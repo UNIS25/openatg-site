@@ -733,6 +733,38 @@ ul {
   line-height: 1.4;
 }
 
+.product-signal {
+  background: var(--white);
+}
+
+.signal-layout {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.62fr) minmax(0, 1.38fr);
+  gap: clamp(72px, 9vw, 128px);
+}
+
+.signal-intro .product-index {
+  margin-bottom: 32px;
+}
+
+.signal-copy {
+  max-width: 760px;
+}
+
+.signal-capabilities {
+  margin-top: 40px;
+  border-top: 1px solid var(--line);
+  list-style: none;
+}
+
+.signal-capabilities li {
+  padding-block: 18px;
+  border-bottom: 1px solid var(--line);
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+
 .downloads-section {
   padding-block: 144px;
   background: var(--white);
@@ -884,7 +916,10 @@ ul {
 }
 
 .footer-actions {
+  display: flex;
   justify-self: end;
+  align-items: center;
+  gap: 20px;
 }
 
 .footer-actions a {
@@ -981,6 +1016,10 @@ ul {
 
   .product-grid {
     grid-template-columns: minmax(0, 1fr) minmax(340px, 0.9fr);
+    gap: 56px;
+  }
+
+  .signal-layout {
     gap: 56px;
   }
 
@@ -1102,6 +1141,7 @@ ul {
   }
 
   .product-grid,
+  .signal-layout,
   .downloads-inner,
   .purpose {
     grid-template-columns: 1fr;
@@ -1109,6 +1149,14 @@ ul {
 
   .product-grid {
     gap: 64px;
+  }
+
+  .signal-layout {
+    gap: 32px;
+  }
+
+  .signal-intro .product-index {
+    margin-bottom: 20px;
   }
 
   .product-copy {
@@ -1225,6 +1273,15 @@ ul {
   .purpose > div:last-child > p:last-child,
   .contact-inner > p:nth-of-type(2) {
     margin-top: 20px;
+    font-size: 16px;
+  }
+
+  .signal-capabilities {
+    margin-top: 32px;
+  }
+
+  .signal-capabilities li {
+    padding-block: 16px;
     font-size: 16px;
   }
 
