@@ -155,22 +155,15 @@ ul {
 }
 
 .brand-mark {
-  position: relative;
   display: block;
   width: 23px;
-  height: 23px;
   flex: 0 0 auto;
-  overflow: hidden;
-  border-radius: 5px;
 }
 
 .brand-mark img {
-  position: absolute;
-  width: 42px;
-  height: 42px;
-  max-width: none;
-  inset: 50% auto auto 50%;
-  transform: translate(-50%, -50%);
+  width: 100%;
+  height: auto;
+  object-fit: contain;
 }
 
 .site-nav {
@@ -315,23 +308,13 @@ ul {
 }
 
 .logo-frame {
-  position: relative;
-  width: min(100%, 420px);
-  aspect-ratio: 1;
-  overflow: hidden;
+  width: clamp(260px, 34vw, 480px);
 }
 
 .logo-frame img {
-  position: absolute;
-  inset: 50% auto auto 50%;
-  width: 142%;
-  max-width: none;
-  transform: translate(-50%, -50%);
-  transition: transform 700ms var(--ease-out);
-}
-
-.logo-frame:hover img {
-  transform: translate(-50%, -50%) scale(1.01);
+  width: clamp(260px, 34vw, 480px);
+  height: auto;
+  object-fit: contain;
 }
 
 .hero-visual figcaption {
@@ -823,19 +806,14 @@ ul {
 }
 
 .purpose-mark {
-  position: relative;
   width: 100%;
   max-width: 360px;
-  aspect-ratio: 1;
-  overflow: hidden;
 }
 
 .purpose-mark img {
-  position: absolute;
-  inset: 50% auto auto 50%;
-  width: 145%;
-  max-width: none;
-  transform: translate(-50%, -50%);
+  width: 100%;
+  height: auto;
+  object-fit: contain;
 }
 
 .purpose > div:last-child > p:last-child {
@@ -1123,10 +1101,6 @@ ul {
     justify-self: center;
   }
 
-  .logo-frame {
-    width: min(64vw, 380px);
-  }
-
   .product-grid,
   .downloads-inner,
   .purpose {
@@ -1191,10 +1165,6 @@ ul {
     align-items: flex-start;
     flex-direction: column;
     gap: 8px;
-  }
-
-  .logo-frame {
-    width: min(88vw, 330px);
   }
 
   .principles-inner {
@@ -1401,8 +1371,4 @@ ul {
     transform: none;
   }
 
-  .logo-frame img,
-  .logo-frame:hover img {
-    transform: translate(-50%, -50%);
-  }
 }
