@@ -1,0 +1,356 @@
+{
+  "top": {
+    "X English": [
+      {
+        "Platform": "X English",
+        "Rank": 1,
+        "Date": "08/13/2026",
+        "Post text": "Policy explainer",
+        "Link": "https://example.test/x-en/policy",
+        "Impressions": 3100,
+        "Engagements": 150,
+        "Reactions": 120,
+        "Comments": 18,
+        "Shares": 12
+      },
+      {
+        "Platform": "X English",
+        "Rank": 2,
+        "Date": "08/11/2026",
+        "Post text": "Field update",
+        "Link": "https://example.test/x-en/field",
+        "Impressions": 2200,
+        "Engagements": 120,
+        "Reactions": 95,
+        "Comments": 15,
+        "Shares": 10
+      },
+      {
+        "Platform": "X English",
+        "Rank": 3,
+        "Date": "08/12/2026",
+        "Post text": "Community story",
+        "Link": "https://example.test/x-en/community",
+        "Impressions": 1800,
+        "Engagements": 88,
+        "Reactions": 70,
+        "Comments": 10,
+        "Shares": 8
+      }
+    ],
+    "X French": [
+      {
+        "Platform": "X French",
+        "Rank": 1,
+        "Date": "08/14/2026",
+        "Post text": "Guide pratique",
+        "Link": "https://example.test/x-fr/guide",
+        "Impressions": 3200,
+        "Engagements": 160,
+        "Reactions": 125,
+        "Comments": 20,
+        "Shares": 15
+      },
+      {
+        "Platform": "X French",
+        "Rank": 2,
+        "Date": "08/11/2026",
+        "Post text": "Mise à jour",
+        "Link": "https://example.test/x-fr/mise-a-jour",
+        "Impressions": 2400,
+        "Engagements": 130,
+        "Reactions": 100,
+        "Comments": 18,
+        "Shares": 12
+      },
+      {
+        "Platform": "X French",
+        "Rank": 3,
+        "Date": "08/12/2026",
+        "Post text": "Récit local",
+        "Link": "https://example.test/x-fr/recit",
+        "Impressions": 1900,
+        "Engagements": 95,
+        "Reactions": 75,
+        "Comments": 12,
+        "Shares": 8
+      }
+    ],
+    "Facebook": [
+      {
+        "Platform": "Facebook",
+        "Rank": 1,
+        "Date": "08/13/2026",
+        "Post text": "Galerie",
+        "Link": "https://example.test/facebook/galerie",
+        "Impressions": 8000,
+        "Engagements": 230,
+        "Reactions": 170,
+        "Comments": 35,
+        "Shares": 25
+      },
+      {
+        "Platform": "Facebook",
+        "Rank": 2,
+        "Date": "08/11/2026",
+        "Post text": "Portrait",
+        "Link": "https://example.test/facebook/portrait",
+        "Impressions": 7200,
+        "Engagements": 200,
+        "Reactions": 150,
+        "Comments": 30,
+        "Shares": 20
+      },
+      {
+        "Platform": "Facebook",
+        "Rank": 3,
+        "Date": "08/12/2026",
+        "Post text": "Explication",
+        "Link": "https://example.test/facebook/explication",
+        "Impressions": 6300,
+        "Engagements": 155,
+        "Reactions": 120,
+        "Comments": 25,
+        "Shares": 10
+      }
+    ],
+    "Instagram": [
+      {
+        "Platform": "Instagram",
+        "Rank": 1,
+        "Date": "08/12/2026",
+        "Post text": "Visual explainer",
+        "Link": "https://example.test/instagram/explainer",
+        "Impressions": 5800,
+        "Engagements": 220,
+        "Reactions": 180,
+        "Comments": 10,
+        "Shares": 15
+      },
+      {
+        "Platform": "Instagram",
+        "Rank": 2,
+        "Date": "08/16/2026",
+        "Post text": "Sunday recap",
+        "Link": "https://example.test/instagram/recap",
+        "Impressions": 4900,
+        "Engagements": 180,
+        "Reactions": 145,
+        "Comments": 9,
+        "Shares": 12
+      },
+      {
+        "Platform": "Instagram",
+        "Rank": 3,
+        "Date": "08/15/2026",
+        "Post text": "Community portrait",
+        "Link": "https://example.test/instagram/portrait",
+        "Impressions": 4200,
+        "Engagements": 150,
+        "Reactions": 120,
+        "Comments": 8,
+        "Shares": 10
+      }
+    ],
+    "LinkedIn": [
+      {
+        "Platform": "LinkedIn",
+        "Rank": 1,
+        "Date": "08/14/2026",
+        "Post text": "Policy briefing",
+        "Link": "https://example.test/linkedin/policy",
+        "Impressions": 6200,
+        "Engagements": 250,
+        "Reactions": 130,
+        "Comments": 18,
+        "Shares": 15
+      },
+      {
+        "Platform": "LinkedIn",
+        "Rank": 2,
+        "Date": "08/11/2026",
+        "Post text": "Programme update",
+        "Link": "https://example.test/linkedin/programme",
+        "Impressions": 5100,
+        "Engagements": 200,
+        "Reactions": 105,
+        "Comments": 14,
+        "Shares": 11
+      },
+      {
+        "Platform": "LinkedIn",
+        "Rank": 3,
+        "Date": "08/12/2026",
+        "Post text": "Team perspective",
+        "Link": "https://example.test/linkedin/team",
+        "Impressions": 4400,
+        "Engagements": 170,
+        "Reactions": 90,
+        "Comments": 12,
+        "Shares": 8
+      }
+    ]
+  },
+  "comparison": {
+    "X English": [
+      {
+        "Metric": "Total Posts",
+        "Week Before": "4",
+        "Week in Review": "5",
+        "Change": "▲ +1 (+25.00%)"
+      },
+      {
+        "Metric": "Total Impressions",
+        "Week Before": "2,600",
+        "Week in Review": "3,100",
+        "Change": "▲ +500.0 (+19.23%)"
+      },
+      {
+        "Metric": "Total Engagements",
+        "Week Before": "228",
+        "Week in Review": "444",
+        "Change": "▲ +216.0 (+94.74%)"
+      },
+      {
+        "Metric": "Posts >100 Likes",
+        "Week Before": "1",
+        "Week in Review": "2",
+        "Change": "▲ +1 (+100.00%)"
+      },
+      {
+        "Metric": "Posts ≤100 Likes",
+        "Week Before": "3",
+        "Week in Review": "3",
+        "Change": "— +0 (+0.00%)"
+      }
+    ],
+    "X French": [
+      {
+        "Metric": "Total Posts",
+        "Week Before": "3",
+        "Week in Review": "4",
+        "Change": "▲ +1 (+33.33%)"
+      },
+      {
+        "Metric": "Total Impressions",
+        "Week Before": "600",
+        "Week in Review": "1,100",
+        "Change": "▲ +500 (+83.33%)"
+      },
+      {
+        "Metric": "Total Engagements",
+        "Week Before": "90",
+        "Week in Review": "150",
+        "Change": "▲ +60 (+66.67%)"
+      },
+      {
+        "Metric": "Posts >10 Likes",
+        "Week Before": "1",
+        "Week in Review": "2",
+        "Change": "▲ +1 (+100.00%)"
+      },
+      {
+        "Metric": "Posts ≤10 Likes",
+        "Week Before": "2",
+        "Week in Review": "2",
+        "Change": "— +0 (+0.00%)"
+      }
+    ],
+    "Facebook": [
+      {
+        "Metric": "Total Posts",
+        "Week Before": "3",
+        "Week in Review": "4",
+        "Change": "▲ +1 (+33.33%)"
+      },
+      {
+        "Metric": "Total Reach",
+        "Week Before": "1,900",
+        "Week in Review": "4,200",
+        "Change": "▲ +2,300.0 (+121.05%)"
+      },
+      {
+        "Metric": "Total Engagements",
+        "Week Before": "250",
+        "Week in Review": "515",
+        "Change": "▲ +265.0 (+106.00%)"
+      },
+      {
+        "Metric": "Posts >100 Reactions",
+        "Week Before": "1",
+        "Week in Review": "2",
+        "Change": "▲ +1 (+100.00%)"
+      },
+      {
+        "Metric": "Posts ≤100 Reactions",
+        "Week Before": "2",
+        "Week in Review": "2",
+        "Change": "— +0 (+0.00%)"
+      }
+    ],
+    "Instagram": [
+      {
+        "Metric": "Total Posts",
+        "Week Before": "3",
+        "Week in Review": "4",
+        "Change": "▲ +1 (+33.33%)"
+      },
+      {
+        "Metric": "Total Reach",
+        "Week Before": "3,800",
+        "Week in Review": "8,800",
+        "Change": "▲ +5,000.0 (+131.58%)"
+      },
+      {
+        "Metric": "Total Engagements",
+        "Week Before": "454",
+        "Week in Review": "794",
+        "Change": "▲ +340.0 (+74.89%)"
+      },
+      {
+        "Metric": "Posts >200 Likes",
+        "Week Before": "0",
+        "Week in Review": "2",
+        "Change": "▲ +2 (+0.00%)"
+      },
+      {
+        "Metric": "Posts ≤200 Likes",
+        "Week Before": "3",
+        "Week in Review": "2",
+        "Change": "▼ -1 (-33.33%)"
+      }
+    ],
+    "LinkedIn": [
+      {
+        "Metric": "Total Posts",
+        "Week Before": "3",
+        "Week in Review": "4",
+        "Change": "▲ +1 (+33.33%)"
+      },
+      {
+        "Metric": "Total Impressions",
+        "Week Before": "2,600",
+        "Week in Review": "4,400",
+        "Change": "▲ +1,800 (+69.23%)"
+      },
+      {
+        "Metric": "Total Engagements",
+        "Week Before": "261",
+        "Week in Review": "589",
+        "Change": "▲ +328.0 (+125.67%)"
+      },
+      {
+        "Metric": "Posts >100 Reactions",
+        "Week Before": "1",
+        "Week in Review": "2",
+        "Change": "▲ +1 (+100.00%)"
+      },
+      {
+        "Metric": "Posts ≤100 Reactions",
+        "Week Before": "2",
+        "Week in Review": "2",
+        "Change": "— +0 (+0.00%)"
+      }
+    ]
+  }
+}

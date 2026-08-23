@@ -1,0 +1,117 @@
+{
+  "status": "pass",
+  "viewports": [
+    {
+      "width": 1440,
+      "height": 1000,
+      "file": "atg-signal-1440x1000.png",
+      "innerWidth": 1440,
+      "innerHeight": 1000,
+      "scrollWidth": 1440,
+      "bodyScrollWidth": 1440,
+      "title": "ATG Signal — OpenATG",
+      "headline": "Weekly social media intelligence.",
+      "localOnly": "local-only",
+      "status": "pass"
+    },
+    {
+      "width": 768,
+      "height": 1024,
+      "file": "atg-signal-768x1024.png",
+      "innerWidth": 768,
+      "innerHeight": 1024,
+      "scrollWidth": 768,
+      "bodyScrollWidth": 768,
+      "title": "ATG Signal — OpenATG",
+      "headline": "Weekly social media intelligence.",
+      "localOnly": "local-only",
+      "status": "pass"
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "file": "atg-signal-390x844.png",
+      "innerWidth": 390,
+      "innerHeight": 844,
+      "scrollWidth": 390,
+      "bodyScrollWidth": 390,
+      "title": "ATG Signal — OpenATG",
+      "headline": "Weekly social media intelligence.",
+      "localOnly": "local-only",
+      "status": "pass"
+    }
+  ],
+  "functionality": {
+    "top_posts": {
+      "rowCount": 3,
+      "firstPost": "Policy explainer",
+      "linkCount": 3,
+      "status": "Processed 1 platform locally."
+    },
+    "compare_weeks": {
+      "rowCount": 5,
+      "title": "X English comparison",
+      "firstChange": "▲ +1 (+25.00%)",
+      "status": "Comparison completed locally."
+    },
+    "keyboard": {
+      "activeId": "tab-compare-weeks",
+      "selected": "true",
+      "panelVisible": true
+    },
+    "focus": {
+      "activeClass": "skip-link",
+      "outlineStyle": "solid",
+      "outlineWidth": "3px",
+      "transform": "matrix(1, 0, 0, 1, 0, -64)"
+    },
+    "reduced_motion": {
+      "scrollBehavior": "auto",
+      "transitionDuration": "1e-05s"
+    },
+    "accessibility": {
+      "unlabeledInputs": [],
+      "emptyButtons": 0,
+      "imagesWithoutAlt": 0,
+      "tabCount": 2,
+      "privacyStatement": "Private by design. Files are processed locally in your browser and are never uploaded.",
+      "mainTabIndex": "-1"
+    },
+    "offline_after_load": {
+      "topPanelVisible": true,
+      "retainedRows": 3,
+      "processing": "local-only"
+    },
+    "homepage_links": {
+      "signalLinks": [
+        {
+          "text": "Signal",
+          "target": null,
+          "rel": null
+        },
+        {
+          "text": "Signal",
+          "target": null,
+          "rel": null
+        },
+        {
+          "text": "Open ATG Signal →",
+          "target": null,
+          "rel": null
+        },
+        {
+          "text": "ATG Signal",
+          "target": null,
+          "rel": null
+        }
+      ],
+      "missingHashTargets": []
+    }
+  },
+  "privacy": {
+    "external_runtime_requests": [],
+    "requests_created_by_file_processing": 0,
+    "content_security_policy_connect_src": "none"
+  },
+  "console_errors": []
+}

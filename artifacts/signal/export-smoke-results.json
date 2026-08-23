@@ -1,0 +1,13 @@
+{
+  "status": "pass",
+  "excel": {
+    "top_report_rows": 15,
+    "comparison_metric_rows": 5,
+    "top_report_bytes": 21358,
+    "comparison_report_bytes": 16813
+  },
+  "word": {
+    "report_bytes": 9285,
+    "zip_structure": "valid"
+  }
+}

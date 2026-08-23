@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="ATG Signal turns social media exports into weekly performance reports entirely in your browser."
+    />
+    <meta name="theme-color" content="#ffffff" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; connect-src 'none'; img-src 'self' data:; style-src 'self'; script-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
+    />
+    <title>ATG Signal — OpenATG</title>
+    <link rel="canonical" href="https://openatg.com/signal/" />
+    <link rel="icon" type="image/png" href="../atg-mark-transparent.png" />
+    <link rel="stylesheet" href="signal.css" />
+    <script src="vendor/xlsx.full.min.js" defer></script>
+    <script src="vendor/docx.umd.js" defer></script>
+    <script type="module" src="app.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <header class="global-header" data-header>
+      <div class="site-header">
+        <a class="brand" href="/" aria-label="OpenATG home">
+          <span class="brand-mark" aria-hidden="true">
+            <img src="../atg-mark-transparent.png" alt="" width="1317" height="1221" />
+          </span>
+          <span>OpenATG</span>
+          <span class="header-divider" aria-hidden="true"></span>
+          <span class="product-label">ATG Signal</span>
+        </a>
+        <a class="back-link" href="/">
+          <span aria-hidden="true">←</span> Back to OpenATG
+        </a>
+      </div>
+    </header>
+
+    <main id="main-content" tabindex="-1">
+      <section class="report-hero">
+        <div class="content-shell hero-inner">
+          <p class="eyebrow">ATG Signal</p>
+          <h1>Weekly social media intelligence.</h1>
+          <p class="hero-copy">
+            Understand what reached people, compare performance and prepare clear reports.
+          </p>
+        </div>
+      </section>
+
+      <aside class="privacy-strip" aria-label="Privacy information">
+        <div class="content-shell privacy-inner">
+          <span class="privacy-symbol" aria-hidden="true">✓</span>
+          <p>
+            <strong>Private by design.</strong> Files are processed locally in your browser and
+            are never uploaded.
+          </p>
+        </div>
+      </aside>
+
+      <section class="workspace" aria-labelledby="workspace-title">
+        <div class="content-shell">
+          <h2 class="visually-hidden" id="workspace-title">Weekly report tools</h2>
+
+          <div class="tool-switcher" role="tablist" aria-label="Weekly report section">
+            <button
+              class="tool-tab is-active"
+              id="tab-top-posts"
+              type="button"
+              role="tab"
+              aria-selected="true"
+              aria-controls="panel-top-posts"
+              data-panel="top-posts"
+            >
+              Top 3 Posts
+            </button>
+            <button
+              class="tool-tab"
+              id="tab-compare-weeks"
+              type="button"
+              role="tab"
+              aria-selected="false"
+              aria-controls="panel-compare-weeks"
+              tabindex="-1"
+              data-panel="compare-weeks"
+            >
+              Compare Weeks
+            </button>
+          </div>
+
+          <section
+            class="tool-panel"
+            id="panel-top-posts"
+            role="tabpanel"
+            aria-labelledby="tab-top-posts"
+          >
+            <header class="tool-heading">
+              <p class="section-number">01</p>
+              <div>
+                <h2>Top-performing posts</h2>
+                <p>Select the reporting period and add one or more platform exports.</p>
+              </div>
+            </header>
+
+            <div class="date-grid" aria-label="Reporting period">
+              <label class="field-label" for="top-start-date">
+                <span>Start date</span>
+                <input id="top-start-date" type="date" />
+              </label>
+              <label class="field-label" for="top-end-date">
+                <span>End date</span>
+                <input id="top-end-date" type="date" />
+              </label>
+            </div>
+
+            <div class="subheading-row">
+              <div>
+                <h3>Platform data</h3>
+                <p>CSV, XLS or XLSX · add only the platforms needed</p>
+              </div>
+            </div>
+
+            <div class="upload-grid" id="top-upload-grid"></div>
+            <div class="status-summary" id="top-status" role="status" aria-live="polite"></div>
+
+            <section class="results" id="top-results" aria-labelledby="top-results-title" hidden>
+              <div class="results-heading">
+                <div>
+                  <p class="section-kicker">Results</p>
+                  <h3 id="top-results-title">Combined report</h3>
+                </div>
+                <div class="download-actions">
+                  <button class="secondary-button" id="download-top-excel" type="button">
+                    Download Excel
+                  </button>
+                  <button class="primary-button" id="download-top-word" type="button">
+                    Download Word
+                  </button>
+                </div>
+              </div>
+              <div id="platform-results"></div>
+              <div class="combined-table">
+                <h4>All uploaded platforms</h4>
+                <div id="top-combined-table"></div>
+              </div>
+            </section>
+          </section>
+
+          <section
+            class="tool-panel"
+            id="panel-compare-weeks"
+            role="tabpanel"
+            aria-labelledby="tab-compare-weeks"
+            hidden
+          >
+            <header class="tool-heading">
+              <p class="section-number">02</p>
+              <div>
+                <h2>Week-on-week comparison</h2>
+                <p>Measure the exact change from the previous week to the week in review.</p>
+              </div>
+            </header>
+
+            <label class="field-label platform-select" for="comparison-platform">
+              <span>Platform</span>
+              <select id="comparison-platform"></select>
+            </label>
+
+            <p class="format-guidance" id="comparison-guidance"></p>
+            <div class="comparison-upload-grid">
+              <div id="comparison-before-slot"></div>
+              <div id="comparison-review-slot"></div>
+            </div>
+            <div
+              class="status-summary"
+              id="comparison-status"
+              role="status"
+              aria-live="polite"
+            ></div>
+
+            <section
+              class="results"
+              id="comparison-results"
+              aria-labelledby="comparison-results-title"
+              hidden
+            >
+              <div class="results-heading">
+                <div>
+                  <p class="section-kicker">Results</p>
+                  <h3 id="comparison-results-title">Weekly comparison</h3>
+                </div>
+                <button class="primary-button" id="download-comparison" type="button">
+                  Download Excel
+                </button>
+              </div>
+              <div id="comparison-table"></div>
+            </section>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="content-shell footer-inner">
+        <div class="footer-brand">
+          <span class="brand-mark" aria-hidden="true">
+            <img src="../atg-mark-transparent.png" alt="" width="1317" height="1221" />
+          </span>
+          <span>OpenATG</span>
+        </div>
+        <p>ATG Signal · Local browser processing</p>
+        <a href="/">Back to OpenATG</a>
+      </div>
+    </footer>
+  </body>
+</html>

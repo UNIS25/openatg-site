@@ -1,0 +1,21 @@
+{
+  "status": "pass",
+  "runtime_asset_references": [
+    "vendor/xlsx.full.min.js",
+    "vendor/docx.umd.js",
+    "app.js",
+    "../atg-mark-transparent.png",
+    "../atg-mark-transparent.png",
+    "../atg-mark-transparent.png",
+    "signal.css"
+  ],
+  "external_runtime_assets": [],
+  "network_api_calls_in_application_source": 0,
+  "analytics_integrations": 0,
+  "homepage_signal_links": 4,
+  "homepage_editorial_section_preserved": true,
+  "dependency_hashes": {
+    "vendor/xlsx.full.min.js": "cc015130aa8521e7f088f88898eba949ccdcbfb38df0bd129b44b7273c3a6f41",
+    "vendor/docx.umd.js": "096ce30fdd0a8ddc94fe44a86ab1d5ce58165c88d8be797005eba8788fab7203"
+  }
+}

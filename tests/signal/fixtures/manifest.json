@@ -1,0 +1,36 @@
+{
+  "synthetic": true,
+  "reportingPeriod": {
+    "start": "2026-08-10",
+    "end": "2026-08-16"
+  },
+  "top": {
+    "X English": "top/x-english.csv",
+    "X French": "top/x-french.xlsx",
+    "Facebook": "top/facebook.xls",
+    "Instagram": "top/instagram.csv",
+    "LinkedIn": "top/linkedin.xlsx"
+  },
+  "comparison": {
+    "X English": [
+      "comparison/x-english-before.csv",
+      "comparison/x-english-review.csv"
+    ],
+    "X French": [
+      "comparison/x-french-before.csv",
+      "comparison/x-french-review.csv"
+    ],
+    "Facebook": [
+      "comparison/facebook-before.csv",
+      "comparison/facebook-review-latin1.csv"
+    ],
+    "Instagram": [
+      "comparison/instagram-before.csv",
+      "comparison/instagram-review.csv"
+    ],
+    "LinkedIn": [
+      "comparison/linkedin-before.xlsx",
+      "comparison/linkedin-review.xlsx"
+    ]
+  }
+}

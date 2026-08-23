@@ -1,0 +1,76 @@
+{
+  "status": "pass",
+  "summary": {
+    "cases": 10,
+    "passed": 10,
+    "failed": 0,
+    "top_post_rows_compared": 15,
+    "comparison_metric_rows_compared": 25
+  },
+  "cases": [
+    {
+      "section": "Top 3 Posts",
+      "platform": "X English",
+      "status": "pass",
+      "rows": 3
+    },
+    {
+      "section": "Top 3 Posts",
+      "platform": "X French",
+      "status": "pass",
+      "rows": 3
+    },
+    {
+      "section": "Top 3 Posts",
+      "platform": "Facebook",
+      "status": "pass",
+      "rows": 3
+    },
+    {
+      "section": "Top 3 Posts",
+      "platform": "Instagram",
+      "status": "pass",
+      "rows": 3
+    },
+    {
+      "section": "Top 3 Posts",
+      "platform": "LinkedIn",
+      "status": "pass",
+      "rows": 3
+    },
+    {
+      "section": "Compare Weeks",
+      "platform": "X English",
+      "status": "pass",
+      "metrics": 5
+    },
+    {
+      "section": "Compare Weeks",
+      "platform": "X French",
+      "status": "pass",
+      "metrics": 5
+    },
+    {
+      "section": "Compare Weeks",
+      "platform": "Facebook",
+      "status": "pass",
+      "metrics": 5
+    },
+    {
+      "section": "Compare Weeks",
+      "platform": "Instagram",
+      "status": "pass",
+      "metrics": 5
+    },
+    {
+      "section": "Compare Weeks",
+      "platform": "LinkedIn",
+      "status": "pass",
+      "metrics": 5
+    }
+  ],
+  "reference_hashes": {
+    "top_posts_core.py": "eebc08ce8171b9faf9b55aa39dc83539cc6f52edbf2959dfa2fd4d824f4fe9df",
+    "week_comparison_core.py": "8014a0a90083c49ba1e2403b09b951f5e0594ded9500b94ae5cdbedf50bffe00"
+  }
+}
