@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "applications": [
+    {
+      "id": "atg-signal",
+      "name": "ATG Signal",
+      "category": "Communications analytics",
+      "description": "Identify top-performing social media content and compare performance between reporting periods.",
+      "version": "1.0.0",
+      "runtime": "Browser-native",
+      "runtimeRequirements": [
+        "A current desktop browser with JavaScript and the File API enabled",
+        "Python 3 when using the included offline package launcher"
+      ],
+      "internetAfterInstallation": "Not required",
+      "dataProcessing": "On device",
+      "filesUploadedElsewhere": "No",
+      "publisher": "OpenATG",
+      "status": "Available",
+      "capabilities": [
+        "Top-performing post analysis",
+        "Week-on-week comparison",
+        "Excel report generation",
+        "Word report generation"
+      ],
+      "permissions": [
+        "Read files explicitly selected by the user",
+        "Generate downloadable reports",
+        "Store only necessary browser-local settings"
+      ],
+      "privacy": "Your selected files are processed on this device. OpenATG does not receive or store their contents.",
+      "offlineAvailability": "Works offline after the first successful browser load, or from the downloadable local package.",
+      "releaseNotes": [
+        "Initial 1.0.0 release.",
+        "Includes top-performing post analysis, week-on-week comparison, and local Excel and Word report generation."
+      ],
+      "supportedOperatingSystems": [
+        "macOS",
+        "Windows",
+        "Linux"
+      ],
+      "entryPoint": "/signal/",
+      "networkRequirements": "Internet is required for the first website load only. No internet connection is required after installation or when using the offline package.",
+      "package": {
+        "filename": "atg-signal-1.0.0.zip",
+        "sizeBytes": 1413275,
+        "size": "1.35 MB",
+        "sha256": "fb6de970450b34d20326e2a154f20cc51a8f3cbb888df14adf32b093fc89d1f1"
+      },
+      "links": {
+        "open": "/signal/",
+        "install": "/signal/#install",
+        "download": "/downloads/atg-signal-1.0.0.zip",
+        "thirdPartyNotices": "/signal/THIRD_PARTY_NOTICES.md"
+      }
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "id": "atg-signal",
+  "name": "ATG Signal",
+  "version": "1.0.0",
+  "description": "Identify top-performing social media content and compare performance between reporting periods.",
+  "publisher": "OpenATG",
+  "runtime": "Browser-native",
+  "entryPoint": "/signal/",
+  "permissions": [
+    "Read files explicitly selected by the user",
+    "Generate downloadable reports",
+    "Store only necessary browser-local settings"
+  ],
+  "networkRequirements": "Internet is required for the first website load only. No internet connection is required after installation or when using the offline package.",
+  "supportedOperatingSystems": [
+    "macOS",
+    "Windows",
+    "Linux"
+  ],
+  "packageFilename": "atg-signal-1.0.0.zip",
+  "packageSizeBytes": 1413275,
+  "sha256": "fb6de970450b34d20326e2a154f20cc51a8f3cbb888df14adf32b093fc89d1f1"
+}

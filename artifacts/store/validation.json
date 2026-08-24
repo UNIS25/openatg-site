@@ -1,0 +1,200 @@
+{
+  "status": "pass",
+  "viewports": [
+    {
+      "width": 1440,
+      "height": 1000,
+      "file": "openatg-1440x1000.png",
+      "innerWidth": 1440,
+      "innerHeight": 1000,
+      "scrollWidth": 1440,
+      "bodyScrollWidth": 1440,
+      "title": "OpenATG — Local-first software",
+      "headline": "Useful tools. Ready to work.",
+      "applicationCount": 1,
+      "applicationName": "ATG Signal",
+      "clippedHeadline": false,
+      "status": "pass"
+    },
+    {
+      "width": 768,
+      "height": 1024,
+      "file": "openatg-768x1024.png",
+      "innerWidth": 768,
+      "innerHeight": 1024,
+      "scrollWidth": 768,
+      "bodyScrollWidth": 768,
+      "title": "OpenATG — Local-first software",
+      "headline": "Useful tools. Ready to work.",
+      "applicationCount": 1,
+      "applicationName": "ATG Signal",
+      "clippedHeadline": false,
+      "status": "pass"
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "file": "openatg-390x844.png",
+      "innerWidth": 390,
+      "innerHeight": 844,
+      "scrollWidth": 390,
+      "bodyScrollWidth": 390,
+      "title": "OpenATG — Local-first software",
+      "headline": "Useful tools. Ready to work.",
+      "applicationCount": 1,
+      "applicationName": "ATG Signal",
+      "clippedHeadline": false,
+      "status": "pass"
+    }
+  ],
+  "catalogue": {
+    "actionLabels": [
+      "Open ATG Signal",
+      "Install locally",
+      "Download offline package"
+    ],
+    "actionPaths": [
+      "/signal/",
+      "/signal/#install",
+      "/downloads/atg-signal-1.0.0.zip"
+    ],
+    "factValues": [
+      "1.0.0",
+      "Browser-native",
+      "Not required",
+      "On device",
+      "No",
+      "OpenATG"
+    ],
+    "capabilityCount": 4,
+    "status": "Available",
+    "unsafeHtmlCalls": false,
+    "imagesWithoutAlt": 0,
+    "emptyButtons": 0,
+    "mainTabIndex": "-1"
+  },
+  "accessibility": {
+    "focus": {
+      "className": "skip-link",
+      "outlineStyle": "solid",
+      "outlineWidth": "3px",
+      "transform": "matrix(1, 0, 0, 1, 0, -64)"
+    },
+    "dialog": {
+      "title": "ATG Signal",
+      "privacy": [
+        "Your selected files are processed on this device. OpenATG does not receive or store their contents."
+      ],
+      "checksum": [
+        "fb6de970450b34d20326e2a154f20cc51a8f3cbb888df14adf32b093fc89d1f1"
+      ],
+      "permissionCount": 3,
+      "noticePath": "/signal/THIRD_PARTY_NOTICES.md",
+      "modal": true
+    },
+    "reducedMotion": {
+      "scrollBehavior": "auto",
+      "transitionDuration": "1e-05s"
+    }
+  },
+  "homepage": {
+    "storeLinks": [
+      "OpenATG",
+      "OpenATG",
+      "View in OpenATG →"
+    ],
+    "desktopNavigationLinks": 1,
+    "mobileNavigationLinks": 1,
+    "signalSectionLinks": 1,
+    "missingHashTargets": [],
+    "viewports": [
+      {
+        "width": 1440,
+        "height": 1000,
+        "innerWidth": 1440,
+        "innerHeight": 1000,
+        "scrollWidth": 1440,
+        "bodyScrollWidth": 1440,
+        "title": "OpenATG — AI for the Greater Good",
+        "headline": "AI for the greater good.",
+        "status": "pass"
+      },
+      {
+        "width": 768,
+        "height": 1024,
+        "innerWidth": 768,
+        "innerHeight": 1024,
+        "scrollWidth": 768,
+        "bodyScrollWidth": 768,
+        "title": "OpenATG — AI for the Greater Good",
+        "headline": "AI for the greater good.",
+        "status": "pass"
+      },
+      {
+        "width": 390,
+        "height": 844,
+        "innerWidth": 390,
+        "innerHeight": 844,
+        "scrollWidth": 390,
+        "bodyScrollWidth": 390,
+        "title": "OpenATG — AI for the Greater Good",
+        "headline": "AI for the greater good.",
+        "status": "pass"
+      }
+    ]
+  },
+  "pwa": {
+    "manifest": {
+      "name": "ATG Signal",
+      "start_url": "/signal/",
+      "scope": "/signal/",
+      "display": "standalone",
+      "errors": []
+    },
+    "installabilityErrors": [],
+    "serviceWorker": {
+      "processing": "local-only",
+      "controlled": true,
+      "cacheNames": [
+        "atg-signal-v1.0.0"
+      ],
+      "cachedPaths": [
+        "/atg-mark-transparent.png",
+        "/signal/",
+        "/signal/app.js",
+        "/signal/icons/icon-192.png",
+        "/signal/icons/icon-512.png",
+        "/signal/icons/icon-maskable-512.png",
+        "/signal/index.html",
+        "/signal/manifest.webmanifest",
+        "/signal/pwa.js",
+        "/signal/report-downloads.mjs",
+        "/signal/signal-core.mjs",
+        "/signal/signal.css",
+        "/signal/vendor/docx.umd.js",
+        "/signal/vendor/xlsx.full.min.js"
+      ],
+      "installButtonHidden": false,
+      "installationText": "Installation is available in this browser. Install ATG Signal for direct access and offline use.",
+      "manifestPath": "/signal/manifest.webmanifest"
+    },
+    "offlineReload": {
+      "title": "ATG Signal — OpenATG",
+      "processing": "local-only",
+      "controlled": true,
+      "headline": "Weekly social media intelligence."
+    }
+  },
+  "signal": {
+    "fileProcessing": {
+      "rowCount": 3,
+      "firstPost": "Policy explainer",
+      "status": "Processed 1 platform locally."
+    },
+    "requestsCreatedByFileProcessing": 0
+  },
+  "privacy": {
+    "externalRequests": [],
+    "consoleErrors": []
+  }
+}

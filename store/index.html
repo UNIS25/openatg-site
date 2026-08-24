@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Discover local-first applications from OpenATG, beginning with ATG Signal."
+    />
+    <meta name="theme-color" content="#ffffff" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; connect-src 'self'; img-src 'self'; style-src 'self'; script-src 'self'; font-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none'; frame-src 'none'; worker-src 'none'"
+    />
+    <title>OpenATG — Local-first software</title>
+    <link rel="canonical" href="https://openatg.com/store/" />
+    <link rel="icon" type="image/png" href="../atg-mark-transparent.png" />
+    <link rel="stylesheet" href="store.css" />
+    <script src="store.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <header class="global-header">
+      <div class="site-header">
+        <a class="brand" href="/" aria-label="OpenATG home">
+          <span class="brand-mark" aria-hidden="true">
+            <img src="../atg-mark-transparent.png" alt="" width="1317" height="1221" />
+          </span>
+          <span>OpenATG</span>
+        </a>
+        <nav class="site-nav" aria-label="Primary navigation">
+          <a href="/">About OpenATG</a>
+          <a href="/signal/">ATG Signal</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main-content" tabindex="-1">
+      <section class="opening">
+        <div class="content-shell opening-inner">
+          <p class="kicker">Local-first software</p>
+          <h1>Useful tools.<br />Ready to work.</h1>
+          <p class="opening-copy">
+            Discover applications designed to run closer to your data, on your computer or within
+            your organisation.
+          </p>
+        </div>
+      </section>
+
+      <section class="catalogue" aria-labelledby="catalogue-title">
+        <div class="content-shell">
+          <header class="section-heading">
+            <p class="kicker">Available now</p>
+            <h2 id="catalogue-title">Applications</h2>
+          </header>
+          <p class="catalogue-status" id="catalogue-status" role="status" aria-live="polite">
+            Loading applications…
+          </p>
+          <div id="application-list"></div>
+          <noscript>
+            <p class="catalogue-error">JavaScript is required to read the local catalogue.</p>
+          </noscript>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="content-shell footer-inner">
+        <div class="footer-brand">
+          <span class="brand-mark" aria-hidden="true">
+            <img src="../atg-mark-transparent.png" alt="" width="1317" height="1221" />
+          </span>
+          <span>OpenATG</span>
+        </div>
+        <p>Local-first software for practical work.</p>
+        <a href="/">About OpenATG</a>
+      </div>
+    </footer>
+
+    <dialog class="application-dialog" id="application-dialog" aria-labelledby="dialog-title">
+      <div class="dialog-surface">
+        <header class="dialog-header">
+          <div>
+            <p class="dialog-kicker" id="dialog-category"></p>
+            <h2 id="dialog-title"></h2>
+          </div>
+          <button class="dialog-close" id="dialog-close" type="button" aria-label="Close details">
+            <span aria-hidden="true">×</span>
+          </button>
+        </header>
+        <div class="dialog-content" id="dialog-content"></div>
+      </div>
+    </dialog>
+  </body>
+</html>

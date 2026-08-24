@@ -765,6 +765,13 @@ ul {
   letter-spacing: -0.015em;
 }
 
+.signal-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 24px;
+}
+
 .downloads-section {
   padding-block: 144px;
   background: var(--white);
@@ -1287,6 +1294,12 @@ ul {
 
   .product-action {
     margin-top: 24px;
+  }
+
+  .signal-actions {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
   }
 
   .facts {

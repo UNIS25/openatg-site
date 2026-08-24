@@ -10,14 +10,17 @@
     <meta name="theme-color" content="#ffffff" />
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; connect-src 'none'; img-src 'self' data:; style-src 'self'; script-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
+      content="default-src 'self'; connect-src 'none'; img-src 'self' data:; style-src 'self'; script-src 'self'; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
     />
     <title>ATG Signal — OpenATG</title>
     <link rel="canonical" href="https://openatg.com/signal/" />
     <link rel="icon" type="image/png" href="../atg-mark-transparent.png" />
+    <link rel="apple-touch-icon" href="icons/icon-192.png" />
+    <link rel="manifest" href="manifest.webmanifest" />
     <link rel="stylesheet" href="signal.css" />
     <script src="vendor/xlsx.full.min.js" defer></script>
     <script src="vendor/docx.umd.js" defer></script>
+    <script src="pwa.js" defer></script>
     <script type="module" src="app.js"></script>
   </head>
   <body>
@@ -59,6 +62,22 @@
           </p>
         </div>
       </aside>
+
+      <section class="installation" id="install" aria-labelledby="install-title">
+        <div class="content-shell installation-inner">
+          <div>
+            <p class="installation-kicker">Local installation</p>
+            <h2 id="install-title">Keep ATG Signal on this computer.</h2>
+            <p class="installation-status" id="installation-status" role="status" aria-live="polite">
+              If installation is unavailable in this browser, continue with the browser-native
+              version below or use the offline package from OpenATG.
+            </p>
+          </div>
+          <button class="install-button" id="install-button" type="button" hidden>
+            Install ATG Signal
+          </button>
+        </div>
+      </section>
 
       <section class="workspace" aria-labelledby="workspace-title">
         <div class="content-shell">

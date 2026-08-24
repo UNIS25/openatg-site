@@ -13,6 +13,9 @@ analytics service or upload endpoint.
   memory and are discarded when the page is refreshed or closed.
 - `vendor/xlsx.full.min.js` reads CSV/XLS/XLSX files and creates Excel workbooks.
 - `vendor/docx.umd.js` creates the Word report.
+- `manifest.webmanifest`, `pwa.js` and `service-worker.js` provide optional desktop installation
+  and cache only the production application assets needed for offline use. Selected files and
+  generated reports are not cached.
 - A restrictive Content Security Policy sets `connect-src 'none'`, so the application cannot
   make runtime network requests after the static files have loaded.
 

@@ -3,6 +3,7 @@
   "runtime_asset_references": [
     "vendor/xlsx.full.min.js",
     "vendor/docx.umd.js",
+    "pwa.js",
     "app.js",
     "../atg-mark-transparent.png",
     "../atg-mark-transparent.png",

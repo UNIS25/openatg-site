@@ -273,6 +273,65 @@ h4 {
   color: var(--ink);
 }
 
+.installation {
+  border-bottom: 1px solid var(--line-soft);
+  background: var(--white);
+}
+
+.installation-inner {
+  display: grid;
+  min-height: 144px;
+  padding-block: 28px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 40px;
+}
+
+.installation-kicker {
+  margin-bottom: 8px;
+  color: var(--text-orange);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.installation h2 {
+  margin-bottom: 0;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.022em;
+  line-height: 1.16;
+}
+
+.installation-status {
+  max-width: 720px;
+  margin: 9px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.install-button {
+  display: inline-flex;
+  min-height: 40px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: var(--blue);
+  color: var(--white);
+  padding: 9px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: background-color 180ms ease, transform 180ms ease;
+}
+
+.install-button:hover {
+  transform: translateY(-1px);
+  background: var(--blue-hover);
+}
+
 .workspace {
   min-height: 640px;
   padding-block: 64px 120px;
@@ -788,6 +847,17 @@ td a {
 
   .privacy-symbol {
     margin-top: 1px;
+  }
+
+  .installation-inner {
+    min-height: 0;
+    padding-block: 28px;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .install-button {
+    width: max-content;
   }
 
   .workspace {
