@@ -65,7 +65,7 @@
     const privacy = document.querySelector(".privacy-inner p");
     if (privacy) {
       privacy.innerHTML =
-        "<strong>Private by design.</strong> Files are processed locally on this Mac and are never uploaded.";
+        "<strong>Private by design.</strong> Files are processed locally on this device and are never uploaded.";
     }
 
     const footer = document.querySelector(".site-footer p");
@@ -83,4 +83,3 @@
     );
   });
 })();
-

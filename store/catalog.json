@@ -1,8 +1,9 @@
 {
-  "schemaVersion": 1,
-  "applications": [
+  "schemaVersion": 2,
+  "items": [
     {
       "id": "atg-signal",
+      "type": "application",
       "name": "ATG Signal",
       "category": "Communications analytics",
       "description": "Identify top-performing social media content and compare performance between reporting periods.",
@@ -39,6 +40,35 @@
         "Windows",
         "Linux"
       ],
+      "compatibility": [
+        {
+          "label": "Browser",
+          "details": [
+            "macOS, Windows and Linux"
+          ]
+        },
+        {
+          "label": "Mac Beta",
+          "details": [
+            "Apple Silicon, M1 or later",
+            "macOS 11 or later"
+          ]
+        },
+        {
+          "label": "Windows Beta",
+          "details": [
+            "Windows 10 and Windows 11",
+            "64-bit x86_64",
+            "Installer not public until the GitHub Windows build succeeds"
+          ]
+        },
+        {
+          "label": "Intel Mac",
+          "details": [
+            "Browser version only"
+          ]
+        }
+      ],
       "entryPoint": "/signal/",
       "networkRequirements": "Internet is required for the first website load only. No internet connection is required after installation or when using the offline package.",
       "package": {
@@ -52,6 +82,19 @@
         "install": "/signal/#install",
         "download": "/downloads/atg-signal-1.0.0.zip",
         "thirdPartyNotices": "/signal/THIRD_PARTY_NOTICES.md"
+      }
+    },
+    {
+      "id": "atg-base-32m",
+      "type": "research",
+      "name": "ATG Base 32M",
+      "category": "Research",
+      "status": "Research checkpoint",
+      "description": "An independently pretrained compact generative language model exploring local, private and accessible AI for English, Sinhala and Tamil.",
+      "privacy": "Designed for local research and offline experimentation.",
+      "action": {
+        "label": "View research",
+        "url": "https://atg-base-32m-research.adrianvasu1998.chatgpt.site/"
       }
     }
   ]

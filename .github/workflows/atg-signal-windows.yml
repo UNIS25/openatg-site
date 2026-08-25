@@ -1,0 +1,83 @@
+name: Build ATG Signal for Windows
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - feature/atg-signal-windows
+    tags:
+      - "v*"
+
+permissions:
+  contents: read
+
+jobs:
+  build-windows-x64:
+    name: Windows 10/11 x64 installers
+    runs-on: windows-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: desktop/atg-signal/package-lock.json
+
+      - name: Install stable Rust for 64-bit Windows
+        shell: pwsh
+        run: |
+          rustup toolchain install stable --profile minimal --no-self-update
+          rustup default stable
+          rustup target add x86_64-pc-windows-msvc
+
+      - name: Install locked Node dependencies
+        working-directory: desktop/atg-signal
+        run: npm ci
+
+      - name: Validate desktop configuration and locks
+        working-directory: desktop/atg-signal
+        shell: pwsh
+        run: |
+          npm run icons:windows
+          npm run test:config
+          cargo metadata --manifest-path src-tauri/Cargo.toml --locked --format-version 1 --filter-platform x86_64-pc-windows-msvc | Out-Null
+
+      - name: Build unsigned NSIS and MSI installers
+        uses: tauri-apps/tauri-action@v1
+        with:
+          projectPath: desktop/atg-signal
+          args: --target x86_64-pc-windows-msvc --bundles nsis,msi --ci --no-sign -- --locked
+
+      - name: Verify installer outputs
+        shell: pwsh
+        run: |
+          $version = (Get-Content "desktop/atg-signal/package.json" | ConvertFrom-Json).version
+          $nsis = @(Get-ChildItem "desktop/atg-signal/src-tauri/target/x86_64-pc-windows-msvc/release/bundle/nsis/*.exe")
+          $msi = @(Get-ChildItem "desktop/atg-signal/src-tauri/target/x86_64-pc-windows-msvc/release/bundle/msi/*.msi")
+          if ($nsis.Count -ne 1) { throw "Expected exactly one NSIS .exe, found $($nsis.Count)." }
+          if ($msi.Count -ne 1) { throw "Expected exactly one WiX .msi, found $($msi.Count)." }
+          if ($nsis[0].Name -ne "ATG Signal_${version}_x64-setup.exe") { throw "Unexpected NSIS filename: $($nsis[0].Name)" }
+          if ($msi[0].Name -ne "ATG Signal_${version}_x64_en-US.msi") { throw "Unexpected MSI filename: $($msi[0].Name)" }
+          Write-Output "NSIS installer: $($nsis[0].Name)"
+          Write-Output "MSI installer: $($msi[0].Name)"
+
+      - name: Upload NSIS installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: atg-signal-windows-x64-nsis
+          path: desktop/atg-signal/src-tauri/target/x86_64-pc-windows-msvc/release/bundle/nsis/*.exe
+          if-no-files-found: error
+          compression-level: 0
+
+      - name: Upload MSI installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: atg-signal-windows-x64-msi
+          path: desktop/atg-signal/src-tauri/target/x86_64-pc-windows-msvc/release/bundle/msi/*.msi
+          if-no-files-found: error
+          compression-level: 0

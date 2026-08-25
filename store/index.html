@@ -5,16 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Discover local-first applications from OpenATG, beginning with ATG Signal."
+      content="A trusted catalogue of private, locally operated applications and OpenATG research."
     />
     <meta name="theme-color" content="#ffffff" />
     <meta
       http-equiv="Content-Security-Policy"
       content="default-src 'self'; connect-src 'self'; img-src 'self'; style-src 'self'; script-src 'self'; font-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none'; frame-src 'none'; worker-src 'none'"
     />
-    <title>OpenATG — Local-first software</title>
+    <title>OpenStore — OpenATG</title>
     <link rel="canonical" href="https://openatg.com/store/" />
     <link rel="icon" type="image/png" href="../atg-mark-transparent.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="OpenStore — OpenATG" />
+    <meta
+      property="og:description"
+      content="A trusted catalogue of private, locally operated applications and OpenATG research."
+    />
+    <meta property="og:url" content="https://openatg.com/store/" />
+    <meta property="og:site_name" content="OpenATG" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="OpenStore — OpenATG" />
+    <meta
+      name="twitter:description"
+      content="A trusted catalogue of private, locally operated applications and OpenATG research."
+    />
     <link rel="stylesheet" href="store.css" />
     <script src="store.js" defer></script>
   </head>
@@ -29,7 +43,7 @@
           </span>
           <span>OpenATG</span>
         </a>
-        <nav class="site-nav" aria-label="Primary navigation">
+        <nav class="site-nav" aria-label="OpenStore navigation">
           <a href="/">About OpenATG</a>
           <a href="/signal/">ATG Signal</a>
         </nav>
@@ -39,11 +53,10 @@
     <main id="main-content" tabindex="-1">
       <section class="opening">
         <div class="content-shell opening-inner">
-          <p class="kicker">Local-first software</p>
-          <h1>Useful tools.<br />Ready to work.</h1>
+          <p class="kicker">OpenStore</p>
+          <h1>Local tools.<br />Shared responsibly.</h1>
           <p class="opening-copy">
-            Discover applications designed to run closer to your data, on your computer or within
-            your organisation.
+            A trusted catalogue of private, locally operated applications and OpenATG research.
           </p>
         </div>
       </section>
@@ -51,15 +64,15 @@
       <section class="catalogue" aria-labelledby="catalogue-title">
         <div class="content-shell">
           <header class="section-heading">
-            <p class="kicker">Available now</p>
-            <h2 id="catalogue-title">Applications</h2>
+            <p class="kicker">OpenStore catalogue</p>
+            <h2 id="catalogue-title">Applications and research</h2>
           </header>
           <p class="catalogue-status" id="catalogue-status" role="status" aria-live="polite">
-            Loading applications…
+            Loading OpenStore…
           </p>
-          <div id="application-list"></div>
+          <div id="application-list" role="list" aria-label="OpenStore catalogue items"></div>
           <noscript>
-            <p class="catalogue-error">JavaScript is required to read the local catalogue.</p>
+            <p class="catalogue-error">JavaScript is required to read the OpenStore catalogue.</p>
           </noscript>
         </div>
       </section>
@@ -73,7 +86,7 @@
           </span>
           <span>OpenATG</span>
         </div>
-        <p>Local-first software for practical work.</p>
+        <p>Local tools. Shared responsibly.</p>
         <a href="/">About OpenATG</a>
       </div>
     </footer>

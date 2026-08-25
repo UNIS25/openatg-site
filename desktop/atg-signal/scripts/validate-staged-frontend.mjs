@@ -272,8 +272,19 @@ try {
       Object.defineProperty(globalThis, '__TAURI_INTERNALS__', { value: {}, configurable: true });
       Object.defineProperty(globalThis, '__TAURI__', {
         value: {
-          dialog: { save: async () => '/mock/Social_Media_Report.xlsx' },
-          fs: { writeFile: async (path, contents) => { globalThis.__ATG_MOCK_SAVE__ = { path, bytes: contents.length }; } }
+          dialog: {
+            save: async (options) => {
+              globalThis.__ATG_MOCK_DIALOGS__ ??= [];
+              globalThis.__ATG_MOCK_DIALOGS__.push(options);
+              return ['C:', 'Users', 'ATG', 'Documents', options.defaultPath].join(String.fromCharCode(92));
+            }
+          },
+          fs: {
+            writeFile: async (path, contents) => {
+              globalThis.__ATG_MOCK_SAVES__ ??= [];
+              globalThis.__ATG_MOCK_SAVES__.push({ path, bytes: contents.length });
+            }
+          }
         },
         configurable: true
       });
@@ -284,9 +295,15 @@ try {
     await evaluate(`({
       runtime: globalThis.ATGDesktop?.runtime,
       pwaRegistration: globalThis.ATGDesktop?.pwaRegistration,
-      installHidden: getComputedStyle(document.querySelector('.installation')).display === 'none'
+      installHidden: getComputedStyle(document.querySelector('.installation')).display === 'none',
+      privacy: document.querySelector('.privacy-inner p')?.textContent.trim()
     })`),
-    { runtime: "tauri", pwaRegistration: "skipped", installHidden: true },
+    {
+      runtime: "tauri",
+      pwaRegistration: "skipped",
+      installHidden: true,
+      privacy: "Private by design. Files are processed locally on this device and are never uploaded.",
+    },
   );
   await evaluate(`
     document.querySelector('#top-start-date').value = '2026-08-10';
@@ -297,10 +314,41 @@ try {
   await setInputFiles("#top-x-english", [path.join(fixtureRoot, "top", "x-english.csv")]);
   await waitFor("document.querySelectorAll('#top-combined-table tbody tr').length === 3", "native-bridge Top 3 rows");
   await evaluate("document.querySelector('#download-top-excel').click()");
-  await waitFor("document.documentElement.dataset.lastSave === 'saved'", "mocked native save");
-  const nativeSave = await evaluate("globalThis.__ATG_MOCK_SAVE__");
-  assert.equal(nativeSave.path, "/mock/Social_Media_Report.xlsx");
-  assert.ok(nativeSave.bytes > 1000);
+  await waitFor("globalThis.__ATG_MOCK_SAVES__?.length === 1", "mocked native Excel save");
+  await evaluate("document.querySelector('#download-top-word').click()");
+  await waitFor("globalThis.__ATG_MOCK_SAVES__?.length === 2", "mocked native Word save");
+
+  await evaluate("document.querySelector('#tab-compare-weeks').click()");
+  await setInputFiles("#comparison-week-before", [path.join(fixtureRoot, "comparison", "x-english-before.csv")]);
+  await setInputFiles("#comparison-week-review", [path.join(fixtureRoot, "comparison", "x-english-review.csv")]);
+  await waitFor("document.querySelectorAll('#comparison-table tbody tr').length === 5", "native comparison rows");
+  await evaluate("document.querySelector('#download-comparison').click()");
+  await waitFor("globalThis.__ATG_MOCK_SAVES__?.length === 3", "mocked native comparison save");
+
+  const nativeSaves = await evaluate(`({
+    dialogs: globalThis.__ATG_MOCK_DIALOGS__,
+    files: globalThis.__ATG_MOCK_SAVES__
+  })`);
+  assert.deepEqual(
+    nativeSaves.dialogs.map((entry) => ({
+      defaultPath: entry.defaultPath,
+      extension: entry.filters[0].extensions[0],
+    })),
+    [
+      { defaultPath: "Social_Media_Report.xlsx", extension: "xlsx" },
+      { defaultPath: "Weekly_Social_Media_Report.docx", extension: "docx" },
+      { defaultPath: "X_English_Week_Comparison.xlsx", extension: "xlsx" },
+    ],
+  );
+  assert.deepEqual(
+    nativeSaves.files.map((entry) => entry.path),
+    [
+      "C:\\Users\\ATG\\Documents\\Social_Media_Report.xlsx",
+      "C:\\Users\\ATG\\Documents\\Weekly_Social_Media_Report.docx",
+      "C:\\Users\\ATG\\Documents\\X_English_Week_Comparison.xlsx",
+    ],
+  );
+  assert.ok(nativeSaves.files.every((entry) => entry.bytes > 1000));
 
   const desktopScreenshot = await send("Page.captureScreenshot", {
     format: "png",
@@ -324,7 +372,7 @@ try {
       excel_exports: { top_rows: 3, comparison_rows: 5 },
       word_export: { zip_structure: "valid", bytes: wordBytes.length },
       offline: offlineResult,
-      native_save_bridge: nativeSave,
+      native_save_bridge: nativeSaves,
       pwa_registration: "skipped",
       external_requests: externalRequests.length,
       console_errors: consoleErrors.length,

@@ -27,6 +27,15 @@
     }
   }
 
+  function safeExternalUrl(value) {
+    try {
+      const url = new URL(String(value));
+      return url.protocol === "https:" ? url.href : null;
+    } catch {
+      return null;
+    }
+  }
+
   function stringList(value) {
     return Array.isArray(value) ? value.map((item) => String(item)) : [];
   }
@@ -43,10 +52,14 @@
     return wrapper;
   }
 
-  function createAction(label, href, className, downloadName) {
+  function createAction(label, href, className, options = {}) {
     const link = element("a", className, label);
     link.href = href;
-    if (downloadName) link.download = downloadName;
+    if (options.downloadName) link.download = options.downloadName;
+    if (options.external) {
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+    }
     return link;
   }
 
@@ -99,6 +112,19 @@
     privacy.append(element("p", "privacy-statement", application.privacy));
     dialogContent.append(privacy);
 
+    const compatibility = createDetailSection("Compatibility");
+    const compatibilityGrid = element("div", "compatibility-grid");
+    for (const profile of Array.isArray(application.compatibility)
+      ? application.compatibility
+      : []) {
+      const item = element("div", "compatibility-item");
+      item.append(element("p", "detail-label", profile.label));
+      addList(item, profile.details);
+      compatibilityGrid.append(item);
+    }
+    compatibility.append(compatibilityGrid);
+    dialogContent.append(compatibility);
+
     const packageSection = createDetailSection("Offline package");
     const packageGrid = element("div", "detail-grid");
     appendDetailValue(packageGrid, "Package", application.package.filename);
@@ -131,7 +157,9 @@
     const downloadPath = safeLocalPath(application.links.download, ["/downloads/"]);
     if (!openPath || !installPath || !downloadPath) throw new Error("Catalogue link validation failed.");
 
-    const article = element("article", "application");
+    const article = element("article", "application catalogue-item");
+    article.setAttribute("role", "listitem");
+    article.dataset.itemType = "application";
     article.dataset.applicationId = String(application.id);
 
     const header = element("header", "application-header");
@@ -177,7 +205,7 @@
         "Download offline package",
         downloadPath,
         "secondary-action",
-        application.package.filename,
+        { downloadName: application.package.filename },
       ),
     );
     const detailsButton = element("button", "text-button", "View permissions and details");
@@ -195,20 +223,66 @@
     return article;
   }
 
+  function renderResearch(research) {
+    const researchUrl = safeExternalUrl(research.action?.url);
+    if (!researchUrl) throw new Error("Research link validation failed.");
+
+    const article = element("article", "application catalogue-item research-item");
+    article.setAttribute("role", "listitem");
+    article.dataset.itemType = "research";
+    article.dataset.researchId = String(research.id);
+
+    const header = element("header", "application-header");
+    const mark = element("div", "application-icon research-mark", "32M");
+    mark.setAttribute("aria-hidden", "true");
+
+    const identity = document.createElement("div");
+    const category = element("p", "application-category");
+    category.append(element("span", "research-badge", research.category));
+    identity.append(category, element("h3", "application-title", research.name));
+
+    const checkpoint = element("span", "status research-status", research.status);
+    header.append(mark, identity, checkpoint);
+    article.append(header);
+
+    const layout = element("div", "application-layout research-layout");
+    layout.append(element("p", "application-description", research.description));
+    const privacy = element("div", "research-privacy");
+    privacy.append(
+      element("p", "detail-label", "Privacy"),
+      element("p", "privacy-statement", research.privacy),
+    );
+    layout.append(privacy);
+    article.append(layout);
+
+    const actions = element("div", "application-actions");
+    actions.append(
+      createAction(research.action.label, researchUrl, "primary-action", { external: true }),
+    );
+    article.append(actions);
+    return article;
+  }
+
+  function renderCatalogueItem(item) {
+    if (item?.type === "application") return renderApplication(item);
+    if (item?.type === "research") return renderResearch(item);
+    throw new Error("Catalogue item type is invalid.");
+  }
+
   async function loadCatalogue() {
     try {
       const response = await fetch("./catalog.json", { cache: "no-store" });
       if (!response.ok) throw new Error(`Catalogue request returned ${response.status}.`);
       const catalogue = await response.json();
-      if (!Array.isArray(catalogue.applications)) throw new Error("Catalogue data is invalid.");
+      if (!Array.isArray(catalogue.items)) throw new Error("Catalogue data is invalid.");
 
       const fragment = document.createDocumentFragment();
-      for (const application of catalogue.applications) fragment.append(renderApplication(application));
+      for (const item of catalogue.items) fragment.append(renderCatalogueItem(item));
       list.replaceChildren(fragment);
-      status.textContent = catalogue.applications.length ? "" : "No applications are available yet.";
+      status.textContent = catalogue.items.length ? "" : "No catalogue items are available yet.";
     } catch (error) {
       status.className = "catalogue-error";
-      status.textContent = "The application catalogue could not be loaded. Please try again.";
+      status.textContent = "The OpenStore catalogue could not be loaded. Please try again.";
       console.error(error);
     }
   }

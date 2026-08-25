@@ -52,7 +52,7 @@
       "icons/128x128@2x.png",
       "icons/icon.icns"
     ],
-    "resources": ["../THIRD_PARTY_NOTICES.md"],
+    "resources": ["../THIRD_PARTY_NOTICES.md", "../WINDOWS_THIRD_PARTY_NOTICES.md"],
     "createUpdaterArtifacts": false,
     "macOS": {
       "minimumSystemVersion": "11.0",

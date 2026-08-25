@@ -17,7 +17,6 @@ const metadata = JSON.parse(
       "--format-version",
       "1",
       "--locked",
-      "--offline",
       "--filter-platform",
       "aarch64-apple-darwin",
     ],

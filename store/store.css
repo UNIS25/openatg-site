@@ -230,6 +230,11 @@ ul {
   color: var(--error);
 }
 
+#application-list {
+  display: grid;
+  gap: 24px;
+}
+
 .application {
   padding: 48px;
   border: 1px solid var(--line-soft);
@@ -297,6 +302,34 @@ ul {
   content: "";
 }
 
+.research-mark {
+  background: var(--soft);
+  color: #3a3a3c;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.research-badge {
+  display: inline-flex;
+  min-height: 24px;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--soft);
+  color: #515154;
+  padding: 3px 9px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.research-status {
+  background: var(--soft);
+  color: #515154;
+}
+
 .application-layout {
   display: grid;
   margin-top: 36px;
@@ -311,6 +344,14 @@ ul {
   font-size: 19px;
   letter-spacing: -0.012em;
   line-height: 1.47;
+}
+
+.research-privacy {
+  padding-top: 2px;
+}
+
+.research-privacy .privacy-statement {
+  font-size: 15px;
 }
 
 .capabilities-title {
@@ -590,6 +631,16 @@ ul {
   gap: 22px 32px;
 }
 
+.compatibility-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px 32px;
+}
+
+.compatibility-item .detail-list {
+  margin-top: 8px;
+}
+
 .detail-label {
   margin-bottom: 5px;
   color: var(--muted);
@@ -770,6 +821,10 @@ ul {
   }
 
   .detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .compatibility-grid {
     grid-template-columns: 1fr;
   }
 }
