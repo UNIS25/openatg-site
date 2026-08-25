@@ -1,0 +1,14 @@
+html[data-runtime="tauri"] .installation,
+html[data-runtime="tauri"] .back-link,
+html[data-runtime="tauri"] .site-footer a {
+  display: none !important;
+}
+
+html[data-runtime="tauri"] .brand {
+  cursor: default;
+}
+
+html[data-runtime="tauri"] .report-hero h1 {
+  user-select: none;
+}
+

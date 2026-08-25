@@ -1,0 +1,19 @@
+{
+  "name": "atg-signal-desktop",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "stage": "node scripts/stage-frontend.mjs",
+    "icons": "node scripts/generate-macos-icons.mjs",
+    "licenses": "node scripts/generate-third-party-notices.mjs",
+    "build": "tauri build --target aarch64-apple-darwin --bundles app,dmg",
+    "test:staged": "node scripts/validate-staged-frontend.mjs"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "2.11.4"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

@@ -1,0 +1,17 @@
+[package]
+name = "atg-signal"
+version = "1.0.0"
+description = "Private, offline social media reporting for macOS"
+authors = ["OpenATG"]
+edition = "2021"
+license = "LicenseRef-Proprietary"
+publish = false
+
+[build-dependencies]
+tauri-build = { version = "=2.6.3", features = [] }
+
+[dependencies]
+tauri = { version = "=2.11.5", features = [] }
+tauri-plugin-dialog = "=2.7.2"
+tauri-plugin-fs = "=2.5.1"
+

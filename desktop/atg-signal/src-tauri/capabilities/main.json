@@ -1,0 +1,12 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "main-local-reports",
+  "description": "The main window may show a save dialog and write only the file selected in that dialog.",
+  "windows": ["main"],
+  "platforms": ["macOS"],
+  "permissions": [
+    "dialog:allow-save",
+    "fs:allow-write-file"
+  ]
+}
+
