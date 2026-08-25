@@ -119,13 +119,49 @@ assert.match(
 assert.ok(workflow.includes('"ATG Signal_${version}_x64-setup.exe"'));
 assert.ok(workflow.includes('"ATG Signal_${version}_x64_en-US.msi"'));
 assert.doesNotMatch(workflow, /(?:releaseName|releaseId|GITHUB_TOKEN|secrets\.)/);
-assert.doesNotMatch(`${storeScript}\n${storeCatalogue}`, /(?:\.msi|_x64-setup\.exe)/);
-assert.match(storeCatalogue, /Windows Beta/);
-assert.match(storeCatalogue, /Installer not public until the GitHub Windows build succeeds/);
+assert.doesNotMatch(storeScript, /api\.github\.com|fetch\([^)]*github/i);
 const signalCatalogueEntry = JSON.parse(storeCatalogue).items.find(
   (item) => item.id === "atg-signal",
 );
-assert.equal(signalCatalogueEntry.links.windows, undefined);
+assert.equal(signalCatalogueEntry.availability.browser.url, "https://openatg.com/signal/");
+assert.deepEqual(
+  {
+    filename: signalCatalogueEntry.availability.windows.recommended.filename,
+    sizeBytes: signalCatalogueEntry.availability.windows.recommended.sizeBytes,
+    sha256: signalCatalogueEntry.availability.windows.recommended.sha256,
+  },
+  {
+    filename: "ATG-Signal-1.0.0-Windows-x64-Setup.exe",
+    sizeBytes: 218863321,
+    sha256: "bea0260319b6ce911407cebbbf4bf725dfcaa5376534cff92c232d445a0cd4ab",
+  },
+);
+assert.deepEqual(
+  {
+    filename: signalCatalogueEntry.availability.windows.alternative.filename,
+    sizeBytes: signalCatalogueEntry.availability.windows.alternative.sizeBytes,
+    sha256: signalCatalogueEntry.availability.windows.alternative.sha256,
+  },
+  {
+    filename: "ATG-Signal-1.0.0-Windows-x64.msi",
+    sizeBytes: 217436160,
+    sha256: "25992e57001bc5ba6f181f7f1567498a01f71187face876c8fedc0712c47b254",
+  },
+);
+assert.deepEqual(
+  {
+    filename: signalCatalogueEntry.availability.macos.installer.filename,
+    sizeBytes: signalCatalogueEntry.availability.macos.installer.sizeBytes,
+    sha256: signalCatalogueEntry.availability.macos.installer.sha256,
+  },
+  {
+    filename: "ATG-Signal-1.0.0-macOS-Apple-Silicon.dmg",
+    sizeBytes: 4343812,
+    sha256: "9942a1b1864f01ed5023e6f82fcac54d749e4f8780c3af871c3f402911b92c3d",
+  },
+);
+assert.match(signalCatalogueEntry.availability.windows.securityNotice, /currently unsigned/);
+assert.match(signalCatalogueEntry.availability.macos.securityNotice, /not yet been Apple-notarised/);
 
 console.log(
   JSON.stringify({
@@ -136,6 +172,6 @@ console.log(
     native_save_permissions: capability.permissions,
     production_devtools: false,
     authoritative_modules: "byte-identical in staged frontend",
-    windows_download_button: "not activated",
+    public_downloads: "browser, Windows EXE/MSI and macOS DMG activated in OpenStore",
   }),
 );

@@ -350,6 +350,270 @@ ul {
   line-height: 1.47;
 }
 
+.signal-availability {
+  margin-top: 52px;
+  padding-top: 44px;
+  border-top: 1px solid var(--line);
+}
+
+.signal-availability-kicker {
+  margin-bottom: 10px;
+  color: var(--text-orange);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.signal-availability-title {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+}
+
+.signal-choice-grid {
+  display: grid;
+  margin-top: 32px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.signal-choice {
+  display: flex;
+  min-width: 0;
+  padding: 30px 28px;
+  flex-direction: column;
+}
+
+.signal-choice:first-child {
+  padding-left: 0;
+}
+
+.signal-choice:last-child {
+  padding-right: 0;
+}
+
+.signal-choice + .signal-choice {
+  border-left: 1px solid var(--line);
+}
+
+.signal-choice-kicker {
+  margin-bottom: 14px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+.signal-choice-title {
+  margin: 0;
+  font-size: 21px;
+  letter-spacing: -0.02em;
+  line-height: 1.16;
+}
+
+.signal-choice-description {
+  margin: 14px 0 0;
+  color: #515154;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.signal-choice-actions {
+  display: flex;
+  margin-top: 26px;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 16px;
+}
+
+.signal-choice-actions .primary-action {
+  min-height: 42px;
+  padding: 9px 17px;
+}
+
+.signal-secondary-link {
+  display: inline-flex;
+  min-height: 42px;
+  align-items: center;
+  color: var(--blue);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.signal-secondary-link:hover {
+  color: var(--blue-hover);
+}
+
+.signal-security-notice {
+  margin: 24px 0 0;
+  padding-top: 18px;
+  border-top: 1px solid var(--line-soft);
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.signal-privacy-summary {
+  display: grid;
+  padding-block: 28px;
+  border-bottom: 1px solid var(--line);
+  grid-template-columns: minmax(150px, 0.35fr) minmax(0, 1fr);
+  gap: 28px;
+}
+
+.signal-privacy-summary h4 {
+  margin: 0;
+  font-size: 15px;
+  letter-spacing: -0.01em;
+}
+
+.signal-privacy-list {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  list-style: none;
+}
+
+.signal-privacy-list li {
+  color: #515154;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.release-technical {
+  border-bottom: 1px solid var(--line);
+}
+
+.release-technical-summary {
+  display: flex;
+  min-height: 58px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  color: var(--blue);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+}
+
+.release-technical-summary::-webkit-details-marker {
+  display: none;
+}
+
+.release-technical-summary::after {
+  color: var(--muted);
+  content: "+";
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.release-technical[open] > .release-technical-summary::after {
+  content: "−";
+}
+
+.release-technical-content {
+  display: grid;
+  padding: 8px 0 36px;
+  gap: 44px;
+}
+
+.release-platform-details {
+  min-width: 0;
+}
+
+.release-platform-details + .release-platform-details {
+  padding-top: 40px;
+  border-top: 1px solid var(--line-soft);
+}
+
+.release-platform-details h5 {
+  margin: 0 0 22px;
+  font-size: 18px;
+  letter-spacing: -0.018em;
+}
+
+.release-platform-facts,
+.release-asset-facts {
+  display: grid;
+  margin: 0;
+  gap: 14px 24px;
+}
+
+.release-platform-facts {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.release-platform-facts div,
+.release-asset-facts div {
+  min-width: 0;
+}
+
+.release-platform-facts dt,
+.release-asset-facts dt {
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.release-platform-facts dd,
+.release-asset-facts dd {
+  margin: 5px 0 0;
+  color: #3a3a3c;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.release-platform-facts code,
+.release-asset-facts code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.88em;
+  font-weight: 500;
+}
+
+.release-assets-grid {
+  display: grid;
+  margin-top: 28px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.release-asset-details {
+  min-width: 0;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+
+.release-asset-details h6 {
+  margin: 0 0 16px;
+  font-size: 13px;
+  letter-spacing: -0.005em;
+}
+
+.release-resource-links {
+  display: flex;
+  margin-top: 24px;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+}
+
+.application-detail-action {
+  margin-top: 22px;
+}
+
 .research-privacy {
   margin-top: 22px;
   padding-top: 20px;
@@ -709,6 +973,31 @@ ul {
     grid-template-columns: 1fr;
     gap: 44px;
   }
+
+  .signal-choice-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .signal-choice,
+  .signal-choice:first-child,
+  .signal-choice:last-child {
+    padding: 28px 0;
+  }
+
+  .signal-choice + .signal-choice {
+    border-top: 1px solid var(--line);
+    border-left: 0;
+  }
+
+  .signal-privacy-summary {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .signal-privacy-list {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
 }
 
 @media (max-width: 600px) {
@@ -774,6 +1063,38 @@ ul {
   .application-layout {
     margin-top: 28px;
     gap: 36px;
+  }
+
+  .signal-availability {
+    margin-top: 40px;
+    padding-top: 34px;
+  }
+
+  .signal-availability-title {
+    font-size: 25px;
+  }
+
+  .signal-choice-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .signal-choice-actions .primary-action,
+  .signal-secondary-link {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .release-platform-facts,
+  .release-assets-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .release-resource-links {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0;
   }
 
   .application-description {

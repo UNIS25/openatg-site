@@ -8,12 +8,13 @@
       "category": "Communications analytics",
       "description": "Identify top-performing social media content and compare performance between reporting periods.",
       "version": "1.0.0",
-      "runtime": "Browser-native",
+      "runtime": "Browser and native desktop beta",
       "runtimeRequirements": [
-        "A current desktop browser with JavaScript and the File API enabled",
-        "Python 3 when using the included offline package launcher"
+        "A modern Windows, macOS or Linux browser for the browser version",
+        "Windows 10 or Windows 11 on a 64-bit x86 system for the Windows native beta",
+        "macOS 11 or later on Apple Silicon for the macOS native beta"
       ],
-      "internetAfterInstallation": "Not required",
+      "internetAfterInstallation": "Not required for analysis or report generation",
       "dataProcessing": "On device",
       "filesUploadedElsewhere": "No",
       "publisher": "OpenATG",
@@ -30,7 +31,12 @@
         "Store only necessary browser-local settings"
       ],
       "privacy": "Your selected files are processed on this device. OpenATG does not receive or store their contents.",
-      "offlineAvailability": "Works offline after the first successful browser load, or from the downloadable local package.",
+      "privacyStatements": [
+        "Files are processed locally.",
+        "Report data is not uploaded.",
+        "The browser version also processes selected files locally."
+      ],
+      "offlineAvailability": "Processing is local after the native application is installed. The browser version processes selected files locally after the page has loaded.",
       "releaseNotes": [
         "Initial 1.0.0 release.",
         "Includes top-performing post analysis, week-on-week comparison, and local Excel and Word report generation."
@@ -44,43 +50,81 @@
         {
           "label": "Browser",
           "details": [
-            "macOS, Windows and Linux"
+            "Modern Windows, macOS and Linux browsers."
           ]
         },
         {
-          "label": "Mac Beta",
-          "details": [
-            "Apple Silicon, M1 or later",
-            "macOS 11 or later"
-          ]
-        },
-        {
-          "label": "Windows Beta",
+          "label": "Windows native beta",
           "details": [
             "Windows 10 and Windows 11",
-            "64-bit x86_64",
-            "Installer not public until the GitHub Windows build succeeds"
+            "64-bit x86 systems",
+            "Version 1.0.0",
+            "EXE recommended for individual users",
+            "MSI intended for organisational IT deployment"
           ]
         },
         {
-          "label": "Intel Mac",
+          "label": "macOS native beta",
           "details": [
-            "Browser version only"
+            "macOS 11 or later",
+            "Apple Silicon only",
+            "Intel Macs are not currently supported",
+            "Version 1.0.0"
           ]
         }
       ],
       "entryPoint": "/signal/",
-      "networkRequirements": "Internet is required for the first website load only. No internet connection is required after installation or when using the offline package.",
-      "package": {
-        "filename": "atg-signal-1.0.0.zip",
-        "sizeBytes": 1413275,
-        "size": "1.35 MB",
-        "sha256": "fb6de970450b34d20326e2a154f20cc51a8f3cbb888df14adf32b093fc89d1f1"
+      "networkRequirements": "Internet access is required to load the website or download an installer. Selected-file processing and report generation are local.",
+      "availability": {
+        "browser": {
+          "kind": "browser",
+          "label": "Use in browser",
+          "url": "https://openatg.com/signal/",
+          "supportedPlatform": "Modern Windows, macOS and Linux browsers"
+        },
+        "windows": {
+          "kind": "native-beta",
+          "label": "Download for Windows",
+          "version": "1.0.0",
+          "supportedPlatform": "Windows 10 and Windows 11",
+          "architecture": "64-bit x86 systems",
+          "recommended": {
+            "label": "EXE recommended for individual users",
+            "filename": "ATG-Signal-1.0.0-Windows-x64-Setup.exe",
+            "url": "https://github.com/UNIS25/openatg-site/releases/download/atg-signal-v1.0.0-windows-beta.1/ATG-Signal-1.0.0-Windows-x64-Setup.exe",
+            "sizeBytes": 218863321,
+            "sha256": "bea0260319b6ce911407cebbbf4bf725dfcaa5376534cff92c232d445a0cd4ab"
+          },
+          "alternative": {
+            "label": "MSI for IT administrators",
+            "description": "Intended for organisational IT deployment",
+            "filename": "ATG-Signal-1.0.0-Windows-x64.msi",
+            "url": "https://github.com/UNIS25/openatg-site/releases/download/atg-signal-v1.0.0-windows-beta.1/ATG-Signal-1.0.0-Windows-x64.msi",
+            "sizeBytes": 217436160,
+            "sha256": "25992e57001bc5ba6f181f7f1567498a01f71187face876c8fedc0712c47b254"
+          },
+          "checksumFile": "https://github.com/UNIS25/openatg-site/releases/download/atg-signal-v1.0.0-windows-beta.1/SHA256SUMS-Windows.txt",
+          "releasePage": "https://github.com/UNIS25/openatg-site/releases/tag/atg-signal-v1.0.0-windows-beta.1",
+          "securityNotice": "This beta is currently unsigned. Microsoft Defender SmartScreen or organisation-managed security controls may display a warning or block installation."
+        },
+        "macos": {
+          "kind": "native-beta",
+          "label": "Download for Mac",
+          "version": "1.0.0",
+          "supportedPlatform": "macOS 11 or later",
+          "architecture": "Apple Silicon only",
+          "installer": {
+            "filename": "ATG-Signal-1.0.0-macOS-Apple-Silicon.dmg",
+            "url": "https://github.com/UNIS25/openatg-site/releases/download/atg-signal-v1.0.0-macos-beta.1/ATG-Signal-1.0.0-macOS-Apple-Silicon.dmg",
+            "sizeBytes": 4343812,
+            "sha256": "9942a1b1864f01ed5023e6f82fcac54d749e4f8780c3af871c3f402911b92c3d"
+          },
+          "checksumFile": "https://github.com/UNIS25/openatg-site/releases/download/atg-signal-v1.0.0-macos-beta.1/SHA256SUMS-macOS.txt",
+          "releasePage": "https://github.com/UNIS25/openatg-site/releases/tag/atg-signal-v1.0.0-macos-beta.1",
+          "securityNotice": "This beta is ad-hoc signed and has not yet been Apple-notarised. macOS or organisation-managed security controls may display a warning or block installation."
+        }
       },
       "links": {
-        "open": "/signal/",
-        "install": "/signal/#install",
-        "download": "/downloads/atg-signal-1.0.0.zip",
         "thirdPartyNotices": "/signal/THIRD_PARTY_NOTICES.md"
       }
     },

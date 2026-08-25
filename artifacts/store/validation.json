@@ -1,17 +1,25 @@
 {
   "status": "pass",
-  "release": {
-    "downloadUrl": "https://github.com/UNIS25/openatg-site/releases/download/atg-base-32m-lightning-v2/ATG-Base-32M-Lightning-v2-Research.tar",
-    "archiveFilename": "ATG-Base-32M-Lightning-v2-Research.tar",
-    "archiveBytes": 378429440,
-    "archiveSize": "360.90 MiB",
-    "archiveSha256": "eb907924aedf9e8c6bc070db4b2cd3aa047aedb28edccb257d1a06a87be967dd"
+  "releases": {
+    "base32m": {
+      "downloadUrl": "https://github.com/UNIS25/openatg-site/releases/download/atg-base-32m-lightning-v2/ATG-Base-32M-Lightning-v2-Research.tar",
+      "archiveFilename": "ATG-Base-32M-Lightning-v2-Research.tar",
+      "archiveBytes": 378429440,
+      "archiveSize": "360.90 MiB",
+      "archiveSha256": "eb907924aedf9e8c6bc070db4b2cd3aa047aedb28edccb257d1a06a87be967dd"
+    },
+    "signal": {
+      "browser": "https://openatg.com/signal/",
+      "windowsExe": "https://github.com/UNIS25/openatg-site/releases/download/atg-signal-v1.0.0-windows-beta.1/ATG-Signal-1.0.0-Windows-x64-Setup.exe",
+      "windowsMsi": "https://github.com/UNIS25/openatg-site/releases/download/atg-signal-v1.0.0-windows-beta.1/ATG-Signal-1.0.0-Windows-x64.msi",
+      "windowsChecksum": "https://github.com/UNIS25/openatg-site/releases/download/atg-signal-v1.0.0-windows-beta.1/SHA256SUMS-Windows.txt",
+      "macDmg": "https://github.com/UNIS25/openatg-site/releases/download/atg-signal-v1.0.0-macos-beta.1/ATG-Signal-1.0.0-macOS-Apple-Silicon.dmg",
+      "macChecksum": "https://github.com/UNIS25/openatg-site/releases/download/atg-signal-v1.0.0-macos-beta.1/SHA256SUMS-macOS.txt"
+    }
   },
   "localPaths": [
     "/",
-    "/downloads/atg-signal-1.0.0.zip",
     "/signal/",
-    "/signal/#install",
     "/signal/THIRD_PARTY_NOTICES.md",
     "/store/",
     "/store/base-32m/"
@@ -33,6 +41,24 @@
         "headerFits": true
       },
       "store": {
+        "path": "/store/",
+        "innerWidth": 1440,
+        "innerHeight": 1000,
+        "scrollWidth": 1440,
+        "bodyScrollWidth": 1440,
+        "clipped": [],
+        "headerFits": true
+      },
+      "signalDownloads": {
+        "path": "/store/",
+        "innerWidth": 1440,
+        "innerHeight": 1000,
+        "scrollWidth": 1440,
+        "bodyScrollWidth": 1440,
+        "clipped": [],
+        "headerFits": true
+      },
+      "signalTechnical": {
         "path": "/store/",
         "innerWidth": 1440,
         "innerHeight": 1000,
@@ -76,6 +102,24 @@
         "clipped": [],
         "headerFits": true
       },
+      "signalDownloads": {
+        "path": "/store/",
+        "innerWidth": 768,
+        "innerHeight": 1024,
+        "scrollWidth": 768,
+        "bodyScrollWidth": 768,
+        "clipped": [],
+        "headerFits": true
+      },
+      "signalTechnical": {
+        "path": "/store/",
+        "innerWidth": 768,
+        "innerHeight": 1024,
+        "scrollWidth": 768,
+        "bodyScrollWidth": 768,
+        "clipped": [],
+        "headerFits": true
+      },
       "detail": {
         "path": "/store/base-32m/",
         "innerWidth": 768,
@@ -103,6 +147,24 @@
         "headerFits": true
       },
       "store": {
+        "path": "/store/",
+        "innerWidth": 390,
+        "innerHeight": 844,
+        "scrollWidth": 390,
+        "bodyScrollWidth": 390,
+        "clipped": [],
+        "headerFits": true
+      },
+      "signalDownloads": {
+        "path": "/store/",
+        "innerWidth": 390,
+        "innerHeight": 844,
+        "scrollWidth": 390,
+        "bodyScrollWidth": 390,
+        "clipped": [],
+        "headerFits": true
+      },
+      "signalTechnical": {
         "path": "/store/",
         "innerWidth": 390,
         "innerHeight": 844,
@@ -205,7 +267,7 @@
   "homepageRelease": {
     "id": "new-releases",
     "heading": "A compact model, released for research.",
-    "top": 89,
+    "top": 91,
     "downloadHref": "https://github.com/UNIS25/openatg-site/releases/download/atg-base-32m-lightning-v2/ATG-Base-32M-Lightning-v2-Research.tar",
     "downloadAttribute": null,
     "detailHref": "/store/base-32m/",
@@ -220,23 +282,134 @@
       "application",
       "research"
     ],
-    "signalActions": [
+    "signalChoices": [
       {
-        "label": "Open ATG Signal",
-        "path": "/signal/",
+        "label": "Use in browser",
+        "href": "https://openatg.com/signal/",
+        "target": "",
         "download": null
       },
       {
-        "label": "Install locally",
-        "path": "/signal/#install",
+        "label": "Download for Windows",
+        "href": "https://github.com/UNIS25/openatg-site/releases/download/atg-signal-v1.0.0-windows-beta.1/ATG-Signal-1.0.0-Windows-x64-Setup.exe",
+        "target": "",
         "download": null
       },
       {
-        "label": "Download offline package",
-        "path": "/downloads/atg-signal-1.0.0.zip",
-        "download": "atg-signal-1.0.0.zip"
+        "label": "Download for Mac",
+        "href": "https://github.com/UNIS25/openatg-site/releases/download/atg-signal-v1.0.0-macos-beta.1/ATG-Signal-1.0.0-macOS-Apple-Silicon.dmg",
+        "target": "",
+        "download": null
       }
     ],
+    "msiAction": {
+      "label": "MSI for IT administrators",
+      "href": "https://github.com/UNIS25/openatg-site/releases/download/atg-signal-v1.0.0-windows-beta.1/ATG-Signal-1.0.0-Windows-x64.msi",
+      "target": "",
+      "download": null
+    },
+    "securityNotices": [
+      "This beta is currently unsigned. Microsoft Defender SmartScreen or organisation-managed security controls may display a warning or block installation.",
+      "This beta is ad-hoc signed and has not yet been Apple-notarised. macOS or organisation-managed security controls may display a warning or block installation."
+    ],
+    "privacyStatements": [
+      "Files are processed locally.",
+      "Report data is not uploaded.",
+      "The browser version also processes selected files locally."
+    ],
+    "technical": {
+      "tagName": "DETAILS",
+      "initiallyOpen": false,
+      "summary": "Technical details",
+      "fields": [
+        {
+          "label": "Version",
+          "value": "1.0.0"
+        },
+        {
+          "label": "Supported platform",
+          "value": "Windows 10 and Windows 11"
+        },
+        {
+          "label": "Architecture",
+          "value": "64-bit x86 systems"
+        },
+        {
+          "label": "Filename",
+          "value": "ATG-Signal-1.0.0-Windows-x64-Setup.exe"
+        },
+        {
+          "label": "Exact size",
+          "value": "218,863,321 bytes"
+        },
+        {
+          "label": "SHA-256",
+          "value": "bea0260319b6ce911407cebbbf4bf725dfcaa5376534cff92c232d445a0cd4ab"
+        },
+        {
+          "label": "Filename",
+          "value": "ATG-Signal-1.0.0-Windows-x64.msi"
+        },
+        {
+          "label": "Exact size",
+          "value": "217,436,160 bytes"
+        },
+        {
+          "label": "SHA-256",
+          "value": "25992e57001bc5ba6f181f7f1567498a01f71187face876c8fedc0712c47b254"
+        },
+        {
+          "label": "Version",
+          "value": "1.0.0"
+        },
+        {
+          "label": "Supported platform",
+          "value": "macOS 11 or later"
+        },
+        {
+          "label": "Architecture",
+          "value": "Apple Silicon only"
+        },
+        {
+          "label": "Filename",
+          "value": "ATG-Signal-1.0.0-macOS-Apple-Silicon.dmg"
+        },
+        {
+          "label": "Exact size",
+          "value": "4,343,812 bytes"
+        },
+        {
+          "label": "SHA-256",
+          "value": "9942a1b1864f01ed5023e6f82fcac54d749e4f8780c3af871c3f402911b92c3d"
+        }
+      ],
+      "resources": [
+        {
+          "label": "View checksum file",
+          "href": "https://github.com/UNIS25/openatg-site/releases/download/atg-signal-v1.0.0-windows-beta.1/SHA256SUMS-Windows.txt",
+          "target": "_blank",
+          "rel": "noopener noreferrer"
+        },
+        {
+          "label": "View GitHub Release",
+          "href": "https://github.com/UNIS25/openatg-site/releases/tag/atg-signal-v1.0.0-windows-beta.1",
+          "target": "_blank",
+          "rel": "noopener noreferrer"
+        },
+        {
+          "label": "View checksum file",
+          "href": "https://github.com/UNIS25/openatg-site/releases/download/atg-signal-v1.0.0-macos-beta.1/SHA256SUMS-macOS.txt",
+          "target": "_blank",
+          "rel": "noopener noreferrer"
+        },
+        {
+          "label": "View GitHub Release",
+          "href": "https://github.com/UNIS25/openatg-site/releases/tag/atg-signal-v1.0.0-macos-beta.1",
+          "target": "_blank",
+          "rel": "noopener noreferrer"
+        }
+      ]
+    },
     "signalCapabilities": 4,
     "research": {
       "badge": "Research",
@@ -255,6 +428,198 @@
     "emptyButtons": 0
   },
   "signal": {
+    "catalogue": {
+      "itemNames": [
+        "ATG Signal",
+        "ATG Base 32M"
+      ],
+      "itemTypes": [
+        "application",
+        "research"
+      ],
+      "signalChoices": [
+        {
+          "label": "Use in browser",
+          "href": "https://openatg.com/signal/",
+          "target": "",
+          "download": null
+        },
+        {
+          "label": "Download for Windows",
+          "href": "https://github.com/UNIS25/openatg-site/releases/download/atg-signal-v1.0.0-windows-beta.1/ATG-Signal-1.0.0-Windows-x64-Setup.exe",
+          "target": "",
+          "download": null
+        },
+        {
+          "label": "Download for Mac",
+          "href": "https://github.com/UNIS25/openatg-site/releases/download/atg-signal-v1.0.0-macos-beta.1/ATG-Signal-1.0.0-macOS-Apple-Silicon.dmg",
+          "target": "",
+          "download": null
+        }
+      ],
+      "msiAction": {
+        "label": "MSI for IT administrators",
+        "href": "https://github.com/UNIS25/openatg-site/releases/download/atg-signal-v1.0.0-windows-beta.1/ATG-Signal-1.0.0-Windows-x64.msi",
+        "target": "",
+        "download": null
+      },
+      "securityNotices": [
+        "This beta is currently unsigned. Microsoft Defender SmartScreen or organisation-managed security controls may display a warning or block installation.",
+        "This beta is ad-hoc signed and has not yet been Apple-notarised. macOS or organisation-managed security controls may display a warning or block installation."
+      ],
+      "privacyStatements": [
+        "Files are processed locally.",
+        "Report data is not uploaded.",
+        "The browser version also processes selected files locally."
+      ],
+      "technical": {
+        "tagName": "DETAILS",
+        "initiallyOpen": false,
+        "summary": "Technical details",
+        "fields": [
+          {
+            "label": "Version",
+            "value": "1.0.0"
+          },
+          {
+            "label": "Supported platform",
+            "value": "Windows 10 and Windows 11"
+          },
+          {
+            "label": "Architecture",
+            "value": "64-bit x86 systems"
+          },
+          {
+            "label": "Filename",
+            "value": "ATG-Signal-1.0.0-Windows-x64-Setup.exe"
+          },
+          {
+            "label": "Exact size",
+            "value": "218,863,321 bytes"
+          },
+          {
+            "label": "SHA-256",
+            "value": "bea0260319b6ce911407cebbbf4bf725dfcaa5376534cff92c232d445a0cd4ab"
+          },
+          {
+            "label": "Filename",
+            "value": "ATG-Signal-1.0.0-Windows-x64.msi"
+          },
+          {
+            "label": "Exact size",
+            "value": "217,436,160 bytes"
+          },
+          {
+            "label": "SHA-256",
+            "value": "25992e57001bc5ba6f181f7f1567498a01f71187face876c8fedc0712c47b254"
+          },
+          {
+            "label": "Version",
+            "value": "1.0.0"
+          },
+          {
+            "label": "Supported platform",
+            "value": "macOS 11 or later"
+          },
+          {
+            "label": "Architecture",
+            "value": "Apple Silicon only"
+          },
+          {
+            "label": "Filename",
+            "value": "ATG-Signal-1.0.0-macOS-Apple-Silicon.dmg"
+          },
+          {
+            "label": "Exact size",
+            "value": "4,343,812 bytes"
+          },
+          {
+            "label": "SHA-256",
+            "value": "9942a1b1864f01ed5023e6f82fcac54d749e4f8780c3af871c3f402911b92c3d"
+          }
+        ],
+        "resources": [
+          {
+            "label": "View checksum file",
+            "href": "https://github.com/UNIS25/openatg-site/releases/download/atg-signal-v1.0.0-windows-beta.1/SHA256SUMS-Windows.txt",
+            "target": "_blank",
+            "rel": "noopener noreferrer"
+          },
+          {
+            "label": "View GitHub Release",
+            "href": "https://github.com/UNIS25/openatg-site/releases/tag/atg-signal-v1.0.0-windows-beta.1",
+            "target": "_blank",
+            "rel": "noopener noreferrer"
+          },
+          {
+            "label": "View checksum file",
+            "href": "https://github.com/UNIS25/openatg-site/releases/download/atg-signal-v1.0.0-macos-beta.1/SHA256SUMS-macOS.txt",
+            "target": "_blank",
+            "rel": "noopener noreferrer"
+          },
+          {
+            "label": "View GitHub Release",
+            "href": "https://github.com/UNIS25/openatg-site/releases/tag/atg-signal-v1.0.0-macos-beta.1",
+            "target": "_blank",
+            "rel": "noopener noreferrer"
+          }
+        ]
+      },
+      "signalCapabilities": 4,
+      "research": {
+        "badge": "Research",
+        "status": "Research checkpoint",
+        "description": "An independently pretrained compact generative language-model research checkpoint exploring local and accessible AI for English, Sinhala and Tamil.",
+        "privacy": "Designed for local research and offline experimentation.",
+        "actionLabel": "View checkpoint",
+        "actionPath": "/store/base-32m/",
+        "actionTarget": "",
+        "downloadActions": 0,
+        "operatingSystemSelectors": 0,
+        "actionCount": 1
+      },
+      "activeOpenStore": "page",
+      "imagesWithoutAlt": 0,
+      "emptyButtons": 0
+    },
+    "technicalDisclosure": {
+      "downloadFocus": [
+        {
+          "label": "Use in browser",
+          "tagName": "A",
+          "tabIndex": 0,
+          "outline": "solid",
+          "width": "3px"
+        },
+        {
+          "label": "Download for Windows",
+          "tagName": "A",
+          "tabIndex": 0,
+          "outline": "solid",
+          "width": "3px"
+        },
+        {
+          "label": "MSI for IT administrators",
+          "tagName": "A",
+          "tabIndex": 0,
+          "outline": "solid",
+          "width": "3px"
+        },
+        {
+          "label": "Download for Mac",
+          "tagName": "A",
+          "tabIndex": 0,
+          "outline": "solid",
+          "width": "3px"
+        }
+      ],
+      "focus": {
+        "outline": "solid",
+        "width": "3px"
+      },
+      "enter": "pass",
+      "space": "pass"
+    },
     "details": {
       "label": "View permissions and details",
       "tagName": "BUTTON",
@@ -264,28 +629,26 @@
       {
         "label": "Browser",
         "details": [
-          "macOS, Windows and Linux"
+          "Modern Windows, macOS and Linux browsers."
         ]
       },
       {
-        "label": "Mac Beta",
-        "details": [
-          "Apple Silicon, M1 or later",
-          "macOS 11 or later"
-        ]
-      },
-      {
-        "label": "Windows Beta",
+        "label": "Windows native beta",
         "details": [
           "Windows 10 and Windows 11",
-          "64-bit x86_64",
-          "Installer not public until the GitHub Windows build succeeds"
+          "64-bit x86 systems",
+          "Version 1.0.0",
+          "EXE recommended for individual users",
+          "MSI intended for organisational IT deployment"
         ]
       },
       {
-        "label": "Intel Mac",
+        "label": "macOS native beta",
         "details": [
-          "Browser version only"
+          "macOS 11 or later",
+          "Apple Silicon only",
+          "Intel Macs are not currently supported",
+          "Version 1.0.0"
         ]
       }
     ]

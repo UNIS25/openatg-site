@@ -21,6 +21,25 @@ const licenceUrl =
 const archiveFilename = "ATG-Base-32M-Lightning-v2-Research.tar";
 const archiveBytes = 378_429_440;
 const archiveSha256 = "eb907924aedf9e8c6bc070db4b2cd3aa047aedb28edccb257d1a06a87be967dd";
+const signalBrowserUrl = "https://openatg.com/signal/";
+const windowsExeUrl =
+  "https://github.com/UNIS25/openatg-site/releases/download/atg-signal-v1.0.0-windows-beta.1/ATG-Signal-1.0.0-Windows-x64-Setup.exe";
+const windowsMsiUrl =
+  "https://github.com/UNIS25/openatg-site/releases/download/atg-signal-v1.0.0-windows-beta.1/ATG-Signal-1.0.0-Windows-x64.msi";
+const windowsChecksumUrl =
+  "https://github.com/UNIS25/openatg-site/releases/download/atg-signal-v1.0.0-windows-beta.1/SHA256SUMS-Windows.txt";
+const windowsReleaseUrl =
+  "https://github.com/UNIS25/openatg-site/releases/tag/atg-signal-v1.0.0-windows-beta.1";
+const macDmgUrl =
+  "https://github.com/UNIS25/openatg-site/releases/download/atg-signal-v1.0.0-macos-beta.1/ATG-Signal-1.0.0-macOS-Apple-Silicon.dmg";
+const macChecksumUrl =
+  "https://github.com/UNIS25/openatg-site/releases/download/atg-signal-v1.0.0-macos-beta.1/SHA256SUMS-macOS.txt";
+const macReleaseUrl =
+  "https://github.com/UNIS25/openatg-site/releases/tag/atg-signal-v1.0.0-macos-beta.1";
+const windowsUnsignedWarning =
+  "This beta is currently unsigned. Microsoft Defender SmartScreen or organisation-managed security controls may display a warning or block installation.";
+const macNotarisationWarning =
+  "This beta is ad-hoc signed and has not yet been Apple-notarised. macOS or organisation-managed security controls may display a warning or block installation.";
 const expectedTopNavigation = ["OpenStore", "New Releases", "Purpose", "Downloads", "Contact"];
 const expectedOpenStoreItems = [
   ["Base 32M New", "Research checkpoint"],
@@ -64,12 +83,70 @@ assert.equal(researchEntry.typeLabel, "Research checkpoint");
 assert.equal(researchEntry.version, "Lightning v2");
 assert.equal(researchEntry.status, "Research checkpoint");
 assert.equal(researchEntry.privacy, "Designed for local research and offline experimentation.");
-assert.equal(signalEntry.links.windows, undefined);
-assert.match(JSON.stringify(signalEntry.compatibility), /Windows 10 and Windows 11/);
-assert.match(JSON.stringify(signalEntry.compatibility), /64-bit x86_64/);
-assert.match(
-  JSON.stringify(signalEntry.compatibility),
-  /Installer not public until the GitHub Windows build succeeds/,
+assert.deepEqual(signalEntry.privacyStatements, [
+  "Files are processed locally.",
+  "Report data is not uploaded.",
+  "The browser version also processes selected files locally.",
+]);
+assert.deepEqual(signalEntry.compatibility, [
+  { label: "Browser", details: ["Modern Windows, macOS and Linux browsers."] },
+  {
+    label: "Windows native beta",
+    details: [
+      "Windows 10 and Windows 11",
+      "64-bit x86 systems",
+      "Version 1.0.0",
+      "EXE recommended for individual users",
+      "MSI intended for organisational IT deployment",
+    ],
+  },
+  {
+    label: "macOS native beta",
+    details: [
+      "macOS 11 or later",
+      "Apple Silicon only",
+      "Intel Macs are not currently supported",
+      "Version 1.0.0",
+    ],
+  },
+]);
+assert.equal(signalEntry.availability.browser.url, signalBrowserUrl);
+assert.deepEqual(signalEntry.availability.windows.recommended, {
+  label: "EXE recommended for individual users",
+  filename: "ATG-Signal-1.0.0-Windows-x64-Setup.exe",
+  url: windowsExeUrl,
+  sizeBytes: 218_863_321,
+  sha256: "bea0260319b6ce911407cebbbf4bf725dfcaa5376534cff92c232d445a0cd4ab",
+});
+assert.deepEqual(signalEntry.availability.windows.alternative, {
+  label: "MSI for IT administrators",
+  description: "Intended for organisational IT deployment",
+  filename: "ATG-Signal-1.0.0-Windows-x64.msi",
+  url: windowsMsiUrl,
+  sizeBytes: 217_436_160,
+  sha256: "25992e57001bc5ba6f181f7f1567498a01f71187face876c8fedc0712c47b254",
+});
+assert.equal(signalEntry.availability.windows.checksumFile, windowsChecksumUrl);
+assert.equal(signalEntry.availability.windows.releasePage, windowsReleaseUrl);
+assert.equal(signalEntry.availability.windows.securityNotice, windowsUnsignedWarning);
+assert.deepEqual(signalEntry.availability.macos.installer, {
+  filename: "ATG-Signal-1.0.0-macOS-Apple-Silicon.dmg",
+  url: macDmgUrl,
+  sizeBytes: 4_343_812,
+  sha256: "9942a1b1864f01ed5023e6f82fcac54d749e4f8780c3af871c3f402911b92c3d",
+});
+assert.equal(signalEntry.availability.macos.checksumFile, macChecksumUrl);
+assert.equal(signalEntry.availability.macos.releasePage, macReleaseUrl);
+assert.equal(signalEntry.availability.macos.securityNotice, macNotarisationWarning);
+assert.deepEqual(
+  [
+    signalEntry.availability.windows.recommended.url,
+    signalEntry.availability.windows.alternative.url,
+    signalEntry.availability.windows.checksumFile,
+    signalEntry.availability.macos.installer.url,
+    signalEntry.availability.macos.checksumFile,
+  ],
+  [windowsExeUrl, windowsMsiUrl, windowsChecksumUrl, macDmgUrl, macChecksumUrl],
 );
 assert.match(storeHtml, /<title>OpenStore — OpenATG<\/title>/);
 assert.match(storeHtml, /<link rel="canonical" href="https:\/\/openatg\.com\/store\/"/);
@@ -83,7 +160,19 @@ assert.match(detailHtml, /connect-src 'none'/);
 assert.doesNotMatch(`${homepageHtml}\n${storeHtml}\n${detailHtml}\n${storeSource}`, /chatgpt\.site/);
 assert.doesNotMatch(storeSource, /\.innerHTML\s*=/);
 assert.doesNotMatch(`${storeSource}\n${detailSource}`, /github\.com.*fetch|fetch\([^)]*github/i);
+assert.doesNotMatch(storeSource, /api\.github\.com/);
+assert.doesNotMatch(
+  `${homepageHtml}\n${storeHtml}\n${storeSource}\n${JSON.stringify(catalogue)}`,
+  /Windows download unavailable|macOS coming soon|Downloads coming later|Installer not public until/i,
+);
 assert.doesNotMatch(detailHtml, new RegExp(`href="${downloadUrl.replaceAll(".", "\\.")}"[^>]*download`));
+
+const homepageDownloadsSection = homepageHtml.match(
+  /<section class="downloads-section"[\s\S]*?<\/section>/,
+)?.[0];
+assert.ok(homepageDownloadsSection);
+assert.match(homepageDownloadsSection, /href="\/store\/"/);
+assert.doesNotMatch(homepageDownloadsSection, /atg-signal-v1\.0\.0-(?:windows|macos)-beta/);
 
 for (const [url, label] of [
   [modelCardUrl, "View model card"],
@@ -131,9 +220,7 @@ const requiredLocalPaths = new Set([
   "/",
   "/store/",
   "/store/base-32m/",
-  signalEntry.links.open,
-  signalEntry.links.install,
-  signalEntry.links.download,
+  signalEntry.entryPoint,
   signalEntry.links.thirdPartyNotices,
 ]);
 for (const href of [
@@ -281,7 +368,7 @@ function externalRequestsSince(index) {
 
 async function pageLayout() {
   return evaluate(`(() => {
-    const candidates = [...document.querySelectorAll('h1, h2, a.primary-button, a.primary-action, button')]
+    const candidates = [...document.querySelectorAll('h1, h2, a.primary-button, a.primary-action, a.signal-secondary-link, button, summary')]
       .filter((node) => node.getClientRects().length > 0);
     const clipped = candidates
       .filter((node) => {
@@ -357,8 +444,6 @@ try {
     assert.deepEqual(homepage.clipped, []);
     assert.equal(homepage.headerFits, true);
     assert.deepEqual(externalRequestsSince(requestStart), []);
-    await evaluate("document.querySelector('#new-releases').scrollIntoView({block: 'start', behavior: 'instant'})");
-    await screenshot(`openatg-${viewport.suffix}.png`);
 
     requestStart = requests.length;
     await navigate(`${baseUrl}/store/`);
@@ -371,8 +456,22 @@ try {
     assert.equal(store.headerFits, true);
     assert.equal(await evaluate("document.title"), "OpenStore — OpenATG");
     assert.deepEqual(externalRequestsSince(requestStart), []);
-    await evaluate("document.querySelector('.research-item').scrollIntoView({block: 'center', behavior: 'instant'})");
-    await screenshot(`openstore-research-${viewport.suffix}.png`);
+    await evaluate("scrollTo({ top: 0, behavior: 'instant' })");
+    await screenshot(`openstore-${viewport.suffix}.png`);
+    await evaluate(
+      "document.querySelector('.signal-availability').scrollIntoView({block: 'start', behavior: 'instant'})",
+    );
+    const signalDownloadLayout = await pageLayout();
+    assert.ok(signalDownloadLayout.scrollWidth <= viewport.width);
+    assert.ok(signalDownloadLayout.bodyScrollWidth <= viewport.width);
+    assert.deepEqual(signalDownloadLayout.clipped, []);
+    await screenshot(`atg-signal-downloads-${viewport.suffix}.png`);
+    await evaluate("document.querySelector('[data-signal-technical]').open = true");
+    const signalTechnicalLayout = await pageLayout();
+    assert.ok(signalTechnicalLayout.scrollWidth <= viewport.width);
+    assert.ok(signalTechnicalLayout.bodyScrollWidth <= viewport.width);
+    assert.deepEqual(signalTechnicalLayout.clipped, []);
+    await evaluate("document.querySelector('[data-signal-technical]').open = false");
 
     requestStart = requests.length;
     await navigate(`${baseUrl}/store/base-32m/`);
@@ -383,9 +482,16 @@ try {
     assert.deepEqual(detail.clipped, []);
     assert.equal(detail.headerFits, true);
     assert.deepEqual(externalRequestsSince(requestStart), []);
-    await screenshot(`base-32m-${viewport.suffix}.png`);
 
-    viewportResults.push({ viewport, homepage, store, detail, status: "pass" });
+    viewportResults.push({
+      viewport,
+      homepage,
+      store,
+      signalDownloads: signalDownloadLayout,
+      signalTechnical: signalTechnicalLayout,
+      detail,
+      status: "pass",
+    });
   }
 
   await setViewport(1440, 1000);
@@ -467,12 +573,35 @@ try {
     const signal = document.querySelector('[data-application-id="atg-signal"]');
     const research = document.querySelector('[data-research-id="atg-base-32m"]');
     const action = research.querySelector('.application-actions a');
+    const technical = signal.querySelector('[data-signal-technical]');
     return {
       itemNames: [...document.querySelectorAll('.application-title')].map((node) => node.textContent),
       itemTypes: [...document.querySelectorAll('.catalogue-item')].map((node) => node.dataset.itemType),
-      signalActions: [...signal.querySelectorAll('.application-actions a')].map((link) => ({
-        label: link.textContent.trim(), path: link.pathname + link.hash, download: link.getAttribute('download')
+      signalChoices: [...signal.querySelectorAll('.signal-choice .primary-action')].map((link) => ({
+        label: link.textContent.trim(), href: link.href, target: link.target,
+        download: link.getAttribute('download')
       })),
+      msiAction: (() => {
+        const link = signal.querySelector('.signal-secondary-link');
+        return { label: link.textContent.trim(), href: link.href, target: link.target,
+          download: link.getAttribute('download') };
+      })(),
+      securityNotices: [...signal.querySelectorAll('.signal-security-notice')]
+        .map((notice) => notice.textContent),
+      privacyStatements: [...signal.querySelectorAll('.signal-privacy-list li')]
+        .map((statement) => statement.textContent),
+      technical: {
+        tagName: technical.tagName,
+        initiallyOpen: technical.open,
+        summary: technical.querySelector('summary').textContent,
+        fields: [...technical.querySelectorAll('.release-technical-content dl > div')].map((field) => ({
+          label: field.querySelector('dt').textContent,
+          value: field.querySelector('dd').textContent
+        })),
+        resources: [...technical.querySelectorAll('.release-resource-links a')].map((link) => ({
+          label: link.textContent.trim(), href: link.href, target: link.target, rel: link.rel
+        }))
+      },
       signalCapabilities: signal.querySelectorAll('.capability-list li').length,
       research: {
         badge: research.querySelector('.research-badge').textContent,
@@ -495,14 +624,60 @@ try {
   assert.deepEqual(catalogueResult.itemNames, ["ATG Signal", "ATG Base 32M"]);
   assert.deepEqual(catalogueResult.itemTypes, ["application", "research"]);
   assert.deepEqual(
-    catalogueResult.signalActions.map((action) => action.label),
-    ["Open ATG Signal", "Install locally", "Download offline package"],
+    catalogueResult.signalChoices.map((action) => action.label),
+    ["Use in browser", "Download for Windows", "Download for Mac"],
   );
   assert.deepEqual(
-    catalogueResult.signalActions.map((action) => action.path),
-    ["/signal/", "/signal/#install", "/downloads/atg-signal-1.0.0.zip"],
+    catalogueResult.signalChoices.map((action) => action.href),
+    [signalBrowserUrl, windowsExeUrl, macDmgUrl],
   );
-  assert.equal(catalogueResult.signalActions[2].download, "atg-signal-1.0.0.zip");
+  assert.ok(catalogueResult.signalChoices.every((action) => !action.target && !action.download));
+  assert.deepEqual(catalogueResult.msiAction, {
+    label: "MSI for IT administrators",
+    href: windowsMsiUrl,
+    target: "",
+    download: null,
+  });
+  assert.deepEqual(catalogueResult.securityNotices, [
+    windowsUnsignedWarning,
+    macNotarisationWarning,
+  ]);
+  assert.deepEqual(catalogueResult.privacyStatements, signalEntry.privacyStatements);
+  assert.deepEqual(
+    catalogueResult.technical.resources,
+    [
+      { label: "View checksum file", href: windowsChecksumUrl, target: "_blank", rel: "noopener noreferrer" },
+      { label: "View GitHub Release", href: windowsReleaseUrl, target: "_blank", rel: "noopener noreferrer" },
+      { label: "View checksum file", href: macChecksumUrl, target: "_blank", rel: "noopener noreferrer" },
+      { label: "View GitHub Release", href: macReleaseUrl, target: "_blank", rel: "noopener noreferrer" },
+    ],
+  );
+  assert.equal(catalogueResult.technical.tagName, "DETAILS");
+  assert.equal(catalogueResult.technical.initiallyOpen, false);
+  assert.equal(catalogueResult.technical.summary, "Technical details");
+  for (const requiredField of [
+    { label: "Version", value: "1.0.0" },
+    { label: "Supported platform", value: "Windows 10 and Windows 11" },
+    { label: "Architecture", value: "64-bit x86 systems" },
+    { label: "Filename", value: "ATG-Signal-1.0.0-Windows-x64-Setup.exe" },
+    { label: "Exact size", value: "218,863,321 bytes" },
+    { label: "SHA-256", value: "bea0260319b6ce911407cebbbf4bf725dfcaa5376534cff92c232d445a0cd4ab" },
+    { label: "Filename", value: "ATG-Signal-1.0.0-Windows-x64.msi" },
+    { label: "Exact size", value: "217,436,160 bytes" },
+    { label: "SHA-256", value: "25992e57001bc5ba6f181f7f1567498a01f71187face876c8fedc0712c47b254" },
+    { label: "Supported platform", value: "macOS 11 or later" },
+    { label: "Architecture", value: "Apple Silicon only" },
+    { label: "Filename", value: "ATG-Signal-1.0.0-macOS-Apple-Silicon.dmg" },
+    { label: "Exact size", value: "4,343,812 bytes" },
+    { label: "SHA-256", value: "9942a1b1864f01ed5023e6f82fcac54d749e4f8780c3af871c3f402911b92c3d" },
+  ]) {
+    assert.ok(
+      catalogueResult.technical.fields.some(
+        (field) => field.label === requiredField.label && field.value === requiredField.value,
+      ),
+      `Technical details should include ${requiredField.label}: ${requiredField.value}`,
+    );
+  }
   assert.equal(catalogueResult.signalCapabilities, 4);
   assert.deepEqual(catalogueResult.research, {
     badge: "Research",
@@ -520,6 +695,51 @@ try {
   assert.equal(catalogueResult.activeOpenStore, "page");
   assert.equal(catalogueResult.imagesWithoutAlt, 0);
   assert.equal(catalogueResult.emptyButtons, 0);
+
+  const downloadFocus = await evaluate(`(() => {
+    const controls = [...document.querySelectorAll(
+      '[data-application-id="atg-signal"] .signal-choice-actions a'
+    )];
+    return controls.map((control) => {
+      control.focus();
+      const style = getComputedStyle(control);
+      return {
+        label: control.textContent.trim(),
+        tagName: control.tagName,
+        tabIndex: control.tabIndex,
+        outline: style.outlineStyle,
+        width: style.outlineWidth
+      };
+    });
+  })()`);
+  assert.deepEqual(
+    downloadFocus.map(({ label, tagName, tabIndex }) => ({ label, tagName, tabIndex })),
+    [
+      { label: "Use in browser", tagName: "A", tabIndex: 0 },
+      { label: "Download for Windows", tagName: "A", tabIndex: 0 },
+      { label: "MSI for IT administrators", tagName: "A", tabIndex: 0 },
+      { label: "Download for Mac", tagName: "A", tabIndex: 0 },
+    ],
+  );
+  assert.ok(downloadFocus.every(({ outline, width }) => outline === "solid" && width === "3px"));
+
+  const technicalSummarySelector = "[data-application-id=\"atg-signal\"] [data-signal-technical] > summary";
+  await evaluate(`document.querySelector('${technicalSummarySelector}').focus()`);
+  const technicalFocus = await evaluate(`({
+    outline: getComputedStyle(document.activeElement).outlineStyle,
+    width: getComputedStyle(document.activeElement).outlineWidth
+  })`);
+  assert.deepEqual(technicalFocus, { outline: "solid", width: "3px" });
+  await pressKey("Enter", "Enter", 13);
+  await waitFor(
+    "document.querySelector('[data-signal-technical]').open",
+    "Signal technical details keyboard open",
+  );
+  await pressKey(" ", "Space", 32);
+  await waitFor(
+    "!document.querySelector('[data-signal-technical]').open",
+    "Signal technical details keyboard close",
+  );
 
   const signalDetails = await evaluate(`(() => {
     const button = document.querySelector('[data-application-id="atg-signal"] .text-button');
@@ -631,12 +851,22 @@ try {
 
   report = {
     status: "pass",
-    release: {
-      downloadUrl,
-      archiveFilename,
-      archiveBytes,
-      archiveSize: "360.90 MiB",
-      archiveSha256,
+    releases: {
+      base32m: {
+        downloadUrl,
+        archiveFilename,
+        archiveBytes,
+        archiveSize: "360.90 MiB",
+        archiveSha256,
+      },
+      signal: {
+        browser: signalBrowserUrl,
+        windowsExe: windowsExeUrl,
+        windowsMsi: windowsMsiUrl,
+        windowsChecksum: windowsChecksumUrl,
+        macDmg: macDmgUrl,
+        macChecksum: macChecksumUrl,
+      },
     },
     localPaths: [...requiredLocalPaths].sort(),
     viewports: viewportResults,
@@ -648,7 +878,12 @@ try {
     },
     homepageRelease: releaseResult,
     catalogue: catalogueResult,
-    signal: { details: signalDetails, compatibility },
+    signal: {
+      catalogue: catalogueResult,
+      technicalDisclosure: { downloadFocus, focus: technicalFocus, enter: "pass", space: "pass" },
+      details: signalDetails,
+      compatibility,
+    },
     checkpoint: { detail: detailResult, checksumControl: copyResult },
     privacy: { externalRequestsOnPageLoad: allExternalRequests, consoleErrors },
   };

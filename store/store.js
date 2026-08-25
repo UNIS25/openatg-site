@@ -27,6 +27,25 @@
     }
   }
 
+  function safePublicUrl(value, kind) {
+    try {
+      const url = new URL(String(value));
+      if (url.protocol !== "https:") return null;
+      if (kind === "browser") {
+        return url.hostname === "openatg.com" && url.pathname === "/signal/" ? url.href : null;
+      }
+      if (kind === "release") {
+        const releasePrefix = "/UNIS25/openatg-site/releases/";
+        return url.hostname === "github.com" && url.pathname.startsWith(releasePrefix)
+          ? url.href
+          : null;
+      }
+      return null;
+    } catch {
+      return null;
+    }
+  }
+
   function stringList(value) {
     return Array.isArray(value) ? value.map((item) => String(item)) : [];
   }
@@ -60,6 +79,66 @@
     return section;
   }
 
+  function formatByteSize(value) {
+    if (!Number.isSafeInteger(value) || value < 0) throw new Error("Release byte size is invalid.");
+    return `${new Intl.NumberFormat("en-US").format(value)} bytes`;
+  }
+
+  function createChoice(kicker, title, description, actionLabel, href) {
+    const section = element("section", "signal-choice");
+    section.append(
+      element("p", "signal-choice-kicker", kicker),
+      element("h4", "signal-choice-title", title),
+      element("p", "signal-choice-description", description),
+    );
+    const actions = element("div", "signal-choice-actions");
+    actions.append(createAction(actionLabel, href, "primary-action"));
+    section.append(actions);
+    return section;
+  }
+
+  function appendTechnicalField(grid, label, value, isCode = false) {
+    const wrapper = document.createElement("div");
+    wrapper.append(element("dt", "", label));
+    const detail = element("dd");
+    detail.append(isCode ? element("code", "", value) : document.createTextNode(String(value)));
+    wrapper.append(detail);
+    grid.append(wrapper);
+  }
+
+  function createAssetDetails(label, asset) {
+    const section = element("section", "release-asset-details");
+    section.append(element("h6", "", label));
+    const facts = element("dl", "release-asset-facts");
+    appendTechnicalField(facts, "Filename", asset.filename, true);
+    appendTechnicalField(facts, "Exact size", formatByteSize(asset.sizeBytes));
+    appendTechnicalField(facts, "SHA-256", asset.sha256, true);
+    section.append(facts);
+    return section;
+  }
+
+  function createPlatformDetails(title, release, assets, checksumUrl, releasePageUrl) {
+    const section = element("section", "release-platform-details");
+    section.append(element("h5", "", title));
+    const facts = element("dl", "release-platform-facts");
+    appendTechnicalField(facts, "Version", release.version);
+    appendTechnicalField(facts, "Supported platform", release.supportedPlatform);
+    appendTechnicalField(facts, "Architecture", release.architecture);
+    section.append(facts);
+
+    const assetGrid = element("div", "release-assets-grid");
+    for (const [label, asset] of assets) assetGrid.append(createAssetDetails(label, asset));
+    section.append(assetGrid);
+
+    const links = element("div", "release-resource-links");
+    links.append(
+      createAction("View checksum file", checksumUrl, "notice-link", { external: true }),
+      createAction("View GitHub Release", releasePageUrl, "notice-link", { external: true }),
+    );
+    section.append(links);
+    return section;
+  }
+
   function appendDetailValue(grid, label, value, isCode = false) {
     const wrapper = document.createElement("div");
     wrapper.append(element("p", "detail-label", label));
@@ -87,7 +166,7 @@
     appendDetailValue(runtimeGrid, "Version", application.version);
     appendDetailValue(runtimeGrid, "Runtime", application.runtime);
     appendDetailValue(runtimeGrid, "Internet after installation", application.internetAfterInstallation);
-    appendDetailValue(runtimeGrid, "Offline availability", application.offlineAvailability);
+    appendDetailValue(runtimeGrid, "Local processing", application.offlineAvailability);
     runtime.append(runtimeGrid);
     const requirementsTitle = element("h3", "", "Runtime requirements");
     requirementsTitle.className = "capabilities-title";
@@ -116,15 +195,6 @@
     compatibility.append(compatibilityGrid);
     dialogContent.append(compatibility);
 
-    const packageSection = createDetailSection("Offline package");
-    const packageGrid = element("div", "detail-grid");
-    appendDetailValue(packageGrid, "Package", application.package.filename);
-    appendDetailValue(packageGrid, "Package size", application.package.size);
-    appendDetailValue(packageGrid, "SHA-256", application.package.sha256, true);
-    appendDetailValue(packageGrid, "Supported systems", stringList(application.supportedOperatingSystems).join(", "));
-    packageSection.append(packageGrid);
-    dialogContent.append(packageSection);
-
     const releaseNotes = createDetailSection("Release notes");
     addList(releaseNotes, application.releaseNotes);
     dialogContent.append(releaseNotes);
@@ -143,10 +213,27 @@
   }
 
   function renderApplication(application) {
-    const openPath = safeLocalPath(application.links.open, ["/signal/"]);
-    const installPath = safeLocalPath(application.links.install, ["/signal/"]);
-    const downloadPath = safeLocalPath(application.links.download, ["/downloads/"]);
-    if (!openPath || !installPath || !downloadPath) throw new Error("Catalogue link validation failed.");
+    const availability = application.availability;
+    const browserUrl = safePublicUrl(availability?.browser?.url, "browser");
+    const windowsExeUrl = safePublicUrl(availability?.windows?.recommended?.url, "release");
+    const windowsMsiUrl = safePublicUrl(availability?.windows?.alternative?.url, "release");
+    const windowsChecksumUrl = safePublicUrl(availability?.windows?.checksumFile, "release");
+    const windowsReleaseUrl = safePublicUrl(availability?.windows?.releasePage, "release");
+    const macDmgUrl = safePublicUrl(availability?.macos?.installer?.url, "release");
+    const macChecksumUrl = safePublicUrl(availability?.macos?.checksumFile, "release");
+    const macReleaseUrl = safePublicUrl(availability?.macos?.releasePage, "release");
+    if (
+      !browserUrl ||
+      !windowsExeUrl ||
+      !windowsMsiUrl ||
+      !windowsChecksumUrl ||
+      !windowsReleaseUrl ||
+      !macDmgUrl ||
+      !macChecksumUrl ||
+      !macReleaseUrl
+    ) {
+      throw new Error("Catalogue release link validation failed.");
+    }
 
     const article = element("article", "application catalogue-item");
     article.setAttribute("role", "listitem");
@@ -188,29 +275,87 @@
     layout.append(summary, facts);
     article.append(layout);
 
-    const actions = element("div", "application-actions");
-    actions.append(
-      createAction("Open ATG Signal", openPath, "primary-action"),
-      createAction("Install locally", installPath, "secondary-action"),
-      createAction(
-        "Download offline package",
-        downloadPath,
-        "secondary-action",
-        { downloadName: application.package.filename },
+    const availabilitySection = element("section", "signal-availability");
+    availabilitySection.append(
+      element("p", "signal-availability-kicker", "Choose how to use ATG Signal"),
+      element("h4", "signal-availability-title", "Browser, Windows or Mac."),
+    );
+
+    const choices = element("div", "signal-choice-grid");
+    const browserChoice = createChoice(
+      "Browser",
+      "Use in browser",
+      "Use ATG Signal in a modern Windows, macOS or Linux browser. Selected files are processed locally.",
+      availability.browser.label,
+      browserUrl,
+    );
+
+    const windowsChoice = createChoice(
+      "Windows native beta",
+      "Download for Windows",
+      "Windows 10 or Windows 11 on a 64-bit x86 system. The EXE is recommended for individual users.",
+      availability.windows.label,
+      windowsExeUrl,
+    );
+    const windowsActions = windowsChoice.querySelector(".signal-choice-actions");
+    windowsActions.append(
+      createAction(availability.windows.alternative.label, windowsMsiUrl, "signal-secondary-link"),
+    );
+    windowsChoice.append(
+      element("p", "signal-security-notice", availability.windows.securityNotice),
+    );
+
+    const macChoice = createChoice(
+      "macOS native beta",
+      "Download for Mac",
+      "macOS 11 or later on Apple Silicon. Intel Macs are not currently supported.",
+      availability.macos.label,
+      macDmgUrl,
+    );
+    macChoice.append(element("p", "signal-security-notice", availability.macos.securityNotice));
+
+    choices.append(browserChoice, windowsChoice, macChoice);
+    availabilitySection.append(choices);
+
+    const privacy = element("aside", "signal-privacy-summary");
+    privacy.setAttribute("aria-label", "ATG Signal privacy");
+    privacy.append(element("h4", "", "Private processing"));
+    addList(privacy, application.privacyStatements, "signal-privacy-list");
+    availabilitySection.append(privacy);
+
+    const technical = element("details", "release-technical");
+    technical.dataset.signalTechnical = "";
+    technical.append(element("summary", "release-technical-summary", "Technical details"));
+    const technicalContent = element("div", "release-technical-content");
+    technicalContent.append(
+      createPlatformDetails(
+        "Windows native beta",
+        availability.windows,
+        [
+          [availability.windows.recommended.label, availability.windows.recommended],
+          [availability.windows.alternative.label, availability.windows.alternative],
+        ],
+        windowsChecksumUrl,
+        windowsReleaseUrl,
+      ),
+      createPlatformDetails(
+        "macOS native beta",
+        availability.macos,
+        [["DMG installer", availability.macos.installer]],
+        macChecksumUrl,
+        macReleaseUrl,
       ),
     );
+    technical.append(technicalContent);
+    availabilitySection.append(technical);
+    article.append(availabilitySection);
+
+    const actions = element("div", "application-actions application-detail-action");
     const detailsButton = element("button", "text-button", "View permissions and details");
     detailsButton.type = "button";
     detailsButton.addEventListener("click", () => showDetails(application));
     actions.append(detailsButton);
     article.append(actions);
-
-    const packageNote = element("p", "package-note");
-    packageNote.append(
-      document.createTextNode(`${application.package.filename} · ${application.package.size} · SHA-256 `),
-      element("code", "", application.package.sha256),
-    );
-    article.append(packageNote);
     return article;
   }
 
