@@ -162,6 +162,10 @@ ul {
   color: var(--blue-hover);
 }
 
+.mobile-menu {
+  display: none;
+}
+
 .opening-inner {
   padding-block: clamp(104px, 11vw, 156px) clamp(96px, 9vw, 132px);
 }
@@ -347,11 +351,17 @@ ul {
 }
 
 .research-privacy {
-  padding-top: 2px;
+  margin-top: 22px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line-soft);
 }
 
 .research-privacy .privacy-statement {
   font-size: 15px;
+}
+
+.research-facts {
+  grid-template-columns: 1fr;
 }
 
 .capabilities-title {
@@ -498,6 +508,13 @@ ul {
   color: var(--muted);
   font-size: 12px;
   text-align: center;
+}
+
+.footer-links {
+  display: flex;
+  justify-self: end;
+  align-items: center;
+  gap: 18px;
 }
 
 .site-footer a {
@@ -676,6 +693,10 @@ ul {
     width: min(calc(100% - 80px), var(--content-max));
   }
 
+  .site-header {
+    display: grid;
+  }
+
   .catalogue {
     padding-block: 96px 112px;
   }
@@ -694,14 +715,6 @@ ul {
   .content-shell,
   .site-header {
     width: calc(100% - 44px);
-  }
-
-  .site-nav {
-    gap: 16px;
-  }
-
-  .site-nav a:first-child {
-    display: none;
   }
 
   .opening-inner {
@@ -795,6 +808,13 @@ ul {
 
   .site-footer a {
     justify-self: start;
+  }
+
+  .footer-links {
+    justify-self: start;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0;
   }
 
   .application-dialog {

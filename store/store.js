@@ -27,15 +27,6 @@
     }
   }
 
-  function safeExternalUrl(value) {
-    try {
-      const url = new URL(String(value));
-      return url.protocol === "https:" ? url.href : null;
-    } catch {
-      return null;
-    }
-  }
-
   function stringList(value) {
     return Array.isArray(value) ? value.map((item) => String(item)) : [];
   }
@@ -224,8 +215,8 @@
   }
 
   function renderResearch(research) {
-    const researchUrl = safeExternalUrl(research.action?.url);
-    if (!researchUrl) throw new Error("Research link validation failed.");
+    const researchPath = safeLocalPath(research.action?.path, ["/store/base-32m/"]);
+    if (!researchPath) throw new Error("Research link validation failed.");
 
     const article = element("article", "application catalogue-item research-item");
     article.setAttribute("role", "listitem");
@@ -247,18 +238,23 @@
 
     const layout = element("div", "application-layout research-layout");
     layout.append(element("p", "application-description", research.description));
+    const researchDetails = document.createElement("div");
+    const facts = element("dl", "facts research-facts");
+    facts.append(
+      createFact("Type", research.typeLabel),
+      createFact("Version", research.version),
+    );
     const privacy = element("div", "research-privacy");
     privacy.append(
       element("p", "detail-label", "Privacy"),
       element("p", "privacy-statement", research.privacy),
     );
-    layout.append(privacy);
+    researchDetails.append(facts, privacy);
+    layout.append(researchDetails);
     article.append(layout);
 
     const actions = element("div", "application-actions");
-    actions.append(
-      createAction(research.action.label, researchUrl, "primary-action", { external: true }),
-    );
+    actions.append(createAction(research.action.label, researchPath, "primary-action"));
     article.append(actions);
     return article;
   }

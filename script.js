@@ -2,6 +2,7 @@
   const header = document.querySelector("[data-header]");
   const menu = document.querySelector("[data-mobile-menu]");
   const menuButton = menu?.querySelector("summary");
+  const openStoreMenus = [...document.querySelectorAll("[data-openstore-menu]")];
   const desktopNavigation = window.matchMedia("(min-width: 901px)");
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
@@ -28,11 +29,42 @@
 
   menu?.addEventListener("toggle", () => {
     menuButton?.setAttribute("aria-expanded", String(menu.open));
+    if (!menu.open) {
+      for (const openStoreMenu of openStoreMenus) {
+        if (menu.contains(openStoreMenu)) openStoreMenu.open = false;
+      }
+    }
   });
 
-  menu?.querySelectorAll("a[href^='#']").forEach((link) => {
+  const setOpenStoreMenuState = (openStoreMenu, open) => {
+    const button = openStoreMenu.querySelector(":scope > summary");
+    openStoreMenu.open = open;
+    button?.setAttribute("aria-expanded", String(open));
+  };
+
+  for (const openStoreMenu of openStoreMenus) {
+    const button = openStoreMenu.querySelector(":scope > summary");
+    button?.setAttribute("aria-expanded", String(openStoreMenu.open));
+    openStoreMenu.addEventListener("toggle", () => {
+      button?.setAttribute("aria-expanded", String(openStoreMenu.open));
+      if (!openStoreMenu.open) return;
+      for (const otherMenu of openStoreMenus) {
+        if (otherMenu !== openStoreMenu && !otherMenu.contains(openStoreMenu)) {
+          setOpenStoreMenuState(otherMenu, false);
+        }
+      }
+    });
+  }
+
+  menu?.querySelectorAll("a").forEach((link) => {
     link.addEventListener("click", () => {
-      const target = document.querySelector(link.getAttribute("href"));
+      const linkUrl = new URL(link.href, window.location.href);
+      const target =
+        linkUrl.origin === window.location.origin &&
+        linkUrl.pathname === window.location.pathname &&
+        linkUrl.hash
+          ? document.querySelector(linkUrl.hash)
+          : null;
       setMenuState(false);
 
       if (target) {
@@ -44,9 +76,23 @@
   });
 
   document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && menu?.open) {
+    if (event.key !== "Escape") return;
+    const openStoreMenu = openStoreMenus.find((candidate) => candidate.open);
+    if (openStoreMenu) {
+      const button = openStoreMenu.querySelector(":scope > summary");
+      setOpenStoreMenuState(openStoreMenu, false);
+      button?.focus();
+    } else if (menu?.open) {
       setMenuState(false);
       menuButton?.focus();
+    }
+  });
+
+  document.addEventListener("click", (event) => {
+    for (const openStoreMenu of openStoreMenus) {
+      if (openStoreMenu.open && !openStoreMenu.contains(event.target)) {
+        setOpenStoreMenuState(openStoreMenu, false);
+      }
     }
   });
 

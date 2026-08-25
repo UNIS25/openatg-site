@@ -10,7 +10,8 @@
     "licenses": "node scripts/generate-third-party-notices.mjs && node scripts/generate-windows-third-party-notices.mjs",
     "build": "tauri build --target aarch64-apple-darwin --bundles app,dmg",
     "build:windows": "npm run icons:windows && tauri build --target x86_64-pc-windows-msvc --bundles nsis,msi --ci --no-sign -- --locked",
-    "test:config": "npm run stage && node scripts/validate-desktop-config.mjs",
+    "test:portability": "node --test scripts/portable-build.test.mjs",
+    "test:config": "npm run test:portability && npm run stage && node scripts/validate-desktop-config.mjs",
     "test:staged": "node scripts/validate-staged-frontend.mjs"
   },
   "devDependencies": {

@@ -89,12 +89,14 @@
       "type": "research",
       "name": "ATG Base 32M",
       "category": "Research",
+      "typeLabel": "Research checkpoint",
+      "version": "Lightning v2",
       "status": "Research checkpoint",
-      "description": "An independently pretrained compact generative language model exploring local, private and accessible AI for English, Sinhala and Tamil.",
+      "description": "An independently pretrained compact generative language-model research checkpoint exploring local and accessible AI for English, Sinhala and Tamil.",
       "privacy": "Designed for local research and offline experimentation.",
       "action": {
-        "label": "View research",
-        "url": "https://atg-base-32m-research.adrianvasu1998.chatgpt.site/"
+        "label": "View checkpoint",
+        "path": "/store/base-32m/"
       }
     }
   ]

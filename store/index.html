@@ -30,12 +30,14 @@
       content="A trusted catalogue of private, locally operated applications and OpenATG research."
     />
     <link rel="stylesheet" href="store.css" />
+    <link rel="stylesheet" href="../navigation.css" />
+    <script src="../script.js" defer></script>
     <script src="store.js" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to main content</a>
 
-    <header class="global-header">
+    <header class="global-header" data-header>
       <div class="site-header">
         <a class="brand" href="/" aria-label="OpenATG home">
           <span class="brand-mark" aria-hidden="true">
@@ -43,10 +45,102 @@
           </span>
           <span>OpenATG</span>
         </a>
-        <nav class="site-nav" aria-label="OpenStore navigation">
-          <a href="/">About OpenATG</a>
-          <a href="/signal/">ATG Signal</a>
+        <nav class="site-nav" aria-label="Primary navigation">
+          <div class="openstore-nav-group">
+            <a class="openstore-nav-link" href="/store/" aria-current="page">OpenStore</a>
+            <details class="openstore-menu" data-openstore-menu>
+              <summary
+                class="openstore-menu-button"
+                aria-label="OpenStore products menu"
+                aria-controls="openstore-products-desktop-store"
+                aria-expanded="false"
+              ></summary>
+              <div class="openstore-menu-panel" id="openstore-products-desktop-store">
+                <a class="openstore-menu-item" href="/store/base-32m/">
+                  <span class="openstore-menu-title">
+                    Base 32M <span class="new-indicator">New</span>
+                  </span>
+                  <span class="openstore-menu-supporting">Research checkpoint</span>
+                </a>
+                <a class="openstore-menu-item" href="/#guard">
+                  <span class="openstore-menu-title">Guard</span>
+                  <span class="openstore-menu-supporting">Verification and safety</span>
+                </a>
+                <a class="openstore-menu-item" href="/#apply">
+                  <span class="openstore-menu-title">Apply</span>
+                  <span class="openstore-menu-supporting">Career applications</span>
+                </a>
+                <a class="openstore-menu-item" href="/signal/">
+                  <span class="openstore-menu-title">Signal</span>
+                  <span class="openstore-menu-supporting">Social media analysis</span>
+                </a>
+                <a class="openstore-menu-item" href="/store/">
+                  <span class="openstore-menu-title">Browse OpenStore</span>
+                  <span class="openstore-menu-supporting">View the complete catalogue</span>
+                </a>
+              </div>
+            </details>
+          </div>
+          <a href="/#new-releases">New Releases</a>
+          <a href="/#purpose">Purpose</a>
+          <a href="/#downloads">Downloads</a>
+          <a href="/#contact">Contact</a>
         </nav>
+
+        <details class="mobile-menu" data-mobile-menu>
+          <summary
+            class="mobile-menu-button"
+            aria-controls="mobile-navigation-store"
+            aria-expanded="false"
+          >
+            Menu
+          </summary>
+          <nav
+            id="mobile-navigation-store"
+            class="mobile-menu-panel"
+            aria-label="Mobile primary navigation"
+          >
+            <div class="mobile-openstore-section">
+              <a class="mobile-openstore-link" href="/store/" aria-current="page">OpenStore</a>
+              <details class="mobile-openstore-menu" data-openstore-menu>
+                <summary
+                  class="mobile-openstore-menu-button"
+                  aria-label="OpenStore products menu"
+                  aria-controls="openstore-products-mobile-store"
+                  aria-expanded="false"
+                ></summary>
+                <div class="mobile-openstore-products" id="openstore-products-mobile-store">
+                  <a class="openstore-menu-item" href="/store/base-32m/">
+                    <span class="openstore-menu-title">
+                      Base 32M <span class="new-indicator">New</span>
+                    </span>
+                    <span class="openstore-menu-supporting">Research checkpoint</span>
+                  </a>
+                  <a class="openstore-menu-item" href="/#guard">
+                    <span class="openstore-menu-title">Guard</span>
+                    <span class="openstore-menu-supporting">Verification and safety</span>
+                  </a>
+                  <a class="openstore-menu-item" href="/#apply">
+                    <span class="openstore-menu-title">Apply</span>
+                    <span class="openstore-menu-supporting">Career applications</span>
+                  </a>
+                  <a class="openstore-menu-item" href="/signal/">
+                    <span class="openstore-menu-title">Signal</span>
+                    <span class="openstore-menu-supporting">Social media analysis</span>
+                  </a>
+                  <a class="openstore-menu-item" href="/store/">
+                    <span class="openstore-menu-title">Browse OpenStore</span>
+                    <span class="openstore-menu-supporting">View the complete catalogue</span>
+                  </a>
+                </div>
+              </details>
+            </div>
+            <a href="/#new-releases">New Releases</a>
+            <a href="/#purpose">Purpose</a>
+            <a href="/#downloads">Downloads</a>
+            <a href="/#contact">Contact</a>
+          </nav>
+        </details>
       </div>
     </header>
 
@@ -87,7 +181,11 @@
           <span>OpenATG</span>
         </div>
         <p>Local tools. Shared responsibly.</p>
-        <a href="/">About OpenATG</a>
+        <div class="footer-links" aria-label="Product links">
+          <a href="/store/">OpenStore</a>
+          <a href="/#new-releases">New Releases</a>
+          <a href="/signal/">ATG Signal</a>
+        </div>
       </div>
     </footer>
 

@@ -7,7 +7,11 @@ const repositoryRoot = path.resolve(projectRoot, "../..");
 const signalRoot = path.join(repositoryRoot, "signal");
 const outputRoot = path.join(projectRoot, "dist");
 
-function replaceExactly(source, search, replacement, label) {
+export function normalizeLineEndings(source) {
+  return source.replaceAll("\r\n", "\n").replaceAll("\r", "\n");
+}
+
+export function replaceExactly(source, search, replacement, label) {
   const occurrences = source.split(search).length - 1;
   if (occurrences !== 1) {
     throw new Error(`${label}: expected one source match, found ${occurrences}.`);
@@ -15,63 +19,83 @@ function replaceExactly(source, search, replacement, label) {
   return source.replace(search, replacement);
 }
 
-await rm(outputRoot, { recursive: true, force: true });
-await mkdir(outputRoot, { recursive: true });
-await cp(signalRoot, outputRoot, { recursive: true });
-await cp(path.join(repositoryRoot, "atg-mark-transparent.png"), path.join(outputRoot, "atg-mark-transparent.png"));
+export function transformDesktopHtml(normalizedHtml) {
+  let html = replaceExactly(
+    normalizedHtml,
+    "connect-src 'none'",
+    "connect-src ipc: http://ipc.localhost",
+    "desktop IPC Content Security Policy",
+  );
+  html = replaceExactly(
+    html,
+    "worker-src 'self'; manifest-src 'self'",
+    "worker-src 'none'",
+    "desktop service-worker policy",
+  );
+  html = replaceExactly(
+    html,
+    '    <link rel="canonical" href="https://openatg.com/signal/" />\n',
+    "",
+    "desktop canonical removal",
+  );
+  html = html.replaceAll('../atg-mark-transparent.png', 'atg-mark-transparent.png');
+  html = replaceExactly(
+    html,
+    '    <link rel="manifest" href="manifest.webmanifest" />\n',
+    "",
+    "desktop manifest removal",
+  );
+  return replaceExactly(
+    html,
+    '    <script src="pwa.js" defer></script>',
+    '    <link rel="stylesheet" href="desktop.css" />\n    <script src="desktop-runtime.js" defer></script>',
+    "desktop runtime insertion",
+  );
+}
 
-let html = await readFile(path.join(outputRoot, "index.html"), "utf8");
-html = replaceExactly(
-  html,
-  "connect-src 'none'",
-  "connect-src ipc: http://ipc.localhost",
-  "desktop IPC Content Security Policy",
-);
-html = replaceExactly(
-  html,
-  "worker-src 'self'; manifest-src 'self'",
-  "worker-src 'none'",
-  "desktop service-worker policy",
-);
-html = replaceExactly(
-  html,
-  '    <link rel="canonical" href="https://openatg.com/signal/" />\n',
-  "",
-  "desktop canonical removal",
-);
-html = html.replaceAll('../atg-mark-transparent.png', 'atg-mark-transparent.png');
-html = replaceExactly(
-  html,
-  '    <link rel="manifest" href="manifest.webmanifest" />\n',
-  "",
-  "desktop manifest removal",
-);
-html = replaceExactly(
-  html,
-  '    <script src="pwa.js" defer></script>',
-  '    <link rel="stylesheet" href="desktop.css" />\n    <script src="desktop-runtime.js" defer></script>',
-  "desktop runtime insertion",
-);
-await writeFile(path.join(outputRoot, "index.html"), html);
+export function transformDesktopApp(normalizedApp) {
+  return replaceExactly(
+    normalizedApp,
+    "function downloadBlob(blob, filename) {\n",
+    "async function downloadBlob(blob, filename) {\n" +
+      "  if (globalThis.ATGDesktop?.saveBlob) {\n" +
+      "    await globalThis.ATGDesktop.saveBlob(blob, filename);\n" +
+      "    return;\n" +
+      "  }\n",
+    "native report save bridge",
+  );
+}
 
-let app = await readFile(path.join(outputRoot, "app.js"), "utf8");
-app = replaceExactly(
-  app,
-  "function downloadBlob(blob, filename) {\n",
-  "async function downloadBlob(blob, filename) {\n" +
-    "  if (globalThis.ATGDesktop?.saveBlob) {\n" +
-    "    await globalThis.ATGDesktop.saveBlob(blob, filename);\n" +
-    "    return;\n" +
-    "  }\n",
-  "native report save bridge",
-);
-await writeFile(path.join(outputRoot, "app.js"), app);
+export async function stageFrontend() {
+  await rm(outputRoot, { recursive: true, force: true });
+  await mkdir(outputRoot, { recursive: true });
+  await cp(signalRoot, outputRoot, { recursive: true });
+  await cp(
+    path.join(repositoryRoot, "atg-mark-transparent.png"),
+    path.join(outputRoot, "atg-mark-transparent.png"),
+  );
 
-await cp(path.join(projectRoot, "frontend", "desktop-runtime.js"), path.join(outputRoot, "desktop-runtime.js"));
-await cp(path.join(projectRoot, "frontend", "desktop.css"), path.join(outputRoot, "desktop.css"));
+  let html = normalizeLineEndings(await readFile(path.join(outputRoot, "index.html"), "utf8"));
+  html = transformDesktopHtml(html);
+  await writeFile(path.join(outputRoot, "index.html"), html);
 
-await rm(path.join(outputRoot, "pwa.js"), { force: true });
-await rm(path.join(outputRoot, "service-worker.js"), { force: true });
-await rm(path.join(outputRoot, "manifest.webmanifest"), { force: true });
+  let app = normalizeLineEndings(await readFile(path.join(outputRoot, "app.js"), "utf8"));
+  app = transformDesktopApp(app);
+  await writeFile(path.join(outputRoot, "app.js"), app);
 
-console.log(`Staged the local ATG Signal frontend in ${outputRoot}`);
+  await cp(
+    path.join(projectRoot, "frontend", "desktop-runtime.js"),
+    path.join(outputRoot, "desktop-runtime.js"),
+  );
+  await cp(path.join(projectRoot, "frontend", "desktop.css"), path.join(outputRoot, "desktop.css"));
+
+  await rm(path.join(outputRoot, "pwa.js"), { force: true });
+  await rm(path.join(outputRoot, "service-worker.js"), { force: true });
+  await rm(path.join(outputRoot, "manifest.webmanifest"), { force: true });
+
+  console.log(`Staged the local ATG Signal frontend in ${outputRoot}`);
+}
+
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  await stageFrontend();
+}
