@@ -1,0 +1,4 @@
+:HL["/varathans25/_next/static/chunks/1m04jr2gni_51.css","style"]
+:HL["/varathans25/_next/static/chunks/0005g2_i28x_6.css","style"]
+:HL["/varathans25/fonts/inter-latin.woff2","font",{"crossOrigin":"anonymous","type":"font/woff2"}]
+0:{"tree":{"name":"","param":null,"prefetchHints":4184,"slots":{"children":{"name":"locale","param":{"type":"d","key":"en","siblings":["language"]},"prefetchHints":4132,"slots":{"children":{"name":"page","param":{"type":"d","key":"account","siblings":["cigars","legal","product","shop"]},"prefetchHints":4160,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}},"staleTime":300,"buildId":"review-80cae7ffbafa"}

@@ -1,0 +1,21 @@
+1:"$Sreact.fragment"
+2:I[97367,["/varathans25/_next/static/chunks/3fntmmi971322.js"],"OutletBoundary"]
+3:"$Sreact.suspense"
+7:I[97367,["/varathans25/_next/static/chunks/3fntmmi971322.js"],"ViewportBoundary"]
+8:I[97367,["/varathans25/_next/static/chunks/3fntmmi971322.js"],"MetadataBoundary"]
+9:I[27201,["/varathans25/_next/static/chunks/3fntmmi971322.js"],"IconMark"]
+b:I[39756,["/varathans25/_next/static/chunks/3fntmmi971322.js"],"default"]
+c:I[37457,["/varathans25/_next/static/chunks/3fntmmi971322.js"],"default"]
+6:X
+e:X
+e:C
+0:{"buildId":"review-80cae7ffbafa","data":[{"rsc":["$","$1","c",{"children":[["$","article",null,{"className":"section legal-page","children":[["$","span",null,{"className":"eyebrow","children":["Varathans25 / ","The details"]}],["$","h1",null,{"children":"Terms & conditions"}],["$","section",null,{"children":[["$","h2",null,{"children":"Shopping with Varathans25"}],["$","p",null,{"children":"Prices are displayed in Swiss francs. Check quantities, product information and delivery before confirming your selection."}]]}],["$","section",null,{"children":[["$","h2",null,{"children":"Your checkout"}],["$","p",null,{"children":"Review the order summary and the payment method shown at checkout."}]]}],["$","p",null,{"className":"micro","children":["17.09.2026 · ","All rights reserved."]}]]}],null,["$","$L2",null,{"children":["$","$3",null,{"name":"Next.MetadataOutlet","children":"$@4"}]}]]}],"isPartial":"$@5","staleTime":"$6","varyParams":null},{"rsc":["$","$1","h",{"children":[null,["$","$L7",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","div",null,{"hidden":true,"children":["$","$L8",null,{"children":["$","$3",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Varathans25 — Island flavour. Swiss precision."}],["$","meta","1",{"name":"description","content":"Spices, tea, coffee and gifts from Varathans25 in Sursee."}],["$","meta","2",{"name":"robots","content":"noindex, nofollow, noarchive"}],["$","link","3",{"rel":"icon","href":"/varathans25/brand/varathans25-original.png"}],["$","$L9","4",{}]]}]}]}],null]}],"isPartial":"$@a","staleTime":"$6","varyParams":null},{"rsc":["$","$1","c",{"children":[null,["$","$Lb",null,{"parallelRouterKey":"children","template":["$","$Lc",null,{}]}]]}],"isPartial":"$@d","staleTime":"$6","varyParams":"$e"},{"rsc":["$","$1","c",{"children":[null,["$","$Lb",null,{"parallelRouterKey":"children","template":["$","$Lc",null,{}]}]]}],"isPartial":"$@f","staleTime":"$6","varyParams":"$e"}],"isUpgradeableISRFallback":false,"a":"$@10","rootVaryParams":null,"needsRuntimeRequest":"$@11"}
+4:null
+11:true
+6:300
+6:C
+10:0
+a:"$undefined"
+d:"$undefined"
+f:"$undefined"
+5:"$undefined"
