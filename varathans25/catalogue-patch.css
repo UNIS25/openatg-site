@@ -1,0 +1,6 @@
+.product-card:has(a[href*="/product/fish-curry-blend"]),
+.product-card:has(a[href*="/product/premium-spice-gift-box"]),
+.product-card:has(a[href*="/product/ready-to-cook-chicken"]),
+.product-card:has(a[href*="/product/ready-to-cook-fish"]) {
+  display: none !important;
+}
