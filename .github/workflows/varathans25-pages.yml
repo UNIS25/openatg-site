@@ -1,0 +1,48 @@
+name: Publish reviewed Varathans25 commerce
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: false
+jobs:
+  publish:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    env:
+      VITE_SUPABASE_URL: ${{ vars.V25_SUPABASE_URL }}
+      VITE_SUPABASE_PUBLISHABLE_KEY: ${{ vars.V25_SUPABASE_PUBLISHABLE_KEY }}
+      REVIEWED_REMOTE_SHA: ${{ github.sha }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: commerce/package-lock.json
+      - name: Install locked dependencies
+        run: npm ci --prefix commerce
+      - name: Verify preserved commits and reviewed remote
+        run: npm --prefix commerce run deploy:preflight
+      - name: Check source and build the production admin
+        run: |
+          npm --prefix commerce run lint
+          npm --prefix commerce test
+          npm --prefix commerce audit
+          npm --prefix commerce run build
+          npm --prefix commerce run stage:pages
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: commerce/.local/pages
+      - name: Deploy the reviewed artifact
+        id: deployment
+        uses: actions/deploy-pages@v4

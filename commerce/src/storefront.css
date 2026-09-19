@@ -1,0 +1,96 @@
+/* Scoped commerce additions inherit the established storefront type and colours. */
+.cigar-purchase {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.cigar-purchase p {
+  margin: 0;
+}
+.cigar-purchase span {
+  font-size: 0.8em;
+}
+.cigar-box-builder {
+  border: 1px solid #dedbd3;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  background: white;
+}
+.box-sizes {
+  display: flex;
+  gap: 0.75rem;
+}
+.box-slots {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  padding-left: 1.5rem;
+}
+.box-slots li {
+  padding: 0.75rem;
+  border: 1px solid #dedbd3;
+  min-height: 5rem;
+}
+.box-slots button {
+  display: block;
+  margin-top: 0.5rem;
+}
+.box-catalogue > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #eee;
+}
+.box-catalogue > div span:first-child {
+  flex: 1;
+}
+.free-delivery {
+  margin: 1rem 0;
+}
+.free-delivery progress {
+  width: 100%;
+  height: 0.5rem;
+  accent-color: #87692e;
+}
+.free-delivery p {
+  font-size: 0.875rem;
+}
+@media (max-width: 540px) {
+  .box-slots {
+    grid-template-columns: 1fr;
+  }
+  .cigar-box-builder {
+    padding: 1rem;
+  }
+  .box-catalogue > div {
+    flex-wrap: wrap;
+  }
+  .box-catalogue > div span:first-child {
+    flex-basis: 100%;
+  }
+}
+
+.commerce-cart > ul {
+  list-style: none;
+  padding: 0;
+}
+.commerce-cart > ul > li {
+  border-bottom: 1px solid #dedbd3;
+  padding: 1rem 0;
+}
+.commerce-cart label {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  margin: 0.75rem 0;
+}
+.commerce-cart input {
+  width: 5rem;
+  min-height: 44px;
+  border: 1px solid #aeb5bd;
+  border-radius: 4px;
+  padding: 0.5rem;
+}
