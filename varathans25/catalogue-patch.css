@@ -1,6 +1,18 @@
-.product-card:has(a[href*="/product/fish-curry-blend"]),
 .product-card:has(a[href*="/product/premium-spice-gift-box"]),
 .product-card:has(a[href*="/product/ready-to-cook-chicken"]),
 .product-card:has(a[href*="/product/ready-to-cook-fish"]) {
+  display: none !important;
+}
+
+.product-page--pending .purchase-row,
+.product-page--pending .mobile-sticky-add {
+  display: none !important;
+}
+
+.product-page--pending .detail-price {
+  color: #1b3f63;
+}
+
+.product-card:has(a[href*="/product/gelber-curry-kokos"]) .add-control {
   display: none !important;
 }
