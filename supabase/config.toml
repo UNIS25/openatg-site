@@ -1,0 +1,63 @@
+project_id = "varathans25-commerce"
+[api]
+enabled = true
+port = 57431
+schemas = ["public"]
+extra_search_path = ["public", "extensions"]
+max_rows = 500
+[db]
+port = 57432
+shadow_port = 57430
+major_version = 17
+[db.migrations]
+enabled = true
+[db.seed]
+enabled = false
+[studio]
+enabled = true
+port = 57433
+api_url = "http://127.0.0.1"
+[local_smtp]
+enabled = true
+port = 57434
+[storage]
+enabled = true
+file_size_limit = "5MiB"
+[auth]
+enabled = true
+site_url = "http://127.0.0.1:4175/adminpage/"
+additional_redirect_urls = ["http://127.0.0.1:4175/adminpage/"]
+jwt_expiry = 900
+enable_refresh_token_rotation = true
+refresh_token_reuse_interval = 10
+enable_signup = false
+enable_anonymous_sign_ins = false
+minimum_password_length = 14
+password_requirements = "lower_upper_letters_digits_symbols"
+[auth.email]
+# Keep email sign-in enabled. Global auth.enable_signup=false blocks registration.
+enable_signup = true
+double_confirm_changes = true
+enable_confirmations = true
+secure_password_change = true
+otp_expiry = 900
+[auth.rate_limit]
+sign_in_sign_ups = 30
+token_verifications = 30
+[auth.sessions]
+timebox = "8h"
+inactivity_timeout = "1h"
+[auth.mfa.totp]
+enroll_enabled = true
+verify_enabled = true
+[edge_runtime]
+enabled = true
+policy = "per_worker"
+inspector_port = 57438
+deno_version = 2
+[analytics]
+enabled = false
+[functions.invite-admin]
+verify_jwt = false
+[functions.checkout]
+verify_jwt = false

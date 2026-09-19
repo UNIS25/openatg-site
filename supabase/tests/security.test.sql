@@ -1,0 +1,12 @@
+begin;
+create extension if not exists pgtap with schema extensions;
+select plan(7);
+select is((select count(*)::integer from pg_class c join pg_namespace n on n.oid=c.relnamespace where n.nspname='public' and c.relname like 'v25_%' and c.relkind='r' and not c.relrowsecurity),0,'Every commerce table has RLS');
+select is((select count(*)::integer from pg_policies where schemaname='public' and tablename like 'v25_%' and cmd in ('ALL','INSERT','UPDATE','DELETE')),0,'No public table write policies');
+select ok(not has_table_privilege('anon','public.v25_products','SELECT'),'Anonymous cannot query raw products');
+select ok(not has_table_privilege('authenticated','public.v25_products','UPDATE'),'Authenticated cannot bypass product operations');
+select ok(not has_function_privilege('authenticated','public.v25_create_order(jsonb)','EXECUTE'),'Browser cannot create trusted orders');
+select ok(not has_function_privilege('anon','public.v25_save_product(jsonb,integer)','EXECUTE'),'Anonymous cannot call product writes');
+select is((select count(*)::integer from pg_proc p join pg_namespace n on n.oid=p.pronamespace where(n.nspname='v25_private' or(n.nspname='public' and p.proname like 'v25_%'))and p.prosecdef and not coalesce(p.proconfig @> array['search_path=""'],false)),0,'Definer functions fix an empty search path');
+select * from finish();
+rollback;
