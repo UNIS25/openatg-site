@@ -8,7 +8,7 @@ import { fileURLToPath } from "node:url";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const repositoryRoot = path.resolve(here, "..");
-const artifactRoot = path.join(repositoryRoot, "artifacts", "store");
+const artifactRoot = process.env.OPENATG_TEST_ARTIFACT_DIR || path.join(repositoryRoot, "artifacts", "store");
 const screenshotRoot = path.join(artifactRoot, "screenshots");
 const chromePath = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 const profilePath = await mkdtemp(path.join(tmpdir(), "openstore-chrome-"));
@@ -42,7 +42,8 @@ const macNotarisationWarning =
   "This beta is ad-hoc signed and has not yet been Apple-notarised. macOS or organisation-managed security controls may display a warning or block installation.";
 const expectedTopNavigation = ["OpenStore", "New Releases", "Purpose", "Downloads", "Contact"];
 const expectedOpenStoreItems = [
-  ["Base 32M New", "Research checkpoint"],
+  ["Base 64M New", "Research milestone"],
+  ["Base 32M", "Research checkpoint"],
   ["Guard", "Verification and safety"],
   ["Apply", "Career applications"],
   ["Signal", "Social media analysis"],
@@ -72,7 +73,7 @@ const [catalogue, homepageHtml, storeHtml, detailHtml, storeSource, detailSource
 assert.equal(catalogue.schemaVersion, 2);
 assert.deepEqual(
   catalogue.items.map((item) => item.type),
-  ["application", "research"],
+  ["application", "research", "research"],
 );
 const signalEntry = catalogue.items.find((item) => item.id === "atg-signal");
 const researchEntry = catalogue.items.find((item) => item.id === "atg-base-32m");
@@ -187,6 +188,18 @@ for (const [url, label] of [
   );
 }
 
+const milestoneHtml = await readFile(path.join(repositoryRoot, "store/base-64m/index.html"), "utf8");
+const milestoneEntry = catalogue.items.find(item => item.id === "atg-base-64m");
+assert.deepEqual(milestoneEntry.action, { label: "Explore the milestone", path: "/store/base-64m/" });
+assert.equal(milestoneEntry.status, "Artifact distribution under review");
+assert.match(milestoneHtml, /connect-src 'none'/);
+assert.match(milestoneHtml, /canonical" href="https:\/\/openatg\.com\/store\/base-64m\/"/);
+assert.doesNotMatch(milestoneHtml, /\.atgckpt|perplexity|independent post-training validation|no recovery retries|Apache|public_inference_artifact_sha256/i);
+assert.doesNotMatch(homepageHtml + storeHtml + milestoneHtml + JSON.stringify(catalogue), /\/Users\/|\/teamspace\/|\/private\/|s_01m2|BEGIN [A-Z ]*PRIVATE KEY/);
+const upcomingHtml = homepageHtml.match(/<section class="upcoming-section"[\s\S]*?<\/section>/)?.[0];
+assert.ok(upcomingHtml);
+assert.doesNotMatch(upcomingHtml, /<a\b|<button\b|\bhref=|\bonclick=|https?:\/\//i);
+
 function anchorHrefs(source) {
   return [...source.matchAll(/<a\b[^>]*\bhref="([^"]+)"/g)].map((match) => match[1]);
 }
@@ -214,9 +227,11 @@ const server = createServer(async (request, response) => {
 
 await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
 const serverAddress = server.address();
-const baseUrl = `http://127.0.0.1:${serverAddress.port}`;
+const baseUrl = process.env.OPENATG_BASE_URL || `http://127.0.0.1:${serverAddress.port}`;
 
 const requiredLocalPaths = new Set([
+  "/store/base-64m/",
+  "/milestones.css",
   "/",
   "/store/",
   "/store/base-32m/",
@@ -326,7 +341,7 @@ async function waitFor(expression, label) {
 
 async function navigate(url) {
   await send("Page.navigate", { url });
-  await waitFor("document.readyState === 'complete'", `page load: ${url}`);
+  await waitFor(`location.href === ${JSON.stringify(url)} && document.readyState === 'complete'`, `page load: ${url}`);
 }
 
 async function setViewport(width, height) {
@@ -362,7 +377,7 @@ async function pressKey(key, code, windowsVirtualKeyCode) {
 function externalRequestsSince(index) {
   return requests.slice(index).filter((requestUrl) => {
     const url = new URL(requestUrl);
-    return url.hostname !== "127.0.0.1" && url.protocol !== "data:";
+    return url.hostname !== new URL(baseUrl).hostname && url.protocol !== "data:";
   });
 }
 
@@ -445,9 +460,50 @@ try {
     assert.equal(homepage.headerFits, true);
     assert.deepEqual(externalRequestsSince(requestStart), []);
 
+    const projectCards = await evaluate(`([...document.querySelectorAll('.upcoming-card')].map(card => ({
+      title: card.querySelector('h3').textContent,
+      interactive: card.querySelectorAll('a, button, input, [role="link"], [role="button"], [tabindex], [onclick]').length
+    })))`);
+    assert.deepEqual(projectCards.map(card => card.title), ["ATG Neural Bridge", "ATG Gazette", "Varathans × ATG"]);
+    assert.ok(projectCards.every(card => card.interactive === 0));
+    for (const [id, filename] of [["new-releases", "milestone-home"], ["model-evolution", "model-history"], ["upcoming-projects", "upcoming-projects"]]) {
+      await evaluate(`document.getElementById('${id}').scrollIntoView({behavior: 'instant', block: 'start'})`);
+      await screenshot(`${filename}-${viewport.suffix}.png`);
+    }
+    requestStart = requests.length;
+    await navigate(`${baseUrl}/store/base-64m/`);
+    const milestone = await pageLayout();
+    assert.ok(milestone.scrollWidth <= viewport.width);
+    assert.ok(milestone.bodyScrollWidth <= viewport.width);
+    assert.deepEqual(milestone.clipped, []);
+    const milestoneContent = await evaluate(`({
+      title: document.querySelector('h1').textContent,
+      facts: document.querySelector('.checkpoint-facts').textContent,
+      status: document.querySelector('#model-artifact').textContent,
+      interactiveStatus: document.querySelectorAll('#model-artifact a, #model-artifact button, #model-artifact [tabindex]').length,
+      downloads: document.querySelectorAll('a[download], main a[href^="https://"]').length,
+      metrics: document.querySelector('#public-validation').textContent
+    })`);
+    assert.equal(milestoneContent.title, "ATG Base 64M");
+    for (const fact of ["64,307,712", "600,000,000", "14,717", "3.393438551641386", "Not instruction-tuned"]) assert.ok(milestoneContent.facts.includes(fact));
+    assert.equal(milestoneContent.interactiveStatus, 0);
+    assert.equal(milestoneContent.downloads, 0);
+    assert.match(milestoneContent.status, /Distribution review in progress/);
+    assert.doesNotMatch(milestoneContent.metrics, /[0-9]|perplexity/i);
+    await screenshot(`base-64m-${viewport.suffix}.png`);
+    await evaluate("document.querySelector('.technical-notes summary').focus()");
+    await pressKey("Enter", "Enter", 13);
+    assert.equal(await evaluate("document.querySelector('.technical-notes').open"), true);
+    assert.match(await evaluate("document.querySelector('.technical-notes').textContent"), /rather than a finished assistant/);
+    const expanded = await pageLayout();
+    assert.deepEqual(expanded.clipped, []);
+    await evaluate("document.querySelector('#model-artifact').scrollIntoView({behavior: 'instant', block: 'start'})");
+    await screenshot(`base-64m-status-${viewport.suffix}.png`);
+    assert.deepEqual(externalRequestsSince(requestStart), []);
+
     requestStart = requests.length;
     await navigate(`${baseUrl}/store/`);
-    await waitFor("document.querySelectorAll('.catalogue-item').length === 2", "catalogue rendering");
+    await waitFor("document.querySelectorAll('.catalogue-item').length === 3", "catalogue rendering");
     const store = await pageLayout();
     assert.equal(store.path, "/store/");
     assert.ok(store.scrollWidth <= viewport.width, `OpenStore should fit at ${viewport.width}px`);
@@ -483,9 +539,12 @@ try {
     assert.equal(detail.headerFits, true);
     assert.deepEqual(externalRequestsSince(requestStart), []);
 
+    await screenshot(`base-32m-${viewport.suffix}.png`);
     viewportResults.push({
       viewport,
       homepage,
+      milestone,
+      projectCards,
       store,
       signalDownloads: signalDownloadLayout,
       signalTechnical: signalTechnicalLayout,
@@ -500,6 +559,7 @@ try {
   assert.deepEqual(navigation.top, expectedTopNavigation);
   assert.deepEqual(navigation.items, expectedOpenStoreItems);
   assert.deepEqual(navigation.hrefs, [
+    "/store/base-64m/",
     "/store/base-32m/",
     "/#guard",
     "/#apply",
@@ -548,27 +608,25 @@ try {
   );
   const releaseResult = await evaluate(`(() => {
     const section = document.querySelector('#new-releases');
-    const download = section.querySelector('a[href^="https://github.com/"]');
     return {
       id: section.id,
-      heading: section.querySelector('h2').textContent.trim(),
+      heading: section.querySelector('h2').textContent,
       top: section.getBoundingClientRect().top,
-      downloadHref: download.href,
-      downloadAttribute: download.getAttribute('download'),
-      detailHref: section.querySelector('a[href="/store/base-32m/"]').pathname,
-      status: section.querySelector('.release-status').textContent.trim().replace(/\\s+/g, ' ')
+      detailHref: section.querySelector('a[href="/store/base-64m/"]').pathname,
+      unapprovedDownloads: section.querySelectorAll('a[download], a[href^="https://github.com/"]').length,
+      status: section.querySelector('.milestone-availability').textContent.trim()
     };
   })()`);
   assert.equal(releaseResult.id, "new-releases");
-  assert.equal(releaseResult.heading, "A compact model, released for research.");
+  assert.match(releaseResult.heading, /Built from scratch/);
   assert.ok(releaseResult.top >= 40 && releaseResult.top < 100);
-  assert.equal(releaseResult.downloadHref, downloadUrl);
-  assert.equal(releaseResult.downloadAttribute, null);
-  assert.equal(releaseResult.detailHref, "/store/base-32m/");
-  assert.equal(releaseResult.status, "Research checkpoint. Not production-ready.");
+  assert.equal(releaseResult.detailHref, "/store/base-64m/");
+  assert.equal(releaseResult.unapprovedDownloads, 0);
+  assert.match(releaseResult.status, /Distribution review in progress/);
+  assert.equal(await evaluate("document.querySelector('#previous-releases .primary-button').href"), downloadUrl);
 
   await navigate(`${baseUrl}/store/`);
-  await waitFor("document.querySelectorAll('.catalogue-item').length === 2", "catalogue rendering");
+  await waitFor("document.querySelectorAll('.catalogue-item').length === 3", "catalogue rendering");
   const catalogueResult = await evaluate(`(() => {
     const signal = document.querySelector('[data-application-id="atg-signal"]');
     const research = document.querySelector('[data-research-id="atg-base-32m"]');
@@ -621,8 +679,8 @@ try {
         .filter((button) => !button.textContent.trim() && !button.getAttribute('aria-label')).length
     };
   })()`);
-  assert.deepEqual(catalogueResult.itemNames, ["ATG Signal", "ATG Base 32M"]);
-  assert.deepEqual(catalogueResult.itemTypes, ["application", "research"]);
+  assert.deepEqual(catalogueResult.itemNames, ["ATG Signal", "ATG Base 64M v1", "ATG Base 32M"]);
+  assert.deepEqual(catalogueResult.itemTypes, ["application", "research", "research"]);
   assert.deepEqual(
     catalogueResult.signalChoices.map((action) => action.label),
     ["Use in browser", "Download for Windows", "Download for Mac"],
@@ -844,7 +902,7 @@ try {
 
   const allExternalRequests = requests.filter((requestUrl) => {
     const url = new URL(requestUrl);
-    return url.hostname !== "127.0.0.1" && url.protocol !== "data:";
+    return url.hostname !== new URL(baseUrl).hostname && url.protocol !== "data:";
   });
   assert.deepEqual(allExternalRequests, []);
   assert.deepEqual(consoleErrors, []);
@@ -852,6 +910,7 @@ try {
   report = {
     status: "pass",
     releases: {
+      base64m: { stage: "informational", artifactDistribution: "pending", publicMetrics: false },
       base32m: {
         downloadUrl,
         archiveFilename,

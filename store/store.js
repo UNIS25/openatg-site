@@ -360,7 +360,7 @@
   }
 
   function renderResearch(research) {
-    const researchPath = safeLocalPath(research.action?.path, ["/store/base-32m/"]);
+    const researchPath = safeLocalPath(research.action?.path, ["/store/base-32m/", "/store/base-64m/"]);
     if (!researchPath) throw new Error("Research link validation failed.");
 
     const article = element("article", "application catalogue-item research-item");
@@ -369,7 +369,7 @@
     article.dataset.researchId = String(research.id);
 
     const header = element("header", "application-header");
-    const mark = element("div", "application-icon research-mark", "32M");
+    const mark = element("div", "application-icon research-mark", research.id === "atg-base-64m" ? "64M" : "32M");
     mark.setAttribute("aria-hidden", "true");
 
     const identity = document.createElement("div");
@@ -391,7 +391,7 @@
     );
     const privacy = element("div", "research-privacy");
     privacy.append(
-      element("p", "detail-label", "Privacy"),
+      element("p", "detail-label", research.id === "atg-base-64m" ? "Distribution" : "Privacy"),
       element("p", "privacy-statement", research.privacy),
     );
     researchDetails.append(facts, privacy);

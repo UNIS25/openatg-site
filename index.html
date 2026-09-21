@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="OpenATG develops compact, private and human-centred technology, including ATG Base 32M, ATG Guard, ATG Apply and ATG Signal."
+      content="OpenATG develops compact, private and human-centred technology, including the completed ATG Base 64M research milestone, ATG Guard, ATG Apply and ATG Signal."
     />
     <meta name="theme-color" content="#ffffff" />
     <title>OpenATG — AI for the Greater Good</title>
@@ -16,7 +16,7 @@
     <meta property="og:title" content="OpenATG — AI for the Greater Good" />
     <meta
       property="og:description"
-      content="OpenATG develops compact, private and human-centred technology, including ATG Base 32M, ATG Guard, ATG Apply and ATG Signal."
+      content="OpenATG develops compact, private and human-centred technology, including the completed ATG Base 64M research milestone, ATG Guard, ATG Apply and ATG Signal."
     />
     <meta property="og:url" content="https://openatg.com/" />
     <meta property="og:site_name" content="OpenATG" />
@@ -30,13 +30,14 @@
     <meta name="twitter:title" content="OpenATG — AI for the Greater Good" />
     <meta
       name="twitter:description"
-      content="OpenATG develops compact, private and human-centred technology, including ATG Base 32M, ATG Guard, ATG Apply and ATG Signal."
+      content="OpenATG develops compact, private and human-centred technology, including the completed ATG Base 64M research milestone, ATG Guard, ATG Apply and ATG Signal."
     />
     <meta name="twitter:image" content="https://openatg.com/atg-mark-transparent.png" />
     <meta name="twitter:image:alt" content="OpenATG" />
 
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="navigation.css" />
+    <link rel="stylesheet" href="milestones.css" />
     <script src="script.js" defer></script>
   </head>
   <body>
@@ -62,9 +63,13 @@
                 aria-expanded="false"
               ></summary>
               <div class="openstore-menu-panel" id="openstore-products-desktop-home">
+                <a class="openstore-menu-item" href="/store/base-64m/">
+                  <span class="openstore-menu-title">Base 64M <span class="new-indicator">New</span></span>
+                  <span class="openstore-menu-supporting">Research milestone</span>
+                </a>
                 <a class="openstore-menu-item" href="/store/base-32m/">
                   <span class="openstore-menu-title">
-                    Base 32M <span class="new-indicator">New</span>
+                    Base 32M
                   </span>
                   <span class="openstore-menu-supporting">Research checkpoint</span>
                 </a>
@@ -116,9 +121,13 @@
                   aria-expanded="false"
                 ></summary>
                 <div class="mobile-openstore-products" id="openstore-products-mobile-home">
+                  <a class="openstore-menu-item" href="/store/base-64m/">
+                    <span class="openstore-menu-title">Base 64M <span class="new-indicator">New</span></span>
+                    <span class="openstore-menu-supporting">Research milestone</span>
+                  </a>
                   <a class="openstore-menu-item" href="/store/base-32m/">
                     <span class="openstore-menu-title">
-                      Base 32M <span class="new-indicator">New</span>
+                      Base 32M
                     </span>
                     <span class="openstore-menu-supporting">Research checkpoint</span>
                   </a>
@@ -161,7 +170,7 @@
             </p>
             <div class="hero-actions">
               <a class="primary-button" href="#new-releases">
-                Explore the new release <span aria-hidden="true">↓</span>
+                Explore the latest milestone <span aria-hidden="true">↓</span>
               </a>
               <a class="text-link" href="#family">
                 Explore the family <span aria-hidden="true">→</span>
@@ -191,10 +200,86 @@
         </div>
       </section>
 
-      <section class="new-release-section" id="new-releases" aria-labelledby="new-release-title">
+      <section class="new-release-section milestone-section" id="new-releases" aria-labelledby="milestone-title">
+        <div class="content-shell new-release-inner">
+          <div class="new-release-copy">
+            <p class="section-kicker">Latest completed research milestone · v1</p>
+            <p class="release-product">ATG Base 64M</p>
+            <h2 id="milestone-title">Built from scratch<br />in Sri Lanka.</h2>
+            <p class="release-description">64.3M parameters · 600M training tokens<br />English · Sinhala · Tamil</p>
+            <div class="milestone-labels"><span>Research base model</span><span>Artifact distribution under review</span></div>
+            <p class="release-description milestone-description">Trained from random initialization with an ATG-authored decoder architecture
+              and independently trained trilingual tokenizer. A completed milestone in OpenATG's compact-model research programme.</p>
+            <div class="release-actions">
+              <a class="primary-button" href="/store/base-64m/">Explore the milestone <span aria-hidden="true">→</span></a>
+              <a class="text-link" href="#model-evolution">Model history <span aria-hidden="true">↓</span></a>
+            </div>
+            <p class="milestone-availability">Model artifact · Distribution review in progress</p>
+          </div>
+          <div class="new-release-composition" aria-hidden="true">
+            <div class="release-mark-line"><span></span><strong>OpenATG research</strong></div>
+            <img src="atg-mark-transparent.png" alt="" width="1317" height="1221" />
+            <div class="release-model-line"><strong>64M</strong><span>Base v1 · September 2026</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="evolution-section" id="model-evolution" aria-labelledby="history-title">
+        <div class="content-shell">
+          <p class="section-kicker">Building ATG in public</p>
+          <h2 id="history-title">A model history.<br />An ongoing research programme.</h2>
+          <p class="section-intro">OpenATG preserves major model generations so collaborators, researchers and investors
+            can follow the evolution of the architecture, training pipeline, data strategy and evaluation methodology over time.</p>
+          <ol class="model-timeline">
+            <li><p class="timeline-step">01 / Earlier generation</p><h3>ATG Base 32M</h3><p>Early scaling milestone</p><a class="text-link" href="/store/base-32m/">View the existing release →</a></li>
+            <li class="current-milestone"><p class="timeline-step">02 / Completed milestone</p><h3>ATG Base 64M v1</h3><p>64.3M parameters<br />600M-token trilingual pretraining completed<br />September 2026</p><a class="text-link" href="/store/base-64m/">Explore the milestone →</a></li>
+            <li><p class="timeline-step">03 / Looking ahead</p><h3>Continuing research</h3><p>Architecture, data and evaluation.</p></li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="upcoming-section" id="upcoming-projects" aria-labelledby="upcoming-title">
+        <div class="content-shell">
+          <p class="section-kicker">Upcoming Projects</p>
+          <h2 id="upcoming-title">What we're building.</h2>
+          <p class="section-intro">Work in development across local intelligence, institutional workflows and commerce.</p>
+          <div class="upcoming-grid">
+            <article class="upcoming-card">
+              <p class="project-category">Hybrid AI Architecture</p>
+              <h3>ATG Neural Bridge</h3>
+              <p>ATG Neural Bridge is the emerging hybrid intelligence layer for connecting compact local ATG models
+                with retrieval systems, institutional data, specialist AI and approved larger models when additional capability is required.</p>
+              <p>The approach is designed to preserve local control and privacy while allowing more demanding tasks
+                to access broader intelligence selectively.</p>
+              <p class="project-label">In development</p>
+            </article>
+            <article class="upcoming-card">
+              <p class="project-category">Government Digitalisation</p>
+              <h3>ATG Gazette</h3>
+              <p class="project-subtitle">In collaboration with the Ministry of Lands, Sri Lanka</p>
+              <p>A digital workflow being developed in collaboration with the Ministry of Lands to transform structured gazette information
+                into consistent, multilingual, printer-ready government publications.</p>
+              <p>The system is designed around English, Sinhala and Tamil workflows, structured forms, validation,
+                document preview and publication-ready output.</p>
+              <p class="project-label">Government collaboration</p>
+            </article>
+            <article class="upcoming-card">
+              <p class="project-category">Swiss E-commerce</p>
+              <h3>Varathans × ATG</h3>
+              <p class="project-subtitle">E-commerce collaboration in Switzerland</p>
+              <p>An e-commerce initiative being developed with Varathans to explore a technology-led Swiss marketplace
+                combining selected Sri Lankan products, Varathans products and local delivery infrastructure.</p>
+              <p>The collaboration explores catalogue technology, multilingual commerce, operations and digital customer experiences for the Swiss market.</p>
+              <p class="project-label">Switzerland · In development</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="new-release-section" id="previous-releases" aria-labelledby="new-release-title">
         <div class="content-shell new-release-inner">
           <div class="new-release-copy reveal-block" data-reveal>
-            <p class="section-kicker">New release</p>
+            <p class="section-kicker">Preserved model release</p>
             <p class="release-product">ATG Base 32M</p>
             <h2 id="new-release-title">A compact model, released for research.</h2>
             <p class="release-description">

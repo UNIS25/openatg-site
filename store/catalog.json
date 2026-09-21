@@ -129,6 +129,21 @@
       }
     },
     {
+      "id": "atg-base-64m",
+      "type": "research",
+      "name": "ATG Base 64M v1",
+      "category": "Research",
+      "typeLabel": "Completed research milestone",
+      "version": "Base v1",
+      "status": "Artifact distribution under review",
+      "description": "Built from scratch in Sri Lanka. 64.3M parameters and 600M tokens of English, Sinhala and Tamil pretraining. A research base model, not instruction-tuned.",
+      "privacy": "No public model download. Provenance, licensing and distribution clearance are in progress.",
+      "action": {
+        "label": "Explore the milestone",
+        "path": "/store/base-64m/"
+      }
+    },
+    {
       "id": "atg-base-32m",
       "type": "research",
       "name": "ATG Base 32M",
