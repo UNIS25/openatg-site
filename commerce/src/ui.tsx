@@ -1,7 +1,9 @@
+import { useI18n, LanguageSelector, errorKey } from "./i18n";
 import {
   useEffect,
   useState,
   useId,
+  useRef,
   cloneElement,
   isValidElement,
   type FormEvent,
@@ -12,38 +14,50 @@ import { client, configured, db, rpc, invitationCallback } from "./api";
 import type { Role } from "./domain";
 import { formatMoney } from "./domain";
 import { Products, Inventory } from "./products";
+import { Customers } from "./customers";
 import { Orders } from "./orders";
 import { StoreSettings, Audit, Access } from "./settings";
 export function Field({
   label,
   children,
+  incomplete = false,
 }: {
   label: string;
   children: ReactNode;
+  incomplete?: boolean;
 }) {
+  const { t } = useI18n();
   const id = useId();
   return (
     <div className="field">
-      <label htmlFor={id}>{label}</label>
-      {isValidElement<{ id?: string }>(children)
-        ? cloneElement(children, { id })
+      <label htmlFor={id}>{t(label)}</label>
+      {isValidElement<{ id?: string; "aria-describedby"?: string }>(children)
+        ? cloneElement(children, {
+            id,
+            ...(incomplete ? { "aria-describedby": `${id}-incomplete` } : {}),
+          })
         : children}
+      {incomplete && (
+        <small className="incomplete" id={`${id}-incomplete`}>
+          {t("Incomplete — verified content required")}
+        </small>
+      )}
     </div>
   );
 }
 export function ErrorMessage({ error }: { error: string }) {
+  const { t } = useI18n();
   return error ? (
     <p className="error" role="alert">
-      {error}
+      {t(errorKey(error))}
     </p>
   ) : null;
 }
 export function message(error: unknown) {
-  return error instanceof Error
-    ? error.message
-    : "The operation could not be completed.";
+  return errorKey(error);
 }
 function Brand() {
+  const { t } = useI18n();
   return (
     <div className="brand">
       <img
@@ -52,12 +66,13 @@ function Brand() {
       />
       <div>
         <strong>VARATHANS25</strong>
-        <span>Store administration · Sursee</span>
+        <span>{t("Store administration · Sursee")}</span>
       </div>
     </div>
   );
 }
 export function App() {
+  const { t } = useI18n();
   const [session, setSession] = useState<Session | null>(null),
     [role, setRole] = useState<Role | null>(null),
     [aal, setAal] = useState(""),
@@ -74,6 +89,8 @@ export function App() {
       if (_event === "PASSWORD_RECOVERY") setInvite(true);
       if (!s) {
         setRole(null);
+        setView("Dashboard");
+        setError("");
         setAal("");
       }
     });
@@ -137,30 +154,43 @@ export function App() {
   const tabs = [
     "Dashboard",
     ...(productRole ? ["Products", "Inventory"] : []),
-    ...(orderRole ? ["Orders"] : []),
-    ...(adminRole ? ["Settings", "Audit"] : []),
+    ...(orderRole ? ["Orders", "Customers"] : []),
+    ...(adminRole
+      ? [
+          "Delivery settings",
+          "Discounts",
+          "Cigar-box configuration",
+          "Settings",
+          "Audit",
+        ]
+      : []),
     ...(role === "owner" ? ["Access"] : []),
   ];
   return (
     <>
       <a className="skip" href="#main">
-        Skip to content
+        {t("Skip to content")}
       </a>
       <header>
         <Brand />
-        {session && (
-          <button onClick={() => void db().auth.signOut()}>Sign out</button>
-        )}
+        <div className="header-actions">
+          <LanguageSelector />
+          {session && (
+            <button onClick={() => void db().auth.signOut()}>
+              {t("Sign out")}
+            </button>
+          )}
+        </div>
       </header>
       {ready && (
-        <nav aria-label="Administration">
-          {tabs.map((t) => (
+        <nav aria-label={t("Administration")}>
+          {tabs.map((tab) => (
             <button
-              aria-current={view === t ? "page" : undefined}
-              key={t}
-              onClick={() => setView(t)}
+              aria-current={view === tab ? "page" : undefined}
+              key={tab}
+              onClick={() => setView(tab)}
             >
-              {t}
+              {t(tab)}
             </button>
           ))}
         </nav>
@@ -169,11 +199,12 @@ export function App() {
         <ErrorMessage error={error} />
         {!configured ? (
           <section className="panel">
-            <h1>Administration</h1>
-            <p>The secured backend has not been connected yet.</p>
+            <h1>{t("Administration")}</h1>
+            <p>{t("The secured backend has not been connected yet.")}</p>
             <p>
-              Administrator access will be available after backend deployment
-              and invitation.
+              {t(
+                "Administrator access will be available after backend deployment and invitation.",
+              )}
             </p>
           </section>
         ) : !session ? (
@@ -186,19 +217,17 @@ export function App() {
             }}
           />
         ) : !role ? (
-          <p role="status">Checking administrator access…</p>
+          <p role="status">{t("Checking administrator access…")}</p>
         ) : role === "owner" && aal !== "aal2" ? (
           <Mfa done={() => setVersion((v) => v + 1)} />
         ) : ready ? (
           <>
             <div className="heading">
               <div>
-                <p className="eyebrow">
-                  VARATHANS25 / {role.replaceAll("_", " ")}
-                </p>
-                <h1>{view}</h1>
+                <p className="eyebrow">VARATHANS25 / {t(role)}</p>
+                <h1>{t(view)}</h1>
               </div>
-              <span className="badge">Secure administration</span>
+              <span className="badge">{t("Secure administration")}</span>
             </div>
             {view === "Dashboard" ? (
               <Dashboard />
@@ -208,8 +237,15 @@ export function App() {
               <Inventory />
             ) : view === "Orders" ? (
               <Orders />
-            ) : view === "Settings" ? (
-              <StoreSettings role={role} />
+            ) : view === "Customers" ? (
+              <Customers />
+            ) : [
+                "Settings",
+                "Delivery settings",
+                "Discounts",
+                "Cigar-box configuration",
+              ].includes(view) ? (
+              <StoreSettings key={view} role={role} section={view} />
             ) : view === "Audit" ? (
               <Audit />
             ) : (
@@ -218,11 +254,12 @@ export function App() {
           </>
         ) : null}
       </main>
-      <footer>Varathans25 · Swiss store operations · CHF</footer>
+      <footer>{t("Varathans25 · Swiss store operations · CHF")}</footer>
     </>
   );
 }
 function Login() {
+  const { t } = useI18n();
   const [error, setError] = useState(""),
     [busy, setBusy] = useState(false);
   async function submit(e: FormEvent<HTMLFormElement>) {
@@ -247,9 +284,9 @@ function Login() {
   }
   return (
     <section className="panel">
-      <p className="eyebrow">PRIVATE ACCESS</p>
-      <h1>Welcome back</h1>
-      <p>Sign in with your invited administrator account.</p>
+      <p className="eyebrow">{t("PRIVATE ACCESS")}</p>
+      <h1>{t("Welcome back")}</h1>
+      <p>{t("Sign in with your invited administrator account.")}</p>
       <form onSubmit={submit}>
         <Field label="Email">
           <input name="email" type="email" autoComplete="username" required />
@@ -264,24 +301,27 @@ function Login() {
         </Field>
         <ErrorMessage error={error} />
         <button className="primary" disabled={busy}>
-          {busy ? "Signing in…" : "Sign in"}
+          {t(busy ? "Signing in…" : "Sign in")}
         </button>
       </form>
       <p className="muted">
-        Access is invitation only. Owners verify their identity with an
-        authenticator app.
+        {t(
+          "Access is invitation only. Owners verify their identity with an authenticator app.",
+        )}
       </p>
     </section>
   );
 }
 function SetPassword({ done }: { done: () => void }) {
+  const { t } = useI18n();
   const [error, setError] = useState("");
   return (
     <section className="panel">
-      <h1>Set your password</h1>
+      <h1>{t("Set your password")}</h1>
       <p>
-        Use at least 14 characters with upper and lower case letters, a number
-        and a symbol.
+        {t(
+          "Use at least 14 characters with upper and lower case letters, a number and a symbol.",
+        )}
       </p>
       <form
         onSubmit={async (e) => {
@@ -304,12 +344,13 @@ function SetPassword({ done }: { done: () => void }) {
           />
         </Field>
         <ErrorMessage error={error} />
-        <button className="primary">Save password</button>
+        <button className="primary">{t("Save password")}</button>
       </form>
     </section>
   );
 }
 function Mfa({ done }: { done: () => void }) {
+  const { t } = useI18n();
   const [factor, setFactor] = useState(""),
     [qr, setQr] = useState(""),
     [error, setError] = useState(""),
@@ -343,12 +384,16 @@ function Mfa({ done }: { done: () => void }) {
   }
   return (
     <section className="panel">
-      <h1>Owner verification</h1>
-      <p>An authenticator code is required before owner access is granted.</p>
+      <h1>{t("Owner verification")}</h1>
+      <p>
+        {t("An authenticator code is required before owner access is granted.")}
+      </p>
       {loading ? (
-        <p>Loading…</p>
+        <p>{t("Loading…")}</p>
       ) : !factor ? (
-        <button onClick={() => void enroll()}>Set up authenticator</button>
+        <button onClick={() => void enroll()}>
+          {t("Set up authenticator")}
+        </button>
       ) : (
         <form
           onSubmit={async (e) => {
@@ -367,7 +412,7 @@ function Mfa({ done }: { done: () => void }) {
             <img
               className="qr"
               src={qr}
-              alt="Scan this QR code with your authenticator app"
+              alt={t("Scan this QR code with your authenticator app")}
             />
           )}
           <Field label="Authenticator code">
@@ -380,7 +425,7 @@ function Mfa({ done }: { done: () => void }) {
               required
             />
           </Field>
-          <button className="primary">Verify</button>
+          <button className="primary">{t("Verify")}</button>
         </form>
       )}
       <ErrorMessage error={error} />
@@ -404,6 +449,7 @@ type DashboardData = {
   }[];
 };
 function Dashboard() {
+  const { t, locale } = useI18n();
   const [data, setData] = useState<DashboardData | null>(null),
     [error, setError] = useState("");
   useEffect(() => {
@@ -435,48 +481,97 @@ function Dashboard() {
               ([k, label]) =>
                 data[k as keyof DashboardData] !== undefined && (
                   <article className="panel" key={k}>
-                    <span>{label}</span>
+                    <span>{t(label)}</span>
                     <strong>{String(data[k as keyof DashboardData])}</strong>
                   </article>
                 ),
             )}
             {!!data.orders && (
               <article className="panel">
-                <span>Paid revenue · all time</span>
-                <strong>{formatMoney(data.revenue_rappen ?? 0)}</strong>
+                <span>{t("Paid revenue · all time")}</span>
+                <strong>{formatMoney(data.revenue_rappen ?? 0, locale)}</strong>
               </article>
             )}
           </div>
           <section className="panel">
-            <h2>System status</h2>
+            <h2>{t("System status")}</h2>
             <ul>
               {Object.entries(data.warnings)
                 .filter(([, on]) => on)
                 .map(([k]) => (
-                  <li key={k}>{names[k]}</li>
+                  <li key={k}>{t(names[k])}</li>
                 ))}
             </ul>
           </section>
           {data.recent_orders && (
             <section className="panel">
-              <h2>Recent orders</h2>
+              <h2>{t("Recent orders")}</h2>
               {data.recent_orders.length ? (
                 <ul>
                   {data.recent_orders.map((o) => (
                     <li key={o.id}>
-                      #{o.number} · {o.status} · {formatMoney(o.total_rappen)}
+                      #{o.number} · {t(o.status)} ·{" "}
+                      {formatMoney(o.total_rappen, locale)}
                     </li>
                   ))}
                 </ul>
               ) : (
-                <p>No orders yet. Revenue appears when real orders exist.</p>
+                <p>
+                  {t("No orders yet. Revenue appears when real orders exist.")}
+                </p>
               )}
             </section>
           )}
         </>
       ) : (
-        <p role="status">Loading dashboard…</p>
+        <p role="status">{t("Loading dashboard…")}</p>
       )}
     </>
   );
+}
+
+// Native browser confirm-button labels follow the browser locale, so admin confirmations
+// use an accessible modal with labels from the selected interface language.
+export function useConfirmation() {
+  const { t } = useI18n();
+  const id = useId();
+  const ref = useRef<HTMLDialogElement>(null);
+  const [pending, setPending] = useState<{
+    key: string;
+    resolve: (confirmed: boolean) => void;
+  } | null>(null);
+  useEffect(() => {
+    if (pending) ref.current?.showModal();
+    return () => pending?.resolve(false);
+  }, [pending]);
+  function finish(confirmed: boolean) {
+    pending?.resolve(confirmed);
+    ref.current?.close();
+    setPending(null);
+  }
+  return {
+    confirm: (key: string) =>
+      new Promise<boolean>((resolve) => setPending({ key, resolve })),
+    dialog: pending && (
+      <dialog
+        ref={ref}
+        className="confirmation"
+        aria-labelledby={id}
+        onCancel={(e) => {
+          e.preventDefault();
+          finish(false);
+        }}
+      >
+        <h2 id={id}>{t(pending.key)}</h2>
+        <div className="actions">
+          <button autoFocus onClick={() => finish(false)}>
+            {t("Cancel")}
+          </button>
+          <button className="primary" onClick={() => finish(true)}>
+            {t("Confirm")}
+          </button>
+        </div>
+      </dialog>
+    ),
+  };
 }

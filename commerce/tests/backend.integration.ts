@@ -661,6 +661,123 @@ test("Real Supabase authentication, RLS and commerce", async (t) => {
     },
   );
   await t.test(
+    "all nine content fields round-trip independently, with private supplier, blank legal fields and audit records",
+    async () => {
+      const multilingual = {
+        ...blankProduct(),
+        slug: `languages-${randomUUID()}`,
+        supplier: "LOCAL fixture supplier",
+      };
+      multilingual.translations = multilingual.translations.map((tr) => ({
+        ...tr,
+        name: `Name ${tr.locale}`,
+        short_description: `Short ${tr.locale}`,
+        description: `Full ${tr.locale}`,
+        preparation_instructions: `Use ${tr.locale}`,
+        seo_title: `SEO ${tr.locale}`,
+        seo_description: `SEO description ${tr.locale}`,
+      }));
+      const product = ok(
+        await editor.client.rpc("v25_save_product", { document: multilingual }),
+      );
+      const translations = () =>
+        admin.client
+          .from("v25_product_translations")
+          .select("*")
+          .eq("product_id", product)
+          .order("locale");
+      const before = ok(await translations());
+      for (const row of before) {
+        const expected = multilingual.translations.find(
+          (tr) => tr.locale === row.locale,
+        )!;
+        for (const [key, value] of Object.entries(expected))
+          assert.equal(row[key], value);
+        assert.equal(row.ingredients, "");
+        assert.equal(row.allergens, "");
+      }
+      assert.equal(
+        ok(
+          await admin.client
+            .from("v25_products")
+            .select("supplier")
+            .eq("id", product)
+            .single(),
+        ).supplier,
+        multilingual.supplier,
+      );
+      multilingual.translations[1].short_description =
+        "FR edited independently";
+      ok(
+        await editor.client.rpc("v25_save_product", {
+          document: { ...multilingual, id: product },
+          expected_revision: 1,
+        }),
+      );
+      const after = ok(await translations());
+      assert.equal(
+        after.find((tr) => tr.locale === "fr").short_description,
+        "FR edited independently",
+      );
+      assert.deepEqual(
+        after.filter((tr) => tr.locale !== "fr"),
+        before.filter((tr) => tr.locale !== "fr"),
+      );
+      const duplicate = ok(
+        await editor.client.rpc("v25_duplicate_product", {
+          product,
+          new_slug: `languages-copy-${randomUUID()}`,
+          new_sku: null,
+        }),
+      );
+      const copied = ok(
+        await admin.client
+          .from("v25_product_translations")
+          .select("*")
+          .eq("product_id", duplicate)
+          .order("locale"),
+      );
+      assert.deepEqual(
+        copied.map((tr) => ({ ...tr, product_id: null })),
+        after.map((tr) => ({ ...tr, product_id: null })),
+      );
+      denied(
+        await anon
+          .from("v25_product_translations")
+          .select("seo_title,ingredients"),
+      );
+      assert.equal(
+        ok(
+          await manager.client
+            .from("v25_product_translations")
+            .select("seo_title,ingredients"),
+        ).length,
+        0,
+      );
+      assert.equal(
+        ok(await editor.client.from("v25_customers").select("id,name,email"))
+          .length,
+        0,
+      );
+      assert.ok(
+        !ok(await anon.rpc("v25_catalogue")).some(
+          (p: { id: string }) => p.id === product,
+        ),
+      );
+      const audit = ok(
+        await admin.client
+          .from("v25_audit_events")
+          .select("action,entity")
+          .eq("entity_id", product),
+      );
+      assert.ok(
+        audit.some(
+          (row) => row.action === "UPDATE" && row.entity === "v25_products",
+        ),
+      );
+    },
+  );
+  await t.test(
     "session revocation takes effect even before access JWT expiry",
     async () => {
       const token = ok(await editor.client.auth.getSession()).session!

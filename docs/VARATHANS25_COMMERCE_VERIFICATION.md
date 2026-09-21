@@ -1,5 +1,51 @@
 # Varathans25 commerce verification
 
+## 22 September 2026 — multilingual administration
+
+Starting point: `work/varathans25-admin-backend` at `f3e1735f4f324d8a6a13bcc00c5906aad5074ca4`. Safety branch `safety/varathans25-admin-i18n-f3e1735` was created before edits. The recovered product commits and approved storefront are preserved.
+
+### What existed and what was missing
+
+The admin interface was English only. DE/FR/EN product-content tabs existed for name, description, ingredients, allergens and storage instructions, but there was no interface-language selector or persisted preference. Separate short descriptions, preparation/use instructions, SEO titles and SEO descriptions were absent. Delivery and box discounts were grouped in Settings; there were no separate Customers, Delivery, Discounts or Cigar-box views.
+
+The admin now defaults to German, with a shared visible DE/FR/EN selector on login, password setup, TOTP and every authenticated screen. It persists only the language code in browser storage and preserves unsaved form values during switching. All interface copy, accessible labels, validation, notifications and confirmation buttons use the locale catalogue. Unknown backend errors are localized without exposing raw database details.
+
+Product editing separates all requested content fields by language, retains the existing storage-instruction fields, and visibly marks incomplete content. New fields default to blank. No ingredient, allergen, legal or product content was translated automatically. Shared facts and product-status codes remain unchanged across languages. A shared private supplier field was added. Customers and the separate configuration views use the existing role-protected backend, with no new public write access or browser service key.
+
+### Verification results
+
+| Check | Result |
+| --- | --- |
+| TypeScript and ESLint | Passed |
+| Admin production build and commerce harness build | Passed |
+| Unit tests | 38 passed, including locale completeness, source-label coverage, backend-error mappings and blank-content preservation |
+| Catalogue and inline-script validation | 7 packet products, 21 product routes, 3 languages; 1,508 inline scripts in 161 HTML files passed |
+| Fresh local database migrations and pgTAP | All seven migrations applied; 7 policy checks passed |
+| Backend integration and security | 27 subtests passed (29 including the two Node parent suites) |
+| SQL lint | No errors; five pre-existing warnings from JSONB initializer casts and STABLE functions calling the existing role-check helper in `v25_quote`, `v25_dashboard` and `v25_owner_authorized` |
+| Complete Playwright suite | 24 passed: original 15 journeys plus DE, FR and EN admin journeys at desktop, tablet and mobile sizes |
+| Browser console and uncaught exceptions | Zero in all 24 journeys; the strict shared fixture suppresses no errors |
+| Accessibility | All axe assertions passed, including all required admin sections and translated confirmation dialogs |
+| Dependency audit | 0 vulnerabilities; dependency versions unchanged |
+| Static artifact staging | Prepared locally only; existing 1,159 tracked site files preserved by the staging check |
+| Storefront and branch preservation | No change under `varathans25/` or other OpenATG public routes; `main` remains `e58fce588b61e89d2a56783f0e4b603937c15bef` |
+
+Each added language journey creates and saves a draft through the real authenticated backend, fills separate content languages, leaves unverified ingredients/allergens blank, reloads and edits the product, and verifies saved shared values. It exercises localized native and application validation, previews, real order transitions, translated cancellation confirmation, customer contact reveal, delivery settings saves, every requested navigation area, language switching without losing edits, and persistence after logout, refresh and login. Existing owner journeys also switch the TOTP and access-management screens through all three languages.
+
+A loaded-content check also exposed an existing order-search race: a late initial request could overwrite the filtered results. The order list now ignores responses from superseded requests; the journeys assert that searching settles to the expected order before management actions.
+
+An intermediate mobile axe run found that empty horizontally scrolling tables lacked keyboard access. Labelled, focusable table regions fixed that issue; the final suite passes. The file picker and confirmation buttons use explicit translated controls rather than browser-language labels. Desktop/tablet/mobile screenshots are local, ignored artifacts in `commerce/.local/screenshots/`. Visual review covered the language selector, login, editor/incomplete fields, dashboard, orders and delivery settings. No storefront redesign was made.
+
+### Changed files
+
+- Admin language infrastructure: `commerce/src/i18n.tsx`, `commerce/src/admin-messages.json`, `commerce/src/main.tsx`, `commerce/index.html`.
+- Admin screens and styles: `commerce/src/ui.tsx`, `commerce/src/products.tsx`, `commerce/src/orders.tsx`, `commerce/src/settings.tsx`, `commerce/src/customers.tsx`, `commerce/src/style.css`.
+- Product types and migration: `commerce/src/domain.ts`, `supabase/migrations/202609220007_admin_languages.sql`.
+- Tests: `commerce/tests/i18n.test.ts`, `commerce/tests/admin-languages.spec.ts`, `commerce/tests/backend.integration.ts`, `commerce/tests/journeys.spec.ts`, `commerce/tests/invitation.spec.ts`.
+- Documentation: `docs/VARATHANS25_ADMIN_BACKEND.md`, this verification record.
+
+No push, production migration or deployment was performed. Later authorized deployment must apply migration 007 before the matching admin build. The setup guide explains preserving the additional content when rolling back. Production backend configuration and the previously outstanding live-store integration remain separate work.
+
 ## 22 September 2026 — recovered storefront correction
 
 Starting point: `work/varathans25-admin-backend` at `85a7eb5fa51d54eb7b6df6bf9edc7b0751909e5a`, after importing the original `0a5a509` and `5cde291` commits and rebasing only the backend work. The safety branch `safety/varathans25-admin-backend-b9a658a` remains at the original backend checkpoint.

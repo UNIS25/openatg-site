@@ -28,6 +28,10 @@ test("invitation callback sets a password and grants only the invited role", asy
     .insert({ id: data.user.id, role: "product_editor" });
   expect(result.error).toBeNull();
   await page.goto(data.properties.action_link);
+  await page
+    .locator(".language-selector")
+    .getByRole("button", { name: "EN", exact: true })
+    .click();
   await expect(
     page.getByRole("heading", { name: "Set your password" }),
   ).toBeVisible();
@@ -42,7 +46,7 @@ test("invitation callback sets a password and grants only the invited role", asy
     page.getByRole("button", { name: "Orders", exact: true }),
   ).toHaveCount(0);
   await expect(
-    page.getByRole("button", { name: "Settings", exact: true }),
+    page.getByRole("button", { name: "General settings", exact: true }),
   ).toHaveCount(0);
   await expect(
     page.getByRole("button", { name: "Access", exact: true }),

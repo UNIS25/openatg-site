@@ -1,7 +1,10 @@
-import { useEffect, useState, type FormEvent } from "react";
+import { useI18n } from "./i18n";
+import { useEffect, useState, useRef, type FormEvent } from "react";
 import { products, saveProduct, rpc, db, imageUrl } from "./api";
 import {
   blankProduct,
+  translationFields,
+  missingTranslationFields,
   formatMoney,
   moneyInput,
   parseMoney,
@@ -21,6 +24,7 @@ export function MoneyField({
   value: number | null;
   onChange: (n: number | null) => void;
 }) {
+  const { t } = useI18n();
   const [text, setText] = useState(moneyInput(value));
   return (
     <Field label={label}>
@@ -35,7 +39,8 @@ export function MoneyField({
             e.target.setCustomValidity("");
             onChange(n);
           } catch (error) {
-            e.target.setCustomValidity(message(error));
+            e.target.dataset.errorKey = message(error);
+            e.target.setCustomValidity(t(message(error)));
           }
         }}
       />
@@ -43,6 +48,7 @@ export function MoneyField({
   );
 }
 export function Products({ role }: { role: Role }) {
+  const { t, locale } = useI18n();
   const [rows, setRows] = useState<Product[]>([]),
     [editor, setEditor] = useState<Product | "new" | null>(null),
     [error, setError] = useState(""),
@@ -88,45 +94,53 @@ export function Products({ role }: { role: Role }) {
           />
         </Field>
         <button className="primary" onClick={() => setEditor("new")}>
-          Create product
+          {t("Create product")}
         </button>
       </div>
       <ErrorMessage error={error} />
-      <p role="status">{notice}</p>
-      <div className="table-wrap">
+      <p role="status">{notice && t(notice)}</p>
+      <div
+        className="table-wrap"
+        role="region"
+        aria-label={t("Products")}
+        tabIndex={0}
+      >
         <table>
-          <caption>Products · page {page + 1}</caption>
+          <caption>
+            {t("Products · page")} {page + 1}
+          </caption>
           <thead>
             <tr>
-              <th>Name / SKU</th>
-              <th>Status</th>
+              <th>{t("Name / SKU")}</th>
+              <th>{t("Status")}</th>
               <th>CHF</th>
               <th>DE / FR / EN</th>
-              <th>Action</th>
+              <th>{t("Action")}</th>
             </tr>
           </thead>
           <tbody>
             {rows.map((p) => (
               <tr key={p.id}>
                 <td>
-                  {p.translations.find((t) => t.locale === "de")?.name ||
+                  {p.translations.find((t) => t.locale === locale)?.name ||
                     p.slug}
-                  <small>{p.sku ?? "SKU pending"}</small>
+                  <small>{p.sku ?? t("SKU pending")}</small>
                 </td>
                 <td>
                   <span className="badge">{p.status}</span>
                 </td>
                 <td>
                   {p.price_rappen === null
-                    ? "Unconfirmed"
-                    : formatMoney(p.price_rappen)}
+                    ? t("Unconfirmed")
+                    : formatMoney(p.price_rappen, locale)}
                 </td>
                 <td>
                   {locales.map((l) => (
                     <span key={l}>
                       {l.toUpperCase()}{" "}
                       {p.translations.some(
-                        (t) => t.locale === l && t.name && t.description,
+                        (t) =>
+                          t.locale === l && !missingTranslationFields(t).length,
                       )
                         ? "✓"
                         : "—"}{" "}
@@ -134,13 +148,16 @@ export function Products({ role }: { role: Role }) {
                   ))}
                 </td>
                 <td>
-                  <button onClick={() => setEditor(p)}>Edit {p.slug}</button>
+                  <button onClick={() => setEditor(p)}>
+                    {t("Edit")} {p.slug}
+                  </button>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+      {!rows.length && <p>{t("No matching products.")}</p>}
       <Pagination page={page} next={rows.length === 50} change={setPage} />
     </>
   );
@@ -154,14 +171,17 @@ export function Pagination({
   next: boolean;
   change: (p: number) => void;
 }) {
+  const { t } = useI18n();
   return (
     <div className="toolbar">
       <button disabled={page === 0} onClick={() => change(page - 1)}>
-        Previous page
+        {t("Previous page")}
       </button>
-      <span>Page {page + 1}</span>
+      <span>
+        {t("Page")} {page + 1}
+      </span>
       <button disabled={!next} onClick={() => change(page + 1)}>
-        Next page
+        {t("Next page")}
       </button>
     </div>
   );
@@ -177,6 +197,7 @@ function ProductEditor({
   cancel: () => void;
   saved: () => void;
 }) {
+  const { t, locale } = useI18n();
   const [doc, setDoc] = useState<ProductDocument>(() =>
       initial ? structuredClone(initial) : blankProduct(),
     ),
@@ -191,6 +212,7 @@ function ProductEditor({
     key: K,
     value: ProductDocument[K],
   ) => setDoc((d) => ({ ...d, [key]: value }));
+  const uploadInput = useRef<HTMLInputElement>(null);
   const translation = doc.translations.find((t) => t.locale === lang)!;
   async function submit(e: FormEvent) {
     e.preventDefault();
@@ -255,8 +277,8 @@ function ProductEditor({
   return (
     <section className="panel">
       <div className="toolbar">
-        <h2>{initial ? "Edit product" : "Create draft product"}</h2>
-        <button onClick={cancel}>Back to products</button>
+        <h2>{t(initial ? "Edit product" : "Create draft product")}</h2>
+        <button onClick={cancel}>{t("Back to products")}</button>
       </div>
       <form onSubmit={submit}>
         <div className="grid">
@@ -280,7 +302,7 @@ function ProductEditor({
               onChange={(e) => set("barcode", e.target.value || null)}
             />
           </Field>
-          {(["category", "brand", "origin"] as const).map((k) => (
+          {(["category", "brand", "origin", "supplier"] as const).map((k) => (
             <Field
               key={k}
               label={
@@ -323,16 +345,16 @@ function ProductEditor({
                 set("status", e.target.value as ProductDocument["status"])
               }
             >
-              <option value="draft">Draft</option>
+              <option value="draft">draft</option>
               <option value="active" disabled={role === "product_editor"}>
-                Active / published
+                active
               </option>
-              <option value="archived">Archived</option>
+              <option value="archived">archived</option>
             </select>
           </Field>
         </div>
         <fieldset>
-          <legend>Product controls</legend>
+          <legend>{t("Product controls")}</legend>
           {(
             [
               "available",
@@ -349,7 +371,7 @@ function ProductEditor({
                 checked={doc[k]}
                 onChange={(e) => set(k, e.target.checked)}
               />
-              {
+              {t(
                 {
                   available: "Available for sale",
                   featured: "Featured",
@@ -358,14 +380,18 @@ function ProductEditor({
                   information_confirmed:
                     "Product information verified against the label",
                   price_confirmed: "Selling price confirmed",
-                }[k]
-              }
+                }[k],
+              )}
             </label>
           ))}
         </fieldset>
         <fieldset>
-          <legend>DE / FR / EN product information</legend>
-          <div className="tabs">
+          <legend>{t("DE / FR / EN product information")}</legend>
+          <div
+            className="tabs"
+            role="group"
+            aria-label={t("Product content language")}
+          >
             {locales.map((l) => (
               <button
                 type="button"
@@ -377,20 +403,25 @@ function ProductEditor({
               </button>
             ))}
           </div>
-          {(
-            [
-              "name",
-              "description",
-              "ingredients",
-              "allergens",
-              "storage_instructions",
-            ] as const
-          ).map((k) => (
+          <p className="muted">
+            {t(
+              "Enter verified content separately for each language. Missing legal, ingredient and allergen information stays blank.",
+            )}
+          </p>
+          <p role="status">
+            {t("Missing fields in {language}: {count}", {
+              language: lang.toUpperCase(),
+              count: missingTranslationFields(translation).length,
+            })}
+          </p>
+          {translationFields.map((k) => (
             <Field
               key={`${lang}-${k}`}
-              label={`${lang.toUpperCase()} ${k.replaceAll("_", " ")}`}
+              label={`${lang.toUpperCase()} ${t(k)}`}
+              incomplete={!translation?.[k]?.trim()}
             >
               <textarea
+                lang={lang}
                 value={translation?.[k] ?? ""}
                 onChange={(e) =>
                   set(
@@ -402,6 +433,10 @@ function ProductEditor({
                         locale,
                         name: "",
                         description: "",
+                        short_description: "",
+                        preparation_instructions: "",
+                        seo_title: "",
+                        seo_description: "",
                         ingredients: "",
                         allergens: "",
                         storage_instructions: "",
@@ -424,13 +459,16 @@ function ProductEditor({
           />
         </Field>
         <fieldset>
-          <legend>Product images</legend>
+          <legend>{t("Product images")}</legend>
           <p>
-            Upload JPEG, PNG or WebP. Save the draft first. Image order and alt
-            text are saved with the product.
+            {t(
+              "Upload JPEG, PNG or WebP. Save the draft first. Image order and alt text are saved with the product.",
+            )}
           </p>
           <Field label="Upload product image">
             <input
+              ref={uploadInput}
+              className="visually-hidden"
               type="file"
               accept="image/jpeg,image/png,image/webp"
               disabled={!initial || busy}
@@ -440,6 +478,13 @@ function ProductEditor({
               }}
             />
           </Field>
+          <button
+            type="button"
+            disabled={!initial || busy}
+            onClick={() => uploadInput.current?.click()}
+          >
+            {t("Choose image")}
+          </button>
           {[...doc.images]
             .sort((a, b) => a.position - b.position)
             .map((im, i) => (
@@ -452,7 +497,10 @@ function ProductEditor({
                   {locales.map((l) => (
                     <Field
                       key={l}
-                      label={`${l.toUpperCase()} image ${i + 1} alt text`}
+                      label={t("{language} image {number} alt text", {
+                        language: l.toUpperCase(),
+                        number: i + 1,
+                      })}
                     >
                       <input
                         value={im.alt[l] ?? ""}
@@ -479,14 +527,14 @@ function ProductEditor({
                     disabled={i === 0}
                     onClick={() => move(i, -1)}
                   >
-                    Move up
+                    {t("Move up")}
                   </button>
                   <button
                     type="button"
                     disabled={i === doc.images.length - 1}
                     onClick={() => move(i, 1)}
                   >
-                    Move down
+                    {t("Move down")}
                   </button>
                   <button
                     type="button"
@@ -499,7 +547,7 @@ function ProductEditor({
                       )
                     }
                   >
-                    Remove image {i + 1}
+                    {t("Remove image")} {i + 1}
                   </button>
                 </div>
               </div>
@@ -508,10 +556,10 @@ function ProductEditor({
         <ErrorMessage error={error} />
         <div className="toolbar">
           <button className="primary" disabled={busy}>
-            {busy ? "Saving…" : "Save product"}
+            {t(busy ? "Saving…" : "Save product")}
           </button>
           <button type="button" onClick={() => setPreview((p) => !p)}>
-            {preview ? "Close preview" : "Preview before publishing"}
+            {t(preview ? "Close preview" : "Preview before publishing")}
           </button>
           {initial && (
             <button
@@ -530,7 +578,7 @@ function ProductEditor({
                 }
               }}
             >
-              Duplicate as draft
+              {t("Duplicate as draft")}
             </button>
           )}
           {initial && (
@@ -540,32 +588,38 @@ function ProductEditor({
                 set("status", doc.status === "archived" ? "draft" : "archived")
               }
             >
-              {doc.status === "archived"
-                ? "Restore as draft"
-                : "Archive on save"}
+              {t(
+                doc.status === "archived"
+                  ? "Restore as draft"
+                  : "Archive on save",
+              )}
             </button>
           )}
         </div>
         <p className="muted">
-          Publishing requires confirmed price, inventory, complete translations
-          and verified product information. Unconfirmed fields stay blank in
-          drafts.
+          {t(
+            "Publishing requires confirmed price, inventory, complete translations and verified product information. Unconfirmed fields stay blank in drafts.",
+          )}
         </p>
       </form>
       {preview && (
-        <article className="preview" aria-label="Product preview">
-          <p className="eyebrow">PRIVATE PREVIEW · {lang.toUpperCase()}</p>
+        <article className="preview" aria-label={t("Product preview")}>
+          <p className="eyebrow">
+            {t("PRIVATE PREVIEW ·")} {lang.toUpperCase()}
+          </p>
           {doc.images[0] && <ImagePreview image={doc.images[0]} />}
           <h3>{translation?.name || doc.slug}</h3>
+          <p>{translation?.short_description}</p>
           <p>{translation?.description}</p>
           <strong>
             {doc.price_rappen === null
-              ? "Price awaiting confirmation"
-              : formatMoney(doc.promotion_rappen ?? doc.price_rappen)}
+              ? t("Price awaiting confirmation")
+              : formatMoney(doc.promotion_rappen ?? doc.price_rappen, locale)}
           </strong>
-          {doc.adult_only && <p>18+ · Single cigar</p>}
+          {doc.adult_only && <p>{t("18+ · Single cigar")}</p>}
           <p>{translation?.ingredients}</p>
           <p>{translation?.allergens}</p>
+          <p>{translation?.preparation_instructions}</p>
           <p>{translation?.storage_instructions}</p>
         </article>
       )}
@@ -573,6 +627,7 @@ function ProductEditor({
   );
 }
 function ImagePreview({ image }: { image: ProductImage }) {
+  const { t, locale } = useI18n();
   const [src, setSrc] = useState(image.legacy_path ?? "");
   useEffect(() => {
     let live = true;
@@ -597,13 +652,15 @@ function ImagePreview({ image }: { image: ProductImage }) {
     <img
       className="product-image"
       src={src}
-      alt={image.alt.en || "Product preview"}
+      alt={image.alt[locale] || t("Product preview")}
     />
   ) : (
-    <span>Image preview unavailable</span>
+    <span>{t("Image preview unavailable")}</span>
   );
 }
 export function Inventory() {
+  const { t, locale } = useI18n();
+  const [notice, setNotice] = useState("");
   const [rows, setRows] = useState<Product[]>([]),
     [page, setPage] = useState(0),
     [selected, setSelected] = useState<Product | null>(null),
@@ -639,15 +696,20 @@ export function Inventory() {
   return (
     <>
       <ErrorMessage error={error} />
-      <div className="table-wrap">
+      <div
+        className="table-wrap"
+        role="region"
+        aria-label={t("Inventory")}
+        tabIndex={0}
+      >
         <table>
-          <caption>Stock inventory</caption>
+          <caption>{t("Stock inventory")}</caption>
           <thead>
             <tr>
-              <th>Product</th>
-              <th>Quantity</th>
-              <th>Low-stock threshold</th>
-              <th>Action</th>
+              <th>{t("Product")}</th>
+              <th>{t("Quantity")}</th>
+              <th>{t("Low-stock threshold")}</th>
+              <th>{t("Action")}</th>
             </tr>
           </thead>
           <tbody>
@@ -656,12 +718,12 @@ export function Inventory() {
                 <td>{p.sku || p.slug}</td>
                 <td>
                   {p.inventory?.quantity ?? 0}
-                  {!p.inventory?.confirmed && " · Unconfirmed"}
+                  {!p.inventory?.confirmed && ` · ${t("Unconfirmed")}`}
                 </td>
                 <td>{p.inventory?.low_stock_threshold}</td>
                 <td>
                   <button onClick={() => setSelected(p)}>
-                    Adjust {p.slug}
+                    {t("Adjust")} {p.slug}
                   </button>
                 </td>
               </tr>
@@ -672,7 +734,9 @@ export function Inventory() {
       <Pagination page={page} next={rows.length === 50} change={setPage} />
       {selected && (
         <section className="panel" key={selected.id}>
-          <h2>Adjust {selected.slug}</h2>
+          <h2>
+            {t("Adjust")} {selected.slug}
+          </h2>
           <form
             onSubmit={async (e) => {
               e.preventDefault();
@@ -686,6 +750,7 @@ export function Inventory() {
                   threshold: Number(f.get("threshold")),
                 });
                 setVersion((v) => v + 1);
+                setNotice("Inventory updated.");
               } catch (e) {
                 setError(message(e));
               }
@@ -715,17 +780,20 @@ export function Inventory() {
                 <input name="reason" minLength={3} maxLength={500} required />
               </Field>
             </div>
-            <button className="primary">Record adjustment</button>
+            <button className="primary">{t("Record adjustment")}</button>
             <p>
-              Use zero to confirm an opening quantity of zero. Negative stock is
-              rejected.
+              {t(
+                "Use zero to confirm an opening quantity of zero. Negative stock is rejected.",
+              )}
             </p>
           </form>
-          <h3>Inventory history · latest 50</h3>
+          <p role="status">{notice && t(notice)}</p>
+          <h3>{t("Inventory history · latest 50")}</h3>
+          {!history.length && <p>{t("No inventory movements yet.")}</p>}
           <ul>
             {history.map((h) => (
               <li key={h.id}>
-                {new Date(h.created_at).toLocaleString()} ·{" "}
+                {new Date(h.created_at).toLocaleString(`${locale}-CH`)} ·{" "}
                 {h.delta > 0 ? "+" : ""}
                 {h.delta} → {h.new_quantity} · {h.reason}
               </li>

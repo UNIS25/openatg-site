@@ -1,4 +1,6 @@
 import { test, expect } from "./browser-fixture";
+import { translate } from "../src/i18n";
+import { locales } from "../src/domain";
 import AxeBuilder from "@axe-core/playwright";
 import { readFileSync, mkdirSync } from "node:fs";
 import { TOTP, Secret } from "otpauth";
@@ -9,6 +11,10 @@ test("admin direct load, login, product editor, orders, settings, refresh and ac
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
   await page.goto("/adminpage/");
+  await page
+    .locator(".language-selector")
+    .getByRole("button", { name: "EN", exact: true })
+    .click();
   await expect(
     page.getByRole("heading", { name: "Welcome back" }),
   ).toBeVisible();
@@ -40,7 +46,9 @@ test("admin direct load, login, product editor, orders, settings, refresh and ac
   await page.getByRole("button", { name: "Create product" }).click();
   const slug = `browser-${info.project.name}-${Date.now()}`;
   await page.getByLabel("Product slug", { exact: true }).fill(slug);
-  await page.getByLabel("DE name", { exact: true }).fill("Browser test draft");
+  await page
+    .getByLabel("DE Product name", { exact: true })
+    .fill("Browser test draft");
   await page.getByRole("button", { name: "Preview before publishing" }).click();
   await expect(
     page.getByRole("article", { name: "Product preview" }),
@@ -74,12 +82,14 @@ test("admin direct load, login, product editor, orders, settings, refresh and ac
     fullPage: true,
   });
   expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
-  await page.getByRole("button", { name: "Settings", exact: true }).click();
+  await page
+    .getByRole("button", { name: "General settings", exact: true })
+    .click();
   await expect(
     page.getByLabel("Free standard delivery threshold CHF"),
   ).toHaveValue("100.00");
   await expect(
-    page.getByLabel("payment enabled", { exact: true }),
+    page.getByLabel("Payments enabled", { exact: true }),
   ).toBeDisabled();
   await page.screenshot({
     path: `.local/screenshots/${info.project.name}-delivery-settings.png`,
@@ -101,6 +111,10 @@ test("admin direct load, login, product editor, orders, settings, refresh and ac
 });
 test("owner TOTP is required before the dashboard", async ({ page }) => {
   await page.goto("/adminpage/");
+  await page
+    .locator(".language-selector")
+    .getByRole("button", { name: "EN", exact: true })
+    .click();
   await page.getByLabel("Email", { exact: true }).fill(accounts.owner.email);
   await page
     .getByLabel("Password", { exact: true })
@@ -112,6 +126,17 @@ test("owner TOTP is required before the dashboard", async ({ page }) => {
   await expect(
     page.getByRole("heading", { name: "Dashboard", exact: true }),
   ).toHaveCount(0);
+  for (const locale of locales) {
+    await page
+      .locator(".language-selector")
+      .getByRole("button", { name: locale.toUpperCase(), exact: true })
+      .click();
+    await expect(
+      page.getByRole("heading", {
+        name: translate(locale, "Owner verification"),
+      }),
+    ).toBeVisible();
+  }
   const totp = new TOTP({
     secret: Secret.fromBase32(accounts.owner.totpSecret),
     period: 30,
@@ -122,6 +147,25 @@ test("owner TOTP is required before the dashboard", async ({ page }) => {
   await expect(
     page.getByRole("heading", { name: "Dashboard", exact: true }),
   ).toBeVisible();
+  await page
+    .getByRole("navigation")
+    .getByRole("button", { name: "Access", exact: true })
+    .click();
+  for (const locale of locales) {
+    const t = (key: string) => translate(locale, key);
+    await page
+      .locator(".language-selector")
+      .getByRole("button", { name: locale.toUpperCase(), exact: true })
+      .click();
+    await expect(
+      page.getByRole("heading", { name: t("Invite an administrator") }),
+    ).toBeVisible();
+    await expect(
+      page
+        .getByLabel(t("Administrator role"), { exact: true })
+        .getByRole("option", { name: t("product_editor"), exact: true }),
+    ).toHaveAttribute("value", "product_editor");
+  }
   await page.getByRole("button", { name: "Sign out" }).click();
 });
 test("preserved storefront routes remain available and mobile navigation works", async ({

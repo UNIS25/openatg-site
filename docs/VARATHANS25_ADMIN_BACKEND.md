@@ -2,11 +2,31 @@
 
 ## Implementation status and repository boundary
 
-This work is in the isolated branch `work/varathans25-admin-backend`, based on OpenATG `6c80ae4e0b7beb1708d1389a8c6d7c7dafb1b379`. The supplied `/workspace/scratch/91cd31d174c3/openatg-site` does not exist on this machine. Neither available OpenATG checkout nor GitHub contains the requested local commits `0a5a509` and `5cde291`. **Retrieve those commits before integrating or publishing the storefront.** They have not been reset, recreated, replaced or omitted from an attempted push.
+The current work is on `work/varathans25-admin-backend`. Commits `0a5a509` and `5cde291` were recovered from the supplied Git bundle and retained unchanged; the backend work was rebased onto them. Storefront correction `f3e1735f4f324d8a6a13bcc00c5906aad5074ca4` is retained. The multilingual-admin update leaves every approved storefront file unchanged relative to that correction.
 
-The PostgreSQL backend, static administration source, local stack, tests and reusable storefront integration components are implemented here. The approved storefront files remain byte-for-byte unchanged. The new commerce provider is tested in a separate local harness; it has **not** been inserted into the unavailable updated storefront source. The public admin route has not been deployed. This is not a claim of a completed live store.
+The PostgreSQL backend, static administration source, local stack, tests and reusable storefront integration components are implemented and locally verified. The commerce provider remains tested in a separate local harness; live storefront integration and production Supabase configuration remain separate deployment work. `/adminpage/` has not been deployed. No `main` branch, remote branch or production service was modified for this update.
 
-Checkpoints were taken before edits: `checkpoint/pre-admin-backend-20260920` in both available repositories, plus independent Git bundles under the local V25-Suisse `.local/deployment-checkpoints/` directory. Do not publish those local files.
+Safety checkpoints include `safety/varathans25-admin-backend-b9a658a` for the original backend and `safety/varathans25-admin-i18n-f3e1735` for the multilingual-admin starting point. Local Git bundles and development credentials must not be published.
+
+## Admin interface languages
+
+The shared header exposes DE / FR / EN on login, invitation/password setup, owner TOTP and every authenticated screen. German is the default. Switching updates the interface immediately without remounting forms or changing product content. Only the language code is persisted, under `varathans25_admin_language`; authentication tokens remain in memory. The choice survives logout, page refresh and a subsequent login in the same browser. If browser storage is unavailable, switching still works for the current page.
+
+Navigation, accessible labels, buttons, validation, cancellation/refund confirmations, empty states and notifications use the central `commerce/src/admin-messages.json` catalogue. Known backend validation errors are mapped to translated messages; unknown server errors produce a localized generic message rather than exposing database details. Native constraint-validation messages follow the selected admin language. Monetary/date display uses the corresponding Swiss locale. Stored amounts remain integer rappen.
+
+Available role-protected areas: Dashboard, Products, Inventory, Orders, Customers, Delivery settings, Discounts, Cigar-box configuration, General settings, Audit and owner-only Access. The Customers view retrieves names first and shows email only on request; addresses stay in order details. Discounts uses existing product promotion prices and the configured cigar-box discount, not a new coupon engine. Cigar-box sizes remain exactly four or six. Payment and tobacco activation remain owner/MFA protected and disabled by default.
+
+Interface language is independent of the DE / FR / EN product-content tabs. Each language has product name, short description, full description, ingredients, allergens, preparation/use instructions, storage instructions, SEO title and SEO description. Empty fields have visible and screen-reader-associated incomplete markers; the editor, product list and dashboard report completeness. No translation service, inferred legal copy or cross-language content fallback populates these fields. The existing full description remains in `description`; it is not copied into the new short-description or SEO fields.
+
+SKU, barcode, price, weight, inventory, tax rate, supplier and product status remain shared factual values. Product status codes `draft`, `active`, `archived` remain unchanged in all interface languages. Labels are translated. Technical identifiers and actual entered values in audit records remain original evidence. Tax remains a store-level configuration; no per-language tax or inventory records were added.
+
+### Migration and rollback
+
+`202609220007_admin_languages.sql` adds four blank, non-null text columns to `v25_product_translations` (`short_description`, `preparation_instructions`, `seo_title`, `seo_description`) and a private shared `supplier` column to `v25_products`. It replaces the existing product-save and completeness-dashboard RPC bodies without changing grants, RLS, revision checks, audit triggers or publication requirements. Existing names, descriptions, label text and published states are preserved. Duplication already copies all translation columns. The public catalogue projects the new translated fields only for published products and does not include supplier.
+
+For a later authorized deployment, take the database backup described below, apply migration 007 before serving the updated admin build, then follow the existing deployment checks. Do not reset a production database. No production migration or deployment was performed during this work.
+
+For rollback, keep a backup containing all new content. Do not allow writes from the old admin: its translation document omits the new columns and could replace them with blanks. Retain migration 007 and disable administrative editing while restoring a compatible frontend, or restore the coordinated pre-update database and frontend backup during a maintenance window. Do not drop populated columns as a shortcut. The safety branch preserves the original code; database backups preserve entered content.
 
 ## Architecture
 
@@ -73,7 +93,7 @@ Local SMTP mail stays in Mailpit at `http://127.0.0.1:57434`. Test accounts use 
 
 ## Products and catalogue preservation
 
-Migration `202609200006_preserved_references.sql` preserves 23 Patoro/Davidoff names and the requested seven packet products. They start as drafts, with unconfirmed prices and zero unconfirmed stock. Gelber Curry Kokos keeps its supplied 80 g weight. The verified label information in missing commit `5cde291` is **not available here** and has not been invented.
+Migration `202609200006_preserved_references.sql` preserves 23 Patoro/Davidoff names and the requested seven packet products. They start as drafts, with unconfirmed prices and zero unconfirmed stock. Gelber Curry Kokos keeps its supplied 80 g weight. The recovered storefront commit `5cde291` contains the verified curry label. That storefront content is preserved unchanged; migration 006 does not automatically import its full label text into the database. Unconfirmed backend fields remain drafts and have not been invented.
 
 The original reference catalogue's prices are not treated as confirmed selling prices. No supplier costs, private source documents or legal claims were imported. Publishing requires complete DE/FR/EN names and descriptions, confirmed inventory, SKU, origin, verified price and product information. Food additionally requires weight, nutrition and translated ingredient/allergen/storage fields. Image alt text must be complete in each language.
 

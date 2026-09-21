@@ -7,6 +7,10 @@ export type Translation = {
   locale: Locale;
   name: string;
   description: string;
+  short_description: string;
+  preparation_instructions: string;
+  seo_title: string;
+  seo_description: string;
   ingredients: string;
   allergens: string;
   storage_instructions: string;
@@ -25,6 +29,7 @@ export type ProductDocument = {
   barcode: string | null;
   category: string;
   brand: string;
+  supplier: string;
   price_rappen: number | null;
   promotion_rappen: number | null;
   weight_grams: number | null;
@@ -109,6 +114,7 @@ export function blankProduct(): ProductDocument {
     barcode: null,
     category: "",
     brand: "",
+    supplier: "",
     price_rappen: null,
     promotion_rappen: null,
     weight_grams: null,
@@ -125,6 +131,10 @@ export function blankProduct(): ProductDocument {
       locale,
       name: "",
       description: "",
+      short_description: "",
+      preparation_instructions: "",
+      seo_title: "",
+      seo_description: "",
       ingredients: "",
       allergens: "",
       storage_instructions: "",
@@ -254,9 +264,12 @@ export function csvCell(value: unknown) {
     '"'
   );
 }
-export function orderCsv(orders: Order[]) {
+export function orderCsv(
+  orders: Order[],
+  headers = ["Order", "Created", "Status", "Total CHF", "Refund status"],
+) {
   return [
-    ["Order", "Created", "Status", "Total CHF", "Refund status"],
+    headers,
     ...orders.map((o) => [
       o.number,
       o.created_at,
@@ -297,3 +310,19 @@ export const deliveryMessages: Record<
     adult: "Any adult-delivery surcharge remains separate.",
   },
 };
+
+// These are independent content values, never inferred from another language.
+export const translationFields = [
+  "name",
+  "short_description",
+  "description",
+  "ingredients",
+  "allergens",
+  "preparation_instructions",
+  "storage_instructions",
+  "seo_title",
+  "seo_description",
+] as const;
+export function missingTranslationFields(translation?: Translation) {
+  return translationFields.filter((key) => !translation?.[key]?.trim());
+}

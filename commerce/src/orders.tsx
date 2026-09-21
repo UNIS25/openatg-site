@@ -1,3 +1,4 @@
+import { useI18n } from "./i18n";
 import { useEffect, useState } from "react";
 import { orders, db, rpc, updateOrder } from "./api";
 import {
@@ -7,7 +8,7 @@ import {
   type Order,
   type OrderStatus,
 } from "./domain";
-import { Field, ErrorMessage, message } from "./ui";
+import { Field, ErrorMessage, message, useConfirmation } from "./ui";
 import { Pagination } from "./products";
 type Detail = {
   customer: { name: string; email: string };
@@ -27,6 +28,8 @@ type Detail = {
   }[];
 };
 export function Orders() {
+  const { t, locale } = useI18n();
+  const { confirm, dialog } = useConfirmation();
   const [rows, setRows] = useState<Order[]>([]),
     [status, setStatus] = useState(""),
     [search, setSearch] = useState(""),
@@ -34,11 +37,20 @@ export function Orders() {
     [error, setError] = useState(""),
     [selected, setSelected] = useState<Order | null>(null),
     [detail, setDetail] = useState<Detail | null>(null),
-    [version, setVersion] = useState(0);
+    [version, setVersion] = useState(0),
+    [notice, setNotice] = useState("");
   useEffect(() => {
+    let live = true;
     orders(status, search, page)
-      .then(setRows)
-      .catch((e) => setError(message(e)));
+      .then((data) => {
+        if (live) setRows(data);
+      })
+      .catch((e) => {
+        if (live) setError(message(e));
+      });
+    return () => {
+      live = false;
+    };
   }, [status, search, page, version]);
   async function show(order: Order) {
     setError("");
@@ -77,7 +89,18 @@ export function Orders() {
     try {
       await rpc("v25_record_export", { order_ids: rows.map((o) => o.id) });
       const url = URL.createObjectURL(
-        new Blob([orderCsv(rows)], { type: "text/csv;charset=utf-8" }),
+        new Blob(
+          [
+            orderCsv(rows, [
+              t("Order"),
+              t("Date"),
+              t("Status"),
+              t("Total CHF"),
+              t("Refund"),
+            ]),
+          ],
+          { type: "text/csv;charset=utf-8" },
+        ),
       );
       const a = document.createElement("a");
       a.href = url;
@@ -90,6 +113,7 @@ export function Orders() {
   }
   return (
     <>
+      {dialog}
       <div className="toolbar">
         <Field label="Search order number or ID">
           <input
@@ -108,45 +132,56 @@ export function Orders() {
               setPage(0);
             }}
           >
-            <option value="">All states</option>
+            <option value="">{t("All states")}</option>
             {orderStatuses.map((s) => (
-              <option key={s}>{s}</option>
+              <option key={s} value={s}>
+                {t(s)}
+              </option>
             ))}
           </select>
         </Field>
         <button disabled={!rows.length} onClick={() => void download()}>
-          Export this page to CSV
+          {t("Export this page to CSV")}
         </button>
       </div>
       <p className="muted">
-        Customer details are opened only when needed. CSV includes order totals
-        and status, without contact details.
+        {t(
+          "Customer details are opened only when needed. CSV includes order totals and status, without contact details.",
+        )}
       </p>
       <ErrorMessage error={error} />
-      <div className="table-wrap">
+      <p role="status">{notice && t(notice)}</p>
+      <div
+        className="table-wrap"
+        role="region"
+        aria-label={t("Orders")}
+        tabIndex={0}
+      >
         <table>
-          <caption>Orders</caption>
+          <caption>{t("Orders")}</caption>
           <thead>
             <tr>
-              <th>Order</th>
-              <th>Date</th>
-              <th>Status</th>
-              <th>Total</th>
-              <th>Refund</th>
-              <th>Action</th>
+              <th>{t("Order")}</th>
+              <th>{t("Date")}</th>
+              <th>{t("Status")}</th>
+              <th>{t("Total")}</th>
+              <th>{t("Refund")}</th>
+              <th>{t("Action")}</th>
             </tr>
           </thead>
           <tbody>
             {rows.map((o) => (
               <tr key={o.id}>
                 <td>#{o.number}</td>
-                <td>{new Date(o.created_at).toLocaleDateString()}</td>
-                <td>{o.status}</td>
-                <td>{formatMoney(o.total_rappen)}</td>
-                <td>{o.refund_status}</td>
+                <td>
+                  {new Date(o.created_at).toLocaleDateString(`${locale}-CH`)}
+                </td>
+                <td>{t(o.status)}</td>
+                <td>{formatMoney(o.total_rappen, locale)}</td>
+                <td>{t(o.refund_status)}</td>
                 <td>
                   <button onClick={() => void show(o)}>
-                    View order {o.number}
+                    {t("View order")} {o.number}
                   </button>
                 </td>
               </tr>
@@ -154,26 +189,29 @@ export function Orders() {
           </tbody>
         </table>
       </div>
-      {!rows.length && <p>No matching orders.</p>}
+      {!rows.length && <p>{t("No matching orders.")}</p>}
       <Pagination page={page} next={rows.length === 50} change={setPage} />
       {selected && (
         <section className="panel" key={`${selected.id}-${selected.revision}`}>
           <div className="toolbar">
-            <h2>Order #{selected.number}</h2>
+            <h2>
+              {t("Order #")}
+              {selected.number}
+            </h2>
             <button
               onClick={() => {
                 setSelected(null);
                 setDetail(null);
               }}
             >
-              Close order
+              {t("Close order")}
             </button>
           </div>
           {detail ? (
             <>
               <div className="grid">
                 <div>
-                  <h3>Customer</h3>
+                  <h3>{t("Customer")}</h3>
                   <p>
                     {detail.customer.name}
                     <br />
@@ -181,7 +219,7 @@ export function Orders() {
                   </p>
                 </div>
                 <div>
-                  <h3>Delivery address</h3>
+                  <h3>{t("Delivery address")}</h3>
                   <p>
                     {detail.address.line1}
                     <br />
@@ -193,11 +231,12 @@ export function Orders() {
                   </p>
                 </div>
               </div>
-              <h3>Items and cigar composition</h3>
+              <h3>{t("Items and cigar composition")}</h3>
               <ul>
                 {detail.items.map((i) => (
                   <li key={i.id}>
-                    {i.quantity} × {i.name} · {formatMoney(i.unit_rappen)}
+                    {i.quantity} × {i.name} ·{" "}
+                    {formatMoney(i.unit_rappen, locale)}
                     {i.composition.length > 0 && (
                       <ul>
                         {i.composition
@@ -205,7 +244,7 @@ export function Orders() {
                           .map((c) => (
                             <li key={c.position}>
                               {c.position + 1}. {c.name} ·{" "}
-                              {formatMoney(c.unit_rappen)}
+                              {formatMoney(c.unit_rappen, locale)}
                             </li>
                           ))}
                       </ul>
@@ -225,8 +264,8 @@ export function Orders() {
                   ] as const
                 ).map(([label, value]) => (
                   <div key={label}>
-                    <dt>{label}</dt>
-                    <dd>{formatMoney(value)}</dd>
+                    <dt>{t(label)}</dt>
+                    <dd>{formatMoney(value, locale)}</dd>
                   </div>
                 ))}
               </dl>
@@ -234,6 +273,17 @@ export function Orders() {
                 onSubmit={async (e) => {
                   e.preventDefault();
                   const f = new FormData(e.currentTarget);
+                  if (
+                    f.get("status") === "cancelled" &&
+                    selected.status !== "cancelled" &&
+                    !(await confirm("Confirm order cancellation?"))
+                  )
+                    return;
+                  if (
+                    f.get("refund") === "on" &&
+                    !(await confirm("Confirm refund review request?"))
+                  )
+                    return;
                   setError("");
                   try {
                     await updateOrder(
@@ -247,6 +297,7 @@ export function Orders() {
                     setSelected(null);
                     setDetail(null);
                     setVersion((v) => v + 1);
+                    setNotice("Order updated.");
                   } catch (e) {
                     setError(message(e));
                   }
@@ -257,12 +308,13 @@ export function Orders() {
                     {orderStatuses.map((s) => (
                       <option
                         key={s}
+                        value={s}
                         disabled={
                           ["paid", "refunded"].includes(s) &&
                           s !== selected.status
                         }
                       >
-                        {s}
+                        {t(s)}
                       </option>
                     ))}
                   </select>
@@ -283,17 +335,18 @@ export function Orders() {
                 </Field>
                 <label className="check">
                   <input type="checkbox" name="refund" />
-                  Request refund review
+                  {t("Request refund review")}
                 </label>
                 <p>
-                  Paid and refunded states require verified provider
-                  confirmation. Cancellation returns reserved stock once.
+                  {t(
+                    "Paid and refunded states require verified provider confirmation. Cancellation returns reserved stock once.",
+                  )}
                 </p>
-                <button className="primary">Save order update</button>
+                <button className="primary">{t("Save order update")}</button>
               </form>
             </>
           ) : (
-            <p>Loading order details…</p>
+            <p>{t("Loading order details…")}</p>
           )}
         </section>
       )}
