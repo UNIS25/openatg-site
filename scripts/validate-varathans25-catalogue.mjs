@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
+import { Script } from "node:vm";
 
 const root = path.resolve(import.meta.dirname, "..", "varathans25");
 const locales = ["de", "fr", "en"];
@@ -21,6 +22,27 @@ const hiddenSlugs = [
 
 function assert(condition, message) {
   if (!condition) throw new Error(message);
+}
+
+// JSON embedded in a Flight script needs another layer of string escaping.
+// Checking external chunks alone does not catch malformed generated HTML.
+let htmlCount = 0;
+let inlineScriptCount = 0;
+for (const relative of fs.readdirSync(root, { recursive: true })) {
+  if (!relative.endsWith(".html")) continue;
+  const html = fs.readFileSync(path.join(root, relative), "utf8");
+  htmlCount += 1;
+  for (const match of html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/g)) {
+    if (/\bsrc\s*=/.test(match[1])) continue;
+    if (/type=["']application\/ld\+json["']/.test(match[1])) {
+      JSON.parse(match[2]);
+      continue;
+    }
+    const line = html.slice(0, match.index).split("\n").length;
+    // Compile only; never execute the embedded application scripts.
+    new Script(match[2], { filename: `${relative}:${line}` });
+    inlineScriptCount += 1;
+  }
 }
 
 function extractProduct(source, slug) {
@@ -111,3 +133,4 @@ for (const locale of locales) {
 }
 
 console.log("Varathans25 catalogue validation passed: 7 products, 3 languages, 21 product routes, and 4/6-cigar box builder.");
+console.log(`Inline JavaScript syntax passed: ${inlineScriptCount} scripts in ${htmlCount} HTML files.`);

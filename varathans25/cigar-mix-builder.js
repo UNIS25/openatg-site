@@ -55,11 +55,6 @@
       notice: "Aperçu uniquement. La disponibilité, les prix, le contrôle de l’âge et la livraison avec vérification doivent être confirmés avant l’activation du paiement.",
     },
   }[locale];
-  const priceSoon = {
-    en: "Price coming soon",
-    de: "Preis folgt",
-    fr: "Prix à venir",
-  }[locale];
 
   const storageKey = "varathans25_review_cigar_mix";
   let state = { size: 4, items: [] };
@@ -252,34 +247,10 @@
     });
   }
 
-  function patchCurryProduct() {
-    document.querySelectorAll('a[href*="/product/gelber-curry-kokos"]').forEach((link) => {
-      const card = link.closest(".product-card");
-      if (!card) return;
-      const price = card.querySelector(".product-price");
-      if (price) price.textContent = priceSoon;
-      card.querySelectorAll("button").forEach((button) => {
-        button.hidden = true;
-      });
-    });
-
-    if (!location.pathname.includes("/product/gelber-curry-kokos")) return;
-    const page = document.querySelector(".product-page");
-    if (!page) return;
-    page.classList.add("product-page--pending");
-    const price = page.querySelector(".detail-price span");
-    if (price) price.textContent = priceSoon;
-    page.querySelectorAll(".product-facts > div").forEach((row) => {
-      const heading = row.querySelector("dt")?.textContent?.trim().toLowerCase();
-      if (["spice", "schärfe", "piquant"].some((word) => heading?.includes(word))) row.remove();
-    });
-  }
-
   const scheduleRender = () => {
     cancelAnimationFrame(observerFrame);
     observerFrame = requestAnimationFrame(() => {
       render();
-      patchCurryProduct();
     });
   };
 

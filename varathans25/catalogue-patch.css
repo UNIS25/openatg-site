@@ -5,11 +5,15 @@
 }
 
 .product-page--pending .purchase-row,
-.product-page--pending .mobile-sticky-add {
+.product-page--pending .mobile-sticky-add,
+.product-page:has(img[src="/varathans25/images/gelber-curry-kokos.webp"]) .purchase-row,
+.product-page:has(img[src="/varathans25/images/gelber-curry-kokos.webp"]) .mobile-sticky-add,
+.product-page:has(img[src="/varathans25/images/gelber-curry-kokos.webp"]) .product-facts > div:has(.spice-level) {
   display: none !important;
 }
 
-.product-page--pending .detail-price {
+.product-page--pending .detail-price,
+.product-page:has(img[src="/varathans25/images/gelber-curry-kokos.webp"]) .detail-price {
   color: #1b3f63;
 }
 

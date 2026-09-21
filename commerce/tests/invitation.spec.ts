@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from "./browser-fixture";
 import { createClient } from "@supabase/supabase-js";
 import { readFileSync } from "node:fs";
 import { parseEnv } from "node:util";

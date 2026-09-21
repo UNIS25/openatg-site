@@ -1,5 +1,69 @@
 # Varathans25 commerce verification
 
+## 22 September 2026 — recovered storefront correction
+
+Starting point: `work/varathans25-admin-backend` at `85a7eb5fa51d54eb7b6df6bf9edc7b0751909e5a`, after importing the original `0a5a509` and `5cde291` commits and rebasing only the backend work. The safety branch `safety/varathans25-admin-backend-b9a658a` remains at the original backend checkpoint.
+
+### Root cause and correction
+
+The source defect was in `scripts/add-varathans25-curry-and-cigar-box.mjs:63`, with the same defect at lines 73 and 81. `replaceScalar`, `replaceObject` and `replaceGallery` looked for two backslashes before a quote; the inline Flight payload uses one. The resulting raw JSON quotes terminated the enclosing JavaScript string. For example, line 2 of each DE/FR/EN home export contained `\"categoryId\":"spices"` inside that string. The first visible error was `Unexpected identifier 'spices'`.
+
+This was nested inline-script serialization, not an error in a translation or the supplied curry label. The helpers now detect the actual escape level and use JSON serialization for the second layer. All 156 affected language-route HTML files were corrected. The validator now compiles all 1,508 inline scripts across 161 exported HTML files and runs as part of `npm test`.
+
+Once JavaScript loaded, strict browser checks exposed related stale prerendered markup from the recovered product patches: old packet weights, product lists, gallery/details and pending-price controls did not match their existing client data. Only the streamed content of 39 affected pages was reconciled with the existing renderer. Next's metadata boundaries and postcode-form IDs were preserved. No catalogue payload, product translation, verified label, price, stock value, logo, image or font was changed.
+
+The curry enhancer also replaced React-owned price nodes before hydration. Its curry DOM edits were removed; the same DE/FR/EN pending-price labels now render directly in the existing card/detail chunks, and CSS retains the existing hidden purchase controls and spice row. The four/six-cigar builder and age gate are unchanged. The local verification server now serves `.mjs` as JavaScript so the unchanged Signal modules load correctly.
+
+### Final results
+
+| Check | Result |
+| --- | --- |
+| TypeScript / ESLint | Passed |
+| Admin production build / commerce harness build | Passed |
+| Unit tests | 32 passed |
+| Catalogue and inline-script validation | 7 products, 21 product routes, 3 languages; 1,508 scripts in 161 HTML files passed |
+| Fresh database migrations / pgTAP | All six migrations applied; 7 policy checks passed |
+| Backend integration / security | 26 subtests passed (28 including Node parent suites) |
+| Complete Playwright suite | 15 passed in 32.3 seconds; desktop, tablet and mobile |
+| Browser console / uncaught exceptions | Zero across every Playwright journey |
+| Read-only language-route sweep | 156 routes passed; zero repairs required; product detail hydration exercised by thumbnail interaction |
+| Accessibility | All existing axe assertions passed |
+| Dependency audit | 0 vulnerabilities |
+| Static artifact preparation / whitespace / staged-secret checks | Passed |
+
+The expanded storefront journey also checks interactive curry and packet details in DE/FR/EN. Intermediate runs exposed the hydration mismatches described above; those were corrected before the final clean runs. A test locator was scoped to `main` because Next can temporarily retain another copy in its hidden streaming container. No browser error is filtered or suppressed by the Playwright fixture.
+
+Existing non-failing build notices remain for the runtime-resolved shared font, vendor chunk size and third-party pure annotations. No dependency versions changed.
+
+Changed sources: `scripts/add-varathans25-curry-and-cigar-box.mjs`, `scripts/validate-varathans25-catalogue.mjs`, `commerce/scripts/repair-recovered-markup.mjs`, `commerce/scripts/serve.mjs`, `commerce/package.json`, `commerce/tests/browser-fixture.ts`, and the three existing Playwright spec files. Storefront changes are limited to the 156 generated DE/FR/EN HTML files, price-label rendering in `2to0v8xkzjqr9.js` and `2gwu-0b7eoq24.js`, `catalogue-patch.css`, and removal of the curry DOM patch in `cigar-mix-builder.js`. This document records the verification.
+
+Local `main` stayed at `e58fce588b61e89d2a56783f0e4b603937c15bef`; remote `main` stayed at `6c80ae4e0b7beb1708d1389a8c6d7c7dafb1b379`. No push or deployment was performed.
+
+### Verification commands and scope
+
+From `commerce/`, with local Supabase, Edge Functions and the verification server running:
+
+```sh
+npm run test:backend
+npm run typecheck
+npm run lint
+npm test
+npm run build
+npm run build:harness
+npm audit
+npm run test:e2e
+node scripts/repair-recovered-markup.mjs --check
+npm run stage:pages
+```
+
+`repair-recovered-markup.mjs --check` is read-only, checks all 156 language routes with the complete storefront script, and interacts with product thumbnails to exercise deferred hydration. Without `--check`, it is a local recovery utility for reconciling stale streamed markup after rerunning the recovered catalogue patcher. It refuses any verification response that differs from the working-tree file, leaves product payloads untouched, and does not contact production. Use reduced motion during recovery to retain the carousel's initial server state.
+
+The 15 desktop/tablet/mobile Playwright journeys now all assert zero `console.error` messages and zero uncaught browser exceptions. Accessibility assertions cover admin login, dashboard, editor, order details, settings and the three-language commerce harness. Additional browser checks cover the preserved 18+ gate, all 23 cigar cards, duplicate four/six-box selections, refresh persistence, the curry label and hidden purchase controls, and all three language homepages. Screenshots remain local under `commerce/.local/screenshots/`.
+
+These checks verify the existing backend and its integration harness alongside the recovered static storefront. They do not add the remaining live-catalogue integration or production configuration. No production service, `main` branch, remote branch or deployment was changed.
+
+## Historical verification — 20 September 2026
+
 Date: 20 September 2026 (Asia/Colombo).
 
 ## Result and scope

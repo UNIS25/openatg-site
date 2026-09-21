@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from "./browser-fixture";
 import AxeBuilder from "@axe-core/playwright";
 import { mkdirSync } from "node:fs";
 test("single cigars, complete 4/6 boxes, persistence and free-delivery progress in three languages", async ({

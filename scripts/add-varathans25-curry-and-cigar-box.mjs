@@ -60,7 +60,7 @@ function replaceScalar(source, productSlug, field, value) {
   return source.replace(pattern, (match, prefix) => {
     if (typeof value === "string") {
       const serialized = JSON.stringify(value);
-      return `${prefix}${prefix.includes('\\\\"') ? serialized.replaceAll('"', '\\\\"') : serialized}`;
+      return `${prefix}${prefix.includes('\\"') ? JSON.stringify(serialized).slice(1, -1) : serialized}`;
     }
     return `${prefix}${JSON.stringify(value)}`;
   });
@@ -70,7 +70,7 @@ function replaceObject(source, productSlug, field, value) {
   const pattern = new RegExp(`(\\\\?"id\\\\?":\\\\?"${productSlug}\\\\?"[\\s\\S]{0,7200}?\\\\?"${field}\\\\?":)\\{[^{}]*\\}`, "g");
   return source.replace(pattern, (match, prefix) => {
     const serialized = JSON.stringify(value);
-    return `${prefix}${prefix.includes('\\\\"') ? serialized.replaceAll('"', '\\\\"') : serialized}`;
+    return `${prefix}${prefix.includes('\\"') ? JSON.stringify(serialized).slice(1, -1) : serialized}`;
   });
 }
 
@@ -78,7 +78,7 @@ function replaceGallery(source, productSlug) {
   const pattern = new RegExp(`(\\\\?"id\\\\?":\\\\?"${productSlug}\\\\?"[\\s\\S]{0,2400}?\\\\?"gallery\\\\?":)\\[[^\\]]*\\]`, "g");
   return source.replace(pattern, (match, prefix) => {
     const gallery = JSON.stringify([`/varathans25/images/${productSlug}.webp`]);
-    return `${prefix}${prefix.includes('\\\\"') ? gallery.replaceAll('"', '\\\\"') : gallery}`;
+    return `${prefix}${prefix.includes('\\"') ? JSON.stringify(gallery).slice(1, -1) : gallery}`;
   });
 }
 
@@ -244,10 +244,15 @@ for (const locale of locales) {
 }
 
 const catalogueChunk = path.join(siteRoot, "_next", "static", "chunks", "2to0v8xkzjqr9.js");
+const pendingPrice = JSON.stringify(Object.fromEntries(locales.map((locale) => [locale, reviewCopy[locale].price])));
 let catalogueClient = fs.readFileSync(catalogueChunk, "utf8");
 catalogueClient = catalogueClient.replaceAll(
   "children:(0,mS.money)((0,mS.price)(t),i)",
+  `children:t.priceCents>0?(0,mS.money)((0,mS.price)(t),i):${pendingPrice}[i]`,
+);
+catalogueClient = catalogueClient.replaceAll(
   "children:t.priceCents>0?(0,mS.money)((0,mS.price)(t),i):mk[i].comingSoon",
+  `children:t.priceCents>0?(0,mS.money)((0,mS.price)(t),i):${pendingPrice}[i]`,
 );
 fs.writeFileSync(catalogueChunk, catalogueClient);
 
@@ -255,7 +260,11 @@ const detailChunk = path.join(siteRoot, "_next", "static", "chunks", "2gwu-0b7eo
 let detailClient = fs.readFileSync(detailChunk, "utf8");
 detailClient = detailClient.replaceAll(
   "children:(0,h.money)((0,h.price)(x),n)",
+  `children:x.priceCents>0?(0,h.money)((0,h.price)(x),n):${pendingPrice}[n]`,
+);
+detailClient = detailClient.replaceAll(
   "children:x.priceCents>0?(0,h.money)((0,h.price)(x),n):o.storefront[n].comingSoon",
+  `children:x.priceCents>0?(0,h.money)((0,h.price)(x),n):${pendingPrice}[n]`,
 );
 fs.writeFileSync(detailChunk, detailClient);
 

@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from "./browser-fixture";
 import AxeBuilder from "@axe-core/playwright";
 import { readFileSync, mkdirSync } from "node:fs";
 import { TOTP, Secret } from "otpauth";
@@ -139,6 +139,22 @@ test("preserved storefront routes remain available and mobile navigation works",
   ]) {
     const response = await page.goto(path);
     expect(response?.status(), path).toBe(200);
+    const locale = path.match(/^\/varathans25\/(de|fr|en)\/$/)?.[1];
+    if (locale) {
+      await expect(page.locator("html")).toHaveAttribute("lang", locale);
+      await expect(page.locator("main")).toBeVisible();
+    }
+  }
+  for (const locale of ["de", "fr", "en"]) {
+    await page.goto(`/varathans25/${locale}/product/gelber-curry-kokos/`);
+    await page.locator(".gallery-thumbs button").first().click();
+    await expect(page.locator(".product-facts dd").first()).toHaveText("80 g");
+    await expect(page.locator("main .product-data")).toContainText("609 kcal");
+    await expect(page.locator("main .product-page .purchase-row")).toBeHidden();
+    await page.goto(`/varathans25/${locale}/product/cardamom-tea/`);
+    await page.locator(".gallery-thumbs button").first().click();
+    await expect(page.locator(".product-facts dd").first()).toHaveText("—");
+    await page.goto(`/varathans25/${locale}/`);
   }
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
   if ((page.viewportSize()?.width ?? 1440) < 900) {

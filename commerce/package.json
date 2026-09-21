@@ -8,7 +8,7 @@
     "build": "tsc --noEmit && vite build",
     "typecheck": "tsc --noEmit",
     "lint": "eslint src tests scripts *.ts",
-    "test": "vitest run",
+    "test": "vitest run && node ../scripts/validate-varathans25-catalogue.mjs",
     "test:db": "supabase test db --workdir ..",
     "test:e2e": "playwright test",
     "backend:start": "supabase start --workdir ..",
