@@ -1,0 +1,2 @@
+import {defineConfig} from '@playwright/test';
+export default defineConfig({testDir:'.',testMatch:'layout.spec.mjs',workers:3,fullyParallel:true,timeout:45000,outputDir:'results',reporter:[['list'],['json',{outputFile:'report.json'}]],use:{baseURL:'http://127.0.0.1:4187',screenshot:'only-on-failure'},projects:[{name:'desktop',use:{viewport:{width:1440,height:1000}}},{name:'tablet',use:{viewport:{width:1024,height:1000}}},{name:'mobile',use:{viewport:{width:390,height:844}}}]});

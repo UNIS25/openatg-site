@@ -1,0 +1,47 @@
+/* Preserve the original logo and palette; give the header a stable, padded frame. */
+:root { --v25-content-width: 1600px; }
+.header-reserve { height: auto; background: #fff; }
+.site-header,
+.site-header.is-scrolled {
+  height: auto;
+  min-height: 108px;
+  align-items: center;
+  padding-block: 16px;
+  padding-inline: max(var(--space), calc((100vw - var(--v25-content-width)) / 2 + var(--space)));
+  transition: none;
+}
+.site-header .logo-link { align-self: center; flex-shrink: 0; }
+.site-header .brand-mark { display: block; line-height: 0; }
+.site-header .brand-mark img { display: block; width: 100%; height: auto; object-fit: contain; }
+.section { max-width: var(--v25-content-width); margin-inline: auto; }
+.v25-delivery-announcement {
+  border-bottom: 1px solid #e5e8ea;
+  background: #f7f6f2;
+  color: #1b3f63;
+  text-align: center;
+  padding: 9px var(--space);
+  font-size: 13px;
+  line-height: 1.5;
+}
+.v25-delivery-announcement p { margin: 0 auto; max-width: 1300px; line-height: inherit; }
+.v25-delivery-announcement small { display: block; font-size: 11px; color: #526170; }
+.v25-product-delivery { margin: 16px 0; padding-block: 12px; border-block: 1px solid #e5e8ea; color: #1b3f63; font-size: 14px; }
+.v25-delivery-estimate { margin-block: 20px; padding: 18px; border: 1px solid #e5e8ea; border-radius: 3px; background: #f8f9f9; color: #1b3f63; }
+.drawer > .v25-delivery-estimate { margin-inline: 22px; }
+.v25-delivery-estimate h3 { font-size: 19px; margin: 0 0 16px; }
+.v25-delivery-estimate p { margin: 12px 0 0; }
+.v25-delivery-estimate label { display: block; font-size: 13px; margin-bottom: 5px; }
+.v25-delivery-estimate select { display: block; width: 100%; min-height: 44px; padding: 8px; background: #fff; border: 1px solid #8a969f; color: #1b3f63; }
+.v25-delivery-estimate select:focus-visible { outline: 2px solid #9d3842; outline-offset: 3px; }
+.v25-delivery-estimate progress { appearance: none; display: block; width: 100%; height: 6px; border: 0; margin-top: 12px; background: #e5e8ea; border-radius: 3px; overflow: hidden; }
+.v25-delivery-estimate progress::-webkit-progress-bar { background: #e5e8ea; }
+.v25-delivery-estimate progress::-webkit-progress-value { background: #806a3e; }
+.v25-delivery-estimate progress::-moz-progress-bar { background: #806a3e; }
+.v25-delivery-estimate small { display: block; margin-top: 12px; color: #526170; line-height: 1.5; }
+.v25-delivery-announcement[hidden], .v25-product-delivery[hidden], .v25-delivery-estimate[hidden] { display: none; }
+@media (max-width: 600px) {
+  .site-header, .site-header.is-scrolled { min-height: 89px; padding: 14px 22px; gap: 14px; }
+  .v25-delivery-announcement { padding: 9px 22px; font-size: 12px; }
+  .v25-delivery-announcement small { font-size: 10px; }
+  .v25-delivery-estimate { padding: 14px; }
+}

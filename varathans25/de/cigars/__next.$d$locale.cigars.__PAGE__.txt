@@ -1,5 +1,5 @@
 1:"$Sreact.fragment"
-2:I[29011,["/varathans25/_next/static/chunks/3fntmmi971322.js","/varathans25/_next/static/chunks/1rpplkm6wsxy0.js","/varathans25/_next/static/chunks/2to0v8xkzjqr9.js","/varathans25/_next/static/chunks/1bwpvix27slqy.js","/varathans25/_next/static/chunks/2vrr_5r91ji23.js"],"ReviewCigars"]
+2:I[29011,["/varathans25/_next/static/chunks/3fntmmi971322.js","/varathans25/_next/static/chunks/1rpplkm6wsxy0.js","/varathans25/_next/static/chunks/2to0v8xkzjqr9-layout-v1.js","/varathans25/_next/static/chunks/1bwpvix27slqy.js","/varathans25/_next/static/chunks/2vrr_5r91ji23.js"],"ReviewCigars"]
 6:X
 b:X
 b:C
