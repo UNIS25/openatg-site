@@ -201,6 +201,17 @@
   }
 
   function render() {
+    // Our own DOM updates must not trigger another render on every frame.
+    // Keeping the controls stable also preserves their keyboard focus.
+    observer.disconnect();
+    try {
+      renderBuilder();
+    } finally {
+      observer.observe(observerTarget, { childList: true, subtree: true });
+    }
+  }
+
+  function renderBuilder() {
     const collection = document.querySelector(".cigar-collection");
     if (!collection) return;
     let builder = document.querySelector('[data-cigar-mix-builder="true"]');
@@ -254,7 +265,9 @@
     });
   };
 
-  new MutationObserver(scheduleRender).observe(document.querySelector("main") ?? document.body, {
+  const observerTarget = document.querySelector("main") ?? document.body;
+  const observer = new MutationObserver(scheduleRender);
+  observer.observe(observerTarget, {
     childList: true,
     subtree: true,
   });
