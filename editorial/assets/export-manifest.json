@@ -1,0 +1,62 @@
+{
+  "sourceCommit": "87c81681931a3a90c6034164e1f98c8471acd150",
+  "originals": {
+    "closed": {
+      "sha256": "d29c5a05d4afec72901b55ddc4cb8bf5f1e99895432052d4804078bf25bc2be0",
+      "width": 1536,
+      "height": 1024
+    },
+    "open": {
+      "sha256": "1e3213dc7f16678b07a4b682f57120022da6cea3052fa876e939a846502ada9b",
+      "width": 1536,
+      "height": 1024
+    }
+  },
+  "files": {
+    "varathans25/images/cigars/varathans-cigars-box-closed-480.webp": "848798bc9e3c1647a48baddcae1807f98f486b0d8a1d72bfc6670dff1e4deed1",
+    "varathans25/images/cigars/varathans-cigars-box-closed-960.webp": "6d94ca7a8e30a1b7324a8040888b404f61cb8c4b13d4922be0952ffbf6be24aa",
+    "varathans25/images/cigars/varathans-cigars-box-closed.webp": "2ea1481b69b23e1fbf24f2f2685b422d4f837c7fe85cc362c6966b4c6003828a",
+    "varathans25/images/cigars/varathans-cigars-box-open-480.webp": "5c5673aeba04ad8661975d65b1e1db1835904d03372ad3bc89d7df9275ea274e",
+    "varathans25/images/cigars/varathans-cigars-box-open-960.webp": "303c5b781f666503560f8ce56342867dab3541fb70d530efaae7ff32f9f4dd37",
+    "varathans25/images/cigars/varathans-cigars-box-open.webp": "735e67d0a862434322aca2c91daffbf7aebb1676af768cda1ac0fe7f59d28e3b",
+    "varathans25/de/cigar-collection/__next.$d$locale.cigar-collection.__PAGE__.txt": "2b3d0e2a242e789d0d480b21c3f08c22109cfb2ed4f66fa51674f30b8323ec45",
+    "varathans25/de/cigar-collection/__next.$d$locale.txt": "0b6927b390884c43b8c2916a269b51683a48c09add59142442f6653438f9896c",
+    "varathans25/de/cigar-collection/__next._full.txt": "521b8490cb8a02023890d6f2148930957b2a7a926b39ece9de8396b12c4a2420",
+    "varathans25/de/cigar-collection/__next._tree.txt": "d3e8bac0eb4e976945cadda65676d3b9fdde50c4f611481088eb57ccaaf50176",
+    "varathans25/de/cigar-collection/index.html": "92a62d6272bf51aaae43d64ddfe28ab3c3008b3df73eceafea8ef0ffe3ce4b94",
+    "varathans25/de/cigar-collection/index.txt": "521b8490cb8a02023890d6f2148930957b2a7a926b39ece9de8396b12c4a2420",
+    "varathans25/fr/cigar-collection/__next.$d$locale.cigar-collection.__PAGE__.txt": "eb8971a53930735809c8e20175800a84c4b400f9268a75f1c0d2bc08ad626940",
+    "varathans25/fr/cigar-collection/__next.$d$locale.txt": "dd8d494f4b1440b7cb6d709815a9301dae82c0f6c8a50ddc1cab44d81b8ec8b4",
+    "varathans25/fr/cigar-collection/__next._full.txt": "8f086f2866c97f2c7109ef13761426d1de8dec98766f59fff774dac1b4dec73c",
+    "varathans25/fr/cigar-collection/__next._tree.txt": "172c0770c341e69820c989842e28efd7d253dea05a4e8f73f4964ec0b0de2247",
+    "varathans25/fr/cigar-collection/index.html": "1eac579ea47749aafbe9b82a74e7ea1a0f758c3d3a7bb848299f99cbf0c77689",
+    "varathans25/fr/cigar-collection/index.txt": "8f086f2866c97f2c7109ef13761426d1de8dec98766f59fff774dac1b4dec73c",
+    "varathans25/en/cigar-collection/__next.$d$locale.cigar-collection.__PAGE__.txt": "1a692240f81c5f6cc4ad7df812c2857ac023386882d9fb3bbbdd9fcc3042f6c3",
+    "varathans25/en/cigar-collection/__next.$d$locale.txt": "3d1bb84c5b972433fec3281100673208bfb54be1c3208ce73de4c47752f64ba1",
+    "varathans25/en/cigar-collection/__next._full.txt": "3c58b034a5b25f12616bf02f62011c95f396037a95c21f7e41a8640ee6b2c5fa",
+    "varathans25/en/cigar-collection/__next._tree.txt": "fb3695cfb85adb03377e34da41fdd37efb6d5de5269765e5737d5bc3df1503a2",
+    "varathans25/en/cigar-collection/index.html": "8904d525ff6d74ca82e05ebd982f13c775280e7895ec9a796b6aac9d8fa102a8",
+    "varathans25/en/cigar-collection/index.txt": "3c58b034a5b25f12616bf02f62011c95f396037a95c21f7e41a8640ee6b2c5fa",
+    "varathans25/_next/static/chunks/0937d497-4bac4f7c73c04ac9.js": "4dd8d661494d0dd3c5aba55f10765a504062f09f1f885c7363319d43868aaea1",
+    "varathans25/_next/static/chunks/749-64f2df4431debc18.js": "672c225d7f1e534da8cee25a7b9e4ded0686aa6e41f1bf3bd8cf27dc98df3337",
+    "varathans25/_next/static/chunks/858-adae076856d22392.js": "ce0008d3ebbb57874547ad39c9f6b421e16f5f2161e826cdd5333b6ec466b7fa",
+    "varathans25/_next/static/chunks/app/[locale]/cigar-collection/page-f86fcd79f08a4b34.js": "b0a23bb781ee52207a2a3f2d204b37db0fc8b38cbaa6eb1b45dfeb9a7dc7e48a",
+    "varathans25/_next/static/chunks/app/[locale]/layout-83beb6b29a7cdd7e.js": "a2ae2b19471f0cf2561038efd09b0d464975eb7c82c91cce1fc69ddcf559075f",
+    "varathans25/_next/static/chunks/app/_global-error/page-7c6d865aa589b191.js": "7609644490ad5422b2052a0daa89ad2139f0b400d85640731a22e2a0f43be4c8",
+    "varathans25/_next/static/chunks/app/_not-found/page-4c452764e59ded4c.js": "9e1b3c889dd66529881f972dd8b39a3b0b135d1920bb1dce0a48a88cc5d4bdda",
+    "varathans25/_next/static/chunks/app/layout-00d62c17081a890a.js": "f80dadee6a4d9235d48a23d25d707143c241c2dc5c38be40ab3aad857df96efc",
+    "varathans25/_next/static/chunks/framework-a9acfc9e3cf1ed45.js": "7116e7e435aeca8c8d8b3d88a93bf1dab05c596a4f17cb821f042c5fb0805ef2",
+    "varathans25/_next/static/chunks/main-a19cbeca591254e9.js": "e99a99c81066a998a3577a0333baeabf9fbc6b9995dbc3f46da995c2a416de3c",
+    "varathans25/_next/static/chunks/main-app-cf0ab2ef20938a08.js": "2ce127bbe9817238d08f4408b853c91c13ed4342e7916cbcd767e8670cc43c82",
+    "varathans25/_next/static/chunks/next/dist/client/components/builtin/app-error-7c6d865aa589b191.js": "7609644490ad5422b2052a0daa89ad2139f0b400d85640731a22e2a0f43be4c8",
+    "varathans25/_next/static/chunks/next/dist/client/components/builtin/forbidden-7c6d865aa589b191.js": "7609644490ad5422b2052a0daa89ad2139f0b400d85640731a22e2a0f43be4c8",
+    "varathans25/_next/static/chunks/next/dist/client/components/builtin/global-error-8de592ed5e41e85e.js": "aa97fe7c0d538c4669012ddbbfccd36835295618cbce646589024657413cce81",
+    "varathans25/_next/static/chunks/next/dist/client/components/builtin/not-found-7c6d865aa589b191.js": "7609644490ad5422b2052a0daa89ad2139f0b400d85640731a22e2a0f43be4c8",
+    "varathans25/_next/static/chunks/next/dist/client/components/builtin/unauthorized-7c6d865aa589b191.js": "7609644490ad5422b2052a0daa89ad2139f0b400d85640731a22e2a0f43be4c8",
+    "varathans25/_next/static/chunks/polyfills-42372ed130431b0a.js": "0973c1d64c88adc8e3c950410cb58b288f72118d5965b78049438deb8f2f9683",
+    "varathans25/_next/static/chunks/webpack-40fcd3df49c43573.js": "a834f1507672ee9e148b990e6051688bd39923845ae26521311809423f77b912",
+    "varathans25/_next/static/css/2a8e8d820dd9876b.css": "9e8b088bca21f78c0bb02abacbdf9fd3eca0c34cda367470d2f8ad0a45ea1bf4",
+    "varathans25/_next/static/packaging-editorial-v1/_buildManifest.js": "a757a54dcde84a30bdfde7dd973b4589e356fb3266d75a1ff85aec890edd9bdd",
+    "varathans25/_next/static/packaging-editorial-v1/_ssgManifest.js": "2fe493b5f145e9dc7255cd552c857b5f65d0a3f9bfb716472fcef2ace269d3cc"
+  }
+}
