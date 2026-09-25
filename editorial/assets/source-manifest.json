@@ -1,0 +1,54 @@
+{
+  "shellSourceCommit": "e82d502a6775b3235205cf2bade2f8766bb7810b",
+  "shellFiles": [
+    {
+      "file": "components/store.tsx",
+      "sourceSha256": "ce2c04f0b627a2d60312ac821a1af342ac3621aaa7c40dbdff0fed267f419663"
+    },
+    {
+      "file": "components/gateway.tsx",
+      "sourceSha256": "7e15f15fd91aa0f32f3ef22528e63fa226d4828b57667c4c52e74a65e5064bff"
+    },
+    {
+      "file": "lib/types.ts",
+      "sourceSha256": "450324a04ba6b514a4221535aa7c0c3fe7619435ea5ea6ee6a6244a87117a9c9"
+    },
+    {
+      "file": "lib/i18n.ts",
+      "sourceSha256": "9d97dddcd1b8c74750d0146288a92099ab767354a57ac45a818c314f8b9af035"
+    },
+    {
+      "file": "lib/brand.ts",
+      "sourceSha256": "182325407ae3f3a4cce0a71c0f63635538d26749b63564433c474c2bee778a73"
+    },
+    {
+      "file": "lib/delivery.ts",
+      "sourceSha256": "51528ca73a8e0dff2298d0ecdb45a24ebf4e0959e2b27ef143c6fb931cfc1ae5"
+    },
+    {
+      "file": "messages/en.ts",
+      "sourceSha256": "bcaea922ea8aa0f4d5c729f025ffca36dd9d3b019a8bd744d9e72da5e592edda"
+    },
+    {
+      "file": "messages/de.ts",
+      "sourceSha256": "1411d55e0cc6d0e406b8d958bef9e21a23b9cb8acbc145c14bcf28dca128cf49"
+    },
+    {
+      "file": "messages/fr.ts",
+      "sourceSha256": "6f16c8d6bfee96d9a567c6d1a0f358bfb2da7dfb5df069120e04d30a683c375d"
+    },
+    {
+      "file": "messages/editorial.ts",
+      "sourceSha256": "f57de5c2d0225c8e953988243d9719e016d2437a3f99a297f94621ffbbe509d8"
+    },
+    {
+      "file": "messages/regulatory.ts",
+      "sourceSha256": "1f993559cdfdbf10d001a7154ca627bdd9e335fe128ee35fd9303f4fe10881fb"
+    },
+    {
+      "file": "messages/storefront.ts",
+      "sourceSha256": "c439ec5ea9103567eb33880a430bc45d3dac5eaf18d245aecc0bd5521c1c1be5"
+    }
+  ],
+  "catalogueCommit": "87c81681931a3a90c6034164e1f98c8471acd150"
+}
