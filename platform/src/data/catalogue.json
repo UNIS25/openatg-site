@@ -1,0 +1,140 @@
+[
+  {
+    "slug": "premium-black-tea-powder",
+    "category": "tea",
+    "image": "/varathans25/images/varathans25-premium-black-tea-powder.webp",
+    "translations": [
+      {
+        "locale": "de",
+        "name": "Premium-Schwarztee-Pulver",
+        "description": ""
+      },
+      {
+        "locale": "en",
+        "name": "Premium Black Tea Powder",
+        "description": ""
+      },
+      {
+        "locale": "fr",
+        "name": "Poudre de thé noir premium",
+        "description": ""
+      }
+    ],
+    "test_price_rappen": 1690
+  },
+  {
+    "slug": "green-tea-powder",
+    "category": "tea",
+    "image": "/varathans25/images/varathans25-green-tea-powder.webp",
+    "translations": [
+      {
+        "locale": "de",
+        "name": "Grünteepulver",
+        "description": ""
+      },
+      {
+        "locale": "en",
+        "name": "Green Tea Powder",
+        "description": ""
+      },
+      {
+        "locale": "fr",
+        "name": "Poudre de thé vert",
+        "description": ""
+      }
+    ],
+    "test_price_rappen": 1790
+  },
+  {
+    "slug": "cardamom-tea",
+    "category": "tea",
+    "image": "/varathans25/images/varathans25-cardamom-tea.webp",
+    "translations": [
+      {
+        "locale": "de",
+        "name": "Kardamomtee",
+        "description": ""
+      },
+      {
+        "locale": "en",
+        "name": "Cardamom Tea",
+        "description": ""
+      },
+      {
+        "locale": "fr",
+        "name": "Thé à la cardamome",
+        "description": ""
+      }
+    ],
+    "test_price_rappen": 1190
+  },
+  {
+    "slug": "gelber-curry-kokos",
+    "category": "pantry",
+    "image": "/varathans25/images/gelber-curry-kokos.webp",
+    "translations": [
+      {
+        "locale": "de",
+        "name": "Gelber Curry Kokos",
+        "description": ""
+      },
+      {
+        "locale": "en",
+        "name": "Gelber Curry Kokos",
+        "description": ""
+      },
+      {
+        "locale": "fr",
+        "name": "Gelber Curry Kokos",
+        "description": ""
+      }
+    ],
+    "test_price_rappen": 0
+  },
+  {
+    "slug": "cinnamon-tea",
+    "category": "tea",
+    "image": "/varathans25/images/varathans25-cinnamon-tea.webp",
+    "translations": [
+      {
+        "locale": "de",
+        "name": "Zimttee",
+        "description": ""
+      },
+      {
+        "locale": "en",
+        "name": "Cinnamon Tea",
+        "description": ""
+      },
+      {
+        "locale": "fr",
+        "name": "Thé à la cannelle",
+        "description": ""
+      }
+    ],
+    "test_price_rappen": 1390
+  },
+  {
+    "slug": "masala-tea-powder",
+    "category": "tea",
+    "image": "/varathans25/images/varathans25-masala-tea-powder.webp",
+    "translations": [
+      {
+        "locale": "de",
+        "name": "Masala-Teepulver",
+        "description": ""
+      },
+      {
+        "locale": "en",
+        "name": "Masala Tea Powder",
+        "description": ""
+      },
+      {
+        "locale": "fr",
+        "name": "Poudre de thé masala",
+        "description": ""
+      }
+    ],
+    "test_price_rappen": 1290
+  }
+]

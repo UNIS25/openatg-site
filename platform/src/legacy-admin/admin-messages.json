@@ -1,0 +1,1292 @@
+{
+  "Interface language": {
+    "de": "Sprache der Oberfläche",
+    "fr": "Langue de l’interface"
+  },
+  "Store administration · Sursee": {
+    "de": "Shopverwaltung · Sursee",
+    "fr": "Administration de la boutique · Sursee"
+  },
+  "Skip to content": {
+    "de": "Zum Inhalt springen",
+    "fr": "Aller au contenu"
+  },
+  "Sign out": {
+    "de": "Abmelden",
+    "fr": "Se déconnecter"
+  },
+  "Administration": {
+    "de": "Verwaltung",
+    "fr": "Administration"
+  },
+  "Dashboard": {
+    "de": "Übersicht",
+    "fr": "Tableau de bord"
+  },
+  "Products": {
+    "de": "Produkte",
+    "fr": "Produits"
+  },
+  "Inventory": {
+    "de": "Lagerbestand",
+    "fr": "Stock"
+  },
+  "Orders": {
+    "de": "Bestellungen",
+    "fr": "Commandes"
+  },
+  "Customers": {
+    "de": "Kundschaft",
+    "fr": "Clientèle"
+  },
+  "Delivery settings": {
+    "de": "Liefereinstellungen",
+    "fr": "Paramètres de livraison"
+  },
+  "Discounts": {
+    "de": "Rabatte",
+    "fr": "Réductions"
+  },
+  "Cigar-box configuration": {
+    "de": "Zigarrenbox-Konfiguration",
+    "fr": "Configuration des coffrets de cigares"
+  },
+  "Settings": {
+    "de": "Allgemeine Einstellungen",
+    "fr": "Paramètres généraux",
+    "en": "General settings"
+  },
+  "Audit": {
+    "de": "Änderungsprotokoll",
+    "fr": "Journal des modifications"
+  },
+  "Access": {
+    "de": "Zugriffsverwaltung",
+    "fr": "Gestion des accès"
+  },
+  "The secured backend has not been connected yet.": {
+    "de": "Das gesicherte Backend ist noch nicht verbunden.",
+    "fr": "Le backend sécurisé n’est pas encore connecté."
+  },
+  "Administrator access will be available after backend deployment and invitation.": {
+    "de": "Der Verwaltungszugang ist nach der Backend-Bereitstellung und Einladung verfügbar.",
+    "fr": "L’accès administrateur sera disponible après le déploiement du backend et l’invitation."
+  },
+  "Checking administrator access…": {
+    "de": "Verwaltungszugang wird geprüft…",
+    "fr": "Vérification de l’accès administrateur…"
+  },
+  "Secure administration": {
+    "de": "Gesicherte Verwaltung",
+    "fr": "Administration sécurisée"
+  },
+  "Varathans25 · Swiss store operations · CHF": {
+    "de": "Varathans25 · Schweizer Shopverwaltung · CHF",
+    "fr": "Varathans25 · Gestion de boutique suisse · CHF"
+  },
+  "PRIVATE ACCESS": {
+    "de": "PRIVATER ZUGANG",
+    "fr": "ACCÈS PRIVÉ"
+  },
+  "Welcome back": {
+    "de": "Willkommen zurück",
+    "fr": "Heureux de vous revoir"
+  },
+  "Sign in with your invited administrator account.": {
+    "de": "Melden Sie sich mit Ihrem eingeladenen Verwaltungskonto an.",
+    "fr": "Connectez-vous avec votre compte administrateur invité."
+  },
+  "Access is invitation only. Owners verify their identity with an authenticator app.": {
+    "de": "Zugang nur auf Einladung. Inhaber bestätigen ihre Identität mit einer Authenticator-App.",
+    "fr": "L’accès est réservé aux personnes invitées. Les propriétaires confirment leur identité avec une application d’authentification."
+  },
+  "Email": {
+    "de": "E-Mail",
+    "fr": "E-mail"
+  },
+  "Password": {
+    "de": "Passwort",
+    "fr": "Mot de passe"
+  },
+  "New password": {
+    "de": "Neues Passwort",
+    "fr": "Nouveau mot de passe"
+  },
+  "Sign in": {
+    "de": "Anmelden",
+    "fr": "Se connecter"
+  },
+  "Signing in…": {
+    "de": "Anmeldung läuft…",
+    "fr": "Connexion en cours…"
+  },
+  "Set your password": {
+    "de": "Passwort festlegen",
+    "fr": "Définir votre mot de passe"
+  },
+  "Use at least 14 characters with upper and lower case letters, a number and a symbol.": {
+    "de": "Verwenden Sie mindestens 14 Zeichen mit Gross- und Kleinbuchstaben, einer Zahl und einem Sonderzeichen.",
+    "fr": "Utilisez au moins 14 caractères comprenant des majuscules, des minuscules, un chiffre et un symbole."
+  },
+  "Save password": {
+    "de": "Passwort speichern",
+    "fr": "Enregistrer le mot de passe"
+  },
+  "Owner verification": {
+    "de": "Inhaber-Verifizierung",
+    "fr": "Vérification du propriétaire"
+  },
+  "An authenticator code is required before owner access is granted.": {
+    "de": "Für den Inhaberzugang ist ein Code aus der Authenticator-App erforderlich.",
+    "fr": "Un code d’authentification est requis pour accéder aux fonctions du propriétaire."
+  },
+  "Loading…": {
+    "de": "Wird geladen…",
+    "fr": "Chargement…"
+  },
+  "Set up authenticator": {
+    "de": "Authenticator einrichten",
+    "fr": "Configurer l’authentification"
+  },
+  "Scan this QR code with your authenticator app": {
+    "de": "Diesen QR-Code mit Ihrer Authenticator-App scannen",
+    "fr": "Scannez ce code QR avec votre application d’authentification"
+  },
+  "Authenticator code": {
+    "de": "Authenticator-Code",
+    "fr": "Code d’authentification"
+  },
+  "Verify": {
+    "de": "Bestätigen",
+    "fr": "Vérifier"
+  },
+  "Paid revenue · all time": {
+    "de": "Bezahlter Umsatz · insgesamt",
+    "fr": "Chiffre d’affaires encaissé · total"
+  },
+  "System status": {
+    "de": "Systemstatus",
+    "fr": "État du système"
+  },
+  "Recent orders": {
+    "de": "Letzte Bestellungen",
+    "fr": "Commandes récentes"
+  },
+  "No orders yet. Revenue appears when real orders exist.": {
+    "de": "Noch keine Bestellungen. Umsatz wird angezeigt, sobald echte Bestellungen vorliegen.",
+    "fr": "Aucune commande pour le moment. Le chiffre d’affaires s’affichera lorsque des commandes réelles existeront."
+  },
+  "Loading dashboard…": {
+    "de": "Übersicht wird geladen…",
+    "fr": "Chargement du tableau de bord…"
+  },
+  "Active products": {
+    "de": "Aktive Produkte",
+    "fr": "Produits actifs"
+  },
+  "Draft products": {
+    "de": "Produktentwürfe",
+    "fr": "Brouillons de produits"
+  },
+  "Low-stock products": {
+    "de": "Produkte mit niedrigem Bestand",
+    "fr": "Produits à faible stock"
+  },
+  "Incomplete translations": {
+    "de": "Unvollständige Übersetzungen",
+    "fr": "Traductions incomplètes"
+  },
+  "Pending fulfilment": {
+    "de": "Ausstehende Abwicklung",
+    "fr": "Commandes à traiter"
+  },
+  "Standard delivery charge needs confirmation.": {
+    "de": "Die Standardliefergebühr muss bestätigt werden.",
+    "fr": "Les frais de livraison standard doivent être confirmés."
+  },
+  "Payments are disabled.": {
+    "de": "Zahlungen sind deaktiviert.",
+    "fr": "Les paiements sont désactivés."
+  },
+  "Tobacco checkout and delivery are disabled.": {
+    "de": "Tabakverkauf und Tabaklieferung sind deaktiviert.",
+    "fr": "Le paiement et la livraison du tabac sont désactivés."
+  },
+  "Maintenance mode is active.": {
+    "de": "Der Wartungsmodus ist aktiv.",
+    "fr": "Le mode maintenance est actif."
+  },
+  "The store is not accepting orders.": {
+    "de": "Der Shop nimmt keine Bestellungen an.",
+    "fr": "La boutique n’accepte pas de commandes."
+  },
+  "Create product": {
+    "de": "Produkt erstellen",
+    "fr": "Créer un produit"
+  },
+  "Products · page": {
+    "de": "Produkte · Seite",
+    "fr": "Produits · page"
+  },
+  "Name / SKU": {
+    "de": "Name / SKU",
+    "fr": "Nom / SKU"
+  },
+  "Status": {
+    "de": "Status",
+    "fr": "Statut"
+  },
+  "Action": {
+    "de": "Aktion",
+    "fr": "Action"
+  },
+  "Edit": {
+    "de": "Bearbeiten",
+    "fr": "Modifier"
+  },
+  "Previous page": {
+    "de": "Vorherige Seite",
+    "fr": "Page précédente"
+  },
+  "Page": {
+    "de": "Seite",
+    "fr": "Page"
+  },
+  "Next page": {
+    "de": "Nächste Seite",
+    "fr": "Page suivante"
+  },
+  "Back to products": {
+    "de": "Zurück zu den Produkten",
+    "fr": "Retour aux produits"
+  },
+  "Product controls": {
+    "de": "Produktsteuerung",
+    "fr": "Options du produit"
+  },
+  "DE / FR / EN product information": {
+    "de": "Produktinformationen DE / FR / EN",
+    "fr": "Informations produit DE / FR / EN"
+  },
+  "Product images": {
+    "de": "Produktbilder",
+    "fr": "Images du produit"
+  },
+  "Upload JPEG, PNG or WebP. Save the draft first. Image order and alt text are saved with the product.": {
+    "de": "JPEG, PNG oder WebP hochladen. Speichern Sie zuerst den Entwurf. Bildreihenfolge und Alternativtexte werden mit dem Produkt gespeichert.",
+    "fr": "Importez des images JPEG, PNG ou WebP. Enregistrez d’abord le brouillon. L’ordre des images et les textes alternatifs sont enregistrés avec le produit."
+  },
+  "Move up": {
+    "de": "Nach oben",
+    "fr": "Monter"
+  },
+  "Move down": {
+    "de": "Nach unten",
+    "fr": "Descendre"
+  },
+  "Remove image": {
+    "de": "Bild entfernen",
+    "fr": "Supprimer l’image"
+  },
+  "Duplicate as draft": {
+    "de": "Als Entwurf duplizieren",
+    "fr": "Dupliquer en brouillon"
+  },
+  "Publishing requires confirmed price, inventory, complete translations and verified product information. Unconfirmed fields stay blank in drafts.": {
+    "de": "Die Veröffentlichung erfordert einen bestätigten Preis und Bestand, vollständige Übersetzungen und geprüfte Produktinformationen. Unbestätigte Felder bleiben in Entwürfen leer.",
+    "fr": "La publication exige un prix et un stock confirmés, des traductions complètes et des informations produit vérifiées. Les champs non confirmés restent vides dans les brouillons."
+  },
+  "Product preview": {
+    "de": "Produktvorschau",
+    "fr": "Aperçu du produit"
+  },
+  "PRIVATE PREVIEW ·": {
+    "de": "PRIVATE VORSCHAU ·",
+    "fr": "APERÇU PRIVÉ ·"
+  },
+  "18+ · Single cigar": {
+    "de": "18+ · Einzelzigarre",
+    "fr": "18+ · Cigare à l’unité"
+  },
+  "Image preview unavailable": {
+    "de": "Bildvorschau nicht verfügbar",
+    "fr": "Aperçu de l’image indisponible"
+  },
+  "Stock inventory": {
+    "de": "Lagerbestand",
+    "fr": "Inventaire du stock"
+  },
+  "Product": {
+    "de": "Produkt",
+    "fr": "Produit"
+  },
+  "Quantity": {
+    "de": "Menge",
+    "fr": "Quantité"
+  },
+  "Low-stock threshold": {
+    "de": "Mindestbestand",
+    "fr": "Seuil de stock faible"
+  },
+  "Adjust": {
+    "de": "Anpassen",
+    "fr": "Ajuster"
+  },
+  "Record adjustment": {
+    "de": "Anpassung erfassen",
+    "fr": "Enregistrer l’ajustement"
+  },
+  "Use zero to confirm an opening quantity of zero. Negative stock is rejected.": {
+    "de": "Verwenden Sie null, um einen Anfangsbestand von null zu bestätigen. Negative Bestände werden abgelehnt.",
+    "fr": "Utilisez zéro pour confirmer un stock initial nul. Les stocks négatifs sont refusés."
+  },
+  "Inventory history · latest 50": {
+    "de": "Bestandsverlauf · letzte 50",
+    "fr": "Historique du stock · 50 derniers mouvements"
+  },
+  "Search product slug": {
+    "de": "Produktkennung suchen",
+    "fr": "Rechercher l’identifiant du produit"
+  },
+  "Product saved.": {
+    "de": "Produkt gespeichert.",
+    "fr": "Produit enregistré."
+  },
+  "SKU pending": {
+    "de": "SKU ausstehend",
+    "fr": "SKU à confirmer"
+  },
+  "Unconfirmed": {
+    "de": "Unbestätigt",
+    "fr": "Non confirmé"
+  },
+  "Edit product": {
+    "de": "Produkt bearbeiten",
+    "fr": "Modifier le produit"
+  },
+  "Create draft product": {
+    "de": "Produktentwurf erstellen",
+    "fr": "Créer un brouillon de produit"
+  },
+  "Product slug": {
+    "de": "Produktkennung",
+    "fr": "Identifiant du produit"
+  },
+  "SKU": {
+    "de": "SKU",
+    "fr": "SKU"
+  },
+  "Barcode": {
+    "de": "Barcode",
+    "fr": "Code-barres"
+  },
+  "Category": {
+    "de": "Kategorie",
+    "fr": "Catégorie"
+  },
+  "Brand": {
+    "de": "Marke",
+    "fr": "Marque"
+  },
+  "Supplier": {
+    "de": "Lieferant",
+    "fr": "Fournisseur"
+  },
+  "Country of origin": {
+    "de": "Herkunftsland",
+    "fr": "Pays d’origine"
+  },
+  "Price CHF": {
+    "de": "Preis CHF",
+    "fr": "Prix CHF"
+  },
+  "Promotion price CHF": {
+    "de": "Aktionspreis CHF",
+    "fr": "Prix promotionnel CHF"
+  },
+  "Weight in grams": {
+    "de": "Gewicht in Gramm",
+    "fr": "Poids en grammes"
+  },
+  "Available for sale": {
+    "de": "Zum Verkauf verfügbar",
+    "fr": "Disponible à la vente"
+  },
+  "Featured": {
+    "de": "Hervorgehoben",
+    "fr": "Mis en avant"
+  },
+  "Most picked": {
+    "de": "Beliebt",
+    "fr": "Les plus choisis"
+  },
+  "Cigar / adult product (18+)": {
+    "de": "Zigarre / Produkt ab 18 Jahren",
+    "fr": "Cigare / produit réservé aux adultes (18+)"
+  },
+  "Product information verified against the label": {
+    "de": "Produktinformationen anhand des Etiketts geprüft",
+    "fr": "Informations produit vérifiées sur l’étiquette"
+  },
+  "Selling price confirmed": {
+    "de": "Verkaufspreis bestätigt",
+    "fr": "Prix de vente confirmé"
+  },
+  "Product content language": {
+    "de": "Sprache der Produktinhalte",
+    "fr": "Langue du contenu produit"
+  },
+  "Enter verified content separately for each language. Missing legal, ingredient and allergen information stays blank.": {
+    "de": "Erfassen Sie geprüfte Inhalte für jede Sprache separat. Fehlende Rechts-, Zutaten- und Allergeninformationen bleiben leer.",
+    "fr": "Saisissez les contenus vérifiés séparément pour chaque langue. Les informations légales, les ingrédients et les allergènes manquants restent vides."
+  },
+  "Missing fields in {language}: {count}": {
+    "de": "Fehlende Felder in {language}: {count}",
+    "fr": "Champs manquants en {language} : {count}"
+  },
+  "Incomplete — verified content required": {
+    "de": "Unvollständig — geprüfter Inhalt erforderlich",
+    "fr": "Incomplet — contenu vérifié requis"
+  },
+  "name": {
+    "de": "Produktname",
+    "fr": "Nom du produit",
+    "en": "Product name"
+  },
+  "short_description": {
+    "de": "Kurzbeschreibung",
+    "fr": "Description courte",
+    "en": "Short description"
+  },
+  "description": {
+    "de": "Vollständige Beschreibung",
+    "fr": "Description complète",
+    "en": "Full description"
+  },
+  "ingredients": {
+    "de": "Zutaten",
+    "fr": "Ingrédients",
+    "en": "Ingredients"
+  },
+  "allergens": {
+    "de": "Allergeninformationen",
+    "fr": "Informations sur les allergènes",
+    "en": "Allergen information"
+  },
+  "preparation_instructions": {
+    "de": "Zubereitung / Verwendung",
+    "fr": "Préparation / utilisation",
+    "en": "Preparation / use instructions"
+  },
+  "storage_instructions": {
+    "de": "Lagerungshinweise",
+    "fr": "Instructions de conservation",
+    "en": "Storage instructions"
+  },
+  "seo_title": {
+    "de": "SEO-Titel",
+    "fr": "Titre SEO",
+    "en": "SEO title"
+  },
+  "seo_description": {
+    "de": "SEO-Beschreibung",
+    "fr": "Description SEO",
+    "en": "SEO description"
+  },
+  "Nutrition (verified JSON, including units)": {
+    "de": "Nährwerte (geprüftes JSON, mit Einheiten)",
+    "fr": "Valeurs nutritionnelles (JSON vérifié, unités incluses)"
+  },
+  "Upload product image": {
+    "de": "Produktbild hochladen",
+    "fr": "Importer une image du produit"
+  },
+  "{language} image {number} alt text": {
+    "de": "{language} Alternativtext für Bild {number}",
+    "fr": "{language} texte alternatif de l’image {number}"
+  },
+  "Saving…": {
+    "de": "Wird gespeichert…",
+    "fr": "Enregistrement…"
+  },
+  "Save product": {
+    "de": "Produkt speichern",
+    "fr": "Enregistrer le produit"
+  },
+  "Close preview": {
+    "de": "Vorschau schliessen",
+    "fr": "Fermer l’aperçu"
+  },
+  "Preview before publishing": {
+    "de": "Vorschau vor Veröffentlichung",
+    "fr": "Aperçu avant publication"
+  },
+  "Restore as draft": {
+    "de": "Als Entwurf wiederherstellen",
+    "fr": "Restaurer en brouillon"
+  },
+  "Archive on save": {
+    "de": "Beim Speichern archivieren",
+    "fr": "Archiver à l’enregistrement"
+  },
+  "Price awaiting confirmation": {
+    "de": "Preis noch zu bestätigen",
+    "fr": "Prix en attente de confirmation"
+  },
+  "No matching products.": {
+    "de": "Keine passenden Produkte.",
+    "fr": "Aucun produit correspondant."
+  },
+  "Quantity change (+ or −)": {
+    "de": "Mengenänderung (+ oder −)",
+    "fr": "Variation de quantité (+ ou −)"
+  },
+  "Adjustment reason": {
+    "de": "Grund der Anpassung",
+    "fr": "Motif de l’ajustement"
+  },
+  "Inventory updated.": {
+    "de": "Lagerbestand aktualisiert.",
+    "fr": "Stock mis à jour."
+  },
+  "No inventory movements yet.": {
+    "de": "Noch keine Bestandsbewegungen.",
+    "fr": "Aucun mouvement de stock pour le moment."
+  },
+  "All states": {
+    "de": "Alle Status",
+    "fr": "Tous les statuts"
+  },
+  "Export this page to CSV": {
+    "de": "Diese Seite als CSV exportieren",
+    "fr": "Exporter cette page en CSV"
+  },
+  "Customer details are opened only when needed. CSV includes order totals and status, without contact details.": {
+    "de": "Kundendaten werden nur bei Bedarf geöffnet. Die CSV-Datei enthält Bestellsummen und Status ohne Kontaktdaten.",
+    "fr": "Les données clients ne sont ouvertes qu’en cas de besoin. Le CSV contient les totaux et statuts des commandes, sans coordonnées."
+  },
+  "Order": {
+    "de": "Bestellung",
+    "fr": "Commande"
+  },
+  "Date": {
+    "de": "Datum",
+    "fr": "Date"
+  },
+  "Total": {
+    "de": "Gesamtbetrag",
+    "fr": "Total"
+  },
+  "Total CHF": {
+    "de": "Gesamtbetrag CHF",
+    "fr": "Total CHF"
+  },
+  "Refund": {
+    "de": "Rückerstattung",
+    "fr": "Remboursement"
+  },
+  "View order": {
+    "de": "Bestellung ansehen",
+    "fr": "Voir la commande"
+  },
+  "No matching orders.": {
+    "de": "Keine passenden Bestellungen.",
+    "fr": "Aucune commande correspondante."
+  },
+  "Order #": {
+    "de": "Bestellung #",
+    "fr": "Commande #"
+  },
+  "Close order": {
+    "de": "Bestellung schliessen",
+    "fr": "Fermer la commande"
+  },
+  "Customer": {
+    "de": "Kunde",
+    "fr": "Client"
+  },
+  "Delivery address": {
+    "de": "Lieferadresse",
+    "fr": "Adresse de livraison"
+  },
+  "Items and cigar composition": {
+    "de": "Artikel und Zigarrenzusammenstellung",
+    "fr": "Articles et composition des cigares"
+  },
+  "Request refund review": {
+    "de": "Rückerstattungsprüfung anfordern",
+    "fr": "Demander l’examen du remboursement"
+  },
+  "Paid and refunded states require verified provider confirmation. Cancellation returns reserved stock once.": {
+    "de": "Die Status «Bezahlt» und «Rückerstattet» erfordern eine geprüfte Anbieterbestätigung. Eine Stornierung gibt reservierten Bestand einmalig zurück.",
+    "fr": "Les statuts «Payée» et «Remboursée» exigent une confirmation vérifiée du prestataire. Une annulation libère le stock réservé une seule fois."
+  },
+  "Save order update": {
+    "de": "Bestelländerung speichern",
+    "fr": "Enregistrer la modification"
+  },
+  "Loading order details…": {
+    "de": "Bestelldetails werden geladen…",
+    "fr": "Chargement des détails de la commande…"
+  },
+  "Search order number or ID": {
+    "de": "Bestellnummer oder ID suchen",
+    "fr": "Rechercher le numéro ou l’ID de commande"
+  },
+  "Order status": {
+    "de": "Bestellstatus",
+    "fr": "Statut de la commande"
+  },
+  "New order status": {
+    "de": "Neuer Bestellstatus",
+    "fr": "Nouveau statut de commande"
+  },
+  "Fulfilment notes": {
+    "de": "Abwicklungsnotizen",
+    "fr": "Notes de traitement"
+  },
+  "Tracking number": {
+    "de": "Sendungsnummer",
+    "fr": "Numéro de suivi"
+  },
+  "Order updated.": {
+    "de": "Bestellung aktualisiert.",
+    "fr": "Commande mise à jour."
+  },
+  "Merchandise": {
+    "de": "Warenwert",
+    "fr": "Marchandises"
+  },
+  "Discount": {
+    "de": "Rabatt",
+    "fr": "Réduction"
+  },
+  "Standard delivery": {
+    "de": "Standardlieferung",
+    "fr": "Livraison standard"
+  },
+  "Adult delivery": {
+    "de": "Lieferung mit Altersprüfung",
+    "fr": "Livraison avec contrôle d’âge"
+  },
+  "Included VAT": {
+    "de": "Enthaltene MWST",
+    "fr": "TVA incluse"
+  },
+  "pending": {
+    "de": "Ausstehend",
+    "fr": "En attente",
+    "en": "Pending"
+  },
+  "paid": {
+    "de": "Bezahlt",
+    "fr": "Payée",
+    "en": "Paid"
+  },
+  "preparing": {
+    "de": "In Vorbereitung",
+    "fr": "En préparation",
+    "en": "Preparing"
+  },
+  "dispatched": {
+    "de": "Versandt",
+    "fr": "Expédiée",
+    "en": "Dispatched"
+  },
+  "completed": {
+    "de": "Abgeschlossen",
+    "fr": "Terminée",
+    "en": "Completed"
+  },
+  "cancelled": {
+    "de": "Storniert",
+    "fr": "Annulée",
+    "en": "Cancelled"
+  },
+  "refunded": {
+    "de": "Rückerstattet",
+    "fr": "Remboursée",
+    "en": "Refunded"
+  },
+  "none": {
+    "de": "Keine",
+    "fr": "Aucun",
+    "en": "None"
+  },
+  "requested": {
+    "de": "Angefordert",
+    "fr": "Demandé",
+    "en": "Requested"
+  },
+  "Loading settings…": {
+    "de": "Einstellungen werden geladen…",
+    "fr": "Chargement des paramètres…"
+  },
+  "Delivery": {
+    "de": "Lieferung",
+    "fr": "Livraison"
+  },
+  "Standard delivery is free from CHF 100.00 after discounts. The adult-delivery surcharge remains separate.": {
+    "de": "Die Standardlieferung ist ab CHF 100.00 nach Rabatten kostenlos. Der Zuschlag für die Lieferung mit Altersprüfung bleibt separat.",
+    "fr": "La livraison standard est gratuite dès CHF 100.00 après réductions. Le supplément pour la livraison avec contrôle d’âge reste distinct."
+  },
+  "Leave unconfirmed delivery charges blank. Zero means an explicitly confirmed free charge.": {
+    "de": "Lassen Sie unbestätigte Liefergebühren leer. Null bedeutet eine ausdrücklich bestätigte kostenlose Lieferung.",
+    "fr": "Laissez vides les frais de livraison non confirmés. Zéro signifie une gratuité explicitement confirmée."
+  },
+  "Tax / VAT": {
+    "de": "Steuern / MWST",
+    "fr": "Taxes / TVA"
+  },
+  "Tax configuration verified": {
+    "de": "Steuerkonfiguration geprüft",
+    "fr": "Configuration fiscale vérifiée"
+  },
+  "VAT registered": {
+    "de": "MWST-pflichtig",
+    "fr": "Assujetti à la TVA"
+  },
+  "Entered prices include VAT. Confirm the correct tax configuration before opening checkout.": {
+    "de": "Die eingegebenen Preise enthalten die MWST. Bestätigen Sie die korrekte Steuerkonfiguration vor der Freigabe des Checkouts.",
+    "fr": "Les prix saisis incluent la TVA. Confirmez la configuration fiscale correcte avant d’activer le paiement."
+  },
+  "Contact": {
+    "de": "Kontakt",
+    "fr": "Contact"
+  },
+  "Availability and promotions": {
+    "de": "Verfügbarkeit und Aktionen",
+    "fr": "Disponibilité et promotions"
+  },
+  "Owner controls · MFA required": {
+    "de": "Inhabersteuerung · MFA erforderlich",
+    "fr": "Commandes du propriétaire · MFA requise"
+  },
+  "Activation requires documented approval and a deployed provider adapter. Flags alone cannot start payments.": {
+    "de": "Die Aktivierung erfordert dokumentierte Freigaben und einen bereitgestellten Anbieteradapter. Schalter allein können keine Zahlungen starten.",
+    "fr": "L’activation exige une autorisation documentée et un adaptateur de prestataire déployé. Les options seules ne peuvent pas lancer les paiements."
+  },
+  "Save settings": {
+    "de": "Einstellungen speichern",
+    "fr": "Enregistrer les paramètres"
+  },
+  "Settings saved.": {
+    "de": "Einstellungen gespeichert.",
+    "fr": "Paramètres enregistrés."
+  },
+  "Standard delivery CHF": {
+    "de": "Standardlieferung CHF",
+    "fr": "Livraison standard CHF"
+  },
+  "Free standard delivery threshold CHF": {
+    "de": "Freigrenze Standardlieferung CHF",
+    "fr": "Seuil de livraison standard gratuite CHF"
+  },
+  "Adult-delivery surcharge CHF": {
+    "de": "Zuschlag Altersprüfung bei Lieferung CHF",
+    "fr": "Supplément de livraison avec contrôle d’âge CHF"
+  },
+  "VAT number": {
+    "de": "MWST-Nummer",
+    "fr": "Numéro de TVA"
+  },
+  "VAT basis points (100 = 1%)": {
+    "de": "MWST-Basispunkte (100 = 1%)",
+    "fr": "Points de base de TVA (100 = 1%)"
+  },
+  "Cigar box discount basis points (0 = no discount)": {
+    "de": "Zigarrenbox-Rabatt in Basispunkten (0 = kein Rabatt)",
+    "fr": "Réduction des coffrets en points de base (0 = aucune réduction)"
+  },
+  "Product promotions use the confirmed promotion price in each product. Cigar box discounts are configured below.": {
+    "de": "Produktaktionen verwenden den bestätigten Aktionspreis des jeweiligen Produkts. Rabatte für Zigarrenboxen werden unten eingestellt.",
+    "fr": "Les promotions utilisent le prix promotionnel confirmé de chaque produit. Les réductions des coffrets de cigares se configurent ci-dessous."
+  },
+  "Boxes contain exactly 4 or 6 cigars. Patoro and Davidoff may be mixed, with repeated selections subject to combined stock. Prices are the sum of the selected cigars, less only the configured discount.": {
+    "de": "Boxen enthalten genau 4 oder 6 Zigarren. Patoro und Davidoff sind mischbar; Mehrfachauswahlen werden gegen den Gesamtbestand geprüft. Der Preis entspricht der Summe der gewählten Zigarren abzüglich des eingestellten Rabatts.",
+    "fr": "Les coffrets contiennent exactement 4 ou 6 cigares. Patoro et Davidoff peuvent être mélangés ; les sélections répétées sont soumises au stock cumulé. Le prix est la somme des cigares choisis, diminuée uniquement de la réduction configurée."
+  },
+  "contact_name": {
+    "de": "Kontaktname",
+    "fr": "Nom du contact",
+    "en": "Contact name"
+  },
+  "contact_address": {
+    "de": "Kontaktadresse",
+    "fr": "Adresse de contact",
+    "en": "Contact address"
+  },
+  "contact_phone": {
+    "de": "Telefon",
+    "fr": "Téléphone",
+    "en": "Contact phone"
+  },
+  "support_email": {
+    "de": "Support-E-Mail",
+    "fr": "E-mail d’assistance",
+    "en": "Support email"
+  },
+  "store_available": {
+    "de": "Shop nimmt Bestellungen an",
+    "fr": "La boutique accepte les commandes",
+    "en": "Store accepts orders"
+  },
+  "maintenance_mode": {
+    "de": "Wartungsmodus",
+    "fr": "Mode maintenance",
+    "en": "Maintenance mode"
+  },
+  "payment_enabled": {
+    "de": "Zahlungen aktiviert",
+    "fr": "Paiements activés",
+    "en": "Payments enabled"
+  },
+  "tobacco_checkout_enabled": {
+    "de": "Tabak-Checkout aktiviert",
+    "fr": "Paiement du tabac activé",
+    "en": "Tobacco checkout enabled"
+  },
+  "payment_provider_reference": {
+    "de": "Freigabereferenz Zahlungsanbieter",
+    "fr": "Référence d’approbation du prestataire de paiement",
+    "en": "Payment provider approval reference"
+  },
+  "legal_review_reference": {
+    "de": "Referenz rechtliche Prüfung",
+    "fr": "Référence de l’examen juridique",
+    "en": "Legal review reference"
+  },
+  "age_verification_reference": {
+    "de": "Referenz Altersverifizierung",
+    "fr": "Référence de vérification de l’âge",
+    "en": "Age verification reference"
+  },
+  "adult_delivery_reference": {
+    "de": "Referenz Lieferung mit Altersprüfung",
+    "fr": "Référence de livraison avec contrôle d’âge",
+    "en": "Adult delivery reference"
+  },
+  "Append-only records. Customer contact information and session secrets are excluded.": {
+    "de": "Unveränderbare Protokolleinträge. Kundenkontaktdaten und Sitzungsgeheimnisse sind ausgeschlossen.",
+    "fr": "Enregistrements non modifiables. Les coordonnées clients et les secrets de session sont exclus."
+  },
+  "Audit records": {
+    "de": "Protokolleinträge",
+    "fr": "Entrées du journal"
+  },
+  "Time": {
+    "de": "Zeitpunkt",
+    "fr": "Date et heure"
+  },
+  "Actor": {
+    "de": "Ausführende Person",
+    "fr": "Auteur"
+  },
+  "Entity": {
+    "de": "Datensatztyp",
+    "fr": "Type de données"
+  },
+  "Change": {
+    "de": "Änderung",
+    "fr": "Modification"
+  },
+  "Server operation": {
+    "de": "Servervorgang",
+    "fr": "Opération du serveur"
+  },
+  "Invite an administrator": {
+    "de": "Verwaltungsperson einladen",
+    "fr": "Inviter un administrateur"
+  },
+  "Invitation emails are sent through the configured authentication service.": {
+    "de": "Einladungs-E-Mails werden über den konfigurierten Authentifizierungsdienst gesendet.",
+    "fr": "Les invitations sont envoyées par le service d’authentification configuré."
+  },
+  "Send invitation": {
+    "de": "Einladung senden",
+    "fr": "Envoyer l’invitation"
+  },
+  "Administrator access": {
+    "de": "Verwaltungszugriff",
+    "fr": "Accès administrateur"
+  },
+  "Enabled": {
+    "de": "Aktiviert",
+    "fr": "Activé"
+  },
+  "Save access": {
+    "de": "Zugriff speichern",
+    "fr": "Enregistrer l’accès"
+  },
+  "Administrator email": {
+    "de": "E-Mail der Verwaltungsperson",
+    "fr": "E-mail de l’administrateur"
+  },
+  "Administrator role": {
+    "de": "Verwaltungsrolle",
+    "fr": "Rôle administrateur"
+  },
+  "Role for {id}": {
+    "de": "Rolle für {id}",
+    "fr": "Rôle de {id}"
+  },
+  "Invitation failed.": {
+    "de": "Einladung fehlgeschlagen.",
+    "fr": "Échec de l’invitation."
+  },
+  "Invitation sent.": {
+    "de": "Einladung gesendet.",
+    "fr": "Invitation envoyée."
+  },
+  "Access updated.": {
+    "de": "Zugriff aktualisiert.",
+    "fr": "Accès mis à jour."
+  },
+  "owner": {
+    "de": "Inhaber",
+    "fr": "Propriétaire",
+    "en": "Owner"
+  },
+  "administrator": {
+    "de": "Administrator",
+    "fr": "Administrateur",
+    "en": "Administrator"
+  },
+  "product_editor": {
+    "de": "Produktredakteur",
+    "fr": "Éditeur de produits",
+    "en": "Product editor"
+  },
+  "order_manager": {
+    "de": "Bestellverwalter",
+    "fr": "Gestionnaire de commandes",
+    "en": "Order manager"
+  },
+  "Search customer name": {
+    "de": "Kundenname suchen",
+    "fr": "Rechercher le nom du client"
+  },
+  "Customer contact details are shown only on request. Delivery addresses remain in the relevant order.": {
+    "de": "Kundenkontaktdaten werden nur auf Anfrage angezeigt. Lieferadressen bleiben in der jeweiligen Bestellung.",
+    "fr": "Les coordonnées clients sont affichées uniquement sur demande. Les adresses de livraison restent dans la commande concernée."
+  },
+  "Name": {
+    "de": "Name",
+    "fr": "Nom"
+  },
+  "Hide contact": {
+    "de": "Kontakt ausblenden",
+    "fr": "Masquer les coordonnées"
+  },
+  "View contact": {
+    "de": "Kontakt anzeigen",
+    "fr": "Afficher les coordonnées"
+  },
+  "No matching customers.": {
+    "de": "Keine passenden Kunden.",
+    "fr": "Aucun client correspondant."
+  },
+  "Open administration directly.": {
+    "de": "Öffnen Sie die Verwaltung direkt.",
+    "fr": "Ouvrez directement l’administration."
+  },
+  "Complete this field.": {
+    "de": "Bitte füllen Sie dieses Feld aus.",
+    "fr": "Veuillez remplir ce champ."
+  },
+  "Enter a valid email address.": {
+    "de": "Geben Sie eine gültige E-Mail-Adresse ein.",
+    "fr": "Saisissez une adresse e-mail valide."
+  },
+  "Use the requested format.": {
+    "de": "Verwenden Sie das vorgegebene Format.",
+    "fr": "Utilisez le format demandé."
+  },
+  "Enter a number within the allowed range.": {
+    "de": "Geben Sie eine Zahl im zulässigen Bereich ein.",
+    "fr": "Saisissez un nombre dans la plage autorisée."
+  },
+  "Check the length of this value.": {
+    "de": "Prüfen Sie die Länge dieser Eingabe.",
+    "fr": "Vérifiez la longueur de cette valeur."
+  },
+  "Enter CHF with at most two decimal places.": {
+    "de": "Geben Sie CHF mit höchstens zwei Dezimalstellen ein.",
+    "fr": "Saisissez un montant en CHF avec deux décimales au maximum."
+  },
+  "Amount is too large.": {
+    "de": "Der Betrag ist zu hoch.",
+    "fr": "Le montant est trop élevé."
+  },
+  "Nutrition must be an object.": {
+    "de": "Die Nährwerte müssen als JSON-Objekt erfasst werden.",
+    "fr": "Les valeurs nutritionnelles doivent être un objet JSON."
+  },
+  "Nutrition must contain valid JSON.": {
+    "de": "Die Nährwerte müssen gültiges JSON enthalten.",
+    "fr": "Les valeurs nutritionnelles doivent contenir un JSON valide."
+  },
+  "Save the draft before uploading images.": {
+    "de": "Speichern Sie den Entwurf, bevor Sie Bilder hochladen.",
+    "fr": "Enregistrez le brouillon avant d’importer des images."
+  },
+  "Choose a JPEG, PNG or WebP image of at most 5 MB.": {
+    "de": "Wählen Sie ein JPEG-, PNG- oder WebP-Bild mit höchstens 5 MB.",
+    "fr": "Choisissez une image JPEG, PNG ou WebP de 5 Mo au maximum."
+  },
+  "This account does not have an active administrator invitation.": {
+    "de": "Für dieses Konto liegt keine aktive Verwaltungseinladung vor.",
+    "fr": "Ce compte ne dispose pas d’une invitation administrateur active."
+  },
+  "Sign-in failed. Check your invitation and credentials.": {
+    "de": "Anmeldung fehlgeschlagen. Prüfen Sie Ihre Einladung und Zugangsdaten.",
+    "fr": "Échec de connexion. Vérifiez votre invitation et vos identifiants."
+  },
+  "This SKU, barcode or product slug is already in use.": {
+    "de": "Diese SKU, dieser Barcode oder diese Produktkennung wird bereits verwendet.",
+    "fr": "Ce SKU, ce code-barres ou cet identifiant de produit est déjà utilisé."
+  },
+  "Check the entered values and required confirmations.": {
+    "de": "Prüfen Sie die eingegebenen Werte und erforderlichen Bestätigungen.",
+    "fr": "Vérifiez les valeurs saisies et les confirmations requises."
+  },
+  "Your session has expired. Sign in again.": {
+    "de": "Ihre Sitzung ist abgelaufen. Melden Sie sich erneut an.",
+    "fr": "Votre session a expiré. Reconnectez-vous."
+  },
+  "Connection unavailable. Please try again.": {
+    "de": "Keine Verbindung verfügbar. Versuchen Sie es erneut.",
+    "fr": "Connexion indisponible. Veuillez réessayer."
+  },
+  "Verification failed. Check your authenticator code and try again.": {
+    "de": "Verifizierung fehlgeschlagen. Prüfen Sie Ihren Authenticator-Code und versuchen Sie es erneut.",
+    "fr": "Échec de vérification. Vérifiez votre code d’authentification et réessayez."
+  },
+  "The operation could not be completed. Please try again.": {
+    "de": "Der Vorgang konnte nicht abgeschlossen werden. Versuchen Sie es erneut.",
+    "fr": "L’opération n’a pas pu être effectuée. Veuillez réessayer."
+  },
+  "Product changed. Reload before saving.": {
+    "de": "Das Produkt wurde geändert. Laden Sie es vor dem Speichern neu.",
+    "fr": "Le produit a été modifié. Rechargez-le avant d’enregistrer."
+  },
+  "Product no longer exists": {
+    "de": "Das Produkt existiert nicht mehr.",
+    "fr": "Le produit n’existe plus."
+  },
+  "Translations required": {
+    "de": "Übersetzungen sind erforderlich.",
+    "fr": "Les traductions sont requises."
+  },
+  "Complete DE, FR and EN translations before publishing": {
+    "de": "Vervollständigen Sie die DE-, FR- und EN-Übersetzungen vor der Veröffentlichung.",
+    "fr": "Complétez les traductions DE, FR et EN avant la publication."
+  },
+  "Confirm inventory before publishing": {
+    "de": "Bestätigen Sie den Lagerbestand vor der Veröffentlichung.",
+    "fr": "Confirmez le stock avant la publication."
+  },
+  "SKU and country of origin required": {
+    "de": "SKU und Herkunftsland sind erforderlich.",
+    "fr": "Le SKU et le pays d’origine sont requis."
+  },
+  "Verified food label information required": {
+    "de": "Geprüfte Angaben des Lebensmitteletiketts sind erforderlich.",
+    "fr": "Les informations vérifiées de l’étiquette alimentaire sont requises."
+  },
+  "Image alt text required in every language": {
+    "de": "Bild-Alternativtexte sind in jeder Sprache erforderlich.",
+    "fr": "Les textes alternatifs des images sont requis dans chaque langue."
+  },
+  "Product not found": {
+    "de": "Produkt nicht gefunden.",
+    "fr": "Produit introuvable."
+  },
+  "A specific adjustment reason is required": {
+    "de": "Ein konkreter Anpassungsgrund ist erforderlich.",
+    "fr": "Un motif précis d’ajustement est requis."
+  },
+  "Insufficient stock": {
+    "de": "Nicht genügend Lagerbestand.",
+    "fr": "Stock insuffisant."
+  },
+  "Settings changed. Reload before saving.": {
+    "de": "Die Einstellungen wurden geändert. Laden Sie sie vor dem Speichern neu.",
+    "fr": "Les paramètres ont été modifiés. Rechargez-les avant d’enregistrer."
+  },
+  "Order not found": {
+    "de": "Bestellung nicht gefunden.",
+    "fr": "Commande introuvable."
+  },
+  "Order changed. Reload before saving.": {
+    "de": "Die Bestellung wurde geändert. Laden Sie sie vor dem Speichern neu.",
+    "fr": "La commande a été modifiée. Rechargez-la avant d’enregistrer."
+  },
+  "Invalid order transition; payment and refund confirmation require provider verification": {
+    "de": "Ungültiger Statuswechsel. Zahlungen und Rückerstattungen müssen vom Anbieter bestätigt werden.",
+    "fr": "Changement de statut invalide. Les paiements et remboursements doivent être confirmés par le prestataire."
+  },
+  "Tracking number required": {
+    "de": "Eine Sendungsnummer ist erforderlich.",
+    "fr": "Un numéro de suivi est requis."
+  },
+  "No refundable payment": {
+    "de": "Keine erstattungsfähige Zahlung vorhanden.",
+    "fr": "Aucun paiement remboursable."
+  },
+  "Export at most 500 orders at once": {
+    "de": "Exportieren Sie höchstens 500 Bestellungen gleichzeitig.",
+    "fr": "Exportez au maximum 500 commandes à la fois."
+  },
+  "Owners cannot remove or change their own access": {
+    "de": "Inhaber können ihren eigenen Zugriff nicht entfernen oder ändern.",
+    "fr": "Les propriétaires ne peuvent pas supprimer ni modifier leur propre accès."
+  },
+  "Administrator not found": {
+    "de": "Verwaltungsperson nicht gefunden.",
+    "fr": "Administrateur introuvable."
+  },
+  "Not authorized": {
+    "de": "Keine Berechtigung für diesen Vorgang.",
+    "fr": "Vous n’êtes pas autorisé à effectuer cette opération."
+  },
+  "INSERT": {
+    "de": "Erstellt",
+    "fr": "Création",
+    "en": "Created"
+  },
+  "UPDATE": {
+    "de": "Aktualisiert",
+    "fr": "Modification",
+    "en": "Updated"
+  },
+  "DELETE": {
+    "de": "Gelöscht",
+    "fr": "Suppression",
+    "en": "Deleted"
+  },
+  "EXPORT": {
+    "de": "Exportiert",
+    "fr": "Exportation",
+    "en": "Exported"
+  },
+  "CONFIRM_STOCK": {
+    "de": "Bestand bestätigt",
+    "fr": "Stock confirmé",
+    "en": "Stock confirmed"
+  },
+  "v25_profiles": {
+    "de": "Verwaltungskonten",
+    "fr": "Comptes administrateurs",
+    "en": "Administrator accounts"
+  },
+  "v25_products": {
+    "de": "Produkte",
+    "fr": "Produits",
+    "en": "Products"
+  },
+  "v25_product_translations": {
+    "de": "Produktübersetzungen",
+    "fr": "Traductions des produits",
+    "en": "Product translations"
+  },
+  "v25_product_images": {
+    "de": "Produktbilder",
+    "fr": "Images des produits",
+    "en": "Product images"
+  },
+  "v25_inventory": {
+    "de": "Lagerbestand",
+    "fr": "Stock",
+    "en": "Inventory"
+  },
+  "v25_inventory_movements": {
+    "de": "Bestandsbewegungen",
+    "fr": "Mouvements de stock",
+    "en": "Inventory movements"
+  },
+  "v25_customers": {
+    "de": "Kundschaft",
+    "fr": "Clientèle",
+    "en": "Customers"
+  },
+  "v25_addresses": {
+    "de": "Adressen",
+    "fr": "Adresses",
+    "en": "Addresses"
+  },
+  "v25_orders": {
+    "de": "Bestellungen",
+    "fr": "Commandes",
+    "en": "Orders"
+  },
+  "v25_order_items": {
+    "de": "Bestellpositionen",
+    "fr": "Articles commandés",
+    "en": "Order items"
+  },
+  "v25_cigar_bundle_items": {
+    "de": "Zigarrenbox-Inhalt",
+    "fr": "Composition des coffrets",
+    "en": "Cigar box composition"
+  },
+  "v25_store_settings": {
+    "de": "Shop-Einstellungen",
+    "fr": "Paramètres de la boutique",
+    "en": "Store settings"
+  },
+  "Confirm order cancellation?": {
+    "de": "Stornierung der Bestellung bestätigen?",
+    "fr": "Confirmer l’annulation de la commande ?"
+  },
+  "Confirm refund review request?": {
+    "de": "Anforderung einer Rückerstattungsprüfung bestätigen?",
+    "fr": "Confirmer la demande d’examen du remboursement ?"
+  },
+  "No audit records yet.": {
+    "de": "Noch keine Protokolleinträge.",
+    "fr": "Aucune entrée dans le journal pour le moment."
+  },
+  "failed": {
+    "de": "Fehlgeschlagen",
+    "fr": "Échec",
+    "en": "Failed"
+  },
+  "Choose image": {
+    "de": "Bild auswählen",
+    "fr": "Choisir une image"
+  },
+  "changed_fields": {
+    "de": "Geänderte Felder",
+    "fr": "Champs modifiés",
+    "en": "Changed fields"
+  },
+  "status_before": {
+    "de": "Vorheriger Status",
+    "fr": "Statut précédent",
+    "en": "Previous status"
+  },
+  "status_after": {
+    "de": "Neuer Status",
+    "fr": "Nouveau statut",
+    "en": "New status"
+  },
+  "reason": {
+    "de": "Grund",
+    "fr": "Motif",
+    "en": "Reason"
+  },
+  "count": {
+    "de": "Anzahl",
+    "fr": "Nombre",
+    "en": "Count"
+  },
+  "Cancel": {
+    "de": "Abbrechen",
+    "fr": "Annuler"
+  },
+  "Confirm": {
+    "de": "Bestätigen",
+    "fr": "Confirmer"
+  }
+}

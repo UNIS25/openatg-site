@@ -1,0 +1,10 @@
+node_modules
+.next/
+out/
+artifacts/
+.local/
+.env*
+!.env.example
+*.tsbuildinfo
+supabase/.temp/
+supabase/.branches/

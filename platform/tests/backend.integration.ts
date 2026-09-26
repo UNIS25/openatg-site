@@ -1,0 +1,679 @@
+import { test, before, after } from "node:test";
+import assert from "node:assert/strict";
+import { createClient, type SupabaseClient } from "@supabase/supabase-js";
+import { readFileSync } from "node:fs";
+import { randomUUID, createHash } from "node:crypto";
+import { blankProduct } from "../src/legacy-admin/domain";
+const url = process.env.SUPABASE_URL!,
+  key = process.env.SUPABASE_ANON_KEY!;
+if (url !== "http://127.0.0.1:58531") throw new Error("Local integration only");
+const make = (keyValue = key) =>
+  createClient(url, keyValue, {
+    auth: { persistSession: false, autoRefreshToken: false },
+  });
+const service = make(process.env.SUPABASE_SERVICE_ROLE_KEY);
+const anon = make();
+const accounts = JSON.parse(
+  readFileSync(".local/review-accounts.json", "utf8"),
+);
+let silver: SupabaseClient,
+  gold: SupabaseClient,
+  staff: SupabaseClient,
+  admin: SupabaseClient,
+  owner: SupabaseClient;
+let product: string;
+let order: { order_id: string; payment_id: string };
+const check = <R extends { data?: unknown; error: unknown }>(
+  r: R,
+): NonNullable<R["data"]> => {
+  assert.equal(r.error, null);
+  return r.data as NonNullable<R["data"]>;
+};
+const call = (
+  db: SupabaseClient,
+  action: string,
+  document: Record<string, unknown> = {},
+  request_key = randomUUID(),
+) => db.rpc("v25_platform_action", { action, document, request_key });
+before(async () => {
+  for (const role of ["silver", "gold"]) {
+    const email = `integration-${role}-${randomUUID()}@v25.local.test`;
+    const password = `Test!${randomUUID()}Aa1`;
+    const result = await service.auth.admin.createUser({
+      email,
+      password,
+      email_confirm: true,
+    });
+    if (result.error) throw result.error;
+    const id = result.data.user.id;
+    accounts[role] = { email, password, id };
+    check(
+      await service
+        .from("v25_members")
+        .insert({ id, name: `Local ${role} reviewer`, locale: "en" }),
+    );
+    check(
+      await service.from("v25_member_verifications").insert({
+        member_id: id,
+        provider_reference: `integration-${id}`,
+        status: "verified",
+        verified_at: new Date().toISOString(),
+        expires_at: new Date(Date.now() + 86400000 * 365).toISOString(),
+        is_test: true,
+      }),
+    );
+    check(
+      await service.from("v25_memberships").insert({
+        member_id: id,
+        plan_id: role === "gold" ? "gold-yearly" : "silver",
+        status: "active",
+        period_start: new Date().toISOString(),
+        period_end:
+          role === "gold"
+            ? new Date(Date.now() + 86400000 * 365).toISOString()
+            : null,
+      }),
+    );
+    check(
+      await service.from("v25_member_addresses").insert({
+        member_id: id,
+        name: "INTEGRATION TEST",
+        street: "Teststrasse",
+        house_number: "1",
+        postal_code: "8000",
+        city: "Zürich",
+      }),
+    );
+  }
+  [silver, gold, staff, admin, owner] = await Promise.all(
+    ["silver", "gold", "staff", "administrator", "owner"].map(async (role) => {
+      const db = make();
+      const login = await db.auth.signInWithPassword(accounts[role]);
+      assert.equal(login.error, null);
+      return db;
+    }),
+  );
+  const p = check(
+    await service
+      .from("v25_products")
+      .insert({
+        slug: `test-fixture-${randomUUID().slice(0, 8)}`,
+        category: "tea",
+        brand: "LOCAL TEST",
+      })
+      .select("id")
+      .single(),
+  );
+  product = p.id;
+  check(
+    await service
+      .from("v25_product_presentations")
+      .insert({ product_id: product, test_price_rappen: 9999, enabled: true }),
+  );
+  check(
+    await service
+      .from("v25_inventory")
+      .insert({ product_id: product, quantity: 100, confirmed: false }),
+  );
+  check(
+    await service.from("v25_product_translations").insert(
+      ["de", "fr", "en"].map((locale) => ({
+        product_id: product,
+        locale,
+        name: "LOCAL TEST FIXTURE",
+      })),
+    ),
+  );
+});
+after(async () => {
+  if (product) {
+    await service
+      .from("v25_product_presentations")
+      .update({ enabled: false })
+      .eq("product_id", product);
+    await service
+      .from("v25_products")
+      .update({ status: "archived" })
+      .eq("id", product);
+  }
+  for (const db of [silver, gold, staff, admin, owner])
+    await db?.auth.signOut({ scope: "local" });
+});
+test("anonymous public projection never contains coffee or tobacco", async () => {
+  const data = check(await anon.rpc("v25_platform_catalogue"));
+  assert.ok(
+    data.every(
+      (p: { category: string; slug: string }) =>
+        ["tea", "pantry"].includes(p.category) && !p.slug.includes("coffee"),
+    ),
+  );
+});
+test("anonymous cannot read profiles, customer records or payments", async () => {
+  for (const table of [
+    "v25_members",
+    "v25_orders",
+    "v25_payments",
+    "v25_member_verifications",
+    "v25_audit_events",
+  ]) {
+    const { data, error } = await anon.from(table).select("*");
+    assert.ok(error || data?.length === 0, table);
+  }
+});
+test("member row ownership and direct-write denial", async () => {
+  const data = check(await silver.from("v25_members").select("*"));
+  assert.equal(data.length, 1);
+  assert.equal(data[0].id, accounts.silver.id);
+  const other = check(
+    await silver
+      .from("v25_member_addresses")
+      .select("*")
+      .eq("member_id", accounts.gold.id),
+  );
+  assert.equal(other.length, 0);
+  const result = await silver
+    .from("v25_members")
+    .update({ state: "suspended" })
+    .eq("id", accounts.gold.id);
+  assert.ok(result.error);
+});
+test("staff cannot alter plans, member verification or payments", async () => {
+  for (const action of ["plan_settings", "verification_review", "reconcile"])
+    assert.ok((await call(staff, action, {})).error);
+});
+test("owner privileges require AAL2 while named administrator has its assigned role", async () => {
+  assert.equal(check(await owner.rpc("v25_platform_identity")).admin, false);
+  assert.equal(check(await admin.rpc("v25_platform_identity")).admin, true);
+});
+test("legacy tobacco/order endpoints denied even to service role", async () => {
+  assert.ok((await service.rpc("v25_create_order", { request: {} })).error);
+  assert.ok(
+    (await silver.rpc("v25_quote", { lines: [], lock_stock: false })).error,
+  );
+});
+test("Silver database threshold matches CHF boundaries", async () => {
+  for (const [amount, delivery] of [
+    [9999, 1000],
+    [10000, 0],
+    [10001, 0],
+  ]) {
+    check(
+      await service
+        .from("v25_product_presentations")
+        .update({ test_price_rappen: amount })
+        .eq("product_id", product),
+    );
+    const q = check(
+      await call(silver, "quote", {
+        lines: [{ product_id: product, quantity: 1 }],
+      }),
+    );
+    assert.equal(q.delivery_rappen, delivery);
+    assert.equal(q.total_rappen, amount + delivery);
+  }
+});
+test("Gold quote applies exactly one eligible discount", async () => {
+  check(
+    await service
+      .from("v25_product_presentations")
+      .update({ test_price_rappen: 9999 })
+      .eq("product_id", product),
+  );
+  const q = check(
+    await call(gold, "quote", {
+      lines: [{ product_id: product, quantity: 1 }],
+    }),
+  );
+  assert.equal(q.discount_rappen, 1000);
+  assert.equal(q.delivery_rappen, 0);
+});
+test("duplicate cart components aggregate before stock validation", async () => {
+  check(
+    await service
+      .from("v25_inventory")
+      .update({ quantity: 3 })
+      .eq("product_id", product),
+  );
+  assert.ok(
+    (
+      await call(silver, "quote", {
+        lines: [
+          { product_id: product, quantity: 2 },
+          { product_id: product, quantity: 2 },
+        ],
+      })
+    ).error,
+  );
+  check(
+    await service
+      .from("v25_inventory")
+      .update({ quantity: 100 })
+      .eq("product_id", product),
+  );
+});
+test("tobacco and mixed orders fail in database", async () => {
+  const tobacco = check(
+    await service
+      .from("v25_products")
+      .select("id")
+      .eq("adult_only", true)
+      .limit(1)
+      .single(),
+  );
+  assert.ok(
+    (
+      await call(silver, "quote", {
+        lines: [{ product_id: tobacco.id, quantity: 1 }],
+      })
+    ).error,
+  );
+  assert.ok(
+    (
+      await call(gold, "quote", {
+        lines: [
+          { product_id: product, quantity: 1 },
+          { product_id: tobacco.id, quantity: 1 },
+        ],
+      })
+    ).error,
+  );
+});
+test("pending/expired verification immediately removes Gold access", async () => {
+  check(await call(gold, "test_verification", { status: "expired" }));
+  assert.equal(check(await gold.rpc("v25_platform_identity")).gold, false);
+  assert.ok((await call(gold, "pass", { token_hash: "a".repeat(64) })).error);
+  check(await call(gold, "test_verification", { status: "verified" }));
+});
+test("pending verification cannot activate membership", async () => {
+  check(await call(silver, "test_verification", { status: "pending" }));
+  assert.ok(
+    (await call(silver, "membership", { plan_id: "gold-monthly" })).error,
+  );
+  check(await call(silver, "test_verification", { status: "verified" }));
+});
+test("scheduled cancellation retains paid Gold; cancelled status removes it", async () => {
+  check(await call(gold, "cancel_membership"));
+  assert.equal(check(await gold.rpc("v25_platform_identity")).gold, true);
+  check(
+    await service
+      .from("v25_memberships")
+      .update({ status: "cancelled" })
+      .eq("member_id", accounts.gold.id),
+  );
+  assert.equal(check(await gold.rpc("v25_platform_identity")).gold, false);
+  check(
+    await service
+      .from("v25_memberships")
+      .update({ status: "active", cancel_at_period_end: false })
+      .eq("member_id", accounts.gold.id),
+  );
+});
+test("order creation is atomic and idempotent under concurrency", async () => {
+  const address = check(
+    await silver.from("v25_member_addresses").select("id").limit(1).single(),
+  );
+  const key = randomUUID();
+  const doc = {
+    lines: [{ product_id: product, quantity: 2 }],
+    address_id: address.id,
+  };
+  const outcomes = await Promise.all([
+    call(silver, "order", doc, key),
+    call(silver, "order", doc, key),
+  ]);
+  order = check(outcomes[0]);
+  assert.equal(check(outcomes[1]).order_id, order.order_id);
+  assert.equal(
+    check(
+      await service
+        .from("v25_inventory")
+        .select("quantity")
+        .eq("product_id", product)
+        .single(),
+    ).quantity,
+    98,
+  );
+  assert.ok(
+    (
+      await call(
+        silver,
+        "order",
+        { ...doc, lines: [{ product_id: product, quantity: 3 }] },
+        key,
+      )
+    ).error,
+  );
+});
+test("unpaid orders cannot enter fulfilment", async () =>
+  assert.ok(
+    (
+      await call(admin, "order_status", {
+        id: order.order_id,
+        status: "preparing",
+      })
+    ).error,
+  ));
+test("reconciliation validates exact amount and deduplicates events", async () => {
+  const p = check(
+    await admin
+      .from("v25_payments")
+      .select("*")
+      .eq("id", order.payment_id)
+      .single(),
+  );
+  assert.ok(
+    (
+      await call(admin, "reconcile", {
+        payment_id: p.id,
+        state: "matched",
+        amount_rappen: p.amount_rappen - 1,
+        event_id: randomUUID(),
+        reason: "Local test bank line",
+      })
+    ).error,
+  );
+  const doc = {
+    payment_id: p.id,
+    state: "matched",
+    amount_rappen: p.amount_rappen,
+    event_id: randomUUID(),
+    reason: "Local test bank line",
+  };
+  check(await call(admin, "reconcile", doc));
+  assert.equal(check(await call(admin, "reconcile", doc)).replayed, true);
+  assert.equal(
+    check(
+      await silver
+        .from("v25_orders")
+        .select("status")
+        .eq("id", order.order_id)
+        .single(),
+    ).status,
+    "paid",
+  );
+});
+test("paid order lifecycle and audit history", async () => {
+  for (const status of ["preparing", "dispatched", "completed"])
+    check(
+      await call(admin, "order_status", {
+        id: order.order_id,
+        status,
+        tracking: "LOCAL-TEST",
+        notes: "Local review",
+      }),
+    );
+  assert.ok(
+    (await call(admin, "order_status", { id: order.order_id, status: "paid" }))
+      .error,
+  );
+  const audit = check(
+    await admin
+      .from("v25_audit_events")
+      .select("*")
+      .eq("entity", "v25_orders")
+      .eq("entity_id", order.order_id),
+  );
+  assert.ok(audit.length >= 4);
+  assert.ok(
+    audit.every((r) => !JSON.stringify(r.detail).includes("Teststrasse")),
+  );
+});
+test("payment events are immutable even with service access", async () => {
+  const event = check(
+    await service
+      .from("v25_platform_payment_events")
+      .select("id")
+      .eq("payment_id", order.payment_id)
+      .single(),
+  );
+  assert.ok(
+    (
+      await service
+        .from("v25_platform_payment_events")
+        .update({ state: "failed" })
+        .eq("id", event.id)
+    ).error,
+  );
+  assert.ok(
+    (
+      await service
+        .from("v25_platform_payment_events")
+        .delete()
+        .eq("id", event.id)
+    ).error,
+  );
+});
+test("staff sees named pass and duplicate redemption is blocked across venues", async () => {
+  const token = createHash("sha256").update(randomUUID()).digest("hex");
+  check(await call(gold, "pass", { token_hash: token }));
+  const doc = { token_hash: token, venue: "restaurant" };
+  const p = check(await call(staff, "pass_check", doc));
+  assert.equal(p.name, "Local gold reviewer");
+  assert.equal(p.eligible, true);
+  assert.ok((await call(staff, "redeem", doc)).error);
+  const results = await Promise.all([
+    call(staff, "redeem", { ...doc, identity_confirmed: true }),
+    call(staff, "redeem", {
+      ...doc,
+      venue: "lounge",
+      identity_confirmed: true,
+    }),
+  ]);
+  assert.equal(results.filter((r) => !r.error).length, 1);
+  assert.equal(results.filter((r) => r.error).length, 1);
+});
+test("suspending a member revokes pass and account access", async () => {
+  check(
+    await call(admin, "member_state", {
+      id: accounts.gold.id,
+      state: "suspended",
+    }),
+  );
+  assert.equal(check(await gold.rpc("v25_platform_identity")).active, false);
+  assert.ok(
+    (
+      await call(gold, "quote", {
+        lines: [{ product_id: product, quantity: 1 }],
+      })
+    ).error,
+  );
+  check(
+    await call(admin, "member_state", {
+      id: accounts.gold.id,
+      state: "active",
+    }),
+  );
+});
+test("product CRUD retains independent DE FR EN fields and revision conflicts", async () => {
+  const doc = blankProduct();
+  doc.slug = `local-editor-${randomUUID().slice(0, 8)}`;
+  doc.category = "tea";
+  doc.translations.forEach((t) => (t.name = `LOCAL TEST ${t.locale}`));
+  const id = check(
+    await admin.rpc("v25_save_product", {
+      document: doc,
+      expected_revision: null,
+    }),
+  );
+  const p = check(
+    await admin.from("v25_products").select("*").eq("id", id).single(),
+  );
+  assert.equal(p.status, "draft");
+  check(
+    await admin.rpc("v25_save_product", {
+      document: { ...doc, id, status: "archived" },
+      expected_revision: p.revision,
+    }),
+  );
+  assert.ok(
+    (
+      await admin.rpc("v25_save_product", {
+        document: { ...doc, id },
+        expected_revision: p.revision,
+      })
+    ).error,
+  );
+});
+test("administrator cannot assign own owner role", async () =>
+  assert.ok(
+    (
+      await call(admin, "staff", {
+        id: accounts.administrator.id,
+        role: "manager",
+        enabled: true,
+      })
+    ).error,
+  ));
+test("signed-out JWT no longer grants database session access", async () => {
+  const db = make();
+  const result = await db.auth.signInWithPassword(accounts.silver);
+  assert.equal(result.error, null);
+  const token = result.data.session!.access_token;
+  check(await db.auth.signOut({ scope: "local" }));
+  const stale = createClient(url, key, {
+    global: { headers: { Authorization: `Bearer ${token}` } },
+    auth: { persistSession: false },
+  });
+  const i = check(await stale.rpc("v25_platform_identity"));
+  assert.equal(i, null);
+});
+test("monthly and yearly fees are undiscounted and activation requires test settlement", async () => {
+  for (const [plan, fee] of [
+    ["gold-monthly", 6900],
+    ["gold-yearly", 50000],
+  ] as const) {
+    if (plan === "gold-yearly")
+      check(
+        await service
+          .from("v25_memberships")
+          .update({
+            status: "expired",
+            period_start: "2025-01-01",
+            period_end: "2026-01-01",
+          })
+          .eq("member_id", accounts.silver.id),
+      );
+    const selected = check(await call(silver, "membership", { plan_id: plan }));
+    const p = check(
+      await silver
+        .from("v25_payments")
+        .select("*")
+        .eq("id", selected.payment_id)
+        .single(),
+    );
+    assert.equal(p.amount_rappen, fee);
+    assert.equal(check(await silver.rpc("v25_platform_identity")).gold, false);
+    check(
+      await call(admin, "reconcile", {
+        payment_id: p.id,
+        state: "matched",
+        amount_rappen: fee,
+        event_id: randomUUID(),
+        reason: "Local membership payment test",
+      }),
+    );
+    assert.equal(check(await silver.rpc("v25_platform_identity")).gold, true);
+  }
+});
+test("bank import is atomic and duplicate transaction IDs cannot settle twice", async () => {
+  check(
+    await service
+      .from("v25_memberships")
+      .update({
+        status: "expired",
+        period_start: "2025-01-01",
+        period_end: "2026-01-01",
+      })
+      .eq("member_id", accounts.silver.id),
+  );
+  const selected = check(
+    await call(silver, "membership", { plan_id: "gold-monthly" }),
+  );
+  const p = check(
+    await silver
+      .from("v25_payments")
+      .select("*")
+      .eq("id", selected.payment_id)
+      .single(),
+  );
+  const row = {
+    transaction_id: randomUUID(),
+    reference: p.reference,
+    amount_rappen: p.amount_rappen,
+    currency: "CHF",
+    booked_at: "2026-09-27",
+  };
+  assert.ok(
+    (
+      await call(admin, "reconcile_import", {
+        rows: [
+          row,
+          { ...row, transaction_id: randomUUID(), reference: "RF001" },
+        ],
+      })
+    ).error,
+  );
+  assert.equal(
+    check(
+      await silver.from("v25_payments").select("state").eq("id", p.id).single(),
+    ).state,
+    "awaiting_payment",
+  );
+  check(await call(admin, "reconcile_import", { rows: [row] }));
+  assert.ok((await call(admin, "reconcile_import", { rows: [row] })).error);
+});
+test("partial refund accumulates exact rappen and final refund closes order", async () => {
+  const p = check(
+    await admin
+      .from("v25_payments")
+      .select("*")
+      .eq("id", order.payment_id)
+      .single(),
+  );
+  check(
+    await call(admin, "reconcile", {
+      payment_id: p.id,
+      state: "partially_refunded",
+      amount_rappen: 100,
+      event_id: randomUUID(),
+      reason: "Partial local refund",
+    }),
+  );
+  assert.equal(
+    check(
+      await admin
+        .from("v25_payments")
+        .select("refunded_rappen")
+        .eq("id", p.id)
+        .single(),
+    ).refunded_rappen,
+    100,
+  );
+  check(
+    await call(admin, "reconcile", {
+      payment_id: p.id,
+      state: "refunded",
+      amount_rappen: p.amount_rappen - 100,
+      event_id: randomUUID(),
+      reason: "Remaining local refund",
+    }),
+  );
+  assert.equal(
+    check(
+      await admin
+        .from("v25_orders")
+        .select("status")
+        .eq("id", order.order_id)
+        .single(),
+    ).status,
+    "refunded",
+  );
+});
+
+test("missing consent and empty/malformed carts are rejected", async () => {
+  assert.ok(
+    (await call(silver, "onboard", { name: "Local test", locale: "en" })).error,
+  );
+  for (const lines of [null, [], [{ product_id: product }], {}])
+    assert.ok((await call(silver, "quote", { lines })).error);
+});
