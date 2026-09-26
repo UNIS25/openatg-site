@@ -1,5 +1,5 @@
 1:"$Sreact.fragment"
-2:I[1186,["3","static/chunks/app/%5Blocale%5D/cigar-collection/page-f86fcd79f08a4b34.js"],"default"]
+2:I[1186,["3","static/chunks/app/%5Blocale%5D/cigar-collection/page-91c93d2e89a4d96c.js"],"default"]
 6:X
 b:X
 b:C

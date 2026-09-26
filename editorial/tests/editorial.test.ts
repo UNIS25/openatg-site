@@ -51,6 +51,10 @@ test('export hashes and untouched baseline protect existing routes and assets', 
   for (const [view, original] of Object.entries(manifest.originals)) {
     assert.equal(createHash('sha256').update(readFileSync(`assets/originals/varathans-cigars-box-${view}.png`)).digest('hex'), (original as { sha256: string }).sha256);
   }
-  const modified = execFileSync('git', ['diff', '--name-only', '--diff-filter=MDR', manifest.sourceCommit, '--', '.'], { cwd: '..', encoding: 'utf8' }).trim();
+  // This release cherry-picks the editorial onto public main. The manifest's
+  // sourceCommit records catalogue provenance, not the production baseline.
+  const productionBaseline = 'd7012ead4eb2291847f130c30891d70fd0abb173';
+  execFileSync('git', ['merge-base', '--is-ancestor', productionBaseline, 'HEAD'], { cwd: '..' });
+  const modified = execFileSync('git', ['diff', '--name-only', '--diff-filter=MDR', productionBaseline, '--', '.'], { cwd: '..', encoding: 'utf8' }).trim();
   assert.equal(modified, '', 'No pre-existing repository files may be modified, deleted or renamed');
 });

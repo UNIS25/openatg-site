@@ -1,5 +1,7 @@
 # Varathans packaging editorial — review only
 
+> Historical feature-branch review. The owner subsequently approved publication of this editorial alone. See [the production release record](VARATHANS25_CIGAR_EDITORIAL_DEPLOYMENT.md) for the isolated cherry-pick, production verification and rollback procedure.
+
 This change adds a factual, non-transactional packaging presentation titled **VARATHANS CIGAR COLLECTION · 18+**. It is committed to `work/varathans25-private-cigar-club` for screenshot review. It is **not merged or deployed**.
 
 ## Routes prepared
