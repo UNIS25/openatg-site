@@ -6,8 +6,8 @@
   "scripts": {
     "typecheck": "next typegen && tsc --noEmit",
     "lint": "eslint src scripts tests *.mjs",
-    "build": "node scripts/build.mjs",
-    "test": "node --import tsx --test tests/editorial.test.ts",
+    "build": "node scripts/tea-tins.mjs prepare && node scripts/build.mjs && node scripts/tea-tins.mjs publish",
+    "test": "node --import tsx --test tests/*.test.ts",
     "test:e2e": "playwright test"
   },
   "dependencies": {

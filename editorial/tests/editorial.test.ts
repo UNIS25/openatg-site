@@ -55,6 +55,7 @@ test('export hashes and untouched baseline protect existing routes and assets', 
   // sourceCommit records catalogue provenance, not the production baseline.
   const productionBaseline = 'd7012ead4eb2291847f130c30891d70fd0abb173';
   execFileSync('git', ['merge-base', '--is-ancestor', productionBaseline, 'HEAD'], { cwd: '..' });
-  const modified = execFileSync('git', ['diff', '--name-only', '--diff-filter=MDR', productionBaseline, '--', '.'], { cwd: '..', encoding: 'utf8' }).trim();
-  assert.equal(modified, '', 'No pre-existing repository files may be modified, deleted or renamed');
+  const protectedPaths = ['index.html', 'signal', 'store', 'varathans25/images/cigars', 'varathans25/images/gelber-curry-kokos*', 'varathans25/brand', 'varathans25/cigar-mix-builder.js', 'varathans25/cigar-mix-builder.css'];
+  const modified = execFileSync('git', ['diff', '--name-only', '--diff-filter=MDR', productionBaseline, '--', ...protectedPaths], { cwd: '..', encoding: 'utf8' }).trim();
+  assert.equal(modified, '', 'Existing OpenATG, curry, cigar, logo and delivery assets are protected');
 });

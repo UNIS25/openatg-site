@@ -1,12 +1,12 @@
 // Customer-facing copy for the visual reset. Operational notes stay in admin/docs.
 export const storefrontEN = {
   foodNav: "Food",
-  teaNav: "Tea & Coffee",
+  teaNav: "Tea",
   shopCategories: "Shop by category",
   ourPicks: "Our picks",
   fromSursee: "From Sursee, delivered across Switzerland.",
   rooftopCaption: "A little closer to Sursee.",
-  teaCaption: "Tea, coffee and discoveries from Sri Lanka.",
+  teaCaption: "Tea and discoveries from Sri Lanka.",
   foodCaption: "From our kitchen.",
   shopNow: "Shop the collection",
   seeProducts: "View products",
@@ -28,7 +28,7 @@ export const storefrontEN = {
   priceOnRequest: "Price on request",
   deliveryShort: "Delivery, made simple.",
   deliveryCopy: "Enter your postcode to see what can reach your door.",
-  nationalCopy: "Spices, tea, coffee and gifts across Switzerland.",
+  nationalCopy: "Spices, tea and gifts across Switzerland.",
   regionalCopy: "Chilled and frozen favourites, where available.",
   pickupCopy: "Collect from Varathans25 in Sursee, where available.",
   noDelivery: "Currently unavailable for this postcode",
@@ -37,7 +37,7 @@ export const storefrontEN = {
   storyLead:
     "Welcome to Varathans25. A restaurant, rooftop and bar above Sursee, brought to life by Varathan and Tharanie.",
   storyBody:
-    "A table with a view. An evening at the bar. Food with Sri Lankan roots. Our shop brings a little of Varathans25 to your own table, with spices, tea, coffee and gifts chosen for sharing.",
+    "A table with a view. An evening at the bar. Food with Sri Lankan roots. Our shop brings a little of Varathans25 to your own table, with spices, tea and gifts chosen for sharing.",
   storyRooftop: "Above the rooftops",
   storyRooftopCopy:
     "Come for a meal, stay for the panoramic terrace. Find us at Kavalleriestrasse 2 in Sursee.",
@@ -51,12 +51,12 @@ export const storefrontEN = {
 export type StorefrontMessages = { [K in keyof typeof storefrontEN]: string };
 export const storefrontDE: StorefrontMessages = {
   foodNav: "Food",
-  teaNav: "Tee & Kaffee",
+  teaNav: "Tee",
   shopCategories: "Nach Kategorie einkaufen",
   ourPicks: "Unsere Empfehlungen",
   fromSursee: "Aus Sursee. In die ganze Schweiz.",
   rooftopCaption: "Ein Stück näher an Sursee.",
-  teaCaption: "Tee, Kaffee und Entdeckungen aus Sri Lanka.",
+  teaCaption: "Tee und Entdeckungen aus Sri Lanka.",
   foodCaption: "Aus unserer Küche.",
   shopNow: "Sortiment entdecken",
   seeProducts: "Produkte ansehen",
@@ -81,7 +81,7 @@ export const storefrontDE: StorefrontMessages = {
   deliveryShort: "Einfach zu Ihnen.",
   deliveryCopy:
     "Geben Sie Ihre Postleitzahl ein und entdecken Sie die Liefermöglichkeiten.",
-  nationalCopy: "Gewürze, Tee, Kaffee und Geschenke in der ganzen Schweiz.",
+  nationalCopy: "Gewürze, Tee und Geschenke in der ganzen Schweiz.",
   regionalCopy: "Gekühlte und tiefgekühlte Spezialitäten, wo verfügbar.",
   pickupCopy: "Abholung im Varathans25 in Sursee, wo verfügbar.",
   noDelivery: "Für diese Postleitzahl derzeit nicht verfügbar",
@@ -90,7 +90,7 @@ export const storefrontDE: StorefrontMessages = {
   storyLead:
     "Willkommen im Varathans25. Restaurant, Rooftop und Bar über Sursee, mit Herz geführt von Varathan und Tharanie.",
   storyBody:
-    "Ein Tisch mit Aussicht. Ein Abend an der Bar. Kulinarik mit sri-lankischen Wurzeln. Unser Shop bringt ein Stück Varathans25 an Ihren Tisch: Gewürze, Tee, Kaffee und Geschenke zum gemeinsamen Geniessen.",
+    "Ein Tisch mit Aussicht. Ein Abend an der Bar. Kulinarik mit sri-lankischen Wurzeln. Unser Shop bringt ein Stück Varathans25 an Ihren Tisch: Gewürze, Tee und Geschenke zum gemeinsamen Geniessen.",
   storyRooftop: "Über den Dächern",
   storyRooftopCopy:
     "Kommen Sie zum Essen und bleiben Sie für die Panoramaterrasse. Sie finden uns an der Kavalleriestrasse 2 in Sursee.",
@@ -103,12 +103,12 @@ export const storefrontDE: StorefrontMessages = {
 };
 export const storefrontFR: StorefrontMessages = {
   foodNav: "Épicerie",
-  teaNav: "Thé & Café",
+  teaNav: "Thé",
   shopCategories: "Acheter par catégorie",
   ourPicks: "Notre sélection",
   fromSursee: "De Sursee, partout en Suisse.",
   rooftopCaption: "Un peu plus près de Sursee.",
-  teaCaption: "Thé, café et découvertes du Sri Lanka.",
+  teaCaption: "Thé et découvertes du Sri Lanka.",
   foodCaption: "De notre cuisine.",
   shopNow: "Découvrir la collection",
   seeProducts: "Voir les produits",
@@ -133,7 +133,7 @@ export const storefrontFR: StorefrontMessages = {
   deliveryShort: "La livraison, simplement.",
   deliveryCopy:
     "Saisissez votre code postal pour découvrir les possibilités de livraison.",
-  nationalCopy: "Épices, thé, café et cadeaux dans toute la Suisse.",
+  nationalCopy: "Épices, thé et cadeaux dans toute la Suisse.",
   regionalCopy: "Spécialités fraîches et surgelées, selon disponibilité.",
   pickupCopy: "Retrait au Varathans25 à Sursee, selon disponibilité.",
   noDelivery: "Actuellement indisponible pour ce code postal",
@@ -142,7 +142,7 @@ export const storefrontFR: StorefrontMessages = {
   storyLead:
     "Bienvenue chez Varathans25. Un restaurant, un rooftop et un bar au-dessus de Sursee, animés par Varathan et Tharanie.",
   storyBody:
-    "Une table avec vue. Une soirée au bar. Une cuisine aux racines sri-lankaises. Notre boutique apporte un peu de Varathans25 à votre table : épices, thé, café et cadeaux choisis pour être partagés.",
+    "Une table avec vue. Une soirée au bar. Une cuisine aux racines sri-lankaises. Notre boutique apporte un peu de Varathans25 à votre table : épices, thé et cadeaux choisis pour être partagés.",
   storyRooftop: "Au-dessus des toits",
   storyRooftopCopy:
     "Venez pour un repas, restez pour la terrasse panoramique. Retrouvez-nous à la Kavalleriestrasse 2 à Sursee.",

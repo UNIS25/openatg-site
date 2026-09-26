@@ -70,7 +70,7 @@ export const de: Messages = {
   worldSpices: "Gewürze & Mischungen",
   worldReady: "Kochfertig",
   worldTea: "Ceylon-Tee",
-  worldCoffee: "Kaffee aus Sri Lanka",
+  worldCoffee: "Tee",
   worldGifts: "Geschenke mit Bedacht",
   worldPartners: "Partnerauswahl",
   worldKitchenCopy: "Von unserer Küche zu Ihnen.",
@@ -98,7 +98,7 @@ export const de: Messages = {
   copyright: "Alle Rechte vorbehalten.",
   catalogueTitle: "Entdecken Sie Ihre Favoriten.",
   catalogueCopy:
-    "Gewürze, Tee, Kaffee und Geschenke, ausgewählt von Varathans25.",
+    "Gewürze, Tee und Geschenke, ausgewählt von Varathans25.",
   products: "Produkte",
   filters: "Filter",
   clearFilters: "Filter zurücksetzen",
@@ -224,7 +224,7 @@ export const de: Messages = {
     "Beginnen Sie mit Ihrer Postleitzahl. Haltbare Produkte sind für den schweizweiten Versand eingerichtet. Gekühlte, gefrorene Produkte und Abholung bleiben gesperrt, bis Anbieter, Liefergebiet und Handhabung geprüft sind.",
   kitchenTitle: "Essen mit Charakter.\nEin Platz an Ihrem Tisch.",
   kitchenIntro:
-    "V25 Suisse, gegründet von Varathans25, ist ein Schweizer–Sri-lankischer Marktplatz in Entwicklung. Die erste Auswahl umfasst Gewürze, Tee, Kaffee und Küchenkonzepte. Rezepte, Lieferanten und Produktdetails werden vor dem Start bestätigt.",
+    "V25 Suisse, gegründet von Varathans25, ist ein Schweizer–Sri-lankischer Marktplatz in Entwicklung. Die erste Auswahl umfasst Gewürze, Tee und Küchenkonzepte. Rezepte, Lieferanten und Produktdetails werden vor dem Start bestätigt.",
   collectionsTitle: "Gutes, zusammengebracht.",
   contactPending:
     "Varathans25 · Kavalleriestrasse 2 · 6210 Sursee · +41 41 921 30 60 · info@varathans25.ch",

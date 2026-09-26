@@ -1,5 +1,5 @@
 1:"$Sreact.fragment"
-2:I[29011,["/varathans25/_next/static/chunks/3fntmmi971322.js","/varathans25/_next/static/chunks/1rpplkm6wsxy0.js","/varathans25/_next/static/chunks/2to0v8xkzjqr9-layout-v1.js","/varathans25/_next/static/chunks/1bwpvix27slqy.js","/varathans25/_next/static/chunks/2vrr_5r91ji23.js"],"ReviewCigars"]
+2:I[29011,["/varathans25/_next/static/chunks/3fntmmi971322.js","/varathans25/_next/static/chunks/1rpplkm6wsxy0.js","/varathans25/_next/static/chunks/2to0v8xkzjqr9-layout-v1-tea-tins-v1.js","/varathans25/_next/static/chunks/1bwpvix27slqy-tea-tins-v1.js","/varathans25/_next/static/chunks/2vrr_5r91ji23-tea-tins-v1.js"],"ReviewCigars"]
 6:X
 b:X
 b:C
@@ -11,9 +11,9 @@ f:"$Sreact.suspense"
 13:I[27201,["/varathans25/_next/static/chunks/3fntmmi971322.js"],"IconMark"]
 14:I[39756,["/varathans25/_next/static/chunks/3fntmmi971322.js"],"default"]
 15:I[37457,["/varathans25/_next/static/chunks/3fntmmi971322.js"],"default"]
-3:["$","script","script-0",{"src":"/varathans25/_next/static/chunks/2vrr_5r91ji23.js","async":true}]
+3:["$","script","script-0",{"src":"/varathans25/_next/static/chunks/2vrr_5r91ji23-tea-tins-v1.js","async":true}]
 4:["$","$Le",null,{"children":["$","$f",null,{"name":"Next.MetadataOutlet","children":"$@10"}]}]
-7:["$","$1","h",{"children":[null,["$","$L11",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","div",null,{"hidden":true,"children":["$","$L12",null,{"children":["$","$f",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Varathans25 — Island flavour. Swiss precision."}],["$","meta","1",{"name":"description","content":"Curry, tea and coffee from Varathans25 in Sursee."}],["$","meta","2",{"name":"robots","content":"noindex, nofollow, noarchive"}],["$","link","3",{"rel":"icon","href":"/varathans25/brand/varathans25-original.png"}],["$","$L13","4",{}]]}]}]}],null]}]
+7:["$","$1","h",{"children":[null,["$","$L11",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","div",null,{"hidden":true,"children":["$","$L12",null,{"children":["$","$f",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Varathans25 — Island flavour. Swiss precision."}],["$","meta","1",{"name":"description","content":"Curry and tea from Varathans25 in Sursee."}],["$","meta","2",{"name":"robots","content":"noindex, nofollow, noarchive"}],["$","link","3",{"rel":"icon","href":"/varathans25/brand/varathans25-original.png"}],["$","$L13","4",{}]]}]}]}],null]}]
 9:["$","$1","c",{"children":[null,["$","$L14",null,{"parallelRouterKey":"children","template":["$","$L15",null,{}]}]]}]
 d:true
 10:null
