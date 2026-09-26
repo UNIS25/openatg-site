@@ -60,8 +60,16 @@ test('language switching, mobile navigation and saved bag remain intact', async 
   const errors: string[] = [];
   page.on('pageerror', e => errors.push(e.message));
   page.on('console', m => { if (m.type() === 'error') errors.push(m.text()); });
+  // Seed an existing bag before React reads browser storage. Writing the fixture
+  // after navigation races the initial empty-state persistence on a cold load.
+  // The session marker prevents reseeding on reload and masking a real loss.
+  await page.addInitScript(() => {
+    if (!sessionStorage.getItem('editorial-bag-fixture-seeded')) {
+      localStorage.setItem('varathans25_review_cart', JSON.stringify([{ productId: 'editorial-preservation-test', quantity: 2 }]));
+      sessionStorage.setItem('editorial-bag-fixture-seeded', '1');
+    }
+  });
   await page.goto('/varathans25/de/cigar-collection/');
-  await page.evaluate(() => localStorage.setItem('varathans25_review_cart', JSON.stringify([{ productId: 'editorial-preservation-test', quantity: 2 }])));
   await page.reload();
   for (const locale of ['fr', 'en', 'de'] as const) {
     if (testInfo.project.name === 'mobile') {

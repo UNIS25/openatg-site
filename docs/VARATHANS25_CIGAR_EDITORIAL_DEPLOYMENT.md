@@ -18,7 +18,21 @@ The presentation remains adults-only, factual and non-transactional. All three p
 - `https://openatg.com/varathans25/fr/cigar-collection/`
 - `https://openatg.com/varathans25/en/cigar-collection/`
 
-These are the intended publication paths. Successful deployment must be confirmed through the GitHub Pages build and live route checks; this record alone is not evidence of a completed deployment.
+GitHub Pages successfully published deployment merge `2c5c36f66ba26027607c893fc2701ac1f8d4c838` in [run 36236579616](https://github.com/UNIS25/openatg-site/actions/runs/36236579616). All three paths were subsequently tested on the live origin.
+
+## Live verification results
+
+- All 169 HTML routes returned HTTP 200, including every one of the 166 pre-existing paths.
+- All 107 checked static assets returned HTTP 200 and matched local SHA-256 hashes, including the approved packaging photographs and their responsive sizes.
+- All 15 live editorial Playwright journeys passed across DE/FR/EN at desktop, tablet and mobile widths. Direct reloads, language switching, mobile navigation, image controls, saved bag preservation and reduced motion passed.
+- Nine live full-page axe scans reported zero WCAG A/AA violations. Local browser suites also remained green: 15 editorial plus 27 existing storefront journeys.
+- Seven existing core routes matched their pre-deployment browser status, page title and console baseline: `/`, `/signal/`, `/store/`, `/store/base-32m/`, `/store/base-64m/`, `/varathans25/` and `/varathans25/en/`.
+- No new application or page errors were observed. The already-recorded injected Cloudflare analytics CSP message remains and was classified separately by exact script origin and message; CSP was not relaxed.
+- Gitleaks found zero secrets in the full two-commit deployment range. No environment files, private keys, local databases, dependency folders or verification artifacts were committed.
+
+The first live run exposed a **test-fixture timing race** on tablet: the test wrote a synthetic bag after navigation, competing with React's initial storage restoration. The fixture now seeds storage before application initialization, once per browser session; reloads cannot reseed it and mask a real persistence failure. No storefront code changed. After this correction, all 15 local and all 15 live editorial journeys passed with no retries or skips. The test correction and this results record form a verification-only follow-up commit; the deployed customer assets are byte-identical to the successful deployment merge.
+
+Live full-page screenshots and JSON reports were captured under the ignored local `editorial/artifacts/live-suite/artifacts/` directory and are supplied separately in the delivery report. The checked-in review screenshots remain the original approved captures.
 
 ## Pre-publication checks
 
@@ -84,8 +98,9 @@ Rollback preserves history. From a clean checkout based on the current remote ma
 ```sh
 git fetch origin
 git switch -c rollback/cigar-editorial-publication origin/main
-git revert -m 1 <deployment-merge-commit>
+git revert <verification-follow-up-commit>
+git revert -m 1 2c5c36f66ba26027607c893fc2701ac1f8d4c838
 git push origin HEAD:main
 ```
 
-Substitute the exact merge SHA reported after publication. Do not reset or force-push. A revert of that merge removes only this editorial release and restores the previous static tree while preserving any unrelated subsequent commits. Wait for the Pages rollback build and recheck existing routes.
+Substitute the verification-only follow-up SHA reported with the final live commit. Revert it first, then the deployment merge; this avoids a modify/delete conflict in the newly added test and release document. Do not reset or force-push. The two reverts remove only this editorial release while preserving unrelated subsequent commits. Wait for the Pages rollback build and recheck existing routes.
