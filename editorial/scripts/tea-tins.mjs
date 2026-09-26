@@ -155,7 +155,7 @@ function publish() {
     const destination = `/varathans25/${locale}/shop/?selection=tea`;
     // GitHub Pages cannot issue custom HTTP redirects. Retire the product with
     // a noindex static redirect plus an accessible, script-free fallback link.
-    writeFileSync(join(repo, `varathans25/${locale}/product/coffee-powder/index.html`), `<!doctype html><html lang="${locale}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex, nofollow"><meta http-equiv="refresh" content="0; url=${destination}"><link rel="canonical" href="https://openatg.com${destination}"><title>${label} — Varathans25</title></head><body><main><h1>${label}</h1><a href="${destination}">Varathans25 · ${label}</a></main></body></html>\n`);
+    writeFileSync(join(repo, `varathans25/${locale}/product/coffee-powder/index.html`), `<!doctype html><html lang="${locale}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex, nofollow"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'none'; style-src 'none'; connect-src 'none'; base-uri 'self'; object-src 'none'; form-action 'none'; upgrade-insecure-requests"><meta name="referrer" content="strict-origin-when-cross-origin"><meta http-equiv="refresh" content="0; url=${destination}"><link rel="canonical" href="https://openatg.com${destination}"><title>${label} — Varathans25</title></head><body><main><h1>${label}</h1><a href="${destination}">Varathans25 · ${label}</a></main></body></html>\n`);
   }
   console.log(`Updated public catalogue and ${names.size} versioned storefront chunks; retired three Coffee product pages.`);
 }

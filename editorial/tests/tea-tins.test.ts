@@ -72,6 +72,9 @@ test('Coffee URLs are retired to localized Tea redirects without product payload
     assert.deepEqual(readdirSync(join(repo, directory)), ['index.html']);
     const source = read(`${directory}/index.html`);
     assert.match(source, /noindex, nofollow/);
+    assert.match(source, /Content-Security-Policy/);
+    assert.match(source, /script-src 'none'/);
+    assert.match(source, /connect-src 'none'/);
     assert.ok(source.includes(`url=/varathans25/${locale}/shop/?selection=tea`));
     assert.doesNotMatch(source, /<script|CHF|product-card/);
   }
