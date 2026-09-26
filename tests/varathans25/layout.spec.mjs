@@ -5,7 +5,7 @@ const test=base.extend({page:async({page},use,info)=>{
  const errors=[],writes=[];page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push(m.text())});page.on('request',r=>{if(!['GET','HEAD'].includes(r.method())||/supabase|stripe|paypal|\/api\/|\/adminpage\//.test(r.url()))writes.push(r.url())});
  await use(page);appendFileSync(new URL('./diagnostics.jsonl',import.meta.url),JSON.stringify({name:info.title,device:info.project.name,errors,writes})+'\n');expect(errors).toEqual([]);expect(writes).toEqual([]);
 }});
-const announcements={en:'Free delivery across Switzerland from CHF 100',de:'Kostenlose Lieferung in der Schweiz ab CHF 100',fr:'Livraison gratuite en Suisse dès CHF 100'};
+const announcements={en:'Free delivery on orders of CHF 100 or more.',de:'Kostenlose Lieferung ab einem Bestellwert von CHF 100.',fr:'Livraison offerte dès CHF 100 d’achat.'};
 const unlocked={en:'You’ve unlocked free delivery.',de:'Ihre Lieferung ist kostenlos.',fr:'Vous bénéficiez de la livraison gratuite.'};
 async function accessibility(page){expect((await new AxeBuilder({page}).analyze()).violations).toEqual([]);expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true)}
 async function logo(page){const positions=await page.locator('.site-header').evaluate(h=>{const r=h.getBoundingClientRect(),i=h.querySelector('img').getBoundingClientRect();return {top:i.top-r.top,bottom:r.bottom-i.bottom,left:i.left,right:i.right,width:innerWidth}});expect(positions.top).toBeGreaterThanOrEqual(13);expect(positions.bottom).toBeGreaterThanOrEqual(13);expect(positions.left).toBeGreaterThanOrEqual(20);expect(positions.right).toBeLessThan(positions.width-20)}

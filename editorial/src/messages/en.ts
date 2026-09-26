@@ -66,7 +66,7 @@ export const en = {
   worldSpices: "Spices & blends",
   worldReady: "Ready to cook",
   worldTea: "Ceylon tea",
-  worldCoffee: "Sri Lankan coffee",
+  worldCoffee: "Tea",
   worldGifts: "Gifts, thoughtfully chosen",
   worldPartners: "Partner selection",
   worldKitchenCopy: "From our kitchen to yours.",
@@ -93,7 +93,7 @@ export const en = {
   legalDraft: "Draft · Swiss legal review required before launch.",
   copyright: "All rights reserved.",
   catalogueTitle: "Discover your favourites.",
-  catalogueCopy: "Spices, tea, coffee and gifts, chosen by Varathans25.",
+  catalogueCopy: "Spices, tea and gifts, chosen by Varathans25.",
   products: "products",
   filters: "Filters",
   clearFilters: "Clear filters",
@@ -217,7 +217,7 @@ export const en = {
     "Start with your postcode. Shelf-stable products are configured for national Swiss delivery. Chilled, frozen and restaurant pickup options remain unavailable until their provider, service area and handling process are verified.",
   kitchenTitle: "Food with character.\nA place at your table.",
   kitchenIntro:
-    "Created by Varathans25, V25 Suisse is a Swiss–Sri Lankan marketplace in development. Our first selection brings together spice blends, tea, coffee and kitchen concepts. We are confirming recipes, suppliers and product details before launch.",
+    "Created by Varathans25, V25 Suisse is a Swiss–Sri Lankan marketplace in development. Our first selection brings together spice blends, tea and kitchen concepts. We are confirming recipes, suppliers and product details before launch.",
   collectionsTitle: "Good things, brought together.",
   contactPending:
     "Varathans25 · Kavalleriestrasse 2 · 6210 Sursee · +41 41 921 30 60 · info@varathans25.ch",

@@ -72,7 +72,7 @@ export const fr: Messages = {
   worldSpices: "Épices & mélanges",
   worldReady: "Prêt à cuisiner",
   worldTea: "Thé de Ceylan",
-  worldCoffee: "Café du Sri Lanka",
+  worldCoffee: "Thé",
   worldGifts: "Des cadeaux choisis avec soin",
   worldPartners: "Sélection partenaires",
   worldKitchenCopy: "De notre cuisine à la vôtre.",
@@ -99,7 +99,7 @@ export const fr: Messages = {
   legalDraft: "Projet · validation juridique suisse requise avant lancement.",
   copyright: "Tous droits réservés.",
   catalogueTitle: "Découvrez vos favoris.",
-  catalogueCopy: "Épices, thé, café et cadeaux, choisis par Varathans25.",
+  catalogueCopy: "Épices, thé et cadeaux, choisis par Varathans25.",
   products: "produits",
   filters: "Filtres",
   clearFilters: "Réinitialiser les filtres",
@@ -223,7 +223,7 @@ export const fr: Messages = {
     "Commencez par votre code postal. Les produits de longue conservation sont configurés pour la Suisse. Les produits frais, surgelés et les retraits restent indisponibles jusqu’à validation du prestataire, de la zone et du processus.",
   kitchenTitle: "Des saveurs de caractère.\nUne place à votre table.",
   kitchenIntro:
-    "Créé par Varathans25, V25 Suisse est un marché suisse–sri-lankais en développement. Notre sélection réunit épices, thé, café et concepts de cuisine. Recettes, fournisseurs et détails seront validés avant le lancement.",
+    "Créé par Varathans25, V25 Suisse est un marché suisse–sri-lankais en développement. Notre sélection réunit épices, thé et concepts de cuisine. Recettes, fournisseurs et détails seront validés avant le lancement.",
   collectionsTitle: "De bonnes choses, réunies.",
   contactPending:
     "Varathans25 · Kavalleriestrasse 2 · 6210 Sursee · +41 41 921 30 60 · info@varathans25.ch",
