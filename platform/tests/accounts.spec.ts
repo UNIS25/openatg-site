@@ -281,6 +281,12 @@ test("admin creates multilingual draft, uploads private image and reloads an edi
   page,
 }) => {
   const check = noErrors(page);
+  // Exercise save/reopen while the product list is still refreshing.
+  await page.route("**/rest/v1/v25_products?*", async (route) => {
+    const response = await route.fetch();
+    await new Promise((resolve) => setTimeout(resolve, 300));
+    await route.fulfill({ response });
+  });
   await login(page, "administrator");
   await page.goto("/en/admin");
   await page

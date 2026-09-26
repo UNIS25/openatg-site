@@ -638,6 +638,7 @@ export const messages = {
     "Traductions produit",
     "Product translations",
   ],
+  media: ["Medien & Editorial", "Médias et éditorial", "Media & editorial"],
   role: ["Rolle", "Rôle", "Role"],
   owner: ["Eigentümer", "Propriétaire", "Owner"],
   administrator: ["Administration", "Administration", "Administrator"],

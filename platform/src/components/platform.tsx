@@ -25,7 +25,6 @@ import {
   Plus,
   Minus,
   ShieldCheck,
-  ArrowUpRight,
 } from "lucide-react";
 import {
   calculate,
@@ -46,6 +45,12 @@ import {
 } from "@/lib/client";
 import catalogue from "@/data/catalogue.json";
 import Admin from "./admin";
+import {
+  CinematicEntrance,
+  CinematicHome,
+  ClubInvitation,
+  useEditorial,
+} from "./cinematic";
 type Context = {
   locale: Locale;
   page: string;
@@ -100,6 +105,7 @@ export default function Platform({
   locale: Locale;
   page: string;
 }) {
+  const editorial = useEditorial();
   const tr = (k: MessageKey, v?: Record<string, string | number>) =>
     t(locale, k, v);
   const [products, setProducts] = useState<Product[]>(
@@ -232,7 +238,7 @@ export default function Platform({
         {tr("skip")}
       </a>
       {page === "entrance" ? (
-        <Entrance />
+        <CinematicEntrance locale={locale} />
       ) : (
         <>
           <Header />
@@ -256,7 +262,11 @@ export default function Platform({
                 {tr("loading")}
               </p>
             ) : page === "" ? (
-              <Home />
+              <CinematicHome
+                locale={locale}
+                config={editorial}
+                collection={<Collection category="tea" compact />}
+              />
             ) : page === "tea" || page === "pantry" ? (
               <Collection category={page} />
             ) : page.startsWith("product/") ? (
@@ -278,6 +288,12 @@ export default function Platform({
             )}
           </main>
           <Footer />
+          <ClubInvitation
+            locale={locale}
+            page={page}
+            member={!!state}
+            config={editorial}
+          />
         </>
       )}
     </C.Provider>
@@ -397,140 +413,6 @@ function Footer() {
         </div>
       </div>
     </footer>
-  );
-}
-function Entrance() {
-  const { tr } = usePlatform();
-  const [preferred, setPreferred] = useState<Locale | null>(null),
-    [index, setIndex] = useState(0);
-  useEffect(() => {
-    try {
-      const l = localStorage.getItem("v25_language") as Locale;
-      if (locales.includes(l)) setPreferred(l);
-    } catch {}
-  }, []);
-  return (
-    <main id="content" className="entrance">
-      <div className="entrance-copy">
-        <Logo />
-        <p className="eyebrow">VARATHANS25 · SCHWEIZ / SUISSE / SWITZERLAND</p>
-        <h1>{tr("entranceTitle")}</h1>
-        <p className="lede">
-          Tee. Küche. Gastfreundschaft.
-          <br />
-          Thé. Cuisine. Hospitalité.
-          <br />
-          Tea. Food. Hospitality.
-        </p>
-        <nav
-          className="entrance-languages"
-          aria-label="Sprache · Langue · Language"
-        >
-          {[
-            ["de", "Deutsch"],
-            ["fr", "Français"],
-            ["en", "English"],
-          ].map(([l, name]) => (
-            <a
-              href={`/${l}/`}
-              lang={l}
-              key={l}
-              onClick={() => remember(l as Locale)}
-            >
-              {name}
-              <ArrowUpRight size={22} />
-            </a>
-          ))}
-        </nav>
-        {preferred && (
-          <a className="text-link" href={`/${preferred}/`}>
-            {t(preferred, "continue")} →
-          </a>
-        )}
-        <small className="muted">PRIVATE LOCAL REVIEW · NO LIVE COMMERCE</small>
-      </div>
-      <div className="entrance-visual">
-        <img
-          src={
-            index === 0
-              ? `${asset}images/restaurant/dining-interior.webp`
-              : `${asset}images/restaurant/rooftop-panorama.webp`
-          }
-          alt={tr(index === 0 ? "restaurantAlt" : "rooftopAlt")}
-          width="768"
-          height="1024"
-        />
-        <div className="image-caption">
-          <span>
-            VARATHANS25
-            <br />
-            RESTAURANT & HOSPITALITY
-          </span>
-          <div className="image-controls">
-            <button
-              onClick={() => setIndex(1 - index)}
-              aria-label={tr("previous")}
-            >
-              <ChevronLeft />
-            </button>
-            <button onClick={() => setIndex(1 - index)} aria-label={tr("next")}>
-              <ChevronRight />
-            </button>
-          </div>
-        </div>
-      </div>
-    </main>
-  );
-}
-function Home() {
-  const { tr, locale } = usePlatform();
-  return (
-    <>
-      <section className="container home-hero">
-        <div>
-          <p className="eyebrow">VARATHANS25 · TEA & PANTRY</p>
-          <h1>{tr("heroTitle")}</h1>
-          <p className="lede">{tr("heroText")}</p>
-          <a className="button" href={`/${locale}/tea`}>
-            {tr("exploreTea")}
-            <ArrowRight size={18} />
-          </a>
-        </div>
-        <div className="hero-tin">
-          <img
-            src={`${asset}images/varathans25-premium-black-tea-powder.webp`}
-            width="650"
-            height="650"
-            alt={
-              locale === "de"
-                ? "Premium-Schwarztee-Pulver"
-                : locale === "fr"
-                  ? "Poudre de thé noir premium"
-                  : "Premium Black Tea Powder"
-            }
-          />
-          <span>01 / 05 · VARATHANS25 TEA</span>
-        </div>
-      </section>
-      <section className="container section">
-        <p className="eyebrow">VARATHANS25</p>
-        <h2>{tr("destinations")}</h2>
-        <div className="destinations">
-          {(["tea", "pantry", "club"] as const).map((p, i) => (
-            <a
-              className={`destination ${p === "club" ? "night" : ""}`}
-              href={`/${locale}/${p}`}
-              key={p}
-            >
-              <span>0{i + 1}</span>
-              <h3>{tr(p)}</h3>
-              <ArrowUpRight />
-            </a>
-          ))}
-        </div>
-      </section>
-      <Collection category="tea" compact />
-    </>
   );
 }
 function Quantity({
@@ -675,11 +557,15 @@ function Collection({
   const { products, tr } = usePlatform();
   return (
     <section className="container section">
-      <p className="eyebrow">VARATHANS25 COLLECTION</p>
-      {compact ? <h2>{tr("teaIntro")}</h2> : <h1>{tr(category)}</h1>}
-      <p className="lede">
-        {tr(category === "tea" ? "teaIntro" : "pantryIntro")}
-      </p>
+      {!compact && (
+        <>
+          <p className="eyebrow">VARATHANS25 COLLECTION</p>
+          <h1>{tr(category)}</h1>
+          <p className="lede">
+            {tr(category === "tea" ? "teaIntro" : "pantryIntro")}
+          </p>
+        </>
+      )}
       <div className="product-grid">
         {products
           .filter((p) => p.category === category)

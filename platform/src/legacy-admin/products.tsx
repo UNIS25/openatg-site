@@ -76,6 +76,7 @@ export function Products({ role }: { role: Role }) {
         role={role}
         cancel={() => setEditor(null)}
         saved={() => {
+          setRows([]); // Prevent reopening a stale revision before the list refreshes.
           setEditor(null);
           setVersion((v) => v + 1);
           setNotice("Product saved.");

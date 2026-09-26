@@ -6,6 +6,7 @@ import { money } from "@/lib/domain";
 import { stateName, type MessageKey } from "@/lib/messages";
 import { Products, Inventory } from "@/legacy-admin/products";
 import { I18nProvider } from "@/legacy-admin/i18n";
+import EditorialAdmin from "./editorial-admin";
 import type { Role } from "@/legacy-admin/domain";
 const screens = [
   "dashboard",
@@ -20,6 +21,7 @@ const screens = [
   "staff",
   "audit",
   "settings",
+  "media",
 ] as const;
 type Screen = (typeof screens)[number];
 export default function Admin() {
@@ -177,7 +179,9 @@ export default function Admin() {
         </div>
         <p className="system-warning">{tr("reviewFlags")}</p>
         <I18nProvider initialLocale={locale}>
-          {current === "products" ? (
+          {current === "media" ? (
+            <EditorialAdmin />
+          ) : current === "products" ? (
             <Products role={state.identity.role as Role} />
           ) : current === "inventory" ? (
             <Inventory />

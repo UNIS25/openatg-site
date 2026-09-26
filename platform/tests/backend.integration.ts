@@ -677,3 +677,66 @@ test("missing consent and empty/malformed carts are rejected", async () => {
   for (const lines of [null, [], [{ product_id: product }], {}])
     assert.ok((await call(silver, "quote", { lines })).error);
 });
+
+test("editorial configuration is readable but private media data is denied to guests and members", async () => {
+  const publicConfig = check(await anon.rpc("v25_editorial_public")) as {
+    chapter_order: string[];
+  };
+  assert.equal(publicConfig.chapter_order.length, 4);
+  assert.ok((await anon.from("v25_media_assets").select("*")).error);
+  assert.deepEqual(
+    check(await silver.from("v25_media_assets").select("*")),
+    [],
+  );
+  assert.deepEqual(
+    check(await silver.from("v25_editorial_settings").select("*")),
+    [],
+  );
+});
+test("staff and unverified owner cannot edit editorial scheduling", async () => {
+  const input = check(await admin.rpc("v25_editorial_public"));
+  for (const db of [silver, staff, owner])
+    assert.ok((await db.rpc("v25_editorial_save", { input })).error);
+});
+test("admin scheduling, revision conflicts and audit history remain enforced", async () => {
+  const initial = check(await admin.rpc("v25_editorial_public")) as {
+    revision: number;
+  };
+  const saved = check(
+    await admin.rpc("v25_editorial_save", {
+      input: { ...initial, invitation_enabled: false },
+    }),
+  ) as { revision: number; invitation_enabled: boolean };
+  assert.equal(saved.invitation_enabled, false);
+  assert.equal(saved.revision, initial.revision + 1);
+  assert.ok((await admin.rpc("v25_editorial_save", { input: initial })).error);
+  const events = check(
+    await admin
+      .from("v25_audit_events")
+      .select("id")
+      .eq("entity", "v25_editorial_settings"),
+  ) as unknown[];
+  assert.ok(events.length > 0);
+  check(
+    await admin.rpc("v25_editorial_save", {
+      input: { ...initial, revision: saved.revision },
+    }),
+  );
+});
+test("database rejects unsafe editorial mutations even when bypassing the API", async () => {
+  const input = check(await admin.rpc("v25_editorial_public")) as Record<
+    string,
+    unknown
+  >;
+  for (const patch of [
+    { invitation_enabled: null },
+    { invitation_delay_ms: 0 },
+    { chapter_order: ["tea", "tea", "spice", "evening"] },
+    { active_film: "https://untrusted.example/movie.mp4" },
+    { copy: { en: { heroTitle: null } } },
+  ])
+    assert.ok(
+      (await admin.rpc("v25_editorial_save", { input: { ...input, ...patch } }))
+        .error,
+    );
+});

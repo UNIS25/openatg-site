@@ -1,0 +1,660 @@
+/* Cinematic staging: original brand, unchanged product-card and administration foundation. */
+.cinema-film {
+  position: relative;
+  margin: 0;
+  isolation: isolate;
+  overflow: hidden;
+  background: #ecebe6;
+  aspect-ratio: 16/9;
+  min-width: 0;
+}
+.cinema-film picture,
+.cinema-film picture img,
+.cinema-film video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.cinema-film video {
+  z-index: 1;
+}
+.film-caption {
+  position: absolute;
+  z-index: 3;
+  bottom: 18px;
+  right: 24px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 120px;
+  width: min(380px, calc(100% - 48px));
+  min-height: 56px;
+  align-items: center;
+  gap: 18px;
+  color: #fff;
+  background: #102432;
+  padding: 9px 13px;
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+}
+.film-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  justify-content: center;
+  min-height: 38px;
+  padding: 4px 7px;
+  background: transparent;
+  border-color: #75818a;
+  color: #fff;
+  font-size: 0.72rem;
+}
+.film-control:hover:not(:disabled) {
+  background: #263e51;
+}
+.cinematic-gateway {
+  min-height: 100svh;
+  display: grid;
+  grid-template-columns: minmax(350px, 0.85fr) 1.15fr;
+  background: #f8f8f5;
+  position: relative;
+}
+.cinematic-gateway > .cinema-film {
+  grid-column: 2;
+  grid-row: 1;
+  min-height: 100svh;
+  height: 100%;
+  aspect-ratio: auto;
+}
+.gateway-card {
+  grid-column: 1;
+  grid-row: 1;
+  align-self: center;
+  padding: 60px clamp(35px, 7vw, 110px);
+  z-index: 2;
+}
+.gateway-card .logo {
+  width: 190px;
+  margin-bottom: 85px;
+}
+.gateway-card h1 {
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1.8;
+  margin-bottom: 32px;
+  color: #53616c;
+}
+.gateway-languages {
+  display: grid;
+  max-width: 370px;
+}
+.gateway-languages a {
+  padding: 23px 0;
+  border-top: 1px solid #d9dcd9;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-decoration: none;
+  font-size: 1.2rem;
+  transition: color 0.2s ease;
+}
+.gateway-languages a:last-child {
+  border-bottom: 1px solid #d9dcd9;
+}
+.gateway-languages a:hover {
+  color: #9d3842;
+}
+.gateway-continue {
+  display: block;
+  margin-top: 34px;
+  font-size: 0.8rem;
+}
+.cinema-hero {
+  position: relative;
+  min-height: 650px;
+  background: #18344f;
+}
+.cinema-hero > .cinema-film {
+  height: min(76vh, 850px);
+  min-height: 650px;
+  aspect-ratio: auto;
+}
+.cinema-hero-copy {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  pointer-events: none;
+  padding-bottom: 80px;
+}
+.cinema-hero-copy > div {
+  padding: 34px 38px;
+  background: #102432ed;
+  max-width: 590px;
+  color: #f8f8f5;
+  pointer-events: auto;
+}
+.cinema-hero h1 {
+  font-size: clamp(2.6rem, 4vw, 4.2rem);
+  max-width: 500px;
+  margin-bottom: 22px;
+  letter-spacing: -0.045em;
+}
+.cinema-hero .eyebrow {
+  color: #dccbb4;
+  font-size: 0.61rem;
+  letter-spacing: 0.17em;
+}
+.cinema-hero-copy p:not(.eyebrow) {
+  color: #ecebe6;
+  margin-bottom: 25px;
+  max-width: 450px;
+  font-size: 0.93rem;
+}
+.cinema-hero .actions {
+  gap: 22px;
+}
+.cinema-hero .button {
+  font-size: 0.8rem;
+}
+.cinema-link {
+  color: #fff;
+  font-size: 0.8rem;
+  text-underline-offset: 5px;
+  padding-block: 12px;
+}
+.cinema-chapter {
+  padding-block: 100px;
+}
+.chapter-intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 8%;
+  align-items: start;
+}
+.chapter-intro .eyebrow {
+  grid-column: 1/-1;
+  margin-bottom: 35px;
+}
+.chapter-intro h2 {
+  max-width: 570px;
+  font-size: clamp(2.2rem, 4vw, 3.6rem);
+}
+.chapter-intro .lede {
+  padding-top: 4px;
+  font-size: 1rem;
+  max-width: 460px;
+}
+.chapter-tea .section {
+  padding-top: 25px;
+  padding-bottom: 0;
+}
+.chapter-tea .section-heading {
+  display: none;
+}
+.chapter-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8%;
+  align-items: center;
+}
+.chapter-grid figure {
+  margin: 0;
+  min-width: 0;
+}
+.chapter-grid img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.chapter-copy h2 {
+  font-size: clamp(2rem, 3.5vw, 3.4rem);
+  max-width: 520px;
+}
+.chapter-copy .lede {
+  font-size: 1rem;
+}
+.chapter-copy .text-link {
+  display: inline-flex;
+  gap: 18px;
+  align-items: center;
+  font-size: 0.9rem;
+}
+.chapter-spice {
+  background: #f7f7f4;
+}
+.spice-still {
+  background: white;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+}
+.spice-still img {
+  width: 78%;
+  max-height: 100%;
+  object-fit: contain;
+}
+.chapter-evening {
+  background: #101e29;
+  color: #ecebe6;
+}
+.chapter-evening .eyebrow {
+  color: #cbb692;
+}
+.chapter-evening .lede {
+  color: #d4dadd;
+}
+.chapter-evening figure > img {
+  aspect-ratio: 1.1;
+  object-fit: cover;
+}
+.chapter-evening figcaption,
+.restaurant-diptych figcaption {
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  padding-top: 18px;
+}
+.chapter-evening .text-link {
+  color: #ecebe6;
+}
+.restaurant-diptych {
+  display: grid;
+  grid-template-columns: 0.68fr 1.32fr;
+  gap: 4%;
+  align-items: center;
+  padding-top: 45px;
+}
+.restaurant-diptych figure {
+  margin: 0;
+}
+.restaurant-diptych img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.restaurant-diptych figure:first-child img {
+  aspect-ratio: 0.8;
+  object-fit: cover;
+}
+.restaurant-diptych figure:last-child img {
+  aspect-ratio: 1.5;
+  object-fit: cover;
+}
+.invitation-open {
+  overflow: hidden;
+}
+.club-invitation {
+  padding: 0;
+  border: 0;
+  max-width: 1080px;
+  width: calc(100% - 80px);
+  max-height: calc(100svh - 60px);
+  overflow: auto;
+  background: #102432;
+  color: #ecebe6;
+  box-shadow: 0 18px 70px #0005;
+}
+.club-invitation[open] {
+  display: grid;
+  grid-template-columns: 0.88fr 1.12fr;
+}
+.club-invitation::backdrop {
+  background: #071724b8;
+}
+.invitation-close {
+  position: absolute;
+  z-index: 3;
+  top: 14px;
+  right: 14px;
+  width: 44px;
+  height: 44px;
+  padding: 9px;
+  background: #102432;
+  color: white;
+  border: 1px solid #7c858c;
+}
+.invitation-close:hover:not(:disabled) {
+  background: #284458;
+}
+.invitation-image {
+  position: relative;
+  min-height: 100%;
+  overflow: hidden;
+}
+.invitation-image > img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  inset: 0;
+}
+.invitation-image > span {
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
+  right: 20px;
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  background: #102432dc;
+  padding: 12px;
+  color: #fff;
+}
+.invitation-copy {
+  padding: 42px 45px 36px;
+  position: relative;
+}
+.invitation-brand {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  margin: 0 30px 30px 0;
+}
+.invitation-brand img {
+  width: 132px;
+  height: auto;
+  background: white;
+  padding: 8px 12px;
+}
+.adult-marker {
+  padding: 5px 9px;
+  background: #9d3842;
+  color: #fff;
+  font-size: 0.8rem;
+  letter-spacing: 0.07em;
+}
+.invitation-copy .eyebrow {
+  color: #d3bfa0;
+  font-size: 0.62rem;
+  margin-bottom: 14px;
+}
+.invitation-copy h2 {
+  font-size: clamp(1.65rem, 2.35vw, 2.3rem);
+  line-height: 1.14;
+  letter-spacing: -0.03em;
+  margin-bottom: 24px;
+}
+.invitation-copy > p {
+  font-size: 0.85rem;
+  line-height: 1.75;
+}
+.verification-notice {
+  padding-left: 15px;
+  border-left: 2px solid #8d7450;
+  color: #d9dfe2;
+}
+.invitation-join {
+  display: flex;
+  width: 100%;
+  font-size: 0.74rem;
+  justify-content: space-between;
+  margin-block: 25px 16px;
+  gap: 12px;
+}
+.invitation-signin {
+  display: block;
+  text-align: center;
+  font-size: 0.67rem;
+  letter-spacing: 0.05em;
+  padding-block: 6px 22px;
+}
+.invitation-copy .invitation-legal {
+  font-size: 0.66rem;
+  line-height: 1.75;
+  color: #c5cfd5;
+  padding-top: 18px;
+  border-top: 1px solid #52616b;
+}
+.invitation-editorial {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 0.72rem;
+}
+.club-invitation a:focus-visible,
+.club-invitation button:focus-visible {
+  outline-color: #e8cc9d;
+}
+.editorial-settings .chapter-order {
+  display: grid;
+  gap: 10px;
+  padding: 0;
+  list-style: none;
+}
+.chapter-order li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.chapter-order li > span {
+  flex: 1;
+}
+@media (min-width: 761px) and (prefers-reduced-motion: no-preference) {
+  .cinema-hero-copy > div {
+    animation: cinema-enter 0.7s ease both;
+  }
+  .club-invitation[open] {
+    animation: cinema-enter 0.25s ease both;
+  }
+  @keyframes cinema-enter {
+    from {
+      transform: translateY(8px);
+    }
+    to {
+      transform: none;
+    }
+  }
+}
+@media (max-width: 1100px) {
+  .gateway-card {
+    padding: 40px;
+  }
+  .gateway-card .logo {
+    margin-bottom: 60px;
+  }
+  .film-caption {
+    right: 16px;
+    bottom: 16px;
+  }
+  .cinema-hero-copy > div {
+    max-width: 540px;
+  }
+  .cinema-chapter {
+    padding-block: 75px;
+  }
+  .club-invitation {
+    width: calc(100% - 48px);
+  }
+  .invitation-copy {
+    padding: 35px 30px 30px;
+  }
+  .invitation-brand {
+    margin-bottom: 24px;
+  }
+  .invitation-copy h2 {
+    font-size: 1.9rem;
+  }
+}
+@media (max-width: 760px) {
+  .cinematic-gateway {
+    display: flex;
+    flex-direction: column;
+    min-height: 100svh;
+  }
+  .cinematic-gateway > .cinema-film {
+    min-height: 0;
+    height: 34svh;
+    order: 2;
+    aspect-ratio: auto;
+  }
+  .gateway-card {
+    padding: 40px 30px;
+    align-self: stretch;
+    order: 1;
+  }
+  .gateway-card .logo {
+    width: 145px;
+    margin-bottom: 30px;
+  }
+  .gateway-card h1 {
+    font-size: 0.64rem;
+    margin-bottom: 16px;
+  }
+  .gateway-languages {
+    max-width: none;
+  }
+  .gateway-languages a {
+    padding: 16px 0;
+    font-size: 1.03rem;
+  }
+  .gateway-continue {
+    margin-top: 20px;
+  }
+  .film-caption {
+    right: 12px;
+    left: 12px;
+    width: auto;
+    grid-template-columns: minmax(0, 1fr) 105px;
+    bottom: 12px;
+    justify-content: space-between;
+    font-size: 0.58rem;
+    gap: 8px;
+  }
+  .cinema-hero {
+    min-height: 0;
+  }
+  .cinema-hero > .cinema-film {
+    height: 470px;
+    min-height: 0;
+  }
+  .cinema-hero-copy {
+    position: relative;
+    width: 100%;
+    padding: 0;
+  }
+  .cinema-hero-copy > div {
+    max-width: none;
+    width: 100%;
+    padding: 30px 24px 36px;
+    background: #102432;
+  }
+  .cinema-hero h1 {
+    font-size: 2.45rem;
+    max-width: 370px;
+  }
+  .cinema-hero .actions {
+    gap: 16px;
+  }
+  .cinema-hero .button {
+    font-size: 0.75rem;
+  }
+  .cinema-link {
+    font-size: 0.75rem;
+  }
+  .cinema-chapter {
+    padding-block: 56px;
+  }
+  .chapter-intro {
+    display: block;
+  }
+  .chapter-intro .eyebrow {
+    margin-bottom: 24px;
+  }
+  .chapter-intro h2,
+  .chapter-copy h2 {
+    font-size: 2.2rem;
+  }
+  .chapter-intro .lede,
+  .chapter-copy .lede {
+    font-size: 0.93rem;
+  }
+  .chapter-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+  .chapter-grid > div,
+  .chapter-grid > figure {
+    width: 100%;
+  }
+  .chapter-spice .chapter-copy {
+    order: -1;
+  }
+  .chapter-tea .section {
+    padding-top: 0;
+  }
+  .restaurant-diptych {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    padding-top: 8px;
+  }
+  .restaurant-diptych figure:first-child {
+    display: none;
+  }
+  .club-invitation {
+    width: calc(100% - 24px);
+    max-height: calc(100svh - 24px);
+  }
+  .club-invitation[open] {
+    display: block;
+  }
+  .invitation-image {
+    height: 140px;
+    min-height: 0;
+  }
+  .invitation-image > img {
+    object-position: 50% 45%;
+  }
+  .invitation-image > span {
+    display: none;
+  }
+  .invitation-copy {
+    padding: 25px 23px 30px;
+  }
+  .invitation-brand {
+    margin-right: 0;
+    margin-bottom: 22px;
+  }
+  .invitation-brand img {
+    width: 115px;
+  }
+  .invitation-copy h2 {
+    font-size: 1.7rem;
+  }
+  .invitation-copy > p {
+    font-size: 0.8rem;
+  }
+  .invitation-join {
+    font-size: 0.68rem;
+    padding-inline: 13px;
+  }
+  .invitation-copy .invitation-legal {
+    font-size: 0.63rem;
+  }
+  .invitation-close {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+  }
+  .invitation-signin {
+    font-size: 0.64rem;
+  }
+  .invitation-editorial {
+    font-size: 0.7rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cinematic-home *,
+  .cinematic-gateway *,
+  .club-invitation {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.cinema-hero .button.light:hover:not(:disabled),
+.club-invitation .invitation-join:hover:not(:disabled) {
+  background: #deded5;
+  color: #1b3f63;
+}

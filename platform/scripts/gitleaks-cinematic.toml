@@ -1,0 +1,9 @@
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Existing Next.js static route key, verified unchanged from production ad680205. This literal is a public product slug, not a credential."
+condition = "AND"
+paths = ['''(?:^|/)varathans25/(de|fr|en)/cigars/davidoff-aniversario-no-3-tubes/__next\._tree\.txt$''']
+regexTarget = "secret"
+regexes = ['''^davidoff-aniversario-no-3-tubes$''']

@@ -1,0 +1,11 @@
+begin;
+select plan(8);
+select ok(not has_table_privilege('anon','public.v25_media_assets','SELECT'),'media rights metadata is private');
+select ok(not has_table_privilege('authenticated','public.v25_media_assets','INSERT'),'direct uploads cannot self-approve rights');
+select ok(not has_table_privilege('authenticated','public.v25_editorial_settings','UPDATE'),'settings require authorized RPC');
+select ok(not has_function_privilege('anon','public.v25_editorial_save(jsonb)','EXECUTE'),'anonymous config writes denied');
+select is((select public from storage.buckets where id='v25-editorial-private'),false,'quarantine bucket private');
+select is((select file_size_limit from storage.buckets where id='v25-editorial-private'),20971520::bigint,'quarantine size bounded');
+select throws_ok($$insert into public.v25_media_assets(original_filename,mime_type,bytes,commercial_approved,status) values('test.mp4','video/mp4',100,true,'approved')$$,'23514',null,'approval without documented rights rejected, including NULL fields');
+select throws_ok($$insert into public.v25_media_assets(original_filename,mime_type,bytes,has_audio) values('test.mp4','video/mp4',100,true)$$,'23514',null,'silent films required');
+select * from finish();rollback;

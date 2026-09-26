@@ -20,17 +20,17 @@ export default defineConfig({
   projects: [
     {
       name: "desktop",
-      testMatch: "storefront.spec.ts",
+      testMatch: ["storefront.spec.ts", "cinematic.spec.ts"],
       use: { viewport: { width: 1440, height: 1000 } },
     },
     {
       name: "tablet",
-      testMatch: "storefront.spec.ts",
+      testMatch: ["storefront.spec.ts", "cinematic.spec.ts"],
       use: { viewport: { width: 1024, height: 1000 } },
     },
     {
       name: "mobile",
-      testMatch: "storefront.spec.ts",
+      testMatch: ["storefront.spec.ts", "cinematic.spec.ts"],
       use: {
         viewport: { width: 390, height: 844 },
         isMobile: true,
@@ -39,7 +39,7 @@ export default defineConfig({
     },
     {
       name: "accounts",
-      testMatch: "accounts.spec.ts",
+      testMatch: ["accounts.spec.ts", "editorial-admin.spec.ts"],
       use: { viewport: { width: 1440, height: 1000 } },
     },
   ],
