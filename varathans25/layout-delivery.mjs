@@ -1,4 +1,4 @@
-import { standardDelivery, deliveryCopy, FREE_DELIVERY_RAPPEN } from './standard-delivery.mjs?v=20260927-tea';
+import { standardDelivery, deliveryCopy, FREE_DELIVERY_RAPPEN } from './standard-delivery.mjs?v=20260922-layout';
 
 let destination = 'CH';
 try { if (sessionStorage.getItem('v25_standard_delivery_destination') === 'INTERNATIONAL') destination = 'INTERNATIONAL'; } catch { /* Storage is optional. */ }

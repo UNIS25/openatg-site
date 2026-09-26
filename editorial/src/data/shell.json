@@ -13,9 +13,9 @@
       "dietary": "plant-based-sample",
       "origin": "LK",
       "fulfillment": "AMBIENT_NATIONAL",
-      "image": "/varathans25/images/varathans25-premium-black-tea-powder.webp",
+      "image": "/varathans25/images/premium-black-tea-powder.svg",
       "gallery": [
-        "/varathans25/images/varathans25-premium-black-tea-powder.webp"
+        "/varathans25/images/premium-black-tea-powder.svg"
       ],
       "verification": "SAMPLE_UNAPPROVED",
       "featured": true,
@@ -31,7 +31,7 @@
         },
         {
           "locale": "en",
-          "name": "Premium Black Tea Powder",
+          "name": "Premium black tea powder",
           "description": "A full-bodied black tea for a classic cup. Grade, origin and pack size are being confirmed.",
           "ingredients": "",
           "allergens": "",
@@ -64,9 +64,9 @@
       "dietary": "plant-based-sample",
       "origin": "LK",
       "fulfillment": "AMBIENT_NATIONAL",
-      "image": "/varathans25/images/varathans25-green-tea-powder.webp",
+      "image": "/varathans25/images/green-tea-powder.svg",
       "gallery": [
-        "/varathans25/images/varathans25-green-tea-powder.webp"
+        "/varathans25/images/green-tea-powder.svg"
       ],
       "verification": "SAMPLE_UNAPPROVED",
       "featured": false,
@@ -74,16 +74,16 @@
       "translations": [
         {
           "locale": "de",
-          "name": "Grünteepulver",
-          "description": "Herkunft und Packungsgrösse werden noch bestätigt.",
+          "name": "Grüntee-Pulver",
+          "description": "Ein klarer Grüntee im neuen Varathans25 Beutelformat. Herkunft und Packungsgrösse werden noch bestätigt.",
           "ingredients": "",
           "allergens": "",
           "preparation": ""
         },
         {
           "locale": "en",
-          "name": "Green Tea Powder",
-          "description": "Origin and pack size are being confirmed.",
+          "name": "Green tea powder",
+          "description": "A clean green tea in the new Varathans25 packet format. Origin and pack size are being confirmed.",
           "ingredients": "",
           "allergens": "",
           "preparation": ""
@@ -91,7 +91,7 @@
         {
           "locale": "fr",
           "name": "Poudre de thé vert",
-          "description": "L’origine et le format sont en cours de confirmation.",
+          "description": "Un thé vert délicat dans le nouveau sachet Varathans25. L’origine et le format sont en cours de confirmation.",
           "ingredients": "",
           "allergens": "",
           "preparation": ""
@@ -115,9 +115,9 @@
       "dietary": "plant-based-sample",
       "origin": "LK",
       "fulfillment": "AMBIENT_NATIONAL",
-      "image": "/varathans25/images/varathans25-cardamom-tea.webp",
+      "image": "/varathans25/images/cardamom-tea.svg",
       "gallery": [
-        "/varathans25/images/varathans25-cardamom-tea.webp"
+        "/varathans25/images/cardamom-tea.svg"
       ],
       "verification": "SAMPLE_UNAPPROVED",
       "featured": false,
@@ -133,7 +133,7 @@
         },
         {
           "locale": "en",
-          "name": "Cardamom Tea",
+          "name": "Cardamom tea",
           "description": "An aromatic tea blend built around cardamom. Recipe and pack size are being confirmed.",
           "ingredients": "",
           "allergens": "",
@@ -382,9 +382,9 @@
       "dietary": "plant-based-sample",
       "origin": "LK",
       "fulfillment": "AMBIENT_NATIONAL",
-      "image": "/varathans25/images/varathans25-cinnamon-tea.webp",
+      "image": "/varathans25/images/cinnamon-tea.svg",
       "gallery": [
-        "/varathans25/images/varathans25-cinnamon-tea.webp"
+        "/varathans25/images/cinnamon-tea.svg"
       ],
       "verification": "SAMPLE_UNAPPROVED",
       "featured": false,
@@ -400,7 +400,7 @@
         },
         {
           "locale": "en",
-          "name": "Cinnamon Tea",
+          "name": "Cinnamon tea",
           "description": "A fragrant tea blend built around cinnamon. Recipe and pack size are being confirmed.",
           "ingredients": "",
           "allergens": "",
@@ -433,9 +433,9 @@
       "dietary": "plant-based-sample",
       "origin": "LK",
       "fulfillment": "AMBIENT_NATIONAL",
-      "image": "/varathans25/images/varathans25-masala-tea-powder.webp",
+      "image": "/varathans25/images/masala-tea-powder.svg",
       "gallery": [
-        "/varathans25/images/varathans25-masala-tea-powder.webp"
+        "/varathans25/images/masala-tea-powder.svg"
       ],
       "verification": "SAMPLE_UNAPPROVED",
       "featured": true,
@@ -443,7 +443,7 @@
       "translations": [
         {
           "locale": "de",
-          "name": "Masala-Teepulver",
+          "name": "Masala-Tee-Pulver",
           "description": "Ein aromatischer Teemix mit wärmenden Masala-Gewürzen. Rezeptur und Packungsgrösse werden noch bestätigt.",
           "ingredients": "",
           "allergens": "",
@@ -451,7 +451,7 @@
         },
         {
           "locale": "en",
-          "name": "Masala Tea Powder",
+          "name": "Masala tea powder",
           "description": "An aromatic tea blend with warming masala spices. Recipe and pack size are being confirmed.",
           "ingredients": "",
           "allergens": "",
@@ -461,6 +461,57 @@
           "locale": "fr",
           "name": "Poudre de thé masala",
           "description": "Un mélange de thé aromatique aux épices masala chaleureuses. La recette et le format sont en cours de confirmation.",
+          "ingredients": "",
+          "allergens": "",
+          "preparation": ""
+        }
+      ],
+      "supplierId": "v25",
+      "active": true,
+      "tobaccoProduct": false,
+      "nutrition": {}
+    },
+    {
+      "id": "coffee-powder",
+      "slug": "coffee-powder",
+      "categoryId": "coffee",
+      "priceCents": 1890,
+      "launchPriceCents": 1690,
+      "vatBps": 260,
+      "stock": 36,
+      "weight": "—",
+      "spice": 0,
+      "dietary": "plant-based-sample",
+      "origin": "LK",
+      "fulfillment": "AMBIENT_NATIONAL",
+      "image": "/varathans25/images/coffee-powder.svg",
+      "gallery": [
+        "/varathans25/images/coffee-powder.svg"
+      ],
+      "verification": "SAMPLE_UNAPPROVED",
+      "featured": true,
+      "houseSelection": true,
+      "translations": [
+        {
+          "locale": "de",
+          "name": "Kaffeepulver",
+          "description": "Gemahlener Kaffee für die Varathans25 Auswahl. Röstung, Herkunft und Packungsgrösse werden noch bestätigt.",
+          "ingredients": "",
+          "allergens": "",
+          "preparation": ""
+        },
+        {
+          "locale": "en",
+          "name": "Coffee powder",
+          "description": "Ground coffee selected for the Varathans25 pantry. Roast, origin and pack size are being confirmed.",
+          "ingredients": "",
+          "allergens": "",
+          "preparation": ""
+        },
+        {
+          "locale": "fr",
+          "name": "Café moulu",
+          "description": "Un café moulu sélectionné pour l’épicerie Varathans25. La torréfaction, l’origine et le format sont en cours de confirmation.",
           "ingredients": "",
           "allergens": "",
           "preparation": ""
@@ -486,9 +537,18 @@
       "id": "tea",
       "slug": "tea",
       "names": {
-        "en": "Tea",
-        "de": "Tee",
-        "fr": "Thé"
+        "en": "Tea & infusions",
+        "de": "Tee & Aufgüsse",
+        "fr": "Thés & infusions"
+      }
+    },
+    {
+      "id": "coffee",
+      "slug": "coffee",
+      "names": {
+        "en": "Coffee",
+        "de": "Kaffee",
+        "fr": "Café"
       }
     }
   ],
@@ -536,6 +596,7 @@
         "gelber-curry-kokos",
         "masala-tea-powder",
         "green-tea-powder",
+        "coffee-powder",
         "premium-black-tea-powder",
         "cinnamon-tea",
         "cardamom-tea"

@@ -19,8 +19,8 @@ export function standardDelivery({ discountedSubtotalRappen, country = 'CH', sta
 
 export const deliveryCopy = {
   en: {
-    announcement: 'Free delivery on orders of CHF 100 or more.',
-    scope: 'Food, tea, gifts and lifestyle products · Standard Swiss delivery',
+    announcement: 'Free delivery across Switzerland from CHF 100',
+    scope: 'Food, tea, coffee, gifts and lifestyle products · Standard Swiss delivery',
     product: 'Free standard Swiss delivery from CHF 100',
     progress: 'Add {amount} more for free delivery.',
     unlocked: 'You’ve unlocked free delivery.',
@@ -32,8 +32,8 @@ export const deliveryCopy = {
     invalid: 'The delivery estimate is unavailable. Please review your bag.',
   },
   de: {
-    announcement: 'Kostenlose Lieferung ab einem Bestellwert von CHF 100.',
-    scope: 'Lebensmittel, Tee, Geschenke und Lifestyle-Produkte · Standardlieferung in der Schweiz',
+    announcement: 'Kostenlose Lieferung in der Schweiz ab CHF 100',
+    scope: 'Lebensmittel, Tee, Kaffee, Geschenke und Lifestyle-Produkte · Standardlieferung in der Schweiz',
     product: 'Kostenlose Standardlieferung in der Schweiz ab CHF 100',
     progress: 'Noch {amount} bis zur kostenlosen Lieferung.',
     unlocked: 'Ihre Lieferung ist kostenlos.',
@@ -45,8 +45,8 @@ export const deliveryCopy = {
     invalid: 'Die Lieferberechnung ist nicht verfügbar. Bitte prüfen Sie Ihren Warenkorb.',
   },
   fr: {
-    announcement: 'Livraison offerte dès CHF 100 d’achat.',
-    scope: 'Alimentation, thé, cadeaux et produits lifestyle · Livraison standard en Suisse',
+    announcement: 'Livraison gratuite en Suisse dès CHF 100',
+    scope: 'Alimentation, thé, café, cadeaux et produits lifestyle · Livraison standard en Suisse',
     product: 'Livraison standard gratuite en Suisse dès CHF 100',
     progress: 'Ajoutez encore {amount} pour la livraison gratuite.',
     unlocked: 'Vous bénéficiez de la livraison gratuite.',
