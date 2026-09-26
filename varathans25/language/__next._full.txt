@@ -18,4 +18,4 @@ f:I[97484,["/varathans25/_next/static/chunks/3fntmmi971322.js","/varathans25/_ne
 b:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
 10:I[27201,["/varathans25/_next/static/chunks/3fntmmi971322.js"],"IconMark"]
 8:null
-d:[["$","title","0",{"children":"Varathans25 — Island flavour. Swiss precision."}],["$","meta","1",{"name":"description","content":"Curry, tea and coffee from Varathans25 in Sursee."}],["$","meta","2",{"name":"robots","content":"noindex, nofollow, noarchive"}],["$","link","3",{"rel":"icon","href":"/varathans25/brand/varathans25-original.png"}],["$","$L10","4",{}]]
+d:[["$","title","0",{"children":"Varathans25 — Island flavour. Swiss precision."}],["$","meta","1",{"name":"description","content":"Curry and tea from Varathans25 in Sursee."}],["$","meta","2",{"name":"robots","content":"noindex, nofollow, noarchive"}],["$","link","3",{"rel":"icon","href":"/varathans25/brand/varathans25-original.png"}],["$","$L10","4",{}]]

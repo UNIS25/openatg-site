@@ -13,7 +13,7 @@ export const editorialEN = {
   restaurantButton: "Visit the restaurant",
   foodTitle: "Island flavour. Swiss precision.",
   foodCopy:
-    "House blends, Ceylon tea, coffee and considered kitchen essentials.",
+    "House blends, Ceylon tea and considered kitchen essentials.",
   houseSlideTitle: "Selected for your table",
   houseSlideCopy: "Products made, chosen and presented by Varathans25.",
   shopHouse: "Shop the house selection",
@@ -56,9 +56,9 @@ export const editorialEN = {
     "Above Sursee, the restaurant, bar and cigar lounge bring together different moments of an evening. The illuminated full moon is part of that setting: a quiet architectural presence at the heart of the dining room.",
   storyTable: "The same care, at your table.",
   storyTableCopy:
-    "V25 Suisse carries that hospitality into a collection of Sri Lankan flavours, house blends, Ceylon tea, coffee and kitchen essentials. A Swiss shopping experience, with clear information and considered choices.",
+    "V25 Suisse carries that hospitality into a collection of Sri Lankan flavours, house blends, Ceylon tea and kitchen essentials. A Swiss shopping experience, with clear information and considered choices.",
   houseCategory: "Varathans25 house collection",
-  teaCoffeeCategory: "Ceylon tea and coffee",
+  teaCoffeeCategory: "Tea",
   partnerCategory: "Partner favourites",
   giftsCategory: "Gifts",
   spicesCategory: "Spices and blends",
@@ -147,7 +147,7 @@ export const editorialDE: EditorialMessages = {
   restaurantButton: "Das Restaurant besuchen",
   foodTitle: "Inselaromen. Schweizer Präzision.",
   foodCopy:
-    "Hausmischungen, Ceylon-Tee, Kaffee und sorgfältig ausgewählte Küchenbegleiter.",
+    "Hausmischungen, Ceylon-Tee und sorgfältig ausgewählte Küchenbegleiter.",
   houseSlideTitle: "Für Ihren Tisch ausgewählt",
   houseSlideCopy: "Von Varathans25 hergestellt, ausgewählt und präsentiert.",
   shopHouse: "Die Hausauswahl entdecken",
@@ -190,9 +190,9 @@ export const editorialDE: EditorialMessages = {
     "Über Sursee verbinden Restaurant, Bar und Zigarrenlounge die verschiedenen Momente eines Abends. Der beleuchtete Vollmond gehört dazu: ein ruhiges architektonisches Element im Herzen des Speisesaals.",
   storyTable: "Dieselbe Sorgfalt, an Ihrem Tisch.",
   storyTableCopy:
-    "V25 Suisse bringt diese Gastfreundschaft in eine Kollektion aus sri-lankischen Aromen, Hausmischungen, Ceylon-Tee, Kaffee und Küchenbegleitern. Ein Schweizer Einkaufserlebnis mit klaren Informationen und sorgfältiger Auswahl.",
+    "V25 Suisse bringt diese Gastfreundschaft in eine Kollektion aus sri-lankischen Aromen, Hausmischungen, Ceylon-Tee und Küchenbegleitern. Ein Schweizer Einkaufserlebnis mit klaren Informationen und sorgfältiger Auswahl.",
   houseCategory: "Varathans25 Hauskollektion",
-  teaCoffeeCategory: "Ceylon-Tee und Kaffee",
+  teaCoffeeCategory: "Tee",
   partnerCategory: "Partnerfavoriten",
   giftsCategory: "Geschenke",
   spicesCategory: "Gewürze und Mischungen",
@@ -284,7 +284,7 @@ export const editorialFR: EditorialMessages = {
   restaurantButton: "Visiter le restaurant",
   foodTitle: "Saveurs insulaires. Précision suisse.",
   foodCopy:
-    "Mélanges maison, thé de Ceylan, café et essentiels de cuisine choisis avec soin.",
+    "Mélanges maison, thé de Ceylan et essentiels de cuisine choisis avec soin.",
   houseSlideTitle: "Choisis pour votre table",
   houseSlideCopy: "Des produits créés, choisis et présentés par Varathans25.",
   shopHouse: "Découvrir la sélection maison",
@@ -328,9 +328,9 @@ export const editorialFR: EditorialMessages = {
     "Au-dessus de Sursee, le restaurant, le bar et le lounge à cigares réunissent les différents moments d’une soirée. La pleine lune illuminée fait partie de ce décor : une présence architecturale paisible au cœur de la salle.",
   storyTable: "Le même soin, à votre table.",
   storyTableCopy:
-    "V25 Suisse prolonge cette hospitalité avec les saveurs du Sri Lanka, des mélanges maison, du thé de Ceylan, du café et des essentiels de cuisine. Une expérience d’achat suisse, avec des informations claires et des choix réfléchis.",
+    "V25 Suisse prolonge cette hospitalité avec les saveurs du Sri Lanka, des mélanges maison, du thé de Ceylan et des essentiels de cuisine. Une expérience d’achat suisse, avec des informations claires et des choix réfléchis.",
   houseCategory: "Collection maison Varathans25",
-  teaCoffeeCategory: "Thé de Ceylan et café",
+  teaCoffeeCategory: "Thé",
   partnerCategory: "Favoris partenaires",
   giftsCategory: "Cadeaux",
   spicesCategory: "Épices et mélanges",

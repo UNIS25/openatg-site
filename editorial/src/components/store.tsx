@@ -157,7 +157,7 @@ export function StoreProvider({
       if (saved.success)
         setCart(
           saved.data.filter(
-            (v, i, a) => a.findIndex((x) => x.productId === v.productId) === i,
+            (v, i, a) => v.productId !== 'coffee-powder' && a.findIndex((x) => x.productId === v.productId) === i,
           ),
         );
       const p = localStorage.getItem(storageKey("postcode")) ?? "";
@@ -405,7 +405,7 @@ export function StoreShell({ children }: { children: React.ReactNode }) {
   const nav = [
     ["shop", t.shop],
     ["kitchen", s.foodNav],
-    ["shop?selection=tea-coffee", s.teaNav],
+    ["shop?selection=tea", s.teaNav],
     ["cigars", t.lounge],
     ["story", t.story],
   ];
