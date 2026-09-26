@@ -57,7 +57,7 @@ Screenshots and machine-readable results remain in ignored `editorial/artifacts/
 
 ## Deployment and live verification
 
-Use the existing GitHub Pages legacy workflow, `main` / repository root. Re-fetch origin immediately before publishing and require `origin/main` to match the inspected production tip. After the first live smoke test identified the missing redirect CSP, merge `808ada966b10c2c6ed496c1612c728264b4efed4` was reverted by `2bbaf0cd605c6e91cd543216357dc931979d88cc`; its tree exactly matches the baseline. The corrected release reapplies only the isolated tea change plus the redirect CSP correction onto that rollback tip. Commit the isolated feature with `feat: add Varathans25 premium tea tins`, push the feature and rollback checkpoint, create a separate publication branch from `origin/main`, merge only this feature with `--no-ff`, and push that branch's HEAD to `main` without force. Do not reset an unrelated local `main` checkout.
+Use the existing GitHub Pages legacy workflow, `main` / repository root. Re-fetch origin immediately before publishing and require `origin/main` to match the inspected production tip. After the first live smoke test identified the missing redirect CSP, merge `808ada966b10c2c6ed496c1612c728264b4efed4` was reverted by `2bbaf0cd605c6e91cd543216357dc931979d88cc`; its tree exactly matches the baseline. The corrected release reapplies only the isolated tea change (`4d973add638ed3efee4368c73a4f8818158e7ff0`) and redirect CSP correction (`727847f4bd840602ffdd07dcbf920ec24bfc9c26`) onto that rollback tip. Its storefront tree matches the tested feature branch; the backend branch remains separate. Commit the isolated feature with `feat: add Varathans25 premium tea tins`, push the feature and rollback checkpoint, create a separate publication branch from `origin/main`, merge only this feature with `--no-ff`, and push that branch's HEAD to `main` without force. Do not reset an unrelated local `main` checkout.
 
 Wait for the matching GitHub Pages workflow to succeed. Verify the deployed SHA against `gh api repos/UNIS25/openatg-site/pages/builds/latest`, then run:
 
@@ -77,15 +77,20 @@ The live suite verifies all fifteen localized tea product routes, direct reloads
 
 The existing Cloudflare-injected analytics beacon may produce a CSP refusal for `https://static.cloudflareinsights.com/beacon.min.js/...`. This release does not weaken CSP. Live tests record that exact existing analytics refusal separately and fail on any other console/page error. Disable that injected analytics feature in Cloudflare if its warning is to be removed; no Cloudflare configuration or credentials are changed here.
 
+## Recorded live verification
+
+The corrected storefront at `727847f4bd840602ffdd07dcbf920ec24bfc9c26` passed 18/18 live Playwright journeys (all three languages at desktop, tablet and mobile widths), with zero application console/page errors, zero backend/write requests and zero accessibility violations. All 169 public routes and 107 assets passed the HTTP and asset-hash audit, including all five new WebP images. The existing Cloudflare analytics CSP refusal remains separately recorded; CSP was not relaxed. The final documentation commit changes no storefront bytes.
+
 ## Rollback
 
-`DEPLOYMENT_MERGE_SHA` below is the two-parent publication merge reported with this release. To restore the exact previous storefront without rewriting history, use a clean worktree based on current production:
+`RELEASE_SHA` below is the final deployed commit reported with this release. The corrected publication is a linear reapplication on top of rollback commit `2bbaf0cd605c6e91cd543216357dc931979d88cc`. Revert that release range in one new commit to restore the previous storefront without rewriting history:
 
 ```sh
 git fetch origin
 git switch -c rollback/tea-tins-release origin/main
-git revert -m 1 DEPLOYMENT_MERGE_SHA
+git revert --no-commit 2bbaf0cd605c6e91cd543216357dc931979d88cc..RELEASE_SHA
+git commit -m "revert: restore storefront before premium tea tins"
 git push origin HEAD:main
 ```
 
-Wait for the rollback Pages workflow, then verify the prior storefront and cigar editorial. Do not force-push or reset main. If subsequent releases exist, review the revert for conflicts before publishing.
+Wait for the rollback Pages workflow, then verify the prior storefront and cigar editorial. Do not force-push or reset main. If subsequent releases exist, review the revert for conflicts before publishing. The original baseline branch and complete-history bundle also remain available.
