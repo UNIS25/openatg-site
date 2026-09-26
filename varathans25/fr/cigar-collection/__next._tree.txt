@@ -1,0 +1,5 @@
+:HL["/varathans25/_next/static/css/2a8e8d820dd9876b.css","style"]
+:HL["/varathans25/_next/static/chunks/1m04jr2gni_51.css","style"]
+:HL["/varathans25/_next/static/chunks/0005g2_i28x_6.css","style"]
+:HL["/varathans25/fonts/inter-latin.woff2","font",{"crossOrigin":"anonymous","type":"font/woff2"}]
+0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"locale","param":{"type":"d","key":"fr","siblings":["_not-found","_global-error"]},"prefetchHints":4128,"slots":{"children":{"name":"cigar-collection","param":null,"prefetchHints":4160,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}},"staleTime":300,"buildId":"packaging-editorial-v1"}
