@@ -97,6 +97,8 @@ export async function temporaryMember(kind: "gold" | "silver" | "owner") {
         member_id: id,
         provider_reference: `journey-${id}`,
         status: "verified",
+        age_threshold: 18,
+        method: "legacy-test",
         is_test: true,
         verified_at: new Date().toISOString(),
         expires_at: new Date(Date.now() + 86400000 * 365).toISOString(),
@@ -126,4 +128,29 @@ export async function temporaryMember(kind: "gold" | "silver" | "owner") {
     if (error) throw error;
   }
   return { id, email, password };
+}
+
+export async function approveSubmittedVerification(memberId: string) {
+  const { createClient } = await import("@supabase/supabase-js");
+  const admin = createClient(
+    process.env.SUPABASE_URL!,
+    process.env.SUPABASE_ANON_KEY!,
+    { auth: { persistSession: false } },
+  );
+  const login = await admin.auth.signInWithPassword(accounts.administrator);
+  if (login.error) throw login.error;
+  const { data: row, error } = await admin
+    .from("v25_member_verifications")
+    .select("revision")
+    .eq("member_id", memberId)
+    .single();
+  if (error) throw error;
+  const result = await admin.rpc("v25_verification_review", {
+    member: memberId,
+    decision: "approve",
+    reason: "age_confirmed",
+    expected_revision: row.revision,
+  });
+  if (result.error) throw result.error;
+  await admin.auth.signOut();
 }

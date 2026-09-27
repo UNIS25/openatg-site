@@ -46,7 +46,8 @@ export const polishCopy: Record<Locale, Record<PolishKey, string>> = {
     silverCta: "Silver auswählen",
     goldPosition: "Zusätzliche Leistungen für Ihren Alltag.",
     goldDelivery: "Kostenlose berechtigte Lieferung in der Schweiz",
-    goldDiscount: "{discount}% Rabatt auf berechtigte Varathans25 Produkte",
+    goldDiscount:
+      "{discount}% Rabatt auf berechtigte Varathans25 Nicht-Tabakprodukte",
     goldDrink:
       "Ein kostenloses Getränk pro bestätigtem Restaurant- oder Lounge-Besuch",
     goldPass: "Digitaler Gold-Mitgliedsausweis",
@@ -73,7 +74,7 @@ export const polishCopy: Record<Locale, Record<PolishKey, string>> = {
     goldPosition: "Des prestations supplémentaires au quotidien.",
     goldDelivery: "Livraison éligible offerte en Suisse",
     goldDiscount:
-      "{discount}% de remise sur les produits Varathans25 éligibles",
+      "{discount}% de remise sur les produits Varathans25 hors tabac éligibles",
     goldDrink:
       "Une boisson offerte par visite vérifiée au restaurant ou au lounge",
     goldPass: "Carte de membre Gold numérique",
@@ -99,7 +100,8 @@ export const polishCopy: Record<Locale, Record<PolishKey, string>> = {
     silverCta: "Choose Silver",
     goldPosition: "Additional benefits for everyday use.",
     goldDelivery: "Free eligible Swiss delivery",
-    goldDiscount: "{discount}% discount on eligible Varathans25 products",
+    goldDiscount:
+      "{discount}% discount on eligible Varathans25 non-tobacco products",
     goldDrink:
       "One complimentary drink per verified restaurant or lounge visit",
     goldPass: "Digital Gold member pass",

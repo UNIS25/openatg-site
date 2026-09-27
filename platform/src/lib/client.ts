@@ -1,4 +1,5 @@
 "use client";
+import type { ClubAccountState, ClubMembershipState } from "./club-state";
 let csrf = "";
 export async function api<T = Record<string, unknown>>(
   path: string,
@@ -64,6 +65,13 @@ export type DbRow = {
   period_end: string;
   cancel_at_period_end: boolean;
   expires_at: string;
+  submitted_at: string;
+  decided_at: string;
+  method: string;
+  age_threshold: number;
+  reviewer_id: string;
+  decision_reason: string;
+  admin_mfa_required: boolean;
   verified_at: string;
   is_test: boolean;
   fee_rappen: number;
@@ -80,6 +88,7 @@ export type DbRow = {
   total_rappen: number;
   number: number;
   created_at: string;
+  actor: string;
   action: string;
   entity: string;
   entity_id: string;
@@ -108,6 +117,8 @@ export type DbRow = {
 export type AccountState = {
   user: { id: string; email: string; name: string };
   identity: {
+    account_state: ClubAccountState;
+    membership_state: ClubMembershipState;
     active: boolean;
     verified: boolean;
     gold: boolean;

@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { a11y, aligned, noErrors } from "./browser-helpers";
+import { a11y, aligned, noErrors, login } from "./browser-helpers";
 import { locales } from "../src/lib/domain";
 
 for (const locale of locales)
@@ -136,7 +136,8 @@ test("restored chapter order, safe restaurant destination and aligned membership
     await page.locator(selector).screenshot({
       path: `artifacts/final-polish/${name}-${info.project.name}.png`,
     });
-  await page.goto("/en/club");
+  await login(page, "silver");
+  await page.goto("/en/club/membership");
   await expect(page.locator(".comparison-price").first()).toContainText("CHF");
   const panels = await page
     .locator(".comparison-panel")
@@ -151,9 +152,7 @@ test("restored chapter order, safe restaurant destination and aligned membership
   await page.locator(".membership-comparison").screenshot({
     path: `artifacts/final-polish/comparison-${info.project.name}.png`,
   });
-  await page.locator(".gold .comparison-action a").click();
-  await expect(page).toHaveURL(/\/en\/membership$/);
-  await a11y(page);
+  await expect(page.locator(".gold .comparison-select button")).toHaveCount(2);
   check();
 });
 

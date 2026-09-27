@@ -67,6 +67,8 @@ for (const role of ["silver", "gold", "staff", "administrator", "owner"]) {
       member_id: a.id,
       provider_reference: `local-fixture-${a.id}`,
       status: "verified",
+      age_threshold: 18,
+      method: "legacy-test",
       verified_at: new Date().toISOString(),
       expires_at: new Date(Date.now() + 86400000 * 365).toISOString(),
       is_test: true,

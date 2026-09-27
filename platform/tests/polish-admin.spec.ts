@@ -32,7 +32,7 @@ test("protected benefit editor saves independent translations and closing settin
     const saved = await (await page.request.get("/api/admin/polish")).json();
     expect(saved.copy.en.goldDrink).toContain("· review");
     expect(saved.copy.fr.goldDrink).toBe(original.copy.fr.goldDrink);
-    await page.goto("/en/club");
+    await page.goto("/en/club/membership");
     await expect(page.locator(".comparison-panel.gold")).toContainText(
       "· review",
     );
@@ -73,7 +73,7 @@ test("current membership is identified without treating sign-in as verification"
   page,
 }) => {
   await login(page, "gold");
-  await page.goto("/en/club");
+  await page.goto("/en/club/membership");
   await expect(page.locator(".comparison-panel.gold")).toHaveAttribute(
     "data-current",
     "true",
@@ -83,7 +83,7 @@ test("current membership is identified without treating sign-in as verification"
     "false",
   );
   await page.goto("/en/club/member");
-  await expect(page.locator(".digital-pass")).toContainText("GOLD");
+  await expect(page.locator(".digital-pass")).toContainText("Gold");
   await a11y(page);
   await page.screenshot({
     path: "artifacts/final-polish/signed-in-member.png",
@@ -149,23 +149,10 @@ test("profile languages, saved addresses and test Gold activation remain connect
   await expect(address).toContainText("Teststrasse 42");
   await page.reload();
   await expect(address).toContainText("Teststrasse 42");
-  for (const scenario of ["underage", "expired", "review", "adult"]) {
-    await page
-      .getByLabel(t("en", "scenario"), { exact: true })
-      .selectOption(scenario);
-    await page
-      .getByRole("button", { name: t("en", "runVerify"), exact: true })
-      .click();
-    await expect(page.locator(".notice")).toHaveText(t("en", "saved"));
-    await expect(page.getByTestId("verification-status")).toHaveText(
-      {
-        underage: "Rejected",
-        expired: "Expired",
-        review: "Manual review",
-        adult: "Verified",
-      }[scenario]!,
-    );
-  }
+  // Review-state security is exercised through the authorized workflow in verified-access tests.
+  await expect(page.getByTestId("verification-status")).toHaveText(
+    "Verified 18+",
+  );
   await page.goto("/en/membership");
   await page
     .getByRole("button", { name: t("en", "chooseMonthly"), exact: true })
@@ -196,7 +183,7 @@ test("profile languages, saved addresses and test Gold activation remain connect
   expect(settled.ok()).toBe(true);
   await context.close();
   await page.goto("/en/club/member");
-  await expect(page.locator(".digital-pass")).toContainText("GOLD");
+  await expect(page.locator(".digital-pass")).toContainText("Gold");
   await page
     .getByRole("button", { name: t("en", "createPass"), exact: true })
     .click();

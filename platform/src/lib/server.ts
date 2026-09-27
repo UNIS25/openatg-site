@@ -1,4 +1,5 @@
 import "server-only";
+import type { ClubAccountState, ClubMembershipState } from "./club-state";
 import { cookies } from "next/headers";
 import { createClient, type Session } from "@supabase/supabase-js";
 import { createHmac, randomBytes, timingSafeEqual } from "node:crypto";
@@ -107,7 +108,7 @@ export function failure(error: unknown) {
       : String((error as { message?: string })?.message || "");
   const code = /Rate limit/.test(msg)
     ? "rate"
-    : /Auth|session|JWT|login|credentials/i.test(msg)
+    : /Authentication|session|JWT|login|credentials/i.test(msg)
       ? "auth"
       : /stock|quantity/i.test(msg)
         ? "stock"
@@ -140,6 +141,8 @@ export async function identity() {
   return {
     ...s,
     identity: data as {
+      account_state: ClubAccountState;
+      membership_state: ClubMembershipState;
       active: boolean;
       verified: boolean;
       gold: boolean;

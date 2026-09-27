@@ -122,6 +122,7 @@ export async function POST(request: Request) {
     }
     const password = z.string().min(14).max(128).parse(input.password);
     if (action === "register") {
+      z.literal(true).parse(input.consent);
       const name = z.string().min(1).max(120).parse(input.name);
       const { error } = await db.auth.signUp({
         email,

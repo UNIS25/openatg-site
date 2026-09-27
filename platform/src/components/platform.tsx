@@ -42,13 +42,14 @@ import {
 import catalogue from "@/data/catalogue.json";
 import Admin from "./admin";
 import { useEditorial } from "./cinematic";
-import {
-  Gateway,
-  StoreHome,
-  ClubEntrance,
-  MemberArea,
-} from "./final-experience";
+import { Gateway, StoreHome, MemberArea } from "./final-experience";
 import { et } from "@/lib/experience";
+import { VerificationJourney } from "./verification";
+import { vt } from "@/lib/verification-copy";
+import {
+  verificationDestination,
+  type ClubAccountState,
+} from "@/lib/club-state";
 import { MembershipComparison } from "./membership-comparison";
 import { defaultPolish, polishText, type PolishConfig } from "@/lib/polish";
 import {
@@ -110,9 +111,11 @@ function remember(locale: Locale) {
 export default function Platform({
   locale,
   page,
+  restrictedContent,
 }: {
   locale: Locale;
   page: string;
+  restrictedContent?: React.ReactNode;
 }) {
   const editorial = useEditorial();
   const tr = (k: MessageKey, v?: Record<string, string | number>) =>
@@ -283,7 +286,7 @@ export default function Platform({
           {page === "bag" && (
             <div className="review-label">{et(locale, "preview")}</div>
           )}
-          <main id="content" className={page === "club" ? "club-page" : ""}>
+          <main id="content">
             {(error || notice) && (
               <div className="container">
                 <p
@@ -295,7 +298,20 @@ export default function Platform({
               </div>
             )}
             {!ready &&
-            ["account", "admin", "bag", "club/member"].includes(page) ? (
+            [
+              "account",
+              "admin",
+              "bag",
+              "club/member",
+              "club/collection",
+              "club",
+              "club/account",
+              "club/membership",
+              "admin/verification",
+              "verify-age",
+              "verification-pending",
+              "verification-result",
+            ].includes(page) ? (
               <p className="container section" role="status">
                 {tr("loading")}
               </p>
@@ -309,19 +325,31 @@ export default function Platform({
               />
             ) : page.startsWith("product/") ? (
               <ProductPage slug={page.slice(8)} />
+            ) : page === "club/collection" ? (
+              state?.identity.verified ? (
+                restrictedContent
+              ) : (
+                <VerificationJourney />
+              )
+            ) : [
+                "verify-age",
+                "verification-pending",
+                "verification-result",
+              ].includes(page) ? (
+              <VerificationJourney />
             ) : page === "club" ? (
-              <ClubEntrance config={editorial.experience} />
+              <MemberArea />
             ) : page === "club/member" ? (
               <MemberArea />
-            ) : page === "membership" ? (
+            ) : ["membership", "club/membership"].includes(page) ? (
               <Membership />
             ) : page === "bag" ? (
               <Bag />
             ) : ["login", "register", "reset"].includes(page) ? (
               <Auth mode={page} />
-            ) : page === "account" ? (
+            ) : ["account", "club/account"].includes(page) ? (
               <Account />
-            ) : page === "admin" ? (
+            ) : ["admin", "admin/verification"].includes(page) ? (
               <Admin />
             ) : (
               <Privacy />
@@ -800,6 +828,8 @@ export function Membership() {
     <>
       <MembershipComparison onSelect={select} busy={busy} />
       <div className="container membership-policy">
+        <p>{vt(locale, "benefits")}</p>
+        <p>{vt(locale, "payment")}</p>
         <p>{tr("cancelPolicy")}</p>
         <p>{tr("testOnly")}</p>
       </div>
@@ -810,10 +840,28 @@ export function Membership() {
 function Auth({ mode }: { mode: string }) {
   const router = useRouter();
   const { tr, locale, run, busy, notice } = usePlatform();
-  const destination = () =>
-    new URLSearchParams(window.location.search).get("next") === "club/member"
-      ? `/${locale}/club/member`
-      : `/${locale}/account`;
+  const destination = async () => {
+    const next = new URLSearchParams(window.location.search).get("next");
+    if (
+      next &&
+      [
+        "club",
+        "club/member",
+        "club/collection",
+        "club/membership",
+        "club/account",
+        "admin",
+        "admin/verification",
+      ].includes(next)
+    )
+      return `/${locale}/${next}`;
+    const current = await api<{ account_state: ClubAccountState }>(
+      "/api/verification",
+    );
+    return current.account_state === "verified_18_plus"
+      ? `/${locale}/account`
+      : verificationDestination(locale, current.account_state);
+  };
   const [challenge, setChallenge] = useState<string | null>(null);
   async function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -824,11 +872,12 @@ function Auth({ mode }: { mode: string }) {
         email: f.get("email"),
         password: f.get("password"),
         name: f.get("name"),
+        consent: f.get("consent") === "on",
         locale,
       });
       if (mode === "login") {
         if (response.factors?.length) setChallenge(response.factors[0].id);
-        else router.push(destination());
+        else router.push(await destination());
       } else notice(tr(mode === "register" ? "confirmEmail" : "resetSent"));
     });
   }
@@ -849,7 +898,7 @@ function Auth({ mode }: { mode: string }) {
                 factor_id: challenge,
                 code: f.get("code"),
               });
-              router.push(destination());
+              router.push(await destination());
             });
           }}
         >
@@ -909,7 +958,7 @@ function Auth({ mode }: { mode: string }) {
         )}
         {mode === "register" && (
           <label className="check">
-            <input type="checkbox" required />
+            <input name="consent" type="checkbox" required />
             {tr("consent")}
           </label>
         )}
@@ -1147,7 +1196,7 @@ function Bag() {
     </section>
   );
 }
-function Account() {
+export function Account() {
   const router = useRouter();
   const { tr, state, locale, run, reload, notice, busy } = usePlatform();
   const [pass, setPass] = useState<{ qr: string; expires_at: string } | null>(
@@ -1159,8 +1208,7 @@ function Account() {
     } | null>(null);
   if (!state) return <Auth mode="login" />;
   const member = state.rows.members?.[0],
-    m = state.rows.memberships?.[0],
-    v = state.rows.member_verifications?.[0];
+    m = state.rows.memberships?.[0];
   const act = async (name: string, document: Record<string, unknown>) => {
     await action(name, document);
     await reload();
@@ -1189,7 +1237,7 @@ function Account() {
             />
           </Field>
           <label className="check">
-            <input type="checkbox" required />
+            <input name="consent" type="checkbox" required />
             {tr("consent")}
           </label>
           <button className="button">{tr("save")}</button>
@@ -1246,34 +1294,15 @@ function Account() {
           )}
           <h3>{tr("verification")}</h3>
           <p data-testid="verification-status">
-            {stateName(locale, v?.status || "unverified")}
+            {vt(locale, state.identity.account_state)}
           </p>
-          <p>{tr("verifyText")}</p>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              const f = new FormData(e.currentTarget);
-              void run(() =>
-                act("test_verification", { scenario: f.get("scenario") }),
-              );
-            }}
+          <p>{vt(locale, "intro")}</p>
+          <a
+            className="button"
+            href={verificationDestination(locale, state.identity.account_state)}
           >
-            <Field label={tr("scenario")}>
-              <select name="scenario">
-                {[
-                  ["adult", "adultTest"],
-                  ["underage", "underageTest"],
-                  ["expired", "expiredTest"],
-                  ["review", "reviewTest"],
-                ].map(([value, key]) => (
-                  <option key={value} value={value}>
-                    {tr(key as MessageKey)}
-                  </option>
-                ))}
-              </select>
-            </Field>
-            <button disabled={busy}>{tr("runVerify")}</button>
-          </form>
+            {vt(locale, state.identity.verified ? "collection" : "title")}
+          </a>
         </section>
         <section className="panel">
           <h2>{tr("pass")}</h2>

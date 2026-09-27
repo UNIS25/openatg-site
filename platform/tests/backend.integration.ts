@@ -57,6 +57,8 @@ before(async () => {
         member_id: id,
         provider_reference: `integration-${id}`,
         status: "verified",
+        age_threshold: 18,
+        method: "legacy-test",
         verified_at: new Date().toISOString(),
         expires_at: new Date(Date.now() + 86400000 * 365).toISOString(),
         is_test: true,
@@ -279,17 +281,37 @@ test("tobacco and mixed orders fail in database", async () => {
   );
 });
 test("pending/expired verification immediately removes Gold access", async () => {
-  check(await call(gold, "test_verification", { status: "expired" }));
+  check(
+    await service
+      .from("v25_member_verifications")
+      .update({ status: "expired" })
+      .eq("member_id", accounts.gold.id),
+  );
   assert.equal(check(await gold.rpc("v25_platform_identity")).gold, false);
   assert.ok((await call(gold, "pass", { token_hash: "a".repeat(64) })).error);
-  check(await call(gold, "test_verification", { status: "verified" }));
+  check(
+    await service
+      .from("v25_member_verifications")
+      .update({ status: "verified", age_threshold: 18 })
+      .eq("member_id", accounts.gold.id),
+  );
 });
 test("pending verification cannot activate membership", async () => {
-  check(await call(silver, "test_verification", { status: "pending" }));
+  check(
+    await service
+      .from("v25_member_verifications")
+      .update({ status: "pending" })
+      .eq("member_id", accounts.silver.id),
+  );
   assert.ok(
     (await call(silver, "membership", { plan_id: "gold-monthly" })).error,
   );
-  check(await call(silver, "test_verification", { status: "verified" }));
+  check(
+    await service
+      .from("v25_member_verifications")
+      .update({ status: "verified", age_threshold: 18 })
+      .eq("member_id", accounts.silver.id),
+  );
 });
 test("scheduled cancellation retains paid Gold; cancelled status removes it", async () => {
   check(await call(gold, "cancel_membership"));

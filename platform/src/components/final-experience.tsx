@@ -11,6 +11,7 @@ import {
 import { stateName } from "@/lib/messages";
 import { api } from "@/lib/client";
 import { money, type Locale } from "@/lib/domain";
+import { vt } from "@/lib/verification-copy";
 import { polishText } from "@/lib/polish";
 import { MembershipComparison } from "./membership-comparison";
 
@@ -418,7 +419,7 @@ export function MemberArea() {
     );
   const member = state.rows.members?.[0];
   const membership = state.rows.memberships?.[0];
-  const tier = state.identity.gold ? "GOLD" : "SILVER";
+  const tier = vt(locale, state.identity.membership_state);
   const orders = state.rows.orders || [];
   return (
     <section className="member-area container section">
@@ -429,10 +430,9 @@ export function MemberArea() {
           <p>
             {tr("verification")}:{" "}
             <strong>
-              {stateName(
-                locale,
-                state.rows.member_verifications?.[0]?.status || "unverified",
-              )}
+              {vt(locale, state.identity.account_state)}{" "}
+              {state.rows.member_verifications?.[0]?.is_test &&
+                `· ${vt(locale, "testBadge")}`}
             </strong>
           </p>
         </div>
@@ -479,7 +479,7 @@ export function MemberArea() {
         </section>
         <section className="member-status">
           <p className="eyebrow">{tr("membership")}</p>
-          <h2>{tier === "GOLD" ? "Gold" : "Silver"}</h2>
+          <h2>{tier}</h2>
           <dl>
             <div>
               <dt>{tr("status")}</dt>
@@ -497,24 +497,33 @@ export function MemberArea() {
             )}
           </dl>
           {membership?.cancel_at_period_end && <p>{tr("cancelScheduled")}</p>}
-          <a href={`/${locale}/account`}>{tr("account")} →</a>
+          <div className="verification-links">
+            <a href={`/${locale}/club/membership`}>{vt(locale, "choose")} →</a>
+            <a href={`/${locale}/club/collection`}>
+              {vt(locale, "collection")} →
+            </a>
+            <a href={`/${locale}/club/account`}>{tr("account")} →</a>
+          </div>
+          <p>{vt(locale, "benefits")}</p>
           <h3>{et(locale, "benefits")}</h3>
           <ul className="member-benefits">
-            {(state.identity.gold
-              ? ([
-                  "goldDelivery",
-                  "goldDiscount",
-                  "goldDrink",
-                  "goldPass",
-                  "goldBenefits",
-                ] as const)
-              : ([
-                  "silverRecurring",
-                  "silverDelivery",
-                  "silverThreshold",
-                  "silverProfile",
-                  "silverPreferences",
-                ] as const)
+            {(!["silver", "gold"].includes(state.identity.membership_state)
+              ? []
+              : state.identity.gold
+                ? ([
+                    "goldDelivery",
+                    "goldDiscount",
+                    "goldDrink",
+                    "goldPass",
+                    "goldBenefits",
+                  ] as const)
+                : ([
+                    "silverRecurring",
+                    "silverDelivery",
+                    "silverThreshold",
+                    "silverProfile",
+                    "silverPreferences",
+                  ] as const)
             ).map((key) => (
               <li key={key}>
                 {polishText(polish, locale, key, {

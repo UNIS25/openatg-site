@@ -1,6 +1,5 @@
 import { z } from "zod";
 import { body, failure, identity, json, mutation, rate } from "@/lib/server";
-import { LocalAgeAdapter } from "@/lib/tokens";
 export async function POST(request: Request) {
   try {
     await mutation(request);
@@ -15,11 +14,7 @@ export async function POST(request: Request) {
       .parse(await body(request));
     if (["pass", "redeem", "pass_check"].includes(input.action))
       throw new Error("Protected pass endpoint required");
-    if (input.action === "test_verification") {
-      const adapter = new LocalAgeAdapter();
-      const outcome = await adapter.verify(String(input.document.scenario));
-      input.document = { status: outcome.status };
-    }
+    if (["test_verification","verification_review"].includes(input.action)) throw new Error("Authorized verification workflow required");
     const { data, error } = await db.rpc("v25_platform_action", {
       action: input.action,
       document: input.document,

@@ -22,6 +22,7 @@ export default defineConfig({
       name: "desktop",
       testMatch: [
         "storefront.spec.ts",
+        "verified-club.spec.ts",
         "polish.spec.ts",
         "final-experience.spec.ts",
         "resilience.spec.ts",
@@ -32,6 +33,7 @@ export default defineConfig({
       name: "tablet",
       testMatch: [
         "storefront.spec.ts",
+        "verified-club.spec.ts",
         "polish.spec.ts",
         "final-experience.spec.ts",
       ],
@@ -41,6 +43,7 @@ export default defineConfig({
       name: "mobile",
       testMatch: [
         "storefront.spec.ts",
+        "verified-club.spec.ts",
         "polish.spec.ts",
         "final-experience.spec.ts",
       ],
@@ -54,6 +57,7 @@ export default defineConfig({
       name: "narrow",
       testMatch: [
         "storefront.spec.ts",
+        "verified-club.spec.ts",
         "polish.spec.ts",
         "final-experience.spec.ts",
       ],

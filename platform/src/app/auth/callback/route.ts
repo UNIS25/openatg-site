@@ -21,7 +21,7 @@ export async function GET(request: Request) {
     if (!error && data.session) {
       await setSession(data.session);
       return NextResponse.redirect(
-        `${config().origin}/${locale}/account${type === "recovery" ? "?recovery=1" : ""}`,
+        `${config().origin}/${locale}/${type === "recovery" ? "account?recovery=1" : "verify-age"}`,
       );
     }
   }

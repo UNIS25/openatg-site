@@ -7,11 +7,13 @@ import { stateName, type MessageKey } from "@/lib/messages";
 import { Products, Inventory } from "@/legacy-admin/products";
 import { I18nProvider } from "@/legacy-admin/i18n";
 import EditorialAdmin from "./editorial-admin";
+import { VerificationAdmin } from "./verification-admin";
 import PolishAdmin from "./polish-admin";
 import type { Role } from "@/legacy-admin/domain";
 const screens = [
   "dashboard",
   "members",
+  "verification",
   "products",
   "inventory",
   "orders",
@@ -26,8 +28,10 @@ const screens = [
 ] as const;
 type Screen = (typeof screens)[number];
 export default function Admin() {
-  const { locale, tr, state, run, busy, notice } = usePlatform();
-  const [screen, setScreen] = useState<Screen>("dashboard"),
+  const { locale, tr, state, run, busy, notice, page } = usePlatform();
+  const [screen, setScreen] = useState<Screen>(
+      page === "admin/verification" ? "verification" : "dashboard",
+    ),
     [data, setData] = useState<AccountState | null>(null),
     [search, setSearch] = useState(""),
     [pass, setPass] = useState<{ name: string; eligible: boolean } | null>(
@@ -224,6 +228,8 @@ export default function Admin() {
               <h3>{tr("history")}</h3>
               {table("membership_events", ["created_at", "event"])}
             </>
+          ) : current === "verification" ? (
+            <VerificationAdmin />
           ) : current === "members" ? (
             <>
               <Field label={tr("search")}>
@@ -275,19 +281,9 @@ export default function Admin() {
                         >
                           {tr(m.state === "active" ? "suspend" : "restore")}
                         </button>
-                        <button
-                          disabled={busy}
-                          onClick={() =>
-                            void run(() =>
-                              mutate("verification_review", {
-                                id: m.id,
-                                status: "manual_review",
-                              }),
-                            )
-                          }
-                        >
-                          {tr("manual_review")}
-                        </button>
+                        <a href={`/${locale}/admin/verification`}>
+                          {tr("verification")}
+                        </a>
                       </div>
                     </article>
                   );

@@ -1485,3 +1485,111 @@
     400 clamp(42px, 5vw, 60px)/1.1 Georgia,
     serif;
 }
+/* Verified-access workflow: existing colours, typography and spacing. */
+.verification-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 70px;
+  align-items: start;
+  min-height: 65vh;
+}
+.verification-layout h1 {
+  font:
+    400 clamp(40px, 4.6vw, 64px)/1.08 Georgia,
+    serif;
+}
+.verification-layout p {
+  font-size: 14px;
+  line-height: 1.85;
+}
+.verification-panel {
+  padding: 36px;
+}
+.verification-links {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-top: 32px;
+  font-size: 13px;
+}
+.verification-test {
+  border-top: 1px solid var(--line);
+  padding-top: 24px;
+  color: #52616e;
+}
+.verification-panel .button {
+  width: 100%;
+  margin-top: 20px;
+}
+.restricted-study {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 60px;
+}
+.restricted-study figure {
+  margin: 0;
+}
+.restricted-study img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+.restricted-study figcaption {
+  font-size: 12px;
+  line-height: 1.8;
+  margin-top: 20px;
+}
+.restricted-study h2 {
+  font:
+    400 29px/1.2 Georgia,
+    serif;
+  margin-top: 32px;
+}
+.restricted-study p {
+  font-size: 14px;
+  line-height: 1.85;
+}
+.verification-admin article {
+  margin-block: 24px;
+}
+.verification-admin dl {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 12px;
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+.verification-admin dd {
+  margin: 0;
+}
+@media (max-width: 760px) {
+  .verification-layout,
+  .restricted-study {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .verification-panel {
+    padding: 24px;
+  }
+  .verification-admin dl {
+    grid-template-columns: 1fr;
+  }
+  .restricted-study h2 {
+    font-size: 26px;
+  }
+}
+.restricted-editorial .club-account-hero {
+  color: #f7f5ef;
+}
+.restricted-editorial .club-account-copy h1 {
+  color: #f7f5ef;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 400;
+  letter-spacing: -0.045em;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+}
+.restricted-editorial .club-account-copy > p:not(.film-eyebrow),
+.restricted-editorial .club-account-copy .film-link {
+  color: #f7f5ef;
+}

@@ -32,7 +32,7 @@ const assets = [
   ),
 ];
 for (const asset of assets) {
-  const dest = resolve("public", asset.slice(1));
+  const dest = asset.includes("/images/cigars/") ? resolve("private-media/club",asset.split("/").at(-1)) : resolve("public", asset.slice(1));
   await mkdir(dirname(dest), { recursive: true });
   await copyFile(resolve(root, asset.slice(1)), dest);
 }

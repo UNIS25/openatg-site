@@ -54,25 +54,13 @@ for (const locale of locales)
     await page
       .getByRole("link", { name: et(locale, "enter"), exact: true })
       .click();
-    await expect(page).toHaveURL(new RegExp(`/${locale}/club$`));
-    await expect(page.locator(".club-entrance h1")).toHaveText(
-      "Premium Cigar Club",
+    await expect(page).toHaveURL(new RegExp(`/${locale}/login\\?next=club$`));
+    await expect(page.locator(".auth-form")).toBeVisible();
+    await expect(page.locator(".digital-pass,.restricted-study")).toHaveCount(
+      0,
     );
-    await expect(
-      page.locator("img[src*=cigars], img[src*=restaurant]"),
-    ).toHaveCount(0);
     await a11y(page);
     await aligned(page);
-    if (locale === "de")
-      await page.screenshot({
-        path: `artifacts/final-polish/club-${info.project.name}.png`,
-        fullPage: true,
-      });
-    await page
-      .getByRole("link", { name: et(locale, "member"), exact: true })
-      .click();
-    await expect(page.locator(".member-locked")).toBeVisible();
-    await expect(page.locator(".digital-pass")).toHaveCount(0);
     check();
   });
 
@@ -101,7 +89,7 @@ test("language retains catalogue filter, product and member routes; root stays G
     .locator(".language-links")
     .getByRole("link", { name: "EN", exact: true })
     .click();
-  await expect(page).toHaveURL(/\/en\/club\/member$/);
+  await expect(page).toHaveURL(/\/en\/login\?next=club%2Fmember$/);
   await page.goto("/");
   await expect(page.locator("html")).toHaveAttribute("lang", "de");
 });
@@ -168,7 +156,7 @@ test("verified member dashboard retains protected account and pass access", asyn
   const check = noErrors(page);
   await login(page, "gold", "de");
   await page.goto("/de/club/member");
-  await expect(page.locator(".digital-pass")).toContainText("GOLD");
+  await expect(page.locator(".digital-pass")).toContainText("Gold");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
     "Local gold reviewer",
   );

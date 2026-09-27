@@ -3,12 +3,14 @@ import { TOTP, Secret } from "otpauth";
 import { randomUUID } from "node:crypto";
 import {
   accounts,
+  approveSubmittedVerification,
   temporaryMember,
   a11y,
   login,
   noErrors,
   screenshot,
 } from "./browser-helpers";
+import { vt } from "../src/lib/verification-copy";
 import { t } from "../src/lib/messages";
 import { locales } from "../src/lib/domain";
 let checkoutReference = "";
@@ -58,17 +60,21 @@ for (const locale of locales)
     )?.[1]?.replaceAll("&amp;", "&");
     expect(link).toBeTruthy();
     await page.goto(link);
-    await expect(page).toHaveURL(new RegExp(`/${locale}/account`));
+    await expect(page).toHaveURL(new RegExp(`/${locale}/verify-age`));
     await page.getByRole("checkbox").check();
     await page
       .getByRole("button", { name: t(locale, "save"), exact: true })
       .click();
-    await expect(
-      page.getByRole("heading", { name: `Local ${locale} registration` }),
-    ).toBeVisible();
-    await page.getByRole("button", { name: t(locale, "runVerify") }).click();
+    await page
+      .getByRole("button", { name: vt(locale, "submit"), exact: true })
+      .click();
+    await expect(page).toHaveURL(new RegExp(`/${locale}/verification-pending`));
+    const pending = await (await page.request.get("/api/state")).json();
+    await approveSubmittedVerification(pending.user.id);
+    await expect(page).toHaveURL(new RegExp(`/${locale}/club/collection`));
+    await page.goto(`/${locale}/account`);
     await expect(page.getByTestId("verification-status")).toHaveText(
-      t(locale, "verified"),
+      vt(locale, "verified_18_plus"),
     );
     await a11y(page);
     await page.getByRole("button", { name: t(locale, "logout") }).click();
@@ -80,7 +86,7 @@ for (const locale of locales)
       .getByRole("button", { name: t(locale, "login"), exact: true })
       .click();
     await expect(page.getByTestId("verification-status")).toHaveText(
-      t(locale, "verified"),
+      vt(locale, "verified_18_plus"),
     );
     check();
   });
@@ -92,7 +98,7 @@ test("guest has no admin access or private data; forged writes are rejected", as
   await page.goto("/de/admin");
   await expect(page.locator(".admin-content")).toHaveCount(0);
   await expect(
-    page.getByRole("link", { name: t("de", "login"), exact: true }),
+    page.getByRole("button", { name: t("de", "login"), exact: true }),
   ).toBeVisible();
   await a11y(page);
   expect(
@@ -310,7 +316,87 @@ test("owner TOTP enrollment, protected role and MFA login challenge", async ({
   await expect(page).toHaveURL(/\/en\/account/);
   await page.goto("/en/admin");
   await expect(page.locator(".metrics")).toBeVisible();
+  await page.goto("/en/admin/verification");
+  const policy = page.getByLabel("Require MFA for all administrators", {
+    exact: true,
+  });
+  const original = await policy.isChecked();
+  try {
+    await policy.check();
+    await expect(policy).toBeChecked();
+    await expect(policy).toBeEnabled();
+    const { createClient } = await import("@supabase/supabase-js");
+    const admin = createClient(
+      process.env.SUPABASE_URL!,
+      process.env.SUPABASE_ANON_KEY!,
+      { auth: { persistSession: false } },
+    );
+    expect(
+      (await admin.auth.signInWithPassword(accounts.administrator)).error,
+    ).toBeNull();
+    await expect
+      .poll(async () => (await admin.rpc("v25_platform_identity")).data?.admin)
+      .toBe(false);
+    expect(
+      (
+        await admin.rpc("v25_verification_review", {
+          member: member.id,
+          decision: "approve",
+          reason: "age_confirmed",
+          expected_revision: 1,
+        })
+      ).error,
+    ).toBeTruthy();
+    await admin.auth.signOut();
+  } finally {
+    // Restore through the authenticated owner endpoint even if a UI assertion failed
+    // while the controlled checkbox was still rendering its initial response.
+    const { csrf } = await (await page.request.get("/api/auth")).json();
+    const restored = await page.request.post("/api/verification", {
+      headers: { Origin: "http://127.0.0.1:4190", "x-csrf-token": csrf },
+      data: { action: "mfa-policy", required: original },
+    });
+    expect(restored.ok()).toBe(true);
+    await expect
+      .poll(
+        async () =>
+          (await (await page.request.get("/api/verification?review=1")).json())
+            .settings.admin_mfa_required,
+      )
+      .toBe(original);
+  }
   check();
+});
+
+test("restricted refresh preserves the route and absolute session expiry ends at sign-in", async ({ page }) => {
+  const member = await temporaryMember("silver");
+  await page.goto("/fr/login");
+  await page.getByLabel(t("fr", "email"), { exact: true }).fill(member.email);
+  await page.getByLabel(t("fr", "password"), { exact: true }).fill(member.password);
+  await page.getByRole("button", { name: t("fr", "login"), exact: true }).click();
+  await expect(page).toHaveURL(/\/fr\/account$/);
+  await page.context().clearCookies({ name: "v25_access" });
+  await page.goto("/fr/club/collection");
+  await expect(page).toHaveURL(/\/fr\/club\/collection$/);
+  await expect(page.locator(".restricted-study")).toBeVisible();
+  // Expire only this synthetic test user's local session; preserve every review account.
+  expect(process.env.SUPABASE_URL).toBe("http://127.0.0.1:58531");
+  expect(member.id).toMatch(/^[a-f0-9-]{36}$/);
+  const { execFileSync } = await import("node:child_process");
+  execFileSync("docker", [
+    "exec", "supabase_db_varathans25-premium-platform", "psql", "-U", "postgres", "-d", "postgres", "-v", "ON_ERROR_STOP=1", "-c",
+    `update auth.sessions set created_at=now()-interval '9 hours' where user_id='${member.id}'::uuid`,
+  ]);
+  let refreshes = 0;
+  page.on("request", (request) => {
+    if (new URL(request.url()).pathname === "/auth/refresh") refreshes++;
+  });
+  await page.reload();
+  await expect(page).toHaveURL(/\/fr\/login$/);
+  expect(refreshes).toBe(1);
+  expect((await page.context().cookies()).filter((cookie) => ["v25_access", "v25_refresh"].includes(cookie.name))).toEqual([]);
+  await page.goto("/auth/refresh?next=https%3A%2F%2Finvalid.test");
+  await expect(page).toHaveURL("http://127.0.0.1:4190/de/login");
 });
 
 test("admin creates multilingual draft, uploads private image and reloads an edit", async ({
@@ -438,7 +524,7 @@ test("password recovery uses a one-time email link and preserves private account
     .click();
   await expect(page).toHaveURL(/\/de\/account/);
   await expect(page.getByTestId("verification-status")).toHaveText(
-    t("de", "verified"),
+    vt("de", "verified_18_plus"),
   );
   await a11y(page);
   check();
