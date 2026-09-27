@@ -21,7 +21,24 @@ export type Product = {
   slug: string;
   category: string;
   image: string;
-  translations: { locale: string; name: string; description: string }[];
+  translations: {
+    locale: string;
+    name: string;
+    description: string;
+    short_description?: string;
+    ingredients?: string;
+    allergens?: string;
+    preparation_instructions?: string;
+    storage_instructions?: string;
+  }[];
+  images?: { url: string; alt: Record<string, string> }[];
+  weight_grams?: number | null;
+  origin?: string;
+  nutrition?: Record<string, unknown>;
+  information_confirmed?: boolean;
+  available_quantity?: number;
+  stock_confirmed?: boolean;
+  promotion_rappen?: number | null;
   price_rappen: number | null;
   is_test: boolean;
   gold_eligible: boolean;

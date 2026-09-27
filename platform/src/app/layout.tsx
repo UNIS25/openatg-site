@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import { headers } from "next/headers";
 import "./style.css";
 import "./cinematic.css";
+import "./experience.css";
 export const metadata: Metadata = {
-  title: "Varathans25 · Private staging",
+  title: "Varathans25 · Tee, Curry & Club",
   description: "Varathans25 local review platform",
   robots: { index: false, follow: false },
 };
@@ -12,9 +13,10 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  await headers();
+  const requestHeaders = await headers();
+  const locale = requestHeaders.get("x-v25-locale") || "de";
   return (
-    <html lang="de">
+    <html lang={locale}>
       <head>
         <link
           rel="preload"

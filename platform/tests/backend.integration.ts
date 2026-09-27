@@ -740,3 +740,131 @@ test("database rejects unsafe editorial mutations even when bypassing the API", 
         .error,
     );
 });
+
+test("guest server quote uses the same boundary calculation and rejects tobacco", async () => {
+  for (const [price, shipping] of [
+    [9999, 1000],
+    [10000, 0],
+  ] as const) {
+    check(
+      await service
+        .from("v25_product_presentations")
+        .update({ test_price_rappen: price })
+        .eq("product_id", product),
+    );
+    const result = check(
+      await anon.rpc("v25_platform_preview_quote", {
+        lines: [{ product_id: product, quantity: 1 }],
+      }),
+    );
+    assert.equal(result.delivery_rappen, shipping);
+  }
+  check(
+    await service
+      .from("v25_products")
+      .update({ adult_only: true })
+      .eq("id", product),
+  );
+  try {
+    assert.ok(
+      (
+        await anon.rpc("v25_platform_preview_quote", {
+          lines: [{ product_id: product, quantity: 1 }],
+        })
+      ).error,
+    );
+  } finally {
+    check(
+      await service
+        .from("v25_products")
+        .update({ adult_only: false })
+        .eq("id", product),
+    );
+  }
+});
+
+test("publication requires confirmed facts and preparation in every language", async () => {
+  const document = {
+    ...blankProduct(),
+    slug: `publication-gate-${randomUUID().slice(0, 8)}`,
+    category: "tea",
+    translations: blankProduct().translations.map((t) => ({
+      ...t,
+      name: "LOCAL GATE TEST",
+      description: "LOCAL TEST",
+    })),
+  };
+  const id = check(
+    await admin.rpc("v25_save_product", { document, expected_revision: null }),
+  );
+  const unavailable = await admin.rpc("v25_save_product", {
+    document: { ...document, id, status: "active" },
+    expected_revision: 1,
+  });
+  assert.match(
+    unavailable.error?.message || "",
+    /Verified information and confirmed price/,
+  );
+  check(
+    await admin.rpc("v25_adjust_inventory", {
+      product: id,
+      delta: 1,
+      reason: "LOCAL publication gate test",
+    }),
+  );
+  const complete = {
+    ...document,
+    id,
+    status: "active",
+    sku: `GATE-${randomUUID()}`,
+    price_rappen: 100,
+    price_confirmed: true,
+    information_confirmed: true,
+    weight_grams: 1,
+    origin: "LOCAL TEST",
+    nutrition: { energy_kj: "0 kJ · LOCAL TEST" },
+    translations: document.translations.map((t) => ({
+      ...t,
+      ingredients: "LOCAL TEST",
+      allergens: "LOCAL TEST",
+      storage_instructions: "LOCAL TEST",
+      preparation_instructions: t.locale === "fr" ? "" : "LOCAL TEST",
+    })),
+    images: [
+      {
+        legacy_path: "/varathans25/images/varathans25-green-tea-powder.webp",
+        position: 0,
+        alt: { de: "LOCAL TEST", fr: "LOCAL TEST", en: "LOCAL TEST" },
+      },
+    ],
+  };
+  const missing = await admin.rpc("v25_save_product", {
+    document: complete,
+    expected_revision: 1,
+  });
+  assert.match(missing.error?.message || "", /Verified food label/);
+  for (const nutrition of [null, [], {}]) {
+    const result = await admin.rpc("v25_save_product", {
+      document: {
+        ...complete,
+        nutrition,
+        translations: complete.translations.map((t) => ({
+          ...t,
+          preparation_instructions: "LOCAL TEST",
+        })),
+      },
+      expected_revision: 1,
+    });
+    assert.match(result.error?.message || "", /Verified food label/);
+  }
+
+  const persisted = check(
+    await service
+      .from("v25_products")
+      .select("status,information_confirmed")
+      .eq("id", id)
+      .single(),
+  );
+  assert.equal(persisted.status, "draft");
+  assert.equal(persisted.information_confirmed, false);
+});

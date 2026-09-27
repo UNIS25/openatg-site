@@ -20,19 +20,32 @@ export default defineConfig({
   projects: [
     {
       name: "desktop",
-      testMatch: ["storefront.spec.ts", "cinematic.spec.ts"],
+      testMatch: [
+        "storefront.spec.ts",
+        "final-experience.spec.ts",
+        "resilience.spec.ts",
+      ],
       use: { viewport: { width: 1440, height: 1000 } },
     },
     {
       name: "tablet",
-      testMatch: ["storefront.spec.ts", "cinematic.spec.ts"],
+      testMatch: ["storefront.spec.ts", "final-experience.spec.ts"],
       use: { viewport: { width: 1024, height: 1000 } },
     },
     {
       name: "mobile",
-      testMatch: ["storefront.spec.ts", "cinematic.spec.ts"],
+      testMatch: ["storefront.spec.ts", "final-experience.spec.ts"],
       use: {
         viewport: { width: 390, height: 844 },
+        isMobile: true,
+        hasTouch: true,
+      },
+    },
+    {
+      name: "narrow",
+      testMatch: ["storefront.spec.ts", "final-experience.spec.ts"],
+      use: {
+        viewport: { width: 350, height: 780 },
         isMobile: true,
         hasTouch: true,
       },

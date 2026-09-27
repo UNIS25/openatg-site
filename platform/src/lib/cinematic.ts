@@ -1,8 +1,10 @@
 import { z } from "zod";
+import { experienceSchema } from "./experience";
 export const chapters = ["tea", "spice", "evening", "restaurant"] as const;
 export const editorialSchema = z
   .object({
     revision: z.number().int().nonnegative(),
+    experience: experienceSchema.optional(),
     invitation_enabled: z.boolean(),
     invitation_delay_ms: z.number().int().min(12000).max(60000),
     invitation_start: z.iso.datetime().nullable(),

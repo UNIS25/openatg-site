@@ -2,7 +2,9 @@ import { failure, identity, json } from "@/lib/server";
 export async function GET(request: Request) {
   try {
     const s = await identity();
-    const admin = new URL(request.url).searchParams.get("admin") === "1";
+    const exporting = new URL(request.url).searchParams.get("export") === "1";
+    const admin =
+      !exporting && new URL(request.url).searchParams.get("admin") === "1";
     if (admin && !s.identity.admin && !s.identity.staff && !s.identity.role)
       throw new Error("Not authorized");
     const tables =
@@ -61,9 +63,37 @@ export async function GET(request: Request) {
         )
           q = q.eq("member_id", s.user.id);
       }
-      const { data, error } = await q;
-      if (error) throw error;
-      rows[table] = data;
+      // Explicit ownership also applies to administrators exporting their own account.
+      if (!admin && table === "order_items")
+        q = q.in(
+          "order_id",
+          ((rows.orders || []) as { id: string }[]).map((row) => row.id),
+        );
+      if (!admin && table === "cart_items")
+        q = q.in(
+          "cart_id",
+          ((rows.carts || []) as { id: string }[]).map((row) => row.id),
+        );
+      if (
+        ["orders", "payments", "audit_events", "membership_events"].includes(
+          table,
+        )
+      )
+        q = q.order("created_at", { ascending: false });
+      if (exporting) {
+        const all: unknown[] = [];
+        for (let offset = 0; ; offset += 500) {
+          const { data, error } = await q.range(offset, offset + 499);
+          if (error) throw error;
+          all.push(...(data || []));
+          if (!data || data.length < 500) break;
+        }
+        rows[table] = all;
+      } else {
+        const { data, error } = await q;
+        if (error) throw error;
+        rows[table] = data;
+      }
     }
     return json({
       user: {

@@ -1,7 +1,10 @@
 export const locales = ["de", "fr", "en"] as const;
 export type Locale = (typeof locales)[number];
 export type Role =
-  "owner" | "administrator" | "product_editor" | "order_manager";
+  | "owner"
+  | "administrator"
+  | "product_editor"
+  | "order_manager";
 export type Translation = {
   locale: Locale;
   name: string;
@@ -31,6 +34,7 @@ export type ProductDocument = {
   supplier: string;
   price_rappen: number | null;
   promotion_rappen: number | null;
+  display_order: number;
   weight_grams: number | null;
   origin: string;
   nutrition: Record<string, unknown>;
@@ -116,6 +120,7 @@ export function blankProduct(): ProductDocument {
     supplier: "",
     price_rappen: null,
     promotion_rappen: null,
+    display_order: 0,
     weight_grams: null,
     origin: "",
     nutrition: {},

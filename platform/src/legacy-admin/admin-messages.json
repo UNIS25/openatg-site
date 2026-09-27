@@ -1288,5 +1288,17 @@
   "Confirm": {
     "de": "Bestätigen",
     "fr": "Confirmer"
+  },
+  "Product order": {
+    "de": "Produktreihenfolge",
+    "fr": "Ordre des produits"
+  },
+  "Verified information and confirmed price required": {
+    "de": "Geprüfte Produktangaben und ein bestätigter Preis sind erforderlich.",
+    "fr": "Informations vérifiées et prix confirmé requis."
+  },
+  "Product image required": {
+    "de": "Ein Produktbild ist erforderlich.",
+    "fr": "Une image du produit est requise."
   }
 }

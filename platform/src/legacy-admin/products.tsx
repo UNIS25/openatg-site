@@ -329,6 +329,16 @@ function ProductEditor({
             value={doc.promotion_rappen}
             onChange={(n) => set("promotion_rappen", n)}
           />
+          <Field label="Product order">
+            <input
+              type="number"
+              min="0"
+              max="10000"
+              step="1"
+              value={doc.display_order ?? 0}
+              onChange={(e) => set("display_order", Number(e.target.value))}
+            />
+          </Field>
           <Field label="Weight in grams">
             <input
               type="number"

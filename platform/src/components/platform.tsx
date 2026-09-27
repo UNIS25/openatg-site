@@ -15,9 +15,6 @@ import {
 } from "react";
 import { useRouter } from "next/navigation";
 import {
-  ArrowRight,
-  ChevronLeft,
-  ChevronRight,
   Menu,
   X,
   ShoppingBag,
@@ -27,7 +24,6 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import {
-  calculate,
   locales,
   money,
   type Line,
@@ -45,12 +41,20 @@ import {
 } from "@/lib/client";
 import catalogue from "@/data/catalogue.json";
 import Admin from "./admin";
+import { useEditorial } from "./cinematic";
 import {
-  CinematicEntrance,
-  CinematicHome,
-  ClubInvitation,
-  useEditorial,
-} from "./cinematic";
+  Gateway,
+  StoreHome,
+  ClubEntrance,
+  MemberArea,
+} from "./final-experience";
+import { et } from "@/lib/experience";
+import {
+  guestCart,
+  mergeCart,
+  pendingCart,
+  clearPendingCart,
+} from "@/lib/cart";
 type Context = {
   locale: Locale;
   page: string;
@@ -63,6 +67,7 @@ type Context = {
   cart: Line[];
   setCart: (v: Line[]) => void;
   reload: () => Promise<void>;
+  ready: boolean;
   busy: boolean;
   run: (job: () => Promise<void>) => Promise<void>;
   notice: (s: string) => void;
@@ -135,6 +140,7 @@ export default function Platform({
     setState(null);
   }
   useEffect(() => {
+    setReady(false);
     document.documentElement.lang = locale;
     if (page !== "entrance") remember(locale);
     let mounted = true;
@@ -155,28 +161,31 @@ export default function Platform({
           const s = await api<AccountState>("/api/state");
           if (mounted) {
             setState(s);
-            const saved = s.rows.cart_items || [];
-            if (saved.length)
-              setLines(
-                saved.map((r) => ({
-                  product_id: r.product_id,
-                  quantity: r.quantity,
-                })),
-              );
-            else {
+            const saved = (s.rows.cart_items || []).map((r) => ({
+              product_id: r.product_id,
+              quantity: r.quantity,
+            }));
+            const pending = pendingCart(s.user.id);
+            const guest = guestCart(false);
+            const lines = pending?.lines || mergeCart(saved, guest);
+            setLines(lines);
+            if (s.identity.active && (pending || guest.length)) {
+              await action("cart", { lines });
+              if (pending) clearPendingCart(s.user.id, pending.revision);
               try {
-                setLines(
-                  JSON.parse(localStorage.getItem("v25_test_cart") || "[]"),
-                );
+                localStorage.setItem("v25_guest_cart", "[]");
               } catch {}
             }
+            try {
+              localStorage.setItem("v25_cart_owner", s.user.id);
+            } catch {}
           }
-        } else {
+        } else if (mounted) {
+          setState(null);
+          const guest = guestCart();
+          setLines(guest);
           try {
-            if (mounted)
-              setLines(
-                JSON.parse(localStorage.getItem("v25_test_cart") || "[]"),
-              );
+            localStorage.setItem("v25_guest_cart", JSON.stringify(guest));
           } catch {}
         }
       } catch (e) {
@@ -202,13 +211,30 @@ export default function Platform({
       setBusy(false);
     }
   }
+  const cartWrites = useRef(Promise.resolve());
   function setCart(lines: Line[]) {
     setLines(lines);
-    try {
-      localStorage.setItem("v25_test_cart", JSON.stringify(lines));
-    } catch {}
-    if (state?.identity.active)
-      void action("cart", { lines }).catch((e) => setError(errorCode(e)));
+    if (state?.identity.active) {
+      const user = state.user.id;
+      const revision = crypto.randomUUID();
+      try {
+        localStorage.setItem(
+          `v25_pending_cart_${user}`,
+          JSON.stringify({ lines, revision }),
+        );
+      } catch {}
+      cartWrites.current = cartWrites.current
+        .then(async () => {
+          await action("cart", { lines });
+          clearPendingCart(user, revision);
+        })
+        .catch((e) => setError(errorCode(e)));
+    } else {
+      try {
+        localStorage.setItem("v25_guest_cart", JSON.stringify(lines));
+        localStorage.setItem("v25_cart_owner", "guest");
+      } catch {}
+    }
   }
   return (
     <C.Provider
@@ -229,6 +255,7 @@ export default function Platform({
         cart,
         setCart,
         reload,
+        ready,
         busy,
         run,
         notice: setNotice,
@@ -237,15 +264,14 @@ export default function Platform({
       <a className="skip" href="#content">
         {tr("skip")}
       </a>
-      {page === "entrance" ? (
-        <CinematicEntrance locale={locale} />
+      {page === "entrance" || page === "" ? (
+        <Gateway config={editorial.experience} />
       ) : (
         <>
           <Header />
-          <div className="announcement">
-            {tr("delivery")} <span>{tr("deliveryScope")}</span>
-          </div>
-          <div className="review-label">{tr("local")}</div>
+          {page === "bag" && (
+            <div className="review-label">{et(locale, "preview")}</div>
+          )}
           <main id="content" className={page === "club" ? "club-page" : ""}>
             {(error || notice) && (
               <div className="container">
@@ -257,22 +283,25 @@ export default function Platform({
                 </p>
               </div>
             )}
-            {!ready && ["account", "admin", "bag"].includes(page) ? (
+            {!ready &&
+            ["account", "admin", "bag", "club/member"].includes(page) ? (
               <p className="container section" role="status">
                 {tr("loading")}
               </p>
-            ) : page === "" ? (
-              <CinematicHome
-                locale={locale}
-                config={editorial}
-                collection={<Collection category="tea" compact />}
+            ) : page === "store" ? (
+              <StoreHome config={editorial.experience} />
+            ) : ["shop", "tea", "pantry"].includes(page) ? (
+              <Collection
+                category={
+                  page === "tea" || page === "pantry" ? page : undefined
+                }
               />
-            ) : page === "tea" || page === "pantry" ? (
-              <Collection category={page} />
             ) : page.startsWith("product/") ? (
               <ProductPage slug={page.slice(8)} />
             ) : page === "club" ? (
-              <Club />
+              <ClubEntrance config={editorial.experience} />
+            ) : page === "club/member" ? (
+              <MemberArea />
             ) : page === "membership" ? (
               <Membership />
             ) : page === "bag" ? (
@@ -288,12 +317,6 @@ export default function Platform({
             )}
           </main>
           <Footer />
-          <ClubInvitation
-            locale={locale}
-            page={page}
-            member={!!state}
-            config={editorial}
-          />
         </>
       )}
     </C.Provider>
@@ -310,14 +333,16 @@ function Logo() {
     />
   );
 }
-function LanguageLinks() {
+export function LanguageLinks() {
   const { locale, page, tr } = usePlatform();
+  const [query, setQuery] = useState("");
+  useEffect(() => setQuery(window.location.search), [page]);
   return (
     <nav aria-label={tr("language")} className="language-links">
       {locales.map((l) => (
         <a
           key={l}
-          href={`/${l}/${page === "entrance" ? "" : page}`}
+          href={`/${l}/${page === "entrance" ? "" : page}${query}`}
           aria-current={l === locale ? "page" : undefined}
           lang={l}
           onClick={() => remember(l)}
@@ -338,9 +363,13 @@ function Header() {
           <Logo />
         </a>
         <nav className="desktop-nav" aria-label={tr("menu")}>
-          {(["tea", "pantry", "club"] as const).map((p) => (
+          {(["store", "shop", "club"] as const).map((p) => (
             <a key={p} href={`/${locale}/${p}`}>
-              {tr(p)}
+              {p === "store"
+                ? et(locale, "store")
+                : p === "shop"
+                  ? et(locale, "catalogue")
+                  : tr(p)}
             </a>
           ))}
         </nav>
@@ -376,11 +405,13 @@ function Header() {
           className="mobile-navigation container"
           aria-label={tr("menu")}
         >
-          {(
-            ["tea", "pantry", "club", "membership", "account", "bag"] as const
-          ).map((p) => (
+          {(["store", "shop", "club", "account", "bag"] as const).map((p) => (
             <a key={p} href={`/${locale}/${p}`}>
-              {tr(p)}
+              {p === "store"
+                ? et(locale, "store")
+                : p === "shop"
+                  ? et(locale, "catalogue")
+                  : tr(p)}
             </a>
           ))}
           {state?.identity.staff && (
@@ -397,19 +428,21 @@ function Footer() {
     <footer className="footer">
       <div className="container footer-grid">
         <div>
-          <Logo />
-          <p>{tr("presented")}</p>
+          <a href={`/${locale}/`} aria-label="Varathans25">
+            <Logo />
+          </a>
+          <p>Varathans25 · Switzerland</p>
         </div>
         <nav aria-label="Varathans25">
-          <a href={`/${locale}/tea`}>{tr("tea")}</a>
-          <a href={`/${locale}/pantry`}>{tr("pantry")}</a>
+          <a href={`/${locale}/store`}>{et(locale, "store")}</a>
+          <a href={`/${locale}/shop`}>{et(locale, "catalogue")}</a>
           <a href={`/${locale}/membership`}>{tr("membership")}</a>
           <a href={`/${locale}/privacy`}>{tr("privacy")}</a>
         </nav>
         <div>
           <p>{tr("delivery")}</p>
           <small>{tr("deliveryScope")}</small>
-          <p className="muted">{tr("testOnly")}</p>
+          <p className="muted">{et(locale, "preview")}</p>
         </div>
       </div>
     </footer>
@@ -456,36 +489,58 @@ function ProductCard({
   product: Product;
   detail?: boolean;
 }) {
-  const { locale, tr, cart, setCart, state, notice, goldBps } = usePlatform();
+  const { locale, tr, cart, setCart, state, notice, goldBps, ready } =
+    usePlatform();
   const [quantity, setQuantity] = useState(1);
-  const name =
-    product.translations.find((l) => l.locale === locale)?.name || product.slug;
-  const price = product.price_rappen;
+  const [imageIndex, setImageIndex] = useState(0);
+  const translation = product.translations.find((t) => t.locale === locale);
+  const name = translation?.name || product.slug;
+  const price = product.promotion_rappen ?? product.price_rappen;
+  const stock = product.available_quantity ?? 0;
+  const existingQuantity =
+    cart.find((line) => line.product_id === product.id)?.quantity || 0;
+  const limit = Math.max(0, Math.min(20, stock) - existingQuantity);
+  const available = ready && price !== null && limit >= quantity;
   const gold = !!state?.identity.gold && product.gold_eligible;
+  const photos = product.images?.length
+    ? product.images
+    : [{ url: product.image, alt: { [locale]: name } }];
+  const photo = photos[imageIndex] || photos[0];
   return (
     <article className={`product-card ${detail ? "detail" : ""}`}>
-      <a href={`/${locale}/product/${product.slug}`} className="product-photo">
-        <img
-          src={product.image}
-          srcSet={
-            product.image.startsWith("/varathans25/")
-              ? `${product.image.replace(".webp", "-320.webp")} 320w, ${product.image.replace(".webp", "-640.webp")} 640w, ${product.image} 1254w`
-              : undefined
-          }
-          sizes={
-            detail
-              ? "(max-width:760px) 90vw, 45vw"
-              : "(max-width:760px) 45vw, 30vw"
-          }
-          width="480"
-          height="480"
-          alt={name}
-          loading="lazy"
-        />
-      </a>
+      <div className="product-gallery">
+        <a
+          href={detail ? photo.url : `/${locale}/product/${product.slug}`}
+          className="product-photo"
+          aria-label={name}
+        >
+          <img
+            src={photo.url}
+            width="640"
+            height="640"
+            alt={photo.alt[locale] || name}
+            loading={detail ? "eager" : "lazy"}
+          />
+        </a>
+        {detail && photos.length > 1 && (
+          <div className="product-thumbnails">
+            {photos.map((im, i) => (
+              <button
+                key={im.url}
+                onClick={() => setImageIndex(i)}
+                aria-label={`${tr("imageCount", { n: i + 1 })}`}
+                aria-pressed={i === imageIndex}
+              >
+                <img src={im.url} alt="" width="70" height="70" />
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
       <div className="product-copy">
         <p className="eyebrow">
-          VARATHANS25 · {tr(product.category === "tea" ? "tea" : "pantry")}
+          VARATHANS25 ·{" "}
+          {et(locale, product.category === "tea" ? "tea" : "curry")}
         </p>
         {detail ? (
           <h1>{name}</h1>
@@ -494,40 +549,55 @@ function ProductCard({
             <a href={`/${locale}/product/${product.slug}`}>{name}</a>
           </h3>
         )}
-        {detail && <p>{tr("factsPending")}</p>}
+        <p className="product-variant">
+          {translation?.short_description || name}
+        </p>
+        <p className="product-weight">
+          {et(locale, "weight")}:{" "}
+          {product.weight_grams
+            ? `${product.weight_grams} g`
+            : et(locale, "pending")}
+        </p>
+        {detail && translation?.description && <p>{translation.description}</p>}
         <p className="price">
           {price === null ? tr("pricePending") : money(price, locale)}
         </p>
         {price !== null && gold && (
-          <p>
+          <p className="member-price">
             {tr("goldPrice")}:{" "}
-            <strong>
-              {money(
-                price - Math.floor((price * goldBps + 5000) / 10000),
-                locale,
-              )}
-            </strong>
+            {money(
+              Math.min(
+                price,
+                product.price_rappen! -
+                  Math.floor((product.price_rappen! * goldBps + 5000) / 10000),
+              ),
+              locale,
+            )}
           </p>
         )}
-        <small className="muted">
-          {price !== null ? tr("testPrice") : tr("factsPending")}
-        </small>
+        <p
+          className={`stock-status ${stock > 0 && price !== null ? "stock-available" : ""}`}
+        >
+          {stock > 0 && price !== null
+            ? et(locale, product.stock_confirmed ? "stock" : "previewStock")
+            : et(locale, "out")}
+        </p>
         <div className="purchase-row">
           <Quantity
             value={quantity}
             change={setQuantity}
+            max={limit}
             label={`${tr("quantity")} · ${name}`}
           />
           <button
             className="button"
-            disabled={price === null}
+            disabled={!available}
             onClick={() => {
-              const existing = cart.find((l) => l.product_id === product.id);
               setCart([
                 ...cart.filter((l) => l.product_id !== product.id),
                 {
                   product_id: product.id,
-                  quantity: Math.min(20, (existing?.quantity || 0) + quantity),
+                  quantity: existingQuantity + quantity,
                 },
               ]);
               notice(tr("added"));
@@ -536,6 +606,14 @@ function ProductCard({
             {tr("add")}
           </button>
         </div>
+        {!detail && (
+          <a
+            className="product-detail-link"
+            href={`/${locale}/product/${product.slug}`}
+          >
+            {tr("details")} <span aria-hidden="true">↗</span>
+          </a>
+        )}
         {detail && (
           <p className="delivery-note">
             {tr("delivery")}
@@ -547,28 +625,50 @@ function ProductCard({
     </article>
   );
 }
-function Collection({
-  category,
-  compact = false,
-}: {
-  category: "tea" | "pantry";
-  compact?: boolean;
-}) {
-  const { products, tr } = usePlatform();
+function Collection({ category }: { category?: "tea" | "pantry" }) {
+  const { products, locale } = usePlatform();
+  const [filter, setFilter] = useState(category || "all");
+  useEffect(() => {
+    const selected = new URLSearchParams(window.location.search).get(
+      "category",
+    );
+    setFilter(
+      category ||
+        (selected === "tea" || selected === "pantry" ? selected : "all"),
+    );
+  }, [category]);
   return (
-    <section className="container section">
-      {!compact && (
-        <>
+    <section className="container section catalogue">
+      <div className="catalogue-heading">
+        <div>
           <p className="eyebrow">VARATHANS25 COLLECTION</p>
-          <h1>{tr(category)}</h1>
-          <p className="lede">
-            {tr(category === "tea" ? "teaIntro" : "pantryIntro")}
-          </p>
-        </>
-      )}
+          <h1>
+            {et(
+              locale,
+              filter === "tea"
+                ? "tea"
+                : filter === "pantry"
+                  ? "curry"
+                  : "catalogue",
+            )}
+          </h1>
+        </div>
+        <p>{et(locale, "preview")}</p>
+      </div>
+      <nav className="catalogue-filters" aria-label={et(locale, "catalogue")}>
+        {(["all", "tea", "pantry"] as const).map((key) => (
+          <a
+            key={key}
+            href={`/${locale}/shop${key === "all" ? "" : `?category=${key}`}`}
+            aria-current={filter === key ? "page" : undefined}
+          >
+            {et(locale, key === "pantry" ? "curry" : key)}
+          </a>
+        ))}
+      </nav>
       <div className="product-grid">
         {products
-          .filter((p) => p.category === category)
+          .filter((p) => filter === "all" || p.category === filter)
           .map((p) => (
             <ProductCard key={p.id} product={p} />
           ))}
@@ -577,106 +677,70 @@ function Collection({
   );
 }
 function ProductPage({ slug }: { slug: string }) {
-  const { products, tr } = usePlatform();
-  const p = products.find((p) => p.slug === slug);
+  const { products, tr, locale } = usePlatform();
+  const product = products.find((p) => p.slug === slug);
+  if (!product)
+    return (
+      <section className="container section">
+        <h1>{tr("noRecords")}</h1>
+      </section>
+    );
+  const translation = product.translations.find((t) => t.locale === locale);
+  const facts = [
+    [et(locale, "ingredients"), translation?.ingredients],
+    [et(locale, "allergens"), translation?.allergens],
+    [
+      et(locale, "weight"),
+      product.weight_grams ? `${product.weight_grams} g` : "",
+    ],
+    [et(locale, "origin"), product.origin],
+    [et(locale, "preparation"), translation?.preparation_instructions],
+    [et(locale, "storage"), translation?.storage_instructions],
+  ];
   return (
-    <section className="container section">
-      {p ? <ProductCard product={p} detail /> : <h1>{tr("noRecords")}</h1>}
+    <section className="container section product-page">
+      <a className="breadcrumb" href={`/${locale}/shop`}>
+        ← {et(locale, "catalogue")}
+      </a>
+      <ProductCard product={product} detail />
+      <div className="product-facts">
+        <div>
+          <p className="eyebrow">VARATHANS25</p>
+          <h2>{et(locale, "description")}</h2>
+          <p>{translation?.description || tr("factsPending")}</p>
+          <p className="muted">{et(locale, "preview")}</p>
+        </div>
+        <dl>
+          {facts.map(([label, value]) => (
+            <div key={label}>
+              <dt>{label}</dt>
+              <dd>{value || et(locale, "pending")}</dd>
+            </div>
+          ))}
+          <div>
+            <dt>{et(locale, "nutrition")}</dt>
+            <dd>
+              {product.nutrition && Object.keys(product.nutrition).length ? (
+                <dl>
+                  {Object.entries(product.nutrition).map(([key, value]) => (
+                    <div key={key}>
+                      <dt>{key}</dt>
+                      <dd>
+                        {typeof value === "string" || typeof value === "number"
+                          ? String(value)
+                          : JSON.stringify(value)}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+              ) : (
+                et(locale, "pending")
+              )}
+            </dd>
+          </div>
+        </dl>
+      </div>
     </section>
-  );
-}
-function BoxImages() {
-  const { tr } = usePlatform();
-  const [index, setIndex] = useState(0);
-  return (
-    <figure className="box-gallery">
-      <img
-        src={`${asset}images/cigars/varathans-cigars-box-${index ? "open" : "closed"}-960.webp`}
-        srcSet={`${asset}images/cigars/varathans-cigars-box-${index ? "open" : "closed"}-480.webp 480w, ${asset}images/cigars/varathans-cigars-box-${index ? "open" : "closed"}-960.webp 960w`}
-        sizes="(max-width: 760px) 90vw, 50vw"
-        width="960"
-        height="640"
-        alt={tr(index ? "openAlt" : "closedAlt")}
-      />
-      <figcaption>
-        <span aria-live="polite">{tr("imageCount", { n: index + 1 })}</span>
-        <div className="image-controls">
-          <button
-            aria-label={tr("previous")}
-            onClick={() => setIndex(1 - index)}
-          >
-            <ChevronLeft />
-          </button>
-          <button aria-label={tr("next")} onClick={() => setIndex(1 - index)}>
-            <ChevronRight />
-          </button>
-        </div>
-      </figcaption>
-    </figure>
-  );
-}
-function Club() {
-  const { tr, locale } = usePlatform();
-  return (
-    <>
-      <section className="container club-hero">
-        <div>
-          <p className="eyebrow">{tr("adult")}</p>
-          <h1>{tr("clubTitle")}</h1>
-          <p className="club-deck">{tr("clubHero")}</p>
-          <p>{tr("clubIntro")}</p>
-        </div>
-        <BoxImages />
-      </section>
-      <section className="container section editorial-grid">
-        <div>
-          <p className="eyebrow">VARATHANS25 COLLECTION</p>
-          <h2>{tr("boxTitle")}</h2>
-          <p>{tr("boxText")}</p>
-          <p className="concept">{tr("concept")}</p>
-          <p>{tr("presented")}</p>
-        </div>
-        <img
-          className="open-box"
-          src={`${asset}images/cigars/varathans-cigars-box-open-960.webp`}
-          width="960"
-          height="640"
-          alt={tr("openAlt")}
-          loading="lazy"
-        />
-      </section>
-      <section className="container section hospitality-grid">
-        <img
-          src={`${asset}images/restaurant/dining-interior.webp`}
-          alt={tr("restaurantAlt")}
-          width="768"
-          height="1024"
-          loading="lazy"
-        />
-        <div>
-          <p className="eyebrow">RESTAURANT & LOUNGE</p>
-          <h2>{tr("hospitality")}</h2>
-          <p>{tr("hospitalityText")}</p>
-          <a className="button light" href={`/${locale}/membership`}>
-            {tr("membership")}
-            <ArrowRight size={18} />
-          </a>
-          <p>{tr("passExplanation")}</p>
-          <a href={`/${locale}/account`}>{tr("account")} →</a>
-        </div>
-      </section>
-      <section className="container section editorial-grid responsible">
-        <div>
-          <h2>{tr("storage")}</h2>
-          <p>{tr("storageText")}</p>
-        </div>
-        <div>
-          <h2>{tr("responsible")}</h2>
-          <p>{tr("tobaccoInfo")}</p>
-          <strong>{tr("adult")}</strong>
-        </div>
-      </section>
-    </>
   );
 }
 export function Membership() {
@@ -769,6 +833,10 @@ export function Membership() {
 function Auth({ mode }: { mode: string }) {
   const router = useRouter();
   const { tr, locale, run, busy, notice } = usePlatform();
+  const destination = () =>
+    new URLSearchParams(window.location.search).get("next") === "club/member"
+      ? `/${locale}/club/member`
+      : `/${locale}/account`;
   const [challenge, setChallenge] = useState<string | null>(null);
   async function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -783,7 +851,7 @@ function Auth({ mode }: { mode: string }) {
       });
       if (mode === "login") {
         if (response.factors?.length) setChallenge(response.factors[0].id);
-        else router.push(`/${locale}/account`);
+        else router.push(destination());
       } else notice(tr(mode === "register" ? "confirmEmail" : "resetSent"));
     });
   }
@@ -804,7 +872,7 @@ function Auth({ mode }: { mode: string }) {
                 factor_id: challenge,
                 code: f.get("code"),
               });
-              router.push(`/${locale}/account`);
+              router.push(destination());
             });
           }}
         >
@@ -901,8 +969,7 @@ function Bag() {
     run,
     notice,
     busy,
-    goldBps,
-    delivery,
+    reload,
   } = usePlatform();
   const known = cart
     .map((l) => ({
@@ -913,22 +980,29 @@ function Bag() {
   const orderKey = useRef<string | null>(null);
   const [quote, setQuote] = useState<Quote | null>(null),
     [address, setAddress] = useState("");
-  const calculation = known.length
-    ? calculate(
-        known.map(({ line, product }) => ({
-          quantity: line.quantity,
-          price: product!.price_rappen!,
-          goldEligible: product!.gold_eligible,
-        })),
-        !!state?.identity.gold,
-        goldBps,
-        delivery,
-      )
-    : null;
-  const q = quote || calculation;
+  const [serverQuote, setServerQuote] = useState<Quote | null>(null);
+  const [quoteError, setQuoteError] = useState("");
+  const q = quote || serverQuote;
   useEffect(() => {
+    let live = true;
     setQuote(null);
+    setServerQuote(null);
+    setQuoteError("");
     orderKey.current = null;
+    const timer = setTimeout(() => {
+      if (cart.length)
+        void api<Quote>("/api/quote", { lines: cart })
+          .then((result) => {
+            if (live) setServerQuote(result);
+          })
+          .catch((error) => {
+            if (live) setQuoteError(errorCode(error));
+          });
+    }, 180);
+    return () => {
+      live = false;
+      clearTimeout(timer);
+    };
   }, [cart]);
   return (
     <section className="container section">
@@ -949,9 +1023,7 @@ function Bag() {
                         ?.name
                     }
                   </h2>
-                  <p>
-                    {money(product!.price_rappen!, locale)} · {tr("testPrice")}
-                  </p>
+                  <p>{money(product!.price_rappen!, locale)}</p>
                   <div className="actions">
                     <Quantity
                       value={line.quantity}
@@ -982,6 +1054,10 @@ function Bag() {
           </div>
           <aside className="panel bag-summary">
             <h2>{tr("total")}</h2>
+            {quoteError && (
+              <p role="alert">{tr(`error_${quoteError}` as MessageKey)}</p>
+            )}
+            {!q && !quoteError && <p role="status">{tr("loading")}</p>}
             {q && (
               <>
                 <dl className="totals">
@@ -1021,7 +1097,7 @@ function Bag() {
               </>
             )}
             <p>{tr("deliveryScope")}</p>
-            <p className="muted">{tr("testOnly")}</p>
+            <p className="muted">{et(locale, "preview")}</p>
             {state?.identity.active ? (
               <>
                 <Field label={tr("deliveryAddress")}>
@@ -1041,7 +1117,7 @@ function Bag() {
                   <a href={`/${locale}/account`}>{tr("addressRequired")}</a>
                 )}
                 <button
-                  disabled={busy || !address}
+                  disabled={busy || !address || !serverQuote || !!quoteError}
                   className="button"
                   onClick={() =>
                     void run(async () => {
@@ -1070,7 +1146,7 @@ function Bag() {
                           orderKey.current || crypto.randomUUID(),
                         );
                         setCart([]);
-                        await reloadState();
+                        await reload();
                         notice(tr("orderCreated"));
                       })
                     }
@@ -1089,9 +1165,6 @@ function Bag() {
       )}
     </section>
   );
-  async function reloadState() {
-    await api("/api/state");
-  }
 }
 function Account() {
   const router = useRouter();
@@ -1459,7 +1532,7 @@ function Privacy() {
           <button
             onClick={() =>
               void run(async () => {
-                const data = await api("/api/state");
+                const data = await api("/api/state?export=1");
                 const href = URL.createObjectURL(
                   new Blob([JSON.stringify(data, null, 2)], {
                     type: "application/json",

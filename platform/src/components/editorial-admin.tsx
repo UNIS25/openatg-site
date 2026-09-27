@@ -2,46 +2,78 @@
 import { useEffect, useState, useRef } from "react";
 import { usePlatform, Field } from "./platform";
 import { api } from "@/lib/client";
-import { ct, type CinemaKey } from "@/lib/cinematic-copy";
-import { type EditorialConfig, chapters } from "@/lib/cinematic";
+import { ct } from "@/lib/cinematic-copy";
+import { type EditorialConfig } from "@/lib/cinematic";
 import { locales } from "@/lib/domain";
-const keys = [
-  "heroTitle",
-  "heroText",
-  "teaTitle",
-  "teaText",
-  "spiceTitle",
-  "spiceText",
-  "eveningTitle",
-  "eveningText",
-  "restaurantTitle",
-  "restaurantText",
-] as const;
+import {
+  defaultExperience,
+  experienceKeys,
+  experienceText,
+  type ExperienceConfig,
+} from "@/lib/experience";
+const labels = {
+  de: [
+    "Gateway · Titel",
+    "Store · Titel",
+    "Store · Einleitung",
+    "Tee · Titel",
+    "Tee · Text",
+    "Curry · Titel",
+    "Curry · Text",
+    "Kollektion · Titel",
+    "Kollektion · Text",
+    "Lieferung · Titel",
+    "Lieferung · Text",
+    "Club · Titel",
+    "Club · Kontoinformation",
+  ],
+  fr: [
+    "Accueil · Titre",
+    "Boutique · Titre",
+    "Boutique · Introduction",
+    "Thé · Titre",
+    "Thé · Texte",
+    "Curry · Titre",
+    "Curry · Texte",
+    "Collection · Titre",
+    "Collection · Texte",
+    "Livraison · Titre",
+    "Livraison · Texte",
+    "Club · Titre",
+    "Club · Informations de compte",
+  ],
+  en: [
+    "Gateway · Title",
+    "Store · Title",
+    "Store · Introduction",
+    "Tea · Title",
+    "Tea · Text",
+    "Curry · Title",
+    "Curry · Text",
+    "Collection · Title",
+    "Collection · Text",
+    "Delivery · Title",
+    "Delivery · Text",
+    "Club · Title",
+    "Club · Account information",
+  ],
+};
 export default function EditorialAdmin() {
   const { locale, tr, run, busy, notice } = usePlatform();
-  const [config, setConfig] = useState<EditorialConfig | null>(null),
-    [assets, setAssets] = useState<
-      {
-        id: string;
-        original_filename: string;
-        status: string;
-        commercial_approved: boolean;
-      }[]
-    >([]);
+  const [config, setConfig] = useState<EditorialConfig | null>(null);
   const initialRun = useRef(run);
   useEffect(() => {
     void initialRun.current(async () => {
-      const result = await api<{
-        config: EditorialConfig;
-        assets: typeof assets;
-      }>("/api/admin/editorial");
+      const result = await api<{ config: EditorialConfig }>(
+        "/api/admin/editorial",
+      );
       setConfig(result.config);
-      setAssets(result.assets);
     });
-  }, []); // one request on screen entry
+  }, []);
   if (!config) return <p role="status">{tr("loading")}</p>;
-  const set = (patch: Partial<EditorialConfig>) =>
-    setConfig({ ...config, ...patch });
+  const experience = config.experience || defaultExperience;
+  const set = (patch: Partial<ExperienceConfig>) =>
+    setConfig({ ...config, experience: { ...experience, ...patch } });
   return (
     <div className="editorial-settings">
       <h3>{ct(locale, "media")}</h3>
@@ -50,117 +82,58 @@ export default function EditorialAdmin() {
           e.preventDefault();
           void run(async () => {
             setConfig(
-              await api<EditorialConfig>("/api/admin/editorial", config),
+              await api<EditorialConfig>("/api/admin/editorial", {
+                ...config,
+                experience,
+              }),
             );
             notice(ct(locale, "saved"));
           });
         }}
       >
-        <label className="check">
-          <input
-            type="checkbox"
-            checked={config.invitation_enabled}
-            onChange={(e) => set({ invitation_enabled: e.target.checked })}
-          />
-          {ct(locale, "enabled")}
-        </label>
         <div className="grid">
-          <Field label={ct(locale, "delay")}>
-            <input
-              type="number"
-              min="12"
-              max="60"
-              step="1"
-              value={config.invitation_delay_ms / 1000}
-              onChange={(e) =>
-                set({ invitation_delay_ms: Number(e.target.value) * 1000 })
-              }
-              required
-            />
-          </Field>
-          {(["start", "end"] as const).map((key) => (
-            <Field key={key} label={ct(locale, key)}>
-              <input
-                type="datetime-local"
-                value={config[`invitation_${key}`]?.slice(0, 16) || ""}
-                onChange={(e) =>
-                  set({
-                    [`invitation_${key}`]: e.target.value
-                      ? new Date(e.target.value + "Z").toISOString()
-                      : null,
-                  })
-                }
-              />
+          {(["gateway", "store", "club"] as const).map((key, i) => (
+            <Field
+              key={key}
+              label={`${["Gateway", "Store", "Club"][i]} · ${ct(locale, "activeFilm")}`}
+            >
+              <select
+                value={experience[`${key}_film`]}
+                onChange={(e) => set({ [`${key}_film`]: e.target.value })}
+              >
+                <option value={["highlands", "tea", "evening"][i]}>
+                  {
+                    [
+                      "Tea plantation",
+                      "Tea pouring",
+                      "Candlelight · account entrance",
+                    ][i]
+                  }
+                </option>
+                <option value="poster-only">{ct(locale, "poster")}</option>
+              </select>
             </Field>
           ))}
-          <Field label={ct(locale, "activeFilm")}>
-            <select
-              value={config.active_film}
-              onChange={(e) =>
-                set({
-                  active_film: e.target.value as EditorialConfig["active_film"],
-                })
-              }
-            >
-              <option value="daylight-study">{ct(locale, "study")}</option>
-              <option value="poster-only">{ct(locale, "poster")}</option>
-            </select>
-          </Field>
         </div>
-        <h4>{ct(locale, "order")}</h4>
-        <ol className="chapter-order">
-          {config.chapter_order.map((key, i) => (
-            <li key={key}>
-              <span>
-                {ct(
-                  locale,
-                  `${key === "evening" ? "evening" : key}Label` as CinemaKey,
-                )}
-              </span>
-              {([-1, 1] as const).map((d) => (
-                <button
-                  key={d}
-                  type="button"
-                  disabled={i + d < 0 || i + d >= chapters.length}
-                  aria-label={`${ct(locale, d < 0 ? "up" : "down")} ${key}`}
-                  onClick={() => {
-                    const order = [...config.chapter_order];
-                    [order[i], order[i + d]] = [order[i + d], order[i]];
-                    set({ chapter_order: order });
-                  }}
-                >
-                  {d < 0 ? "↑" : "↓"}
-                </button>
-              ))}
-            </li>
-          ))}
-        </ol>
         {locales.map((l) => (
           <fieldset key={l}>
             <legend>{l.toUpperCase()}</legend>
-            {keys.map((key) => (
-              <Field key={key} label={`${l.toUpperCase()} · ${ct(l, key)}`}>
+            {experienceKeys.map((key, i) => (
+              <Field key={key} label={`${l.toUpperCase()} · ${labels[l][i]}`}>
                 <textarea
                   lang={l}
-                  maxLength={500}
-                  required
                   rows={key.endsWith("Title") ? 2 : 3}
-                  value={config.copy?.[l]?.[key] || ct(l, key)}
-                  onChange={(e) => {
-                    const copy = Object.fromEntries(
-                      locales.map((lang) => [
-                        lang,
-                        Object.fromEntries(
-                          keys.map((k) => [
-                            k,
-                            config.copy?.[lang]?.[k] || ct(lang, k),
-                          ]),
-                        ),
-                      ]),
-                    ) as NonNullable<EditorialConfig["copy"]>;
-                    copy[l][key] = e.target.value;
-                    set({ copy });
-                  }}
+                  required
+                  maxLength={500}
+                  value={experienceText(l, key, experience)}
+                  onChange={(e) =>
+                    set({
+                      copy: {
+                        ...experience.copy,
+                        [l]: { ...experience.copy[l], [key]: e.target.value },
+                      },
+                    })
+                  }
                 />
               </Field>
             ))}
@@ -170,24 +143,13 @@ export default function EditorialAdmin() {
           {ct(locale, "save")}
         </button>
       </form>
-      <section className="section">
-        <h3>{ct(locale, "rights")}</h3>
-        <p>{ct(locale, "pending")}</p>
-        <p>{ct(locale, "draftMedia")}</p>
-        <ul>
-          <li>daylight-study-1280.mp4 / 960.mp4 / 1280.webm</li>
-          <li>daylight-poster-1280.webp / mobile.webp</li>
-        </ul>
-        {assets.map((a) => (
-          <p key={a.id}>
-            {a.original_filename} ·{" "}
-            {a.commercial_approved ? tr("verified") : ct(locale, "pending")}
-          </p>
-        ))}
-        <p>
-          <code>docs/MEDIA_RIGHTS_MANIFEST.md</code>
-        </p>
-      </section>
+      <p className="muted">
+        {locale === "de"
+          ? "Film und zugehöriges Standbild werden gemeinsam gewählt. Verwendet werden ausschliesslich die dokumentierten lokalen Filmdateien. Neue Medien benötigen eine Rechteprüfung und technische Freigabe."
+          : locale === "fr"
+            ? "Le film et son image fixe sont sélectionnés ensemble. Seuls les fichiers locaux documentés sont disponibles. Tout nouveau média nécessite une validation des droits et un contrôle technique."
+            : "Each film is paired with its matching poster. Only documented local films are available. New media requires rights verification and technical approval."}
+      </p>
     </div>
   );
 }

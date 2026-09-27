@@ -13,6 +13,12 @@ export async function api<T = Record<string, unknown>>(
     method: body === undefined ? "GET" : "POST",
     credentials: "same-origin",
     cache: "no-store",
+    keepalive:
+      path === "/api/action" &&
+      typeof body === "object" &&
+      body !== null &&
+      "action" in body &&
+      body.action === "cart",
     headers:
       body === undefined
         ? {}
@@ -20,6 +26,8 @@ export async function api<T = Record<string, unknown>>(
     body: body === undefined ? undefined : JSON.stringify(body),
   });
   const result = await response.json();
+  if (path === "/api/auth" && typeof result.csrf === "string")
+    csrf = result.csrf;
   if (!response.ok) throw new Error(result.error || "invalid");
   return result as T;
 }

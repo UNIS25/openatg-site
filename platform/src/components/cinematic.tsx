@@ -18,6 +18,7 @@ import {
   motionPermitted,
   type EditorialConfig,
 } from "@/lib/cinematic";
+import { defaultExperience } from "@/lib/experience";
 const root = "/varathans25/";
 let playing: HTMLVideoElement | null = null;
 let dialogOpen = false;
@@ -613,6 +614,12 @@ export function ClubInvitation({
 export function useEditorial() {
   const [config, setConfig] = useState<EditorialConfig>({
     ...defaultEditorial,
+    experience: {
+      ...defaultExperience,
+      gateway_film: "poster-only",
+      store_film: "poster-only",
+      club_film: "poster-only",
+    },
     invitation_enabled: false,
     active_film: "poster-only",
   });

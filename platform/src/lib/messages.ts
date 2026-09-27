@@ -107,11 +107,7 @@ export const messages = {
     "Further product information will be added after verification.",
   ],
   quantity: ["Menge", "Quantité", "Quantity"],
-  add: [
-    "Zur Testtasche hinzufügen",
-    "Ajouter au panier test",
-    "Add to test bag",
-  ],
+  add: ["In den Warenkorb", "Ajouter au panier", "Add to basket"],
   added: ["Zur Tasche hinzugefügt", "Ajouté au panier", "Added to bag"],
   remove: ["Entfernen", "Retirer", "Remove"],
   minus: ["Menge verringern", "Diminuer la quantité", "Decrease quantity"],
@@ -146,7 +142,7 @@ export const messages = {
   total: ["Gesamtbetrag", "Total", "Total"],
   original: ["Regulärer Preis", "Prix standard", "Original price"],
   saving: ["Ersparnis", "Économie", "Saving"],
-  goldPrice: ["Gold-Preis · Test", "Prix Gold · test", "Gold price · test"],
+  goldPrice: ["Gold-Preis", "Prix Gold", "Gold price"],
   emptyBag: [
     "Ihre Tasche ist noch leer.",
     "Votre panier est vide.",

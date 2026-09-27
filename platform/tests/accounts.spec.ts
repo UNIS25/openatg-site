@@ -11,6 +11,8 @@ import {
 } from "./browser-helpers";
 import { t } from "../src/lib/messages";
 import { locales } from "../src/lib/domain";
+let checkoutReference = "";
+let checkoutNumber = 0;
 for (const locale of locales)
   test(`${locale} real registration, email confirmation, age test and logout/login persistence`, async ({
     page,
@@ -113,10 +115,33 @@ test("Silver tea checkout creates real local order and test QR document", async 
   page,
 }) => {
   const check = noErrors(page);
-  await login(page, "silver");
+  const member = await temporaryMember("silver");
+  await page.goto("/en/login");
+  await page.getByLabel("Email", { exact: true }).fill(member.email);
+  await page.getByLabel("Password", { exact: true }).fill(member.password);
+  await page.getByRole("button", { name: "Sign in", exact: true }).click();
+  await expect(page).toHaveURL(/\/en\/account/);
+  const address = page.locator("form").filter({
+    has: page.getByRole("button", { name: "Save address", exact: true }),
+  });
+  await address
+    .getByLabel("Name", { exact: true })
+    .fill("Local tea and curry checkout");
+  await address.getByLabel("Street", { exact: true }).fill("Teststrasse");
+  await address.getByLabel("House number", { exact: true }).fill("1");
+  await address.getByLabel("Postal code", { exact: true }).fill("8000");
+  await address.getByLabel("City", { exact: true }).fill("Zürich");
+  await address.getByRole("button").click();
+  await expect(page.getByRole("status")).toContainText("Saved");
   await page.goto("/en/tea");
   await expect(page.locator(".product-card .button").first()).toBeEnabled();
   await page.locator(".product-card .button").first().click();
+  await expect(page.locator(".bag-link span")).toHaveText("1");
+  await page.goto("/en/pantry");
+  await page.locator(".product-card .button").first().click();
+  await expect(page.locator(".bag-link span")).toHaveText("2");
+  await page.reload();
+  await expect(page.locator(".bag-link span")).toHaveText("2");
   await page.goto("/en/bag");
   await page
     .getByLabel("Delivery address", { exact: true })
@@ -130,11 +155,15 @@ test("Silver tea checkout creates real local order and test QR document", async 
       exact: true,
     })
     .click();
-  await expect(page.getByRole("status")).toContainText("Test order created");
+  await expect(page.locator(".notice")).toContainText("Test order created");
   await page.goto("/en/account");
   await expect(
     page.getByRole("link", { name: "Download TEST QR document" }).last(),
   ).toBeVisible();
+  const state = await (await page.request.get("/api/state")).json();
+  checkoutReference = state.rows.payments[0].reference;
+  checkoutNumber = state.rows.orders[0].number;
+  expect(state.rows.order_items).toHaveLength(2);
   const download = page.waitForEvent("download");
   await page
     .getByRole("link", { name: "Download TEST QR document" })
@@ -153,12 +182,13 @@ test("admin reconciles pending payment and updates paid order fulfilment", async
     .locator(".admin-sidebar")
     .getByRole("button", { name: "Reconciliation", exact: true })
     .click();
+  expect(checkoutReference).toBeTruthy();
   const form = page
-    .locator("form")
+    .locator("article.panel")
     .filter({
-      has: page.getByRole("button", { name: "Reconcile test payment" }),
+      has: page.getByRole("heading", { name: checkoutReference, exact: true }),
     })
-    .first();
+    .locator("form");
   await form.getByLabel("Reason").fill("Local bank review confirmed");
   await form.getByRole("button", { name: "Reconcile test payment" }).click();
   await expect(page.getByRole("status")).toContainText("Saved");
@@ -167,10 +197,11 @@ test("admin reconciles pending payment and updates paid order fulfilment", async
     .locator(".admin-sidebar")
     .getByRole("button", { name: "Orders", exact: true })
     .click();
-  const order = page
-    .locator("article.panel")
-    .filter({ has: page.locator("p").filter({ hasText: /^Paid$/ }) })
-    .first();
+  const order = page.locator("article.panel").filter({
+    has: page.getByRole("heading", {
+      name: new RegExp(`^#${checkoutNumber} ·`),
+    }),
+  });
   await order.getByLabel("Status", { exact: true }).selectOption("preparing");
   await order.getByRole("button", { name: "Update status" }).click();
   await expect(page.getByRole("status")).toContainText("Saved");
@@ -221,7 +252,12 @@ test("Gold discounts and free delivery shown for multiple tea products", async (
   page,
 }) => {
   const check = noErrors(page);
-  await login(page, "gold");
+  const member = await temporaryMember("gold");
+  await page.goto("/en/login");
+  await page.getByLabel("Email", { exact: true }).fill(member.email);
+  await page.getByLabel("Password", { exact: true }).fill(member.password);
+  await page.getByRole("button", { name: "Sign in", exact: true }).click();
+  await expect(page).toHaveURL(/\/en\/account/);
   await page.goto("/en/tea");
   await expect(page.locator(".product-card .button").first()).toBeEnabled();
   for (const index of [0, 1])
@@ -406,4 +442,63 @@ test("password recovery uses a one-time email link and preserves private account
   );
   await a11y(page);
   check();
+});
+
+test("privacy export contains only the current member and deletion request revokes access", async ({
+  page,
+}) => {
+  const member = await temporaryMember("silver");
+  await page.goto("/en/login");
+  await page.getByLabel("Email", { exact: true }).fill(member.email);
+  await page.getByLabel("Password", { exact: true }).fill(member.password);
+  await page.getByRole("button", { name: "Sign in", exact: true }).click();
+  await expect(page).toHaveURL(/\/en\/account/);
+  const exported = await (await page.request.get("/api/state?export=1")).json();
+  expect(exported.user.id).toBe(member.id);
+  expect(exported.rows.members.map((m: { id: string }) => m.id)).toEqual([
+    member.id,
+  ]);
+  expect(exported.rows.orders).toEqual([]);
+  expect(exported.rows.order_items).toEqual([]);
+  const button = page.getByRole("button", {
+    name: t("en", "exportData"),
+    exact: true,
+  });
+  const download = page.waitForEvent("download");
+  await button.click();
+  expect((await download).suggestedFilename()).toBe(
+    "varathans25-personal-data.json",
+  );
+  page.once("dialog", (dialog) => dialog.accept());
+  await page
+    .getByRole("button", { name: t("en", "deleteRequest"), exact: true })
+    .click();
+  await expect(page).toHaveURL("http://127.0.0.1:4190/");
+  const auth = await (await page.request.get("/api/auth")).json();
+  expect(auth.authenticated).toBe(false);
+});
+
+test("guest basket transfers on sign-in and an emptied member basket stays empty", async ({
+  page,
+}) => {
+  const member = await temporaryMember("silver");
+  await page.goto("/en/shop?category=tea");
+  await page.locator(".product-card .button").first().click();
+  await expect(page.locator(".bag-link span")).toHaveText("1");
+  await page.goto("/en/login");
+  await page.getByLabel("Email", { exact: true }).fill(member.email);
+  await page.getByLabel("Password", { exact: true }).fill(member.password);
+  await page.getByRole("button", { name: "Sign in", exact: true }).click();
+  await expect(page).toHaveURL(/\/en\/account/);
+  await expect(page.locator(".bag-link span")).toHaveText("1");
+  await page.goto("/en/bag");
+  await expect(page.locator(".bag-item")).toHaveCount(1);
+  await page.getByRole("button", { name: "Remove", exact: true }).click();
+  await expect(page.locator(".bag-item")).toHaveCount(0);
+  await page.reload();
+  await expect(page.locator(".bag-link span")).toHaveText("0");
+  await page.goto("/en/account");
+  await page.getByRole("button", { name: "Sign out", exact: true }).click();
+  await page.goto("/en/bag");
+  await expect(page.locator(".bag-item")).toHaveCount(0);
 });

@@ -73,7 +73,7 @@ export function noErrors(page: Page) {
   return () => expect(errors).toEqual([]);
 }
 
-export async function temporaryMember(kind: "gold" | "owner") {
+export async function temporaryMember(kind: "gold" | "silver" | "owner") {
   const { createClient } = await import("@supabase/supabase-js");
   const db = createClient(
     process.env.SUPABASE_URL!,

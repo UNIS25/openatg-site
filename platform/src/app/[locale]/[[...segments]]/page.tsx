@@ -12,6 +12,9 @@ export default async function Page({
   if (
     ![
       "",
+      "store",
+      "shop",
+      "club/member",
       "tea",
       "pantry",
       "club",
