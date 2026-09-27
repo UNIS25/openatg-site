@@ -22,6 +22,7 @@ export default defineConfig({
       name: "desktop",
       testMatch: [
         "storefront.spec.ts",
+        "polish.spec.ts",
         "final-experience.spec.ts",
         "resilience.spec.ts",
       ],
@@ -29,12 +30,20 @@ export default defineConfig({
     },
     {
       name: "tablet",
-      testMatch: ["storefront.spec.ts", "final-experience.spec.ts"],
+      testMatch: [
+        "storefront.spec.ts",
+        "polish.spec.ts",
+        "final-experience.spec.ts",
+      ],
       use: { viewport: { width: 1024, height: 1000 } },
     },
     {
       name: "mobile",
-      testMatch: ["storefront.spec.ts", "final-experience.spec.ts"],
+      testMatch: [
+        "storefront.spec.ts",
+        "polish.spec.ts",
+        "final-experience.spec.ts",
+      ],
       use: {
         viewport: { width: 390, height: 844 },
         isMobile: true,
@@ -43,7 +52,11 @@ export default defineConfig({
     },
     {
       name: "narrow",
-      testMatch: ["storefront.spec.ts", "final-experience.spec.ts"],
+      testMatch: [
+        "storefront.spec.ts",
+        "polish.spec.ts",
+        "final-experience.spec.ts",
+      ],
       use: {
         viewport: { width: 350, height: 780 },
         isMobile: true,
@@ -52,7 +65,11 @@ export default defineConfig({
     },
     {
       name: "accounts",
-      testMatch: ["accounts.spec.ts", "editorial-admin.spec.ts"],
+      testMatch: [
+        "accounts.spec.ts",
+        "editorial-admin.spec.ts",
+        "polish-admin.spec.ts",
+      ],
       use: { viewport: { width: 1440, height: 1000 } },
     },
   ],

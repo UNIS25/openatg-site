@@ -21,7 +21,7 @@ for (const locale of locales)
     await aligned(page);
     if (locale === "de")
       await page.screenshot({
-        path: `artifacts/final-experience/gateway-${info.project.name}.png`,
+        path: `artifacts/final-polish/gateway-${info.project.name}.png`,
         fullPage: true,
       });
     await page
@@ -29,10 +29,10 @@ for (const locale of locales)
       .click();
     await expect(page).toHaveURL(new RegExp(`/${locale}/store$`));
     await expect(page.locator("[data-film=tea]")).toBeVisible();
-    await expect(
-      page.locator("[data-film=highlands], img[src*=restaurant]"),
-    ).toHaveCount(0);
+    await expect(page.locator("[data-film=highlands]")).toHaveCount(0);
     await expect(page.locator(".editorial-tins a")).toHaveCount(5);
+    await expect(page.locator("img[src*=restaurant]")).toHaveCount(1);
+    await expect(page.locator("[data-film=kitchen]")).toBeVisible();
     await page.locator("main img").evaluateAll(async (images) => {
       await Promise.all(
         images.map(async (image) => {
@@ -46,7 +46,7 @@ for (const locale of locales)
     await aligned(page);
     if (locale === "de")
       await page.screenshot({
-        path: `artifacts/final-experience/store-${info.project.name}.png`,
+        path: `artifacts/final-polish/store-${info.project.name}.png`,
         fullPage: true,
       });
     await page.locator(".header a[aria-label=Varathans25]").click();
@@ -65,7 +65,7 @@ for (const locale of locales)
     await aligned(page);
     if (locale === "de")
       await page.screenshot({
-        path: `artifacts/final-experience/club-${info.project.name}.png`,
+        path: `artifacts/final-polish/club-${info.project.name}.png`,
         fullPage: true,
       });
     await page
@@ -175,7 +175,7 @@ test("verified member dashboard retains protected account and pass access", asyn
   await a11y(page);
   await aligned(page);
   await page.screenshot({
-    path: `artifacts/final-experience/member-${info.project.name}.png`,
+    path: `artifacts/final-polish/member-${info.project.name}.png`,
     fullPage: true,
   });
   check();

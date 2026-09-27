@@ -97,6 +97,7 @@ export type DbRow = {
   fulfillment_notes: string;
   minimum_visit_gap_minutes: number;
   standard_rappen: number;
+  threshold_rappen: number;
   gold_eligible: boolean;
   kind: string;
   purpose: string;

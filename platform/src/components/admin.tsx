@@ -7,6 +7,7 @@ import { stateName, type MessageKey } from "@/lib/messages";
 import { Products, Inventory } from "@/legacy-admin/products";
 import { I18nProvider } from "@/legacy-admin/i18n";
 import EditorialAdmin from "./editorial-admin";
+import PolishAdmin from "./polish-admin";
 import type { Role } from "@/legacy-admin/domain";
 const screens = [
   "dashboard",
@@ -629,6 +630,8 @@ export default function Admin() {
                   void run(() =>
                     mutate("delivery_settings", {
                       standard_rappen: Number(f.get("price")),
+                      threshold_rappen: Number(f.get("threshold")),
+                      revision: rows("delivery_methods")[0]?.revision,
                     }),
                   );
                 }}
@@ -647,7 +650,27 @@ export default function Admin() {
                     required
                   />
                 </Field>
-                <p>{tr("delivery")}</p>
+                <Field
+                  label={
+                    {
+                      de: "Versandfreigrenze (Rappen)",
+                      fr: "Seuil de livraison offerte (centimes)",
+                      en: "Free delivery threshold (rappen)",
+                    }[locale]
+                  }
+                >
+                  <input
+                    name="threshold"
+                    type="number"
+                    min="0"
+                    max="1000000"
+                    step="1"
+                    required
+                    defaultValue={
+                      rows("delivery_methods")[0]?.threshold_rappen ?? 10000
+                    }
+                  />
+                </Field>
                 <button>{tr("save")}</button>
               </form>
               <form
@@ -688,6 +711,7 @@ export default function Admin() {
                 </label>
                 <button>{tr("save")}</button>
               </form>
+              <PolishAdmin />
               <h3>{tr("productEligibility")}</h3>
               {rows("product_presentations").map((p) => (
                 <label className="check" key={p.product_id}>

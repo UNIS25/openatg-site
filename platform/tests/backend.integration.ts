@@ -868,3 +868,122 @@ test("publication requires confirmed facts and preparation in every language", a
   assert.equal(persisted.status, "draft");
   assert.equal(persisted.information_confirmed, false);
 });
+
+test("polish settings enforce administrator access, revision checks and safe content", async () => {
+  const original = check(await admin.rpc("v25_polish_public"));
+  assert.ok((await anon.rpc("v25_polish_save", { input: original })).error);
+  assert.ok((await silver.rpc("v25_polish_save", { input: original })).error);
+  assert.ok(
+    (
+      await admin.rpc("v25_polish_save", {
+        input: { ...original, restaurant_url: "javascript:alert(1)" },
+      })
+    ).error,
+  );
+  assert.ok(
+    (
+      await admin.rpc("v25_polish_save", {
+        input: { ...original, spice_film: "unapproved-film" },
+      })
+    ).error,
+  );
+  assert.ok(
+    (
+      await admin.rpc("v25_polish_save", {
+        input: { ...original, copy: { en: original.copy.en } },
+      })
+    ).error,
+  );
+  const saved = check(
+    await admin.rpc("v25_polish_save", {
+      input: { ...original, spice_film: "poster-only" },
+    }),
+  );
+  try {
+    assert.equal(saved.spice_film, "poster-only");
+    assert.ok((await admin.rpc("v25_polish_save", { input: original })).error);
+    const audit = check(
+      await admin
+        .from("v25_audit_events")
+        .select("id")
+        .eq("entity", "v25_polish_settings")
+        .eq("actor", accounts.administrator.id),
+    );
+    assert.ok(audit.length);
+  } finally {
+    check(
+      await admin.rpc("v25_polish_save", {
+        input: { ...original, revision: saved.revision },
+      }),
+    );
+  }
+});
+
+test("configured delivery threshold controls both charges and remaining amount", async () => {
+  const original = check(
+    await admin
+      .from("v25_delivery_methods")
+      .select("*")
+      .eq("id", "standard-ch")
+      .single(),
+  );
+  const input = {
+    standard_rappen: 1250,
+    threshold_rappen: 12000,
+    revision: original.revision,
+  };
+  assert.ok(
+    (
+      await silver.rpc("v25_platform_action", {
+        action: "delivery_settings",
+        document: input,
+        request_key: randomUUID(),
+      })
+    ).error,
+  );
+  check(await call(admin, "delivery_settings", input));
+  try {
+    assert.ok((await call(admin, "delivery_settings", input)).error);
+    check(
+      await service
+        .from("v25_product_presentations")
+        .update({ test_price_rappen: 11999 })
+        .eq("product_id", product),
+    );
+    const q = check(
+      await anon.rpc("v25_platform_preview_quote", {
+        lines: [{ product_id: product, quantity: 1 }],
+      }),
+    );
+    assert.equal(q.delivery_rappen, 1250);
+    assert.equal(q.remaining_rappen, 1);
+    check(
+      await service
+        .from("v25_product_presentations")
+        .update({ test_price_rappen: 12000 })
+        .eq("product_id", product),
+    );
+    const free = check(
+      await anon.rpc("v25_platform_preview_quote", {
+        lines: [{ product_id: product, quantity: 1 }],
+      }),
+    );
+    assert.equal(free.delivery_rappen, 0);
+    assert.equal(free.remaining_rappen, 0);
+  } finally {
+    const current = check(
+      await admin
+        .from("v25_delivery_methods")
+        .select("revision")
+        .eq("id", "standard-ch")
+        .single(),
+    );
+    check(
+      await call(admin, "delivery_settings", {
+        standard_rappen: original.standard_rappen,
+        threshold_rappen: original.threshold_rappen,
+        revision: current.revision,
+      }),
+    );
+  }
+});

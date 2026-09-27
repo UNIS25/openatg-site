@@ -49,6 +49,8 @@ import {
   MemberArea,
 } from "./final-experience";
 import { et } from "@/lib/experience";
+import { MembershipComparison } from "./membership-comparison";
+import { defaultPolish, polishText, type PolishConfig } from "@/lib/polish";
 import {
   guestCart,
   mergeCart,
@@ -62,6 +64,8 @@ type Context = {
   products: Product[];
   plans: DbRow[];
   delivery: number;
+  threshold: number;
+  polish: PolishConfig;
   goldBps: number;
   state: AccountState | null;
   cart: Line[];
@@ -123,6 +127,8 @@ export default function Platform({
     })),
   );
   const [delivery, setDelivery] = useState(1000);
+  const [threshold, setThreshold] = useState(10000);
+  const [polish, setPolish] = useState(defaultPolish);
   const [plans, setPlans] = useState<DbRow[]>([]),
     [state, setState] = useState<AccountState | null>(null),
     [cart, setLines] = useState<Line[]>([]),
@@ -149,12 +155,15 @@ export default function Platform({
         const c = await api<{
           products: Product[];
           plans: DbRow[];
-          delivery: { standard_rappen: number };
+          delivery: { standard_rappen: number; threshold_rappen: number };
+          polish: PolishConfig;
         }>("/api/catalogue");
         if (mounted) {
           setProducts(c.products);
           setPlans(c.plans);
           setDelivery(c.delivery?.standard_rappen ?? 1000);
+          setThreshold(c.delivery?.threshold_rappen ?? 10000);
+          setPolish(c.polish);
         }
         const auth = await api<{ authenticated: boolean }>("/api/auth");
         if (auth.authenticated) {
@@ -245,6 +254,8 @@ export default function Platform({
         products,
         plans,
         delivery,
+        threshold,
+        polish,
         goldBps:
           plans.find(
             (p) =>
@@ -423,7 +434,7 @@ function Header() {
   );
 }
 function Footer() {
-  const { tr, locale } = usePlatform();
+  const { tr, locale, polish, threshold } = usePlatform();
   return (
     <footer className="footer">
       <div className="container footer-grid">
@@ -440,7 +451,11 @@ function Footer() {
           <a href={`/${locale}/privacy`}>{tr("privacy")}</a>
         </nav>
         <div>
-          <p>{tr("delivery")}</p>
+          <p>
+            {polishText(polish, locale, "silverThreshold", {
+              threshold: money(threshold, locale),
+            })}
+          </p>
           <small>{tr("deliveryScope")}</small>
           <p className="muted">{et(locale, "preview")}</p>
         </div>
@@ -489,9 +504,25 @@ function ProductCard({
   product: Product;
   detail?: boolean;
 }) {
-  const { locale, tr, cart, setCart, state, notice, goldBps, ready } =
-    usePlatform();
+  const {
+    locale,
+    tr,
+    cart,
+    setCart,
+    state,
+    notice,
+    goldBps,
+    ready,
+    polish,
+    threshold,
+  } = usePlatform();
   const [quantity, setQuantity] = useState(1);
+  const [added, setAdded] = useState(false);
+  useEffect(() => {
+    if (!added) return;
+    const timer = setTimeout(() => setAdded(false), 2200);
+    return () => clearTimeout(timer);
+  }, [added]);
   const [imageIndex, setImageIndex] = useState(0);
   const translation = product.translations.find((t) => t.locale === locale);
   const name = translation?.name || product.slug;
@@ -550,7 +581,7 @@ function ProductCard({
           </h3>
         )}
         <p className="product-variant">
-          {translation?.short_description || name}
+          {translation?.short_description || ""}
         </p>
         <p className="product-weight">
           {et(locale, "weight")}:{" "}
@@ -559,22 +590,26 @@ function ProductCard({
             : et(locale, "pending")}
         </p>
         {detail && translation?.description && <p>{translation.description}</p>}
-        <p className="price">
-          {price === null ? tr("pricePending") : money(price, locale)}
-        </p>
-        {price !== null && gold && (
-          <p className="member-price">
-            {tr("goldPrice")}:{" "}
-            {money(
-              Math.min(
-                price,
-                product.price_rappen! -
-                  Math.floor((product.price_rappen! * goldBps + 5000) / 10000),
-              ),
-              locale,
-            )}
+        <div className="product-pricing">
+          <p className="price">
+            {price === null ? tr("pricePending") : money(price, locale)}
           </p>
-        )}
+          {price !== null && gold && (
+            <p className="member-price">
+              {tr("goldPrice")}:{" "}
+              {money(
+                Math.min(
+                  price,
+                  product.price_rappen! -
+                    Math.floor(
+                      (product.price_rappen! * goldBps + 5000) / 10000,
+                    ),
+                ),
+                locale,
+              )}
+            </p>
+          )}
+        </div>
         <p
           className={`stock-status ${stock > 0 && price !== null ? "stock-available" : ""}`}
         >
@@ -590,7 +625,7 @@ function ProductCard({
             label={`${tr("quantity")} · ${name}`}
           />
           <button
-            className="button"
+            className={`button ${added ? "is-added" : ""}`}
             disabled={!available}
             onClick={() => {
               setCart([
@@ -600,10 +635,11 @@ function ProductCard({
                   quantity: existingQuantity + quantity,
                 },
               ]);
+              setAdded(true);
               notice(tr("added"));
             }}
           >
-            {tr("add")}
+            {added ? tr("added") : tr("add")}
           </button>
         </div>
         {!detail && (
@@ -616,7 +652,9 @@ function ProductCard({
         )}
         {detail && (
           <p className="delivery-note">
-            {tr("delivery")}
+            {polishText(polish, locale, "silverThreshold", {
+              threshold: money(threshold, locale),
+            })}
             <br />
             <small>{tr("deliveryScope")}</small>
           </p>
@@ -744,8 +782,7 @@ function ProductPage({ slug }: { slug: string }) {
   );
 }
 export function Membership() {
-  const { tr, plans, state, locale, run, reload, notice, busy, delivery } =
-    usePlatform();
+  const { tr, state, locale, run, reload, notice, busy } = usePlatform();
   const router = useRouter();
   async function select(id: string) {
     if (!state) {
@@ -760,76 +797,16 @@ export function Membership() {
     });
   }
   return (
-    <section className="container section">
-      <p className="eyebrow">VARATHANS25 · HOSPITALITY</p>
-      <h1>{tr("tiers")}</h1>
-      <p className="lede narrow">{tr("tierIntro")}</p>
-      <div className="tier-grid">
-        <article className="tier">
-          <p className="eyebrow">SILVER</p>
-          <h2>CHF 0</h2>
-          <p>{tr("free")}</p>
-          <ul>
-            <li>
-              {tr("silverDelivery", { delivery: money(delivery, locale) })}
-            </li>
-            <li>{tr("adult")}</li>
-          </ul>
-          <button
-            className="button"
-            disabled={busy}
-            onClick={() => void select("silver")}
-          >
-            {tr("choose")}
-          </button>
-        </article>
-        <article className="tier gold">
-          <p className="eyebrow">GOLD · VARATHANS25</p>
-          <h2>
-            {money(
-              plans.find((p) => p.id === "gold-monthly")?.fee_rappen ?? 6900,
-              locale,
-            )}{" "}
-            <small>{tr("month")}</small>
-          </h2>
-          <p>
-            {money(
-              plans.find((p) => p.id === "gold-yearly")?.fee_rappen ?? 50000,
-              locale,
-            )}{" "}
-            {tr("year")}
-          </p>
-          <ul>
-            <li>{tr("goldDelivery")}</li>
-            <li>
-              {tr("goldBenefit", {
-                percent:
-                  (plans.find((p) => p.id === "gold-monthly")?.discount_bps ??
-                    1000) / 100,
-              })}
-            </li>
-            <li>{tr("drink")}</li>
-            <li>{tr("passBenefit")}</li>
-          </ul>
-          <div className="actions">
-            <button
-              className="button"
-              disabled={busy}
-              onClick={() => void select("gold-monthly")}
-            >
-              {tr("chooseMonthly")}
-            </button>
-            <button disabled={busy} onClick={() => void select("gold-yearly")}>
-              {tr("chooseYearly")}
-            </button>
-          </div>
-        </article>
+    <>
+      <MembershipComparison onSelect={select} busy={busy} />
+      <div className="container membership-policy">
+        <p>{tr("cancelPolicy")}</p>
+        <p>{tr("testOnly")}</p>
       </div>
-      <p>{tr("cancelPolicy")}</p>
-      <p>{tr("testOnly")}</p>
-    </section>
+    </>
   );
 }
+
 function Auth({ mode }: { mode: string }) {
   const router = useRouter();
   const { tr, locale, run, busy, notice } = usePlatform();
@@ -960,6 +937,7 @@ function Auth({ mode }: { mode: string }) {
 }
 function Bag() {
   const {
+    threshold,
     tr,
     products,
     cart,
@@ -1086,11 +1064,14 @@ function Bag() {
                       })}
                 </p>
                 <progress
-                  max={10000}
+                  max={Math.max(1, threshold)}
                   value={
                     q.gold
-                      ? 10000
-                      : Math.min(10000, q.subtotal_rappen - q.discount_rappen)
+                      ? threshold
+                      : Math.min(
+                          threshold,
+                          q.subtotal_rappen - q.discount_rappen,
+                        )
                   }
                   aria-label={tr("delivery")}
                 />

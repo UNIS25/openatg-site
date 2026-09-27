@@ -99,7 +99,7 @@ test("Save-Data and reduced motion never request film files", async ({
     for (const path of ["/", "/de/store", "/de/club"]) {
       await page.goto(`http://127.0.0.1:4190${path}`);
       await page.waitForLoadState("networkidle");
-      await expect(page.locator("video")).not.toHaveAttribute("src", /mp4/);
+      await expect(page.locator("video[src*=mp4]")).toHaveCount(0);
     }
     expect(films).toEqual([]);
     await context.close();

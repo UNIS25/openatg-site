@@ -51,7 +51,7 @@ export async function aligned(page: Page) {
   const logo = page.locator(".header .logo");
   if (await logo.count()) {
     const box = await logo.boundingBox();
-    const header = await page.locator("header").boundingBox();
+    const header = await page.locator(".header").boundingBox();
     expect(box!.y - header!.y).toBeGreaterThan(0);
     expect(box!.y + box!.height).toBeLessThanOrEqual(
       header!.y + header!.height,

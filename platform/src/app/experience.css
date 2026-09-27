@@ -1052,3 +1052,436 @@
     transform: none !important;
   }
 }
+
+/* Final polish: catalogue row alignment, scoped away from the approved gateway. */
+.product-grid {
+  column-gap: 32px;
+  row-gap: 0;
+}
+.product-grid > .product-card {
+  display: grid;
+  grid-row: span 9;
+  grid-template-rows: subgrid;
+  margin-bottom: 44px;
+}
+.product-grid .product-gallery {
+  margin-bottom: 20px;
+}
+.product-grid .product-photo img {
+  aspect-ratio: 1;
+}
+.product-grid .product-copy {
+  display: grid;
+  grid-row: span 8;
+  grid-template-rows: subgrid;
+  padding-top: 18px;
+}
+.product-grid .product-copy > * {
+  min-height: 0;
+}
+.product-grid .product-copy .eyebrow {
+  margin: 0 0 10px;
+  line-height: 1.5;
+}
+.product-grid .product-copy h3 {
+  margin: 0 0 12px;
+  line-height: 1.25;
+}
+.product-grid .product-variant {
+  margin: 0 0 8px;
+  line-height: 1.6;
+}
+.product-grid .product-variant:empty {
+  margin: 0;
+}
+.product-grid .product-weight {
+  margin: 0 0 18px;
+  line-height: 1.6;
+}
+.product-grid .product-pricing {
+  margin: 0 0 10px;
+}
+.product-grid .product-copy .price {
+  margin: 0;
+  min-height: 0;
+}
+.product-grid .member-price {
+  margin: 6px 0 0;
+}
+.product-grid .stock-status {
+  margin: 0 0 18px;
+  line-height: 1.6;
+}
+.product-grid .purchase-row {
+  display: grid;
+  grid-template-columns: 112px minmax(0, 1fr);
+  gap: 10px;
+  margin-top: 0;
+  align-items: stretch;
+}
+.product-grid .quantity {
+  width: 100%;
+  height: 46px;
+  justify-content: space-between;
+}
+.product-grid .quantity button {
+  width: 36px;
+  padding: 8px;
+  min-width: 0;
+}
+.product-grid .quantity output {
+  min-width: 28px;
+}
+.product-grid .purchase-row .button {
+  width: 100%;
+  min-height: 46px;
+  margin: 0;
+  padding: 8px;
+}
+.product-card .button.is-added {
+  background: #385e49;
+  border-color: #385e49;
+}
+.product-card .button:disabled {
+  opacity: 1;
+  background: #e6e8e8;
+  color: #58636c;
+  border-color: #d4d9db;
+  cursor: not-allowed;
+}
+.product-card .quantity button:disabled {
+  color: #7d8990;
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+.product-card .button:not(:disabled):hover {
+  background: #294b63;
+  border-color: #294b63;
+}
+.product-card :is(button, a):focus-visible {
+  outline: 2px solid #9d3842;
+  outline-offset: 4px;
+}
+.spice-film-chapter {
+  position: relative;
+  min-height: 580px;
+  height: min(76vw, 760px);
+  color: #fff;
+  display: flex;
+  align-items: end;
+}
+.spice-film-copy {
+  position: relative;
+  z-index: 1;
+  padding: 64px 8%;
+  pointer-events: none;
+}
+.spice-film-copy h2 {
+  font:
+    400 clamp(36px, 5.2vw, 76px)/1.05 Georgia,
+    serif;
+  color: #fff;
+  margin: 12px 0 20px;
+  max-width: 700px;
+}
+.spice-film-copy p {
+  color: #fff;
+  font-size: 13px;
+}
+.spice-film-chapter .experience-film::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.56), transparent 65%);
+  pointer-events: none;
+}
+.store-service-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  padding-block: 40px;
+}
+.store-service-line p {
+  font-size: 12px;
+  color: #53616c;
+  margin: 0;
+}
+.restaurant-closing {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: #f4f2ed;
+  align-items: stretch;
+}
+.restaurant-closing > img {
+  width: 100%;
+  height: 620px;
+  object-fit: cover;
+  object-position: center 48%;
+}
+.restaurant-closing > div {
+  padding: 80px 14%;
+  align-self: center;
+}
+.restaurant-closing h2 {
+  font:
+    400 clamp(34px, 3.6vw, 56px)/1.12 Georgia,
+    serif;
+  margin: 20px 0 28px;
+}
+.restaurant-closing p:not(.eyebrow) {
+  color: #53616c;
+  font-size: 14px;
+  line-height: 1.8;
+  margin-bottom: 32px;
+}
+.membership-comparison {
+  padding-block: 90px 30px;
+}
+.comparison-heading {
+  max-width: 750px;
+  margin-bottom: 40px;
+}
+.comparison-heading h2 {
+  font:
+    400 52px/1.1 Georgia,
+    serif;
+}
+.staging-terms {
+  font-size: 12px;
+  line-height: 1.8;
+  color: #53616c;
+  max-width: 700px;
+}
+.comparison-panels {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+.comparison-panel {
+  display: grid;
+  grid-row: span 4;
+  grid-template-rows: subgrid;
+  border: 1px solid #dcdedb;
+  padding: 40px;
+  background: #fff;
+  row-gap: 26px;
+}
+.comparison-panel header {
+  display: block;
+}
+.comparison-panel h3 {
+  font:
+    400 38px/1.2 Georgia,
+    serif;
+  margin: 12px 0 16px;
+}
+.comparison-panel header > p:last-child {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.8;
+}
+.comparison-price p {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+  font:
+    400 28px/1.3 Georgia,
+    serif;
+  margin: 0 0 8px;
+}
+.comparison-price p + p {
+  font-size: 20px;
+}
+.comparison-price span {
+  font:
+    11px/1.5 Inter,
+    sans-serif;
+}
+.comparison-panel ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.comparison-panel li {
+  display: flex;
+  gap: 12px;
+  padding: 11px 0;
+  font-size: 13px;
+  line-height: 1.65;
+  border-bottom: 1px solid #e9e9e2;
+}
+.comparison-panel li svg {
+  flex: 0 0 16px;
+  margin-top: 3px;
+  color: #79613e;
+}
+.comparison-panel .current-tier {
+  font-size: 11px;
+  min-height: 18px;
+  margin: 0 0 12px;
+}
+.comparison-panel .button {
+  width: 100%;
+  min-height: 48px;
+  font-size: 12px;
+}
+.comparison-panel.gold {
+  background: #132c40;
+  border-color: #ac9264;
+  color: #f7f3e9;
+}
+.comparison-panel.gold :is(h3, .eyebrow, .comparison-price) {
+  color: #f7f3e9;
+}
+.comparison-panel.gold li {
+  border-color: #42505b;
+}
+.comparison-panel.gold li svg {
+  color: #c9ae7b;
+}
+.comparison-panel.gold .button {
+  background: #e7d6b4;
+  border-color: #e7d6b4;
+  color: #132c40;
+}
+.comparison-panel[data-current="true"] {
+  outline: 2px solid #a48c61;
+  outline-offset: 4px;
+}
+.club-account-access {
+  display: block;
+  padding-top: 28px;
+  padding-bottom: 70px;
+}
+.polish-settings {
+  margin-top: 40px;
+  border-top: 1px solid #dcdedb;
+  padding-top: 32px;
+}
+.polish-settings fieldset {
+  margin: 28px 0;
+  padding: 20px;
+  border: 1px solid #dcdedb;
+}
+.polish-settings .field {
+  margin-bottom: 18px;
+}
+@media (max-width: 1100px) {
+  .product-grid {
+    column-gap: 22px;
+  }
+  .product-grid .purchase-row {
+    grid-template-columns: 1fr;
+  }
+  .product-grid .quantity {
+    max-width: none;
+  }
+  .comparison-panel {
+    padding: 28px;
+  }
+  .restaurant-closing > div {
+    padding: 50px 10%;
+  }
+}
+@media (max-width: 760px) {
+  .product-grid {
+    column-gap: 16px;
+  }
+  .product-grid .product-copy h3 {
+    font-size: 18px;
+  }
+  .product-grid .product-copy .eyebrow {
+    font-size: 8px;
+  }
+  .product-grid .quantity button {
+    width: 40px;
+    min-height: 44px;
+  }
+  .product-grid .purchase-row .button {
+    min-height: 48px;
+    font-size: 11px;
+  }
+  .product-grid .product-photo img {
+    padding: 10px;
+  }
+  .spice-film-chapter {
+    height: 560px;
+    min-height: 0;
+  }
+  .spice-film-copy {
+    padding: 40px 24px 85px;
+  }
+  .store-service-line {
+    flex-direction: column;
+    align-items: start;
+    padding-block: 28px;
+    gap: 18px;
+  }
+  .restaurant-closing {
+    grid-template-columns: 1fr;
+  }
+  .restaurant-closing > img {
+    height: 440px;
+  }
+  .restaurant-closing > div {
+    padding: 48px 24px;
+  }
+  .membership-comparison {
+    padding-block: 56px 20px;
+  }
+  .comparison-heading h2 {
+    font-size: 42px;
+  }
+  .comparison-panels {
+    gap: 24px;
+    grid-template-columns: 1fr;
+  }
+  .comparison-panel {
+    padding: 26px;
+    row-gap: 22px;
+  }
+  .comparison-price p {
+    font-size: 26px;
+    flex-wrap: wrap;
+  }
+}
+.comparison-panel.silver {
+  color: #17364c;
+}
+.comparison-panel.silver h3 {
+  color: #17364c;
+}
+.comparison-panel.silver .eyebrow {
+  color: #735d36;
+}
+.club-entrance .staging-terms {
+  color: #d0d8de;
+}
+.comparison-panel.silver :focus-visible {
+  outline: 2px solid #8a3440;
+  outline-offset: 4px;
+}
+.comparison-select {
+  display: grid;
+  gap: 10px;
+}
+.membership-policy {
+  padding-bottom: 60px;
+  font-size: 13px;
+}
+@media (max-width: 760px) {
+  .product-grid .product-copy h3 {
+    min-height: 2.5em;
+  }
+}
+.member-benefits {
+  padding-left: 18px;
+  font-size: 13px;
+  line-height: 1.8;
+}
+.comparison-heading h1 {
+  font:
+    400 clamp(42px, 5vw, 60px)/1.1 Georgia,
+    serif;
+}

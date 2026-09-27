@@ -10,7 +10,9 @@ import {
 } from "@/lib/experience";
 import { stateName } from "@/lib/messages";
 import { api } from "@/lib/client";
-import type { Locale } from "@/lib/domain";
+import { money, type Locale } from "@/lib/domain";
+import { polishText } from "@/lib/polish";
+import { MembershipComparison } from "./membership-comparison";
 
 const root = "/varathans25/visual-reset";
 const logo = "/varathans25/brand/varathans25-original.png";
@@ -26,7 +28,7 @@ export function ExperienceFilm({
   posterOnly = false,
   locale,
 }: {
-  name: "highlands" | "tea" | "evening";
+  name: "highlands" | "tea" | "evening" | "kitchen";
   posterOnly?: boolean;
   locale: Locale;
 }) {
@@ -200,7 +202,7 @@ export function StoreHome({
 }: {
   config?: ExperienceConfig;
 }) {
-  const { locale, products } = usePlatform();
+  const { locale, products, polish, threshold } = usePlatform();
   const text = (key: Parameters<typeof experienceText>[1]) =>
     experienceText(locale, key, config);
   const teas = products.filter((p) => p.category === "tea");
@@ -260,6 +262,18 @@ export function StoreHome({
           ))}
         </div>
       </section>
+      <section className="spice-film-chapter" aria-labelledby="spice-heading">
+        <ExperienceFilm
+          name="kitchen"
+          posterOnly={polish.spice_film === "poster-only"}
+          locale={locale}
+        />
+        <div className="spice-film-copy">
+          <p className="film-eyebrow">02 / VARATHANS25</p>
+          <h2 id="spice-heading">{polishText(polish, locale, "spiceTitle")}</h2>
+          <p>{polishText(polish, locale, "spiceText")}</p>
+        </div>
+      </section>
       <section className="curry-editorial" aria-labelledby="curry-heading">
         <div className="container curry-layout">
           <div className="curry-product">
@@ -292,29 +306,44 @@ export function StoreHome({
           </div>
         </div>
       </section>
-      <section className="container store-chapter all-editorial">
-        <p className="eyebrow">03 / {et(locale, "catalogue")}</p>
-        <h2>{text("allTitle")}</h2>
-        <p>{text("allText")}</p>
-        <a className="button maroon" href={`/${locale}/shop`}>
+      <section className="store-service-line container" id="delivery">
+        <a className="editorial-link" href={`/${locale}/shop`}>
           {et(locale, "catalogue")}{" "}
-          <ArrowUpRight size={18} aria-hidden="true" />
+          <ArrowUpRight size={17} aria-hidden="true" />
         </a>
+        <p>
+          {polishText(polish, locale, "silverThreshold", {
+            threshold: money(threshold, locale),
+          })}{" "}
+          · {et(locale, "delivery")}
+        </p>
       </section>
-      <section className="delivery-editorial" id="delivery">
-        <div className="container chapter-heading">
-          <div>
-            <p className="eyebrow">04 / SWITZERLAND</p>
-            <h2>{text("deliveryTitle")}</h2>
-          </div>
-          <div>
-            <span className="delivery-threshold">CHF 100.00</span>
-            <p>{text("deliveryText")}</p>
-            <a className="editorial-link" href={`/${locale}/bag`}>
-              {et(locale, "delivery")}{" "}
-              <ArrowUpRight size={17} aria-hidden="true" />
-            </a>
-          </div>
+      <section
+        className="restaurant-closing"
+        aria-labelledby="restaurant-heading"
+      >
+        <img
+          src={`/varathans25/images/restaurant/${polish.restaurant_image}.webp`}
+          alt={polishText(polish, locale, "restaurantAlt")}
+          width="768"
+          height="1024"
+          loading="lazy"
+        />
+        <div>
+          <p className="eyebrow">VARATHANS25 · RESTAURANT</p>
+          <h2 id="restaurant-heading">
+            {polishText(polish, locale, "restaurantTitle")}
+          </h2>
+          <p>{polishText(polish, locale, "restaurantText")}</p>
+          <a
+            className="editorial-link"
+            href={polish.restaurant_url}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {polishText(polish, locale, "restaurantCta")}{" "}
+            <ArrowUpRight size={18} aria-hidden="true" />
+          </a>
         </div>
       </section>
     </div>
@@ -354,17 +383,8 @@ export function ClubEntrance({
           <p className="club-age">{et(locale, "age")}</p>
         </div>
       </section>
-      <section className="club-access container">
-        <div>
-          <p className="eyebrow">SILVER</p>
-          <h2>Silver</h2>
-          <p>{et(locale, "silver")}</p>
-        </div>
-        <div>
-          <p className="eyebrow">GOLD</p>
-          <h2>Gold</h2>
-          <p>{et(locale, "gold")}</p>
-        </div>
+      <MembershipComparison />
+      <section className="club-access club-account-access container">
         <a className="editorial-link" href={`/${locale}/club/member`}>
           {et(locale, "member")} <ArrowUpRight size={18} aria-hidden="true" />
         </a>
@@ -375,7 +395,7 @@ export function ClubEntrance({
 }
 
 export function MemberArea() {
-  const { state, locale, tr, run } = usePlatform();
+  const { state, locale, tr, run, polish, delivery, threshold } = usePlatform();
   const [pass, setPass] = useState<{ qr: string; expires_at: string } | null>(
     null,
   );
@@ -479,16 +499,37 @@ export function MemberArea() {
           {membership?.cancel_at_period_end && <p>{tr("cancelScheduled")}</p>}
           <a href={`/${locale}/account`}>{tr("account")} →</a>
           <h3>{et(locale, "benefits")}</h3>
-          <p>
-            {state.identity.gold
-              ? tr("goldBenefit", {
-                  percent:
+          <ul className="member-benefits">
+            {(state.identity.gold
+              ? ([
+                  "goldDelivery",
+                  "goldDiscount",
+                  "goldDrink",
+                  "goldPass",
+                  "goldBenefits",
+                ] as const)
+              : ([
+                  "silverRecurring",
+                  "silverDelivery",
+                  "silverThreshold",
+                  "silverProfile",
+                  "silverPreferences",
+                ] as const)
+            ).map((key) => (
+              <li key={key}>
+                {polishText(polish, locale, key, {
+                  delivery: money(delivery, locale),
+                  threshold: money(threshold, locale),
+                  discount: String(
                     (state.rows.membership_plans?.find(
                       (p) => p.id === membership?.plan_id,
                     )?.discount_bps || 0) / 100,
-                })
-              : et(locale, "silver")}
-          </p>
+                  ),
+                })}
+              </li>
+            ))}
+          </ul>
+          <p className="staging-terms">{polishText(polish, locale, "terms")}</p>
           <h3>{et(locale, "redemptions")}</h3>
           <p>
             {state.rows.benefit_redemptions?.length
