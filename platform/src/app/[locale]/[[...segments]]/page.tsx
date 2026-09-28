@@ -7,8 +7,10 @@ import { verificationDestination } from "@/lib/club-state";
 import { RestrictedEditorial } from "@/components/restricted-editorial";
 export default async function Page({
   params,
+  searchParams,
 }: {
   params: Promise<{ locale: string; segments?: string[] }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
   const { locale: language, segments = [] } = await params;
   if (!locales.includes(language as Locale)) notFound();
@@ -78,7 +80,7 @@ export default async function Page({
       page={path}
       restrictedContent={
         path === "club/collection" ? (
-          <RestrictedEditorial locale={locale} />
+          <RestrictedEditorial locale={locale} query={await searchParams} />
         ) : undefined
       }
     />

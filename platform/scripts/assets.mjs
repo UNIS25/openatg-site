@@ -4,6 +4,9 @@ import { copyFile, mkdir, readFile, writeFile } from "node:fs/promises";
 import sharp from "sharp";
 import { dirname, resolve } from "node:path";
 const root = resolve("..");
+const references = JSON.parse(
+  await readFile("src/data/restricted-references.json", "utf8"),
+);
 const catalogue = JSON.parse(
   await readFile(resolve(root, "editorial/src/data/shell.json"), "utf8"),
 );
@@ -19,6 +22,7 @@ const products = catalogue.products.filter((p) =>
 );
 if (products.length !== 6) throw new Error("Expected five tea tins and curry");
 const assets = [
+  ...references.map((r) => `/varathans25/images/cigars/${r.slug}.webp`),
   ...products.map((p) => p.image),
   "/varathans25/brand/varathans25-original.png",
   "/varathans25/fonts/inter-latin.woff2",

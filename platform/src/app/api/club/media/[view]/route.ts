@@ -1,22 +1,22 @@
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
-import { identity, failure } from "@/lib/server";
+import { failure } from "@/lib/server";
+import { verifiedClubSession } from "@/lib/club-access";
+import { clubMediaFilename } from "@/lib/restricted-references";
 export async function GET(
   _request: Request,
   { params }: { params: Promise<{ view: string }> },
 ) {
   try {
-    const s = await identity();
-    if (s.identity.account_state !== "verified_18_plus")
-      throw Error("Verified access required");
+    await verifiedClubSession();
     const { view } = await params;
-    if (!["open", "closed"].includes(view))
-      return new Response(null, { status: 404 });
+    const filename = clubMediaFilename(view);
+    if (!filename) return new Response(null, { status: 404 });
     const bytes = await readFile(
       resolve(
         process.cwd(),
         "private-media/club",
-        `varathans-cigars-box-${view}.webp`,
+        filename,
       ),
     );
     return new Response(bytes, {

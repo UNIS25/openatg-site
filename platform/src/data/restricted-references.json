@@ -1,0 +1,232 @@
+[
+  {
+    "slug": "davidoff-aniversario-double-r",
+    "name": "Davidoff Aniversario Double R",
+    "brand": "Davidoff",
+    "collection": "Aniversario",
+    "format": "Double R",
+    "lengthMm": null,
+    "ringGauge": null,
+    "status": "PREVIEW"
+  },
+  {
+    "slug": "davidoff-aniversario-entreacto",
+    "name": "Davidoff Aniversario Entreacto",
+    "brand": "Davidoff",
+    "collection": "Aniversario",
+    "format": "Entreacto",
+    "lengthMm": null,
+    "ringGauge": null,
+    "status": "PREVIEW"
+  },
+  {
+    "slug": "davidoff-aniversario-no-3",
+    "name": "Davidoff Aniversario No. 3",
+    "brand": "Davidoff",
+    "collection": "Aniversario",
+    "format": "Toro",
+    "lengthMm": null,
+    "ringGauge": null,
+    "status": "PREVIEW"
+  },
+  {
+    "slug": "davidoff-aniversario-no-3-tubes",
+    "name": "Davidoff Aniversario No. 3 Tubes",
+    "brand": "Davidoff",
+    "collection": "Aniversario",
+    "format": "Toro · Tubos",
+    "lengthMm": null,
+    "ringGauge": null,
+    "status": "PREVIEW"
+  },
+  {
+    "slug": "davidoff-aniversario-short-perfecto",
+    "name": "Davidoff Aniversario Short Perfecto",
+    "brand": "Davidoff",
+    "collection": "Aniversario",
+    "format": "Short Perfecto",
+    "lengthMm": null,
+    "ringGauge": null,
+    "status": "PREVIEW"
+  },
+  {
+    "slug": "davidoff-aniversario-special-r",
+    "name": "Davidoff Aniversario Special R",
+    "brand": "Davidoff",
+    "collection": "Aniversario",
+    "format": "Special R",
+    "lengthMm": null,
+    "ringGauge": null,
+    "status": "PREVIEW"
+  },
+  {
+    "slug": "davidoff-aniversario-special-r-tubos",
+    "name": "Davidoff Aniversario Special R Tubos",
+    "brand": "Davidoff",
+    "collection": "Aniversario",
+    "format": "Special R · Tubos",
+    "lengthMm": null,
+    "ringGauge": null,
+    "status": "PREVIEW"
+  },
+  {
+    "slug": "davidoff-aniversario-special-t",
+    "name": "Davidoff Aniversario Special T",
+    "brand": "Davidoff",
+    "collection": "Aniversario",
+    "format": "Special T",
+    "lengthMm": null,
+    "ringGauge": null,
+    "status": "PREVIEW"
+  },
+  {
+    "slug": "davidoff-chefs-edition-2025",
+    "name": "Davidoff Chefs Edition 2025",
+    "brand": "Davidoff",
+    "collection": "Chefs Edition 2025",
+    "format": "Chefs Edition 2025",
+    "lengthMm": null,
+    "ringGauge": null,
+    "status": "PREVIEW"
+  },
+  {
+    "slug": "patoro-brasil-belicoso",
+    "name": "Patoro Brasil Belicoso",
+    "brand": "Patoro",
+    "collection": "Brasil",
+    "format": "Belicoso",
+    "lengthMm": null,
+    "ringGauge": null,
+    "status": "PREVIEW"
+  },
+  {
+    "slug": "patoro-brasil-gordito",
+    "name": "Patoro Brasil Gordito",
+    "brand": "Patoro",
+    "collection": "Brasil",
+    "format": "Gordito",
+    "lengthMm": null,
+    "ringGauge": null,
+    "status": "PREVIEW"
+  },
+  {
+    "slug": "patoro-brasil-gordo",
+    "name": "Patoro Brasil Gordo",
+    "brand": "Patoro",
+    "collection": "Brasil",
+    "format": "Gordo",
+    "lengthMm": null,
+    "ringGauge": null,
+    "status": "PREVIEW"
+  },
+  {
+    "slug": "patoro-gran-anejo-belicoso",
+    "name": "Patoro Gran Añejo Belicoso",
+    "brand": "Patoro",
+    "collection": "Gran Añejo",
+    "format": "Belicoso",
+    "lengthMm": null,
+    "ringGauge": null,
+    "status": "PREVIEW"
+  },
+  {
+    "slug": "patoro-gran-anejo-churchill",
+    "name": "Patoro Gran Añejo Churchill",
+    "brand": "Patoro",
+    "collection": "Gran Añejo",
+    "format": "Churchill",
+    "lengthMm": null,
+    "ringGauge": null,
+    "status": "PREVIEW"
+  },
+  {
+    "slug": "patoro-gran-anejo-corona",
+    "name": "Patoro Gran Añejo Corona",
+    "brand": "Patoro",
+    "collection": "Gran Añejo",
+    "format": "Corona",
+    "lengthMm": null,
+    "ringGauge": null,
+    "status": "PREVIEW"
+  },
+  {
+    "slug": "patoro-gran-anejo-gordito",
+    "name": "Patoro Gran Añejo Gordito",
+    "brand": "Patoro",
+    "collection": "Gran Añejo",
+    "format": "Gordito",
+    "lengthMm": null,
+    "ringGauge": null,
+    "status": "PREVIEW"
+  },
+  {
+    "slug": "patoro-gran-anejo-lancero",
+    "name": "Patoro Gran Añejo Lancero",
+    "brand": "Patoro",
+    "collection": "Gran Añejo",
+    "format": "Lancero",
+    "lengthMm": null,
+    "ringGauge": null,
+    "status": "PREVIEW"
+  },
+  {
+    "slug": "patoro-gran-anejo-perfecto",
+    "name": "Patoro Gran Añejo Perfecto",
+    "brand": "Patoro",
+    "collection": "Gran Añejo",
+    "format": "Perfecto",
+    "lengthMm": null,
+    "ringGauge": null,
+    "status": "PREVIEW"
+  },
+  {
+    "slug": "patoro-gran-anejo-perla",
+    "name": "Patoro Gran Añejo Perla",
+    "brand": "Patoro",
+    "collection": "Gran Añejo",
+    "format": "Perla",
+    "lengthMm": null,
+    "ringGauge": null,
+    "status": "PREVIEW"
+  },
+  {
+    "slug": "patoro-gran-anejo-robusto",
+    "name": "Patoro Gran Añejo Robusto",
+    "brand": "Patoro",
+    "collection": "Gran Añejo",
+    "format": "Robusto",
+    "lengthMm": null,
+    "ringGauge": null,
+    "status": "PREVIEW"
+  },
+  {
+    "slug": "patoro-gran-anejo-toro",
+    "name": "Patoro Gran Añejo Toro",
+    "brand": "Patoro",
+    "collection": "Gran Añejo",
+    "format": "Toro",
+    "lengthMm": null,
+    "ringGauge": null,
+    "status": "PREVIEW"
+  },
+  {
+    "slug": "patoro-platino-robusto",
+    "name": "Patoro Platino Robusto",
+    "brand": "Patoro",
+    "collection": "Platino",
+    "format": "Robusto",
+    "lengthMm": null,
+    "ringGauge": null,
+    "status": "PREVIEW"
+  },
+  {
+    "slug": "patoro-series-p-balthasar",
+    "name": "Patoro Series P Balthasar",
+    "brand": "Patoro",
+    "collection": "Series P",
+    "format": "Balthasar",
+    "lengthMm": null,
+    "ringGauge": null,
+    "status": "PREVIEW"
+  }
+]

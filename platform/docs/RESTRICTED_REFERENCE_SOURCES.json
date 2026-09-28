@@ -1,0 +1,123 @@
+{
+  "sourceCommit": "fc8d400e17130cecead08888ff73cf2dd56c4753",
+  "dataSource": "varathans25/en/cigars/index.txt",
+  "dataSourceSha256": "cd25b65429830d84b5909d73194a7a67eaa9c45da3cadee06dcd05c82c2eceb8",
+  "crossCheck": "platform/supabase/migrations/202609200006_preserved_references.sql",
+  "images": [
+    {
+      "slug": "davidoff-aniversario-double-r",
+      "source": "varathans25/images/cigars/davidoff-aniversario-double-r.webp",
+      "sha256": "aae8e92f82c8b6b9cf99e095aacc8a66632253e76954234a85995fae5b2e75dd"
+    },
+    {
+      "slug": "davidoff-aniversario-entreacto",
+      "source": "varathans25/images/cigars/davidoff-aniversario-entreacto.webp",
+      "sha256": "3b256a7d7acf5f29eb535aa19f5bbe7d62f6be4e8494b2ceedcece585565cb4b"
+    },
+    {
+      "slug": "davidoff-aniversario-no-3",
+      "source": "varathans25/images/cigars/davidoff-aniversario-no-3.webp",
+      "sha256": "e608b690d18c57e422f7164cca9863193aa39a419b850be7c2935e90a866a996"
+    },
+    {
+      "slug": "davidoff-aniversario-no-3-tubes",
+      "source": "varathans25/images/cigars/davidoff-aniversario-no-3-tubes.webp",
+      "sha256": "9739f468f5d451dcf4a5cddeb65ae1b03925cda1766559ba0283880aa5a2dce5"
+    },
+    {
+      "slug": "davidoff-aniversario-short-perfecto",
+      "source": "varathans25/images/cigars/davidoff-aniversario-short-perfecto.webp",
+      "sha256": "6c3829a80ae1178a0788bb087f8d3c380af6ac90cae3e7be1dd22861b1b6e10d"
+    },
+    {
+      "slug": "davidoff-aniversario-special-r",
+      "source": "varathans25/images/cigars/davidoff-aniversario-special-r.webp",
+      "sha256": "6f52a241f392f18c7b027afac0d3c07c804715e7654acbd1f5cc936172408e2f"
+    },
+    {
+      "slug": "davidoff-aniversario-special-r-tubos",
+      "source": "varathans25/images/cigars/davidoff-aniversario-special-r-tubos.webp",
+      "sha256": "643cc4c93c04ac172027f0e7364acdcd0248095dc64818c122d2a95e090d6a24"
+    },
+    {
+      "slug": "davidoff-aniversario-special-t",
+      "source": "varathans25/images/cigars/davidoff-aniversario-special-t.webp",
+      "sha256": "9c5ff2116ba16ca8993900a77999c60dd11727f8f4c9f4df9a8f2904aca2f4a1"
+    },
+    {
+      "slug": "davidoff-chefs-edition-2025",
+      "source": "varathans25/images/cigars/davidoff-chefs-edition-2025.webp",
+      "sha256": "2fb5e633e4fa6fd75ea94f353b08398a0df52307d4769b810fef97e96af81d07"
+    },
+    {
+      "slug": "patoro-brasil-belicoso",
+      "source": "varathans25/images/cigars/patoro-brasil-belicoso.webp",
+      "sha256": "e9483476c691d8f702f4b8df067944290c8d62264552dc99d2a33831910a61eb"
+    },
+    {
+      "slug": "patoro-brasil-gordito",
+      "source": "varathans25/images/cigars/patoro-brasil-gordito.webp",
+      "sha256": "5690c93e6da19e333a7c599012fcaab52e429150f0a01ad50a7a9c0320ed14c1"
+    },
+    {
+      "slug": "patoro-brasil-gordo",
+      "source": "varathans25/images/cigars/patoro-brasil-gordo.webp",
+      "sha256": "333a33f3305e9e07a7cb5304acf801ba844c84183dd50d51b37a00af7c41952b"
+    },
+    {
+      "slug": "patoro-gran-anejo-belicoso",
+      "source": "varathans25/images/cigars/patoro-gran-anejo-belicoso.webp",
+      "sha256": "2d9bda244c7ce01e21c728dea9bec1931a1bb5aef3f05f53d6d5fff13d9a6465"
+    },
+    {
+      "slug": "patoro-gran-anejo-churchill",
+      "source": "varathans25/images/cigars/patoro-gran-anejo-churchill.webp",
+      "sha256": "e6cf0220325b4e4b044108d79d1af822f79cdd703b315718ca2b39af14e93c54"
+    },
+    {
+      "slug": "patoro-gran-anejo-corona",
+      "source": "varathans25/images/cigars/patoro-gran-anejo-corona.webp",
+      "sha256": "1b398953ebc356c486d64595a43d265c4dc3dcf6811736d4cc3443628dd64ddf"
+    },
+    {
+      "slug": "patoro-gran-anejo-gordito",
+      "source": "varathans25/images/cigars/patoro-gran-anejo-gordito.webp",
+      "sha256": "d036739f6be988ab324f07b703b125f733d37ada002b6e51c4f9f096df20db97"
+    },
+    {
+      "slug": "patoro-gran-anejo-lancero",
+      "source": "varathans25/images/cigars/patoro-gran-anejo-lancero.webp",
+      "sha256": "bcc3fea832f6b6480df7b82315402dd9753e20bfa90a7b7167de301930701d3e"
+    },
+    {
+      "slug": "patoro-gran-anejo-perfecto",
+      "source": "varathans25/images/cigars/patoro-gran-anejo-perfecto.webp",
+      "sha256": "6526d394d708072d001cc937438613f5d93b4dc49567c151c919a8c0dd63022f"
+    },
+    {
+      "slug": "patoro-gran-anejo-perla",
+      "source": "varathans25/images/cigars/patoro-gran-anejo-perla.webp",
+      "sha256": "a604e2537dca5a6e4a01bc38ba596a7d2b20786373add694336187d20f16479a"
+    },
+    {
+      "slug": "patoro-gran-anejo-robusto",
+      "source": "varathans25/images/cigars/patoro-gran-anejo-robusto.webp",
+      "sha256": "afb8b59900c007384b85907dd5803f792c56cb9bc1d7288402984b2fba3fab60"
+    },
+    {
+      "slug": "patoro-gran-anejo-toro",
+      "source": "varathans25/images/cigars/patoro-gran-anejo-toro.webp",
+      "sha256": "eec0065806411bd2c948ac482c858f430660280b1bda63d34b80e2c43c1ee4c1"
+    },
+    {
+      "slug": "patoro-platino-robusto",
+      "source": "varathans25/images/cigars/patoro-platino-robusto.webp",
+      "sha256": "5b875e4b9ad860bb21c418fe7f581dcbe7c5d3149839a0fa348fee7a57bf5e65"
+    },
+    {
+      "slug": "patoro-series-p-balthasar",
+      "source": "varathans25/images/cigars/patoro-series-p-balthasar.webp",
+      "sha256": "b812ca0a9889cedd089adbb0ca2f7057e7918bb6a8d562f3f20f1e75639317a2"
+    }
+  ]
+}

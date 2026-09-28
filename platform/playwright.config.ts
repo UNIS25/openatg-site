@@ -23,6 +23,7 @@ export default defineConfig({
       testMatch: [
         "storefront.spec.ts",
         "verified-club.spec.ts",
+        "restricted-collection.spec.ts",
         "polish.spec.ts",
         "final-experience.spec.ts",
         "resilience.spec.ts",
@@ -34,6 +35,7 @@ export default defineConfig({
       testMatch: [
         "storefront.spec.ts",
         "verified-club.spec.ts",
+        "restricted-collection.spec.ts",
         "polish.spec.ts",
         "final-experience.spec.ts",
       ],
@@ -44,6 +46,7 @@ export default defineConfig({
       testMatch: [
         "storefront.spec.ts",
         "verified-club.spec.ts",
+        "restricted-collection.spec.ts",
         "polish.spec.ts",
         "final-experience.spec.ts",
       ],
@@ -58,6 +61,7 @@ export default defineConfig({
       testMatch: [
         "storefront.spec.ts",
         "verified-club.spec.ts",
+        "restricted-collection.spec.ts",
         "polish.spec.ts",
         "final-experience.spec.ts",
       ],

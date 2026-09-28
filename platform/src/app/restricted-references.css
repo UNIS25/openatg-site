@@ -1,0 +1,51 @@
+.reference-library { border-block: 1px solid var(--line); scroll-margin-top: 28px; }
+.reference-heading { display: flex; justify-content: space-between; align-items: end; gap: 24px; }
+.reference-heading h2, .reference-concepts > h2, .restricted-study .reference-signature-title { font: 400 clamp(30px, 3vw, 44px)/1.16 Georgia, serif; margin: 12px 0 24px; }
+.reference-count { font-size: 13px; white-space: nowrap; }
+.reference-filters { display: flex; gap: 32px; padding-block: 12px 26px; flex-wrap: wrap; }
+.reference-filters a { padding-block: 12px; font-size: 13px; text-decoration: none; border-bottom: 2px solid transparent; }
+.reference-filters a[aria-current] { border-bottom-color: var(--maroon); }
+.reference-filters a:hover { color: var(--maroon); }
+.reference-layout { display: grid; grid-template-columns: minmax(250px, .8fr) minmax(0, 1.65fr); gap: 60px; }
+.reference-index { max-height: 900px; overflow-y: auto; scrollbar-width: thin; padding: 4px 18px 4px 4px; }
+.reference-index ol { list-style: none; padding: 0; margin: 0; }
+.reference-index li { border-top: 1px solid var(--line); }
+.reference-index a { display: block; padding: 20px 16px; text-decoration: none; border-left: 2px solid transparent; font-size: 14px; line-height: 1.55; }
+.reference-index a small { display: block; margin-top: 5px; color: #52616e; font-size: 12px; }
+.reference-index a[aria-current] { border-left-color: #8b7650; background: #f4f3ef; }
+.reference-index a:hover { background: #f4f3ef; }
+.reference-detail { min-width: 0; }
+.reference-detail figure { margin: 0; background: #f7f6f3; aspect-ratio: 3 / 2; display: grid; place-items: center; }
+.reference-detail img { width: 100%; height: 100%; object-fit: contain; min-height: 0; padding: 28px; }
+.reference-detail-copy { padding-block: 32px 0; }
+.reference-detail h3 { font: 400 clamp(25px, 2.7vw, 38px)/1.2 Georgia, serif; margin: 14px 0 26px; overflow-wrap: anywhere; }
+.reference-detail dl { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 32px; margin: 0 0 26px; }
+.reference-detail dl div { border-top: 1px solid var(--line); padding-top: 14px; }
+.reference-detail dt { color: #52616e; font-size: 12px; margin-bottom: 8px; }
+.reference-detail dd { margin: 0; font-size: 14px; line-height: 1.6; }
+.reference-detail p, .reference-concepts p { font-size: 14px; line-height: 1.8; }
+.reference-detail .reference-note, .reference-concepts .reference-note { color: #52616e; font-size: 12px; }
+.reference-concept-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-top: 32px; }
+.reference-concept-pair article { border-top: 1px solid #b6a37e; padding-top: 30px; display: grid; grid-template-columns: auto 1fr; gap: 28px; }
+.reference-concept-number { font: 400 62px/1 Georgia, serif; color: #736243; }
+.reference-concept-pair h3 { font: 400 30px/1.2 Georgia, serif; margin: 0 0 24px; }
+.reference-responsible { border-top: 1px solid var(--line); margin-top: 64px; padding-top: 32px; max-width: 800px; }
+.reference-responsible h2 { font: 400 26px/1.2 Georgia, serif; }
+.reference-library a:focus-visible { outline: 2px solid var(--navy); outline-offset: 3px; }
+@media (max-width: 1050px) {
+  .reference-layout { gap: 30px; grid-template-columns: minmax(230px, .85fr) minmax(0, 1.3fr); }
+  .reference-concept-pair { gap: 32px; }
+}
+@media (max-width: 760px) {
+  .reference-heading { align-items: start; flex-direction: column; gap: 0; }
+  .reference-heading h2 { margin-bottom: 8px; }
+  .reference-filters { gap: 24px; }
+  .reference-layout, .reference-concept-pair { grid-template-columns: 1fr; }
+  .reference-index { max-height: 240px; border-bottom: 1px solid var(--line); }
+  .reference-index a { padding-block: 16px; }
+  .reference-detail img { padding: 16px; }
+  .reference-detail dl { gap: 20px; }
+  .reference-concept-pair article { gap: 20px; }
+  .reference-concept-number { font-size: 48px; }
+  .reference-concept-pair h3 { font-size: 27px; }
+}
