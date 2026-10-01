@@ -71,10 +71,10 @@ before(async () => {
   other = two.db;
   otherId = two.id;
 });
-test("new registered account has no age verification and no active membership", async () => {
+test("new registered account has Silver but no age verification", async () => {
   const state = checked(await member.rpc("v25_platform_identity"));
   assert.equal(state.account_state, "registered_unverified");
-  assert.equal(state.membership_state, "none");
+  assert.equal(state.membership_state, "silver");
   assert.equal(state.verified, false);
 });
 test("no self approval through current or retained legacy RPC", async () => {
@@ -150,7 +150,7 @@ test("RLS rejects status, membership and administrator escalation and cross-user
     ).error,
   );
 });
-test("submission stays pending and cannot grant a membership", async () => {
+test("submission stays pending while ordinary Silver remains available", async () => {
   checked(
     await member.rpc("v25_verification_submit", {
       reference: `local-review-${randomUUID()}`,
@@ -159,8 +159,9 @@ test("submission stays pending and cannot grant a membership", async () => {
   const state = checked(await member.rpc("v25_platform_identity"));
   assert.equal(state.account_state, "verification_pending");
   assert.equal(state.verified, false);
-  assert.equal(state.membership_state, "none");
-  assert.ok((await action(member, "membership", { plan_id: "silver" })).error);
+  assert.equal(state.membership_state, "silver");
+  checked(await action(member, "membership", { plan_id: "silver" }));
+  assert.equal(checked(await member.rpc("v25_platform_identity")).membership_state, "silver");
   assert.ok(
     (
       await member.rpc("v25_verification_submit", {
@@ -211,7 +212,7 @@ test("review requires current revision and independent administrator", async () 
   checked(await review("approve", "age_confirmed"));
   const state = checked(await member.rpc("v25_platform_identity"));
   assert.equal(state.account_state, "verified_18_plus");
-  assert.equal(state.membership_state, "none");
+  assert.equal(state.membership_state, "silver");
   const verification = checked(
     await member.from("v25_member_verifications").select("*").single(),
   );
@@ -263,13 +264,13 @@ test("Gold test selection waits for exact authorized test payment", async () => 
   assert.equal(state.membership_state, "gold");
   assert.equal(state.gold, true);
 });
-test("revocation removes verified access and benefits immediately without changing membership identity", async () => {
+test("revocation removes restricted access while preserving paid ordinary benefits", async () => {
   checked(await review("revoke", "access_revoked"));
   const state = checked(await member.rpc("v25_platform_identity"));
   assert.equal(state.account_state, "verification_rejected");
-  assert.equal(state.gold, false);
+  assert.equal(state.gold, true);
   assert.equal(state.membership_state, "gold");
-  assert.ok((await action(member, "membership", { plan_id: "silver" })).error);
+  checked(await action(member, "membership", { plan_id: "silver" }));
 });
 test("expiry, rejection and suspension remain distinct states", async () => {
   checked(await review("expire", "expired"));

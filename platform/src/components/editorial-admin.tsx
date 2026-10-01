@@ -101,10 +101,10 @@ export default function EditorialAdmin() {
                 value={experience[`${key}_film`]}
                 onChange={(e) => set({ [`${key}_film`]: e.target.value })}
               >
-                <option value={["highlands", "tea", "evening"][i]}>
+                <option value={["evening", "tea", "evening"][i]}>
                   {
                     [
-                      "Tea plantation",
+                      "Candlelight · neutral gateway",
                       "Tea pouring",
                       "Candlelight · account entrance",
                     ][i]

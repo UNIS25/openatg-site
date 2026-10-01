@@ -57,7 +57,7 @@ for (const locale of locales)
     )?.[1]?.replaceAll("&amp;", "&");
     expect(link).toBeTruthy();
     await page.goto(link);
-    await expect(page).toHaveURL(new RegExp(`/${locale}/verify-age$`));
+    await expect(page).toHaveURL(new RegExp(`/${locale}/account$`));
     await page.getByRole("checkbox").check();
     await page
       .getByRole("button", { name: t(locale, "save"), exact: true })
@@ -65,6 +65,7 @@ for (const locale of locales)
     await expect(page.getByTestId("verification-status")).toHaveText(
       vt(locale, "registered_unverified"),
     );
+    await page.goto(`/${locale}/verify-age`);
     // The registration consent checkbox has not verified identity or granted restricted access.
     await page.goto(`/${locale}/club/collection`);
     await expect(page).toHaveURL(new RegExp(`/${locale}/verify-age$`));
@@ -89,17 +90,13 @@ for (const locale of locales)
       vt(locale, "verification_pending"),
     );
     await page.goto(`/${locale}/club`);
-    await expect(page).toHaveURL(
-      new RegExp(`/${locale}/verification-pending$`),
-    );
+    await expect(page).toHaveURL(new RegExp(`/${locale}/club$`));
     const alternate = locale === "de" ? "fr" : "de";
     await page
       .locator(".language-links")
       .getByRole("link", { name: alternate.toUpperCase(), exact: true })
       .click();
-    await expect(page).toHaveURL(
-      new RegExp(`/${alternate}/verification-pending$`),
-    );
+    await expect(page).toHaveURL(new RegExp(`/${alternate}/club$`));
     await page.goto(`/${locale}/verification-pending`);
     await a11y(page);
     await aligned(page);
@@ -133,7 +130,7 @@ for (const locale of locales)
         fullPage: true,
       });
     await context.close();
-    await expect(page).toHaveURL(new RegExp(`/${locale}/club/collection$`));
+    await expect(page).toHaveURL(new RegExp(`/${locale}/club/collection(?:#reference-library)?$`));
     await expect(page.locator(".restricted-study img")).toHaveCount(1);
     await expect(
       page.locator(
@@ -167,7 +164,7 @@ for (const locale of locales)
     const state = await (await page.request.get("/api/state")).json();
     expect(state.identity.account_state).toBe("verified_18_plus");
     expect(state.identity.membership_state).toBe("silver");
-    await page.goto(`/${locale}/club`);
+    await page.goto(`/${locale}/club/member`);
     await expect(page.locator(".digital-pass")).toContainText("Silver");
     await a11y(page);
     await aligned(page);
@@ -268,7 +265,6 @@ test("HTTP boundary rejects forged review, checkbox approval, identity uploads a
       .eq("member_id", member.id);
     expect(change.error).toBeNull();
     for (const route of [
-      "club",
       "club/account",
       "club/membership",
       "club/collection",

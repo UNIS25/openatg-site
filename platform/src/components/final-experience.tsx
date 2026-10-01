@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, Pause, Play } from "lucide-react";
-import { usePlatform, LanguageLinks } from "./platform";
+import { usePlatform, LanguageLinks, ProductCard } from "./platform";
 import {
   defaultExperience,
   et,
@@ -16,7 +16,7 @@ import { polishText } from "@/lib/polish";
 import { MembershipComparison } from "./membership-comparison";
 
 const root = "/varathans25/visual-reset";
-const logo = "/varathans25/brand/varathans25-original.png";
+const logo = "/varathans25/brand/varathans25-transparent.png";
 type Connection = {
   saveData?: boolean;
   effectiveType?: string;
@@ -165,7 +165,7 @@ export function Gateway({
   return (
     <main id="content" className="gateway">
       <ExperienceFilm
-        name="highlands"
+        name="evening"
         posterOnly={config.gateway_film === "poster-only"}
         locale={locale}
       />
@@ -212,7 +212,7 @@ export function StoreHome({
     <div className="store-home">
       <section className="store-film-hero">
         <ExperienceFilm
-          name="tea"
+          name="highlands"
           posterOnly={config.store_film === "poster-only"}
           locale={locale}
         />
@@ -220,18 +220,28 @@ export function StoreHome({
           <p className="film-eyebrow">VARATHANS25 · {et(locale, "store")}</p>
           <h1>{text("storeTitle")}</h1>
           <p>{text("storeText")}</p>
-          <a className="film-link" href={`/${locale}/shop?category=tea`}>
+          <a className="film-link" href="#tea-collection">
             {et(locale, "tea")} <ArrowUpRight size={18} aria-hidden="true" />
           </a>
         </div>
       </section>
+      <section className="tea-pouring-chapter" aria-labelledby="tea-pouring-heading">
+        <ExperienceFilm name="tea" locale={locale} />
+        <div className="tea-pouring-copy">
+          <p className="film-eyebrow">VARATHANS25 · 02</p>
+          <h2 id="tea-pouring-heading">{et(locale, "teaPouring")}</h2>
+          <p>{et(locale, "teaPouringText")}</p>
+          <a className="film-link" href="#tea-collection">{et(locale, "tea")} <ArrowUpRight size={18} aria-hidden="true" /></a>
+        </div>
+      </section>
       <section
         className="store-chapter tea-editorial container"
+        id="tea-collection"
         aria-labelledby="tea-heading"
       >
         <div className="chapter-heading">
           <div>
-            <p className="eyebrow">01 / PREMIUM TEA COLLECTION</p>
+            <p className="eyebrow">03 / PREMIUM TEA COLLECTION</p>
             <h2 id="tea-heading">{text("teaTitle")}</h2>
           </div>
           <div>
@@ -241,26 +251,8 @@ export function StoreHome({
             </a>
           </div>
         </div>
-        <div className="editorial-tins">
-          {teas.map((p, i) => (
-            <a href={`/${locale}/product/${p.slug}`} key={p.slug}>
-              <img
-                src={p.image}
-                alt={
-                  p.translations.find((t) => t.locale === locale)?.name ||
-                  p.slug
-                }
-                width="400"
-                height="400"
-                loading="lazy"
-              />
-              <span>
-                <small>{String(i + 1).padStart(2, "0")}</small>
-                {p.translations.find((t) => t.locale === locale)?.name ||
-                  p.slug}
-              </span>
-            </a>
-          ))}
+        <div className="product-grid store-tea-grid">
+          {teas.map((p) => <ProductCard product={p} key={p.slug} />)}
         </div>
       </section>
       <section className="spice-film-chapter" aria-labelledby="spice-heading">
@@ -270,41 +262,19 @@ export function StoreHome({
           locale={locale}
         />
         <div className="spice-film-copy">
-          <p className="film-eyebrow">02 / VARATHANS25</p>
+          <p className="film-eyebrow">04 / VARATHANS25</p>
           <h2 id="spice-heading">{polishText(polish, locale, "spiceTitle")}</h2>
           <p>{polishText(polish, locale, "spiceText")}</p>
         </div>
       </section>
       <section className="curry-editorial" aria-labelledby="curry-heading">
         <div className="container curry-layout">
-          <div className="curry-product">
-            {curry && (
-              <a href={`/${locale}/product/${curry.slug}`}>
-                <img
-                  src={curry.image}
-                  alt={
-                    curry.translations.find((t) => t.locale === locale)?.name ||
-                    "Gelber Curry Kokos"
-                  }
-                  width="640"
-                  height="640"
-                  loading="lazy"
-                />
-              </a>
-            )}
-          </div>
           <div>
-            <p className="eyebrow">02 / VARATHANS25 CURRY</p>
+            <p className="eyebrow">05 / VARATHANS25 CURRY</p>
             <h2 id="curry-heading">{text("curryTitle")}</h2>
             <p>{text("curryText")}</p>
-            <a
-              className="editorial-link"
-              href={`/${locale}/product/gelber-curry-kokos`}
-            >
-              {et(locale, "details")}{" "}
-              <ArrowUpRight size={17} aria-hidden="true" />
-            </a>
           </div>
+          {curry && <ProductCard product={curry} />}
         </div>
       </section>
       <section className="store-service-line container" id="delivery">
@@ -331,7 +301,7 @@ export function StoreHome({
           loading="lazy"
         />
         <div>
-          <p className="eyebrow">VARATHANS25 · RESTAURANT</p>
+          <p className="eyebrow">06 / VARATHANS25 · RESTAURANT</p>
           <h2 id="restaurant-heading">
             {polishText(polish, locale, "restaurantTitle")}
           </h2>
@@ -356,7 +326,7 @@ export function ClubEntrance({
 }: {
   config?: ExperienceConfig;
 }) {
-  const { locale, tr } = usePlatform();
+  const { locale } = usePlatform();
   return (
     <div className="club-entrance">
       <section className="club-account-hero">
@@ -370,16 +340,9 @@ export function ClubEntrance({
           <h1>{experienceText(locale, "clubTitle", config)}</h1>
           <p>{experienceText(locale, "clubText", config)}</p>
           <div className="actions">
-            <a
-              className="button light"
-              href={`/${locale}/login?next=club/member`}
-            >
-              {tr("login")}
-            </a>
-            <a className="film-link" href={`/${locale}/register`}>
-              {et(locale, "apply")}{" "}
-              <ArrowUpRight size={16} aria-hidden="true" />
-            </a>
+            <a className="button light" href={`/${locale}/club/collection#reference-library`}>{et(locale, "viewProducts")}</a>
+            <a className="film-link" href={`/${locale}/membership`}>{et(locale, "joinClub")} <ArrowUpRight size={16} aria-hidden="true" /></a>
+            <a className="film-link" href={`/${locale}/login?next=club/member`}>{et(locale, "existingMember")} <ArrowUpRight size={16} aria-hidden="true" /></a>
           </div>
           <p className="club-age">{et(locale, "age")}</p>
         </div>

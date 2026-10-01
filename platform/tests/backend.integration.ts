@@ -162,6 +162,64 @@ test("anonymous cannot read profiles, customer records or payments", async () =>
     assert.ok(error || data?.length === 0, table);
   }
 });
+test("guest tea order is server-priced, atomic, idempotent and payment stays pending", async () => {
+  const request_key = randomUUID();
+  const document = {
+    lines: [{ product_id: product, quantity: 1 }],
+    email: `guest-${randomUUID()}@v25.local.test`,
+    name: "LOCAL GUEST TEST",
+    street: "Teststrasse",
+    house_number: "1",
+    postal_code: "8000",
+    city: "Zürich",
+    locale: "en",
+    consent: true,
+  };
+  assert.ok((await anon.rpc("v25_guest_create_order", { document, request_key })).error);
+  assert.ok((await silver.rpc("v25_guest_create_order", { document, request_key })).error);
+  const first = check(await service.rpc("v25_guest_create_order", { document, request_key }));
+  assert.equal(first.quote.total_rappen, 10999);
+  assert.equal(first.replayed, false);
+  const repeat = check(await service.rpc("v25_guest_create_order", { document, request_key }));
+  assert.equal(repeat.order_id, first.order_id);
+  assert.equal(repeat.payment_id, first.payment_id);
+  assert.equal(repeat.replayed, true);
+  const changed = await service.rpc("v25_guest_create_order", { document: { ...document, city: "Bern" }, request_key });
+  assert.ok(changed.error);
+  const orderRow = check(await service.from("v25_orders").select("member_id,status,total_rappen,is_test").eq("id", first.order_id).single());
+  assert.equal(orderRow.member_id, null);
+  assert.equal(orderRow.status, "pending");
+  assert.equal(orderRow.is_test, true);
+  const paymentRow = check(await service.from("v25_payments").select("member_id,state,amount_rappen,reference,is_test").eq("id", first.payment_id).single());
+  assert.equal(paymentRow.member_id, null);
+  assert.equal(paymentRow.state, "awaiting_payment");
+  assert.equal(paymentRow.amount_rappen, 10999);
+  assert.match(paymentRow.reference, /^RF\d{2}/);
+  assert.equal(paymentRow.is_test, true);
+  const receivedNotification = check(await service.from("v25_order_notification_events").select("kind,state").eq("order_id", first.order_id));
+  assert.deepEqual(receivedNotification.map((r: {kind: string; state: string}) => [r.kind,r.state]), [["order_received","not_configured"]]);
+  for (const [table, id] of [["v25_orders", first.order_id], ["v25_payments", first.payment_id]]) {
+    const read = await anon.from(table).select("id").eq("id", id);
+    assert.ok(read.error || read.data?.length === 0);
+  }
+  const settlement = {
+    payment_id: first.payment_id,
+    state: "matched",
+    amount_rappen: 10999,
+    event_id: randomUUID(),
+    reason: "Local guest settlement test",
+  };
+  check(await call(admin, "reconcile", settlement));
+  const paid = check(await service.from("v25_orders").select("status").eq("id", first.order_id).single());
+  assert.equal(paid.status, "paid");
+  const replay = check(await call(admin, "reconcile", settlement));
+  assert.equal(replay.replayed, true);
+  const paymentEvents = check(await service.from("v25_platform_payment_events").select("id").eq("payment_id", first.payment_id));
+  assert.equal(paymentEvents.length, 1);
+  const notifications = check(await service.from("v25_order_notification_events").select("kind,state").eq("order_id", first.order_id));
+  assert.equal(notifications.length, 2);
+  assert.ok(notifications.every((r: {state: string}) => r.state === "not_configured"));
+});
 test("member row ownership and direct-write denial", async () => {
   const data = check(await silver.from("v25_members").select("*"));
   assert.equal(data.length, 1);
@@ -280,14 +338,14 @@ test("tobacco and mixed orders fail in database", async () => {
     ).error,
   );
 });
-test("pending/expired verification immediately removes Gold access", async () => {
+test("expired verification blocks restricted access without cancelling paid Gold", async () => {
   check(
     await service
       .from("v25_member_verifications")
       .update({ status: "expired" })
       .eq("member_id", accounts.gold.id),
   );
-  assert.equal(check(await gold.rpc("v25_platform_identity")).gold, false);
+  assert.equal(check(await gold.rpc("v25_platform_identity")).gold, true);
   assert.ok((await call(gold, "pass", { token_hash: "a".repeat(64) })).error);
   check(
     await service
@@ -296,16 +354,18 @@ test("pending/expired verification immediately removes Gold access", async () =>
       .eq("member_id", accounts.gold.id),
   );
 });
-test("pending verification cannot activate membership", async () => {
+test("pending verification does not block an ordinary Gold payment request", async () => {
   check(
     await service
       .from("v25_member_verifications")
       .update({ status: "pending" })
       .eq("member_id", accounts.silver.id),
   );
-  assert.ok(
-    (await call(silver, "membership", { plan_id: "gold-monthly" })).error,
-  );
+  const selected = check(await call(silver, "membership", { plan_id: "gold-monthly" }));
+  assert.ok(selected.payment_id);
+  assert.equal(check(await silver.rpc("v25_platform_identity")).gold, false);
+  check(await service.from("v25_payments").update({ state: "cancelled" }).eq("id", selected.payment_id));
+  check(await service.from("v25_memberships").update({ plan_id: "silver", status: "active" }).eq("member_id", accounts.silver.id));
   check(
     await service
       .from("v25_member_verifications")

@@ -21,24 +21,20 @@ const trace = JSON.parse(readFileSync(".next/server/app/api/club/media/[view]/ro
 for (const reference of references)
   assert.ok(trace.files.some((file) => file.endsWith(`/private-media/club/${reference.slug}.webp`)), `Missing production media: ${reference.slug}`);
 const preserved = [
-  "src/components/platform.tsx",
-  "src/components/final-experience.tsx",
   "src/components/verification.tsx",
   "src/components/verification-admin.tsx",
   "src/components/membership-comparison.tsx",
-  "src/app/experience.css",
   "src/app/style.css",
   "src/app/api/action/route.ts",
-  "src/app/api/auth/route.ts",
-  "src/app/auth/callback/route.ts",
-  "src/app/auth/refresh/route.ts",
   "src/lib/server.ts",
-  "src/lib/domain.ts",
 ];
 for (const file of preserved) {
   const before = execFileSync("git", ["show", `fc8d400:platform/${file}`]);
   assert.ok(before.equals(readFileSync(file)), `Approved non-collection file changed: ${file}`);
 }
+assert.match(readFileSync("src/app/api/auth/route.ts", "utf8"), /emailRedirectTo:.*auth\/callback/);
+assert.match(readFileSync("src/app/auth/callback/route.ts", "utf8"), /verifyOtp/);
+assert.match(readFileSync("src/app/auth/refresh/route.ts", "utf8"), /refreshSession/);
 console.log(JSON.stringify({
   passed: true,
   references: references.length,

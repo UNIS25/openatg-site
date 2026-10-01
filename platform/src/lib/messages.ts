@@ -273,9 +273,9 @@ export const messages = {
     "Your Varathans25 membership",
   ],
   tierIntro: [
-    "Silver und Gold für Tee, Vorrat und Gastfreundschaft. Aktivierung nach E-Mail- und Altersprüfung.",
-    "Silver et Gold pour le thé, l’épicerie et l’hospitalité. Activation après vérification de l’e-mail et de l’âge.",
-    "Silver and Gold for tea, pantry and hospitality. Activation follows email and age verification.",
+    "Silver und Gold für Tee, Vorrat und Gastfreundschaft. Die Altersprüfung ist für den Zugang zum Cigar Club separat erforderlich.",
+    "Silver et Gold pour le thé, l’épicerie et l’hospitalité. L’accès au Cigar Club exige une vérification d’âge distincte.",
+    "Silver and Gold for tea, pantry and hospitality. Cigar Club access requires separate age verification.",
   ],
   silver: ["Silver", "Silver", "Silver"],
   gold: ["Gold", "Gold", "Gold"],
@@ -451,6 +451,10 @@ export const messages = {
   addAddress: ["Adresse speichern", "Enregistrer l’adresse", "Save address"],
   orders: ["Bestellungen", "Commandes", "Orders"],
   payments: ["QR-Zahlungen", "Paiements QR", "QR payments"],
+  notifications: ["E-Mail-Status", "Statut des e-mails", "Email status"],
+  order_received: ["Bestellung erhalten", "Commande reçue", "Order received"],
+  payment_confirmed: ["Zahlung bestätigt", "Paiement confirmé", "Payment confirmed"],
+  not_configured: ["Versand nicht konfiguriert", "Envoi non configuré", "Delivery not configured"],
   history: ["Verlauf", "Historique", "History"],
   noRecords: [
     "Noch keine Einträge.",

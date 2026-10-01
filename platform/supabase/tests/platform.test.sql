@@ -1,5 +1,5 @@
 begin;
-select plan(22);
+select plan(25);
 select is((select count(*)::integer from pg_tables t join pg_class c on c.relname=t.tablename join pg_namespace n on n.oid=c.relnamespace and n.nspname=t.schemaname where t.schemaname='public' and t.tablename like 'v25_%' and not c.relrowsecurity),0,'RLS enabled on every exposed platform table');
 select ok(not has_table_privilege('anon','public.v25_members','SELECT'),'anonymous member table denied');
 select ok(not has_table_privilege('authenticated','public.v25_members','INSERT'),'member self-promotion through INSERT denied');
@@ -7,6 +7,9 @@ select ok(not has_table_privilege('authenticated','public.v25_payments','UPDATE'
 select ok(not has_table_privilege('authenticated','public.v25_memberships','UPDATE'),'membership direct writes denied');
 select ok(not has_table_privilege('authenticated','public.v25_staff_roles','INSERT'),'staff role escalation denied');
 select ok(not has_function_privilege('anon','public.v25_platform_action(text,jsonb,uuid)','EXECUTE'),'anonymous RPC mutations denied');
+select ok(not has_function_privilege('anon','public.v25_guest_create_order(jsonb,uuid)','EXECUTE'),'guest order RPC denies anonymous bypass');
+select ok(not has_function_privilege('authenticated','public.v25_guest_create_order(jsonb,uuid)','EXECUTE'),'guest order RPC denies authenticated browser bypass');
+select ok(has_function_privilege('service_role','public.v25_guest_create_order(jsonb,uuid)','EXECUTE'),'guest order RPC requires the server service role');
 select ok(not has_function_privilege('authenticated','public.v25_platform_webhook(uuid,text,integer,text,text)','EXECUTE'),'webhook RPC requires service role');
 select ok(not has_function_privilege('authenticated','public.v25_platform_rate_limit(text,integer)','EXECUTE'),'rate limiter cannot be reset by browser');
 select ok(not has_function_privilege('service_role','public.v25_create_order(jsonb)','EXECUTE'),'legacy checkout inaccessible even to service role');

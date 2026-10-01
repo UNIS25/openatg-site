@@ -60,11 +60,12 @@ for (const locale of locales)
     )?.[1]?.replaceAll("&amp;", "&");
     expect(link).toBeTruthy();
     await page.goto(link);
-    await expect(page).toHaveURL(new RegExp(`/${locale}/verify-age`));
+    await expect(page).toHaveURL(new RegExp(`/${locale}/account$`));
     await page.getByRole("checkbox").check();
     await page
       .getByRole("button", { name: t(locale, "save"), exact: true })
       .click();
+    await page.goto(`/${locale}/verify-age`);
     await page
       .getByRole("button", { name: vt(locale, "submit"), exact: true })
       .click();
@@ -469,6 +470,50 @@ test("admin creates multilingual draft, uploads private image and reloads an edi
     "LOCAL TEST FR révisé",
   );
   await a11y(page);
+  check();
+});
+
+test("Gold member choosing guest checkout sees the guest price charged by the order", async ({ page }) => {
+  const check = noErrors(page);
+  const member = await temporaryMember("gold");
+  await page.goto("/en/login");
+  await page.getByLabel("Email", { exact: true }).fill(member.email);
+  await page.getByLabel("Password", { exact: true }).fill(member.password);
+  await page.getByRole("button", { name: "Sign in", exact: true }).click();
+  await expect(page).toHaveURL(/\/en\/account/);
+  await page.goto("/en/shop?category=tea");
+  await page.locator(".product-card .purchase-row .button").first().click();
+  await expect(page.locator(".bag-link span")).toHaveText("1");
+  const memberQuoteResponse = page.waitForResponse((response) =>
+    response.url().endsWith("/api/quote") && response.request().method() === "POST",
+  );
+  await page.goto("/en/bag");
+  const memberQuote = await (await memberQuoteResponse).json();
+  expect(memberQuote.gold).toBe(true);
+  const guestQuoteResponse = page.waitForResponse((response) =>
+    response.url().endsWith("/api/quote") && response.request().postDataJSON()?.guest === true,
+  );
+  await page.locator(".checkout-choices button").click();
+  const guestQuote = await (await guestQuoteResponse).json();
+  expect(guestQuote.gold).toBe(false);
+  expect(guestQuote.discount_rappen).toBe(0);
+  expect(guestQuote.total_rappen).toBeGreaterThan(memberQuote.total_rappen);
+  const form = page.locator(".guest-checkout");
+  await form.locator('input[name="email"]').fill(member.email);
+  await form.locator('input[name="name"]').fill("LOCAL GOLD GUEST TEST");
+  await form.locator('input[name="street"]').fill("Teststrasse");
+  await form.locator('input[name="house_number"]').fill("1");
+  await form.locator('input[name="postal_code"]').fill("8000");
+  await form.locator('input[name="city"]').fill("Zürich");
+  await form.locator('input[name="consent"]').check();
+  const orderResponse = page.waitForResponse((response) =>
+    response.url().endsWith("/api/guest/order") && response.request().method() === "POST",
+  );
+  await form.getByRole("button", { name: "Create test order" }).click();
+  const response = await orderResponse;
+  expect(response.status()).toBe(200);
+  expect((await response.json()).amount_rappen).toBe(guestQuote.total_rappen);
+  await expect(page.locator(".payment-result")).toContainText("TEST · NOT PAYABLE");
   check();
 });
 

@@ -75,7 +75,7 @@ const copy: Record<Locale, Record<ExperienceKey, string>> = {
 };
 export const experienceSchema = z
   .object({
-    gateway_film: z.enum(["highlands", "poster-only"]),
+    gateway_film: z.enum(["highlands", "evening", "poster-only"]),
     store_film: z.enum(["tea", "poster-only"]),
     club_film: z.enum(["evening", "poster-only"]),
     copy: z.record(
@@ -86,7 +86,7 @@ export const experienceSchema = z
   .strict();
 export type ExperienceConfig = z.infer<typeof experienceSchema>;
 export const defaultExperience: ExperienceConfig = {
-  gateway_film: "highlands",
+  gateway_film: "evening",
   store_film: "tea",
   club_film: "evening",
   copy,
@@ -97,12 +97,17 @@ export const experienceText = (
   config?: ExperienceConfig,
 ) => config?.copy[locale]?.[key] || copy[locale][key];
 const labels = {
-  explore: ["Store entdecken", "Explorer la boutique", "Explore the Store"],
+  explore: ["General Store", "Boutique générale", "General Store"],
   enter: [
-    "Premium Cigar Club betreten · 18+",
-    "Entrer au Premium Cigar Club · 18+",
-    "Enter the Premium Cigar Club · 18+",
+    "Premium Cigar Club · 18+",
+    "Premium Cigar Club · 18+",
+    "Premium Cigar Club · 18+",
   ],
+  teaPouring: ["Die Kunst des Tees", "L’art du thé", "The art of tea"],
+  teaPouringText: ["Ein stiller Moment vor der Kollektion.", "Un instant de calme avant la collection.", "A quiet moment before the collection."],
+  viewProducts: ["Produkte ansehen", "Voir les produits", "View Products"],
+  joinClub: ["Club beitreten", "Rejoindre le club", "Join the Club"],
+  existingMember: ["Als Mitglied anmelden", "Connexion membre", "Existing Member Sign In"],
   store: ["Store", "Boutique", "Store"],
   catalogue: ["Alle Produkte", "Tous les produits", "All products"],
   tea: ["Teekollektion", "Collection de thés", "Tea collection"],

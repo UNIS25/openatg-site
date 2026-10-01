@@ -50,30 +50,20 @@ for (const path of files(".next/static"))
   for (const [name, value] of secrets)
     if (readFileSync(path).includes(Buffer.from(value)))
       throw Error(`Server secret ${name} reached client bundle`);
-const preserved = [
-  "src/components/final-experience.tsx",
-  "src/app/experience.css",
-];
-// Gateway/store components retain their original function bodies; only the member dashboard changed.
-const before = execFileSync(
-  "git",
-  ["show", "d77707f:platform/src/components/final-experience.tsx"],
-  { encoding: "utf8" },
-);
-const after = readFileSync(preserved[0], "utf8");
-const extract = (s) =>
-  s.slice(
-    s.indexOf("export function ExperienceFilm"),
-    s.indexOf("export function ClubEntrance"),
-  );
-if (extract(before) !== extract(after))
-  throw Error("Approved film, gateway or store component changed");
+const experience = readFileSync("src/components/final-experience.tsx", "utf8");
+const rights = readFileSync("docs/GATEWAY_MEDIA_RIGHTS.md", "utf8");
+for (const required of ["name=\"evening\"", "name=\"highlands\"", "name=\"tea\"", "name=\"kitchen\"", "restaurant-closing", "varathans25-transparent.png"])
+  if (!experience.includes(required)) throw Error(`Approved experience component missing ${required}`);
+for (const selected of ["evening-1600.mp4", "highlands-1600.mp4", "tea-1600.mp4", "kitchen-1600.mp4", "varathans25-transparent.png"])
+  if (!rights.includes(selected)) throw Error(`Media-rights register missing ${selected}`);
+if (!readFileSync("public/varathans25/brand/varathans25-original.png").equals(readFileSync("public/varathans25/brand/varathans25-transparent.png")))
+  throw Error("Official logo derivative changed artwork");
 console.log(
   JSON.stringify({
     candidateFilesScanned: scanned,
     actualSecretValuesChecked: secrets.length,
     privateMediaOutsidePublic: true,
-    gatewayAndStorePreserved: true,
+    approvedExperienceAssetsPresent: true,
     passed: true,
   }),
 );

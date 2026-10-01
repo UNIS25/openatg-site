@@ -42,13 +42,12 @@ import {
 import catalogue from "@/data/catalogue.json";
 import Admin from "./admin";
 import { useEditorial } from "./cinematic";
-import { Gateway, StoreHome, MemberArea } from "./final-experience";
+import { Gateway, StoreHome, ClubEntrance, MemberArea } from "./final-experience";
 import { et } from "@/lib/experience";
 import { VerificationJourney } from "./verification";
 import { vt } from "@/lib/verification-copy";
 import {
   verificationDestination,
-  type ClubAccountState,
 } from "@/lib/club-state";
 import { MembershipComparison } from "./membership-comparison";
 import { defaultPolish, polishText, type PolishConfig } from "@/lib/polish";
@@ -58,6 +57,7 @@ import {
   pendingCart,
   clearPendingCart,
 } from "@/lib/cart";
+import { checkoutText } from "@/lib/checkout-copy";
 type Context = {
   locale: Locale;
   page: string;
@@ -338,7 +338,7 @@ export default function Platform({
               ].includes(page) ? (
               <VerificationJourney />
             ) : page === "club" ? (
-              <MemberArea />
+              <ClubEntrance config={editorial.experience} />
             ) : page === "club/member" ? (
               <MemberArea />
             ) : ["membership", "club/membership"].includes(page) ? (
@@ -374,14 +374,14 @@ function Logo() {
 }
 export function LanguageLinks() {
   const { locale, page, tr } = usePlatform();
-  const [query, setQuery] = useState("");
-  useEffect(() => setQuery(window.location.search), [page]);
+  const [suffix, setSuffix] = useState("");
+  useEffect(() => setSuffix(window.location.search + window.location.hash), [page]);
   return (
     <nav aria-label={tr("language")} className="language-links">
       {locales.map((l) => (
         <a
           key={l}
-          href={`/${l}/${page === "entrance" ? "" : page}${query}`}
+          href={`/${l}/${page === "entrance" ? "" : page}${suffix}`}
           aria-current={l === locale ? "page" : undefined}
           lang={l}
           onClick={() => remember(l)}
@@ -525,7 +525,7 @@ function Quantity({
     </div>
   );
 }
-function ProductCard({
+export function ProductCard({
   product,
   detail = false,
 }: {
@@ -609,7 +609,7 @@ function ProductCard({
           </h3>
         )}
         <p className="product-variant">
-          {translation?.short_description || ""}
+          {translation?.short_description || translation?.description || tr("factsPending")}
         </p>
         <p className="product-weight">
           {et(locale, "weight")}:{" "}
@@ -622,6 +622,7 @@ function ProductCard({
           <p className="price">
             {price === null ? tr("pricePending") : money(price, locale)}
           </p>
+          {product.is_test && price !== null && <small className="test-price-note">{tr("testPrice")}</small>}
           {price !== null && gold && (
             <p className="member-price">
               {tr("goldPrice")}:{" "}
@@ -850,17 +851,13 @@ function Auth({ mode }: { mode: string }) {
         "club/collection",
         "club/membership",
         "club/account",
+        "bag",
         "admin",
         "admin/verification",
       ].includes(next)
     )
-      return `/${locale}/${next}`;
-    const current = await api<{ account_state: ClubAccountState }>(
-      "/api/verification",
-    );
-    return current.account_state === "verified_18_plus"
-      ? `/${locale}/account`
-      : verificationDestination(locale, current.account_state);
+      return `/${locale}/${next}${next === "club/collection" ? "#reference-library" : ""}`;
+    return `/${locale}/account`;
   };
   const [challenge, setChallenge] = useState<string | null>(null);
   async function submit(e: FormEvent<HTMLFormElement>) {
@@ -874,6 +871,7 @@ function Auth({ mode }: { mode: string }) {
         name: f.get("name"),
         consent: f.get("consent") === "on",
         locale,
+        next: new URLSearchParams(window.location.search).get("next"),
       });
       if (mode === "login") {
         if (response.factors?.length) setChallenge(response.factors[0].id);
@@ -1009,6 +1007,15 @@ function Bag() {
     [address, setAddress] = useState("");
   const [serverQuote, setServerQuote] = useState<Quote | null>(null);
   const [quoteError, setQuoteError] = useState("");
+  const [checkoutChoice, setCheckoutChoice] = useState<"guest" | "member" | null>(null);
+  const [paymentResult, setPaymentResult] = useState<{
+    order_id: string;
+    payment_id: string;
+    amount_rappen?: number;
+    reference?: string;
+    bill_url?: string;
+  } | null>(null);
+  const ct = (key: Parameters<typeof checkoutText>[1]) => checkoutText(locale, key);
   const q = quote || serverQuote;
   useEffect(() => {
     let live = true;
@@ -1018,7 +1025,10 @@ function Bag() {
     orderKey.current = null;
     const timer = setTimeout(() => {
       if (cart.length)
-        void api<Quote>("/api/quote", { lines: cart })
+        void api<Quote>("/api/quote", {
+          lines: cart,
+          guest: checkoutChoice === "guest",
+        })
           .then((result) => {
             if (live) setServerQuote(result);
           })
@@ -1030,11 +1040,23 @@ function Bag() {
       live = false;
       clearTimeout(timer);
     };
-  }, [cart]);
+  }, [cart, checkoutChoice]);
   return (
     <section className="container section">
       <p className="eyebrow">VARATHANS25</p>
       <h1>{tr("bag")}</h1>
+      {paymentResult && (
+        <section className="panel payment-result" role="status" aria-live="polite">
+          <p className="eyebrow">{ct("received")}</p>
+          <h2>{ct("payment")}</h2>
+          <p><strong>{ct("paymentNote")}</strong></p>
+          {paymentResult.reference && <p>{ct("reference")}: <code>{paymentResult.reference}</code></p>}
+          {paymentResult.amount_rappen !== undefined && <p>{money(paymentResult.amount_rappen, locale)}</p>}
+          <p>{ct("wait")}</p>
+          <p className="muted">{ct("emailPending")}</p>
+          <a className="button" href={paymentResult.bill_url || `/api/payment?id=${paymentResult.payment_id}`}>{tr("downloadBill")}</a>
+        </section>
+      )}
       {!known.length ? (
         <p>{tr("emptyBag")}</p>
       ) : (
@@ -1128,7 +1150,53 @@ function Bag() {
             )}
             <p>{tr("deliveryScope")}</p>
             <p className="muted">{et(locale, "preview")}</p>
-            {state?.identity.active ? (
+            <div className="checkout-choices" aria-label={ct("choices")}>
+              <h3>{ct("choices")}</h3>
+              <button type="button" className={checkoutChoice === "guest" ? "selected" : ""} onClick={() => setCheckoutChoice("guest")}>{ct("guest")}<small>{ct("guestDetail")}</small></button>
+              <a href={`/${locale}/${state?.identity.active ? "membership" : "register?next=bag"}`}>{ct("silver")}<small>{ct("silverDetail")}</small></a>
+              <a href={`/${locale}/membership`}>{ct("gold")}<small>{ct("goldDetail")}</small></a>
+            </div>
+            {checkoutChoice === "guest" && (
+              <form className="guest-checkout" onSubmit={(event) => {
+                event.preventDefault();
+                const fields = new FormData(event.currentTarget);
+                void run(async () => {
+                  if (!orderKey.current) orderKey.current = crypto.randomUUID();
+                  const result = await api<{
+                    order_id: string; payment_id: string; amount_rappen: number;
+                    reference: string; bill_url: string;
+                  }>("/api/guest/order", {
+                    key: orderKey.current,
+                    lines: cart,
+                    email: fields.get("email"),
+                    name: fields.get("name"),
+                    street: fields.get("street"),
+                    house_number: fields.get("house_number"),
+                    postal_code: fields.get("postal_code"),
+                    city: fields.get("city"),
+                    locale,
+                    consent: fields.get("consent") === "on",
+                  });
+                  setPaymentResult(result);
+                  setCart([]);
+                });
+              }}>
+                <h3>{ct("guestAddress")}</h3>
+                <Field label={ct("email")}><input name="email" type="email" autoComplete="email" required maxLength={254} /></Field>
+                <Field label={ct("name")}><input name="name" autoComplete="name" required maxLength={120} /></Field>
+                <div className="guest-address-row">
+                  <Field label={ct("street")}><input name="street" autoComplete="address-line1" required maxLength={100} /></Field>
+                  <Field label={ct("house")}><input name="house_number" required maxLength={20} /></Field>
+                </div>
+                <div className="guest-address-row">
+                  <Field label={ct("postal")}><input name="postal_code" autoComplete="postal-code" required inputMode="numeric" pattern="[1-9][0-9]{3}" maxLength={4} /></Field>
+                  <Field label={ct("city")}><input name="city" autoComplete="address-level2" required maxLength={100} /></Field>
+                </div>
+                <label className="check"><input type="checkbox" name="consent" required />{ct("consent")}</label>
+                <button className="button maroon" disabled={busy || !serverQuote || !!quoteError}>{ct("placeTest")}</button>
+              </form>
+            )}
+            {state?.identity.active && checkoutChoice !== "guest" ? (
               <>
                 <Field label={tr("deliveryAddress")}>
                   <select
@@ -1167,7 +1235,7 @@ function Bag() {
                     disabled={busy}
                     onClick={() =>
                       void run(async () => {
-                        await action(
+                        const result = await action<{order_id: string; payment_id: string}>(
                           "order",
                           {
                             lines: cart,
@@ -1175,6 +1243,7 @@ function Bag() {
                           },
                           orderKey.current || crypto.randomUUID(),
                         );
+                        setPaymentResult(result);
                         setCart([]);
                         await reload();
                         notice(tr("orderCreated"));
@@ -1185,11 +1254,9 @@ function Bag() {
                   </button>
                 )}
               </>
-            ) : (
-              <a className="button" href={`/${locale}/login`}>
-                {tr("loginToOrder")}
-              </a>
-            )}
+            ) : !state?.identity.active && checkoutChoice !== "guest" ? (
+              <a className="button" href={state ? `/${locale}/account?next=bag` : `/${locale}/login?next=bag`}>{state ? tr("finishProfile") : tr("loginToOrder")}</a>
+            ) : null}
           </aside>
         </div>
       )}
@@ -1223,9 +1290,10 @@ export function Account() {
           onSubmit={(e) => {
             e.preventDefault();
             const f = new FormData(e.currentTarget);
-            void run(() =>
-              act("onboard", { name: f.get("name"), locale, consent: true }),
-            );
+            void run(async () => {
+              await act("onboard", { name: f.get("name"), locale, consent: true });
+              if (new URLSearchParams(window.location.search).get("next") === "bag") router.push(`/${locale}/bag`);
+            });
           }}
         >
           <Field label={tr("name")}>

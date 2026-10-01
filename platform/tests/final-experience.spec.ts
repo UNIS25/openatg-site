@@ -29,8 +29,8 @@ for (const locale of locales)
       .click();
     await expect(page).toHaveURL(new RegExp(`/${locale}/store$`));
     await expect(page.locator("[data-film=tea]")).toBeVisible();
-    await expect(page.locator("[data-film=highlands]")).toHaveCount(0);
-    await expect(page.locator(".editorial-tins a")).toHaveCount(5);
+    await expect(page.locator("[data-film=highlands]")).toBeVisible();
+    await expect(page.locator(".store-tea-grid .product-card")).toHaveCount(5);
     await expect(page.locator("img[src*=restaurant]")).toHaveCount(1);
     await expect(page.locator("[data-film=kitchen]")).toBeVisible();
     await page.locator("main img").evaluateAll(async (images) => {
@@ -54,15 +54,49 @@ for (const locale of locales)
     await page
       .getByRole("link", { name: et(locale, "enter"), exact: true })
       .click();
-    await expect(page).toHaveURL(new RegExp(`/${locale}/login\\?next=club$`));
-    await expect(page.locator(".auth-form")).toBeVisible();
+    await expect(page).toHaveURL(new RegExp(`/${locale}/club$`));
+    await expect(page.getByRole("link", { name: et(locale, "viewProducts") })).toBeVisible();
+    await expect(page.getByRole("link", { name: et(locale, "joinClub") })).toBeVisible();
     await expect(page.locator(".digital-pass,.restricted-study")).toHaveCount(
       0,
     );
     await a11y(page);
     await aligned(page);
+    if (locale === "de")
+      await page.screenshot({ path: `artifacts/final-polish/club-${info.project.name}.png`, fullPage: true });
     check();
   });
+
+test("ordinary products can create a guest test order with a protected non-payable QR bill", async ({ page }) => {
+  await page.goto("/en/shop?category=tea");
+  await expect(page.locator(".product-card .purchase-row .button").first()).toBeEnabled();
+  await page.locator(".product-card .purchase-row .button").first().click();
+  await expect(page.locator(".bag-link span")).toHaveText("1");
+  await page.locator(".bag-link").click();
+  await expect(page.locator(".checkout-choices")).toContainText("Continue as Guest");
+  await page.getByRole("button", { name: "Continue as Guest No membership required. Tea and curry only." }).click();
+  const form = page.locator(".guest-checkout");
+  await form.locator('input[name="email"]').fill(`guest-browser-${crypto.randomUUID()}@v25.local.test`);
+  await form.locator('input[name="name"]').fill("LOCAL GUEST TEST");
+  await form.locator('input[name="street"]').fill("Teststrasse");
+  await form.locator('input[name="house_number"]').fill("1");
+  await form.locator('input[name="postal_code"]').fill("8000");
+  await form.locator('input[name="city"]').fill("Zürich");
+  await form.locator('input[name="consent"]').check();
+  await page.getByRole("button", { name: "Create test order" }).click();
+  await expect(page.locator(".payment-result")).toContainText("TEST · NOT PAYABLE");
+  const url = await page.locator(".payment-result a").getAttribute("href");
+  expect(url).toContain("/api/guest/payment?");
+  const bill = await page.request.get(url!);
+  expect(bill.status()).toBe(200);
+  expect(bill.headers()["content-type"]).toBe("application/pdf");
+  expect((await bill.body()).subarray(0, 4).toString()).toBe("%PDF");
+  const invalid = new URL(url!, "http://127.0.0.1:4190");
+  invalid.searchParams.set("token", "0".repeat(64));
+  expect((await page.request.get(invalid.toString())).status()).toBe(403);
+  await a11y(page);
+  await aligned(page);
+});
 
 test("language retains catalogue filter, product and member routes; root stays German", async ({
   page,
@@ -136,7 +170,7 @@ test("autoplay failure keeps the poster and user can explicitly play and pause",
   await expect(page.locator(".film-poster")).toBeVisible();
   await expect(page.locator("video")).toHaveAttribute(
     "src",
-    /highlands-1600.mp4/,
+    /evening-1600.mp4/,
   );
   const pause = page.getByRole("button", { name: "Pause film", exact: true });
   const play = page.getByRole("button", { name: "Play film", exact: true });

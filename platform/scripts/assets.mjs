@@ -40,6 +40,11 @@ for (const asset of assets) {
   await mkdir(dirname(dest), { recursive: true });
   await copyFile(resolve(root, asset.slice(1)), dest);
 }
+const officialLogo = resolve("public/varathans25/brand/varathans25-original.png");
+const logoAlpha = (await sharp(officialLogo).stats()).channels[3];
+if (!logoAlpha || logoAlpha.min !== 0 || logoAlpha.max !== 255)
+  throw new Error("Official logo transparency must be reviewed before deriving the emblem");
+await copyFile(officialLogo, resolve("public/varathans25/brand/varathans25-transparent.png"));
 for (const p of products) {
   for (const width of [320, 640]) {
     const dest = resolve(
@@ -73,5 +78,5 @@ await writeFile(
   ) + "\n",
 );
 console.log(
-  "Copied approved assets for six products, original logo and editorial photography.",
+  "Copied approved assets for six products, byte-identical transparent logo and editorial photography.",
 );

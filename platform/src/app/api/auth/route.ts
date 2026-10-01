@@ -129,7 +129,7 @@ export async function POST(request: Request) {
         password,
         options: {
           data: { name, locale },
-          emailRedirectTo: `${config().origin}/auth/callback?locale=${locale}`,
+          emailRedirectTo: `${config().origin}/auth/callback?locale=${locale}${input.next === "bag" ? "&next=bag" : ""}`,
         },
       });
       if (error) throw error;

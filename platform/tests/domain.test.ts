@@ -95,7 +95,7 @@ const m = {
   period_end: "2027-01-01",
   cancel_at_period_end: true,
 };
-const v = { status: "verified", expires_at: "2027-01-01" };
+const v = { active: true, emailConfirmed: true };
 const now = Date.parse("2026-09-27");
 test("scheduled cancellation retains already paid period", () =>
   assert.equal(goldActive(m, v, now), true));
@@ -104,8 +104,10 @@ test("cancelled, past due and expired memberships lose Gold", () => {
     assert.equal(goldActive({ ...m, status }, v, now), false);
   assert.equal(goldActive({ ...m, period_end: "2026-09-26" }, v, now), false);
 });
-test("expired verification loses Gold even in paid period", () =>
-  assert.equal(goldActive(m, { ...v, expires_at: "2026-09-26" }, now), false));
+test("Gold depends on the active confirmed account, independently of adult verification", () => {
+  assert.equal(goldActive(m, { ...v, active: false }, now), false);
+  assert.equal(goldActive(m, { ...v, emailConfirmed: false }, now), false);
+});
 test("payment transitions protect terminal and unpaid states", () => {
   assert.equal(paymentTransition("awaiting_payment", "matched"), true);
   assert.equal(paymentTransition("paid", "refunded"), true);

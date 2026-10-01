@@ -17,6 +17,7 @@ export async function GET(request: Request) {
             "membership_plans",
             "orders",
             "order_items",
+            "order_notification_events",
             "payments",
             "platform_payment_events",
             "staff_roles",

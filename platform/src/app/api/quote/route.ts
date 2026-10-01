@@ -18,6 +18,7 @@ export async function POST(request: Request) {
     await rate(`quote:${s?.user.id || "local-guest"}`, 60);
     const input = z
       .object({
+        guest: z.boolean().optional(),
         lines: z
           .array(
             z
@@ -32,9 +33,13 @@ export async function POST(request: Request) {
       })
       .strict()
       .parse(await body(request));
-    const { data, error } = await (s?.db || supabase()).rpc(
+    // Guest checkout always uses ordinary delivery/pricing, even when the
+    // browser has a signed-in Gold session. Membership benefits require the
+    // member order journey and must match the server's final order quote.
+    const db = input.guest ? supabase() : s?.db || supabase();
+    const { data, error } = await db.rpc(
       "v25_platform_preview_quote",
-      input,
+      { lines: input.lines },
     );
     if (error) throw error;
     return json(data);

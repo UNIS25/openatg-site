@@ -6,7 +6,7 @@ export async function GET(request: Request) {
   const url = new URL(request.url),
     requested = url.searchParams.get("next") || "/de/account";
   const next =
-    /^\/(de|fr|en)\/(club(?:\/(collection|membership|account|member))?|membership|account|admin(?:\/verification)?|verify-age|verification-pending|verification-result)$/.test(
+    /^\/(de|fr|en)\/(club(?:\/(collection|membership|account|member))?|membership|bag|account|admin(?:\/verification)?|verify-age|verification-pending|verification-result)$/.test(
       requested,
     )
       ? requested

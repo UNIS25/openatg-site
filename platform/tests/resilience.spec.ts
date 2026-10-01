@@ -38,7 +38,7 @@ test("keyboard-only gateway, catalogue, add to basket and club navigation", asyn
   await expect(page.locator(".gateway")).toBeVisible();
   await tabTo(page, '.gateway-choices a[href="/en/club"]');
   await page.keyboard.press("Enter");
-  await expect(page.locator(".auth-form")).toBeVisible();
+  await expect(page.locator(".club-entrance")).toBeVisible();
   check();
 });
 test("autoplay rejection never hides the poster; trusted play restores film", async ({
@@ -67,7 +67,7 @@ test("autoplay rejection never hides the poster; trusted play restores film", as
   await page.waitForLoadState("networkidle");
   await expect(page.locator("video")).toHaveAttribute(
     "src",
-    /highlands-1600.mp4/,
+    /evening-1600.mp4/,
   );
   await expect(page.locator("video")).not.toHaveClass(/film-started/);
   await expect(page.locator(".film-poster")).toBeVisible();
@@ -114,13 +114,15 @@ test("club sign-in returns to the protected member route after language switch",
     .locator(".language-links")
     .getByRole("link", { name: "EN", exact: true })
     .click();
-  await expect(page).toHaveURL(/\/en\/login\?next=club$/);
+  await expect(page).toHaveURL(/\/en\/club$/);
+  await page.getByRole("link", { name: "Existing Member Sign In" }).click();
+  await expect(page).toHaveURL(/\/en\/login\?next=club\/member$/);
   await page.getByLabel("Email", { exact: true }).fill(accounts.gold.email);
   await page
     .getByLabel("Password", { exact: true })
     .fill(accounts.gold.password);
   await page.getByRole("button", { name: "Sign in", exact: true }).click();
-  await expect(page).toHaveURL(/\/en\/club$/);
+  await expect(page).toHaveURL(/\/en\/club\/member$/);
   await expect(page.locator(".digital-pass")).toBeVisible();
   await a11y(page);
   check();

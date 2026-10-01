@@ -17,12 +17,10 @@ export default async function Page({
   const locale = language as Locale;
   const path = segments.join("/");
   const restricted = [
-    "club",
     "club/member",
     "club/collection",
     "club/account",
     "club/membership",
-    "membership",
   ].includes(path);
   const verification = [
     "verify-age",
@@ -34,6 +32,8 @@ export default async function Page({
     ![
       "",
       "store",
+      "club",
+      "membership",
       "shop",
       "tea",
       "pantry",

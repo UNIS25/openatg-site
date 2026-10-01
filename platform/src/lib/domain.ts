@@ -101,15 +101,15 @@ export function goldActive(
     period_end: string;
     cancel_at_period_end: boolean;
   },
-  verification: { status: string; expires_at: string },
+  account: { active: boolean; emailConfirmed: boolean },
   now = Date.now(),
 ) {
   return (
     m.status === "active" &&
     Date.parse(m.period_start) <= now &&
     Date.parse(m.period_end) > now &&
-    verification.status === "verified" &&
-    Date.parse(verification.expires_at) > now
+    account.active &&
+    account.emailConfirmed
   );
 }
 export function paymentTransition(from: string, to: string) {

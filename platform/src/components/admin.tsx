@@ -18,6 +18,7 @@ const screens = [
   "inventory",
   "orders",
   "payments",
+  "notifications",
   "reconciliation",
   "subscriptions",
   "benefits",
@@ -112,6 +113,9 @@ export default function Admin() {
                         name: "name",
                         plan_id: "plan",
                         provider_reference: "reference",
+                        order_id: "reference",
+                        recipient: "email",
+                        kind: "action",
                         expires_at: "expires",
                         amount_rappen: "amount",
                       } as Record<string, MessageKey>
@@ -134,7 +138,7 @@ export default function Admin() {
                 <tr key={r.id || i}>
                   {fields.map((f) => (
                     <td key={f}>
-                      {["status", "state", "event", "role", "plan_id"].includes(
+                      {["status", "state", "event", "kind", "role", "plan_id"].includes(
                         f,
                       )
                         ? stateName(locale, String(r[f as keyof DbRow]))
@@ -442,6 +446,8 @@ export default function Admin() {
               ))}
               {!rows("payments").length && <p>{tr("noRecords")}</p>}
             </>
+          ) : current === "notifications" ? (
+            table("order_notification_events", ["created_at", "order_id", "kind", "state", "recipient"])
           ) : current === "subscriptions" ? (
             table("membership_events", ["created_at", "event", "member_id"])
           ) : current === "audit" ? (
