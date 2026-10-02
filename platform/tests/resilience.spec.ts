@@ -41,7 +41,28 @@ test("keyboard-only gateway, catalogue, add to basket and club navigation", asyn
   await expect(page.locator(".club-entrance")).toBeVisible();
   check();
 });
-test("autoplay rejection never hides the poster; trusted play restores film", async ({
+test("premium gateway film is stable and never requests candle footage", async ({
+  page,
+}) => {
+  const check = noErrors(page);
+  await page.goto("/en/");
+  await page.waitForLoadState("networkidle");
+  await expect(page.locator(".gateway .film-poster")).toHaveAttribute(
+    "src",
+    /v25-premium-hero-1600.webp/,
+  );
+  await expect(page.locator(".gateway video")).toHaveAttribute(
+    "src",
+    /v25-premium-hero-1600.mp4/,
+  );
+  await expect(page.locator(".gateway video")).not.toHaveAttribute(
+    "src",
+    /evening-1600.mp4/,
+  );
+  await expect(page.locator(".gateway .film-poster")).toBeVisible();
+  check();
+});
+test("autoplay rejection keeps the premium poster; trusted play restores film", async ({
   page,
 }) => {
   const check = noErrors(page);
@@ -65,12 +86,12 @@ test("autoplay rejection never hides the poster; trusted play restores film", as
   });
   await page.goto("/en/");
   await page.waitForLoadState("networkidle");
-  await expect(page.locator("video")).toHaveAttribute(
+  await expect(page.locator(".gateway video")).toHaveAttribute(
     "src",
-    /evening-1600.mp4/,
+    /v25-premium-hero-1600.mp4/,
   );
-  await expect(page.locator("video")).not.toHaveClass(/film-started/);
-  await expect(page.locator(".film-poster")).toBeVisible();
+  await expect(page.locator(".gateway video")).not.toHaveClass(/film-started/);
+  await expect(page.locator(".gateway .film-poster")).toBeVisible();
   await page.getByRole("button", { name: "Play film", exact: true }).click();
   await expect(
     page.getByRole("button", { name: "Pause film", exact: true }),

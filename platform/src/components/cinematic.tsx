@@ -616,9 +616,9 @@ export function useEditorial() {
     ...defaultEditorial,
     experience: {
       ...defaultExperience,
-      gateway_film: "poster-only",
-      store_film: "poster-only",
-      club_film: "poster-only",
+      gateway_film: "evening",
+      store_film: "tea",
+      club_film: "evening",
     },
     invitation_enabled: false,
     active_film: "poster-only",

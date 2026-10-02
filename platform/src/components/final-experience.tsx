@@ -17,6 +17,11 @@ import { MembershipComparison } from "./membership-comparison";
 
 const root = "/varathans25/visual-reset";
 const logo = "/varathans25/brand/varathans25-transparent.png";
+const premiumHero = "/varathans25/media/v25-premium-hero-1600.webp";
+const premiumHeroMobile =
+  "/varathans25/media/v25-premium-hero-mobile.webp";
+const premiumHeroFilm =
+  "/varathans25/media/v25-premium-hero-1600.mp4";
 type Connection = {
   saveData?: boolean;
   effectiveType?: string;
@@ -33,6 +38,11 @@ export function ExperienceFilm({
   posterOnly?: boolean;
   locale: Locale;
 }) {
+  const premiumGateway = name === "evening";
+  const poster = premiumGateway ? premiumHero : `${root}/${name}-poster.webp`;
+  const mobilePoster = premiumGateway
+    ? premiumHeroMobile
+    : `${root}/${name}-poster.webp`;
   const player = useRef<HTMLVideoElement>(null);
   const [allowed, setAllowed] = useState(false);
   const [source, setSource] = useState<string>();
@@ -64,12 +74,15 @@ export function ExperienceFilm({
     };
   }, [posterOnly]);
   useEffect(() => {
-    if (allowed) setSource(`${root}/${name}-1600.mp4`);
+    if (allowed)
+      setSource(
+        premiumGateway ? premiumHeroFilm : `${root}/${name}-1600.mp4`,
+      );
     else {
       setSource(undefined);
       setStarted(false);
     }
-  }, [allowed, name]);
+  }, [allowed, name, premiumGateway]);
   useEffect(() => {
     const video = player.current;
     if (!video) return;
@@ -102,15 +115,17 @@ export function ExperienceFilm({
     }
   };
   return (
-    <div className="experience-film" data-film={name} data-playing={playing}>
+    <div
+      className="experience-film"
+      data-film={name}
+      data-playing={playing}
+      data-premium-hero={premiumGateway ? "true" : undefined}
+    >
       <picture>
-        <source
-          media="(max-width: 700px)"
-          srcSet={`${root}/${name}-poster.webp`}
-        />
+        <source media="(max-width: 700px)" srcSet={mobilePoster} />
         <img
           className="film-poster"
-          src={`${root}/${name}-poster.webp`}
+          src={poster}
           alt=""
           width="1600"
           height="900"
@@ -121,7 +136,7 @@ export function ExperienceFilm({
         ref={player}
         src={source}
         className={`film-video ${started && !failed ? "film-started" : ""}`}
-        poster={`${root}/${name}-poster.webp`}
+        poster={poster}
         muted
         playsInline
         loop

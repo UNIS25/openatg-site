@@ -54,7 +54,7 @@ const experience = readFileSync("src/components/final-experience.tsx", "utf8");
 const rights = readFileSync("docs/GATEWAY_MEDIA_RIGHTS.md", "utf8");
 for (const required of ["name=\"evening\"", "name=\"highlands\"", "name=\"tea\"", "name=\"kitchen\"", "restaurant-closing", "varathans25-transparent.png"])
   if (!experience.includes(required)) throw Error(`Approved experience component missing ${required}`);
-for (const selected of ["evening-1600.mp4", "highlands-1600.mp4", "tea-1600.mp4", "kitchen-1600.mp4", "varathans25-transparent.png"])
+for (const selected of ["v25-premium-hero-1600.webp", "v25-premium-hero-mobile.webp", "v25-premium-hero-1600.mp4", "evening-1600.mp4", "highlands-1600.mp4", "tea-1600.mp4", "kitchen-1600.mp4", "varathans25-transparent.png"])
   if (!rights.includes(selected)) throw Error(`Media-rights register missing ${selected}`);
 if (!readFileSync("public/varathans25/brand/varathans25-original.png").equals(readFileSync("public/varathans25/brand/varathans25-transparent.png")))
   throw Error("Official logo derivative changed artwork");

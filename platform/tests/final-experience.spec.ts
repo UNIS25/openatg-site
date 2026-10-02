@@ -148,7 +148,27 @@ test("motion preferences, mobile poster, Save-Data and rejected autoplay", async
   check();
 });
 
-test("autoplay failure keeps the poster and user can explicitly play and pause", async ({
+test("premium gateway film replaces the candle footage", async ({
+  page,
+}, info) => {
+  const check = noErrors(page);
+  await page.goto("/en/");
+  await expect(page.locator(".gateway .film-poster")).toBeVisible();
+  await expect(page.locator(".gateway .film-poster")).toHaveAttribute(
+    "src",
+    /v25-premium-hero-1600.webp/,
+  );
+  const video = page.locator(".gateway video");
+  if (info.project.name === "mobile" || info.project.name === "narrow") {
+    await expect(video).not.toHaveAttribute("src", /mp4/);
+  } else {
+    await expect(video).toHaveAttribute("src", /v25-premium-hero-1600.mp4/);
+  }
+  await expect(video).not.toHaveAttribute("src", /evening-1600.mp4/);
+  check();
+});
+
+test("autoplay failure keeps the premium poster and trusted controls recover", async ({
   page,
 }, info) => {
   if (info.project.name === "mobile" || info.project.name === "narrow") return;
@@ -167,10 +187,10 @@ test("autoplay failure keeps the poster and user can explicitly play and pause",
     };
   });
   await page.goto("/en/");
-  await expect(page.locator(".film-poster")).toBeVisible();
-  await expect(page.locator("video")).toHaveAttribute(
+  await expect(page.locator(".gateway .film-poster")).toBeVisible();
+  await expect(page.locator(".gateway video")).toHaveAttribute(
     "src",
-    /evening-1600.mp4/,
+    /v25-premium-hero-1600.mp4/,
   );
   const pause = page.getByRole("button", { name: "Pause film", exact: true });
   const play = page.getByRole("button", { name: "Play film", exact: true });

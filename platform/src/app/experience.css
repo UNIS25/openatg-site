@@ -43,6 +43,24 @@
   object-fit: cover;
   display: block;
 }
+.experience-film[data-premium-hero="true"] .film-poster {
+  transform-origin: 72% 50%;
+  animation: premium-hero-drift 18s cubic-bezier(0.45, 0, 0.55, 1) infinite
+    alternate;
+}
+.experience-film[data-premium-hero="true"] .film-shade {
+  background:
+    linear-gradient(90deg, #061827d9 0%, #071c2fa3 38%, transparent 78%),
+    linear-gradient(180deg, #06152252, transparent 36%, #050d17a8 100%);
+}
+@keyframes premium-hero-drift {
+  from {
+    transform: scale(1.015) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.055) translate3d(-0.45%, -0.25%, 0);
+  }
+}
 .film-video {
   opacity: 0;
 }
@@ -172,6 +190,12 @@
 .club-entrance :focus-visible {
   outline: 2px solid #fff;
   outline-offset: 6px;
+}
+@media (prefers-reduced-motion: reduce), (max-width: 700px) {
+  .experience-film[data-premium-hero="true"] .film-poster {
+    animation: none;
+    transform: none;
+  }
 }
 .header-inner {
   min-height: 98px;

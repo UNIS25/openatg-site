@@ -7,9 +7,9 @@ export async function GET() {
     ...defaultEditorial,
     experience: {
       ...defaultExperience,
-      gateway_film: "poster-only" as const,
-      store_film: "poster-only" as const,
-      club_film: "poster-only" as const,
+      gateway_film: "evening" as const,
+      store_film: "tea" as const,
+      club_film: "evening" as const,
     },
     invitation_enabled: false,
     active_film: "poster-only" as const,

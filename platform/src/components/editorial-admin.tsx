@@ -104,9 +104,9 @@ export default function EditorialAdmin() {
                 <option value={["evening", "tea", "evening"][i]}>
                   {
                     [
-                      "Candlelight · neutral gateway",
+                      "Varathans25 atelier · premium still",
                       "Tea pouring",
-                      "Candlelight · account entrance",
+                      "Varathans25 atelier · premium still",
                     ][i]
                   }
                 </option>
