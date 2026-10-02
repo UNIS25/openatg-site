@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-YAk7kNzAFZG0jKguPl+/JIcwyHTnZ+nsQx6AkAMdLhQ='; script-src-attr 'none'; style-src 'sha256-scpFgpKWRixEJV8xULKOTUztU5aUxYYdUWqigH1ilwo='; style-src-attr 'none'; img-src 'self'; media-src 'self'; font-src 'self'; connect-src 'none'; base-uri 'none'; object-src 'none'; form-action 'none'; upgrade-insecure-requests">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-YAk7kNzAFZG0jKguPl+/JIcwyHTnZ+nsQx6AkAMdLhQ='; script-src-attr 'none'; style-src 'sha256-NYj0tTgdUHGIGv3jdkT34i6C4FH6Dz9RumjaFYFRtNg='; style-src-attr 'none'; img-src 'self'; media-src 'self'; font-src 'self'; connect-src 'none'; base-uri 'none'; object-src 'none'; form-action 'none'; upgrade-insecure-requests">
   <meta name="robots" content="noindex, nofollow, noarchive">
   <meta name="referrer" content="no-referrer">
   <meta name="theme-color" content="#111e28">
@@ -49,7 +49,8 @@
     .film-note { margin: 0; color: #dedbd2; font-size: 10px; line-height: 1.6; letter-spacing: .04em; }
     .media-state { display: grid; justify-items: end; align-items: center; min-width: 215px; min-height: 44px; }
     .motion-toggle, .still-label { grid-area: 1 / 1; }
-    .motion-toggle { display: inline-flex; align-items: center; gap: 16px; min-height: 44px; padding: 10px 16px; border: 1px solid #d8c49a80; color: var(--paper); background: #111e28cc; cursor: pointer; font-size: 11px; }
+    .motion-toggle { display: inline-flex; align-items: center; justify-content: space-between; gap: 16px; width: 215px; min-height: 44px; padding: 10px 16px; border: 1px solid #d8c49a80; color: var(--paper); background: #111e28cc; cursor: pointer; font-size: 11px; }
+    #motion-label { flex: 1; text-align: left; }
     .motion-toggle:hover { background: var(--navy); border-color: var(--gold); }
     .motion-toggle svg { width: 14px; height: 14px; }
     .motion-toggle .pause-icon { display: none; }
