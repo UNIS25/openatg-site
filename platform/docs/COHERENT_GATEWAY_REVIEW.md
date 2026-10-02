@@ -12,7 +12,7 @@ Working branch: `work/varathans25-coherent-gateway-20260929`. Rollback branch: `
 
 ## Implemented experience
 
-- German-default gateway using the existing documented evening footage, with the official transparent logo, restrained dimensional CSS, language controls, film controls, keyboard focus and reduced-motion/mobile poster fallback. The original logo already has transparent alpha; the derivative preserves its bytes.
+- German-default gateway using documented stabilized 4K Swiss alpine footage, with the official transparent logo, language controls, film controls, keyboard focus and reduced-motion/mobile poster fallback. The original logo already has transparent alpha; the derivative preserves its bytes.
 - Connected General Store: plantation film, tea-pouring film, five tea cards, spice film, curry card, restaurant closing and the existing restaurant destination. Cards use repository data and clearly label test prices or missing facts.
 - Quantity controls and persistent basket; guest tea/curry checkout, optional Silver or Gold journeys, localized order instructions and protected test QR downloads.
 - Guest checkout uses an anonymous server quote even when a Gold member is signed in, so the displayed delivery and discount match the guest order. A browser regression covers the journey and final amount.
@@ -21,7 +21,7 @@ Working branch: `work/varathans25-coherent-gateway-20260929`. Rollback branch: `
 - Atomic server-priced guest test orders, inventory locks, idempotency, unique RF references, pending payment, authorized reconciliation and immutable payment history.
 - Durable order-received and payment-confirmed notification intents with an explicit `not_configured` state and an administrator view. No email delivery is claimed.
 
-Selected assets and rights limits are recorded in [GATEWAY_MEDIA_RIGHTS.md](GATEWAY_MEDIA_RIGHTS.md). The evening footage is candlelit stock, not actual Varathans25 lounge or cigar footage. Actual venue film is a future replacement slot.
+Selected assets and rights limits are recorded in [GATEWAY_MEDIA_RIGHTS.md](GATEWAY_MEDIA_RIGHTS.md). The gateway footage depicts Lake Oeschinen in Switzerland and is not claimed to be the Varathans25 venue. Actual venue film remains a future replacement slot.
 
 ## Restricted and production boundaries
 
