@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-YAk7kNzAFZG0jKguPl+/JIcwyHTnZ+nsQx6AkAMdLhQ='; script-src-attr 'none'; style-src 'sha256-scpFgpKWRixEJV8xULKOTUztU5aUxYYdUWqigH1ilwo='; style-src-attr 'none'; img-src 'self'; media-src 'self'; font-src 'self'; connect-src 'none'; base-uri 'none'; object-src 'none'; form-action 'none'; upgrade-insecure-requests">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="referrer" content="no-referrer">
+  <meta name="theme-color" content="#111e28">
+  <meta name="description" content="Varathans25 · Temporäre Filmvorschau.">
+  <title>Varathans25 · Premium Preview</title>
+  <link rel="icon" href="media/varathans25-logo.png">
+  <link rel="preload" href="media/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <style>
+    @font-face { font-family: Inter; src: url("media/inter-latin.woff2") format("woff2"); font-style: normal; font-weight: 100 900; font-display: block; }
+    :root { color-scheme: dark; --navy: #111e28; --gold: #d8c49a; --paper: #f7f5ef; --red: #a62b38; }
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    body { margin: 0; background: var(--navy); color: var(--paper); font-family: Inter, Arial, sans-serif; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    button { font: inherit; }
+    a { color: inherit; }
+    :focus-visible { outline: 2px solid var(--gold); outline-offset: 6px; }
+    .entrance { position: relative; isolation: isolate; min-height: 100vh; min-height: 100svh; display: grid; grid-template-rows: 100px 1fr 90px; overflow: clip; }
+    .backdrop { position: absolute; inset: 0; z-index: -2; overflow: hidden; }
+    .backdrop picture, .backdrop img, .backdrop video { display: block; position: absolute; inset: 0; width: 100%; height: 100%; }
+    .backdrop img, .backdrop video { object-fit: cover; object-position: 62% center; }
+    .backdrop video { opacity: 0; }
+    .backdrop[data-started="true"] video { opacity: 1; }
+    .shade { position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, #071018dc 0%, #071018b0 37%, #07101830 75%), linear-gradient(180deg, #07101860, #07101810 55%, #071018ba); }
+    .topbar { padding: 26px 48px; display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+    .review-mark { display: flex; align-items: center; gap: 12px; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; }
+    .review-mark::before { content: ""; width: 5px; height: 5px; background: #bd5861; border-radius: 50%; }
+    .languages { display: flex; gap: 6px; }
+    .languages button { color: var(--paper); border: 0; border-bottom: 1px solid transparent; background: #111e2880; min-width: 44px; min-height: 44px; cursor: pointer; font-size: 11px; letter-spacing: .09em; }
+    .languages button[aria-pressed="true"] { color: var(--gold); border-bottom-color: var(--gold); }
+    .languages button:hover { background: #111e28dd; }
+    .copy { width: min(780px, 64%); padding: 36px 0 52px; margin-left: clamp(48px, 7.5vw, 140px); align-self: center; }
+    .logo { position: relative; display: grid; place-items: center; width: 218px; height: 132px; padding: 23px; margin-bottom: 38px; background: linear-gradient(135deg, #fffef5f2, #e2dbcced 65%, #b6a784f0); border: 1px solid #f8efddc9; box-shadow: 0 22px 54px #0007, inset 0 1px 1px #fff; }
+    .logo::before { content: ""; position: absolute; inset: 6px; border: 1px solid #786b514d; pointer-events: none; }
+    .logo img { display: block; width: 170px; height: auto; aspect-ratio: 368 / 200; }
+    h1 { font-family: Georgia, "Times New Roman", serif; font-size: clamp(60px, 6.15vw, 96px); font-weight: 400; letter-spacing: -.045em; line-height: 1.06; text-wrap: balance; max-width: 740px; margin: 0 0 42px; text-shadow: 0 3px 28px #000a; }
+    .destinations { display: flex; align-items: stretch; gap: 36px; max-width: 575px; }
+    .destination { flex: 1; display: flex; align-items: center; justify-content: space-between; gap: 18px; min-height: 58px; padding: 14px 0; border-bottom: 1px solid #d8c49a99; font-size: 13px; line-height: 1.6; font-weight: 500; text-decoration: none; text-shadow: 0 1px 10px #000; }
+    .destination.club { flex: 1.45; }
+    .destination svg { width: 19px; height: 19px; flex-shrink: 0; color: var(--gold); }
+    .destination:hover { border-color: var(--paper); color: var(--gold); }
+    .footer { padding: 18px 48px 26px; display: flex; justify-content: space-between; align-items: center; gap: 24px; }
+    .film-note { margin: 0; color: #dedbd2; font-size: 10px; line-height: 1.6; letter-spacing: .04em; }
+    .media-state { display: grid; justify-items: end; align-items: center; min-width: 215px; min-height: 44px; }
+    .motion-toggle, .still-label { grid-area: 1 / 1; }
+    .motion-toggle { display: inline-flex; align-items: center; gap: 16px; min-height: 44px; padding: 10px 16px; border: 1px solid #d8c49a80; color: var(--paper); background: #111e28cc; cursor: pointer; font-size: 11px; }
+    .motion-toggle:hover { background: var(--navy); border-color: var(--gold); }
+    .motion-toggle svg { width: 14px; height: 14px; }
+    .motion-toggle .pause-icon { display: none; }
+    .motion-toggle[data-playing="true"] .pause-icon { display: block; }
+    .motion-toggle[data-playing="true"] .play-icon { display: none; }
+    .still-label { color: #dedbd2; font-size: 11px; }
+    @media (max-width: 1100px) { .copy { width: 70%; margin-left: 48px; } .destinations { gap: 28px; } h1 { max-width: 640px; } }
+    @media (max-width: 700px) {
+      .entrance { grid-template-rows: 88px 1fr 88px; min-height: max(680px, 100svh); }
+      .topbar { padding: 20px 24px; gap: 8px; }
+      .review-mark { font-size: 9px; letter-spacing: .09em; gap: 8px; }
+      .languages { gap: 0; }
+      .shade { background: linear-gradient(180deg, #071018b0, #071018c7 30%, #071018b5 68%, #071018e8); }
+      .copy { width: auto; margin: 0 28px; padding: 24px 0 28px; text-align: center; }
+      .logo { width: 180px; height: 110px; padding: 18px; margin: 0 auto 30px; }
+      .logo img { width: 140px; }
+      h1 { font-size: clamp(44px, 12.3vw, 62px); margin: 0 auto 26px; max-width: 410px; }
+      .destinations { flex-direction: column; gap: 4px; width: 100%; max-width: 380px; margin: 0 auto; text-align: left; }
+      .destination { font-size: 12px; min-height: 56px; padding: 14px 4px; }
+      .footer { padding: 16px 24px 24px; gap: 12px; }
+      .film-note { max-width: 165px; font-size: 9px; }
+      .media-state { min-width: 80px; }
+      .still-label { font-size: 10px; }
+    }
+    @media (max-height: 600px) and (min-width: 701px) { .entrance { min-height: 600px; } .copy { padding-block: 20px; } .logo { margin-bottom: 24px; width: 180px; height: 110px; } .logo img { width: 140px; } h1 { font-size: 58px; margin-bottom: 20px; } }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; } }
+  </style>
+</head>
+<body>
+  <main class="entrance">
+    <div class="backdrop" data-started="false" aria-hidden="true">
+      <picture>
+        <source media="(max-width: 700px)" srcset="media/hero-poster-mobile.webp" width="780" height="1200">
+        <img src="media/hero-poster-1600.webp" alt="" width="1600" height="900" fetchpriority="high">
+      </picture>
+      <video id="hero-video" muted autoplay loop playsinline preload="none" tabindex="-1" disablepictureinpicture></video>
+    </div>
+    <div class="shade" aria-hidden="true"></div>
+    <header class="topbar">
+      <span class="review-mark" id="review-mark">Designvorschau</span>
+      <nav class="languages" id="languages" aria-label="Sprache wählen">
+        <button type="button" lang="de" aria-label="Deutsch" aria-pressed="true" data-locale="de">DE</button>
+        <button type="button" lang="fr" aria-label="Français" aria-pressed="false" data-locale="fr">FR</button>
+        <button type="button" lang="en" aria-label="English" aria-pressed="false" data-locale="en">EN</button>
+      </nav>
+    </header>
+    <section class="copy" aria-labelledby="entrance-title">
+      <div class="logo"><img src="media/varathans25-logo.png" alt="Varathans25" width="368" height="200"></div>
+      <h1 id="entrance-title">Zeit für das Wesentliche.</h1>
+      <nav class="destinations" id="destinations" aria-label="Bereich wählen">
+        <a class="destination" id="store-link" href="/varathans25/de/shop/">
+          <span id="store-label">General Store</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg>
+        </a>
+        <a class="destination club" id="club-link" href="/varathans25/de/cigar-collection/">
+          <span>Premium Cigar Club · 18+</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg>
+        </a>
+      </nav>
+    </section>
+    <footer class="footer">
+      <p class="film-note" id="film-note">Temporäre Filmvorschau</p>
+      <div class="media-state">
+        <span class="still-label" id="still-label">Standbild</span>
+        <button class="motion-toggle" id="motion-toggle" type="button" aria-controls="hero-video" aria-label="Film abspielen" data-playing="false" hidden>
+          <span id="motion-label">Film abspielen</span>
+          <svg class="play-icon" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="m4 2 9 6-9 6z"/></svg>
+          <svg class="pause-icon" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M3 2h3v12H3zM10 2h3v12h-3z"/></svg>
+        </button>
+      </div>
+    </footer>
+  </main>
+  <script>
+    (() => {
+      "use strict";
+      const copy = {
+        de: { title: "Zeit für das Wesentliche.", store: "General Store", review: "Designvorschau", note: "Temporäre Filmvorschau", languages: "Sprache wählen", destinations: "Bereich wählen", pause: "Film pausieren", play: "Film abspielen", still: "Standbild" },
+        fr: { title: "Le temps de l’essentiel.", store: "Boutique générale", review: "Aperçu du design", note: "Aperçu vidéo temporaire", languages: "Choisir la langue", destinations: "Choisir une destination", pause: "Mettre le film en pause", play: "Lire le film", still: "Image fixe" },
+        en: { title: "Time for what matters.", store: "General Store", review: "Design preview", note: "Temporary film preview", languages: "Choose language", destinations: "Choose a destination", pause: "Pause film", play: "Play film", still: "Still image" }
+      };
+      const byId = (id) => document.getElementById(id);
+      const video = byId("hero-video");
+      const backdrop = document.querySelector(".backdrop");
+      const control = byId("motion-toggle");
+      const still = byId("still-label");
+      const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
+      const mobile = matchMedia("(max-width: 700px)");
+      const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+      let locale = "de";
+      let userPaused = false;
+      let failed = false;
+      const eligible = () => !failed && !reducedMotion.matches && !mobile.matches && !connection?.saveData && !["slow-2g", "2g", "3g"].includes(connection?.effectiveType || "");
+      const updateControl = () => {
+        const playing = !video.paused && !video.ended;
+        const text = copy[locale][playing ? "pause" : "play"];
+        control.dataset.playing = String(playing);
+        control.setAttribute("aria-label", text);
+        byId("motion-label").textContent = text;
+      };
+      const setLocale = (next) => {
+        locale = next;
+        const text = copy[locale];
+        document.documentElement.lang = locale;
+        byId("entrance-title").textContent = text.title;
+        byId("store-label").textContent = text.store;
+        byId("review-mark").textContent = text.review;
+        byId("film-note").textContent = text.note;
+        byId("languages").setAttribute("aria-label", text.languages);
+        byId("destinations").setAttribute("aria-label", text.destinations);
+        still.textContent = text.still;
+        byId("store-link").href = `/varathans25/${locale}/shop/`;
+        byId("club-link").href = `/varathans25/${locale}/cigar-collection/`;
+        document.querySelectorAll("[data-locale]").forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.locale === locale)));
+        updateControl();
+      };
+      const play = () => { void video.play().catch(() => { updateControl(); }); };
+      const syncMedia = () => {
+        const allowed = eligible();
+        control.hidden = !allowed;
+        still.hidden = allowed;
+        if (!allowed) {
+          video.pause();
+          if (video.hasAttribute("src")) {
+            video.removeAttribute("src");
+            video.load();
+          }
+          backdrop.dataset.started = "false";
+        } else {
+          if (!video.hasAttribute("src")) video.src = "media/v25-premium-hero-1600.mp4";
+          if (userPaused || document.hidden) video.pause();
+          else play();
+        }
+        updateControl();
+      };
+      document.querySelectorAll("[data-locale]").forEach((button) => button.addEventListener("click", () => setLocale(button.dataset.locale)));
+      control.addEventListener("click", () => {
+        if (!eligible()) return;
+        userPaused = !video.paused;
+        if (userPaused) video.pause();
+        else play();
+      });
+      video.addEventListener("playing", () => { backdrop.dataset.started = "true"; updateControl(); });
+      video.addEventListener("pause", updateControl);
+      video.addEventListener("error", () => { failed = true; syncMedia(); });
+      reducedMotion.addEventListener("change", syncMedia);
+      mobile.addEventListener("change", syncMedia);
+      connection?.addEventListener?.("change", syncMedia);
+      document.addEventListener("visibilitychange", syncMedia);
+      video.muted = true;
+      video.defaultMuted = true;
+      syncMedia();
+    })();
+  </script>
+</body>
+</html>
