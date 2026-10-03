@@ -137,7 +137,10 @@ test('Full downloaded film respects autoplay policy, pauses, resumes and loops o
     await expect(video).toHaveAttribute('src',new RegExp(`gateway-${width===1440?'1920':'1280'}\.`));
     await page.locator('.film-control button').click();expect(await video.evaluate(v=>(v as HTMLVideoElement).paused)).toBe(true);
     await page.waitForTimeout(100);await page.locator('.film-control button').click();await expect.poll(()=>video.evaluate(v=>(v as HTMLVideoElement).paused)).toBe(false);
-    await video.evaluate(v=>{(v as HTMLVideoElement).currentTime=(v as HTMLVideoElement).duration-.3;});await page.waitForTimeout(800);expect(await video.evaluate(v=>(v as HTMLVideoElement).currentTime)).toBeLessThan(3);
+    await video.evaluate(v=>{(v as HTMLVideoElement).currentTime=(v as HTMLVideoElement).duration-.3;});
+    // A seek can fetch an unbuffered range on the public CDN. Wait for the
+    // actual loop rather than assuming that network + seek finishes in 800ms.
+    await expect.poll(()=>video.evaluate(v=>(v as HTMLVideoElement).currentTime),{timeout:30000}).toBeLessThan(3);
     expect(await video.evaluate(v=>(v as HTMLVideoElement).muted)).toBe(true);
   }clean();
 });
