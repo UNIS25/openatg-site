@@ -117,11 +117,16 @@ document.querySelectorAll('[data-filter]').forEach(node => { if (node.dataset.fi
     node.setAttribute('aria-current', 'page');
 else
     node.removeAttribute('aria-current'); });
-document.querySelectorAll('.languages a').forEach(node => { if (location.search && document.querySelector('.filters')) {
+const sectionAnchors = ['#tea-collection', '#tea-spiced', '#curry-collection'];
+const syncLanguageLinks = () => document.querySelectorAll('.languages a').forEach(node => {
     const url = new URL(node.href);
-    url.search = location.search;
+    if (location.search && document.querySelector('.filters'))
+        url.search = location.search;
+    url.hash = sectionAnchors.includes(location.hash) ? location.hash : '';
     node.href = url.href;
-} });
+});
+syncLanguageLinks();
+window.addEventListener('hashchange', syncLanguageLinks);
 const motion = matchMedia('(prefers-reduced-motion: reduce)');
 const compact = matchMedia('(max-width: 700px)');
 const connection = navigator.connection;
@@ -129,20 +134,24 @@ document.querySelectorAll('[data-film]').forEach(box => {
     const video = box.querySelector('video');
     const button = box.querySelector('.film-control button');
     const still = box.querySelector('.still-label');
-    let inView = false, userPaused = false, failed = false;
+    const gateway = box.dataset.film === 'gateway';
+    let inView = gateway, userPaused = false, failed = false, autoplayBlocked = false;
     const eligible = () => !failed && !motion.matches && !connection?.saveData && !['slow-2g', '2g', '3g'].includes(connection?.effectiveType || '');
     const control = () => {
         const playing = !video.paused && !video.ended;
-        button.querySelector('span').textContent = button.dataset[playing ? 'pause' : 'play'];
+        // Show Pause after automatic playback starts. A Play prompt appears only
+        // after a deliberate pause or an actual browser autoplay rejection.
+        button.hidden = !eligible() || (!playing && box.dataset.started !== 'true' && !autoplayBlocked && !userPaused);
+        still.hidden = eligible();
         button.setAttribute('aria-label', button.dataset[playing ? 'pause' : 'play']);
-        button.querySelectorAll('span')[1].textContent = playing ? 'Ⅱ' : '▷';
+        button.querySelector('[data-icon-play]').setAttribute('display', playing ? 'none' : 'inline');
+        button.querySelector('[data-icon-pause]').setAttribute('display', playing ? 'inline' : 'none');
         box.dataset.playing = String(playing);
     };
-    const play = () => { void video.play().catch(() => control()); };
+    const play = () => { void video.play().then(() => { autoplayBlocked = false; control(); }).catch(error => { if (error?.name === 'NotAllowedError')
+        autoplayBlocked = true; control(); }); };
     const sync = () => {
         const allowed = eligible();
-        button.hidden = !allowed;
-        still.hidden = allowed;
         if (!allowed) {
             video.pause();
             box.dataset.started = 'false';
@@ -164,10 +173,16 @@ document.querySelectorAll('[data-film]').forEach(box => {
             video.src = source;
             video.load();
         }
-        play();
+        control();
+        if (!autoplayBlocked)
+            play();
     };
     video.muted = true;
     video.defaultMuted = true;
+    if (gateway) {
+        video.autoplay = true;
+        video.preload = 'auto';
+    }
     video.addEventListener('playing', () => { box.dataset.started = 'true'; control(); });
     video.addEventListener('pause', control);
     video.addEventListener('error', () => { if (video.hasAttribute('src')) {
@@ -195,5 +210,9 @@ document.querySelectorAll('[data-film]').forEach(box => {
     compact.addEventListener('change', sync);
     connection?.addEventListener('change', sync);
     document.addEventListener('visibilitychange', sync);
+    if (gateway) {
+        video.addEventListener('canplay', sync);
+        window.addEventListener('pageshow', sync);
+    }
     sync();
 });
