@@ -3,8 +3,19 @@ import assert from 'node:assert/strict';
 import {readFileSync,readdirSync,statSync} from 'node:fs';
 import {resolve} from 'node:path';
 import {createHash} from 'node:crypto';
+import {execFileSync} from 'node:child_process';
 import {copy,locales,link,base} from '../src/copy';
 const output=resolve('out',base.slice(1));
+test('Both gateway exports preserve all 707 frames and the full downloaded-film duration',()=>{
+  for(const width of [1920,1280]){
+    const probe=JSON.parse(execFileSync('ffprobe',['-v','error','-show_streams','-show_format','-of','json',resolve('media',`gateway-${width}.mp4`)],{encoding:'utf8'}));
+    assert.equal(probe.streams.length,1);
+    assert.equal(probe.streams[0].codec_name,'h264');
+    assert.equal(Number(probe.streams[0].nb_frames),707);
+    assert.equal(probe.streams[0].width,width);
+    assert.ok(Math.abs(Number(probe.format.duration)-23.566667)<.002);
+  }
+});
 test('Every declared route has a complete localized document and scoped navigation',()=>{
   const release=JSON.parse(readFileSync(resolve(output,'release.json'),'utf8'));
   assert.equal(release.routes.length,51);

@@ -3,7 +3,7 @@ import {resolve} from 'node:path';
 import {execFileSync} from 'node:child_process';
 const checkout=resolve(process.argv[2]||'');
 if(!process.argv[2])throw Error('Pass the isolated publication checkout');
-const baseline='13960040f294e552e0bf2d90fa4145c7bab3c519';
+const baseline='72b7c7bdd1de5946c9c4b757be82a3bb651bc684';
 const git=(...args)=>execFileSync('git',args,{cwd:checkout,encoding:'utf8'}).trim();
 if(git('rev-parse','HEAD')!==baseline||git('rev-parse','origin/main')!==baseline)throw Error('Public baseline changed; inspect and rebase before publication');
 if(git('status','--porcelain'))throw Error('Publication checkout must be clean');

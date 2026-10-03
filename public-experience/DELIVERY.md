@@ -1,4 +1,6 @@
-# Verified public delivery · 3 October 2026
+# Historical public delivery · 3 October 2026
+
+The gateway-film correction supersedes this first-release media description. See [the full-film update](FULL_FILM_UPDATE.md) for the current deployment and rollback.
 
 The connected public frontend is deployed on OpenATG. GitHub Pages reports `built`, and its deployment workflow reports `success` for **`72b7c7bdd1de5946c9c4b757be82a3bb651bc684`**. [Deployment evidence](https://github.com/UNIS25/openatg-site/actions/runs/37118598242).
 

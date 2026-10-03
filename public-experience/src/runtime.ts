@@ -84,26 +84,32 @@ document.querySelectorAll<HTMLElement>('[data-film]').forEach(box=>{
   const video=box.querySelector('video')!;
   const button=box.querySelector<HTMLButtonElement>('.film-control button')!;
   const still=box.querySelector<HTMLElement>('.still-label')!;
-  let inView=false, userPaused=false, failed=false;
+  const gateway=box.dataset.film==='gateway';
+  let inView=gateway, userPaused=false, failed=false, autoplayBlocked=false;
   const eligible=()=>!failed&&!motion.matches&&!connection?.saveData&&!['slow-2g','2g','3g'].includes(connection?.effectiveType||'');
   const control=()=>{
     const playing=!video.paused&&!video.ended;
+    // Show Pause after automatic playback starts. A Play prompt appears only
+    // after a deliberate pause or an actual browser autoplay rejection.
+    button.hidden=!eligible()||(!playing&&box.dataset.started!=='true'&&!autoplayBlocked&&!userPaused);
+    still.hidden=eligible();
     button.querySelector('span')!.textContent=button.dataset[playing?'pause':'play']!;
     button.setAttribute('aria-label',button.dataset[playing?'pause':'play']!);
     button.querySelectorAll('span')[1].textContent=playing?'Ⅱ':'▷';
     box.dataset.playing=String(playing);
   };
-  const play=()=>{void video.play().catch(()=>control());};
+  const play=()=>{void video.play().then(()=>{autoplayBlocked=false;control();}).catch(error=>{if(error?.name==='NotAllowedError')autoplayBlocked=true;control();});};
   const sync=()=>{
     const allowed=eligible();
-    button.hidden=!allowed;still.hidden=allowed;
     if(!allowed){video.pause();box.dataset.started='false';if(video.hasAttribute('src')){video.removeAttribute('src');video.load();}control();return;}
     if(!inView||document.hidden||userPaused){video.pause();control();return;}
     const source=compact.matches?box.dataset.mobile!:box.dataset.desktop!;
     if(video.getAttribute('src')!==source){box.dataset.started='false';video.src=source;video.load();}
-    play();
+    control();
+    if(!autoplayBlocked)play();
   };
   video.muted=true;video.defaultMuted=true;
+  if(gateway){video.autoplay=true;video.preload='auto';}
   video.addEventListener('playing',()=>{box.dataset.started='true';control();});
   video.addEventListener('pause',control);
   video.addEventListener('error',()=>{if(video.hasAttribute('src')){failed=true;sync();}});
@@ -117,5 +123,6 @@ document.querySelectorAll<HTMLElement>('[data-film]').forEach(box=>{
   if('IntersectionObserver' in window){new IntersectionObserver(([entry])=>{inView=entry.isIntersecting&&entry.intersectionRatio>=.12;sync();},{threshold:[0,.12]}).observe(box);}else{inView=box.dataset.film==='gateway'||box.dataset.film==='highlands';sync();}
   motion.addEventListener('change',sync);compact.addEventListener('change',sync);connection?.addEventListener('change',sync);
   document.addEventListener('visibilitychange',sync);
+  if(gateway){video.addEventListener('canplay',sync);window.addEventListener('pageshow',sync);}
   sync();
 });

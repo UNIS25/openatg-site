@@ -52,12 +52,15 @@ for(const locale of locales)for(const width of widths){
     clean();
   });
 }
-test('Actual downloaded-film derivative plays, pauses, resumes and loops on desktop and mobile',async({page})=>{
+test('Full downloaded film autoplays without a click, pauses, resumes and loops on desktop and mobile',async({page})=>{
   const clean=errors(page);
   for(const width of [1440,390]){
     await page.setViewportSize({width,height:900});await page.goto(base+'/');
     const video=page.locator('video');await expect.poll(()=>video.evaluate(v=>({paused:(v as HTMLVideoElement).paused,ready:(v as HTMLVideoElement).readyState}))).toMatchObject({paused:false,ready:4});
-    expect(await video.evaluate(v=>(v as HTMLVideoElement).duration)).toBeCloseTo(14.7,1);
+    expect(await video.evaluate(v=>(v as HTMLVideoElement).duration)).toBeCloseTo(23.566667,1);
+    await expect(video).toHaveAttribute('autoplay','');
+    await expect.poll(()=>video.evaluate(v=>(v as HTMLVideoElement).currentTime)).toBeGreaterThan(.1);
+    await expect(page.locator('.film-control button')).toHaveAttribute('aria-label',copy.de.pause);
     await expect(video).toHaveAttribute('src',new RegExp(`gateway-${width===1440?'1920':'1280'}\.`));
     await page.locator('.film-control button').click();expect(await video.evaluate(v=>(v as HTMLVideoElement).paused)).toBe(true);
     await page.waitForTimeout(100);await page.locator('.film-control button').click();await expect.poll(()=>video.evaluate(v=>(v as HTMLVideoElement).paused)).toBe(false);
@@ -73,6 +76,17 @@ test('Lower films load on demand and off-screen films pause',async({page})=>{
   await expect.poll(()=>page.locator('[data-film=highlands] video').evaluate(v=>(v as HTMLVideoElement).paused)).toBe(true);
   await page.locator('.spices').evaluate(section=>section.scrollIntoView({block:'start'}));await expect.poll(()=>page.locator('[data-film=kitchen]').getAttribute('data-playing')).toBe('true');
   await expect.poll(()=>page.locator('[data-film=tea] video').evaluate(v=>(v as HTMLVideoElement).paused)).toBe(true);clean();
+});
+test('Touch mobile gateway starts the full film with no tap in every language',async({browser})=>{
+  for(const locale of locales){
+    const context=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
+    const page=await context.newPage();const clean=errors(page);
+    await page.goto((process.env.PUBLIC_RELEASE_URL||'http://127.0.0.1:4188')+link(locale));
+    await expect.poll(()=>page.locator('video').evaluate(v=>!(v as HTMLVideoElement).paused&&(v as HTMLVideoElement).currentTime>.1)).toBe(true);
+    await expect(page.locator('.film-control button')).toHaveAttribute('aria-label',copy[locale].pause);
+    expect(await page.locator('video').evaluate(v=>(v as HTMLVideoElement).duration)).toBeCloseTo(23.566667,1);
+    clean();await context.close();
+  }
 });
 test('Reduced motion, Save-Data and slow connections use posters without video requests',async({browser})=>{
   for(const condition of ['motion','data','2g']){

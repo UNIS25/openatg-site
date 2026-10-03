@@ -55,7 +55,7 @@ function Languages({locale, route}: {locale: Locale; route: string}) {
 function FilmView({film, locale, hero=false, id}: {film:Film; locale:Locale; hero?:boolean; id:string}) {
   return <div className="film-media" data-film={id} data-desktop={film.desktop} data-mobile={film.mobile}>
     <img className="film-poster" src={film.poster} width="1920" height="1080" loading={hero?'eager':'lazy'} fetchPriority={hero?'high':'auto'} alt=""/>
-    <video id={`film-${id}`} muted playsInline loop preload="none" aria-hidden="true" tabIndex={-1}/>
+    <video id={`film-${id}`} muted playsInline loop autoPlay={id==='gateway'} preload={id==='gateway'?'auto':'none'} aria-hidden="true" tabIndex={-1}/>
     <div className="film-shade"/>
     <div className="film-control"><span className="still-label">{copy[locale].still}</span><button type="button" hidden aria-controls={`film-${id}`} data-play={copy[locale].play} data-pause={copy[locale].pause}><span>{copy[locale].play}</span><span aria-hidden="true">▷</span></button></div>
   </div>;
