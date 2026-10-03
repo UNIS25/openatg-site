@@ -24,7 +24,7 @@ for(const [engine,type] of [['chromium',chromium],['webkit',webkit]]){
         await box.evaluate(b=>b.scrollIntoView({block:'center',behavior:'instant'}));
         // No click or explicit video.play: verify actual automatic decoding.
         await expect.poll(()=>video.evaluate(v=>!v.paused&&v.currentTime>.1),{timeout:30000}).toBe(true);
-        report.playback.push({engine,width,id,...await video.evaluate(v=>({paused:v.paused,currentTime:v.currentTime,muted:v.muted,width:v.videoWidth,height:v.videoHeight}))});
+        report.playback.push({engine,viewportWidth:width,id,...await video.evaluate(v=>({paused:v.paused,currentTime:v.currentTime,muted:v.muted,videoWidth:v.videoWidth,videoHeight:v.videoHeight}))});
         if(!route){await video.evaluate(v=>{v.currentTime=15;});await expect.poll(()=>video.evaluate(v=>v.seeking)).toBe(false);}
       }
       if(route){
