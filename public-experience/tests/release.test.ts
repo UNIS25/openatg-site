@@ -39,6 +39,17 @@ test('Content hashes match every exported byte',()=>{
   const release=JSON.parse(readFileSync(resolve(output,'release.json'),'utf8'));
   for(const [file,expected] of Object.entries(release.files)) assert.equal(createHash('sha256').update(readFileSync(resolve(output,file))).digest('hex'),expected);
 });
+test('Compact favicon fallback contains true square 16/32/48px images and a 180px touch icon',()=>{
+  const ico=readFileSync('media/favicon.ico');
+  assert.equal(ico.readUInt16LE(2),1);assert.equal(ico.readUInt16LE(4),3);
+  for(const [i,size] of [16,32,48].entries()){
+    const entry=6+i*16,offset=ico.readUInt32LE(entry+12);
+    assert.equal(ico[entry],size);assert.equal(ico[entry+1],size);
+    assert.equal(ico.readUInt32BE(offset+16),size);assert.equal(ico.readUInt32BE(offset+20),size);
+  }
+  const apple=readFileSync('media/apple-touch-icon.png');
+  assert.equal(apple.readUInt32BE(16),180);assert.equal(apple.readUInt32BE(20),180);
+});
 test('German is default and all languages have the complete copy',()=>{
   assert.ok(readFileSync(resolve(output,'index.html'),'utf8').includes('<html lang="de"'));
   for(const locale of locales){assert.deepEqual(Object.keys(copy[locale]),Object.keys(copy.de));assert.equal(link(locale,'store'),`${base}/${locale}/store/`);}

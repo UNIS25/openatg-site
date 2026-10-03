@@ -76,7 +76,14 @@ const category=new URL(location.href).searchParams.get('category')||'all';
 const selected=['tea','pantry'].includes(category)?category:'all';
 document.querySelectorAll<HTMLElement>('[data-category]').forEach(node=>{node.hidden=selected!=='all'&&node.dataset.category!==selected;});
 document.querySelectorAll<HTMLAnchorElement>('[data-filter]').forEach(node=>{if(node.dataset.filter===selected)node.setAttribute('aria-current','page');else node.removeAttribute('aria-current');});
-document.querySelectorAll<HTMLAnchorElement>('.languages a').forEach(node=>{if(location.search&&document.querySelector('.filters')){const url=new URL(node.href);url.search=location.search;node.href=url.href;}});
+const sectionAnchors=['#tea-collection','#tea-spiced','#curry-collection'];
+const syncLanguageLinks=()=>document.querySelectorAll<HTMLAnchorElement>('.languages a').forEach(node=>{
+  const url=new URL(node.href);
+  if(location.search&&document.querySelector('.filters'))url.search=location.search;
+  url.hash=sectionAnchors.includes(location.hash)?location.hash:'';
+  node.href=url.href;
+});
+syncLanguageLinks();window.addEventListener('hashchange',syncLanguageLinks);
 const motion=matchMedia('(prefers-reduced-motion: reduce)');
 const compact=matchMedia('(max-width: 700px)');
 const connection=(navigator as Navigator & {connection?:Connection}).connection;
@@ -93,9 +100,9 @@ document.querySelectorAll<HTMLElement>('[data-film]').forEach(box=>{
     // after a deliberate pause or an actual browser autoplay rejection.
     button.hidden=!eligible()||(!playing&&box.dataset.started!=='true'&&!autoplayBlocked&&!userPaused);
     still.hidden=eligible();
-    button.querySelector('span')!.textContent=button.dataset[playing?'pause':'play']!;
     button.setAttribute('aria-label',button.dataset[playing?'pause':'play']!);
-    button.querySelectorAll('span')[1].textContent=playing?'Ⅱ':'▷';
+    button.querySelector('[data-icon-play]')!.setAttribute('display',playing?'none':'inline');
+    button.querySelector('[data-icon-pause]')!.setAttribute('display',playing?'inline':'none');
     box.dataset.playing=String(playing);
   };
   const play=()=>{void video.play().then(()=>{autoplayBlocked=false;control();}).catch(error=>{if(error?.name==='NotAllowedError')autoplayBlocked=true;control();});};

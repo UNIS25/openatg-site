@@ -27,6 +27,7 @@ function asset(source: string, name = basename(source)) {
 }
 const media = (name: string) => asset(resolve('media', name));
 const logo = asset(resolve(repo, 'platform/public/varathans25/brand/varathans25-transparent.png'));
+const favicon = {svg: media('favicon.svg'), ico: media('favicon.ico'), apple: media('apple-touch-icon.png')};
 const font = asset(resolve(repo, 'platform/public/varathans25/fonts/inter-latin.woff2'));
 const gateway = {desktop: media('gateway-1920.mp4'), mobile: media('gateway-1280.mp4'), poster: media('gateway-poster.webp')};
 const films = Object.fromEntries(['highlands', 'tea', 'kitchen'].map(name => [name, {
@@ -47,7 +48,7 @@ if (!curry || curry.weight !== '80 g') throw Error('Verified curry label missing
 const css = asset(resolve('src/style.css'));
 const runtime = asset(resolve('.compiled/runtime.js'));
 type Film = typeof gateway;
-const Arrow = () => <span aria-hidden="true" className="arrow">↗</span>;
+const Arrow = ({back=false}: {back?:boolean}) => <svg aria-hidden="true" className={`arrow${back?' arrow-back':''}`} width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d={back?'M20 12H4m6-6-6 6 6 6':'M5 19 19 5M5 5h14v14'}/></svg>;
 const name = (p: Product, locale: Locale) => p.translations.find(t=>t.locale===locale)!.name;
 function Languages({locale, route}: {locale: Locale; route: string}) {
   return <nav className="languages" aria-label={copy[locale].language}>{locales.map(l=><a key={l} href={link(l,route)} lang={l} aria-label={{de:'Deutsch',fr:'Français',en:'English'}[l]} aria-current={l===locale?'page':undefined}>{l.toUpperCase()}</a>)}</nav>;
@@ -57,7 +58,7 @@ function FilmView({film, locale, hero=false, id}: {film:Film; locale:Locale; her
     <img className="film-poster" src={film.poster} width="1920" height="1080" loading={hero?'eager':'lazy'} fetchPriority={hero?'high':'auto'} alt=""/>
     <video id={`film-${id}`} muted playsInline loop autoPlay={id==='gateway'} preload={id==='gateway'?'auto':'none'} aria-hidden="true" tabIndex={-1}/>
     <div className="film-shade"/>
-    <div className="film-control"><span className="still-label">{copy[locale].still}</span><button type="button" hidden aria-controls={`film-${id}`} data-play={copy[locale].play} data-pause={copy[locale].pause}><span>{copy[locale].play}</span><span aria-hidden="true">▷</span></button></div>
+    <div className="film-control"><span className="still-label">{copy[locale].still}</span><button type="button" hidden aria-controls={`film-${id}`} aria-label={copy[locale].play} data-play={copy[locale].play} data-pause={copy[locale].pause}><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path data-icon-play d="m8 5 11 7-11 7Z"/><path data-icon-pause display="none" d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg></button></div>
   </div>;
 }
 function Header({locale, route}: {locale:Locale; route:string}) {
@@ -89,12 +90,14 @@ function Gateway({locale, route}: {locale:Locale;route:string}) {
 }
 function Store({locale}: {locale:Locale}) {
   const c=copy[locale];
+  const teaGroup=(slugs:string[])=>slugs.map(slug=>products.find(p=>p.slug===slug)!);
   return <><section className="film-chapter store-hero"><FilmView film={films.highlands} locale={locale} hero id="highlands"/><div className="film-copy"><p className="eyebrow">01 / VARATHANS25 · {c.store}</p><h1>{c.storeTitle}</h1><p>{c.storeText}</p><a className="film-link" href="#tea-collection">{c.tea}<Arrow/></a></div></section>
-    <section className="film-chapter pouring"><FilmView film={films.tea} locale={locale} id="tea"/><div className="film-copy"><p className="eyebrow">02 / VARATHANS25</p><h2>{c.pourTitle}</h2><p>{c.pourText}</p><a className="film-link" href="#tea-collection">{c.tea}<Arrow/></a></div></section>
-    <section className="section container" id="tea-collection"><div className="chapter-heading"><div><p className="eyebrow">03 / VARATHANS25 · {c.tea}</p><h2>{c.teaTitle}</h2></div><div><p>{c.teaText}</p><a className="editorial-link" href={`${link(locale,'shop')}?category=tea`}>{c.catalogue}<Arrow/></a></div></div><div className="product-grid tea-grid">{products.filter(p=>p.category==='tea').map(p=><Card key={p.slug} p={p} locale={locale}/>)}</div></section>
-    <section className="film-chapter spices"><FilmView film={films.kitchen} locale={locale} id="kitchen"/><div className="film-copy"><p className="eyebrow">04 / VARATHANS25</p><h2>{c.spiceTitle}</h2><p>{c.spiceText}</p></div></section>
-    <section className="curry-section"><div className="container curry-layout"><div><p className="eyebrow">05 / VARATHANS25 · CURRY</p><h2>{c.curryTitle}</h2><p>{c.curryText}</p></div><Card p={products.find(p=>p.slug==='gelber-curry-kokos')!} locale={locale}/></div></section>
-    <section className="restaurant-closing"><img src={hospitality['dining-interior']} alt={c.restaurantText} width="768" height="1024" loading="lazy"/><div><p className="eyebrow">06 / VARATHANS25 · RESTAURANT</p><h2>{c.restaurantTitle}</h2><p>{c.restaurantText}</p><a className="editorial-link" href="https://www.varathans25.ch/" target="_blank" rel="noopener noreferrer">{c.restaurant}<Arrow/></a></div></section></>;
+    <section className="section container tea-section" id="tea-collection"><div className="chapter-heading"><div><p className="eyebrow">02 / VARATHANS25 · {c.tea}</p><h2>{c.teaTitle}</h2></div><div><p>{c.teaText}</p><a className="editorial-link" href={`${link(locale,'shop')}?category=tea`}>{c.catalogue}<Arrow/></a></div></div><div className="product-grid tea-grid tea-pair">{teaGroup(['premium-black-tea-powder','green-tea-powder']).map(p=><Card key={p.slug} p={p} locale={locale}/>)}</div></section>
+    <section className="film-chapter pouring"><FilmView film={films.tea} locale={locale} id="tea"/><div className="film-copy"><p className="eyebrow">03 / VARATHANS25</p><h2>{c.pourTitle}</h2><p>{c.pourText}</p><a className="film-link" href="#tea-spiced">{c.tea}<Arrow/></a></div></section>
+    <section className="section container tea-section" id="tea-spiced"><p className="eyebrow">04 / VARATHANS25 · {c.tea}</p><div className="product-grid tea-grid tea-trio">{teaGroup(['masala-tea-powder','cinnamon-tea','cardamom-tea']).map(p=><Card key={p.slug} p={p} locale={locale}/>)}</div></section>
+    <section className="film-chapter spices"><FilmView film={films.kitchen} locale={locale} id="kitchen"/><div className="film-copy"><p className="eyebrow">05 / VARATHANS25</p><h2>{c.spiceTitle}</h2><p>{c.spiceText}</p><a className="film-link" href="#curry-collection">{c.curry}<Arrow/></a></div></section>
+    <section className="curry-section" id="curry-collection"><div className="container curry-layout"><div><p className="eyebrow">06 / VARATHANS25 · CURRY</p><h2>{c.curryTitle}</h2><p>{c.curryText}</p></div><Card p={products.find(p=>p.slug==='gelber-curry-kokos')!} locale={locale}/></div></section>
+    <section className="restaurant-closing"><img src={hospitality['dining-interior']} alt={c.restaurantText} width="768" height="1024" loading="lazy"/><div><p className="eyebrow">07 / VARATHANS25 · RESTAURANT</p><h2>{c.restaurantTitle}</h2><p>{c.restaurantText}</p><a className="editorial-link" href="https://www.varathans25.ch/" target="_blank" rel="noopener noreferrer">{c.restaurant}<Arrow/></a></div></section></>;
 }
 function Catalogue({locale}: {locale:Locale}) {
   const c=copy[locale];
@@ -103,7 +106,7 @@ function Catalogue({locale}: {locale:Locale}) {
 function ProductPage({locale,slug}: {locale:Locale;slug:string}) {
   const c=copy[locale]; const p=products.find(p=>p.slug===slug)!;
   const facts = curry.translations.find((t:{locale:string})=>t.locale===locale);
-  return <section className="container section product-page"><a className="back-link" href={link(locale,'shop')}>← {c.back}</a><Card p={p} locale={locale} detail/><section className="product-facts"><h2>{c.facts}</h2>{slug==='gelber-curry-kokos'?<dl>{(['ingredients','allergens','preparation'] as const).filter(key=>facts[key]).map(key=><div key={key}><dt>{c[key]}</dt><dd>{facts[key]}</dd></div>)}</dl>:<p>{c.noFacts}</p>}</section></section>;
+  return <section className="container section product-page"><a className="back-link" href={link(locale,'shop')}><Arrow back/>{c.back}</a><Card p={p} locale={locale} detail/><section className="product-facts"><h2>{c.facts}</h2>{slug==='gelber-curry-kokos'?<dl>{(['ingredients','allergens','preparation'] as const).filter(key=>facts[key]).map(key=><div key={key}><dt>{c[key]}</dt><dd>{facts[key]}</dd></div>)}</dl>:<p>{c.noFacts}</p>}</section></section>;
 }
 function Bag({locale}: {locale:Locale}) {
   const c=copy[locale];
@@ -130,7 +133,7 @@ function page(locale:Locale,route:string,root=false) {
   const pageTitles: Record<string,string> = {store:c.store,shop:c.catalogue,bag:c.basket,club:c.member,login:c.login,account:c.account,membership:c.membership,recovery:c.recovery,privacy:c.privacy,legal:c.legal};
   const pageTitle=isGateway?c.title:route.startsWith('product/')?name(products.find(p=>p.slug===route.split('/')[1])!,locale):pageTitles[route];
   const content=isGateway?<Gateway locale={locale} route={route}/>:route==='store'?<Store locale={locale}/>:route==='shop'?<Catalogue locale={locale}/>:route==='bag'?<Bag locale={locale}/>:route==='club'?<Club locale={locale}/>:['login','account','membership','recovery'].includes(route)?<Account locale={locale} route={route}/>:route.startsWith('product/')?<ProductPage locale={locale} slug={route.split('/')[1]}/>:<DocumentPage locale={locale} route={route as 'privacy'|'legal'}/>;
-  const markup=renderToStaticMarkup(<html lang={locale}><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta httpEquiv="Content-Security-Policy" content={csp}/><meta name="robots" content="noindex, nofollow, noarchive"/><meta name="referrer" content="no-referrer"/><meta name="theme-color" content="#102c44"/><title>{`Varathans25 · ${pageTitle}`}</title><link rel="icon" href={logo}/><link rel="preload" href={font} as="font" type="font/woff2" crossOrigin="anonymous"/><link rel="stylesheet" href={css}/><style>{''}</style></head><body data-locale={locale} data-added={c.added} data-storage-error={c.browserStorage} className={isGateway?'gateway-body':''}><a className="skip-link" href="#content">{c.skip}</a>{!isGateway&&<Header locale={locale} route={route}/ >}{isGateway?content:<main id="content">{content}</main>}{!isGateway&&<Footer locale={locale}/>}<div className="toast" role="status" aria-live="polite"/><script src={runtime} type="module" defer/></body></html>);
+  const markup=renderToStaticMarkup(<html lang={locale}><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/><meta httpEquiv="Content-Security-Policy" content={csp}/><meta name="robots" content="noindex, nofollow, noarchive"/><meta name="referrer" content="no-referrer"/><meta name="theme-color" content="#102c44"/><title>{`Varathans25 · ${pageTitle}`}</title><link rel="icon" type="image/svg+xml" href={favicon.svg}/><link rel="icon" type="image/x-icon" sizes="16x16 32x32 48x48" href={favicon.ico}/><link rel="apple-touch-icon" sizes="180x180" href={favicon.apple}/><link rel="preload" href={font} as="font" type="font/woff2" crossOrigin="anonymous"/><link rel="stylesheet" href={css}/><style>{''}</style></head><body data-locale={locale} data-added={c.added} data-storage-error={c.browserStorage} className={isGateway?'gateway-body':''}><a className="skip-link" href="#content">{c.skip}</a>{!isGateway&&<Header locale={locale} route={route}/ >}{isGateway?content:<main id="content">{content}</main>}{!isGateway&&<Footer locale={locale}/>}<div className="toast" role="status" aria-live="polite"/><script src={runtime} type="module" defer/></body></html>);
   write(root?'index.html':`${locale}/${route?route+'/':''}index.html`, '<!DOCTYPE html>\n'+markup.replace('<style></style>',''));
 }
 // Inject only a content-addressed font URL into the stylesheet, never an inline style.
