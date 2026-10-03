@@ -1,0 +1,12 @@
+{
+  "name": "varathans25-public-experience",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src scripts tests",
+    "build": "tsc -p tsconfig.browser.json && node --import tsx scripts/build.tsx",
+    "test": "node --import tsx --test tests/*.test.ts",
+    "test:e2e": "playwright test"
+  }
+}
