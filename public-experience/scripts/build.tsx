@@ -56,7 +56,7 @@ function Languages({locale, route}: {locale: Locale; route: string}) {
 function FilmView({film, locale, hero=false, id}: {film:Film; locale:Locale; hero?:boolean; id:string}) {
   return <div className="film-media" data-film={id} data-desktop={film.desktop} data-mobile={film.mobile}>
     <img className="film-poster" src={film.poster} width="1920" height="1080" loading={hero?'eager':'lazy'} fetchPriority={hero?'high':'auto'} alt=""/>
-    <video id={`film-${id}`} muted playsInline loop autoPlay={id==='gateway'} preload={id==='gateway'?'auto':'none'} aria-hidden="true" tabIndex={-1}/>
+    <video id={`film-${id}`} poster={film.poster} width="1920" height="1080" muted playsInline loop autoPlay preload={hero?'auto':'none'} aria-hidden="true" tabIndex={-1}/>
     <div className="film-shade"/>
     <div className="film-control"><span className="still-label">{copy[locale].still}</span><button type="button" hidden aria-controls={`film-${id}`} aria-label={copy[locale].play} data-play={copy[locale].play} data-pause={copy[locale].pause}><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path data-icon-play d="m8 5 11 7-11 7Z"/><path data-icon-pause display="none" d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg></button></div>
   </div>;

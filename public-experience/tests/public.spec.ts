@@ -90,12 +90,14 @@ test('Discover alternates each film and product group, with working product anch
     for(const [chapter,target] of [['.store-hero','#tea-collection'],['.pouring','#tea-spiced'],['.spices','#curry-collection']]){
       await page.locator(`${chapter} .film-link`).click();await expect(page).toHaveURL(new RegExp(`${target}$`));
       expect(await page.locator(target).evaluate(s=>Math.abs(s.getBoundingClientRect().top))).toBeLessThan(30);
-      await page.reload();expect(await page.locator(target).evaluate(s=>Math.abs(s.getBoundingClientRect().top))).toBeLessThan(30);
+      await page.reload();await page.evaluate(()=>document.fonts.ready);
+      await expect.poll(()=>page.locator(target).evaluate(s=>Math.abs(s.getBoundingClientRect().top))).toBeLessThan(30);
     }
     const next=locale==='de'?'fr':locale==='fr'?'en':'de';
     await page.locator('.languages a').filter({hasText:next.toUpperCase()}).click();
     await expect(page).toHaveURL(new RegExp(`${next}/store/#curry-collection$`));
-    expect(await page.locator('#curry-collection').evaluate(s=>Math.abs(s.getBoundingClientRect().top))).toBeLessThan(30);
+    await page.waitForLoadState('load');await page.evaluate(()=>document.fonts.ready);
+    await expect.poll(()=>page.locator('#curry-collection').evaluate(s=>Math.abs(s.getBoundingClientRect().top))).toBeLessThan(30);
   }clean();
 });
 test('Versioned square favicons load on localized gateway, store and club subpaths',async({page,request})=>{
@@ -114,11 +116,12 @@ test('Versioned square favicons load on localized gateway, store and club subpat
 async function browserPlayback(page:Page,film:string,browserName:string,touch=false){
   const box=page.locator(`[data-film=${film}]`),video=box.locator('video'),button=box.locator('.film-control button');
   await expect(button).toBeVisible();
-  // This macOS MiniBrowser rejects even a plain muted/no-audio autoplay test
-  // at both a trusted public origin and localhost. Validate its real fallback;
-  // Chromium must start without interaction. Do not grant fake playback state.
+  const locale=await page.locator('html').getAttribute('lang') as keyof typeof copy;
+  // Wait for genuine playback or an exhausted policy fallback before touching
+  // controls. A Play call can be pending during initial media loading.
+  await expect.poll(async()=>await video.evaluate(v=>(v as HTMLVideoElement).currentTime>.1)||
+    await button.getAttribute('aria-label')===copy[locale].play&&await button.isVisible()).toBe(true);
   if(browserName==='webkit'&&await video.evaluate(v=>(v as HTMLVideoElement).paused)){
-    const locale=await page.locator('html').getAttribute('lang') as keyof typeof copy;
     await expect(button).toHaveAttribute('aria-label',copy[locale].play);
     if(touch)await button.tap();else await button.click();
   }
@@ -179,11 +182,16 @@ test('Reduced motion, Save-Data and slow connections use posters without video r
 });
 test('Autoplay rejection leaves navigation and a working explicit play control',async({page})=>{
   await page.addInitScript(()=>{
+    // Block both native automatic start and the scripted play request.
+    const autoplay=Object.getOwnPropertyDescriptor(HTMLMediaElement.prototype,'autoplay')!;
+    Object.defineProperty(HTMLMediaElement.prototype,'autoplay',{...autoplay,set(){autoplay.set!.call(this,false);}});
     const original=HTMLMediaElement.prototype.play;let blocked=true;
     HTMLMediaElement.prototype.play=function(){if(blocked)return Promise.reject(new DOMException('Autoplay blocked','NotAllowedError'));return original.call(this);};
     document.addEventListener('click',()=>{blocked=false;},true);
   });
-  await page.goto(base+'/');await page.waitForTimeout(200);await expect(page.locator('.destinations a')).toHaveCount(2);await expect(page.locator('.film-control button')).toBeVisible();await page.locator('.film-control button').click();await expect.poll(()=>page.locator('[data-film=gateway]').getAttribute('data-playing')).toBe('true');
+  await page.goto(base+'/');await expect(page.locator('.destinations a')).toHaveCount(2);
+  const button=page.locator('.film-control button');await expect(button).toHaveAttribute('aria-label',copy.de.play);await expect(button).toBeVisible();
+  await button.click();await expect.poll(()=>page.locator('video').evaluate(v=>!(v as HTMLVideoElement).paused&&(v as HTMLVideoElement).currentTime>.1)).toBe(true);
 });
 test('Unsupported media returns to the poster and does not disable links',async({page})=>{
   await page.route('**/*.mp4',route=>route.fulfill({status:200,contentType:'video/mp4',body:'invalid-video'}));

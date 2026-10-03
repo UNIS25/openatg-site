@@ -84,6 +84,21 @@ const syncLanguageLinks=()=>document.querySelectorAll<HTMLAnchorElement>('.langu
   node.href=url.href;
 });
 syncLanguageLinks();window.addEventListener('hashchange',syncLanguageLinks);
+// On a direct product-section reload, font loading and native scroll restoration
+// can move the section after the browser's first anchor jump. Align once after
+// both have settled, unless the visitor has already begun scrolling elsewhere.
+const initialSectionHash=location.hash;
+if(sectionAnchors.includes(initialSectionHash)){
+  let interrupted=false;
+  const interrupt=()=>{interrupted=true;};
+  document.addEventListener('wheel',interrupt,{once:true,passive:true});
+  document.addEventListener('touchmove',interrupt,{once:true,passive:true});
+  document.addEventListener('keydown',event=>{if(['ArrowUp','ArrowDown','PageUp','PageDown','Home','End',' '].includes(event.key))interrupt();});
+  const align=()=>{void document.fonts.ready.then(()=>requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    if(!interrupted&&location.hash===initialSectionHash)document.querySelector(initialSectionHash)?.scrollIntoView({block:'start',behavior:'instant'});
+  })));};
+  if(document.readyState==='complete')align();else window.addEventListener('load',align,{once:true});
+}
 const motion=matchMedia('(prefers-reduced-motion: reduce)');
 const compact=matchMedia('(max-width: 700px)');
 const connection=(navigator as Navigator & {connection?:Connection}).connection;
@@ -91,45 +106,80 @@ document.querySelectorAll<HTMLElement>('[data-film]').forEach(box=>{
   const video=box.querySelector('video')!;
   const button=box.querySelector<HTMLButtonElement>('.film-control button')!;
   const still=box.querySelector<HTMLElement>('.still-label')!;
-  const gateway=box.dataset.film==='gateway';
-  let inView=gateway, userPaused=false, failed=false, autoplayBlocked=false;
+  const priority=box.dataset.film==='gateway'||box.dataset.film==='highlands';
+  let inView=priority, userPaused=false, failed=false, autoplayBlocked=false;
+  let pending=false, attempts=0, generation=0, retry:number|undefined;
   const eligible=()=>!failed&&!motion.matches&&!connection?.saveData&&!['slow-2g','2g','3g'].includes(connection?.effectiveType||'');
+  const canStart=()=>eligible()&&inView&&!document.hidden&&!userPaused;
+  const clearRetry=()=>{if(retry!==undefined){clearTimeout(retry);retry=undefined;}};
   const control=()=>{
     const playing=!video.paused&&!video.ended;
     // Show Pause after automatic playback starts. A Play prompt appears only
     // after a deliberate pause or an actual browser autoplay rejection.
-    button.hidden=!eligible()||(!playing&&box.dataset.started!=='true'&&!autoplayBlocked&&!userPaused);
+    button.hidden=!eligible()||(!playing&&box.dataset.started!=='true'&&!(autoplayBlocked&&attempts>=4)&&!userPaused);
     still.hidden=eligible();
     button.setAttribute('aria-label',button.dataset[playing?'pause':'play']!);
     button.querySelector('[data-icon-play]')!.setAttribute('display',playing?'none':'inline');
     button.querySelector('[data-icon-pause]')!.setAttribute('display',playing?'inline':'none');
     box.dataset.playing=String(playing);
   };
-  const play=()=>{void video.play().then(()=>{autoplayBlocked=false;control();}).catch(error=>{if(error?.name==='NotAllowedError')autoplayBlocked=true;control();});};
+  const play=()=>{
+    if(!canStart()||pending||(!video.paused&&!video.ended)||attempts>=4)return;
+    // Set native flags before every attempt, including Safari's legacy inline
+    // attribute. A loading/visibility rejection must not become a permanent stop.
+    video.muted=true;video.defaultMuted=true;video.playsInline=true;video.autoplay=true;
+    pending=true;attempts++;const ticket=generation;
+    void video.play().then(()=>{
+      if(ticket!==generation)return;
+      autoplayBlocked=false;attempts=0;
+      if(!canStart()){video.autoplay=false;video.pause();}
+    }).catch(error=>{
+      if(ticket!==generation)return;
+      if(error?.name==='NotAllowedError')autoplayBlocked=true;
+      if(canStart()&&attempts<4){clearRetry();retry=window.setTimeout(()=>{retry=undefined;play();},[0,200,700,1500][attempts]);}
+    }).finally(()=>{if(ticket===generation){pending=false;control();}});
+  };
   const sync=()=>{
     const allowed=eligible();
-    if(!allowed){video.pause();box.dataset.started='false';if(video.hasAttribute('src')){video.removeAttribute('src');video.load();}control();return;}
-    if(!inView||document.hidden||userPaused){video.pause();control();return;}
+    if(!allowed){clearRetry();video.autoplay=false;video.pause();box.dataset.started='false';box.dataset.videoActive='false';if(video.hasAttribute('src')){generation++;pending=false;attempts=0;video.removeAttribute('src');video.load();}control();return;}
+    if(!canStart()){clearRetry();video.autoplay=false;video.pause();control();return;}
     const source=compact.matches?box.dataset.mobile!:box.dataset.desktop!;
-    if(video.getAttribute('src')!==source){box.dataset.started='false';video.src=source;video.load();}
+    video.muted=true;video.defaultMuted=true;video.playsInline=true;video.autoplay=true;
+    // The native poster covers loading. Remove the separate image overlay now,
+    // so the video itself is visible to browsers' autoplay visibility checks.
+    box.dataset.videoActive='true';
+    if(video.getAttribute('src')!==source){clearRetry();generation++;pending=false;attempts=0;autoplayBlocked=false;box.dataset.started='false';video.src=source;video.load();}
     control();
-    if(!autoplayBlocked)play();
+    requestAnimationFrame(play);
   };
-  video.muted=true;video.defaultMuted=true;
-  if(gateway){video.autoplay=true;video.preload='auto';}
-  video.addEventListener('playing',()=>{box.dataset.started='true';control();});
+  const resume=()=>{if(canStart()){clearRetry();attempts=0;}sync();};
+  video.muted=true;video.defaultMuted=true;video.playsInline=true;video.setAttribute('webkit-playsinline','');
+  if(priority)video.preload='auto';
+  video.addEventListener('playing',()=>{clearRetry();autoplayBlocked=false;attempts=0;box.dataset.started='true';if(!canStart()){video.autoplay=false;video.pause();}control();});
   video.addEventListener('pause',control);
   video.addEventListener('error',()=>{if(video.hasAttribute('src')){failed=true;sync();}});
+  video.addEventListener('loadeddata',()=>{clearRetry();sync();});
+  video.addEventListener('canplay',sync);
   button.addEventListener('click',()=>{
     userPaused=!video.paused;
-    if(userPaused)video.pause();else{
-      if(!video.hasAttribute('src'))video.src=compact.matches?box.dataset.mobile!:box.dataset.desktop!;
+    if(userPaused){clearRetry();video.autoplay=false;video.pause();}else{
+      attempts=0;autoplayBlocked=false;
+      if(!video.hasAttribute('src')){box.dataset.videoActive='true';video.src=compact.matches?box.dataset.mobile!:box.dataset.desktop!;}
       play();
     }
+    control();
   });
-  if('IntersectionObserver' in window){new IntersectionObserver(([entry])=>{inView=entry.isIntersecting&&entry.intersectionRatio>=.12;sync();},{threshold:[0,.12]}).observe(box);}else{inView=box.dataset.film==='gateway'||box.dataset.film==='highlands';sync();}
-  motion.addEventListener('change',sync);compact.addEventListener('change',sync);connection?.addEventListener('change',sync);
-  document.addEventListener('visibilitychange',sync);
-  if(gateway){video.addEventListener('canplay',sync);window.addEventListener('pageshow',sync);}
+  if('IntersectionObserver' in window){new IntersectionObserver(([entry])=>{const next=entry.isIntersecting&&entry.intersectionRatio>=.12;const entered=next&&!inView;inView=next;if(entered)attempts=0;sync();},{threshold:[0,.12]}).observe(box);}else{inView=priority;sync();}
+  motion.addEventListener('change',resume);compact.addEventListener('change',sync);connection?.addEventListener('change',resume);
+  document.addEventListener('visibilitychange',()=>{if(document.hidden)sync();else resume();});
+  window.addEventListener('pageshow',resume);window.addEventListener('load',resume);window.addEventListener('focus',resume);
+  // If the browser requires a gesture, an ordinary trusted page interaction
+  // can recover playback without making the visitor find a Play button.
+  const recover=(event:Event)=>{
+    if(!event.isTrusted||!canStart()||!video.paused||(event.target instanceof Element&&event.target.closest('.film-control')))return;
+    clearRetry();attempts=0;play();
+  };
+  document.addEventListener('click',recover,true);document.addEventListener('touchend',recover,{passive:true});
+  document.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' ')recover(event);});
   sync();
 });
