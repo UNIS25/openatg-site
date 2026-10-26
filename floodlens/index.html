@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f8f7">
+  <meta name="description" content="Sri Lanka flood and landslide awareness. Official warnings, source times and practical guidance in Sinhala, Tamil and English.">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self' https://services3.arcgis.com; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'">
+  <title>FloodLens · OpenATG</title>
+  <link rel="canonical" href="https://openatg.com/floodlens/">
+  <link rel="icon" href="../atg-mark-transparent.png">
+  <link rel="stylesheet" href="floodlens.css">
+  <script type="module" src="app.mjs"></script>
+</head>
+<body>
+  <a href="#main" class="skip" data-i18n="skip">Skip to content</a>
+  <header class="header"><div class="header-inner">
+    <a class="brand" href="/" aria-label="OpenATG home"><img src="../atg-mark-transparent.png" width="30" height="28" alt="">OpenATG<span class="brand-divider">/</span><strong>FloodLens</strong></a>
+    <label class="language"><span class="sr-only" data-i18n="language">Language</span><select id="language" aria-label="Language"><option value="en">English</option><option value="si">සිංහල</option><option value="ta">தமிழ்</option></select></label>
+  </div></header>
+  <main id="main" class="shell">
+    <div id="connection" class="connection" role="status" hidden></div>
+    <section class="intro">
+      <p class="eyebrow"><span class="tiny-mark" aria-hidden="true">≈</span><span data-i18n="eyebrow">SRI LANKA · FLOOD & LANDSLIDE AWARENESS</span></p>
+      <h1 data-i18n="headline">A clearer picture.<br>A more informed next step.</h1>
+      <p class="intro-copy" data-i18n="intro">Official warnings and water information, with the limits made clear.</p>
+    </section>
+    <section class="location-panel" aria-labelledby="location-heading">
+      <div class="location-heading"><div><h2 id="location-heading" data-i18n="findArea">Start with your area</h2><p data-i18n="chooseArea">Search a district or a listed Divisional Secretariat (DS) division.</p></div><span class="step" aria-hidden="true">01</span></div>
+      <div class="search-row"><div class="search-wrap"><label for="area-search" class="sr-only" data-i18n="searchLabel">District or DS division</label><span class="search-icon" aria-hidden="true">⌕</span><input id="area-search" type="search" autocomplete="off" spellcheck="false" data-placeholder="searchPlaceholder" placeholder="Try Ratnapura, Kandy, Colombo…" aria-controls="area-results"></div><button id="locate" class="button secondary"><span aria-hidden="true">⌖</span> <span data-i18n="useLocation">Use my location</span></button></div>
+      <div id="area-results" class="search-results" aria-label="Search results" hidden></div>
+      <div class="location-footer"><span id="area-selection" data-i18n="allIsland">Showing Sri Lanka overview</span><button id="clear-area" class="text-button" data-i18n="reset" hidden>Reset</button></div>
+      <p id="location-message" class="small" role="status"></p>
+      <p class="privacy" data-i18n="privacy">Your exact location stays in this page. No location storage or analytics.</p>
+    </section>
+    <section class="assessment" id="assessment" aria-labelledby="assessment-title" aria-live="polite">
+      <span class="assessment-icon" aria-hidden="true">!</span><div><p class="eyebrow" data-i18n="assessmentLabel">YOUR CURRENT ASSESSMENT</p><h2 id="assessment-title" data-i18n="unknownTitle">Local risk is not yet known</h2><p id="assessment-copy" data-i18n="unknownBody">An official warning may apply to your area. Check the bulletins below. Missing data never means an area is safe.</p><div class="assessment-meta"><span class="tag" data-i18n="notPrediction">Awareness, not a prediction</span><a href="#help" data-i18n="whatToDo">What should I do? ↓</a></div></div>
+    </section>
+    <div class="section-heading"><div><p class="eyebrow" data-i18n="officialLabel">FROM THE AUTHORITIES</p><h2 data-i18n="warningsTitle">Official warning bulletins</h2></div><button id="refresh" class="text-button" data-i18n="refresh">↻ Check updates</button></div>
+    <p id="warning-freshness" class="source-note" role="status"></p>
+    <div id="warnings" class="warnings"><p data-i18n="loading">Loading the published source snapshot…</p></div>
+    <p class="source-note" data-i18n="warningLimit">This is a selected bulletin snapshot, not a complete alert feed. Open the official source for changes, cancellations and the latest local instructions.</p>
+    <a class="source-link" id="all-warnings" href="https://www.dmc.gov.lk/" target="_blank" rel="noopener noreferrer"><span data-i18n="allWarnings">All DMC warnings</span><span aria-hidden="true">↗</span></a>
+    <section class="water-section" aria-labelledby="water-title">
+      <div class="section-heading"><div><p class="eyebrow" data-i18n="observationsLabel">OBSERVATIONS · SEPARATE FROM WARNINGS</p><h2 id="water-title" data-i18n="waterTitle">Rivers & reservoirs</h2></div><span class="section-symbol" aria-hidden="true">≈</span></div>
+      <p class="section-intro" data-i18n="waterIntro">A gauge measures water at one station. It cannot tell you the depth at your home or when floodwater will arrive.</p>
+      <div class="water-toolbar"><label for="station-search" class="sr-only" data-i18n="stationSearch">Search river stations</label><input id="station-search" type="search" data-placeholder="stationSearch" placeholder="Search river stations"><button id="load-observations" class="button secondary" data-i18n="getReadings">Update river records</button></div>
+      <p class="source-note" data-i18n="liveDisclosure">Updating contacts the Irrigation Department’s ArcGIS service. No location is sent. Source record-edit times are not measurement times.</p>
+      <p id="observation-status" class="source-note" role="status"></p>
+      <div id="stations" class="stations"></div>
+      <details class="map-panel"><summary><span data-i18n="mapTitle">Open the official water maps</span><span class="map-label" data-i18n="optional">Optional ↗</span></summary><div class="map-content"><p data-i18n="mapCopy">Maps open on the official ArcGIS service in a new tab. Check each station’s date and coverage there. FloodLens does not send your coordinates.</p><div class="map-links"><a target="_blank" rel="noopener noreferrer" href="https://slirrigation.maps.arcgis.com/apps/dashboards/2cffe83c9ff5497d97375498bdf3ff38" data-i18n="riverMap">River levels ↗</a><a target="_blank" rel="noopener noreferrer" href="https://slirrigation.maps.arcgis.com/apps/dashboards/97be51156fa84712851286408eb09c45" data-i18n="majorMap">Major reservoirs ↗</a><a target="_blank" rel="noopener noreferrer" href="https://slirrigation.maps.arcgis.com/apps/dashboards/9b114013dce14faca2c6bf8de3de6d3f" data-i18n="mediumMap">Medium reservoirs ↗</a></div><p class="small" data-i18n="reservoirLimit">Reservoir levels and gate releases are not ingested here yet. An open gate, reservoir percentage or nearby river alone does not establish risk at your location.</p></div></details>
+    </section>
+    <section class="context-grid" aria-label="Weather and coastal context"><article class="context-card"><span class="context-icon" aria-hidden="true">☂</span><h3 data-i18n="rainTitle">Rainfall</h3><p data-i18n="rainCopy">Rain forecasts and station rainfall are different. Use the official report’s time window and location.</p><a target="_blank" rel="noopener noreferrer" href="https://slirrigation.maps.arcgis.com/apps/dashboards/5c30e3fc436543ecbaa74b6f2835b67a" data-i18n="rainLink">Official rainfall map ↗</a></article><article class="context-card"><span class="context-icon" aria-hidden="true">≋</span><h3 data-i18n="seaTitle">Sea & tides</h3><p data-i18n="seaCopy">A verified local tide feed is not connected. Sea forecasts do not establish river flooding or storm-surge depth.</p><a target="_blank" rel="noopener noreferrer" href="https://meteo.gov.lk/index.php?lang=en" data-i18n="seaLink">Meteorology forecasts ↗</a></article></section>
+    <section class="help-panel" id="help" aria-labelledby="help-title"><div><p class="eyebrow" data-i18n="actionLabel">PRACTICAL NEXT STEPS</p><h2 id="help-title" data-i18n="helpTitle">Take the warning seriously.</h2><ul><li data-i18n="action1">Do not walk or drive through floodwater.</li><li data-i18n="action2">Follow evacuation instructions from local authorities.</li><li data-i18n="action3">Check the latest official bulletin and help others access it.</li></ul><a class="small guidance-link" target="_blank" rel="noopener noreferrer" href="https://np.gov.lk/pdf/DMC/irrigation_NPC.pdf" data-i18n="guidanceSource">Official flood guidance ↗</a></div><a class="emergency" href="tel:117"><span data-i18n="emergencyLabel">Disaster help · DMC</span><strong>117 <span aria-hidden="true">↗</span></strong><span data-i18n="callHelp">Call for disaster assistance</span></a></section>
+    <details class="about"><summary data-i18n="aboutTitle">Sources, freshness & what this tool cannot tell you</summary><div class="about-content"><p data-i18n="aboutCopy">FloodLens is an independent OpenATG awareness tool. It is not a validated forecasting system or an official emergency service. No flood depth, arrival time or safe-route prediction is provided.</p><p data-i18n="routingCopy">River connections, catchments, terrain, releases, rainfall and tides all matter. Straight-line distance cannot estimate flood arrival. Historical and satellite evidence is not a current local warning.</p><p data-i18n="updateCopy">Bulletins are reviewed snapshots. Automatic server-side bulletin publishing is not enabled. River records can be refreshed while the page is open. A successful download does not make an old observation fresh.</p><p data-i18n="translationCopy">Interface translations are provided for access; they are not official translations. Read the original bulletin in your language. Independent native-speaker safety review is pending.</p><a href="data/provenance.json" target="_blank" rel="noopener" data-i18n="provenance">View source provenance and file hashes ↗</a></div></details>
+    <noscript><div class="noscript"><h2>JavaScript is unavailable · JavaScript අක්‍රියයි · JavaScript இயங்கவில்லை</h2><p>Local risk is unknown. Missing information does not mean safe. තොරතුරු නොමැති වීම ආරක්ෂිත බවක් නොවේ. தகவல் இல்லாதது பாதுகாப்பானது என்று பொருளல்ல.</p><a href="https://www.dmc.gov.lk/">DMC official warnings ↗</a> · <a href="tel:117">DMC 117</a></div></noscript>
+  </main>
+  <footer class="footer shell"><a href="/" class="brand"><img src="../atg-mark-transparent.png" width="25" height="23" alt="">OpenATG</a><span data-i18n="footer">Built for clarity. Grounded in official sources.</span><a href="https://117.dmc.gov.lk/" target="_blank" rel="noopener noreferrer" data-i18n="hotlineSource">About the 117 hotline ↗</a></footer>
+</body>
+</html>

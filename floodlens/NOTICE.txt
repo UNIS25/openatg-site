@@ -1,0 +1,19 @@
+Administrative boundary data
+Source: Survey Department of Sri Lanka. Publisher: OCHA / HDX.
+Sri Lanka Common Operational Dataset administrative boundaries (COD-AB), v03.
+https://data.humdata.org/dataset/cod-ab-lka
+Licence: Creative Commons Attribution 3.0 IGO
+https://creativecommons.org/licenses/by/3.0/igo/
+Boundary geometry dated 2 August 2022; valid_on 16 August 2022.
+339 DS divisions in this version. Later administrative changes may be missing.
+
+Changes by OpenATG: retained DS geometry without coordinate simplification or
+rounding; divided features into district files; reduced properties; created a
+trilingual name catalogue and bounding boxes. Warning names are separately
+mapped to administrative codes using explicit aliases. These administrative
+boundaries are not flood extents, landslide polygons or household risk maps.
+
+Warnings and selected water observations are attributed to the Sri Lanka
+Irrigation Department, DMC, NBRI and Department of Meteorology. Original source
+links and SHA-256 hashes appear in data/provenance.json. No official partnership
+or comprehensive/realtime coverage is claimed.

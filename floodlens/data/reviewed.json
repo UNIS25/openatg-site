@@ -1,0 +1,563 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-10-26T09:33:45.662280+00:00",
+  "reviewMethod": "Official PDFs visually checked; structured source transcription. Not an agency endorsement.",
+  "bulletins": [
+    {
+      "id": "kalu-20261026-01",
+      "kind": "flood",
+      "title": {
+        "en": "Kalu River Basin",
+        "si": "කළු ගඟ ද්‍රෝණිය",
+        "ta": "களு கங்கை ஆற்றுப் படுகை"
+      },
+      "authority": "Irrigation Department",
+      "issuedAt": "2026-10-26T11:30:00+05:30",
+      "expiresAt": "2026-10-27T11:30:00+05:30",
+      "listingAt": "2026-10-26T11:30:00+05:30",
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Flood_warning_for_Kalu_River_Basin_-_No_01_-_2026__1792995574.pdf",
+      "summary": {
+        "en": "Minor flooding is possible in low-lying parts of the Kalu floodplain in the named DS divisions. The warning does not apply uniformly to every place in a division.",
+        "si": "නම් කළ කොට්ඨාසවල කළු ගඟ ගංවතුර තැනිතලාවේ පහත් බිම්වල සුළු ගංවතුර ඇති විය හැක. කොට්ඨාසයක සෑම ස්ථානයකටම එක සේ අදාළ නොවේ.",
+        "ta": "பெயரிடப்பட்ட பிரிவுகளில் களு கங்கை வெள்ளச் சமவெளியின் தாழ்நிலப் பகுதிகளில் சிறிய வெள்ளம் ஏற்படலாம். பிரிவின் எல்லா இடங்களுக்கும் ஒரே விதமாகப் பொருந்தாது."
+      },
+      "areas": [
+        {
+          "district": "Ratnapura",
+          "division": "Pelmadulla",
+          "districtCode": "LK91",
+          "divisionCode": "LK9124"
+        },
+        {
+          "district": "Ratnapura",
+          "division": "Nivithigala",
+          "districtCode": "LK91",
+          "divisionCode": "LK9136"
+        },
+        {
+          "district": "Ratnapura",
+          "division": "Ratnapura",
+          "districtCode": "LK91",
+          "divisionCode": "LK9112"
+        },
+        {
+          "district": "Ratnapura",
+          "division": "Kuruwita",
+          "districtCode": "LK91",
+          "divisionCode": "LK9106"
+        },
+        {
+          "district": "Ratnapura",
+          "division": "Ayagama",
+          "districtCode": "LK91",
+          "divisionCode": "LK9130"
+        },
+        {
+          "district": "Ratnapura",
+          "division": "Elapatha",
+          "districtCode": "LK91",
+          "divisionCode": "LK9127"
+        },
+        {
+          "district": "Kalutara",
+          "division": "Ingiriya",
+          "districtCode": "LK13",
+          "divisionCode": "LK1310"
+        },
+        {
+          "district": "Kalutara",
+          "division": "Horana",
+          "districtCode": "LK13",
+          "divisionCode": "LK1309"
+        },
+        {
+          "district": "Kalutara",
+          "division": "Dodangoda",
+          "districtCode": "LK13",
+          "divisionCode": "LK1327"
+        },
+        {
+          "district": "Kalutara",
+          "division": "Millaniya",
+          "districtCode": "LK13",
+          "divisionCode": "LK1318"
+        },
+        {
+          "district": "Kalutara",
+          "division": "Bulathsinhala",
+          "districtCode": "LK13",
+          "divisionCode": "LK1312"
+        },
+        {
+          "district": "Kalutara",
+          "division": "Madurawala",
+          "districtCode": "LK13",
+          "divisionCode": "LK1315"
+        },
+        {
+          "district": "Kalutara",
+          "division": "Palindanuwara",
+          "districtCode": "LK13",
+          "divisionCode": "LK1336"
+        }
+      ],
+      "sha256": "1767a274eea705bca490879756b1ad5bd255183c0d101ba5c8e81212b4da8ca3",
+      "districtCodes": []
+    },
+    {
+      "id": "mahaweli-20261026-01",
+      "kind": "flood",
+      "title": {
+        "en": "Mahaweli · Pasbage Korale",
+        "si": "මහවැලි · පස්බාගේ කෝරළේ",
+        "ta": "மகாவலி · பஸ்பாகே கோரளை"
+      },
+      "authority": "Irrigation Department",
+      "issuedAt": "2026-10-26T11:30:00+05:30",
+      "expiresAt": "2026-10-27T11:30:00+05:30",
+      "listingAt": "2026-10-26T11:30:00+05:30",
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Flood_Warning_for_Mahaweli_River_-_No_01_-_2026__1792998739.pdf",
+      "summary": {
+        "en": "Minor flood risk in low-lying areas beside the Mahaweli River within Pasbage Korale DS division. This is not a warning for the entire Mahaweli basin.",
+        "si": "පස්බාගේ කෝරළේ කොට්ඨාසයේ මහවැලි ගඟ අසල පහත් බිම්වල සුළු ගංවතුර අවදානමක් ඇත. සම්පූර්ණ මහවැලි ද්‍රෝණිය සඳහා අනතුරු ඇඟවීමක් නොවේ.",
+        "ta": "பஸ்பாகே கோரளை பிரிவில் மகாவலி ஆற்றருகிலுள்ள தாழ்நிலப் பகுதிகளில் சிறிய வெள்ள அபாயம் உள்ளது. முழு மகாவலி ஆற்றுப் படுகைக்கான எச்சரிக்கை அல்ல."
+      },
+      "areas": [
+        {
+          "district": "Kandy",
+          "division": "Pasbage Korale",
+          "districtCode": "LK21",
+          "divisionCode": "LK2157"
+        }
+      ],
+      "sha256": "8746dbc111719bf59283836919e8ead312f8889fa29d6d9992d70e57d205a560",
+      "districtCodes": []
+    },
+    {
+      "id": "LEWM-26-10-2026-0900-31",
+      "kind": "landslide",
+      "title": {
+        "en": "Landslide early warning",
+        "si": "නායයෑම් පූර්ව අනතුරු ඇඟවීම",
+        "ta": "மண்சரிவு முன்னெச்சரிக்கை"
+      },
+      "authority": "NBRI / DMC",
+      "issuedAt": "2026-10-26T09:00:00+05:30",
+      "expiresAt": "2026-10-27T09:00:00+05:30",
+      "listingAt": null,
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Landslide_EW_Report_at_0900hrs_on_2026__1792988751.pdf",
+      "summary": {
+        "en": "Levels 1 (Yellow) and 2 (Amber) in named DS divisions and surrounding areas. Pay attention to susceptible slopes, valleys, cut slopes and roads. Read the original for the level in each division.",
+        "si": "නම් කළ කොට්ඨාස සහ අවට ප්‍රදේශ සඳහා මට්ටම 1 (කහ) සහ 2 (ඇම්බර්). අවදානම් බෑවුම්, නිම්න, කපා ඇති බෑවුම් හා මාර්ග පිළිබඳ අවධානය යොමු කරන්න. කොට්ඨාසයට අදාළ මට්ටම මුල් නිවේදනයෙන් බලන්න.",
+        "ta": "பெயரிடப்பட்ட பிரிவுகளிலும் சுற்றுப்பகுதிகளிலும் நிலை 1 (மஞ்சள்), நிலை 2 (அம்பர்). அபாயமான சரிவுகள், பள்ளத்தாக்குகள், வெட்டுச் சரிவுகள், வீதிகளைக் கவனிக்கவும். ஒவ்வொரு பிரிவின் நிலைக்கும் அசல் அறிவிப்பைப் பார்க்கவும்."
+      },
+      "areas": [
+        {
+          "district": "Galle",
+          "division": "Thawalama",
+          "level": 1,
+          "districtCode": "LK31",
+          "divisionCode": "LK3118"
+        },
+        {
+          "district": "Gampaha",
+          "division": "Attanagalla",
+          "level": 1,
+          "districtCode": "LK12",
+          "divisionCode": "LK1227"
+        },
+        {
+          "district": "Kalutara",
+          "division": "Madurawala",
+          "level": 1,
+          "districtCode": "LK13",
+          "divisionCode": "LK1315"
+        },
+        {
+          "district": "Kalutara",
+          "division": "Beruwala",
+          "level": 1,
+          "districtCode": "LK13",
+          "divisionCode": "LK1324"
+        },
+        {
+          "district": "Kalutara",
+          "division": "Millaniya",
+          "level": 1,
+          "districtCode": "LK13",
+          "divisionCode": "LK1318"
+        },
+        {
+          "district": "Kalutara",
+          "division": "Horana",
+          "level": 1,
+          "districtCode": "LK13",
+          "divisionCode": "LK1309"
+        },
+        {
+          "district": "Kandy",
+          "division": "Udadumbara",
+          "level": 1,
+          "districtCode": "LK21",
+          "divisionCode": "LK2118"
+        },
+        {
+          "district": "Kandy",
+          "division": "Pasbage Korale",
+          "level": 1,
+          "districtCode": "LK21",
+          "divisionCode": "LK2157"
+        },
+        {
+          "district": "Kandy",
+          "division": "Udapalatha",
+          "level": 1,
+          "districtCode": "LK21",
+          "divisionCode": "LK2151"
+        },
+        {
+          "district": "Kandy",
+          "division": "Udunuwara",
+          "level": 1,
+          "districtCode": "LK21",
+          "divisionCode": "LK2139"
+        },
+        {
+          "district": "Kegalle",
+          "division": "Kegalle",
+          "level": 1,
+          "districtCode": "LK92",
+          "divisionCode": "LK9212"
+        },
+        {
+          "district": "Kegalle",
+          "division": "Mawanella",
+          "level": 1,
+          "districtCode": "LK92",
+          "divisionCode": "LK9206"
+        },
+        {
+          "district": "Kegalle",
+          "division": "Deraniyagala",
+          "level": 1,
+          "districtCode": "LK92",
+          "divisionCode": "LK9233"
+        },
+        {
+          "district": "Kegalle",
+          "division": "Warakapola",
+          "level": 1,
+          "districtCode": "LK92",
+          "divisionCode": "LK9218"
+        },
+        {
+          "district": "Kegalle",
+          "division": "Aranayake",
+          "level": 1,
+          "districtCode": "LK92",
+          "divisionCode": "LK9209"
+        },
+        {
+          "district": "Kegalle",
+          "division": "Ruwanwella",
+          "level": 1,
+          "districtCode": "LK92",
+          "divisionCode": "LK9221"
+        },
+        {
+          "district": "Kegalle",
+          "division": "Yatiyanthota",
+          "level": 1,
+          "districtCode": "LK92",
+          "divisionCode": "LK9227"
+        },
+        {
+          "district": "Kurunegala",
+          "division": "Narammala",
+          "level": 1,
+          "districtCode": "LK61",
+          "divisionCode": "LK6181"
+        },
+        {
+          "district": "Kurunegala",
+          "division": "Kurunegala",
+          "level": 1,
+          "districtCode": "LK61",
+          "divisionCode": "LK6154"
+        },
+        {
+          "district": "Ratnapura",
+          "division": "Kiriella",
+          "level": 1,
+          "districtCode": "LK91",
+          "divisionCode": "LK9109"
+        },
+        {
+          "district": "Ratnapura",
+          "division": "Openayake",
+          "level": 1,
+          "districtCode": "LK91",
+          "divisionCode": "LK9121"
+        },
+        {
+          "district": "Kalutara",
+          "division": "Walallawita",
+          "level": 2,
+          "districtCode": "LK13",
+          "divisionCode": "LK1339"
+        },
+        {
+          "district": "Kalutara",
+          "division": "Bulathsinhala",
+          "level": 2,
+          "districtCode": "LK13",
+          "divisionCode": "LK1312"
+        },
+        {
+          "district": "Kegalle",
+          "division": "Dehiowita",
+          "level": 2,
+          "districtCode": "LK92",
+          "divisionCode": "LK9230"
+        },
+        {
+          "district": "Kegalle",
+          "division": "Galigamuwa",
+          "level": 2,
+          "districtCode": "LK92",
+          "divisionCode": "LK9215"
+        },
+        {
+          "district": "Nuwara Eliya",
+          "division": "Ambagamuwa Korale",
+          "level": 2,
+          "districtCode": "LK23",
+          "divisionCode": "LK2315"
+        },
+        {
+          "district": "Nuwara Eliya",
+          "division": "Norwood",
+          "level": 2,
+          "districtCode": "LK23",
+          "divisionCode": "LK2330"
+        },
+        {
+          "district": "Ratnapura",
+          "division": "Ratnapura",
+          "level": 2,
+          "districtCode": "LK91",
+          "divisionCode": "LK9112"
+        },
+        {
+          "district": "Ratnapura",
+          "division": "Kuruwita",
+          "level": 2,
+          "districtCode": "LK91",
+          "divisionCode": "LK9106"
+        },
+        {
+          "district": "Ratnapura",
+          "division": "Pelmadulla",
+          "level": 2,
+          "districtCode": "LK91",
+          "divisionCode": "LK9124"
+        },
+        {
+          "district": "Ratnapura",
+          "division": "Elapatha",
+          "level": 2,
+          "districtCode": "LK91",
+          "divisionCode": "LK9127"
+        },
+        {
+          "district": "Ratnapura",
+          "division": "Ayagama",
+          "level": 2,
+          "districtCode": "LK91",
+          "divisionCode": "LK9130"
+        },
+        {
+          "district": "Ratnapura",
+          "division": "Nivithigala",
+          "level": 2,
+          "districtCode": "LK91",
+          "divisionCode": "LK9136"
+        }
+      ],
+      "sha256": "85948d296020693c11da8bbcca8b705060e423f004586fb0db0b08241bdeb378",
+      "districtCodes": []
+    },
+    {
+      "id": "rain-20261026-0300",
+      "kind": "rain",
+      "title": {
+        "en": "Heavy-rain advisory",
+        "si": "තද වැසි නිවේදනය",
+        "ta": "கடும் மழை அறிவிப்பு"
+      },
+      "authority": "Department of Meteorology / DMC",
+      "issuedAt": "2026-10-26T03:00:00+05:30",
+      "expiresAt": "2026-10-27T05:30:00+05:30",
+      "listingAt": "2026-10-26T03:30:00+05:30",
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Advisory_for_Heavy_Rain_at_0330_hrs_on_2026__1792968291.pdf",
+      "summary": {
+        "en": "Falls over 100 mm are possible in Northern, Western, Sabaragamuwa, North Western, Central and Southern provinces and Anuradhapura district. This is a rainfall advisory, not observed flood inundation.",
+        "si": "උතුරු, බස්නාහිර, සබරගමුව, වයඹ, මධ්‍යම හා දකුණු පළාත්වල සහ අනුරාධපුර දිස්ත්‍රික්කයේ මි.මී. 100 ඉක්මවූ වැසි ඇති විය හැක. මෙය වැසි නිවේදනයකි; නිරීක්ෂිත ගංවතුර තත්ත්වයක් නොවේ.",
+        "ta": "வடக்கு, மேற்கு, சபரகமுவ, வடமேற்கு, மத்திய, தெற்கு மாகாணங்களிலும் அனுராதபுரம் மாவட்டத்திலும் 100 மி.மீ.க்கு மேல் மழை பெய்யலாம். இது மழை அறிவிப்பு; அவதானிக்கப்பட்ட வெள்ளப் பரவல் அல்ல."
+      },
+      "areas": [],
+      "districts": [
+        "Jaffna",
+        "Kilinochchi",
+        "Mannar",
+        "Mullaitivu",
+        "Vavuniya",
+        "Colombo",
+        "Gampaha",
+        "Kalutara",
+        "Kegalle",
+        "Ratnapura",
+        "Kurunegala",
+        "Puttalam",
+        "Kandy",
+        "Matale",
+        "Nuwara Eliya",
+        "Galle",
+        "Matara",
+        "Hambantota",
+        "Anuradhapura"
+      ],
+      "sha256": "0bd573752b1965d56fd8ec4ae0c372cba2766bb66294bfc2b6acef1c6d5e6136",
+      "districtCodes": [
+        "LK41",
+        "LK45",
+        "LK42",
+        "LK44",
+        "LK43",
+        "LK11",
+        "LK12",
+        "LK13",
+        "LK92",
+        "LK91",
+        "LK61",
+        "LK62",
+        "LK21",
+        "LK22",
+        "LK23",
+        "LK31",
+        "LK32",
+        "LK33",
+        "LK71"
+      ]
+    }
+  ],
+  "stations": [
+    {
+      "name": "Holombuwa",
+      "basin": "Gurugoda Oya · Kelani",
+      "value": 4.65,
+      "unit": "m",
+      "status": "minorRising",
+      "observedAt": "2026-10-26T12:00:00+05:30",
+      "issuedAt": "2026-10-26T12:30:00+05:30",
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1792998944.pdf"
+    },
+    {
+      "name": "Rathnapura",
+      "basin": "Kalu Ganga",
+      "value": 7.62,
+      "unit": "m",
+      "status": "minorRising",
+      "observedAt": "2026-10-26T12:00:00+05:30",
+      "issuedAt": "2026-10-26T12:30:00+05:30",
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1792998944.pdf"
+    },
+    {
+      "name": "Kithulgala",
+      "basin": "Kelani Ganga",
+      "value": 3.14,
+      "unit": "m",
+      "status": "alertRising",
+      "observedAt": "2026-10-26T12:00:00+05:30",
+      "issuedAt": "2026-10-26T12:30:00+05:30",
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1792998944.pdf"
+    },
+    {
+      "name": "Norwood",
+      "basin": "Kehelgamu Oya · Kelani",
+      "value": 2.26,
+      "unit": "m",
+      "status": "alertRising",
+      "observedAt": "2026-10-26T12:00:00+05:30",
+      "issuedAt": "2026-10-26T12:30:00+05:30",
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1792998944.pdf"
+    },
+    {
+      "name": "Magura",
+      "basin": "Maguru Ganga · Kalu",
+      "value": 4.18,
+      "unit": "m",
+      "status": "alertFalling",
+      "observedAt": "2026-10-26T12:00:00+05:30",
+      "issuedAt": "2026-10-26T12:30:00+05:30",
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1792998944.pdf"
+    },
+    {
+      "name": "Kalawellawa (Millakanda)",
+      "basin": "Kuda Ganga · Kalu",
+      "value": 5.92,
+      "unit": "m",
+      "status": "alertRising",
+      "observedAt": "2026-10-26T12:00:00+05:30",
+      "issuedAt": "2026-10-26T12:30:00+05:30",
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1792998944.pdf"
+    },
+    {
+      "name": "Nawalapitiya",
+      "basin": "Mahaweli Ganga",
+      "value": 3.93,
+      "unit": "m",
+      "status": "alertRising",
+      "observedAt": "2026-10-26T12:00:00+05:30",
+      "issuedAt": "2026-10-26T12:30:00+05:30",
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1792998944.pdf"
+    },
+    {
+      "name": "Dunamale",
+      "basin": "Attanagalu Oya",
+      "value": 3.41,
+      "unit": "m",
+      "status": "alertRising",
+      "observedAt": "2026-10-26T12:00:00+05:30",
+      "issuedAt": "2026-10-26T12:30:00+05:30",
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1792998944.pdf"
+    }
+  ],
+  "reservoirs": [
+    {
+      "name": "Inginimitiya",
+      "river": "Mee Oya",
+      "depthFeet": 21.33,
+      "effectiveStorageAcreFeet": 47168,
+      "effectivePercent": 92.75,
+      "spilling": true,
+      "spillCusecs": 1000,
+      "observedDate": "2026-10-26",
+      "observedAt": null,
+      "url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTcSGhi9RESl7CMCl1TQnrKe07Gx5Q696YiSB9jneIHqIP9lifpqSErgI3D5k9KtQXSdW5JpycIIr5e/pub?gid=1238978530&single=true&output=csv"
+    },
+    {
+      "name": "Tabbowa",
+      "river": "Nanneri Oya",
+      "depthFeet": 16.1,
+      "effectiveStorageAcreFeet": 15000,
+      "effectivePercent": 99.98,
+      "spilling": true,
+      "spillCusecs": 2200,
+      "observedDate": "2026-10-26",
+      "observedAt": null,
+      "url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTcSGhi9RESl7CMCl1TQnrKe07Gx5Q696YiSB9jneIHqIP9lifpqSErgI3D5k9KtQXSdW5JpycIIr5e/pub?gid=1238978530&single=true&output=csv"
+    }
+  ],
+  "fetchedAt": "2026-10-26T09:33:45.662280+00:00"
+}

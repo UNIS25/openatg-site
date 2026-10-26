@@ -1,0 +1,28 @@
+name: FloodLens source check
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 * * * *'
+permissions:
+  contents: read
+concurrency:
+  group: floodlens-source-check
+  cancel-in-progress: false
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            scripts/floodlens
+            floodlens/data/reviewed.json
+            floodlens/data/provenance.json
+          sparse-checkout-cone-mode: false
+      - name: Read official sources and preserve provenance
+        run: python3 scripts/floodlens/check_sources.py
+      - name: Record source hashes and provenance in run log
+        if: always()
+        run: cat artifacts/floodlens/source-check/report.json
