@@ -529,3 +529,45 @@ copying an enduring storm/track assertion or implying local impact at a pin.
 No observation publisher path, workflow permission, source scheduler, reviewed
 warning data, credentials or automatic warning interpretation changed. The
 separate ECMWF local forecast proof is preserved outside this release.
+
+## Ark and regional forecast — release 20261026-13
+
+User-selected public name: Ark by OpenATG. The main homepage link, app header,
+metadata in all three languages, and short Noah's Ark shelter/care note use Ark.
+`/floodlens/` and all existing data/workflow paths remain intact. `/ark/` is a
+simple tested redirect to that route. No new domain or hosting was created.
+
+A real ECMWF IFS 26 October 06:00 UTC forecast is now bundled as a manually
+reviewed regional snapshot. See ECMWF_FORECAST_PROOF.md for original GRIB
+metadata, raw-range hashes, licence, units, grid matching and actual examples.
+The country-region subset is about 96 KB for 198 published 0.25° grid centres
+and nine three-hour intervals. It shows an explicit complete 24-hour window
+only when eight future consecutive intervals are present. That window begins
+at the next available model interval boundary, not an interpolated now+24h
+promise. Three-hour rain playback and instantaneous 10 m wind are optional.
+Wind range in the summary is the range at the eight forecast-valid times, not
+continuous maximum or gusts. Missing values, mixed schemas, invalid units,
+future runs and outdated horizons fail safely. Run age >18 hours is explicitly
+older; an expired horizon has no upcoming total. Download/rebuild time never
+changes model-run age or original data retrieval time.
+
+ECMWF commercial redistribution is permitted under CC BY 4.0 and additional
+attribution terms. Source credit, copyright, licence, modifications and liability
+wording are retained. No paid service, account, persistent token or security
+change was used. Forecast data publication was specifically authorized after
+validation; automatic publication remains unauthorized for the new data paths.
+Existing source/observation workflows and one-path reservoir guard are unchanged.
+
+A collapsed 'Water is already here' action offers existing official flood safety
+guidance and user-tapped 117/1990/119 phone links. It records no report and does
+not change hazard severity or assert inundation. Nearby shelters and routes
+remain unverified. Original agency guidance is linked. Interface translations
+remain non-official and native-speaker review is pending.
+
+Puttalam Details additionally links to the reviewed public Google Flood Hub
+Puttalam place view (a fixed public town URL, not the visitor's GPS). It is
+labelled as an external regional model; its displayed likelihood is not copied
+into Ark and no issue/expiry time is invented. Primary Google support describes
+20 km flash-flood weather modelling and explicitly notes limitations around
+man-made causes/dam operations. It does not replace official warnings, the
+reservoir daily record or parcel-specific hydraulic evidence.

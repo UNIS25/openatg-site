@@ -1,10 +1,12 @@
-import {createContext} from './context-ui.mjs?v=20261026-12';
-import {streetEnabled} from './street-map.mjs?v=20261026-12';
-import {LocationMap} from './location-map.mjs?v=20261026-12';
-import {locationEvidence,warningState,ageState,insideGeometry,intersectsAccuracy,locationCandidates} from './core.mjs?v=20261026-12';
+import {mountForecast} from './forecast-ui.mjs?v=20261026-13';
+import {createContext} from './context-ui.mjs?v=20261026-13';
+import {streetEnabled} from './street-map.mjs?v=20261026-13';
+import {LocationMap} from './location-map.mjs?v=20261026-13';
+import {locationEvidence,warningState,ageState,insideGeometry,intersectsAccuracy,locationCandidates} from './core.mjs?v=20261026-13';
 const $=s=>document.querySelector(s);
 export function createFlow({t,name,getData,getCatalog,onLanguage,onArea,onRefresh}){
  let stage='language',point=null,accuracy=null,mode='gps',area=null,candidates=[],state='idle',manualPoint=null,catalog=null,locationRequest=0,matchRequest=0,lastMapMode=false;
+ let forecastKey='';
  const shards=new Map();const resultMap=new LocationMap($('#result-map'),{translate:t});
  const context=createContext({map:resultMap,t});
  const pinMap=new LocationMap($('#pin-map'),{translate:t,onPin:p=>{manualPoint=p;$('#use-pin').disabled=false;$('#manual-status').textContent=t('manualAccuracy');}});
@@ -54,6 +56,8 @@ export function createFlow({t,name,getData,getCatalog,onLanguage,onArea,onRefres
   resultMap.t=t;pinMap.t=t;resultMap.labels=labels();pinMap.labels=labels();resultMap.draw();pinMap.draw();
   if(stage!=='result')return;
   context.update({point,accuracy:accuracy||0,outside:state==='outside',checking:state==='checking',areas:area?[area]:candidates});
+  const forecastRoot=$('#location-forecast');forecastRoot.hidden=state==='outside'||state==='checking';
+  if(!forecastRoot.hidden){const key=point.join(',')+'|'+document.documentElement.lang;if(key!==forecastKey){forecastKey=key;mountForecast(forecastRoot,point,document.documentElement.lang);}}
   const {data,needsUpdate,loadFailed,loading}=getData();
   const candidateAreas=area?[area]:state==='ambiguous'?candidates:[];
   const uncertain=state==='ambiguous';

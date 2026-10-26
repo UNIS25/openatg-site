@@ -75,3 +75,12 @@ reviewed conflicting media report are in Details. Download checks are explicitly
 separate from observation time. The generic tide directory link was removed;
 tide predictions remain unavailable. ECMWF forecast proof is in an isolated
 experimental checkout and has not been included in this corrective release.
+
+Release 20261026-13 adds the tested ECMWF IFS regional forecast as a manually
+reviewed public snapshot, with explicit model-run and valid times, complete
+24-hour intervals, optional rain/wind playback and expired/older-run handling.
+The public name is Ark by OpenATG; existing technical routes remain unchanged.
+Automatic forecast publication needs specific approval for exactly two new
+paths: `floodlens/data/forecast/forecast.json` and
+`floodlens/data/forecast/provenance.json`. No permission is needed for the
+already-authorized manual release, and no automatic path grant was assumed.
