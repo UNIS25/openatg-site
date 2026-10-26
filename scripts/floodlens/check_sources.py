@@ -10,6 +10,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import urlparse
 from urllib.request import Request, build_opener, HTTPRedirectHandler
+from discover_bulletins import discover, markdown as queue_markdown
 
 ROOT=Path(__file__).resolve().parents[2]
 ALLOWED={'www.dmc.gov.lk','dmc.gov.lk','docs.google.com','www.irrigation.gov.lk','irrigation.gov.lk'}
@@ -47,7 +48,7 @@ def check(item,out,expected):
         result.update(status='error',error=type(exc).__name__+': '+str(exc)[:180])
     return result
 def main():
-    p=argparse.ArgumentParser();p.add_argument('--output',default='artifacts/floodlens/source-check');p.add_argument('--initial-capture',action='store_true');args=p.parse_args()
+    p=argparse.ArgumentParser();p.add_argument('--output',default='artifacts/floodlens/source-check');args=p.parse_args()
     out=Path(args.output);out.mkdir(parents=True,exist_ok=True)
     snapshot=json.loads((ROOT/'floodlens/data/reviewed.json').read_text())
     items=[dict(id=w['id'],url=w['url'],kind='pdf') for w in snapshot['bulletins']]
@@ -56,28 +57,28 @@ def main():
     for kind,number in [('flood',6),('landslide',5),('weather',2)]:
         items.append(dict(id=kind+'-listing',url=f'https://www.dmc.gov.lk/index.php?option=com_dmcreports&view=reports&report_type_id={number}&lang=en&limit=100',kind='listing'))
     provenance=ROOT/'floodlens/data/provenance.json'
-    expected=json.loads(provenance.read_text()).get('sources',[]) if provenance.exists() else []
+    provenance_data=json.loads(provenance.read_text()) if provenance.exists() else {}
+    expected=provenance_data.get('sources',[])
     expected={x['id']:x for x in expected}
     with concurrent.futures.ThreadPoolExecutor(max_workers=3) as pool:
         results=list(pool.map(lambda x:check(x,out,expected),items))
+    queue=discover(snapshot,provenance_data,out,fetch,existing=results)
+    commit=os.environ.get('GITHUB_SHA','')
+    queue['reviewedSnapshot']={'reviewedAt':snapshot.get('reviewedAt'),'sha256':hashlib.sha256((ROOT/'floodlens/data/reviewed.json').read_bytes()).hexdigest(),
+                              'repositoryCommit':commit if re.fullmatch(r'[0-9a-f]{40}',commit) else None}
     now=datetime.now(timezone.utc).isoformat()
-    report=dict(schemaVersion=1,checkedAt=now,publishing='read-only; no automatic public publication',sources=results)
+    report=dict(schemaVersion=2,checkedAt=now,publishing='read-only; no automatic public publication',sources=results,reviewQueue=queue)
     (out/'report.json').write_text(json.dumps(report,indent=2)+'\n')
+    (out/'review-queue.json').write_text(json.dumps(queue,indent=2)+'\n')
     lines=['# FloodLens official-source check','',f'Completed: {now}','', '| Source | Fetch | Changed since reviewed snapshot |', '|---|---|---|']
     lines += [f'| {r["id"]} | {r["status"]} | {r.get("changed","unknown")} |' for r in results]
     lines += ['','These are retrieval checks, not validation that a warning remains current. Changed/new official documents require review before publication. Fetch times are not observation times.']
-    (out/'summary.md').write_text('\n'.join(lines)+'\n')
+    summary='\n'.join(lines)+'\n\n'+queue_markdown(queue)
+    (out/'summary.md').write_text(summary)
     if os.environ.get('GITHUB_STEP_SUMMARY'):
-        with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as f:f.write('\n'.join(lines))
-    if args.initial_capture:
-        if provenance.exists():raise SystemExit('Initial capture cannot overwrite an existing baseline; explicit source review required.')
-        if any(r['status']!='ok' for r in results[:6]):raise SystemExit('Cannot capture reviewed baseline: a bulletin or observation fetch failed.')
-        snapshot['reviewedAt']=now;snapshot['fetchedAt']=now
-        for w in snapshot['bulletins']:w['sha256']=next(r['sha256'] for r in results if r['id']==w['id'])
-        (ROOT/'floodlens/data/reviewed.json').write_text(json.dumps(snapshot,ensure_ascii=False,indent=2)+'\n')
-        # Raw assets stay in audit output; public provenance contains hashes, not executable HTML.
-        provenance.write_text(json.dumps(report,indent=2)+'\n')
-    print(json.dumps({'checkedAt':now,'ok':sum(r['status']=='ok' for r in results),'failed':[r['id'] for r in results if r['status']!='ok'],'changed':[r['id'] for r in results if r.get('changed')]}))
-    if any(r['status']!='ok' for r in results):return 1
+        with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as f:f.write(summary)
+    print(json.dumps({'checkedAt':now,'ok':sum(r['status']=='ok' for r in results),'failed':[r['id'] for r in results if r['status']!='ok'],'changed':[r['id'] for r in results if r.get('changed')],
+                      'listingWindowComplete':queue['coverage']['completeForListingWindow'],'reviewRequired':queue['reviewRequired'],'deferredPdfHashes':queue['documentHashing']['deferred']}))
+    if any(r['status']!='ok' for r in results) or not queue['coverage']['completeForListingWindow'] or queue['documentHashing']['failures']:return 1
     return 0
 if __name__=='__main__':sys.exit(main())

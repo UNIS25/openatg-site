@@ -64,8 +64,9 @@ the compatibility guard was introduced require a one-time reload.
 on manual dispatch. This is a best-effort GitHub Actions schedule; it can be
 delayed or disabled by GitHub for inactivity. It uses the existing public
 repository's free standard Ubuntu runner, `contents: read` and no stored token.
-It reads ten allowlisted public sources, verifies file shape, records hashes,
-and writes a public job summary and run log. No Actions artifacts/cache storage
+It checks the reviewed source documents and three allowlisted official lists,
+then builds a deterministic read-only review queue. It verifies file shape,
+records hashes, and writes a public job summary and run log. No Actions artifacts/cache storage
 is allocated. Raw retrievals are temporary in the runner; source hashes and
 parsed provenance persist in the run log. Fetch failure fails the job visibly.
 
@@ -104,10 +105,10 @@ data commit and run log. The UI displays source-check time/failure, warns when
 no check within two hours is confirmed, and labels every observation date.
 
 New/changed warning interpretation remains review-gated. Source-check run logs
-include raw official document links and changed hashes as a concrete review
-queue. Automatic comparison of actual issue times in new PDF layouts is not
-validated, so no automatic newer-bulletin banner or severity is inferred from
-listing timestamps. The warning section prominently discloses that hourly
+include structured document identities, listing timestamps, original links,
+changed hashes and incomplete/failure states as a concrete review queue.
+Automatic extraction of actual issue times in new PDF layouts is not validated,
+so no automatic newer-bulletin banner or severity is inferred from listing timestamps. The warning section prominently discloses that hourly
 checks do not update assessments and newer official bulletins may await review.
 
 ## Update procedure
@@ -122,8 +123,9 @@ checks do not update assessments and newer official bulletins may await review.
 5. Run the safety/browser tests and publish through the existing Pages route.
 
 `seed_reviewed.py` records the first source transcription and is a one-time
-reproduction aid, not an updater. It must never be scheduled. The initial hash
-capture refuses to overwrite an existing provenance baseline.
+reproduction aid, not an updater. It must never be scheduled. The source checker is now strictly read-only: its former one-time
+`--initial-capture` write mode has been removed. Reviewers edit published data
+only through the separate reviewed release procedure.
 
 ## Location, boundary limits and privacy
 
@@ -333,3 +335,65 @@ removed. Flood, lightning, rainfall, river and reservoir records are unchanged.
 Regression checks include the four new Red divisions, Attanagalla Amber,
 Pitabeddara Yellow, all 71 unique codes, exact expiry and all previous location,
 privacy, stale-data and failure cases. No new UI kind or permission is needed.
+
+
+## Deterministic discovery and read-only review queue
+
+`discover_bulletins.py` runs inside the existing minute-17 source-check workflow.
+Permissions remain `contents: read`; checkout does not retain credentials.
+No public JSON, warning interpretation, repository commit or deployment is
+written by the checker. The reservoir publisher's sole writable data path and
+its permissions remain unchanged. The existing Details link opens workflow
+run history; this milestone does not claim automatic public warning updates.
+
+Each of the flood, landslide and weather lists requests 100 rows per page.
+The scanner continues until it crosses a seven-day overlap window or exhausts
+the list, with a maximum of five pages per list. The window extends earlier
+when needed to cover the issue date of any still-active reviewed warning,
+plus one day. All currently reviewed source URLs are checked even if absent
+from the scanned rows. A missing link is not a cancellation. An absent Next
+link on a full recent page, repeated page, unexpected pagination link, changed
+row/date format, out-of-order listing, page budget or fetch failure makes
+coverage explicitly incomplete. Unknown formats fail closed.
+
+This is **listing-window coverage**, not proof of all active national warnings.
+Unreviewed PDF validity remains unknown; an older listing date cannot establish
+expiry. Original URLs remain available for manual review. A sufficiently old,
+long-duration unreviewed notice could be outside the bounded window. No all-clear
+or current-warning conclusion is inferred from an empty or incomplete queue.
+
+Document identity is the canonical allowlisted DMC PDF URL plus captured byte
+hash. The same update number/title can identify multiple documents; neither
+is a deduplication key. Repeated URL rows retain all listing aliases. Same-URL
+changed bytes require review even if the bytes appeared in historical provenance.
+The JSON queue records whether a listing is later than the reviewed listing
+time for that stream; earlier unseen documents still require review. The
+reviewed snapshot hash and workflow commit identify the comparison baseline.
+Listing time is stored separately from verified issue and expiry times; only
+an unchanged reviewed source retains those verified times. Titles mentioning
+cancellation, withdrawal, replacement or revision are review-priority hints,
+never an automatic relationship, cancellation or supersession. Severity,
+validity and relationships of new documents stay unreviewed/null.
+
+To limit repeated load on official sources, each run hashes at most 24 additional
+PDFs with three concurrent requests. Current reviewed source captures are reused.
+All candidate links remain in the queue when this budget is reached, explicitly
+`awaiting-document-hash`; they are not declared checked or expired. Fetches are
+TLS-verified, size/time bounded, and restricted to official report paths. PDF
+bytes are hashed and retained temporarily, never executed or interpreted by an
+LLM. Listing text is parsed as data and escaped in Markdown summaries.
+
+`report.json` includes the complete queue, listing-page provenance, document
+hashes, scan limits and failures. `review-queue.json` and `summary.md` are local
+run outputs under `artifacts/floodlens/source-check/`. The full report persists
+in the public Actions run log; the summary shows up to 30 entries. Raw files
+are temporary on hosted runners; no Actions artifact/cache storage is added.
+Technical source failures or incomplete listing coverage fail the job visibly.
+Pending human reviews or deliberately deferred hashes are separately counted;
+a successful job does not mean reviews are complete or warnings are current.
+
+Reviewers open original PDFs, verify actual issue/expiry, geography, severity,
+cancellation/supersession and language before modifying the public snapshot.
+A future automatic public status file would require a separately approved
+publisher allowlist change. This release adds no such path, token scope,
+credential, paid service or automated warning publication.

@@ -21,7 +21,7 @@ jobs:
             floodlens/data/reviewed.json
             floodlens/data/provenance.json
           sparse-checkout-cone-mode: false
-      - name: Read official sources and preserve provenance
+      - name: Discover official bulletins and build a read-only review queue
         run: python3 scripts/floodlens/check_sources.py
       - name: Record source hashes and provenance in run log
         if: always()
