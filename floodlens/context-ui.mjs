@@ -1,0 +1,69 @@
+import {gateSummary} from './gates.mjs?v=20261026-11';
+import {satelliteAt,rainfallAt,nearestReservoir} from './context-evidence.mjs?v=20261026-11';
+import {contextCopy} from './context-copy.mjs?v=20261026-11';
+import {mapWorld} from './location-map.mjs?v=20261026-11';
+const regions=[[79.75,7.9,80.18,8.2],[80.35,6.65,80.50,6.78]];
+const inside=p=>regions.some(b=>p[0]>=b[0]&&p[0]<=b[2]&&p[1]>=b[1]&&p[1]<=b[3]);
+const labels={
+ en:{straightLine:'straight-line',heading:'Dated observations near your pin',limits:'Satellite & NASA: two regional snapshots, not live coverage.',outside:'No satellite or NASA snapshot for this area',details:'Observation sources, coverage & water connections',notConnected:'Tide predictions and reservoir-to-pin water routes are not connected.',map:'Satellite: 23 Oct 2026 · partial coverage',legend:'Purple: detected floodwater · blue: reference water',failure:'Observation source unavailable',dailyTime:'Observation time unknown',update:'Satellite / NASA snapshots do not update automatically.',noRoutes:'No flood probability, arrival time or drainage countdown is calculated.',coverage:'Coverage: parts of Puttalam/Mee Oya and Ratnapura. Elsewhere: unavailable.',numbers:'Emergency help · Sri Lanka',noRisk:'These observations do not change the official warning above.'},
+ si:{straightLine:'සෘජු දුර',heading:'ඔබේ ස්ථානය අසල දිනය සහිත නිරීක්ෂණ',limits:'චන්ද්‍රිකා හා NASA: ප්‍රදේශ දෙකක පැරණි දත්ත; සජීවී නොවේ.',outside:'මෙම ප්‍රදේශයට චන්ද්‍රිකා හෝ NASA දත්ත නැත',details:'නිරීක්ෂණ මූලාශ්‍ර, ආවරණය සහ ජල සම්බන්ධතා',notConnected:'උදම් අනාවැකි හා ජලාශයෙන් මෙම ස්ථානයට ජල මාර්ග සම්බන්ධ කර නැත.',map:'චන්ද්‍රිකා: 2026 ඔක් 23 · අර්ධ ආවරණය',legend:'දම්: හඳුනාගත් ගංවතුර · නිල්: සාමාන්‍ය ජලය',failure:'නිරීක්ෂණ මූලාශ්‍රය නොලැබේ',dailyTime:'නිරීක්ෂණ වේලාව නොදනී',update:'චන්ද්‍රිකා / NASA දත්ත ස්වයංක්‍රීයව යාවත්කාලීන නොවේ.',noRoutes:'ගංවතුර සම්භාවිතාව, පැමිණෙන හෝ බැස යන වේලාව ගණනය නොකරයි.',coverage:'ආවරණය: පුත්තලම/මී ඔය හා රත්නපුර කොටස්. අනෙක් ප්‍රදේශවල දත්ත නැත.',numbers:'හදිසි සහාය · ශ්‍රී ලංකාව',noRisk:'මෙම නිරීක්ෂණ ඉහත නිල අනතුරු ඇඟවීම වෙනස් නොකරයි.'},
+ ta:{straightLine:'நேர்கோட்டு தூரம்',heading:'உங்கள் இடம் அருகிலுள்ள தேதியிட்ட தகவல்கள்',limits:'செயற்கைக்கோள் & NASA: இரு பகுதிகளின் பழைய பதிவுகள்; நேரலை அல்ல.',outside:'இந்தப் பகுதிக்கு செயற்கைக்கோள் அல்லது NASA பதிவு இல்லை',details:'தகவல் மூலங்கள், வரம்பு & நீர்த் தொடர்புகள்',notConnected:'கடலோட்டக் கணிப்புகளும் நீர்த்தேக்கத்திலிருந்து இங்கு வரும் நீர் வழிகளும் இணைக்கப்படவில்லை.',map:'செயற்கைக்கோள்: 23 அக் 2026 · பகுதி வரம்பு',legend:'ஊதா: கண்டறிந்த வெள்ளநீர் · நீலம்: வழக்கமான நீர்',failure:'தகவல் மூலம் கிடைக்கவில்லை',dailyTime:'கவனிப்பு நேரம் தெரியவில்லை',update:'செயற்கைக்கோள் / NASA பதிவுகள் தானாகப் புதுப்பிக்கப்படுவதில்லை.',noRoutes:'வெள்ள வாய்ப்பு, வரும் நேரம் அல்லது வடியும் நேரம் கணிக்கப்படவில்லை.',coverage:'வரம்பு: புத்தளம்/மீ ஓயா மற்றும் இரத்தினபுரியின் சில பகுதிகள். பிற இடங்களில் கிடைக்கவில்லை.',numbers:'அவசர உதவி · இலங்கை',noRisk:'இந்தக் கவனிப்புகள் மேலுள்ள அதிகாரப்பூர்வ எச்சரிக்கையை மாற்றாது.'}
+};
+const node=(tag,cls,text)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n;};
+const link=(url,text)=>{const a=node('a','',text);a.href=url;a.target='_blank';a.rel='noopener noreferrer';return a;};
+async function json(url,max=3200000){const r=await fetch(url,{cache:'no-cache',signal:AbortSignal.timeout(20000)});if(!r.ok)throw Error('Observation unavailable');const raw=await r.text();if(raw.length>max)throw Error('Observation too large');return JSON.parse(raw);}
+export async function hydrateSatellite(value){
+ if(value.schemaVersion!==1||value.resolutionMetres!==20||value.regions?.length!==2||!Array.isArray(value.features)||value.features.length>15000)throw Error('Unsupported satellite data');
+ await import('./vendor/proj4.js?v=2.22.0');
+ if(typeof globalThis.proj4!=='function')throw Error('Projection unavailable');
+ value.project=p=>globalThis.proj4('EPSG:4326','+proj=aeqd +lat_0=47 +lon_0=94 +x_0=4340913.84808 +y_0=4812712.92347 +datum=WGS84 +units=m +no_defs',p);
+ for(const r of value.regions){
+  if(r.nativeCrs!=='EPSG:27703'||r.encoding!=='deflate-base64-uint16le'||r.nativeShape?.length!==2||!r.nativeShape.every(n=>Number.isSafeInteger(n)&&n>0)||r.nativeShape[0]*r.nativeShape[1]>6000000||r.nativeTransform?.[0]!==20||r.nativeTransform?.[4]!==-20)throw Error('Unsupported native grid');
+  const raw=await new Response(new Blob([Uint8Array.from(atob(r.grid),c=>c.charCodeAt(0))]).stream().pipeThrough(new DecompressionStream('deflate'))).arrayBuffer();
+  if(raw.byteLength!==r.nativeShape[0]*r.nativeShape[1]*2)throw Error('Invalid native grid');
+  const view=new DataView(raw);r.values=new Uint16Array(raw.byteLength/2);for(let i=0;i<r.values.length;i++)r.values[i]=view.getUint16(i*2,true);
+ }
+ return value;
+}
+export function createContext({map,t}){
+ const root=document.querySelector('#location-context'),details=document.querySelector('#context-details'),caption=document.querySelector('.map-caption span:last-child');
+ let current=null,started=false,regional=false,busy=false,showSatellite=false,data={},failed=new Set();
+ const toggle=node('button','text-button satellite-toggle');toggle.type='button';toggle.hidden=true;toggle.setAttribute('aria-pressed','false');const legend=node('p','satellite-legend');legend.hidden=true;document.querySelector('.map-caption').after(toggle,legend);toggle.onclick=()=>{showSatellite=!showSatellite;toggle.setAttribute('aria-pressed',String(showSatellite));render();map.draw();};
+ const text=k=>labels[document.documentElement.lang]?.[k]??contextCopy[document.documentElement.lang]?.[k]??labels.en[k]??contextCopy.en[k]??k;
+ const date=(v,time=false)=>v&&Number.isFinite(Date.parse(v))?new Intl.DateTimeFormat(document.documentElement.lang,{timeZone:'Asia/Colombo',day:'numeric',month:'short',year:'numeric',...(time?{hour:'2-digit',minute:'2-digit',hour12:false}:{})}).format(new Date(v))+(time?' · SLST':''):text('unknownDate');
+ const age=h=>Math.floor(h>=48?h/24:h)+' '+text(h>=48?'daysOld':'hoursOld');
+ const fetchOne=async(key,url,transform=v=>v)=>{try{data[key]=await transform(await json(url));failed.delete(key);}catch{failed.add(key);}render();map.draw();};
+ const loadDirectory=async()=>{if(busy)return;busy=true;await fetchOne('directory','./data/reservoirs.json',v=>{if(v.schemaVersion!==1||!Array.isArray(v.records)||v.records.length>200)throw Error('Invalid reservoir data');return v;});busy=false;};
+ function load(p){
+  if(!started){started=true;fetchOne('points','./data/reservoir-locations.json');loadDirectory();}
+  if(inside(p)&&!regional){regional=true;fetchOne('satellite','./data/context/satellite.json?v=20261026-11',hydrateSatellite);fetchOne('rainfall','./data/context/rainfall.json?v=20261026-11',v=>{if(v.schemaVersion!==1||!Array.isArray(v.cells)||v.cells.length>100)throw Error('Invalid rainfall data');return v;});}
+ }
+ function row(label,title,body,key){const a=node('article','evidence-row');a.dataset.evidence=key;a.append(node('small','',label),node('strong','',title),node('p','',body));root.append(a);}
+ function source(label,time,url,extra){const p=node('p','context-source',label+' · '+date(time,Boolean(time&&!/^\d{4}-\d{2}-\d{2}$/.test(time)))+(extra?' · '+extra:''));if(url)p.append(document.createTextNode(' '),link(url,text('source')+' ↗'));details.lastElementChild.append(p);}
+ function render(){
+  if(!current)return;const {point,accuracy,outside,checking}=current;root.hidden=outside||checking;details.hidden=outside||checking;toggle.hidden=outside||checking||!data.satellite||!inside(point);legend.hidden=toggle.hidden||!showSatellite;if(outside||checking){caption.textContent=t('notHazardMap');return;}
+  root.replaceChildren(node('p','context-heading',text('heading')));root.append(node('p','context-limits',text(inside(point)?'limits':'outside')));
+  const sat=inside(point)?satelliteAt(data.satellite,point,{accuracy}):{status:'outside_preview_coverage'};
+  const rain=inside(point)?rainfallAt(data.rainfall,point):{status:'outside_preview_coverage'};
+  const reservoir=nearestReservoir(data.points,data.directory,point);const reading=reservoir.reading;
+  const satKey=sat.status==='flood_detected'?'floodFound':sat.status==='no_flood_classification'?'noFlood':sat.status==='reference_water'?'reference':['excluded','auxiliary_missing','advisory_uncertain','flood_with_advisory'].includes(sat.status)?'masked':sat.status==='outside_preview_coverage'?'noCoverage':regional&&!data.satellite&&!failed.has('satellite')?'dataLoading':'unavailable';
+  row(text('satellite'),text(satKey)+(sat.observedAt?' · '+date(sat.observedAt):''),(sat.observedAt?age(sat.ageHours)+'. ':'')+text(satKey==='floodFound'?'notToday':satKey==='noFlood'?'noFloodBody':satKey==='reference'?'referenceBody':satKey==='masked'?'maskedBody':'coverage')+(sat.positionUncertain?' '+text('pixelAccuracy'):''),'satellite');
+  row(text('reservoir'),reservoir.name?reservoir.name+' · '+reservoir.distanceKm.toFixed(1)+' km · '+text('straightLine'):text(failed.has('points')?'unavailable':'dataLoading'),(reading?text('date')+' '+date(reading.observedDate)+' · '+text(reading.spilling===true?'spilling':reading.spilling===false?'noSpill':'spillUnknown')+(reading.spilling&&Number.isFinite(reading.spillCusecs)?' '+reading.spillCusecs+' cusecs':'')+'. ':text(failed.has('directory')?'failure':!data.directory?'dataLoading':'unknownDate')+'. ')+(reading?' '+gateSummary(reading,document.documentElement.lang)+'. ':'')+text('upstreamUnknown')+(failed.has('directory')||data.directory?.ingestion?.status==='error'?'. '+text('failure'):''),'reservoir');
+  row(text('rainfall'),rain.status==='dated_estimate'?rain.rateMmPerHour.toFixed(2)+' mm/h · '+text('oldEstimate'):text(rain.status==='outside_preview_coverage'?'noCoverage':regional&&!data.rainfall&&!failed.has('rainfall')?'dataLoading':'unavailable'),rain.status==='dated_estimate'?date(rain.observedAt,true)+' · '+age(rain.ageHours)+' · ~10 km'+(rain.newerUnavailable?' · '+text('laterMissing'):''):text('coverage'),'rainfall');
+  root.dataset.satellite=sat.status;root.dataset.rain=rain.status;
+  details.firstElementChild.textContent=text('details');const body=details.lastElementChild;body.replaceChildren(node('p','',text('noRisk')),node('p','',text('update')),node('p','',text('coverage')));
+  source(text('satellite'),sat.observedAt,sat.source,sat.scene);source('NASA IMERG Early V07',rain.observedAt,rain.source,'0.1° · mm/hour');source(text('reservoir'),reading?.observedDate,data.directory?.sourceUrl||data.points?.sourceUrl,text('dailyTime')+' · '+(data.points?.coverage||''));source(t('sourceChecked'),data.directory?.ingestion?.lastAttemptAt||data.directory?.retrievedAt,null,data.directory?.ingestion?.status==='error'?text('failure'):t('autoObservation'));
+  if(reading?.remarks){const raw=node('details','raw-gate-report');raw.append(node('summary','',text('source')),node('p','',reading.remarks));body.append(raw);}
+  body.append(node('p','',text('connectionUnknown')),node('p','',text('tideDetail')),link('https://www.tide-forecast.com/',text('tideLink')),node('p','',text('noRoutes')),node('p','',text('translation')),node('p','context-attribution','Contains modified Copernicus Emergency Management Service information 2026. NASA GES DISC IMERG Early V07, DOI 10.5067/GPM/IMERG/3B-HH-E/07.'));
+  body.append(link('./data/context/provenance.json',text('source')+' · SHA-256 ↗'),node('h3','',text('numbers')));
+  for(const [number,key,url,label] of [['117','disasterHelp','https://117.dmc.gov.lk/','DMC'],['1990','ambulanceHelp','https://www.1990.lk/faq/','Suwa Seriya'],['119','policeHelp','https://www.trc.gov.lk/content/files/3%20Digit%20Short%20Codes%20for%20special%20services_26.pdf','TRCSL']]){const p=node('p','context-help');const a=node('a','',text(key));a.href='tel:'+number;p.append(a,link(url,label+' ↗'));body.append(p);}body.append(node('p','',text('helpNote')));
+  caption.removeAttribute('data-i18n');caption.textContent=data.satellite&&inside(point)&&showSatellite?text('map'):t('notHazardMap');toggle.textContent=text('map')+' '+(showSatellite?'−':'+');legend.textContent=text('legend');
+ }
+ const originalDraw=map.draw.bind(map);map.draw=()=>{originalDraw();if(!showSatellite||!data.satellite||!current||current.outside||!inside(current.point))return;
+  const svg=map.svg,world=mapWorld(map.center),scale=400/(map.span/360),project=p=>{const w=mapWorld(p);return[200+(w[0]-world[0])*scale,150+(w[1]-world[1])*scale];},ns='http://www.w3.org/2000/svg',g=document.createElementNS(ns,'g');g.dataset.satelliteOverlay='true';g.setAttribute('pointer-events','none');
+  for(const f of data.satellite.features){const scene=data.satellite.scenes[f.properties.scene];if(!scene||![scene.observedAt,scene.processedAt].every(v=>Number.isFinite(Date.parse(v))&&Date.parse(v)<=Date.now()))continue;const a=project([f.bbox[0],f.bbox[1]]),b=project([f.bbox[2],f.bbox[3]]);if(b[0]<0||a[0]>400||a[1]<0||b[1]>300)continue;const polygons=f.geometry.type==='Polygon'?[f.geometry.coordinates]:f.geometry.coordinates,path=document.createElementNS(ns,'path');path.setAttribute('d',polygons.flatMap(poly=>poly.map(ring=>ring.map((p,i)=>(i?'L':'M')+project(p).map(x=>x.toFixed(2)).join(',')).join(' ')+'Z')).join(' '));path.setAttribute('fill',f.properties.state==='reference_water'?'#8dc1cf':'#984575');path.setAttribute('fill-opacity',f.properties.state==='reference_water'?'.45':'.8');path.setAttribute('fill-rule','evenodd');g.append(path);}
+  const marker=svg.querySelector('[data-accuracy-circle]')||svg.querySelector('[data-position-pin]')?.previousSibling;svg.insertBefore(g,marker||svg.lastChild);
+ };
+ setInterval(()=>{if(current&&!document.hidden){render();loadDirectory();}},300000);
+ return {update(next){current=next;if(!next.outside&&!next.checking)load(next.point);render();}};
+}

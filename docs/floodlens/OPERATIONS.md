@@ -60,7 +60,7 @@ the compatibility guard was introduced require a one-time reload.
 
 ## Deployed source checks and permission boundary
 
-`.github/workflows/floodlens-source-check.yml` runs at minute 17 each hour and
+`.github/workflows/floodlens-source-check.yml` runs at minutes 17 and 47 each hour and
 on manual dispatch. This is a best-effort GitHub Actions schedule; it can be
 delayed or disabled by GitHub for inactivity. It uses the existing public
 repository's free standard Ubuntu runner, `contents: read` and no stored token.
@@ -78,7 +78,7 @@ is continuously monitoring the user.
 
 The user explicitly approved a separate reservoir observation publisher with
 job-level `contents: write` and `pages: write` on 26 October 2026.
-`.github/workflows/floodlens-observation-update.yml` runs at minute 37 hourly
+`.github/workflows/floodlens-observation-update.yml` runs at minutes 7 and 37 each hour
 and on manual dispatch, using the ephemeral `GITHUB_TOKEN`. Its only permitted
 changed/staged/committed path is `floodlens/data/reservoirs.json`. Actual token
 permissions are repository-wide; the path restriction is a code safeguard.
@@ -108,7 +108,7 @@ New/changed warning interpretation remains review-gated. Source-check run logs
 include structured document identities, listing timestamps, original links,
 changed hashes and incomplete/failure states as a concrete review queue.
 Automatic extraction of actual issue times in new PDF layouts is not validated,
-so no automatic newer-bulletin banner or severity is inferred from listing timestamps. The warning section prominently discloses that hourly
+so no automatic newer-bulletin banner or severity is inferred from listing timestamps. The warning section prominently discloses that 30-minute
 checks do not update assessments and newer official bulletins may await review.
 
 ## Update procedure
@@ -430,3 +430,54 @@ units. No new hazard calculation, UI screen, translation key, client contract,
 publisher path or permission is introduced. Regression checks cover all sixteen
 new DS matches, conditional-scope exclusion, precise expiry, all thirteen
 readings, three-language display and real polygon-interior pins.
+
+
+## Dated location context and 30-minute checks, release 20261026-11
+
+The existing language/location/warning flow now adds separate dated evidence
+rows. Current official warning, actions, GPS uncertainty and client refresh are
+preserved. Copernicus satellite and NASA rainfall snapshots cover only two
+bounded regions: parts of Puttalam/Mee Oya and Ratnapura. Locations elsewhere
+explicitly lack this captured coverage; no sample or nearest raster is substituted.
+The 23 October satellite overlay is off by default and is labelled historical
+when enabled. Its flood pixels, reference water and masks are observations,
+not present-day inundation or a validated local forecast. NASA reads through
+26 October 13:00 UTC were attempted every half hour at 26 fixed grid centres;
+only 00:00 and 00:30 yielded valid estimates. Later failures remain recorded.
+No rainfall accumulation, risk percentage or future household flood estimate is
+published. Satellite/NASA publication is static and this limitation is visible.
+
+Sources and SHA-256 evidence are in `floodlens/data/context/provenance.json`.
+The public data carries the original sensing/estimate periods, processing and
+retrieval times. GFM native 20 m categorical cells retain exact lookup geometry;
+newer NoData cannot erase older observations. Ratnapura's unreadable uncertainty
+raster fails closed. The attributed GFM derived subset and NASA estimates were
+reviewed against original rasters/metadata and tested locally before publication.
+Raw arrays/rasters remain in the original isolated checkout's ignored artifacts.
+The additional projection library is locally bundled Proj4js 2.22.0 under MIT.
+No browser coordinates are sent to these data providers. No NDRSC records,
+private reports, shelter-opening assertions or routing are published.
+
+Reservoir CSV Remarks are preserved as plain text. The parser accepts only
+complete reviewed `GO=discharge(opening"@count,...)` notation (or an explicit
+single-quote feet unit), matching the separate cusecs column. Unknown/malformed
+syntax stays unparsed; `SD` irrigation outlets are separate and never counted as
+spill gates. Tabbowa's dated official row reports four gates at 24 in (2 ft),
+two at 12 in (1 ft), 2,200 cusecs. Inginimitiya reports two at 12 in (1 ft),
+1,000 cusecs. Rajangana's same supported grammar reports 10 × 4 ft, 6 × 3 ft,
+2 × 2 ft, 14,963 cusecs. These are dated configurations with **no published
+operation time**, not real-time gate states. Conflicting news reports were not
+substituted. New optional record fields remain compatible with older clients.
+
+The user requested 30-minute updates. Source discovery is now scheduled at
+minutes 17/47; reservoir publication at 7/37. GitHub schedules are best effort.
+No permissions, concurrency settings or one-file publishing safeguard changed:
+only `floodlens/data/reservoirs.json` can be published by the observation job.
+Source discovery still cannot automatically interpret or publish warnings.
+The page reads published warning/reservoir data every five minutes while visible.
+Static NASA/GFM files are not added to the automated publisher path allowlist.
+
+Verified emergency links under observation Details are DMC 117, Suwa Seriya 1990
+and Police 119, with primary DMC, Suwa Seriya and TRCSL source links. They require
+a user's tap; no automated calls or dispatch promises. The UNICEF infographic's
+conflicting numbers were not copied. Source check date: 26 October 2026.

@@ -1,4 +1,5 @@
-import {dailyAgeState,ageState,safeSource} from './core.mjs?v=20261026-10';
+import {gateSummary} from './gates.mjs?v=20261026-11';
+import {dailyAgeState,ageState,safeSource} from './core.mjs?v=20261026-11';
 let directory=null,context=null,busy=false,failed=false,showAll=false;
 const el=(tag,cls,text)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n;};
 const value=v=>Number.isFinite(v)?v.toLocaleString(undefined,{maximumFractionDigits:2}):'—';
@@ -16,6 +17,7 @@ export function renderReservoirs(args){
   if(directory){const time=directory.ingestion?.lastAttemptAt||directory.retrievedAt;const stamp=Number.isFinite(Date.parse(time))?new Intl.DateTimeFormat(document.documentElement.lang,{timeZone:'Asia/Colombo',dateStyle:'medium',timeStyle:'short'}).format(new Date(time))+' · SLST':t('ageUnknown');root.querySelector('#reservoir-directory-status').append(el('span','ingestion-status',`${t('sourceChecked')}: ${stamp}. ${directory.ingestion?.status==='error'?t('sourceFailed'):ageState(time,2)!=='fresh'?t('sourceCheckOld'):directory.ingestion?.status==='ok'?t('autoObservation'):t('snapshotFetch')}.`));}
   const wrap=root.querySelector('#reservoirs');wrap.replaceChildren();
   for(const r of filtered){const card=el('article','station');card.append(el('h3','',r.name),el('p','basin',r.river||r.range||''));const amount=el('div','level',value(r.effectivePercent)+' ');amount.append(el('span','',Number.isFinite(r.effectivePercent)?'%':''));card.append(amount,el('p','small',t('storage')),el('p','status',t(r.spilling===true?'yesSpill':r.spilling===false?'noSpill':'unknownValue')),el('p','small',`${t('spill')}: ${value(r.spillCusecs)} ft³/s (cusecs)`),el('p','small',`${t('daily')}: ${r.observedDate||t('unknownDate')} · ${t('dailyTime')}`));
+    card.append(el('p','small',gateSummary(r,document.documentElement.lang)));
     const age=dailyAgeState(r.observedDate);if(age!=='daily')card.append(el('p','status',t(age==='stale'?'stale':'unknownDate')));
     const details=el('details','reservoir-details');details.append(el('summary','',t('moreReadings')),el('p','small',`${t('reservoirDepth')}: ${value(r.depthFeet)} ft`),el('p','small',`${t('effectiveVolume')}: ${value(r.effectiveStorageAcreFeet)} acre-ft`),el('p','small',`${t('priorDayRain')}: ${value(r.previousDayRainfallMm)} mm`));card.append(details,el('p','small',t('reservoirNote')));
     const a=el('a','',t('report'));a.href=directory?.sourceUrl||r.url;a.target='_blank';a.rel='noopener noreferrer';card.append(a);wrap.append(card);

@@ -1,0 +1,885 @@
+{
+  "schemaVersion": 1,
+  "release": "20261026-11",
+  "publicationMode": "reviewed static dated context; satellite and NASA do not automatically update",
+  "satellite": {
+    "generatedAt": "2026-10-26T15:02:29.864434+00:00",
+    "catalog": {
+      "url": "https://stac.eodc.eu/api/v1/search?collections=GFM&bbox=79.4%2C5.8%2C82.0%2C9.9&datetime=2026-10-20T00%3A00%3A00Z%2F2026-10-26T14%3A20%3A00Z&limit=100&sortby=-datetime",
+      "retrievedAt": "2026-10-26T14:18:36.149801+00:00",
+      "sha256": "f2af232d6c392554770ed7455192b3a60ebf5a94c5ca89e57ddfeffc5f28bb00",
+      "bytes": 232243
+    },
+    "sourceErrors": [
+      {
+        "region": "ratnapura",
+        "scene": "ENSEMBLE_FLOOD_20261023T124830_VV_AS020M_E027N003T3",
+        "asset": "ensemble_likelihood",
+        "status": "unreadable_source_tile",
+        "detail": "Read failed. See previous exception for details.",
+        "source": "https://data.eodc.eu/collections/GFM_LAYERS/uncertainty/AS020M/2026/10/23/ENSEMBLE_UNCERTAINTY_20261023T124830_VV_AS020M_E027N003T3.tif"
+      }
+    ],
+    "scenes": {
+      "ENSEMBLE_FLOOD_20261023T124859_VV_AS020M_E024N006T3": {
+        "observedAt": "2026-10-23T12:48:59Z",
+        "processedAt": "2026-10-23T19:25:34.780138Z",
+        "version": "v4.1.1",
+        "sources": {
+          "ensemble_flood_extent": {
+            "url": "https://data.eodc.eu/collections/GFM_LAYERS/flood_extent/AS020M/2026/10/23/ENSEMBLE_FLOOD_20261023T124859_VV_AS020M_E024N006T3.tif",
+            "retrievedAt": "2026-10-26T14:26:54.818321+00:00",
+            "sha256": "bd3b126a2dd28376d8915ca1bdeaf20e7b6f200374f79120970ecdaf0d502dae",
+            "bytes": 121450
+          },
+          "ensemble_water_extent": {
+            "url": "https://data.eodc.eu/collections/GFM_LAYERS/obswater_mask/AS020M/2026/10/23/ENSEMBLE_OBSWATER_20261023T124859_VV_AS020M_E024N006T3.tif",
+            "retrievedAt": "2026-10-26T14:27:02.795438+00:00",
+            "sha256": "4e4da8e23b113e9250da16b0a402b133e559a8ae1627b3eb9f18428be0d9c8e5",
+            "bytes": 131761
+          },
+          "reference_water_mask": {
+            "url": "https://data.eodc.eu/collections/GFM_REFWATER/V04/EQUI7_AS020M/E024N006T3/REFERENCE_WATER_OUT_S1-_IW_GRDH_1S-V_20171003T002424_20211030T125014_MONTH-_E024N006T3_AS020M_V04.tif",
+            "retrievedAt": "2026-10-26T14:27:13.638428+00:00",
+            "sha256": "9f4109f484b22ebe5c1379a5e376d23e72c4db89bc4723d3e1e5110f4113cf3f",
+            "bytes": 4560697
+          },
+          "exclusion_mask": {
+            "url": "https://data.eodc.eu/collections/GFM_LAYERS/exlusion_mask/AS020M/2026/10/23/ENSEMBLE_EXCLAYER_20261023T124859_VV_AS020M_E024N006T3.tif",
+            "retrievedAt": "2026-10-26T14:27:00.884230+00:00",
+            "sha256": "bef791e9a4d22547f5c08a849916e16cef1cf908c5c43f5e8ba0940437dde926",
+            "bytes": 479466
+          },
+          "advisory_flags": {
+            "url": "https://data.eodc.eu/collections/GFM_LAYERS/advisory_flags/AS020M/2026/10/23/ADVFLAG_20261023T124859__VV_A027_E024N006T3_EQUI7_AS020M_V0M2R2_S1.tif",
+            "retrievedAt": "2026-10-26T14:27:07.048101+00:00",
+            "sha256": "6078540cd43fd87992940a59f634237f50892ca149998cb942ee0fe3768d0a06",
+            "bytes": 843279
+          },
+          "ensemble_likelihood": {
+            "url": "https://data.eodc.eu/collections/GFM_LAYERS/uncertainty/AS020M/2026/10/23/ENSEMBLE_UNCERTAINTY_20261023T124859_VV_AS020M_E024N006T3.tif",
+            "retrievedAt": "2026-10-26T14:27:13.106372+00:00",
+            "sha256": "29b914cb39ca12d1e7c13338ea63d7e752c64c1a9ca71c9ae27317558d31d55a",
+            "bytes": 2640580
+          }
+        }
+      },
+      "ENSEMBLE_FLOOD_20261023T124859_VV_AS020M_E024N003T3": {
+        "observedAt": "2026-10-23T12:48:59Z",
+        "processedAt": "2026-10-23T19:25:36.411276Z",
+        "version": "v4.1.1",
+        "sources": {
+          "ensemble_flood_extent": {
+            "url": "https://data.eodc.eu/collections/GFM_LAYERS/flood_extent/AS020M/2026/10/23/ENSEMBLE_FLOOD_20261023T124859_VV_AS020M_E024N003T3.tif",
+            "retrievedAt": "2026-10-26T14:27:18.549028+00:00",
+            "sha256": "e42b8de55d8d9ba908b81ba3bff1b7d5dfd8e818e088cff3a6eb8f7bcd783503",
+            "bytes": 122097
+          },
+          "ensemble_water_extent": {
+            "url": "https://data.eodc.eu/collections/GFM_LAYERS/obswater_mask/AS020M/2026/10/23/ENSEMBLE_OBSWATER_20261023T124859_VV_AS020M_E024N003T3.tif",
+            "retrievedAt": "2026-10-26T14:27:24.235020+00:00",
+            "sha256": "12332c3f0e11fce8890ed4b378505601c046de3bd8e04d2ae20b865b377afc86",
+            "bytes": 129784
+          },
+          "reference_water_mask": {
+            "url": "https://data.eodc.eu/collections/GFM_REFWATER/V04/EQUI7_AS020M/E024N003T3/REFERENCE_WATER_OUT_S1-_IW_GRDH_1S-V_20171003T002453_20211030T124949_MONTH-_E024N003T3_AS020M_V04.tif",
+            "retrievedAt": "2026-10-26T14:27:34.756492+00:00",
+            "sha256": "47726dc3295d6de0b8769ae24eaedee0c0124bdf054e98e4db293c3d06c2ab24",
+            "bytes": 4839777
+          },
+          "exclusion_mask": {
+            "url": "https://data.eodc.eu/collections/GFM_LAYERS/exlusion_mask/AS020M/2026/10/23/ENSEMBLE_EXCLAYER_20261023T124859_VV_AS020M_E024N003T3.tif",
+            "retrievedAt": "2026-10-26T14:27:23.309635+00:00",
+            "sha256": "8207241b499640325405e0b1c5ff95a544ab0bab3547f2753f0af2856c3d328c",
+            "bytes": 426089
+          },
+          "advisory_flags": {
+            "url": "https://data.eodc.eu/collections/GFM_LAYERS/advisory_flags/AS020M/2026/10/23/ADVFLAG_20261023T124859__VV_A027_E024N003T3_EQUI7_AS020M_V0M2R2_S1.tif",
+            "retrievedAt": "2026-10-26T14:27:30.069757+00:00",
+            "sha256": "d67eb529abebe3298ea241493acaa6e77f413edf303648c0bccca66a474194e7",
+            "bytes": 843719
+          },
+          "ensemble_likelihood": {
+            "url": "https://data.eodc.eu/collections/GFM_LAYERS/uncertainty/AS020M/2026/10/23/ENSEMBLE_UNCERTAINTY_20261023T124859_VV_AS020M_E024N003T3.tif",
+            "retrievedAt": "2026-10-26T14:27:33.222232+00:00",
+            "sha256": "aa75eace8c6be1687dff42f02d049a6aba41fa9167ce46401ae15dbd59da10e8",
+            "bytes": 1613772
+          }
+        }
+      },
+      "ENSEMBLE_FLOOD_20261023T002434_VV_AS020M_E024N006T3": {
+        "observedAt": "2026-10-23T00:24:34Z",
+        "processedAt": "2026-10-23T02:57:13.996084Z",
+        "version": "v4.1.1",
+        "sources": {
+          "ensemble_flood_extent": {
+            "url": "https://data.eodc.eu/collections/GFM_LAYERS/flood_extent/AS020M/2026/10/23/ENSEMBLE_FLOOD_20261023T002434_VV_AS020M_E024N006T3.tif",
+            "retrievedAt": "2026-10-26T14:28:00.162138+00:00",
+            "sha256": "8da08a278531be2a4eb478c83cd19cbc6e0aa96289dfc06418e807509be2d64e",
+            "bytes": 155029
+          },
+          "ensemble_water_extent": {
+            "url": "https://data.eodc.eu/collections/GFM_LAYERS/obswater_mask/AS020M/2026/10/23/ENSEMBLE_OBSWATER_20261023T002434_VV_AS020M_E024N006T3.tif",
+            "retrievedAt": "2026-10-26T14:28:06.141318+00:00",
+            "sha256": "f30650dfd408ef2a19278d3d28d58b3bac5070dcb5c95d1f0677290fdd4c1635",
+            "bytes": 196232
+          },
+          "reference_water_mask": {
+            "url": "https://data.eodc.eu/collections/GFM_REFWATER/V04/EQUI7_AS020M/E024N006T3/REFERENCE_WATER_OUT_S1-_IW_GRDH_1S-V_20171003T002424_20211030T125014_MONTH-_E024N006T3_AS020M_V04.tif",
+            "retrievedAt": "2026-10-26T14:27:13.638428+00:00",
+            "sha256": "9f4109f484b22ebe5c1379a5e376d23e72c4db89bc4723d3e1e5110f4113cf3f",
+            "bytes": 4560697
+          },
+          "exclusion_mask": {
+            "url": "https://data.eodc.eu/collections/GFM_LAYERS/exlusion_mask/AS020M/2026/10/23/ENSEMBLE_EXCLAYER_20261023T002434_VV_AS020M_E024N006T3.tif",
+            "retrievedAt": "2026-10-26T14:28:08.411236+00:00",
+            "sha256": "d7f2f0d16871302f11b5e23b969aaf426a0d701f2476d4d5e134aaf2e870631b",
+            "bytes": 510268
+          },
+          "advisory_flags": {
+            "url": "https://data.eodc.eu/collections/GFM_LAYERS/advisory_flags/AS020M/2026/10/23/ADVFLAG_20261023T002434__VV_D019_E024N006T3_EQUI7_AS020M_V0M2R2_S1.tif",
+            "retrievedAt": "2026-10-26T14:28:07.101510+00:00",
+            "sha256": "87f342c2e3226043f58c4400e2b9a70edcc780b1e0dd04ed4e6acdf1d3e38b51",
+            "bytes": 857161
+          },
+          "ensemble_likelihood": {
+            "url": "https://data.eodc.eu/collections/GFM_LAYERS/uncertainty/AS020M/2026/10/23/ENSEMBLE_UNCERTAINTY_20261023T002434_VV_AS020M_E024N006T3.tif",
+            "retrievedAt": "2026-10-26T14:28:12.679526+00:00",
+            "sha256": "862e70f4047f8e63d2383da0ad725befeefc4c0ead081ec797c536ff82ba2960",
+            "bytes": 1056295
+          }
+        }
+      },
+      "ENSEMBLE_FLOOD_20261023T002434_VV_AS020M_E024N003T3": {
+        "observedAt": "2026-10-23T00:24:34Z",
+        "processedAt": "2026-10-23T02:57:13.524541Z",
+        "version": "v4.1.1",
+        "sources": {
+          "ensemble_flood_extent": {
+            "url": "https://data.eodc.eu/collections/GFM_LAYERS/flood_extent/AS020M/2026/10/23/ENSEMBLE_FLOOD_20261023T002434_VV_AS020M_E024N003T3.tif",
+            "retrievedAt": "2026-10-26T14:28:18.662597+00:00",
+            "sha256": "62f7bfe4ac0981e6751cf489b42ab0048a426133a35c0a9b3c599d181f3abbe6",
+            "bytes": 181136
+          },
+          "ensemble_water_extent": {
+            "url": "https://data.eodc.eu/collections/GFM_LAYERS/obswater_mask/AS020M/2026/10/23/ENSEMBLE_OBSWATER_20261023T002434_VV_AS020M_E024N003T3.tif",
+            "retrievedAt": "2026-10-26T14:28:25.035178+00:00",
+            "sha256": "90be51c50489df4889f9d67859e4d78c9c4c8c3fb4c68acfc9a1f17917a95c5d",
+            "bytes": 278540
+          },
+          "reference_water_mask": {
+            "url": "https://data.eodc.eu/collections/GFM_REFWATER/V04/EQUI7_AS020M/E024N003T3/REFERENCE_WATER_OUT_S1-_IW_GRDH_1S-V_20171003T002453_20211030T124949_MONTH-_E024N003T3_AS020M_V04.tif",
+            "retrievedAt": "2026-10-26T14:27:34.756492+00:00",
+            "sha256": "47726dc3295d6de0b8769ae24eaedee0c0124bdf054e98e4db293c3d06c2ab24",
+            "bytes": 4839777
+          },
+          "exclusion_mask": {
+            "url": "https://data.eodc.eu/collections/GFM_LAYERS/exlusion_mask/AS020M/2026/10/23/ENSEMBLE_EXCLAYER_20261023T002434_VV_AS020M_E024N003T3.tif",
+            "retrievedAt": "2026-10-26T14:28:26.834016+00:00",
+            "sha256": "b0c802172c1a57bb9e1b4d4bbccd39e87bb7e9a96f7290173a927052f0569861",
+            "bytes": 1953022
+          },
+          "advisory_flags": {
+            "url": "https://data.eodc.eu/collections/GFM_LAYERS/advisory_flags/AS020M/2026/10/23/ADVFLAG_20261023T002434__VV_D019_E024N003T3_EQUI7_AS020M_V0M2R2_S1.tif",
+            "retrievedAt": "2026-10-26T14:28:26.049674+00:00",
+            "sha256": "c24ee5af5331df8d13cc89dfd069e37484bd204e13bb6af5959628080bd9e0b5",
+            "bytes": 858560
+          },
+          "ensemble_likelihood": {
+            "url": "https://data.eodc.eu/collections/GFM_LAYERS/uncertainty/AS020M/2026/10/23/ENSEMBLE_UNCERTAINTY_20261023T002434_VV_AS020M_E024N003T3.tif",
+            "retrievedAt": "2026-10-26T14:28:39.613425+00:00",
+            "sha256": "0abbce7d6b4b532333374db1a9f06d8b3dd2f035cf9fbf6ad9e58266fe397858",
+            "bytes": 4530117
+          }
+        }
+      },
+      "ENSEMBLE_FLOOD_20261023T002405_VV_AS020M_E024N006T3": {
+        "observedAt": "2026-10-23T00:24:05Z",
+        "processedAt": "2026-10-23T02:57:50.593299Z",
+        "version": "v4.1.1",
+        "sources": {
+          "ensemble_flood_extent": {
+            "url": "https://data.eodc.eu/collections/GFM_LAYERS/flood_extent/AS020M/2026/10/23/ENSEMBLE_FLOOD_20261023T002405_VV_AS020M_E024N006T3.tif",
+            "retrievedAt": "2026-10-26T14:28:44.035131+00:00",
+            "sha256": "0d3c6cab0cb19b242fef3531f6c6bdeed7c03c02e8738a02e5383187dbce6fa3",
+            "bytes": 193681
+          },
+          "ensemble_water_extent": {
+            "url": "https://data.eodc.eu/collections/GFM_LAYERS/obswater_mask/AS020M/2026/10/23/ENSEMBLE_OBSWATER_20261023T002405_VV_AS020M_E024N006T3.tif",
+            "retrievedAt": "2026-10-26T14:28:51.417474+00:00",
+            "sha256": "ec2d52b99934ddf3b7f1ec8290606dd243d908320841bee175a07b841fc59560",
+            "bytes": 252111
+          },
+          "reference_water_mask": {
+            "url": "https://data.eodc.eu/collections/GFM_REFWATER/V04/EQUI7_AS020M/E024N006T3/REFERENCE_WATER_OUT_S1-_IW_GRDH_1S-V_20171003T002424_20211030T125014_MONTH-_E024N006T3_AS020M_V04.tif",
+            "retrievedAt": "2026-10-26T14:27:13.638428+00:00",
+            "sha256": "9f4109f484b22ebe5c1379a5e376d23e72c4db89bc4723d3e1e5110f4113cf3f",
+            "bytes": 4560697
+          },
+          "exclusion_mask": {
+            "url": "https://data.eodc.eu/collections/GFM_LAYERS/exlusion_mask/AS020M/2026/10/23/ENSEMBLE_EXCLAYER_20261023T002405_VV_AS020M_E024N006T3.tif",
+            "retrievedAt": "2026-10-26T14:28:51.884088+00:00",
+            "sha256": "6be36ad6a3838f75169f7cfcdcde0177c159b391a6412fe54b9b9c490955ad43",
+            "bytes": 708413
+          },
+          "advisory_flags": {
+            "url": "https://data.eodc.eu/collections/GFM_LAYERS/advisory_flags/AS020M/2026/10/23/ADVFLAG_20261023T002405__VV_D019_E024N006T3_EQUI7_AS020M_V0M2R2_S1.tif",
+            "retrievedAt": "2026-10-26T14:28:51.824661+00:00",
+            "sha256": "d3e74cb5a3b4464c2bf848f97e95c6ad5605eed6f861f265510dfbab464c4b15",
+            "bytes": 861468
+          },
+          "ensemble_likelihood": {
+            "url": "https://data.eodc.eu/collections/GFM_LAYERS/uncertainty/AS020M/2026/10/23/ENSEMBLE_UNCERTAINTY_20261023T002405_VV_AS020M_E024N006T3.tif",
+            "retrievedAt": "2026-10-26T14:28:57.629714+00:00",
+            "sha256": "3e61bc157db43287b8cb28eeaa3a7d04dec72dcab2aa2af5bbfab49a7d6ce3e0",
+            "bytes": 1738487
+          }
+        }
+      },
+      "ENSEMBLE_FLOOD_20261023T124830_VV_AS020M_E027N003T3": {
+        "observedAt": "2026-10-23T12:48:30Z",
+        "processedAt": "2026-10-23T19:25:51.763579Z",
+        "version": "v4.1.1",
+        "sources": {
+          "ensemble_flood_extent": {
+            "url": "https://data.eodc.eu/collections/GFM_LAYERS/flood_extent/AS020M/2026/10/23/ENSEMBLE_FLOOD_20261023T124830_VV_AS020M_E027N003T3.tif",
+            "retrievedAt": "2026-10-26T14:29:38.454157+00:00",
+            "sha256": "298583a32e0ff8d1d89d14ee7eb746a4dc720661ce5c7454dbd799e4744fefbf",
+            "bytes": 734091
+          },
+          "ensemble_water_extent": {
+            "url": "https://data.eodc.eu/collections/GFM_LAYERS/obswater_mask/AS020M/2026/10/23/ENSEMBLE_OBSWATER_20261023T124830_VV_AS020M_E027N003T3.tif",
+            "retrievedAt": "2026-10-26T14:29:42.543928+00:00",
+            "sha256": "8e551ef5a9af87bbaf017044e00756ed3c862ceeafe3115f41678beaf40360aa",
+            "bytes": 532037
+          },
+          "reference_water_mask": {
+            "url": "https://data.eodc.eu/collections/GFM_REFWATER/V04/EQUI7_AS020M/E027N003T3/REFERENCE_WATER_OUT_S1-_IW_GRDH_1S-V_20171003T002453_20211030T124949_MONTH-_E027N003T3_AS020M_V04.tif",
+            "retrievedAt": "2026-10-26T14:30:09.827996+00:00",
+            "sha256": "5003b44b4ba90332161ed1c20c594e94067a42a595fcd508c5cdd475717b59e5",
+            "bytes": 4479478
+          },
+          "exclusion_mask": {
+            "url": "https://data.eodc.eu/collections/GFM_LAYERS/exlusion_mask/AS020M/2026/10/23/ENSEMBLE_EXCLAYER_20261023T124830_VV_AS020M_E027N003T3.tif",
+            "retrievedAt": "2026-10-26T14:31:28.266807+00:00",
+            "sha256": "d9e79f83776873745ea64c408609a04e6699037e6ce412585cddec11eead6c31",
+            "bytes": 3597981
+          },
+          "advisory_flags": {
+            "url": "https://data.eodc.eu/collections/GFM_LAYERS/advisory_flags/AS020M/2026/10/23/ADVFLAG_20261023T124830__VV_A027_E027N003T3_EQUI7_AS020M_V0M2R2_S1.tif",
+            "retrievedAt": "2026-10-26T14:29:52.413653+00:00",
+            "sha256": "1327adb0dc8ed1f5f5d5cf05bcc065d9ef9bab41e51c837f25ac7c68b3bf9d23",
+            "bytes": 979723
+          },
+          "ensemble_likelihood": {
+            "url": "https://data.eodc.eu/collections/GFM_LAYERS/uncertainty/AS020M/2026/10/23/ENSEMBLE_UNCERTAINTY_20261023T124830_VV_AS020M_E027N003T3.tif",
+            "retrievedAt": "2026-10-26T14:32:29.198442+00:00",
+            "sha256": "a59f64be8111b524c710b112f69b5ef2ed60fce1068edaf15bea411d6216c194",
+            "bytes": 6045260
+          }
+        }
+      }
+    },
+    "attribution": "Contains modified Copernicus Emergency Management Service information 2026. Native categorical pixels subset and vectorized; no spatial resampling.",
+    "terms": "https://global-flood.emergency.copernicus.eu/terms-of-service/"
+  },
+  "rainfall": {
+    "generatedAt": "2026-10-26T15:18:52.721000Z",
+    "contract": {
+      "product": "GPM_3IMERGHHE",
+      "version": "07",
+      "run": "Early",
+      "doi": "10.5067/GPM/IMERG/3B-HH-E/07",
+      "quantity": "estimated precipitation rate",
+      "unit": "mm/hr",
+      "intervalMinutes": 30,
+      "nativeGridDegrees": 0.1,
+      "spatialSupport": "approximately 10 km grid; not a point rain gauge",
+      "nominalLatencyHours": 4,
+      "documentedServiceRefreshHours": 3,
+      "missingValueMeaning": "NoData, unavailable or threshold-masked; never assumed zero",
+      "source": "https://gis.earthdata.nasa.gov/portal/rest/services/GESDISC/GPM_3IMERGHHE/ImageServer",
+      "item": "https://gis.earthdata.nasa.gov/portal/sharing/rest/content/items/e92c832b62f84b41a736ce93d354ea7c",
+      "scope": "local experiment, not public hazard evidence"
+    },
+    "captures": [
+      {
+        "url": "https://gis.earthdata.nasa.gov/portal/rest/services/GESDISC/GPM_3IMERGHHE/ImageServer?f=pjson",
+        "method": "GET",
+        "requestedAt": "2026-10-26T15:17:44.098000Z",
+        "retrievedAt": "2026-10-26T15:17:46.089000Z",
+        "sha256": "445ab596d02ea54f54c8a3b50b55cf791cfce24f1f2fecea4181a18fa5990c19",
+        "bytes": 6381,
+        "rawFile": "01.json",
+        "status": "received"
+      },
+      {
+        "url": "https://gis.earthdata.nasa.gov/portal/sharing/rest/content/items/e92c832b62f84b41a736ce93d354ea7c?f=pjson",
+        "method": "GET",
+        "requestedAt": "2026-10-26T15:17:46.091000Z",
+        "retrievedAt": "2026-10-26T15:17:47.202000Z",
+        "sha256": "e6878f60879ae127f7c0b7c4e946b073ffab9cbd0352da7446ac450f99453061",
+        "bytes": 15741,
+        "rawFile": "02.json",
+        "status": "received"
+      },
+      {
+        "url": "https://gis.earthdata.nasa.gov/portal/rest/services/GESDISC/GPM_3IMERGHHE/ImageServer/query?f=pjson&where=category%3D1&time=1792972800000%2C1793019600000&outFields=objectid%2Cname%2Ccategory%2Cvariable%2Cdimensions%2Cstdtime&returnGeometry=false&orderByFields=stdtime+ASC&resultRecordCount=49",
+        "method": "GET",
+        "requestedAt": "2026-10-26T15:17:47.203000Z",
+        "retrievedAt": "2026-10-26T15:17:48.412000Z",
+        "sha256": "521273609326078bbd05017ff5fcf97c1210b5e6e543647d3ffad8c41965fd75",
+        "bytes": 6993,
+        "rawFile": "03.json",
+        "status": "received"
+      },
+      {
+        "url": "https://gis.earthdata.nasa.gov/portal/rest/services/GESDISC/GPM_3IMERGHHE/ImageServer/611473/info?f=pjson",
+        "method": "GET",
+        "requestedAt": "2026-10-26T15:17:48.414000Z",
+        "retrievedAt": "2026-10-26T15:17:49.741000Z",
+        "sha256": "6985b23903178df76a3d2f7b9809064d341faf0d41fc9a57fe62b9f2e89b756d",
+        "bytes": 495,
+        "rawFile": "04.json",
+        "status": "received"
+      },
+      {
+        "url": "https://gis.earthdata.nasa.gov/portal/rest/services/GESDISC/GPM_3IMERGHHE/ImageServer/getSamples?f=pjson&geometry=%7B%22points%22%3A+%5B%5B79.75%2C+7.95%5D%2C+%5B79.75%2C+8.05%5D%2C+%5B79.75%2C+8.15%5D%2C+%5B79.75%2C+8.25%5D%2C+%5B79.85%2C+7.95%5D%2C+%5B79.85%2C+8.05%5D%2C+%5B79.85%2C+8.15%5D%2C+%5B79.85%2C+8.25%5D%2C+%5B79.95%2C+7.95%5D%2C+%5B79.95%2C+8.05%5D%2C+%5B79.95%2C+8.15%5D%2C+%5B79.95%2C+8.25%5D%2C+%5B80.05%2C+7.95%5D%2C+%5B80.05%2C+8.05%5D%2C+%5B80.05%2C+8.15%5D%2C+%5B80.05%2C+8.25%5D%2C+%5B80.15%2C+7.95%5D%2C+%5B80.15%2C+8.05%5D%2C+%5B80.15%2C+8.15%5D%2C+%5B80.15%2C+8.25%5D%2C+%5B80.35%2C+6.65%5D%2C+%5B80.35%2C+6.75%5D%2C+%5B80.45%2C+6.65%5D%2C+%5B80.45%2C+6.75%5D%2C+%5B80.55%2C+6.65%5D%2C+%5B80.55%2C+6.75%5D%5D%2C+%22spatialReference%22%3A+%7B%22wkid%22%3A+4326%7D%7D&geometryType=esriGeometryMultipoint&mosaicRule=%7B%22mosaicMethod%22%3A+%22esriMosaicLockRaster%22%2C+%22lockRasterIds%22%3A+%5B611473%5D%2C+%22mosaicOperation%22%3A+%22MT_FIRST%22%7D&time=1792972800000&pixelSize=0.1%2C0.1&interpolation=RSP_NearestNeighbor&returnFirstValueOnly=false&outFields=objectid%2Cname%2Ccategory%2Cvariable%2Cdimensions%2Cstdtime",
+        "method": "GET",
+        "requestedAt": "2026-10-26T15:17:49.742000Z",
+        "retrievedAt": "2026-10-26T15:17:51.088000Z",
+        "sha256": "78853053d8b287e3b2b9d272f5c48173b263a536675988d24375a5d9fea80ad0",
+        "bytes": 12897,
+        "rawFile": "05.json",
+        "status": "received"
+      },
+      {
+        "url": "https://gis.earthdata.nasa.gov/portal/rest/services/GESDISC/GPM_3IMERGHHE/ImageServer/611474/info?f=pjson",
+        "method": "GET",
+        "requestedAt": "2026-10-26T15:17:51.089000Z",
+        "retrievedAt": "2026-10-26T15:17:52.120000Z",
+        "sha256": "6985b23903178df76a3d2f7b9809064d341faf0d41fc9a57fe62b9f2e89b756d",
+        "bytes": 495,
+        "rawFile": "06.json",
+        "status": "received"
+      },
+      {
+        "url": "https://gis.earthdata.nasa.gov/portal/rest/services/GESDISC/GPM_3IMERGHHE/ImageServer/getSamples?f=pjson&geometry=%7B%22points%22%3A+%5B%5B79.75%2C+7.95%5D%2C+%5B79.75%2C+8.05%5D%2C+%5B79.75%2C+8.15%5D%2C+%5B79.75%2C+8.25%5D%2C+%5B79.85%2C+7.95%5D%2C+%5B79.85%2C+8.05%5D%2C+%5B79.85%2C+8.15%5D%2C+%5B79.85%2C+8.25%5D%2C+%5B79.95%2C+7.95%5D%2C+%5B79.95%2C+8.05%5D%2C+%5B79.95%2C+8.15%5D%2C+%5B79.95%2C+8.25%5D%2C+%5B80.05%2C+7.95%5D%2C+%5B80.05%2C+8.05%5D%2C+%5B80.05%2C+8.15%5D%2C+%5B80.05%2C+8.25%5D%2C+%5B80.15%2C+7.95%5D%2C+%5B80.15%2C+8.05%5D%2C+%5B80.15%2C+8.15%5D%2C+%5B80.15%2C+8.25%5D%2C+%5B80.35%2C+6.65%5D%2C+%5B80.35%2C+6.75%5D%2C+%5B80.45%2C+6.65%5D%2C+%5B80.45%2C+6.75%5D%2C+%5B80.55%2C+6.65%5D%2C+%5B80.55%2C+6.75%5D%5D%2C+%22spatialReference%22%3A+%7B%22wkid%22%3A+4326%7D%7D&geometryType=esriGeometryMultipoint&mosaicRule=%7B%22mosaicMethod%22%3A+%22esriMosaicLockRaster%22%2C+%22lockRasterIds%22%3A+%5B611474%5D%2C+%22mosaicOperation%22%3A+%22MT_FIRST%22%7D&time=1792974600000&pixelSize=0.1%2C0.1&interpolation=RSP_NearestNeighbor&returnFirstValueOnly=false&outFields=objectid%2Cname%2Ccategory%2Cvariable%2Cdimensions%2Cstdtime",
+        "method": "GET",
+        "requestedAt": "2026-10-26T15:17:52.121000Z",
+        "retrievedAt": "2026-10-26T15:17:53.560000Z",
+        "sha256": "da0f0c90cf0a189d11d57266df430a21bca7db57cd6d4b74760b782539335860",
+        "bytes": 12899,
+        "rawFile": "07.json",
+        "status": "received"
+      },
+      {
+        "url": "https://gis.earthdata.nasa.gov/portal/rest/services/GESDISC/GPM_3IMERGHHE/ImageServer/611475/info?f=pjson",
+        "method": "GET",
+        "requestedAt": "2026-10-26T15:17:53.564000Z",
+        "retrievedAt": "2026-10-26T15:17:54.567000Z",
+        "sha256": "6985b23903178df76a3d2f7b9809064d341faf0d41fc9a57fe62b9f2e89b756d",
+        "bytes": 495,
+        "rawFile": "08.json",
+        "status": "received"
+      },
+      {
+        "url": "https://gis.earthdata.nasa.gov/portal/rest/services/GESDISC/GPM_3IMERGHHE/ImageServer/getSamples?f=pjson&geometry=%7B%22points%22%3A+%5B%5B79.75%2C+7.95%5D%2C+%5B79.75%2C+8.05%5D%2C+%5B79.75%2C+8.15%5D%2C+%5B79.75%2C+8.25%5D%2C+%5B79.85%2C+7.95%5D%2C+%5B79.85%2C+8.05%5D%2C+%5B79.85%2C+8.15%5D%2C+%5B79.85%2C+8.25%5D%2C+%5B79.95%2C+7.95%5D%2C+%5B79.95%2C+8.05%5D%2C+%5B79.95%2C+8.15%5D%2C+%5B79.95%2C+8.25%5D%2C+%5B80.05%2C+7.95%5D%2C+%5B80.05%2C+8.05%5D%2C+%5B80.05%2C+8.15%5D%2C+%5B80.05%2C+8.25%5D%2C+%5B80.15%2C+7.95%5D%2C+%5B80.15%2C+8.05%5D%2C+%5B80.15%2C+8.15%5D%2C+%5B80.15%2C+8.25%5D%2C+%5B80.35%2C+6.65%5D%2C+%5B80.35%2C+6.75%5D%2C+%5B80.45%2C+6.65%5D%2C+%5B80.45%2C+6.75%5D%2C+%5B80.55%2C+6.65%5D%2C+%5B80.55%2C+6.75%5D%5D%2C+%22spatialReference%22%3A+%7B%22wkid%22%3A+4326%7D%7D&geometryType=esriGeometryMultipoint&mosaicRule=%7B%22mosaicMethod%22%3A+%22esriMosaicLockRaster%22%2C+%22lockRasterIds%22%3A+%5B611475%5D%2C+%22mosaicOperation%22%3A+%22MT_FIRST%22%7D&time=1792976400000&pixelSize=0.1%2C0.1&interpolation=RSP_NearestNeighbor&returnFirstValueOnly=false&outFields=objectid%2Cname%2Ccategory%2Cvariable%2Cdimensions%2Cstdtime",
+        "method": "GET",
+        "requestedAt": "2026-10-26T15:17:54.568000Z",
+        "retrievedAt": "2026-10-26T15:17:55.559000Z",
+        "sha256": "3b93c8a9c8113b2bc216821efb99a3848d8145da3e0f42d04dc5f3ef9ad5659c",
+        "bytes": 184,
+        "rawFile": "09.json",
+        "status": "api_error"
+      },
+      {
+        "url": "https://gis.earthdata.nasa.gov/portal/rest/services/GESDISC/GPM_3IMERGHHE/ImageServer/611476/info?f=pjson",
+        "method": "GET",
+        "requestedAt": "2026-10-26T15:17:55.560000Z",
+        "retrievedAt": "2026-10-26T15:17:56.646000Z",
+        "sha256": "6985b23903178df76a3d2f7b9809064d341faf0d41fc9a57fe62b9f2e89b756d",
+        "bytes": 495,
+        "rawFile": "10.json",
+        "status": "received"
+      },
+      {
+        "url": "https://gis.earthdata.nasa.gov/portal/rest/services/GESDISC/GPM_3IMERGHHE/ImageServer/getSamples?f=pjson&geometry=%7B%22points%22%3A+%5B%5B79.75%2C+7.95%5D%2C+%5B79.75%2C+8.05%5D%2C+%5B79.75%2C+8.15%5D%2C+%5B79.75%2C+8.25%5D%2C+%5B79.85%2C+7.95%5D%2C+%5B79.85%2C+8.05%5D%2C+%5B79.85%2C+8.15%5D%2C+%5B79.85%2C+8.25%5D%2C+%5B79.95%2C+7.95%5D%2C+%5B79.95%2C+8.05%5D%2C+%5B79.95%2C+8.15%5D%2C+%5B79.95%2C+8.25%5D%2C+%5B80.05%2C+7.95%5D%2C+%5B80.05%2C+8.05%5D%2C+%5B80.05%2C+8.15%5D%2C+%5B80.05%2C+8.25%5D%2C+%5B80.15%2C+7.95%5D%2C+%5B80.15%2C+8.05%5D%2C+%5B80.15%2C+8.15%5D%2C+%5B80.15%2C+8.25%5D%2C+%5B80.35%2C+6.65%5D%2C+%5B80.35%2C+6.75%5D%2C+%5B80.45%2C+6.65%5D%2C+%5B80.45%2C+6.75%5D%2C+%5B80.55%2C+6.65%5D%2C+%5B80.55%2C+6.75%5D%5D%2C+%22spatialReference%22%3A+%7B%22wkid%22%3A+4326%7D%7D&geometryType=esriGeometryMultipoint&mosaicRule=%7B%22mosaicMethod%22%3A+%22esriMosaicLockRaster%22%2C+%22lockRasterIds%22%3A+%5B611476%5D%2C+%22mosaicOperation%22%3A+%22MT_FIRST%22%7D&time=1792978200000&pixelSize=0.1%2C0.1&interpolation=RSP_NearestNeighbor&returnFirstValueOnly=false&outFields=objectid%2Cname%2Ccategory%2Cvariable%2Cdimensions%2Cstdtime",
+        "method": "GET",
+        "requestedAt": "2026-10-26T15:17:56.647000Z",
+        "retrievedAt": "2026-10-26T15:17:57.845000Z",
+        "sha256": "6c69f45c9330a6e443e65690a621e437046797a388e6521a4e75921ebf0f3abe",
+        "bytes": 204,
+        "rawFile": "11.json",
+        "status": "api_error"
+      },
+      {
+        "url": "https://gis.earthdata.nasa.gov/portal/rest/services/GESDISC/GPM_3IMERGHHE/ImageServer/611477/info?f=pjson",
+        "method": "GET",
+        "requestedAt": "2026-10-26T15:17:57.846000Z",
+        "retrievedAt": "2026-10-26T15:17:58.856000Z",
+        "sha256": "6985b23903178df76a3d2f7b9809064d341faf0d41fc9a57fe62b9f2e89b756d",
+        "bytes": 495,
+        "rawFile": "12.json",
+        "status": "received"
+      },
+      {
+        "url": "https://gis.earthdata.nasa.gov/portal/rest/services/GESDISC/GPM_3IMERGHHE/ImageServer/getSamples?f=pjson&geometry=%7B%22points%22%3A+%5B%5B79.75%2C+7.95%5D%2C+%5B79.75%2C+8.05%5D%2C+%5B79.75%2C+8.15%5D%2C+%5B79.75%2C+8.25%5D%2C+%5B79.85%2C+7.95%5D%2C+%5B79.85%2C+8.05%5D%2C+%5B79.85%2C+8.15%5D%2C+%5B79.85%2C+8.25%5D%2C+%5B79.95%2C+7.95%5D%2C+%5B79.95%2C+8.05%5D%2C+%5B79.95%2C+8.15%5D%2C+%5B79.95%2C+8.25%5D%2C+%5B80.05%2C+7.95%5D%2C+%5B80.05%2C+8.05%5D%2C+%5B80.05%2C+8.15%5D%2C+%5B80.05%2C+8.25%5D%2C+%5B80.15%2C+7.95%5D%2C+%5B80.15%2C+8.05%5D%2C+%5B80.15%2C+8.15%5D%2C+%5B80.15%2C+8.25%5D%2C+%5B80.35%2C+6.65%5D%2C+%5B80.35%2C+6.75%5D%2C+%5B80.45%2C+6.65%5D%2C+%5B80.45%2C+6.75%5D%2C+%5B80.55%2C+6.65%5D%2C+%5B80.55%2C+6.75%5D%5D%2C+%22spatialReference%22%3A+%7B%22wkid%22%3A+4326%7D%7D&geometryType=esriGeometryMultipoint&mosaicRule=%7B%22mosaicMethod%22%3A+%22esriMosaicLockRaster%22%2C+%22lockRasterIds%22%3A+%5B611477%5D%2C+%22mosaicOperation%22%3A+%22MT_FIRST%22%7D&time=1792980000000&pixelSize=0.1%2C0.1&interpolation=RSP_NearestNeighbor&returnFirstValueOnly=false&outFields=objectid%2Cname%2Ccategory%2Cvariable%2Cdimensions%2Cstdtime",
+        "method": "GET",
+        "requestedAt": "2026-10-26T15:17:58.857000Z",
+        "retrievedAt": "2026-10-26T15:18:00.118000Z",
+        "sha256": "3b93c8a9c8113b2bc216821efb99a3848d8145da3e0f42d04dc5f3ef9ad5659c",
+        "bytes": 184,
+        "rawFile": "13.json",
+        "status": "api_error"
+      },
+      {
+        "url": "https://gis.earthdata.nasa.gov/portal/rest/services/GESDISC/GPM_3IMERGHHE/ImageServer/611478/info?f=pjson",
+        "method": "GET",
+        "requestedAt": "2026-10-26T15:18:00.120000Z",
+        "retrievedAt": "2026-10-26T15:18:02.430000Z",
+        "sha256": "6985b23903178df76a3d2f7b9809064d341faf0d41fc9a57fe62b9f2e89b756d",
+        "bytes": 495,
+        "rawFile": "14.json",
+        "status": "received"
+      },
+      {
+        "url": "https://gis.earthdata.nasa.gov/portal/rest/services/GESDISC/GPM_3IMERGHHE/ImageServer/getSamples?f=pjson&geometry=%7B%22points%22%3A+%5B%5B79.75%2C+7.95%5D%2C+%5B79.75%2C+8.05%5D%2C+%5B79.75%2C+8.15%5D%2C+%5B79.75%2C+8.25%5D%2C+%5B79.85%2C+7.95%5D%2C+%5B79.85%2C+8.05%5D%2C+%5B79.85%2C+8.15%5D%2C+%5B79.85%2C+8.25%5D%2C+%5B79.95%2C+7.95%5D%2C+%5B79.95%2C+8.05%5D%2C+%5B79.95%2C+8.15%5D%2C+%5B79.95%2C+8.25%5D%2C+%5B80.05%2C+7.95%5D%2C+%5B80.05%2C+8.05%5D%2C+%5B80.05%2C+8.15%5D%2C+%5B80.05%2C+8.25%5D%2C+%5B80.15%2C+7.95%5D%2C+%5B80.15%2C+8.05%5D%2C+%5B80.15%2C+8.15%5D%2C+%5B80.15%2C+8.25%5D%2C+%5B80.35%2C+6.65%5D%2C+%5B80.35%2C+6.75%5D%2C+%5B80.45%2C+6.65%5D%2C+%5B80.45%2C+6.75%5D%2C+%5B80.55%2C+6.65%5D%2C+%5B80.55%2C+6.75%5D%5D%2C+%22spatialReference%22%3A+%7B%22wkid%22%3A+4326%7D%7D&geometryType=esriGeometryMultipoint&mosaicRule=%7B%22mosaicMethod%22%3A+%22esriMosaicLockRaster%22%2C+%22lockRasterIds%22%3A+%5B611478%5D%2C+%22mosaicOperation%22%3A+%22MT_FIRST%22%7D&time=1792981800000&pixelSize=0.1%2C0.1&interpolation=RSP_NearestNeighbor&returnFirstValueOnly=false&outFields=objectid%2Cname%2Ccategory%2Cvariable%2Cdimensions%2Cstdtime",
+        "method": "GET",
+        "requestedAt": "2026-10-26T15:18:02.432000Z",
+        "retrievedAt": "2026-10-26T15:18:03.412000Z",
+        "sha256": "3b93c8a9c8113b2bc216821efb99a3848d8145da3e0f42d04dc5f3ef9ad5659c",
+        "bytes": 184,
+        "rawFile": "15.json",
+        "status": "api_error"
+      },
+      {
+        "url": "https://gis.earthdata.nasa.gov/portal/rest/services/GESDISC/GPM_3IMERGHHE/ImageServer/611479/info?f=pjson",
+        "method": "GET",
+        "requestedAt": "2026-10-26T15:18:03.414000Z",
+        "retrievedAt": "2026-10-26T15:18:04.412000Z",
+        "sha256": "6985b23903178df76a3d2f7b9809064d341faf0d41fc9a57fe62b9f2e89b756d",
+        "bytes": 495,
+        "rawFile": "16.json",
+        "status": "received"
+      },
+      {
+        "url": "https://gis.earthdata.nasa.gov/portal/rest/services/GESDISC/GPM_3IMERGHHE/ImageServer/getSamples?f=pjson&geometry=%7B%22points%22%3A+%5B%5B79.75%2C+7.95%5D%2C+%5B79.75%2C+8.05%5D%2C+%5B79.75%2C+8.15%5D%2C+%5B79.75%2C+8.25%5D%2C+%5B79.85%2C+7.95%5D%2C+%5B79.85%2C+8.05%5D%2C+%5B79.85%2C+8.15%5D%2C+%5B79.85%2C+8.25%5D%2C+%5B79.95%2C+7.95%5D%2C+%5B79.95%2C+8.05%5D%2C+%5B79.95%2C+8.15%5D%2C+%5B79.95%2C+8.25%5D%2C+%5B80.05%2C+7.95%5D%2C+%5B80.05%2C+8.05%5D%2C+%5B80.05%2C+8.15%5D%2C+%5B80.05%2C+8.25%5D%2C+%5B80.15%2C+7.95%5D%2C+%5B80.15%2C+8.05%5D%2C+%5B80.15%2C+8.15%5D%2C+%5B80.15%2C+8.25%5D%2C+%5B80.35%2C+6.65%5D%2C+%5B80.35%2C+6.75%5D%2C+%5B80.45%2C+6.65%5D%2C+%5B80.45%2C+6.75%5D%2C+%5B80.55%2C+6.65%5D%2C+%5B80.55%2C+6.75%5D%5D%2C+%22spatialReference%22%3A+%7B%22wkid%22%3A+4326%7D%7D&geometryType=esriGeometryMultipoint&mosaicRule=%7B%22mosaicMethod%22%3A+%22esriMosaicLockRaster%22%2C+%22lockRasterIds%22%3A+%5B611479%5D%2C+%22mosaicOperation%22%3A+%22MT_FIRST%22%7D&time=1792983600000&pixelSize=0.1%2C0.1&interpolation=RSP_NearestNeighbor&returnFirstValueOnly=false&outFields=objectid%2Cname%2Ccategory%2Cvariable%2Cdimensions%2Cstdtime",
+        "method": "GET",
+        "requestedAt": "2026-10-26T15:18:04.414000Z",
+        "retrievedAt": "2026-10-26T15:18:05.513000Z",
+        "sha256": "3b93c8a9c8113b2bc216821efb99a3848d8145da3e0f42d04dc5f3ef9ad5659c",
+        "bytes": 184,
+        "rawFile": "17.json",
+        "status": "api_error"
+      },
+      {
+        "url": "https://gis.earthdata.nasa.gov/portal/rest/services/GESDISC/GPM_3IMERGHHE/ImageServer/611480/info?f=pjson",
+        "method": "GET",
+        "requestedAt": "2026-10-26T15:18:05.516000Z",
+        "retrievedAt": "2026-10-26T15:18:06.639000Z",
+        "sha256": "6985b23903178df76a3d2f7b9809064d341faf0d41fc9a57fe62b9f2e89b756d",
+        "bytes": 495,
+        "rawFile": "18.json",
+        "status": "received"
+      },
+      {
+        "url": "https://gis.earthdata.nasa.gov/portal/rest/services/GESDISC/GPM_3IMERGHHE/ImageServer/getSamples?f=pjson&geometry=%7B%22points%22%3A+%5B%5B79.75%2C+7.95%5D%2C+%5B79.75%2C+8.05%5D%2C+%5B79.75%2C+8.15%5D%2C+%5B79.75%2C+8.25%5D%2C+%5B79.85%2C+7.95%5D%2C+%5B79.85%2C+8.05%5D%2C+%5B79.85%2C+8.15%5D%2C+%5B79.85%2C+8.25%5D%2C+%5B79.95%2C+7.95%5D%2C+%5B79.95%2C+8.05%5D%2C+%5B79.95%2C+8.15%5D%2C+%5B79.95%2C+8.25%5D%2C+%5B80.05%2C+7.95%5D%2C+%5B80.05%2C+8.05%5D%2C+%5B80.05%2C+8.15%5D%2C+%5B80.05%2C+8.25%5D%2C+%5B80.15%2C+7.95%5D%2C+%5B80.15%2C+8.05%5D%2C+%5B80.15%2C+8.15%5D%2C+%5B80.15%2C+8.25%5D%2C+%5B80.35%2C+6.65%5D%2C+%5B80.35%2C+6.75%5D%2C+%5B80.45%2C+6.65%5D%2C+%5B80.45%2C+6.75%5D%2C+%5B80.55%2C+6.65%5D%2C+%5B80.55%2C+6.75%5D%5D%2C+%22spatialReference%22%3A+%7B%22wkid%22%3A+4326%7D%7D&geometryType=esriGeometryMultipoint&mosaicRule=%7B%22mosaicMethod%22%3A+%22esriMosaicLockRaster%22%2C+%22lockRasterIds%22%3A+%5B611480%5D%2C+%22mosaicOperation%22%3A+%22MT_FIRST%22%7D&time=1792985400000&pixelSize=0.1%2C0.1&interpolation=RSP_NearestNeighbor&returnFirstValueOnly=false&outFields=objectid%2Cname%2Ccategory%2Cvariable%2Cdimensions%2Cstdtime",
+        "method": "GET",
+        "requestedAt": "2026-10-26T15:18:06.640000Z",
+        "retrievedAt": "2026-10-26T15:18:07.625000Z",
+        "sha256": "3b93c8a9c8113b2bc216821efb99a3848d8145da3e0f42d04dc5f3ef9ad5659c",
+        "bytes": 184,
+        "rawFile": "19.json",
+        "status": "api_error"
+      },
+      {
+        "url": "https://gis.earthdata.nasa.gov/portal/rest/services/GESDISC/GPM_3IMERGHHE/ImageServer/611481/info?f=pjson",
+        "method": "GET",
+        "requestedAt": "2026-10-26T15:18:07.626000Z",
+        "retrievedAt": "2026-10-26T15:18:08.686000Z",
+        "sha256": "6985b23903178df76a3d2f7b9809064d341faf0d41fc9a57fe62b9f2e89b756d",
+        "bytes": 495,
+        "rawFile": "20.json",
+        "status": "received"
+      },
+      {
+        "url": "https://gis.earthdata.nasa.gov/portal/rest/services/GESDISC/GPM_3IMERGHHE/ImageServer/getSamples?f=pjson&geometry=%7B%22points%22%3A+%5B%5B79.75%2C+7.95%5D%2C+%5B79.75%2C+8.05%5D%2C+%5B79.75%2C+8.15%5D%2C+%5B79.75%2C+8.25%5D%2C+%5B79.85%2C+7.95%5D%2C+%5B79.85%2C+8.05%5D%2C+%5B79.85%2C+8.15%5D%2C+%5B79.85%2C+8.25%5D%2C+%5B79.95%2C+7.95%5D%2C+%5B79.95%2C+8.05%5D%2C+%5B79.95%2C+8.15%5D%2C+%5B79.95%2C+8.25%5D%2C+%5B80.05%2C+7.95%5D%2C+%5B80.05%2C+8.05%5D%2C+%5B80.05%2C+8.15%5D%2C+%5B80.05%2C+8.25%5D%2C+%5B80.15%2C+7.95%5D%2C+%5B80.15%2C+8.05%5D%2C+%5B80.15%2C+8.15%5D%2C+%5B80.15%2C+8.25%5D%2C+%5B80.35%2C+6.65%5D%2C+%5B80.35%2C+6.75%5D%2C+%5B80.45%2C+6.65%5D%2C+%5B80.45%2C+6.75%5D%2C+%5B80.55%2C+6.65%5D%2C+%5B80.55%2C+6.75%5D%5D%2C+%22spatialReference%22%3A+%7B%22wkid%22%3A+4326%7D%7D&geometryType=esriGeometryMultipoint&mosaicRule=%7B%22mosaicMethod%22%3A+%22esriMosaicLockRaster%22%2C+%22lockRasterIds%22%3A+%5B611481%5D%2C+%22mosaicOperation%22%3A+%22MT_FIRST%22%7D&time=1792987200000&pixelSize=0.1%2C0.1&interpolation=RSP_NearestNeighbor&returnFirstValueOnly=false&outFields=objectid%2Cname%2Ccategory%2Cvariable%2Cdimensions%2Cstdtime",
+        "method": "GET",
+        "requestedAt": "2026-10-26T15:18:08.687000Z",
+        "retrievedAt": "2026-10-26T15:18:09.664000Z",
+        "sha256": "3b93c8a9c8113b2bc216821efb99a3848d8145da3e0f42d04dc5f3ef9ad5659c",
+        "bytes": 184,
+        "rawFile": "21.json",
+        "status": "api_error"
+      },
+      {
+        "url": "https://gis.earthdata.nasa.gov/portal/rest/services/GESDISC/GPM_3IMERGHHE/ImageServer/611482/info?f=pjson",
+        "method": "GET",
+        "requestedAt": "2026-10-26T15:18:09.665000Z",
+        "retrievedAt": "2026-10-26T15:18:10.654000Z",
+        "sha256": "6985b23903178df76a3d2f7b9809064d341faf0d41fc9a57fe62b9f2e89b756d",
+        "bytes": 495,
+        "rawFile": "22.json",
+        "status": "received"
+      },
+      {
+        "url": "https://gis.earthdata.nasa.gov/portal/rest/services/GESDISC/GPM_3IMERGHHE/ImageServer/getSamples?f=pjson&geometry=%7B%22points%22%3A+%5B%5B79.75%2C+7.95%5D%2C+%5B79.75%2C+8.05%5D%2C+%5B79.75%2C+8.15%5D%2C+%5B79.75%2C+8.25%5D%2C+%5B79.85%2C+7.95%5D%2C+%5B79.85%2C+8.05%5D%2C+%5B79.85%2C+8.15%5D%2C+%5B79.85%2C+8.25%5D%2C+%5B79.95%2C+7.95%5D%2C+%5B79.95%2C+8.05%5D%2C+%5B79.95%2C+8.15%5D%2C+%5B79.95%2C+8.25%5D%2C+%5B80.05%2C+7.95%5D%2C+%5B80.05%2C+8.05%5D%2C+%5B80.05%2C+8.15%5D%2C+%5B80.05%2C+8.25%5D%2C+%5B80.15%2C+7.95%5D%2C+%5B80.15%2C+8.05%5D%2C+%5B80.15%2C+8.15%5D%2C+%5B80.15%2C+8.25%5D%2C+%5B80.35%2C+6.65%5D%2C+%5B80.35%2C+6.75%5D%2C+%5B80.45%2C+6.65%5D%2C+%5B80.45%2C+6.75%5D%2C+%5B80.55%2C+6.65%5D%2C+%5B80.55%2C+6.75%5D%5D%2C+%22spatialReference%22%3A+%7B%22wkid%22%3A+4326%7D%7D&geometryType=esriGeometryMultipoint&mosaicRule=%7B%22mosaicMethod%22%3A+%22esriMosaicLockRaster%22%2C+%22lockRasterIds%22%3A+%5B611482%5D%2C+%22mosaicOperation%22%3A+%22MT_FIRST%22%7D&time=1792989000000&pixelSize=0.1%2C0.1&interpolation=RSP_NearestNeighbor&returnFirstValueOnly=false&outFields=objectid%2Cname%2Ccategory%2Cvariable%2Cdimensions%2Cstdtime",
+        "method": "GET",
+        "requestedAt": "2026-10-26T15:18:10.655000Z",
+        "retrievedAt": "2026-10-26T15:18:11.632000Z",
+        "sha256": "3b93c8a9c8113b2bc216821efb99a3848d8145da3e0f42d04dc5f3ef9ad5659c",
+        "bytes": 184,
+        "rawFile": "23.json",
+        "status": "api_error"
+      },
+      {
+        "url": "https://gis.earthdata.nasa.gov/portal/rest/services/GESDISC/GPM_3IMERGHHE/ImageServer/611483/info?f=pjson",
+        "method": "GET",
+        "requestedAt": "2026-10-26T15:18:11.634000Z",
+        "retrievedAt": "2026-10-26T15:18:12.650000Z",
+        "sha256": "6985b23903178df76a3d2f7b9809064d341faf0d41fc9a57fe62b9f2e89b756d",
+        "bytes": 495,
+        "rawFile": "24.json",
+        "status": "received"
+      },
+      {
+        "url": "https://gis.earthdata.nasa.gov/portal/rest/services/GESDISC/GPM_3IMERGHHE/ImageServer/getSamples?f=pjson&geometry=%7B%22points%22%3A+%5B%5B79.75%2C+7.95%5D%2C+%5B79.75%2C+8.05%5D%2C+%5B79.75%2C+8.15%5D%2C+%5B79.75%2C+8.25%5D%2C+%5B79.85%2C+7.95%5D%2C+%5B79.85%2C+8.05%5D%2C+%5B79.85%2C+8.15%5D%2C+%5B79.85%2C+8.25%5D%2C+%5B79.95%2C+7.95%5D%2C+%5B79.95%2C+8.05%5D%2C+%5B79.95%2C+8.15%5D%2C+%5B79.95%2C+8.25%5D%2C+%5B80.05%2C+7.95%5D%2C+%5B80.05%2C+8.05%5D%2C+%5B80.05%2C+8.15%5D%2C+%5B80.05%2C+8.25%5D%2C+%5B80.15%2C+7.95%5D%2C+%5B80.15%2C+8.05%5D%2C+%5B80.15%2C+8.15%5D%2C+%5B80.15%2C+8.25%5D%2C+%5B80.35%2C+6.65%5D%2C+%5B80.35%2C+6.75%5D%2C+%5B80.45%2C+6.65%5D%2C+%5B80.45%2C+6.75%5D%2C+%5B80.55%2C+6.65%5D%2C+%5B80.55%2C+6.75%5D%5D%2C+%22spatialReference%22%3A+%7B%22wkid%22%3A+4326%7D%7D&geometryType=esriGeometryMultipoint&mosaicRule=%7B%22mosaicMethod%22%3A+%22esriMosaicLockRaster%22%2C+%22lockRasterIds%22%3A+%5B611483%5D%2C+%22mosaicOperation%22%3A+%22MT_FIRST%22%7D&time=1792990800000&pixelSize=0.1%2C0.1&interpolation=RSP_NearestNeighbor&returnFirstValueOnly=false&outFields=objectid%2Cname%2Ccategory%2Cvariable%2Cdimensions%2Cstdtime",
+        "method": "GET",
+        "requestedAt": "2026-10-26T15:18:12.651000Z",
+        "retrievedAt": "2026-10-26T15:18:13.945000Z",
+        "sha256": "3b93c8a9c8113b2bc216821efb99a3848d8145da3e0f42d04dc5f3ef9ad5659c",
+        "bytes": 184,
+        "rawFile": "25.json",
+        "status": "api_error"
+      },
+      {
+        "url": "https://gis.earthdata.nasa.gov/portal/rest/services/GESDISC/GPM_3IMERGHHE/ImageServer/611484/info?f=pjson",
+        "method": "GET",
+        "requestedAt": "2026-10-26T15:18:13.946000Z",
+        "retrievedAt": "2026-10-26T15:18:15.154000Z",
+        "sha256": "6985b23903178df76a3d2f7b9809064d341faf0d41fc9a57fe62b9f2e89b756d",
+        "bytes": 495,
+        "rawFile": "26.json",
+        "status": "received"
+      },
+      {
+        "url": "https://gis.earthdata.nasa.gov/portal/rest/services/GESDISC/GPM_3IMERGHHE/ImageServer/getSamples?f=pjson&geometry=%7B%22points%22%3A+%5B%5B79.75%2C+7.95%5D%2C+%5B79.75%2C+8.05%5D%2C+%5B79.75%2C+8.15%5D%2C+%5B79.75%2C+8.25%5D%2C+%5B79.85%2C+7.95%5D%2C+%5B79.85%2C+8.05%5D%2C+%5B79.85%2C+8.15%5D%2C+%5B79.85%2C+8.25%5D%2C+%5B79.95%2C+7.95%5D%2C+%5B79.95%2C+8.05%5D%2C+%5B79.95%2C+8.15%5D%2C+%5B79.95%2C+8.25%5D%2C+%5B80.05%2C+7.95%5D%2C+%5B80.05%2C+8.05%5D%2C+%5B80.05%2C+8.15%5D%2C+%5B80.05%2C+8.25%5D%2C+%5B80.15%2C+7.95%5D%2C+%5B80.15%2C+8.05%5D%2C+%5B80.15%2C+8.15%5D%2C+%5B80.15%2C+8.25%5D%2C+%5B80.35%2C+6.65%5D%2C+%5B80.35%2C+6.75%5D%2C+%5B80.45%2C+6.65%5D%2C+%5B80.45%2C+6.75%5D%2C+%5B80.55%2C+6.65%5D%2C+%5B80.55%2C+6.75%5D%5D%2C+%22spatialReference%22%3A+%7B%22wkid%22%3A+4326%7D%7D&geometryType=esriGeometryMultipoint&mosaicRule=%7B%22mosaicMethod%22%3A+%22esriMosaicLockRaster%22%2C+%22lockRasterIds%22%3A+%5B611484%5D%2C+%22mosaicOperation%22%3A+%22MT_FIRST%22%7D&time=1792992600000&pixelSize=0.1%2C0.1&interpolation=RSP_NearestNeighbor&returnFirstValueOnly=false&outFields=objectid%2Cname%2Ccategory%2Cvariable%2Cdimensions%2Cstdtime",
+        "method": "GET",
+        "requestedAt": "2026-10-26T15:18:15.155000Z",
+        "retrievedAt": "2026-10-26T15:18:16.289000Z",
+        "sha256": "3b93c8a9c8113b2bc216821efb99a3848d8145da3e0f42d04dc5f3ef9ad5659c",
+        "bytes": 184,
+        "rawFile": "27.json",
+        "status": "api_error"
+      },
+      {
+        "url": "https://gis.earthdata.nasa.gov/portal/rest/services/GESDISC/GPM_3IMERGHHE/ImageServer/611485/info?f=pjson",
+        "method": "GET",
+        "requestedAt": "2026-10-26T15:18:16.290000Z",
+        "retrievedAt": "2026-10-26T15:18:17.321000Z",
+        "sha256": "6985b23903178df76a3d2f7b9809064d341faf0d41fc9a57fe62b9f2e89b756d",
+        "bytes": 495,
+        "rawFile": "28.json",
+        "status": "received"
+      },
+      {
+        "url": "https://gis.earthdata.nasa.gov/portal/rest/services/GESDISC/GPM_3IMERGHHE/ImageServer/getSamples?f=pjson&geometry=%7B%22points%22%3A+%5B%5B79.75%2C+7.95%5D%2C+%5B79.75%2C+8.05%5D%2C+%5B79.75%2C+8.15%5D%2C+%5B79.75%2C+8.25%5D%2C+%5B79.85%2C+7.95%5D%2C+%5B79.85%2C+8.05%5D%2C+%5B79.85%2C+8.15%5D%2C+%5B79.85%2C+8.25%5D%2C+%5B79.95%2C+7.95%5D%2C+%5B79.95%2C+8.05%5D%2C+%5B79.95%2C+8.15%5D%2C+%5B79.95%2C+8.25%5D%2C+%5B80.05%2C+7.95%5D%2C+%5B80.05%2C+8.05%5D%2C+%5B80.05%2C+8.15%5D%2C+%5B80.05%2C+8.25%5D%2C+%5B80.15%2C+7.95%5D%2C+%5B80.15%2C+8.05%5D%2C+%5B80.15%2C+8.15%5D%2C+%5B80.15%2C+8.25%5D%2C+%5B80.35%2C+6.65%5D%2C+%5B80.35%2C+6.75%5D%2C+%5B80.45%2C+6.65%5D%2C+%5B80.45%2C+6.75%5D%2C+%5B80.55%2C+6.65%5D%2C+%5B80.55%2C+6.75%5D%5D%2C+%22spatialReference%22%3A+%7B%22wkid%22%3A+4326%7D%7D&geometryType=esriGeometryMultipoint&mosaicRule=%7B%22mosaicMethod%22%3A+%22esriMosaicLockRaster%22%2C+%22lockRasterIds%22%3A+%5B611485%5D%2C+%22mosaicOperation%22%3A+%22MT_FIRST%22%7D&time=1792994400000&pixelSize=0.1%2C0.1&interpolation=RSP_NearestNeighbor&returnFirstValueOnly=false&outFields=objectid%2Cname%2Ccategory%2Cvariable%2Cdimensions%2Cstdtime",
+        "method": "GET",
+        "requestedAt": "2026-10-26T15:18:17.321000Z",
+        "retrievedAt": "2026-10-26T15:18:18.515000Z",
+        "sha256": "3b93c8a9c8113b2bc216821efb99a3848d8145da3e0f42d04dc5f3ef9ad5659c",
+        "bytes": 184,
+        "rawFile": "29.json",
+        "status": "api_error"
+      },
+      {
+        "url": "https://gis.earthdata.nasa.gov/portal/rest/services/GESDISC/GPM_3IMERGHHE/ImageServer/611486/info?f=pjson",
+        "method": "GET",
+        "requestedAt": "2026-10-26T15:18:18.517000Z",
+        "retrievedAt": "2026-10-26T15:18:19.554000Z",
+        "sha256": "6985b23903178df76a3d2f7b9809064d341faf0d41fc9a57fe62b9f2e89b756d",
+        "bytes": 495,
+        "rawFile": "30.json",
+        "status": "received"
+      },
+      {
+        "url": "https://gis.earthdata.nasa.gov/portal/rest/services/GESDISC/GPM_3IMERGHHE/ImageServer/getSamples?f=pjson&geometry=%7B%22points%22%3A+%5B%5B79.75%2C+7.95%5D%2C+%5B79.75%2C+8.05%5D%2C+%5B79.75%2C+8.15%5D%2C+%5B79.75%2C+8.25%5D%2C+%5B79.85%2C+7.95%5D%2C+%5B79.85%2C+8.05%5D%2C+%5B79.85%2C+8.15%5D%2C+%5B79.85%2C+8.25%5D%2C+%5B79.95%2C+7.95%5D%2C+%5B79.95%2C+8.05%5D%2C+%5B79.95%2C+8.15%5D%2C+%5B79.95%2C+8.25%5D%2C+%5B80.05%2C+7.95%5D%2C+%5B80.05%2C+8.05%5D%2C+%5B80.05%2C+8.15%5D%2C+%5B80.05%2C+8.25%5D%2C+%5B80.15%2C+7.95%5D%2C+%5B80.15%2C+8.05%5D%2C+%5B80.15%2C+8.15%5D%2C+%5B80.15%2C+8.25%5D%2C+%5B80.35%2C+6.65%5D%2C+%5B80.35%2C+6.75%5D%2C+%5B80.45%2C+6.65%5D%2C+%5B80.45%2C+6.75%5D%2C+%5B80.55%2C+6.65%5D%2C+%5B80.55%2C+6.75%5D%5D%2C+%22spatialReference%22%3A+%7B%22wkid%22%3A+4326%7D%7D&geometryType=esriGeometryMultipoint&mosaicRule=%7B%22mosaicMethod%22%3A+%22esriMosaicLockRaster%22%2C+%22lockRasterIds%22%3A+%5B611486%5D%2C+%22mosaicOperation%22%3A+%22MT_FIRST%22%7D&time=1792996200000&pixelSize=0.1%2C0.1&interpolation=RSP_NearestNeighbor&returnFirstValueOnly=false&outFields=objectid%2Cname%2Ccategory%2Cvariable%2Cdimensions%2Cstdtime",
+        "method": "GET",
+        "requestedAt": "2026-10-26T15:18:19.555000Z",
+        "retrievedAt": "2026-10-26T15:18:21.199000Z",
+        "sha256": "3b93c8a9c8113b2bc216821efb99a3848d8145da3e0f42d04dc5f3ef9ad5659c",
+        "bytes": 184,
+        "rawFile": "31.json",
+        "status": "api_error"
+      },
+      {
+        "url": "https://gis.earthdata.nasa.gov/portal/rest/services/GESDISC/GPM_3IMERGHHE/ImageServer/611487/info?f=pjson",
+        "method": "GET",
+        "requestedAt": "2026-10-26T15:18:21.201000Z",
+        "retrievedAt": "2026-10-26T15:18:23.167000Z",
+        "sha256": "6985b23903178df76a3d2f7b9809064d341faf0d41fc9a57fe62b9f2e89b756d",
+        "bytes": 495,
+        "rawFile": "32.json",
+        "status": "received"
+      },
+      {
+        "url": "https://gis.earthdata.nasa.gov/portal/rest/services/GESDISC/GPM_3IMERGHHE/ImageServer/getSamples?f=pjson&geometry=%7B%22points%22%3A+%5B%5B79.75%2C+7.95%5D%2C+%5B79.75%2C+8.05%5D%2C+%5B79.75%2C+8.15%5D%2C+%5B79.75%2C+8.25%5D%2C+%5B79.85%2C+7.95%5D%2C+%5B79.85%2C+8.05%5D%2C+%5B79.85%2C+8.15%5D%2C+%5B79.85%2C+8.25%5D%2C+%5B79.95%2C+7.95%5D%2C+%5B79.95%2C+8.05%5D%2C+%5B79.95%2C+8.15%5D%2C+%5B79.95%2C+8.25%5D%2C+%5B80.05%2C+7.95%5D%2C+%5B80.05%2C+8.05%5D%2C+%5B80.05%2C+8.15%5D%2C+%5B80.05%2C+8.25%5D%2C+%5B80.15%2C+7.95%5D%2C+%5B80.15%2C+8.05%5D%2C+%5B80.15%2C+8.15%5D%2C+%5B80.15%2C+8.25%5D%2C+%5B80.35%2C+6.65%5D%2C+%5B80.35%2C+6.75%5D%2C+%5B80.45%2C+6.65%5D%2C+%5B80.45%2C+6.75%5D%2C+%5B80.55%2C+6.65%5D%2C+%5B80.55%2C+6.75%5D%5D%2C+%22spatialReference%22%3A+%7B%22wkid%22%3A+4326%7D%7D&geometryType=esriGeometryMultipoint&mosaicRule=%7B%22mosaicMethod%22%3A+%22esriMosaicLockRaster%22%2C+%22lockRasterIds%22%3A+%5B611487%5D%2C+%22mosaicOperation%22%3A+%22MT_FIRST%22%7D&time=1792998000000&pixelSize=0.1%2C0.1&interpolation=RSP_NearestNeighbor&returnFirstValueOnly=false&outFields=objectid%2Cname%2Ccategory%2Cvariable%2Cdimensions%2Cstdtime",
+        "method": "GET",
+        "requestedAt": "2026-10-26T15:18:23.168000Z",
+        "retrievedAt": "2026-10-26T15:18:25.594000Z",
+        "sha256": "6c69f45c9330a6e443e65690a621e437046797a388e6521a4e75921ebf0f3abe",
+        "bytes": 204,
+        "rawFile": "33.json",
+        "status": "api_error"
+      },
+      {
+        "url": "https://gis.earthdata.nasa.gov/portal/rest/services/GESDISC/GPM_3IMERGHHE/ImageServer/611488/info?f=pjson",
+        "method": "GET",
+        "requestedAt": "2026-10-26T15:18:25.595000Z",
+        "retrievedAt": "2026-10-26T15:18:26.546000Z",
+        "sha256": "6985b23903178df76a3d2f7b9809064d341faf0d41fc9a57fe62b9f2e89b756d",
+        "bytes": 495,
+        "rawFile": "34.json",
+        "status": "received"
+      },
+      {
+        "url": "https://gis.earthdata.nasa.gov/portal/rest/services/GESDISC/GPM_3IMERGHHE/ImageServer/getSamples?f=pjson&geometry=%7B%22points%22%3A+%5B%5B79.75%2C+7.95%5D%2C+%5B79.75%2C+8.05%5D%2C+%5B79.75%2C+8.15%5D%2C+%5B79.75%2C+8.25%5D%2C+%5B79.85%2C+7.95%5D%2C+%5B79.85%2C+8.05%5D%2C+%5B79.85%2C+8.15%5D%2C+%5B79.85%2C+8.25%5D%2C+%5B79.95%2C+7.95%5D%2C+%5B79.95%2C+8.05%5D%2C+%5B79.95%2C+8.15%5D%2C+%5B79.95%2C+8.25%5D%2C+%5B80.05%2C+7.95%5D%2C+%5B80.05%2C+8.05%5D%2C+%5B80.05%2C+8.15%5D%2C+%5B80.05%2C+8.25%5D%2C+%5B80.15%2C+7.95%5D%2C+%5B80.15%2C+8.05%5D%2C+%5B80.15%2C+8.15%5D%2C+%5B80.15%2C+8.25%5D%2C+%5B80.35%2C+6.65%5D%2C+%5B80.35%2C+6.75%5D%2C+%5B80.45%2C+6.65%5D%2C+%5B80.45%2C+6.75%5D%2C+%5B80.55%2C+6.65%5D%2C+%5B80.55%2C+6.75%5D%5D%2C+%22spatialReference%22%3A+%7B%22wkid%22%3A+4326%7D%7D&geometryType=esriGeometryMultipoint&mosaicRule=%7B%22mosaicMethod%22%3A+%22esriMosaicLockRaster%22%2C+%22lockRasterIds%22%3A+%5B611488%5D%2C+%22mosaicOperation%22%3A+%22MT_FIRST%22%7D&time=1792999800000&pixelSize=0.1%2C0.1&interpolation=RSP_NearestNeighbor&returnFirstValueOnly=false&outFields=objectid%2Cname%2Ccategory%2Cvariable%2Cdimensions%2Cstdtime",
+        "method": "GET",
+        "requestedAt": "2026-10-26T15:18:26.549000Z",
+        "retrievedAt": "2026-10-26T15:18:27.568000Z",
+        "sha256": "3b93c8a9c8113b2bc216821efb99a3848d8145da3e0f42d04dc5f3ef9ad5659c",
+        "bytes": 184,
+        "rawFile": "35.json",
+        "status": "api_error"
+      },
+      {
+        "url": "https://gis.earthdata.nasa.gov/portal/rest/services/GESDISC/GPM_3IMERGHHE/ImageServer/611489/info?f=pjson",
+        "method": "GET",
+        "requestedAt": "2026-10-26T15:18:27.569000Z",
+        "retrievedAt": "2026-10-26T15:18:28.922000Z",
+        "sha256": "6985b23903178df76a3d2f7b9809064d341faf0d41fc9a57fe62b9f2e89b756d",
+        "bytes": 495,
+        "rawFile": "36.json",
+        "status": "received"
+      },
+      {
+        "url": "https://gis.earthdata.nasa.gov/portal/rest/services/GESDISC/GPM_3IMERGHHE/ImageServer/getSamples?f=pjson&geometry=%7B%22points%22%3A+%5B%5B79.75%2C+7.95%5D%2C+%5B79.75%2C+8.05%5D%2C+%5B79.75%2C+8.15%5D%2C+%5B79.75%2C+8.25%5D%2C+%5B79.85%2C+7.95%5D%2C+%5B79.85%2C+8.05%5D%2C+%5B79.85%2C+8.15%5D%2C+%5B79.85%2C+8.25%5D%2C+%5B79.95%2C+7.95%5D%2C+%5B79.95%2C+8.05%5D%2C+%5B79.95%2C+8.15%5D%2C+%5B79.95%2C+8.25%5D%2C+%5B80.05%2C+7.95%5D%2C+%5B80.05%2C+8.05%5D%2C+%5B80.05%2C+8.15%5D%2C+%5B80.05%2C+8.25%5D%2C+%5B80.15%2C+7.95%5D%2C+%5B80.15%2C+8.05%5D%2C+%5B80.15%2C+8.15%5D%2C+%5B80.15%2C+8.25%5D%2C+%5B80.35%2C+6.65%5D%2C+%5B80.35%2C+6.75%5D%2C+%5B80.45%2C+6.65%5D%2C+%5B80.45%2C+6.75%5D%2C+%5B80.55%2C+6.65%5D%2C+%5B80.55%2C+6.75%5D%5D%2C+%22spatialReference%22%3A+%7B%22wkid%22%3A+4326%7D%7D&geometryType=esriGeometryMultipoint&mosaicRule=%7B%22mosaicMethod%22%3A+%22esriMosaicLockRaster%22%2C+%22lockRasterIds%22%3A+%5B611489%5D%2C+%22mosaicOperation%22%3A+%22MT_FIRST%22%7D&time=1793001600000&pixelSize=0.1%2C0.1&interpolation=RSP_NearestNeighbor&returnFirstValueOnly=false&outFields=objectid%2Cname%2Ccategory%2Cvariable%2Cdimensions%2Cstdtime",
+        "method": "GET",
+        "requestedAt": "2026-10-26T15:18:28.923000Z",
+        "retrievedAt": "2026-10-26T15:18:30.154000Z",
+        "sha256": "3b93c8a9c8113b2bc216821efb99a3848d8145da3e0f42d04dc5f3ef9ad5659c",
+        "bytes": 184,
+        "rawFile": "37.json",
+        "status": "api_error"
+      },
+      {
+        "url": "https://gis.earthdata.nasa.gov/portal/rest/services/GESDISC/GPM_3IMERGHHE/ImageServer/611490/info?f=pjson",
+        "method": "GET",
+        "requestedAt": "2026-10-26T15:18:30.156000Z",
+        "retrievedAt": "2026-10-26T15:18:31.248000Z",
+        "sha256": "6985b23903178df76a3d2f7b9809064d341faf0d41fc9a57fe62b9f2e89b756d",
+        "bytes": 495,
+        "rawFile": "38.json",
+        "status": "received"
+      },
+      {
+        "url": "https://gis.earthdata.nasa.gov/portal/rest/services/GESDISC/GPM_3IMERGHHE/ImageServer/getSamples?f=pjson&geometry=%7B%22points%22%3A+%5B%5B79.75%2C+7.95%5D%2C+%5B79.75%2C+8.05%5D%2C+%5B79.75%2C+8.15%5D%2C+%5B79.75%2C+8.25%5D%2C+%5B79.85%2C+7.95%5D%2C+%5B79.85%2C+8.05%5D%2C+%5B79.85%2C+8.15%5D%2C+%5B79.85%2C+8.25%5D%2C+%5B79.95%2C+7.95%5D%2C+%5B79.95%2C+8.05%5D%2C+%5B79.95%2C+8.15%5D%2C+%5B79.95%2C+8.25%5D%2C+%5B80.05%2C+7.95%5D%2C+%5B80.05%2C+8.05%5D%2C+%5B80.05%2C+8.15%5D%2C+%5B80.05%2C+8.25%5D%2C+%5B80.15%2C+7.95%5D%2C+%5B80.15%2C+8.05%5D%2C+%5B80.15%2C+8.15%5D%2C+%5B80.15%2C+8.25%5D%2C+%5B80.35%2C+6.65%5D%2C+%5B80.35%2C+6.75%5D%2C+%5B80.45%2C+6.65%5D%2C+%5B80.45%2C+6.75%5D%2C+%5B80.55%2C+6.65%5D%2C+%5B80.55%2C+6.75%5D%5D%2C+%22spatialReference%22%3A+%7B%22wkid%22%3A+4326%7D%7D&geometryType=esriGeometryMultipoint&mosaicRule=%7B%22mosaicMethod%22%3A+%22esriMosaicLockRaster%22%2C+%22lockRasterIds%22%3A+%5B611490%5D%2C+%22mosaicOperation%22%3A+%22MT_FIRST%22%7D&time=1793003400000&pixelSize=0.1%2C0.1&interpolation=RSP_NearestNeighbor&returnFirstValueOnly=false&outFields=objectid%2Cname%2Ccategory%2Cvariable%2Cdimensions%2Cstdtime",
+        "method": "GET",
+        "requestedAt": "2026-10-26T15:18:31.252000Z",
+        "retrievedAt": "2026-10-26T15:18:32.479000Z",
+        "sha256": "3b93c8a9c8113b2bc216821efb99a3848d8145da3e0f42d04dc5f3ef9ad5659c",
+        "bytes": 184,
+        "rawFile": "39.json",
+        "status": "api_error"
+      },
+      {
+        "url": "https://gis.earthdata.nasa.gov/portal/rest/services/GESDISC/GPM_3IMERGHHE/ImageServer/611491/info?f=pjson",
+        "method": "GET",
+        "requestedAt": "2026-10-26T15:18:32.482000Z",
+        "retrievedAt": "2026-10-26T15:18:33.915000Z",
+        "sha256": "6985b23903178df76a3d2f7b9809064d341faf0d41fc9a57fe62b9f2e89b756d",
+        "bytes": 495,
+        "rawFile": "40.json",
+        "status": "received"
+      },
+      {
+        "url": "https://gis.earthdata.nasa.gov/portal/rest/services/GESDISC/GPM_3IMERGHHE/ImageServer/getSamples?f=pjson&geometry=%7B%22points%22%3A+%5B%5B79.75%2C+7.95%5D%2C+%5B79.75%2C+8.05%5D%2C+%5B79.75%2C+8.15%5D%2C+%5B79.75%2C+8.25%5D%2C+%5B79.85%2C+7.95%5D%2C+%5B79.85%2C+8.05%5D%2C+%5B79.85%2C+8.15%5D%2C+%5B79.85%2C+8.25%5D%2C+%5B79.95%2C+7.95%5D%2C+%5B79.95%2C+8.05%5D%2C+%5B79.95%2C+8.15%5D%2C+%5B79.95%2C+8.25%5D%2C+%5B80.05%2C+7.95%5D%2C+%5B80.05%2C+8.05%5D%2C+%5B80.05%2C+8.15%5D%2C+%5B80.05%2C+8.25%5D%2C+%5B80.15%2C+7.95%5D%2C+%5B80.15%2C+8.05%5D%2C+%5B80.15%2C+8.15%5D%2C+%5B80.15%2C+8.25%5D%2C+%5B80.35%2C+6.65%5D%2C+%5B80.35%2C+6.75%5D%2C+%5B80.45%2C+6.65%5D%2C+%5B80.45%2C+6.75%5D%2C+%5B80.55%2C+6.65%5D%2C+%5B80.55%2C+6.75%5D%5D%2C+%22spatialReference%22%3A+%7B%22wkid%22%3A+4326%7D%7D&geometryType=esriGeometryMultipoint&mosaicRule=%7B%22mosaicMethod%22%3A+%22esriMosaicLockRaster%22%2C+%22lockRasterIds%22%3A+%5B611491%5D%2C+%22mosaicOperation%22%3A+%22MT_FIRST%22%7D&time=1793005200000&pixelSize=0.1%2C0.1&interpolation=RSP_NearestNeighbor&returnFirstValueOnly=false&outFields=objectid%2Cname%2Ccategory%2Cvariable%2Cdimensions%2Cstdtime",
+        "method": "GET",
+        "requestedAt": "2026-10-26T15:18:33.916000Z",
+        "retrievedAt": "2026-10-26T15:18:34.919000Z",
+        "sha256": "3b93c8a9c8113b2bc216821efb99a3848d8145da3e0f42d04dc5f3ef9ad5659c",
+        "bytes": 184,
+        "rawFile": "41.json",
+        "status": "api_error"
+      },
+      {
+        "url": "https://gis.earthdata.nasa.gov/portal/rest/services/GESDISC/GPM_3IMERGHHE/ImageServer/611492/info?f=pjson",
+        "method": "GET",
+        "requestedAt": "2026-10-26T15:18:34.920000Z",
+        "retrievedAt": "2026-10-26T15:18:35.922000Z",
+        "sha256": "6985b23903178df76a3d2f7b9809064d341faf0d41fc9a57fe62b9f2e89b756d",
+        "bytes": 495,
+        "rawFile": "42.json",
+        "status": "received"
+      },
+      {
+        "url": "https://gis.earthdata.nasa.gov/portal/rest/services/GESDISC/GPM_3IMERGHHE/ImageServer/getSamples?f=pjson&geometry=%7B%22points%22%3A+%5B%5B79.75%2C+7.95%5D%2C+%5B79.75%2C+8.05%5D%2C+%5B79.75%2C+8.15%5D%2C+%5B79.75%2C+8.25%5D%2C+%5B79.85%2C+7.95%5D%2C+%5B79.85%2C+8.05%5D%2C+%5B79.85%2C+8.15%5D%2C+%5B79.85%2C+8.25%5D%2C+%5B79.95%2C+7.95%5D%2C+%5B79.95%2C+8.05%5D%2C+%5B79.95%2C+8.15%5D%2C+%5B79.95%2C+8.25%5D%2C+%5B80.05%2C+7.95%5D%2C+%5B80.05%2C+8.05%5D%2C+%5B80.05%2C+8.15%5D%2C+%5B80.05%2C+8.25%5D%2C+%5B80.15%2C+7.95%5D%2C+%5B80.15%2C+8.05%5D%2C+%5B80.15%2C+8.15%5D%2C+%5B80.15%2C+8.25%5D%2C+%5B80.35%2C+6.65%5D%2C+%5B80.35%2C+6.75%5D%2C+%5B80.45%2C+6.65%5D%2C+%5B80.45%2C+6.75%5D%2C+%5B80.55%2C+6.65%5D%2C+%5B80.55%2C+6.75%5D%5D%2C+%22spatialReference%22%3A+%7B%22wkid%22%3A+4326%7D%7D&geometryType=esriGeometryMultipoint&mosaicRule=%7B%22mosaicMethod%22%3A+%22esriMosaicLockRaster%22%2C+%22lockRasterIds%22%3A+%5B611492%5D%2C+%22mosaicOperation%22%3A+%22MT_FIRST%22%7D&time=1793007000000&pixelSize=0.1%2C0.1&interpolation=RSP_NearestNeighbor&returnFirstValueOnly=false&outFields=objectid%2Cname%2Ccategory%2Cvariable%2Cdimensions%2Cstdtime",
+        "method": "GET",
+        "requestedAt": "2026-10-26T15:18:35.923000Z",
+        "retrievedAt": "2026-10-26T15:18:37.236000Z",
+        "sha256": "3b93c8a9c8113b2bc216821efb99a3848d8145da3e0f42d04dc5f3ef9ad5659c",
+        "bytes": 184,
+        "rawFile": "43.json",
+        "status": "api_error"
+      },
+      {
+        "url": "https://gis.earthdata.nasa.gov/portal/rest/services/GESDISC/GPM_3IMERGHHE/ImageServer/611493/info?f=pjson",
+        "method": "GET",
+        "requestedAt": "2026-10-26T15:18:37.236000Z",
+        "retrievedAt": "2026-10-26T15:18:38.244000Z",
+        "sha256": "6985b23903178df76a3d2f7b9809064d341faf0d41fc9a57fe62b9f2e89b756d",
+        "bytes": 495,
+        "rawFile": "44.json",
+        "status": "received"
+      },
+      {
+        "url": "https://gis.earthdata.nasa.gov/portal/rest/services/GESDISC/GPM_3IMERGHHE/ImageServer/getSamples?f=pjson&geometry=%7B%22points%22%3A+%5B%5B79.75%2C+7.95%5D%2C+%5B79.75%2C+8.05%5D%2C+%5B79.75%2C+8.15%5D%2C+%5B79.75%2C+8.25%5D%2C+%5B79.85%2C+7.95%5D%2C+%5B79.85%2C+8.05%5D%2C+%5B79.85%2C+8.15%5D%2C+%5B79.85%2C+8.25%5D%2C+%5B79.95%2C+7.95%5D%2C+%5B79.95%2C+8.05%5D%2C+%5B79.95%2C+8.15%5D%2C+%5B79.95%2C+8.25%5D%2C+%5B80.05%2C+7.95%5D%2C+%5B80.05%2C+8.05%5D%2C+%5B80.05%2C+8.15%5D%2C+%5B80.05%2C+8.25%5D%2C+%5B80.15%2C+7.95%5D%2C+%5B80.15%2C+8.05%5D%2C+%5B80.15%2C+8.15%5D%2C+%5B80.15%2C+8.25%5D%2C+%5B80.35%2C+6.65%5D%2C+%5B80.35%2C+6.75%5D%2C+%5B80.45%2C+6.65%5D%2C+%5B80.45%2C+6.75%5D%2C+%5B80.55%2C+6.65%5D%2C+%5B80.55%2C+6.75%5D%5D%2C+%22spatialReference%22%3A+%7B%22wkid%22%3A+4326%7D%7D&geometryType=esriGeometryMultipoint&mosaicRule=%7B%22mosaicMethod%22%3A+%22esriMosaicLockRaster%22%2C+%22lockRasterIds%22%3A+%5B611493%5D%2C+%22mosaicOperation%22%3A+%22MT_FIRST%22%7D&time=1793008800000&pixelSize=0.1%2C0.1&interpolation=RSP_NearestNeighbor&returnFirstValueOnly=false&outFields=objectid%2Cname%2Ccategory%2Cvariable%2Cdimensions%2Cstdtime",
+        "method": "GET",
+        "requestedAt": "2026-10-26T15:18:38.247000Z",
+        "retrievedAt": "2026-10-26T15:18:39.327000Z",
+        "sha256": "3b93c8a9c8113b2bc216821efb99a3848d8145da3e0f42d04dc5f3ef9ad5659c",
+        "bytes": 184,
+        "rawFile": "45.json",
+        "status": "api_error"
+      },
+      {
+        "url": "https://gis.earthdata.nasa.gov/portal/rest/services/GESDISC/GPM_3IMERGHHE/ImageServer/611494/info?f=pjson",
+        "method": "GET",
+        "requestedAt": "2026-10-26T15:18:39.329000Z",
+        "retrievedAt": "2026-10-26T15:18:40.377000Z",
+        "sha256": "6985b23903178df76a3d2f7b9809064d341faf0d41fc9a57fe62b9f2e89b756d",
+        "bytes": 495,
+        "rawFile": "46.json",
+        "status": "received"
+      },
+      {
+        "url": "https://gis.earthdata.nasa.gov/portal/rest/services/GESDISC/GPM_3IMERGHHE/ImageServer/getSamples?f=pjson&geometry=%7B%22points%22%3A+%5B%5B79.75%2C+7.95%5D%2C+%5B79.75%2C+8.05%5D%2C+%5B79.75%2C+8.15%5D%2C+%5B79.75%2C+8.25%5D%2C+%5B79.85%2C+7.95%5D%2C+%5B79.85%2C+8.05%5D%2C+%5B79.85%2C+8.15%5D%2C+%5B79.85%2C+8.25%5D%2C+%5B79.95%2C+7.95%5D%2C+%5B79.95%2C+8.05%5D%2C+%5B79.95%2C+8.15%5D%2C+%5B79.95%2C+8.25%5D%2C+%5B80.05%2C+7.95%5D%2C+%5B80.05%2C+8.05%5D%2C+%5B80.05%2C+8.15%5D%2C+%5B80.05%2C+8.25%5D%2C+%5B80.15%2C+7.95%5D%2C+%5B80.15%2C+8.05%5D%2C+%5B80.15%2C+8.15%5D%2C+%5B80.15%2C+8.25%5D%2C+%5B80.35%2C+6.65%5D%2C+%5B80.35%2C+6.75%5D%2C+%5B80.45%2C+6.65%5D%2C+%5B80.45%2C+6.75%5D%2C+%5B80.55%2C+6.65%5D%2C+%5B80.55%2C+6.75%5D%5D%2C+%22spatialReference%22%3A+%7B%22wkid%22%3A+4326%7D%7D&geometryType=esriGeometryMultipoint&mosaicRule=%7B%22mosaicMethod%22%3A+%22esriMosaicLockRaster%22%2C+%22lockRasterIds%22%3A+%5B611494%5D%2C+%22mosaicOperation%22%3A+%22MT_FIRST%22%7D&time=1793010600000&pixelSize=0.1%2C0.1&interpolation=RSP_NearestNeighbor&returnFirstValueOnly=false&outFields=objectid%2Cname%2Ccategory%2Cvariable%2Cdimensions%2Cstdtime",
+        "method": "GET",
+        "requestedAt": "2026-10-26T15:18:40.378000Z",
+        "retrievedAt": "2026-10-26T15:18:41.552000Z",
+        "sha256": "3b93c8a9c8113b2bc216821efb99a3848d8145da3e0f42d04dc5f3ef9ad5659c",
+        "bytes": 184,
+        "rawFile": "47.json",
+        "status": "api_error"
+      },
+      {
+        "url": "https://gis.earthdata.nasa.gov/portal/rest/services/GESDISC/GPM_3IMERGHHE/ImageServer/611495/info?f=pjson",
+        "method": "GET",
+        "requestedAt": "2026-10-26T15:18:41.554000Z",
+        "retrievedAt": "2026-10-26T15:18:43.056000Z",
+        "sha256": "6985b23903178df76a3d2f7b9809064d341faf0d41fc9a57fe62b9f2e89b756d",
+        "bytes": 495,
+        "rawFile": "48.json",
+        "status": "received"
+      },
+      {
+        "url": "https://gis.earthdata.nasa.gov/portal/rest/services/GESDISC/GPM_3IMERGHHE/ImageServer/getSamples?f=pjson&geometry=%7B%22points%22%3A+%5B%5B79.75%2C+7.95%5D%2C+%5B79.75%2C+8.05%5D%2C+%5B79.75%2C+8.15%5D%2C+%5B79.75%2C+8.25%5D%2C+%5B79.85%2C+7.95%5D%2C+%5B79.85%2C+8.05%5D%2C+%5B79.85%2C+8.15%5D%2C+%5B79.85%2C+8.25%5D%2C+%5B79.95%2C+7.95%5D%2C+%5B79.95%2C+8.05%5D%2C+%5B79.95%2C+8.15%5D%2C+%5B79.95%2C+8.25%5D%2C+%5B80.05%2C+7.95%5D%2C+%5B80.05%2C+8.05%5D%2C+%5B80.05%2C+8.15%5D%2C+%5B80.05%2C+8.25%5D%2C+%5B80.15%2C+7.95%5D%2C+%5B80.15%2C+8.05%5D%2C+%5B80.15%2C+8.15%5D%2C+%5B80.15%2C+8.25%5D%2C+%5B80.35%2C+6.65%5D%2C+%5B80.35%2C+6.75%5D%2C+%5B80.45%2C+6.65%5D%2C+%5B80.45%2C+6.75%5D%2C+%5B80.55%2C+6.65%5D%2C+%5B80.55%2C+6.75%5D%5D%2C+%22spatialReference%22%3A+%7B%22wkid%22%3A+4326%7D%7D&geometryType=esriGeometryMultipoint&mosaicRule=%7B%22mosaicMethod%22%3A+%22esriMosaicLockRaster%22%2C+%22lockRasterIds%22%3A+%5B611495%5D%2C+%22mosaicOperation%22%3A+%22MT_FIRST%22%7D&time=1793012400000&pixelSize=0.1%2C0.1&interpolation=RSP_NearestNeighbor&returnFirstValueOnly=false&outFields=objectid%2Cname%2Ccategory%2Cvariable%2Cdimensions%2Cstdtime",
+        "method": "GET",
+        "requestedAt": "2026-10-26T15:18:43.058000Z",
+        "retrievedAt": "2026-10-26T15:18:44.105000Z",
+        "sha256": "3b93c8a9c8113b2bc216821efb99a3848d8145da3e0f42d04dc5f3ef9ad5659c",
+        "bytes": 184,
+        "rawFile": "49.json",
+        "status": "api_error"
+      },
+      {
+        "url": "https://gis.earthdata.nasa.gov/portal/rest/services/GESDISC/GPM_3IMERGHHE/ImageServer/611496/info?f=pjson",
+        "method": "GET",
+        "requestedAt": "2026-10-26T15:18:44.106000Z",
+        "retrievedAt": "2026-10-26T15:18:45.163000Z",
+        "sha256": "6985b23903178df76a3d2f7b9809064d341faf0d41fc9a57fe62b9f2e89b756d",
+        "bytes": 495,
+        "rawFile": "50.json",
+        "status": "received"
+      },
+      {
+        "url": "https://gis.earthdata.nasa.gov/portal/rest/services/GESDISC/GPM_3IMERGHHE/ImageServer/getSamples?f=pjson&geometry=%7B%22points%22%3A+%5B%5B79.75%2C+7.95%5D%2C+%5B79.75%2C+8.05%5D%2C+%5B79.75%2C+8.15%5D%2C+%5B79.75%2C+8.25%5D%2C+%5B79.85%2C+7.95%5D%2C+%5B79.85%2C+8.05%5D%2C+%5B79.85%2C+8.15%5D%2C+%5B79.85%2C+8.25%5D%2C+%5B79.95%2C+7.95%5D%2C+%5B79.95%2C+8.05%5D%2C+%5B79.95%2C+8.15%5D%2C+%5B79.95%2C+8.25%5D%2C+%5B80.05%2C+7.95%5D%2C+%5B80.05%2C+8.05%5D%2C+%5B80.05%2C+8.15%5D%2C+%5B80.05%2C+8.25%5D%2C+%5B80.15%2C+7.95%5D%2C+%5B80.15%2C+8.05%5D%2C+%5B80.15%2C+8.15%5D%2C+%5B80.15%2C+8.25%5D%2C+%5B80.35%2C+6.65%5D%2C+%5B80.35%2C+6.75%5D%2C+%5B80.45%2C+6.65%5D%2C+%5B80.45%2C+6.75%5D%2C+%5B80.55%2C+6.65%5D%2C+%5B80.55%2C+6.75%5D%5D%2C+%22spatialReference%22%3A+%7B%22wkid%22%3A+4326%7D%7D&geometryType=esriGeometryMultipoint&mosaicRule=%7B%22mosaicMethod%22%3A+%22esriMosaicLockRaster%22%2C+%22lockRasterIds%22%3A+%5B611496%5D%2C+%22mosaicOperation%22%3A+%22MT_FIRST%22%7D&time=1793014200000&pixelSize=0.1%2C0.1&interpolation=RSP_NearestNeighbor&returnFirstValueOnly=false&outFields=objectid%2Cname%2Ccategory%2Cvariable%2Cdimensions%2Cstdtime",
+        "method": "GET",
+        "requestedAt": "2026-10-26T15:18:45.164000Z",
+        "retrievedAt": "2026-10-26T15:18:46.245000Z",
+        "sha256": "3b93c8a9c8113b2bc216821efb99a3848d8145da3e0f42d04dc5f3ef9ad5659c",
+        "bytes": 184,
+        "rawFile": "51.json",
+        "status": "api_error"
+      },
+      {
+        "url": "https://gis.earthdata.nasa.gov/portal/rest/services/GESDISC/GPM_3IMERGHHE/ImageServer/611497/info?f=pjson",
+        "method": "GET",
+        "requestedAt": "2026-10-26T15:18:46.246000Z",
+        "retrievedAt": "2026-10-26T15:18:47.335000Z",
+        "sha256": "6985b23903178df76a3d2f7b9809064d341faf0d41fc9a57fe62b9f2e89b756d",
+        "bytes": 495,
+        "rawFile": "52.json",
+        "status": "received"
+      },
+      {
+        "url": "https://gis.earthdata.nasa.gov/portal/rest/services/GESDISC/GPM_3IMERGHHE/ImageServer/getSamples?f=pjson&geometry=%7B%22points%22%3A+%5B%5B79.75%2C+7.95%5D%2C+%5B79.75%2C+8.05%5D%2C+%5B79.75%2C+8.15%5D%2C+%5B79.75%2C+8.25%5D%2C+%5B79.85%2C+7.95%5D%2C+%5B79.85%2C+8.05%5D%2C+%5B79.85%2C+8.15%5D%2C+%5B79.85%2C+8.25%5D%2C+%5B79.95%2C+7.95%5D%2C+%5B79.95%2C+8.05%5D%2C+%5B79.95%2C+8.15%5D%2C+%5B79.95%2C+8.25%5D%2C+%5B80.05%2C+7.95%5D%2C+%5B80.05%2C+8.05%5D%2C+%5B80.05%2C+8.15%5D%2C+%5B80.05%2C+8.25%5D%2C+%5B80.15%2C+7.95%5D%2C+%5B80.15%2C+8.05%5D%2C+%5B80.15%2C+8.15%5D%2C+%5B80.15%2C+8.25%5D%2C+%5B80.35%2C+6.65%5D%2C+%5B80.35%2C+6.75%5D%2C+%5B80.45%2C+6.65%5D%2C+%5B80.45%2C+6.75%5D%2C+%5B80.55%2C+6.65%5D%2C+%5B80.55%2C+6.75%5D%5D%2C+%22spatialReference%22%3A+%7B%22wkid%22%3A+4326%7D%7D&geometryType=esriGeometryMultipoint&mosaicRule=%7B%22mosaicMethod%22%3A+%22esriMosaicLockRaster%22%2C+%22lockRasterIds%22%3A+%5B611497%5D%2C+%22mosaicOperation%22%3A+%22MT_FIRST%22%7D&time=1793016000000&pixelSize=0.1%2C0.1&interpolation=RSP_NearestNeighbor&returnFirstValueOnly=false&outFields=objectid%2Cname%2Ccategory%2Cvariable%2Cdimensions%2Cstdtime",
+        "method": "GET",
+        "requestedAt": "2026-10-26T15:18:47.336000Z",
+        "retrievedAt": "2026-10-26T15:18:48.307000Z",
+        "sha256": "3b93c8a9c8113b2bc216821efb99a3848d8145da3e0f42d04dc5f3ef9ad5659c",
+        "bytes": 184,
+        "rawFile": "53.json",
+        "status": "api_error"
+      },
+      {
+        "url": "https://gis.earthdata.nasa.gov/portal/rest/services/GESDISC/GPM_3IMERGHHE/ImageServer/611498/info?f=pjson",
+        "method": "GET",
+        "requestedAt": "2026-10-26T15:18:48.307000Z",
+        "retrievedAt": "2026-10-26T15:18:49.355000Z",
+        "sha256": "6985b23903178df76a3d2f7b9809064d341faf0d41fc9a57fe62b9f2e89b756d",
+        "bytes": 495,
+        "rawFile": "54.json",
+        "status": "received"
+      },
+      {
+        "url": "https://gis.earthdata.nasa.gov/portal/rest/services/GESDISC/GPM_3IMERGHHE/ImageServer/getSamples?f=pjson&geometry=%7B%22points%22%3A+%5B%5B79.75%2C+7.95%5D%2C+%5B79.75%2C+8.05%5D%2C+%5B79.75%2C+8.15%5D%2C+%5B79.75%2C+8.25%5D%2C+%5B79.85%2C+7.95%5D%2C+%5B79.85%2C+8.05%5D%2C+%5B79.85%2C+8.15%5D%2C+%5B79.85%2C+8.25%5D%2C+%5B79.95%2C+7.95%5D%2C+%5B79.95%2C+8.05%5D%2C+%5B79.95%2C+8.15%5D%2C+%5B79.95%2C+8.25%5D%2C+%5B80.05%2C+7.95%5D%2C+%5B80.05%2C+8.05%5D%2C+%5B80.05%2C+8.15%5D%2C+%5B80.05%2C+8.25%5D%2C+%5B80.15%2C+7.95%5D%2C+%5B80.15%2C+8.05%5D%2C+%5B80.15%2C+8.15%5D%2C+%5B80.15%2C+8.25%5D%2C+%5B80.35%2C+6.65%5D%2C+%5B80.35%2C+6.75%5D%2C+%5B80.45%2C+6.65%5D%2C+%5B80.45%2C+6.75%5D%2C+%5B80.55%2C+6.65%5D%2C+%5B80.55%2C+6.75%5D%5D%2C+%22spatialReference%22%3A+%7B%22wkid%22%3A+4326%7D%7D&geometryType=esriGeometryMultipoint&mosaicRule=%7B%22mosaicMethod%22%3A+%22esriMosaicLockRaster%22%2C+%22lockRasterIds%22%3A+%5B611498%5D%2C+%22mosaicOperation%22%3A+%22MT_FIRST%22%7D&time=1793017800000&pixelSize=0.1%2C0.1&interpolation=RSP_NearestNeighbor&returnFirstValueOnly=false&outFields=objectid%2Cname%2Ccategory%2Cvariable%2Cdimensions%2Cstdtime",
+        "method": "GET",
+        "requestedAt": "2026-10-26T15:18:49.356000Z",
+        "retrievedAt": "2026-10-26T15:18:50.429000Z",
+        "sha256": "3b93c8a9c8113b2bc216821efb99a3848d8145da3e0f42d04dc5f3ef9ad5659c",
+        "bytes": 184,
+        "rawFile": "55.json",
+        "status": "api_error"
+      },
+      {
+        "url": "https://gis.earthdata.nasa.gov/portal/rest/services/GESDISC/GPM_3IMERGHHE/ImageServer/611499/info?f=pjson",
+        "method": "GET",
+        "requestedAt": "2026-10-26T15:18:50.430000Z",
+        "retrievedAt": "2026-10-26T15:18:51.476000Z",
+        "sha256": "6985b23903178df76a3d2f7b9809064d341faf0d41fc9a57fe62b9f2e89b756d",
+        "bytes": 495,
+        "rawFile": "56.json",
+        "status": "received"
+      },
+      {
+        "url": "https://gis.earthdata.nasa.gov/portal/rest/services/GESDISC/GPM_3IMERGHHE/ImageServer/getSamples?f=pjson&geometry=%7B%22points%22%3A+%5B%5B79.75%2C+7.95%5D%2C+%5B79.75%2C+8.05%5D%2C+%5B79.75%2C+8.15%5D%2C+%5B79.75%2C+8.25%5D%2C+%5B79.85%2C+7.95%5D%2C+%5B79.85%2C+8.05%5D%2C+%5B79.85%2C+8.15%5D%2C+%5B79.85%2C+8.25%5D%2C+%5B79.95%2C+7.95%5D%2C+%5B79.95%2C+8.05%5D%2C+%5B79.95%2C+8.15%5D%2C+%5B79.95%2C+8.25%5D%2C+%5B80.05%2C+7.95%5D%2C+%5B80.05%2C+8.05%5D%2C+%5B80.05%2C+8.15%5D%2C+%5B80.05%2C+8.25%5D%2C+%5B80.15%2C+7.95%5D%2C+%5B80.15%2C+8.05%5D%2C+%5B80.15%2C+8.15%5D%2C+%5B80.15%2C+8.25%5D%2C+%5B80.35%2C+6.65%5D%2C+%5B80.35%2C+6.75%5D%2C+%5B80.45%2C+6.65%5D%2C+%5B80.45%2C+6.75%5D%2C+%5B80.55%2C+6.65%5D%2C+%5B80.55%2C+6.75%5D%5D%2C+%22spatialReference%22%3A+%7B%22wkid%22%3A+4326%7D%7D&geometryType=esriGeometryMultipoint&mosaicRule=%7B%22mosaicMethod%22%3A+%22esriMosaicLockRaster%22%2C+%22lockRasterIds%22%3A+%5B611499%5D%2C+%22mosaicOperation%22%3A+%22MT_FIRST%22%7D&time=1793019600000&pixelSize=0.1%2C0.1&interpolation=RSP_NearestNeighbor&returnFirstValueOnly=false&outFields=objectid%2Cname%2Ccategory%2Cvariable%2Cdimensions%2Cstdtime",
+        "method": "GET",
+        "requestedAt": "2026-10-26T15:18:51.477000Z",
+        "retrievedAt": "2026-10-26T15:18:52.720000Z",
+        "sha256": "6c69f45c9330a6e443e65690a621e437046797a388e6521a4e75921ebf0f3abe",
+        "bytes": 204,
+        "rawFile": "57.json",
+        "status": "api_error"
+      }
+    ],
+    "attemptedSlotsUTC": "2026-10-26 00:00 through 13:00, every half-hour; only 00:00 and 00:30 returned valid estimates",
+    "nativeGridCentres": 26,
+    "attribution": "Huffman, G.J., E.F. Stocker, D.T. Bolvin, E.J. Nelkin, Jackson Tan (2024), GPM IMERG Early Precipitation L3 Half Hourly 0.1 degree x 0.1 degree V07, Greenbelt, MD, Goddard Earth Sciences Data and Information Services Center (GES DISC), Accessed: [Data Access Date], 10.5067/GPM/IMERG/3B-HH-E/07"
+  },
+  "files": {
+    "satellite.json": "43e6556c60ddf006f3011d883025d3dca2731e2ef52054fbe4317801839287b6",
+    "rainfall.json": "9bb9463b5d9b9adfa3fd5d2a5a6ba6849c929bbfd34cbde893d1043d25b8d40b"
+  }
+}

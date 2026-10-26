@@ -12,7 +12,7 @@ class ObservationUpdater(unittest.TestCase):
   self.rows=[]
   fields={'depthFeet':'Water Depth_ft','effectiveStorageAcreFeet':'Effective Storage_Acft','grossStorageAcreFeet':'Gross Storage_Acft','effectivePercent':'Effective Storage_per','spillCusecs':'Spilling_Cusec','previousDayRainfallMm':'Rainfall_Preceding Day_mm'}
   for r in self.before['records']:
-   row={k:'' for k in updater.HEADERS};row.update(Reservoir=r['name'],Range=r['range'],Spilling={True:'Yes',False:'No',None:''}[r['spilling']])
+   row={k:'' for k in updater.HEADERS};row.update(Reservoir=r['name'],Range=r['range'],Remarks=r.get('remarks',''),Spilling={True:'Yes',False:'No',None:''}[r['spilling']])
    for key,column in [('observedDate','Date'),('updatedDate','Update Date')]:row[column]=datetime.fromisoformat(r[key]).strftime('%m/%d/%Y') if r[key] else '#REF!'
    for key,column in fields.items():row[column]='' if r[key] is None else str(r[key])
    self.rows.append(row)
@@ -46,6 +46,14 @@ class ObservationUpdater(unittest.TestCase):
   for field,value in [('Effective Storage_per','999'),('Spilling_Cusec','-1'),('Range','New identity')]:
    rows=copy.deepcopy(self.rows);rows[0][field]=value
    with self.assertRaises(ValueError):updater.validate(self.raw(rows),self.before,self.now)
+ def test_thirty_minute_schedule_keeps_guarded_permissions(self):
+  source=(ROOT/'.github/workflows/floodlens-source-check.yml').read_text()
+  observation=(ROOT/'.github/workflows/floodlens-observation-update.yml').read_text()
+  self.assertIn("cron: '17,47 * * * *'",source)
+  self.assertIn("cron: '7,37 * * * *'",observation)
+  self.assertNotIn('contents: write',source)
+  self.assertIn('persist-credentials: false',observation)
+  self.assertIn('cancel-in-progress: false',observation)
  def test_exact_single_path_allowlist(self):
   assert_paths([PATH])
   for paths in [[],[PATH,'.github/workflows/other.yml'],['floodlens/data/reviewed.json'],['floodlens/data/../app.mjs']]:

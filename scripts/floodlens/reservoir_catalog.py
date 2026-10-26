@@ -15,6 +15,23 @@ def number(value):
 def date(value):
     if value.strip() in ('','#REF!','#N/A','#VALUE!','-'):return None
     return datetime.strptime(value.strip(),'%m/%d/%Y').date().isoformat()
+def gate_configuration(remarks, discharge):
+    """Parse only the reviewed GO opening notation; SD is a separate outlet section."""
+    result={'status':'not_reported' if not remarks.strip() else 'unparsed','groups':[], 'gateCount':None,'operationTime':None}
+    if len(remarks)>1000:return result
+    match=re.fullmatch(r"\s*GO\s*=\s*(\d+(?:\.\d+)?)\s*\(([^()]*)\)\s*(?:SD\b.*)?",remarks,re.IGNORECASE)
+    if not match or discharge is None or float(match[1])!=discharge:return result
+    groups=[]
+    for part in match[2].split(','):
+        item=re.fullmatch(r"\s*(\d+(?:\.\d+)?)\s*([\"'])\s*@\s*(\d+)\s*",part)
+        if not item:return result
+        opening=float(item[1])*(12 if item[2]=="'" else 1);count=int(item[3])
+        if not 0<opening<=240 or not 1<=count<=20:return result
+        groups.append({'count':count,'openingInches':opening,'openingFeet':opening/12})
+    if not groups or sum(g['count'] for g in groups)>20:return result
+    result.update(status='reported_configuration',groups=groups,gateCount=sum(g['count'] for g in groups))
+    return result
+
 def parse(raw):
     reader=csv.DictReader(io.StringIO(raw.decode('utf-8-sig')))
     if not all(f in (reader.fieldnames or []) for f in FIELDS):raise ValueError('Reservoir source schema changed')
@@ -26,6 +43,9 @@ def parse(raw):
         spilling=row['Spilling'].strip().lower()
         if spilling not in ('yes','no','','-'):raise ValueError('Unknown spilling value')
         r=dict(name=name,range=row['Range'].strip(),observedDate=date(row['Date']),updatedDate=date(row['Update Date']),observedAt=None,depthFeet=number(row['Water Depth_ft']),effectiveStorageAcreFeet=number(row['Effective Storage_Acft']),grossStorageAcreFeet=number(row['Gross Storage_Acft']),effectivePercent=number(row['Effective Storage_per']),spilling={'yes':True,'no':False}.get(spilling),spillCusecs=number(row['Spilling_Cusec']),previousDayRainfallMm=number(row['Rainfall_Preceding Day_mm']),url=SOURCE)
+        remarks=row.get('Remarks','').strip()
+        if len(remarks)>1000:raise ValueError('Source remarks too long')
+        r.update(remarks=remarks,gateConfiguration=gate_configuration(remarks,r['spillCusecs']))
         for k in ['effectiveStorageAcreFeet','grossStorageAcreFeet','effectivePercent','spillCusecs','previousDayRainfallMm']:
             if r[k] is not None and (r[k]<0 or r[k]>1e9):raise ValueError('Out-of-range numeric field')
         if r['effectivePercent'] is not None and r['effectivePercent']>200:raise ValueError('Implausible effective percentage; review required')

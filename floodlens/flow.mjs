@@ -1,10 +1,12 @@
-import {streetEnabled} from './street-map.mjs?v=20261026-10';
-import {LocationMap} from './location-map.mjs?v=20261026-10';
-import {locationEvidence,warningState,ageState,insideGeometry,intersectsAccuracy,locationCandidates} from './core.mjs?v=20261026-10';
+import {createContext} from './context-ui.mjs?v=20261026-11';
+import {streetEnabled} from './street-map.mjs?v=20261026-11';
+import {LocationMap} from './location-map.mjs?v=20261026-11';
+import {locationEvidence,warningState,ageState,insideGeometry,intersectsAccuracy,locationCandidates} from './core.mjs?v=20261026-11';
 const $=s=>document.querySelector(s);
 export function createFlow({t,name,getData,getCatalog,onLanguage,onArea,onRefresh}){
  let stage='language',point=null,accuracy=null,mode='gps',area=null,candidates=[],state='idle',manualPoint=null,catalog=null,locationRequest=0,matchRequest=0,lastMapMode=false;
  const shards=new Map();const resultMap=new LocationMap($('#result-map'),{translate:t});
+ const context=createContext({map:resultMap,t});
  const pinMap=new LocationMap($('#pin-map'),{translate:t,onPin:p=>{manualPoint=p;$('#use-pin').disabled=false;$('#manual-status').textContent=t('manualAccuracy');}});
  function labels(){return [...(catalog?.districts||[]),...(catalog?.divisions||[])].map(a=>({...a,label:name(a)}));}
  function show(next){stage=next;for(const s of ['language','location','result'])$('#'+s+'-screen').hidden=s!==next;$('.language').hidden=next==='language';window.scrollTo(0,0);}
@@ -51,6 +53,7 @@ export function createFlow({t,name,getData,getCatalog,onLanguage,onArea,onRefres
   $('.flow-privacy').dataset.i18n=streetEnabled()?'streetPrivacy':'shortPrivacy';$('.flow-privacy').textContent=t($('.flow-privacy').dataset.i18n);
   resultMap.t=t;pinMap.t=t;resultMap.labels=labels();pinMap.labels=labels();resultMap.draw();pinMap.draw();
   if(stage!=='result')return;
+  context.update({point,accuracy:accuracy||0,outside:state==='outside',checking:state==='checking'});
   const {data,needsUpdate,loadFailed,loading}=getData();
   const candidateAreas=area?[area]:state==='ambiguous'?candidates:[];
   const uncertain=state==='ambiguous';
