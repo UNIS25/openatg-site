@@ -24,8 +24,10 @@ branch protection, domain, HTTPS, Cloudflare or Pages publishing configuration.
 
 `contents: write` permits a data commit. `pages: write` permits an explicit
 `POST /repos/UNIS25/openatg-site/pages/builds` because GitHub-token pushes do not
-automatically trigger branch-based Pages builds. The publisher checks the exact build commit and public JSON hash before
-reporting automatic publication success.
+automatically trigger branch-based Pages builds. The publisher confirms the exact successful build commit, then checks the
+public JSON hash when edge access permits. HTTP 401/403 is explicitly reported
+as blocked verification without retrying or bypassing access controls. Separate
+browser verification is required in that case.
 
 GitHub documents these constraints:
 - https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site
@@ -53,7 +55,8 @@ modify frontend code, workflow files, warning severity, DS mappings, validity,
 translations or arbitrary paths derived from source text. No model calls or
 source-driven shell commands occur. Normal non-force pushes and a concurrency
 group protect against competing updates. Verify the resulting Pages build SHA
-and public JSON contents before reporting publication success.
+and public JSON contents when edge access permits. A blocked public check is
+reported separately from successful Pages publication.
 
 On fetch/parse failure, retain prior values with their original dates and
 publish an explicit failure/freshness record if this narrowly scoped behavior

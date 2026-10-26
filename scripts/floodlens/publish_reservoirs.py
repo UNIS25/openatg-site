@@ -1,6 +1,7 @@
 """One-file, normal Git push + explicit legacy Pages build, using an ephemeral token."""
 import base64,hashlib,json,os,subprocess,time
 from pathlib import Path
+from urllib.error import HTTPError
 from urllib.request import Request,urlopen
 
 ROOT=Path(__file__).resolve().parents[2]
@@ -38,6 +39,7 @@ def main():
     api('/pages/builds',token,'POST')
     expected=hashlib.sha256((ROOT/PATH).read_bytes()).hexdigest()
     deadline=time.monotonic()+480;build=None
+    public_verified=False;public_status='pending'
     while time.monotonic()<deadline:
         latest=api('/pages/builds/latest',token)
         if latest.get('commit')==commit:
@@ -49,12 +51,19 @@ def main():
         try:
             with urlopen(Request(PUBLIC+'?publication='+commit,headers={'Cache-Control':'no-cache'}),timeout=25) as response:
                 raw=response.read(2*1024*1024)
-            if hashlib.sha256(raw).hexdigest()==expected:break
-        except Exception:pass
+            if hashlib.sha256(raw).hexdigest()==expected:public_verified=True;public_status='hash_matched';break
+        except HTTPError as error:
+            if error.code in (401,403):
+                # Respect edge access controls. Do not disguise the client, bypass
+                # a challenge, loosen security or repeatedly retry this rejection.
+                public_status='blocked_http_'+str(error.code)
+                print('::warning::Pages build confirmed; public edge verification blocked by HTTP '+str(error.code)+'. Browser verification is required.')
+                break
+            if error.code!=404:raise
         time.sleep(15)
     else:raise TimeoutError('Public data hash did not match committed file')
-    evidence={'commit':commit,'pagesBuild':build['url'],'publicUrl':PUBLIC,'publicSha256':expected,'verified':True}
+    evidence={'commit':commit,'pagesBuild':build['url'],'publicUrl':PUBLIC,'committedSha256':expected,'pagesBuildVerified':True,'publicHashVerified':public_verified,'publicCheck':public_status}
     print(json.dumps(evidence))
     if os.environ.get('GITHUB_STEP_SUMMARY'):
-        with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as f:f.write(f"\n## Publication verified\n\nCommit: [{commit}](https://github.com/{REPOSITORY}/commit/{commit})\n\nPages build: {build['url']}\n\nPublic file: {PUBLIC}\n\nPublic SHA-256 matched: `{expected}`.\n")
+        with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as f:f.write(f"\n## Pages publication verified\n\nCommit: [{commit}](https://github.com/{REPOSITORY}/commit/{commit})\n\nPages build: {build['url']}\n\nPublic file: {PUBLIC}\n\nCommitted SHA-256: `{expected}`.\n\nPublic edge check: **{public_status}**. Public hash verified: **{public_verified}**. A blocked edge check needs separate browser verification; it is not reported as a public hash match.\n")
 if __name__=='__main__':main()

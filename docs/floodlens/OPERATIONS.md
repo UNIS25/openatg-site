@@ -83,11 +83,17 @@ permissions are repository-wide; the path restriction is a code safeguard.
 The publisher validates exact column names/units, all 74 reviewed identities,
 number bounds, dates (no future or regressed dates), and unknown fields. It
 makes a normal non-force push, explicitly requests the existing Pages build,
-checks the exact commit's successful build, and compares the public file hash.
+checks the exact commit's successful build, and attempts a public file hash check.
+Cloudflare rejects default Python requests with HTTP 403 / error 1010. The job
+respects this rejection, records a visible warning and a blocked edge check,
+and never claims a public hash match in that case. Separate real-browser
+verification confirmed the first published data. No user-agent disguise,
+challenge bypass or security configuration change is used.
 Concurrent runs are serialized. An advancing main aborts the push; the next run
 starts fresh. A fetch/validation failure preserves prior readings and dates,
-publishes failure metadata, and fails the workflow visibly. A failed build or
-public verification also fails visibly; no success is inferred from a commit.
+publishes failure metadata, and fails the workflow visibly. A failed build, a public data mismatch or an unclassified verification error
+also fails visibly; no successful build is inferred from a commit. An explicit
+401/403 edge denial is a warning distinct from confirmed Pages publication.
 
 The job uses the existing free standard public-repository runner, no artifact
 or cache storage and no permanent credential. Repository defaults, security,
