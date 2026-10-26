@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "reviewedAt": "2026-10-26T16:50:38.986649+00:00",
+  "reviewedAt": "2026-10-26T18:19:31.514294+00:00",
   "reviewMethod": "Official PDFs visually checked; structured source transcription. Not an agency endorsement.",
   "bulletins": [
     {
@@ -891,6 +891,54 @@
         }
       ],
       "districtCodes": []
+    },
+    {
+      "id": "gin-20261026-01",
+      "kind": "flood",
+      "severity": "amber",
+      "title": {
+        "en": "Gin Ganga Basin",
+        "si": "ගිං ගඟ ද්‍රෝණිය",
+        "ta": "கிங் கங்கை ஆற்றுப் படுகை"
+      },
+      "authority": "Irrigation Department",
+      "issuedAt": "2026-10-26T22:30:00+05:30",
+      "expiresAt": "2026-10-27T22:30:00+05:30",
+      "listingAt": "2026-10-26T22:30:00+05:30",
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Flood_warning_for_Gin_River_Basin_-_NO_01_(2026__1793038211.pdf",
+      "sha256": "8c83b04f7f2c1126a6bb5334ae48b69b842d2d6962d9d0c179cd97ba670de9c3",
+      "summary": {
+        "en": "Minor flooding is possible in low-lying parts of the Gin Ganga valley in the four named DS divisions. Residents and drivers are asked to exercise extreme caution. This does not establish flooding at every location in a division.",
+        "si": "නම් කළ කොට්ඨාස හතරේ ගිං ගඟ නිම්නයේ පහත් බිම්වල සුළු ගංවතුර ඇති විය හැක. පදිංචිකරුවන් සහ රියදුරන් දැඩි සැලකිල්ලෙන් කටයුතු කළ යුතුය. කොට්ඨාසයක සෑම ස්ථානයකම ගංවතුර ඇති බව මෙයින් අදහස් නොවේ.",
+        "ta": "பெயரிடப்பட்ட நான்கு பிரிவுகளில் கிங் கங்கை பள்ளத்தாக்கின் தாழ்நிலப் பகுதிகளில் சிறிய வெள்ளம் ஏற்படலாம். குடியிருப்போரும் சாரதிகளும் மிகுந்த அவதானத்துடன் செயற்படுமாறு கேட்டுக்கொள்ளப்படுகின்றனர். பிரிவின் ஒவ்வொரு இடத்திலும் வெள்ளம் ஏற்பட்டுள்ளதாக இது பொருளல்ல."
+      },
+      "areas": [
+        {
+          "district": "Galle",
+          "division": "Thawalama",
+          "districtCode": "LK31",
+          "divisionCode": "LK3118"
+        },
+        {
+          "district": "Galle",
+          "division": "Nagoda",
+          "districtCode": "LK31",
+          "divisionCode": "LK3124"
+        },
+        {
+          "district": "Galle",
+          "division": "Baddegama",
+          "districtCode": "LK31",
+          "divisionCode": "LK3127"
+        },
+        {
+          "district": "Galle",
+          "division": "Welivitiya-Divithura",
+          "districtCode": "LK31",
+          "divisionCode": "LK3130"
+        }
+      ],
+      "districtCodes": []
     }
   ],
   "stations": [
@@ -1117,6 +1165,6 @@
       "url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTcSGhi9RESl7CMCl1TQnrKe07Gx5Q696YiSB9jneIHqIP9lifpqSErgI3D5k9KtQXSdW5JpycIIr5e/pub?gid=1238978530&single=true&output=csv"
     }
   ],
-  "fetchedAt": "2026-10-26T16:47:39.074227+00:00",
+  "fetchedAt": "2026-10-26T18:19:31.514294+00:00",
   "minClientVersion": 8
 }

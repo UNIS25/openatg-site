@@ -14,7 +14,7 @@ async function draw(){
   const ctx=current;if(!ctx?.area)return;const {area,t}=ctx;const content=document.querySelector('#outline-content');content.replaceChildren(node('p',t('loading')));
   try{
     const districtCode=area.type==='district'?area.code:area.districtCode;
-    const response=await fetch(`./data/boundaries/${districtCode}.json`,{signal:AbortSignal.timeout(20000)});if(!response.ok)throw Error('Unavailable');const shard=await response.json();
+    const response=await fetch(`/floodlens/data/boundaries/${districtCode}.json`,{signal:AbortSignal.timeout(20000)});if(!response.ok)throw Error('Unavailable');const shard=await response.json();
     if(current?.area?.code!==area.code)return;
     const features=area.type==='district'?shard.features:shard.features.filter(f=>f.properties.code===area.code);
     if(!features.length)throw Error('Missing area');

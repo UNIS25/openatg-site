@@ -319,6 +319,17 @@
       "reviewedAt": "2026-10-26T16:50:38.986649+00:00",
       "supersedes": "river-observations-20261026-1830",
       "review": "Original single-page PDF rendered with PDFKit and visually verified against exact 20:00/21:00 columns, unit, remarks and trend. Independent reviewer cross-check agreed. Blank trends remain null; no trend inferred from equal values."
+    },
+    {
+      "id": "gin-20261026-01",
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Flood_warning_for_Gin_River_Basin_-_NO_01_(2026__1793038211.pdf",
+      "checkedAt": "2026-10-26T18:19:21.761771+00:00",
+      "status": "ok",
+      "sha256": "8c83b04f7f2c1126a6bb5334ae48b69b842d2d6962d9d0c179cd97ba670de9c3",
+      "bytes": 574373,
+      "contentType": "application/pdf",
+      "finalUrl": "https://www.dmc.gov.lk/images/dmcreports/Flood_warning_for_Gin_River_Basin_-_NO_01_(2026__1793038211.pdf",
+      "review": "Both original pages visually checked; Amber, 22:30 issue/expiry, four named low-lying valley DS areas. Welivitiya-Divithura maps to catalogue Welivitiya-Divitura LK3130, not all Galle. Non-official summary translations; original trilingual bulletin retained."
     }
   ],
   "reviews": [
@@ -3117,6 +3128,100 @@
         "rowsScanned": 300
       },
       "warningDecision": "All current reviewed warning hashes unchanged; no newer warning or cancellation identified in the three latest official listing streams. Historical unreviewed queue entries remain unreviewed."
+    }
+  ],
+  "reviewChecks": [
+    {
+      "checkedAt": "2026-10-26T18:19:31.514294+00:00",
+      "release": "20261026-16",
+      "result": "All seven previously reviewed warning PDFs and selected river source unchanged. Gin Ganga original independently visually reviewed and added. Other unreviewed/historical listing entries remain outside the selected assessment. No cancellation found for the current selected warnings.",
+      "listingWindowComplete": true,
+      "sources": [
+        {
+          "id": "kalu-20261026-01",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Flood_warning_for_Kalu_River_Basin_-_No_01_-_2026__1792995574.pdf",
+          "sha256": "1767a274eea705bca490879756b1ad5bd255183c0d101ba5c8e81212b4da8ca3",
+          "status": "ok",
+          "checkedAt": "2026-10-26T18:18:42.922570+00:00"
+        },
+        {
+          "id": "mahaweli-20261026-01",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Flood_Warning_for_Mahaweli_River_-_No_01_-_2026__1792998739.pdf",
+          "sha256": "8746dbc111719bf59283836919e8ead312f8889fa29d6d9992d70e57d205a560",
+          "status": "ok",
+          "checkedAt": "2026-10-26T18:18:42.923938+00:00"
+        },
+        {
+          "id": "LEWM-26-10-2026-1800-33",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Landslide_EW_Report_at_1800hrs_on_2026__1793018981.pdf",
+          "sha256": "35e492bf3495070ff0e2fcfaf161528ebf942bb302fffbaa66f78949fdec716f",
+          "status": "ok",
+          "checkedAt": "2026-10-26T18:18:42.924423+00:00"
+        },
+        {
+          "id": "rain-20261026-0300",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Advisory_for_Heavy_Rain_at_0330_hrs_on_2026__1792968291.pdf",
+          "sha256": "0bd573752b1965d56fd8ec4ae0c372cba2766bb66294bfc2b6acef1c6d5e6136",
+          "status": "ok",
+          "checkedAt": "2026-10-26T18:18:47.017819+00:00"
+        },
+        {
+          "id": "LLA-26-10-26-01-03",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Advisory_for_Severe_Lightning_at_1130hrs_on_2026__1792997048.pdf",
+          "sha256": "e5a055762cc5fff61fe0ae610ce6241395f811d76ae020b955d21c98f707ac5c",
+          "status": "ok",
+          "checkedAt": "2026-10-26T18:18:47.312612+00:00"
+        },
+        {
+          "id": "kelani-20261026-01",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Flood_Warning_for_Kelani_Basin-_No_01_-_2026__1793020603.pdf",
+          "sha256": "7ef2fd77855a9bf433e6bab591dcdbf53cc4b7301925ef0bfe248e3aa0e3edd4",
+          "status": "ok",
+          "checkedAt": "2026-10-26T18:18:47.595279+00:00"
+        },
+        {
+          "id": "attanagalu-20261026-01",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Flood_Warning_FOR_Attanagalu_Oya__-_NO_01_%282026__1793020643.pdf",
+          "sha256": "aee26763cf95bbe1c092b17161ac34a0f33c7c6cf24b6b9fc118bc0453f67b72",
+          "status": "ok",
+          "checkedAt": "2026-10-26T18:18:51.733770+00:00"
+        },
+        {
+          "id": "river-observations",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793031612.pdf",
+          "sha256": "eed191d373c03e12f80226e02d7f2a3146a3c6f84422e960b9c553b0e5b1381d",
+          "status": "ok",
+          "checkedAt": "2026-10-26T18:18:51.804817+00:00"
+        },
+        {
+          "id": "major-reservoir-csv",
+          "url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTcSGhi9RESl7CMCl1TQnrKe07Gx5Q696YiSB9jneIHqIP9lifpqSErgI3D5k9KtQXSdW5JpycIIr5e/pub?gid=1238978530&single=true&output=csv",
+          "sha256": "ed1616d8317eeeb1ba4a041c590f66685f365bd47f26af2c7ae113aed8aae44b",
+          "status": "ok",
+          "checkedAt": "2026-10-26T18:18:51.940490+00:00"
+        },
+        {
+          "id": "flood-listing",
+          "url": "https://www.dmc.gov.lk/index.php?option=com_dmcreports&view=reports&report_type_id=6&lang=en&limit=100",
+          "sha256": "64357f3a1db019a9b78d8fc777c4fc1333621adeaa97462ea3874484e8936396",
+          "status": "ok",
+          "checkedAt": "2026-10-26T18:18:55.612960+00:00"
+        },
+        {
+          "id": "landslide-listing",
+          "url": "https://www.dmc.gov.lk/index.php?option=com_dmcreports&view=reports&report_type_id=5&lang=en&limit=100",
+          "sha256": "398aa210d031f260f82c90adfc16d637fd4c34400c39d9f6c4ff2c1910d4218c",
+          "status": "ok",
+          "checkedAt": "2026-10-26T18:18:56.054716+00:00"
+        },
+        {
+          "id": "weather-listing",
+          "url": "https://www.dmc.gov.lk/index.php?option=com_dmcreports&view=reports&report_type_id=2&lang=en&limit=100",
+          "sha256": "462788f838d035bad020885b01ae35c7553f4bff155ef8850e0c6d34eff9856c",
+          "status": "ok",
+          "checkedAt": "2026-10-26T18:18:56.654520+00:00"
+        }
+      ]
     }
   ]
 }

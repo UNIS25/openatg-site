@@ -1,6 +1,6 @@
 # OpenATG FloodLens
 
-Public route: `https://openatg.com/floodlens/`. Existing deployment route: GitHub
+Public route: `https://openatg.com/ark/`. The legacy `/floodlens/` entry redirects to `/ark/`; data/assets and automated publisher paths remain under `/floodlens/`. Existing deployment route: GitHub
 Pages, `UNIS25/openatg-site`, `main`, repository root, behind existing Cloudflare.
 No framework, backend, external font, runtime map library or new credential.
 
@@ -607,3 +607,49 @@ Reservoir gate counts/openings keep the source date, unknown operation time and
 source-conflict disclosure; no zero-gate or non-spill value creates a safe state.
 No warning/observation data, forecast data, publisher permission or workflow was
 changed in this presentation release.
+
+
+## Canonical Ark and mobile interaction, release 20261026-16
+
+The app HTML now lives at `/ark/`; `/floodlens/` is a styled compatible redirect.
+Homepage, canonical metadata and all browser checks use `/ark/`. Runtime data and
+assets use absolute `/floodlens/` paths, preserving scheduler/provenance URLs.
+No domain, Pages, Cloudflare, CSP or token-permission change was made.
+
+A tiny same-origin bootstrap queues early language taps during module loading.
+Preloads reduce module waterfalls. A failed/slow app exposes DMC and 117 links;
+it never invents a location. No startup location/data request or local storage.
+The formerly unstyled `/ark/` redirect document is removed. Exact DS geometry
+is still used for matching; only the bounded, licensed display overview is
+rendered. Cached projected rings, viewport culling and animation-frame drawing
+keep drag work bounded. Touch pan/pinch stays inside the map; page gestures
+outside it remain available. Tests exercise touch movement in all four
+directions, pinch, startup delay/failure and explicit manual confirmation.
+
+Nearest mapped reservoir name and straight-line kilometres are calculated from
+43 mapped source points. This is not complete national inventory or proof of
+upstream influence. Forecast attribution remains available in one compact
+disclosure; technical methods, licence, disclaimer and provenance are nested.
+
+The new Gin Ganga Amber No. 01 original (22:30 SLST, 26 October; expiry 22:30,
+27 October) was visually reviewed on both pages. It covers low-lying Gin valley
+portions of Thawalama LK3118, Nagoda LK3124, Baddegama LK3127 and
+Welivitiya-Divithura (catalogue spelling Welivitiya-Divitura) LK3130. It does not
+cover every parcel or all Galle. Original hash and selected-source recheck are
+preserved in provenance. Existing warnings and station readings are unchanged.
+
+`floodlens/data/reservoir-reports.json` is a separately reviewed media snapshot,
+not an automated observation source. Daily Mirror's original 26 October 21:44
+SLST article, attributed to Irrigation Director Herath, reports Tabbowa eight
+gates (four 2 ft, four 3 ft), 4,400 cusecs, and Inginimitiya four gates (two 2 ft,
+two 1 ft), 3,000 cusecs. Actual operation time is unreported. These appear as
+attributed media reports, while the differing untimed official daily values
+remain in a collapsed comparison. Neither establishes present gate state or
+household impact. Publication/review times and captured text hash are retained.
+The existing automated publisher still writes only `reservoirs.json`.
+
+Unresolved integrations: no validated, reusable Puttalam tide constants/feed;
+Colombo predictions cannot substitute. NASA/NOAA cloud-imagery candidates need
+verified Sri Lanka pixel coverage/capture times before embedding; cloud imagery
+is not flood extent. No verified current inundation polygon or licensed directed
+catchment model was added. These gaps do not block this interface/source release.

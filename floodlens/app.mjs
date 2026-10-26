@@ -1,7 +1,7 @@
-import {copy} from './i18n.mjs?v=20261026-15';
-import {renderReservoirs,refreshReservoirs} from './reservoirs.mjs?v=20261026-15';
-import {createFlow} from './flow.mjs?v=20261026-15';
-import {warningState,ageState,dailyAgeState,warningMatches,assessment,validateSnapshot,intersectsAccuracy,locationCandidates,insideGeometry} from './core.mjs?v=20261026-15';
+import {copy} from './i18n.mjs?v=20261026-16';
+import {renderReservoirs,refreshReservoirs} from './reservoirs.mjs?v=20261026-16';
+import {createFlow} from './flow.mjs?v=20261026-16';
+import {warningState,ageState,dailyAgeState,warningMatches,assessment,validateSnapshot,intersectsAccuracy,locationCandidates,insideGeometry} from './core.mjs?v=20261026-16';
 const $=s=>document.querySelector(s);
 let lang='en',data=null,catalog=null,selected=null,locationMessage='',outside=false,loadFailed=false,loading=false,needsUpdate=false;
 const t=k=>copy[lang][k]??copy.en[k]??k;
@@ -60,12 +60,12 @@ function renderConnection(){const n=$('#connection');n.hidden=navigator.onLine&&
 function render(){renderWarnings();renderStations();renderConnection();flow?.render();}
 async function loadSnapshot(){
   if(loading)return;loading=true;$('#refresh').disabled=true;$('#load-observations').disabled=true;
-  try{const r=await fetch('./data/reviewed.json',{cache:'no-store',signal:AbortSignal.timeout(12000)});if(!r.ok)throw Error('Snapshot unavailable');const next=validateSnapshot(await r.json());data=next;loadFailed=false;needsUpdate=false;}catch(error){if(error.code==='CLIENT_UPDATE_REQUIRED'){needsUpdate=true;data=null;}else loadFailed=true;}
+  try{const r=await fetch('/floodlens/data/reviewed.json',{cache:'no-store',signal:AbortSignal.timeout(12000)});if(!r.ok)throw Error('Snapshot unavailable');const next=validateSnapshot(await r.json());data=next;loadFailed=false;needsUpdate=false;}catch(error){if(error.code==='CLIENT_UPDATE_REQUIRED'){needsUpdate=true;data=null;}else loadFailed=true;}
   finally{loading=false;$('#refresh').disabled=false;$('#load-observations').disabled=false;render();}
 }
 async function loadCatalog(){
   if(catalog)return catalog;
-  const r=await fetch('./data/areas.json',{signal:AbortSignal.timeout(15000)});if(!r.ok)throw Error('Area catalogue unavailable');
+  const r=await fetch('/floodlens/data/areas.json',{signal:AbortSignal.timeout(15000)});if(!r.ok)throw Error('Area catalogue unavailable');
   const next=await r.json();if(!Array.isArray(next.districts)||!Array.isArray(next.divisions))throw Error('Invalid area catalogue');catalog=next;return catalog;
 }
 $('#station-search').addEventListener('input',renderStations);
@@ -79,6 +79,12 @@ setInterval(()=>{if(!document.hidden&&navigator.onLine){loadSnapshot();if($('#ob
 
 const boundaryNote=link('https://data.humdata.org/dataset/cod-ab-lka','');boundaryNote.dataset.i18n='boundarySource';const boundaryP=el('p','');boundaryP.append(boundaryNote);$('.about-content').append(boundaryP);
 const history=link('https://github.com/UNIS25/openatg-site/actions/workflows/floodlens-source-check.yml','');history.dataset.i18n='scheduler';const historyP=el('p','');historyP.append(history);$('.about-content').append(historyP);
-const pointSource=link('./data/reservoir-locations.json','');pointSource.dataset.i18n='mapPointSource';const pointP=el('p','');pointP.append(pointSource);$('.about-content').append(pointP);
+const pointSource=link('/floodlens/data/reservoir-locations.json','');pointSource.dataset.i18n='mapPointSource';const pointP=el('p','');pointP.append(pointSource);$('.about-content').append(pointP);
 const flow=createFlow({t,name:areaName,getData:()=>({data,needsUpdate,loadFailed,loading}),getCatalog:loadCatalog,onLanguage:next=>{lang=next;translate();},onArea:next=>{selected=next;render();},onRefresh:loadSnapshot});
 translate();
+
+document.documentElement.dataset.arkReady="true";
+document.querySelectorAll("[data-language]").forEach(b=>b.disabled=false);
+document.querySelector("#boot-status").hidden=true;
+document.querySelector("#boot-help").hidden=true;
+document.dispatchEvent(new Event("ark-ready"));

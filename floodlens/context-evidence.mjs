@@ -1,5 +1,5 @@
 // Dated observation context. No fetch, storage or household hazard inference.
-import {locationEvidence} from './core.mjs?v=20261026-15';
+import {locationEvidence} from './core.mjs?v=20261026-16';
 const HOUR=3600000;
 const validPoint=p=>Array.isArray(p)&&p.length===2&&p.every(Number.isFinite)&&Math.abs(p[0])<=180&&Math.abs(p[1])<=90;
 const contains=(b,p)=>b&&p[0]>=b[0]&&p[0]<=b[2]&&p[1]>=b[1]&&p[1]<=b[3];
@@ -56,6 +56,14 @@ export function reservoirsForContext(points,directory,point,areas=[],now=Date.no
 }
 export function gateConflict(record){
  return record?.name==='Tabbowa'&&record.observedDate==='2026-10-26'&&record.gateConfiguration?.gateCount===6&&record.spillCusecs===2200;
+}
+// Separately reviewed media evidence never replaces an official daily measurement.
+export function mediaReservoirReport(data,tankCode,now=Date.now()){
+ if(data?.schemaVersion!==1||data.kind!=='reviewed_media_report'||data.source!=='Daily Mirror'||data.url!=='https://www.dailymirror.lk/breaking-news/Two-reservoirs-release-7-400-cusecs-into-Mee-Oya-residents-warned/108-353450')return null;
+ if(!Number.isFinite(Date.parse(data.publishedAt))||Date.parse(data.publishedAt)>now||!Number.isFinite(Date.parse(data.reviewedAt))||Date.parse(data.reviewedAt)<Date.parse(data.publishedAt)||Date.parse(data.reviewedAt)>now||data.operationAt!==null)return null;
+ const records=data.records?.filter(r=>r.tankCode===tankCode);if(records?.length!==1)return null;const r=records[0];
+ if(!Number.isInteger(r.gateCount)||r.gateCount<1||r.gateCount>30||!Number.isFinite(r.spillCusecs)||r.spillCusecs<0||!Array.isArray(r.groups)||r.groups.some(g=>!Number.isInteger(g.count)||g.count<1||!Number.isFinite(g.openingFeet)||g.openingFeet<=0||g.openingFeet>30)||r.groups.reduce((n,g)=>n+g.count,0)!==r.gateCount)return null;
+ return {...r,source:data.source,url:data.url,publishedAt:data.publishedAt,operationAt:null};
 }
 export function assemble(point,{satellite,rainfall,points,directory,reviewed,areas=[]},{now=Date.now(),accuracy=0}={}){
  if(!validPoint(point))throw Error('Invalid point');

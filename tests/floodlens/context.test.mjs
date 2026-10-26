@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {inflateSync} from 'node:zlib';
 import proj4 from '../../floodlens/vendor/proj4.js';
-import {assemble,satelliteAt,rainfallAt,nearestReservoir,distanceKm} from '../../floodlens/context-evidence.mjs';
+import {mediaReservoirReport,assemble,satelliteAt,rainfallAt,nearestReservoir,distanceKm} from '../../floodlens/context-evidence.mjs';
 import {insideGeometry,locationCandidates} from '../../floodlens/core.mjs';
 const read=p=>JSON.parse(fs.readFileSync(new URL(p,import.meta.url),'utf8'));
 const satellite=read('../../floodlens/data/context/satellite.json');
@@ -44,3 +44,7 @@ test('nearest reservoir cannot trigger Puttalam basin membership without adminis
 test('duplicate or missing tank identity does not silently substitute another basin reservoir',()=>{const points=structuredClone(data.points);points.features.push(points.features.find(f=>f.properties.tankCode==='R13101'));const result=reservoirsForContext(points,data.directory,puttalam,areasAt(puttalam),now);assert.equal(result.items[1].status,'locations_unavailable');assert.equal(result.items[1].reading,undefined);});
 test('date-only reservoir report becomes old after local midnight despite fresh download',()=>{const result=reservoirsForContext(data.points,{...data.directory,retrievedAt:'2026-10-26T19:00:00Z'},puttalam,areasAt(puttalam),Date.parse('2026-10-26T19:01:00Z'));assert.ok(result.items.every(r=>r.dateStatus==='old'));});
 test('media discrepancy is attached only to exact reviewed dated record',()=>{const r=data.directory.records.find(r=>r.name==='Tabbowa');assert.equal(gateConflict(r),true);assert.equal(gateConflict({...r,observedDate:'2026-10-27'}),false);assert.equal(gateConflict({...r,gateConfiguration:{gateCount:8}}),false);assert.equal(gateConflict({...r,name:'Inginimitiya'}),false);});
+
+const media=read('../../floodlens/data/reservoir-reports.json');
+test('reviewed media gates retain publication time and unknown operation time separately from daily readings',()=>{const time=Date.parse(media.reviewedAt)+1000,a=mediaReservoirReport(media,'R13206',time),b=mediaReservoirReport(media,'R13101',time);assert.equal(a.gateCount,8);assert.equal(a.spillCusecs,4400);assert.deepEqual(a.groups,[{count:4,openingFeet:2},{count:4,openingFeet:3}]);assert.equal(b.gateCount,4);assert.equal(b.spillCusecs,3000);assert.equal(a.operationAt,null);assert.equal(data.directory.records.find(r=>r.name==='Tabbowa').spillCusecs,2200);});
+test('media report rejects future time, malformed group, invalid date and unreviewed source',()=>{const time=Date.parse(media.reviewedAt)+1000;for(const mutate of [d=>d.publishedAt='2030-01-01',d=>d.reviewedAt='invalid',d=>d.operationAt=d.publishedAt,d=>d.records[0].groups[0].count=99,d=>d.url='https://example.com/']){const d=structuredClone(media);mutate(d);assert.equal(mediaReservoirReport(d,'R13206',time),null);}assert.equal(mediaReservoirReport(media,'missing',time),null);assert.equal(mediaReservoirReport(null,'R13206',time),null);});

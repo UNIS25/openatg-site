@@ -1,8 +1,8 @@
-import {mountForecast} from './forecast-ui.mjs?v=20261026-15';
-import {createContext} from './context-ui.mjs?v=20261026-15';
-import {streetEnabled} from './street-map.mjs?v=20261026-15';
-import {LocationMap} from './location-map.mjs?v=20261026-15';
-import {locationEvidence,warningState,warningMatches,ageState,insideGeometry,intersectsAccuracy,locationCandidates} from './core.mjs?v=20261026-15';
+import {mountForecast} from './forecast-ui.mjs?v=20261026-16';
+import {createContext} from './context-ui.mjs?v=20261026-16';
+import {streetEnabled} from './street-map.mjs?v=20261026-16';
+import {LocationMap} from './location-map.mjs?v=20261026-16';
+import {locationEvidence,warningState,warningMatches,ageState,insideGeometry,intersectsAccuracy,locationCandidates} from './core.mjs?v=20261026-16';
 const $=s=>document.querySelector(s);
 export function createFlow({t,name,getData,getCatalog,onLanguage,onArea,onRefresh}){
  let stage='language',point=null,accuracy=null,mode='gps',area=null,candidates=[],state='idle',manualPoint=null,catalog=null,locationRequest=0,matchRequest=0,lastMapMode=false;
@@ -30,10 +30,11 @@ export function createFlow({t,name,getData,getCatalog,onLanguage,onArea,onRefres
   try{
    catalog=await getCatalog();if(request!==matchRequest)return;const districts=catalog.districts.filter(d=>intersectsAccuracy(d.bbox,p,(uncertainty??100)+30));
    if(!districts.length){state='outside';render();return;}
-   const loaded=await Promise.all(districts.map(async d=>{if(!shards.has(d.code)){const response=await fetch(`./data/boundaries/${d.code}.json`,{signal:AbortSignal.timeout(20000)});if(!response.ok)throw Error('Boundary unavailable');shards.set(d.code,await response.json());}return shards.get(d.code);}));
+   const loaded=await Promise.all(districts.map(async d=>{if(!shards.has(d.code)){const response=await fetch(`/floodlens/data/boundaries/${d.code}.json`,{signal:AbortSignal.timeout(20000)});if(!response.ok)throw Error('Boundary unavailable');shards.set(d.code,await response.json());}return shards.get(d.code);}));
    if(request!==matchRequest)return;const features=loaded.flatMap(s=>s.features);const matches=locationCandidates(features,p,uncertainty??100);
    candidates=matches.map(f=>catalog.divisions.find(a=>a.code===f.properties.code)).filter(Boolean);
-   resultMap.set({features,labels:labels()});
+   // Exact geometry is for matching only; the display uses its bounded, licensed overview.
+   resultMap.set({labels:labels()});
    if(matches.length===1&&insideGeometry(p,matches[0].geometry)){area=candidates[0]||null;state=area?(uncertainty>1500?'ambiguous':'matched'):'unavailable';if(uncertainty>1500)area=null;if(area&&!streetEnabled()){const [x0,y0,x1,y1]=area.bbox;const span=Math.max(.08,Math.min(.65,Math.max(x1-x0,(y1-y0)/.75)*1.35));resultMap.set({center:point,span});}onArea(area);}
    else state=candidates.length?'ambiguous':'outside';
   }catch{if(request!==matchRequest)return;state='unavailable';}

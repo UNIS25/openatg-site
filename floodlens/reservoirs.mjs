@@ -1,11 +1,11 @@
-import {gateSummary} from './gates.mjs?v=20261026-15';
-import {dailyAgeState,ageState,safeSource} from './core.mjs?v=20261026-15';
+import {gateSummary} from './gates.mjs?v=20261026-16';
+import {dailyAgeState,ageState,safeSource} from './core.mjs?v=20261026-16';
 let directory=null,context=null,busy=false,failed=false,showAll=false;
 const el=(tag,cls,text)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n;};
 const value=v=>Number.isFinite(v)?v.toLocaleString(undefined,{maximumFractionDigits:2}):'—';
 export async function refreshReservoirs(){
   if(busy)return;busy=true;
-  try{const response=await fetch('./data/reservoirs.json',{cache:'no-store',signal:AbortSignal.timeout(12000)});if(!response.ok)throw Error('Unavailable');const d=await response.json();if(d.schemaVersion!==1||!safeSource(d.sourceUrl)||!Array.isArray(d.records)||d.records.length>200||d.records.some(r=>typeof r.name!=='string'||(r.effectivePercent!==null&&!Number.isFinite(r.effectivePercent))))throw Error('Invalid schema');directory=d;failed=false;}catch{failed=true;}
+  try{const response=await fetch('/floodlens/data/reservoirs.json',{cache:'no-store',signal:AbortSignal.timeout(12000)});if(!response.ok)throw Error('Unavailable');const d=await response.json();if(d.schemaVersion!==1||!safeSource(d.sourceUrl)||!Array.isArray(d.records)||d.records.length>200||d.records.some(r=>typeof r.name!=='string'||(r.effectivePercent!==null&&!Number.isFinite(r.effectivePercent))))throw Error('Invalid schema');directory=d;failed=false;}catch{failed=true;}
   finally{busy=false;if(context)renderReservoirs(context);}
 }
 export function renderReservoirs(args){
