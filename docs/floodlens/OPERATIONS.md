@@ -45,8 +45,8 @@ National observations are collapsed by default and never labeled as local to
 the selected DS. The directory loads when opened and is searchable across all
 74 records; six display initially, with a show-all option.
 
-The optional area outline uses the same licensed local boundary shards and no
-third-party tiles. It depicts an administrative area, never a hazard extent.
+The location map uses the same licensed local boundary shards and no
+third-party tiles. It depicts administrative areas, never a hazard extent.
 The original Tamil Ratnapura district name is retained in the catalogue while
 a curated display spelling corrects its truncated source label.
 
@@ -132,8 +132,9 @@ date 2 August 2022, validity 16 August 2022; CC BY 3.0 IGO. The catalogue and
 NOTICE link source/licence. Later changes may be missing (current counts can
 differ). No parcel accuracy or abrupt safe edge is claimed.
 
-About 95 KB of name/index data loads initially. Exact, unsimplified geometries
-are sharded by district (largest ~3.7 MB) and load only on GPS use. An accuracy
+About 95 KB of name/index data loads when location matching or manual search
+is requested. A 246 KB display basemap loads for the map. Exact, unsimplified
+geometries are sharded by district (largest ~3.7 MB) for location matching. An accuracy
 circle intersects bounding boxes locally, then Polygon/MultiPolygon membership
 and hole/edge checks run in the browser. GPS accuracy worse than 1.5 km requires
 manual search. A 30 m conservative edge buffer requests manual confirmation for
@@ -194,3 +195,34 @@ commits. This removes FloodLens, its homepage notice, and the read-only source
 checker. Verify the Pages build and existing home/store/signal routes after
 any rollback. Never restore a superseded warning as a current warning without
 rechecking its validity and the latest official bulletin.
+
+## Location-first interface, release 20261026-5
+
+Screen 1 contains language choice only. Screen 2 requests GPS through an explicit
+button; manual map placement is a fallback. Screen 3 centers the real obtained
+GPS position, shows its stated accuracy, and presents one concise result with
+at most three short facts. Bulletins, observations, source review history and
+limitations are behind Details. No default city or administrative centroid is
+used as the user's location. Area search only changes the manual map view;
+users must explicitly place/confirm a pin. Manual pin accuracy is unknown.
+GPS uncertainty over 1.5 km requires correction. Boundary overlap requires
+explicit division confirmation and retains a possible relevant Red warning.
+
+The on-device administrative basemap is a 246 KB display-only simplification
+of the licensed 2022 boundaries. Exact unsimplified district shards still perform
+matching. Pan/tap coordinates use the SVG transform, including letterboxing.
+No external tiles, geocoder or user-coordinate request is used. The map can
+fail without blocking the text result or official action link.
+
+43 official reservoir points have unique exact-name matches to directory
+records, retaining source Tank_Code. Two ambiguous Mahadivul Wewa points were
+excluded, as were unmatched spellings; no fuzzy join is used. This is partial
+mapped coverage. Marker popups show dated effective storage and expressly do
+not establish upstream connection or local danger. The source is Irrigation
+Department Scheme_Data_2 layer 3; full provenance and source hash are bundled
+in `reservoir-locations.json`. No river network or directed routing is inferred.
+
+Build-time tools: `build_map_overview.py`, `build_reservoir_points.py`. The
+observation updater retains its existing one-file publication restriction.
+The future community-input boundary is documented in COMMUNITY_REPORTS.md;
+no Telegram, Grok or social-media ingestion has been connected.

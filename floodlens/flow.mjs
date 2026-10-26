@@ -1,0 +1,76 @@
+import {LocationMap} from './location-map.mjs?v=20261026-5';
+import {warningMatches,warningState,ageState,insideGeometry,intersectsAccuracy,locationCandidates} from './core.mjs?v=20261026-5';
+const $=s=>document.querySelector(s);
+export function createFlow({t,name,getData,getCatalog,onLanguage,onArea,onRefresh}){
+ let stage='language',point=null,accuracy=null,mode='gps',area=null,candidates=[],state='idle',manualPoint=null,catalog=null;
+ const shards=new Map();const resultMap=new LocationMap($('#result-map'),{translate:t});
+ const pinMap=new LocationMap($('#pin-map'),{translate:t,onPin:p=>{manualPoint=p;pinMap.set({point:p,accuracy:null});$('#use-pin').disabled=false;$('#manual-status').textContent=t('manualAccuracy');}});
+ function labels(){return [...(catalog?.districts||[]),...(catalog?.divisions||[])].map(a=>({...a,label:name(a)}));}
+ function show(next){stage=next;for(const s of ['language','location','result'])$('#'+s+'-screen').hidden=s!==next;$('.language').hidden=next==='language';window.scrollTo(0,0);}
+ function status(key,extra=''){$('#location-message').textContent=t(key)+(extra?' '+extra:'');$('#location-help').hidden=key==='gpsWorking';}
+ async function openManual(approximate){
+  show('location');$('#manual-panel').hidden=false;$('#location-screen').classList.add('manual-open');manualPoint=null;$('#use-pin').disabled=true;$('#manual-status').textContent=t('pinInstruction');
+  await pinMap.load();if(pinMap.error)$('#location-help').hidden=false;try{catalog=await getCatalog();pinMap.set({labels:labels()});}catch{}
+  if(approximate)pinMap.set({center:approximate.point,span:Math.max(.08,approximate.accuracy/111320*6),point:approximate.point,accuracy:approximate.accuracy});
+  else pinMap.set({center:point||[80.7,7.9],span:point? .1:4.7,point:null,accuracy:null});
+  $('#manual-title').focus({preventScroll:true});
+ }
+ async function match(p,uncertainty,source){
+  point=[...p];accuracy=uncertainty;mode=source;area=null;candidates=[];state='checking';onArea(null);show('result');
+  resultMap.set({center:point,span:Math.max(.055,(uncertainty||0)/111320*6),point,accuracy});resultMap.load();render();
+  if(p[1]<5.7||p[1]>10.1||p[0]<79.3||p[0]>82.1){state='outside';render();return;}
+  try{
+   catalog=await getCatalog();const districts=catalog.districts.filter(d=>intersectsAccuracy(d.bbox,p,(uncertainty??100)+30));
+   if(!districts.length){state='outside';render();return;}
+   const loaded=await Promise.all(districts.map(async d=>{if(!shards.has(d.code)){const response=await fetch(`./data/boundaries/${d.code}.json`,{signal:AbortSignal.timeout(20000)});if(!response.ok)throw Error('Boundary unavailable');shards.set(d.code,await response.json());}return shards.get(d.code);}));
+   const features=loaded.flatMap(s=>s.features);const matches=locationCandidates(features,p,uncertainty??100);
+   candidates=matches.map(f=>catalog.divisions.find(a=>a.code===f.properties.code)).filter(Boolean);
+   resultMap.set({features,labels:labels()});
+   if(matches.length===1&&insideGeometry(p,matches[0].geometry)){area=candidates[0]||null;state=area?'matched':'unavailable';onArea(area);}
+   else state=candidates.length?'ambiguous':'outside';
+  }catch{state='unavailable';}
+  render();
+ }
+ function locate(){
+  $('#locate').disabled=true;status('gpsWorking');
+  if(!navigator.geolocation){$('#locate').disabled=false;status('gpsUnavailable');return;}
+  navigator.geolocation.getCurrentPosition(position=>{
+   $('#locate').disabled=false;const {latitude,longitude,accuracy:a}=position.coords;
+   if(![latitude,longitude,a].every(Number.isFinite)||a<0){status('gpsUnavailable');return;}
+   if(a>1500){status('gpsApproximate','±'+Math.round(a)+' m');openManual({point:[longitude,latitude],accuracy:a});return;}
+   $('#location-message').textContent='';match([longitude,latitude],a,'gps');
+  },error=>{$('#locate').disabled=false;status(error.code===1?'gpsDenied':'gpsUnavailable');},{enableHighAccuracy:true,timeout:15000,maximumAge:0});
+ }
+ function render(){
+  resultMap.t=t;pinMap.t=t;resultMap.labels=labels();pinMap.labels=labels();resultMap.draw();pinMap.draw();
+  if(stage!=='result')return;
+  const {data,needsUpdate,loadFailed}=getData();
+  const candidateAreas=area?[area]:state==='ambiguous'?candidates:[];
+  const relevant=(data?.bulletins||[]).filter(w=>warningState(w)==='active'&&candidateAreas.some(a=>warningMatches(w,a)));
+  const red=relevant.find(w=>w.kind==='landslide'&&w.areas.some(a=>a.level===3&&candidateAreas.some(c=>c.code===a.divisionCode)));
+  const flood=relevant.find(w=>w.kind==='flood');const landslide=relevant.find(w=>w.kind==='landslide');const primary=red||flood||landslide;
+  let title='riskUnknown',body='noClearResult',facts=['missingNotSafe','checkOfficialShort'];let severity='unknown';
+  if(state==='checking'){title='checkingPlace';body='checkingPlaceBody';facts=[];}
+  else if(state==='outside'){title='outsideShort';body='outsideShortBody';facts=['checkLocalAuthorities'];}
+  else if(state==='unavailable'){title='riskUnknown';body='matchUnavailable';facts=['missingNotSafe','checkOfficialShort'];}
+  else if(state==='ambiguous'){title=red?'possibleRed':'confirmArea';body='boundaryUncertain';facts=['confirmAreaAction','missingNotSafe'];severity=red?'red':'unknown';}
+  else if(primary){title=red?'redShort':flood&&landslide?'bothWarnings':flood?'floodShort':'landslideShort';body=red?'redShortBody':flood?'floodShortBody':'landslideShortBody';facts=[red?'followOfficialEvacuation':'avoidWaterShort','areaNotHome'];severity=red?'red':'warning';}
+  else if(data&&!data.bulletins.some(w=>warningState(w)==='active')){title='outdatedShort';body='checkLatestShort';}
+  if(needsUpdate){title='updateShort';body='updateShortBody';facts=['checkOfficialShort'];severity='unknown';}
+  if(!navigator.onLine)facts.unshift('offlineShort');else if(loadFailed)facts.unshift('refreshFailedShort');
+  $('#area-selection').textContent=area?name(area)+' · '+t('division'):t(mode==='gps'?'yourGps':'yourPin');
+  $('#accuracy-label').textContent=mode==='gps'?t('gpsAccuracy')+' ±'+Math.round(accuracy)+' m':t('manualAccuracy');
+  $('#assessment').className='compact-assessment '+severity;$('#assessment-title').textContent=t(title);$('#assessment-copy').textContent=t(body);$('#result-symbol').textContent=severity==='red'||severity==='warning'?'!':'?';
+  const list=$('#quick-facts');list.replaceChildren();for(const key of facts.slice(0,2)){const li=document.createElement('li');li.textContent=t(key);list.append(li);}
+  if(data&&state!=='checking'){const li=document.createElement('li');li.className='checked-fact';const date=new Date(data.reviewedAt);li.textContent=ageState(data.reviewedAt,3)==='stale'?t('warningReviewOld'):ageState(data.reviewedAt,3)==='unknown'?t('warningTimeUnknown'):Number.isFinite(date.getTime())?t('checkedShort')+' '+new Intl.DateTimeFormat(document.documentElement.lang,{timeZone:'Asia/Colombo',hour:'2-digit',minute:'2-digit',hour12:false}).format(date)+' · SLST':t('ageUnknown');list.append(li);}
+  $('#quick-source').href=primary?.url||'https://www.dmc.gov.lk/';$('#quick-source').textContent=t(needsUpdate?'reloadPage':'officialUpdate');$('#quick-source').onclick=needsUpdate?e=>{e.preventDefault();window.location.reload();}:null;
+  const choices=$('#candidate-choices');choices.replaceChildren();choices.hidden=state!=='ambiguous';if(state==='ambiguous')for(const candidate of candidates){const b=document.createElement('button');b.type='button';b.textContent=name(candidate);b.addEventListener('click',()=>{area=candidate;state='matched';onArea(area);render();});choices.append(b);}
+ }
+ document.querySelectorAll('[data-language]').forEach(b=>b.addEventListener('click',()=>{onLanguage(b.dataset.language);show('location');onRefresh();}));
+ $('#locate').addEventListener('click',locate);$('#manual-location').addEventListener('click',()=>openManual());
+ $('#change-location').addEventListener('click',()=>{show('location');$('#manual-panel').hidden=true;$('#location-screen').classList.remove('manual-open');$('#location-message').textContent='';});
+ $('#use-pin').addEventListener('click',()=>{if(manualPoint)match(manualPoint,null,'manual');});
+ $('#area-search').addEventListener('input',async()=>{const query=$('#area-search').value.trim().toLocaleLowerCase();const list=$('#area-results');list.replaceChildren();list.hidden=!query;if(!query)return;try{catalog=await getCatalog();for(const a of [...catalog.districts,...catalog.divisions].filter(a=>Object.values(a.names).concat(Object.values(a.displayNames||{}),a.aliases||[],a.code).some(n=>String(n).toLocaleLowerCase().includes(query))).slice(0,12)){const b=document.createElement('button');b.type='button';b.textContent=name(a)+' · '+t(a.type);b.addEventListener('click',()=>{const [x0,y0,x1,y1]=a.bbox;pinMap.set({center:[(x0+x1)/2,(y0+y1)/2],span:Math.max(x1-x0,(y1-y0)/.75)*1.15,point:null,accuracy:null,labels:labels()});manualPoint=null;$('#use-pin').disabled=true;$('#area-search').value=name(a);list.hidden=true;$('#manual-status').textContent=t('pinInstruction');});list.append(b);}if(!list.childElementCount)list.textContent=t('noSearch');}catch{list.textContent=t('mapUnavailable');}});
+ $('#all-details').addEventListener('toggle',()=>{if($('#all-details').open)onRefresh();});
+ return {render};
+}
