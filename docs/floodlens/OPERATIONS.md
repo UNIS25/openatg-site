@@ -7,16 +7,16 @@ No framework, backend, external font, runtime map library or new credential.
 ## Data contract and release scope
 
 `floodlens/data/reviewed.json` contains manually reviewed, selected official
-bulletins, eleven dated station observations and two dated reservoir fallback observations.
+bulletins, thirteen dated station observations and two dated reservoir fallback observations.
 It is not complete national alert or gauge coverage. Every warning has original
 URL, issue time, expiry, scope, authority, SHA-256 and explicit DS-code mapping.
 The rainfall advisory's document issue time (03:00 SLST) is kept separately from
 its DMC listing time (03:30). All timestamps include time-zone offsets.
 
-The current 26 October river PDF was issued at 15:30 SLST; its selected measurements
-are at 15:00. The superseded 12:30 report and eight previous readings remain in
-provenance. Source remarks are station classifications, not area predictions.
-All eleven selected gauges use metres. Nagalagam Street is deliberately not
+The current 26 October river PDF was issued at 18:30 SLST; its selected measurements
+are at 18:00, separately from the 18:00 DMC listing time. The superseded 12:30
+and 15:30 reports and their selected readings remain in provenance. Source remarks are station classifications, not area predictions.
+All thirteen selected gauges use metres. Nagalagam Street is deliberately not
 ingested; its official unit is feet. No ArcGIS `CreationDate` or `EditDate` is
 presented as an observation timestamp, and rainfall-period semantics are not
 invented. Reservoir values are daily reports dated 26 October; time unknown.
@@ -397,3 +397,36 @@ cancellation/supersession and language before modifying the public snapshot.
 A future automatic public status file would require a separately approved
 publisher allowlist change. This release adds no such path, token scope,
 credential, paid service or automated warning publication.
+
+
+## Kelani / Attanagalu 18:00 warnings and 18:30 river report
+
+Both new Amber Number 01 flood warnings are issued 26 October 18:00 SLST,
+valid through 27 October 18:00. Their complete two-page originals were visually
+reviewed in all supplied languages; the simple interface still links originals
+and labels summaries non-official.
+
+Kelani applies to low valley portions of seven named divisions: Ruwanwella,
+Seethawaka, Dompe, Dehiowita, Eheliyagoda, Yatiyantota and Bulathkohupitiya.
+The conditional downstream-of-Hanwella statement is retained in the summary,
+without inventing additional DS coverage. Attanagalu applies to low Attanagalu
+and Uruwal valley portions of Divulapitiya, Mirigama, Attanagalla, Mahara,
+Gampaha, Minuwangoda, Ja-Ela, Katana and Wattala. District-scoped codes and
+spelling aliases are explicit. Basnagoda releases are source context, not a
+new live gate feed or a travel-time model. Existing warning objects are unchanged.
+
+River original SHA-256:
+`ff8ad0720346edf8b15827a9a843be66d2fe4201c6dbf6596cccaa9f2dbddc9e`.
+The table is issued at 18:30, listed at 18:00, with 17:00 and 18:00 columns.
+All eleven previously selected stations remain; Glencourse and Thawalama are
+added as Alert/Rising. The thirteen selections include all ten non-normal
+rows: two Minor Flood and eight Alert. Kithulgala, Nawalapitiya and Urawa are
+Normal with blank/null trends. Normal never indicates household safety or
+withdraws an active warning. All selected units are metres. The nine-hour
+rainfall column is not ingested or mixed with earlier periods.
+
+The current client already supports these warning kinds, status labels and
+units. No new hazard calculation, UI screen, translation key, client contract,
+publisher path or permission is introduced. Regression checks cover all sixteen
+new DS matches, conditional-scope exclusion, precise expiry, all thirteen
+readings, three-language display and real polygon-interior pins.
