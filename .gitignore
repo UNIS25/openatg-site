@@ -1,3 +1,4 @@
 artifacts/windows/
 artifacts/floodlens/
 scripts/floodlens/__pycache__/
+tests/floodlens/__pycache__/

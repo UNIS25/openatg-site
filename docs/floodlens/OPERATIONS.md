@@ -45,8 +45,8 @@ National observations are collapsed by default and never labeled as local to
 the selected DS. The directory loads when opened and is searchable across all
 74 records; six display initially, with a show-all option.
 
-The location map uses the same licensed local boundary shards and no
-third-party tiles. It depicts administrative areas, never a hazard extent.
+The private location map uses the licensed local boundary data. Optional
+third-party street tiles require consent as described below. It depicts administrative areas, never a hazard extent.
 The original Tamil Ratnapura district name is retained in the catalogue while
 a curated display spelling corrects its truncated source label.
 
@@ -136,13 +136,17 @@ About 95 KB of name/index data loads when location matching or manual search
 is requested. A 246 KB display basemap loads for the map. Exact, unsimplified
 geometries are sharded by district (largest ~3.7 MB) for location matching. An accuracy
 circle intersects bounding boxes locally, then Polygon/MultiPolygon membership
-and hole/edge checks run in the browser. GPS accuracy worse than 1.5 km requires
-manual search. A 30 m conservative edge buffer requests manual confirmation for
-multiple candidates. No nearest-DS fallback is used. This metric is solely for
+and hole/edge checks run in the browser. GPS accuracy from 1.5–10 km retains all intersecting warning candidates with
+explicit uncertainty and an Improve location action. Above 10 km the user must
+correct the pin before matching. A 30 m conservative administrative edge buffer
+retains warnings from all plausible divisions; it is not a hazard boundary. No nearest-DS fallback is used. This metric is solely for
 administrative matching, never hydrologic routing.
 
-Coordinates never enter request URLs, storage, console, telemetry, analytics or
-source queries. District shard filenames may indicate a coarse area to the
+Exact coordinates never enter request URLs, storage, console, telemetry, analytics
+or source queries. The private map uses bundled data. Optional OpenStreetMap tiles
+are off until explicit per-page consent naming the provider and disclosing the
+viewed area and IP/network information. Tile indices reveal a map area; therefore
+the street map does not promise that the viewed location stays private. District shard filenames may indicate a coarse area to the
 same-origin host as an ordinary asset request. Map links disclose that external
 providers receive normal network information (such as IP); no coordinates are
 added. No map embeds or analytics scripts are included. CSP blocks scripts from
@@ -196,7 +200,7 @@ checker. Verify the Pages build and existing home/store/signal routes after
 any rollback. Never restore a superseded warning as a current warning without
 rechecking its validity and the latest official bulletin.
 
-## Location-first interface, release 20261026-7
+## Location-first interface, release 20261026-8
 
 Screen 1 contains language choice only. Screen 2 requests GPS through an explicit
 button; manual map placement is a fallback. Screen 3 centers the real obtained
@@ -205,13 +209,23 @@ at most three short facts. Bulletins, observations, source review history and
 limitations are behind Details. No default city or administrative centroid is
 used as the user's location. Area search only changes the manual map view;
 users must explicitly place/confirm a pin. Manual pin accuracy is unknown.
-GPS uncertainty over 1.5 km requires correction. Boundary overlap requires
-explicit division confirmation and retains a possible relevant Red warning.
+Approximate GPS and boundary overlap preserve relevant Red, Amber and Yellow
+official warnings with “may cover” language. Rain-only coverage explicitly shows
+a broad Heavy-rain advisory, not local inundation. Unlisted areas remain unassessed.
+Manual placement uses a fixed centre crosshair, one-finger pan, two-finger pinch,
+keyboard controls, and a separate large confirmation button. Search does not
+submit a pin; a map interaction followed by confirmation is required.
 
 The on-device administrative basemap is a 246 KB display-only simplification
 of the licensed 2022 boundaries. Exact unsimplified district shards still perform
-matching. Pan/tap coordinates use the SVG transform, including letterboxing.
-No external tiles, geocoder or user-coordinate request is used. The map can
+matching. Pan/pinch coordinates use the SVG transform. Both layers use Web
+Mercator for alignment. The default map has no external tiles or geocoder.
+An optional street map uses standard OpenStreetMap browser tiles only after
+consent; attribution stays visible. Native HTTP cache rules and origin Referer
+are retained. Only the visible viewport loads; there is no prefetch, bulk download
+or offline tile cache. Tile failure returns to the private map. Automated tests
+mock these tiles and do not send headless tile requests. Provider service is
+best-effort, with no SLA: https://operations.osmfoundation.org/policies/tiles/ . The map can
 fail without blocking the text result or official action link.
 
 43 official reservoir points have unique exact-name matches to directory
@@ -226,3 +240,20 @@ Build-time tools: `build_map_overview.py`, `build_reservoir_points.py`. The
 observation updater retains its existing one-file publication restriction.
 The future community-input boundary is documented in COMMUNITY_REPORTS.md;
 no Telegram, Grok or social-media ingestion has been connected.
+
+Release 8 regression cases: Ratnapura (80.399, 6.682) and Pelmadulla
+(80.529, 6.628): Red landslide; Horana (80.062, 6.715): Amber flood;
+Puttalam (79.828, 8.036): Amber heavy rain. A 3 km Ratnapura accuracy circle
+includes Ratnapura, Pelmadulla and Elapatha and retains Red with uncertainty.
+Actual administrative-edge geometry is unit-tested; synthetic boundary browser
+fixtures separately test Red and Amber retention. No river-channel identity is
+inferred from an administrative edge. These do not reproduce the user's
+unspecified failed pin. Satellite and tide feeds remain unconnected in this release.
+
+Client version 5 adds explicit reviewed Amber severity fields for the two flood
+bulletins and rain advisory. Unsupported or missing non-landslide severity
+requires an update instead of rendering an assumed Amber badge. Published
+snapshot minClientVersion 5 also causes already-open older clients to request
+a reload. Raw source hashes, issue times, validity and reviewed geography remain
+unchanged. Multiple concurrent landslide bulletins are ranked by the highest
+applicable reviewed DS level, never by source order.

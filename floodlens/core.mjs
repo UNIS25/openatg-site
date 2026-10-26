@@ -1,5 +1,5 @@
 export const HOUR = 3600000;
-export const CLIENT_VERSION = 4;
+export const CLIENT_VERSION = 5;
 export function warningState(w, now=Date.now()) {
   const start=Date.parse(w.issuedAt),end=Date.parse(w.expiresAt);
   if(!Number.isFinite(start)||!Number.isFinite(end)||end<=start||now<start) return 'unknown';
@@ -29,6 +29,16 @@ export function assessment(bulletins,area,now=Date.now()) {
   if(!area) return bulletins.some(w=>warningState(w,now)==='active')?'unknown':'expired';
   if(relevant.length&&!current.length) return 'expired';
   return 'unmatched';
+}
+// Evidence category, not probability or a claim of inundation at the pin.
+// All plausible divisions count when GPS uncertainty crosses a boundary.
+export function locationEvidence(bulletins,areas,{uncertain=false,now=Date.now()}={}) {
+  const current=bulletins.filter(w=>warningState(w,now)==='active'&&areas.some(a=>warningMatches(w,a)));
+  const ranked=current.filter(w=>w.kind==='landslide').map(w=>({w,level:Math.max(0,...w.areas.filter(a=>areas.some(c=>c.code===a.divisionCode)).map(a=>a.level||0))})).sort((a,b)=>b.level-a.level);
+  const landslide=ranked[0]?.w,level=ranked[0]?.level||0;
+  const flood=current.find(w=>w.kind==='flood'),rain=current.find(w=>w.kind==='rain');
+  const source=level===3?landslide:flood||landslide||rain;
+  return {source,kind:source?.kind||'unknown',level:source===landslide?level:0,uncertain,otherFlood:level===3&&Boolean(flood)};
 }
 export function insideRing(point,ring) {
   let inside=false;const [x,y]=point;
@@ -67,6 +77,7 @@ export function validateSnapshot(d,clientVersion=CLIENT_VERSION) {
   for(const w of d.bulletins) {
     if(!w.id||!['flood','landslide','rain'].includes(w.kind)||!Array.isArray(w.areas)||!w.title?.en||!w.summary?.en) throw Error('Invalid bulletin');
     if(!safeSource(w.url))throw Error('Invalid source');
+    if(w.kind!=='landslide'&&w.severity!=='amber'){const error=new Error('Unsupported warning severity');error.code='CLIENT_UPDATE_REQUIRED';throw error;}
     if(w.areas.some(a=>a.level!==undefined&&![1,2,3].includes(a.level))){const error=new Error('Unsupported warning severity');error.code='CLIENT_UPDATE_REQUIRED';throw error;}
   }
   for(const s of d.stations) if(!Number.isFinite(s.value)||!['m','ft'].includes(s.unit)||!safeSource(s.url))throw Error('Invalid station');

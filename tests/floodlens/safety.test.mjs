@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {warningState,ageState,dailyAgeState,warningMatches,assessment,insideGeometry,locationCandidates,validateSnapshot} from '../../floodlens/core.mjs';
+import {locationEvidence,warningState,ageState,dailyAgeState,warningMatches,assessment,insideGeometry,locationCandidates,validateSnapshot} from '../../floodlens/core.mjs';
 import {copy} from '../../floodlens/i18n.mjs';
 const snapshot=JSON.parse(await readFile(new URL('../../floodlens/data/reviewed.json',import.meta.url)));
 const catalog=JSON.parse(await readFile(new URL('../../floodlens/data/areas.json',import.meta.url)));
@@ -50,8 +50,38 @@ test('14:45 bulletin has the six visually verified Red divisions, not a blanket 
  const w=snapshot.bulletins.find(b=>b.kind==='landslide');assert.equal(w.id,'LEWM-26-10-2026-1445-00');assert.deepEqual(w.areas.filter(a=>a.level===3).map(a=>a.divisionCode).sort(),['LK9112','LK9130','LK9124','LK9106','LK9127','LK9121'].sort());assert.equal(warningState(w,Date.parse('2026-10-26T15:00:00+05:30')),'active');assert.equal(w.areas.find(a=>a.divisionCode==='LK9136').level,2);
 });
 test('future warning formats and unsupported severity require a page update',()=>{
- assert.throws(()=>validateSnapshot({...snapshot,minClientVersion:5}),{code:'CLIENT_UPDATE_REQUIRED'});assert.throws(()=>validateSnapshot(snapshot,3),{code:'CLIENT_UPDATE_REQUIRED'});const w=snapshot.bulletins.find(w=>w.kind==='landslide');assert.throws(()=>validateSnapshot({...snapshot,bulletins:[{...w,areas:[{...w.areas[0],level:4}]}]}),{code:'CLIENT_UPDATE_REQUIRED'});
+ assert.throws(()=>validateSnapshot({...snapshot,minClientVersion:999}),{code:'CLIENT_UPDATE_REQUIRED'});assert.throws(()=>validateSnapshot(snapshot,3),{code:'CLIENT_UPDATE_REQUIRED'});const w=snapshot.bulletins.find(w=>w.kind==='landslide');assert.throws(()=>validateSnapshot({...snapshot,bulletins:[{...w,areas:[{...w.areas[0],level:4}]}]}),{code:'CLIENT_UPDATE_REQUIRED'});
 });
 test('reservoir map joins are unique, explicit, and limited to source directory identities',async()=>{
  const locations=JSON.parse(await readFile(new URL('../../floodlens/data/reservoir-locations.json',import.meta.url)));const readings=JSON.parse(await readFile(new URL('../../floodlens/data/reservoirs.json',import.meta.url)));const names=new Set(readings.records.map(r=>r.name));assert.equal(locations.features.length,43);assert.equal(new Set(locations.features.map(f=>f.properties.tankCode)).size,43);assert.equal(new Set(locations.features.map(f=>f.properties.name)).size,43);assert.ok(locations.features.every(f=>names.has(f.properties.name)&&f.geometry.type==='Point'&&f.geometry.coordinates[0]>79.3&&f.geometry.coordinates[0]<82.1));assert.deepEqual(locations.excludedAmbiguousNames,['Mahadivul Wewa']);assert.equal(locations.features.find(f=>f.properties.name==='Tabbowa').properties.tankCode,'R13206');
+});
+
+const allFeatures=(await Promise.all(catalog.districts.map(async a=>JSON.parse(await readFile(new URL('../../floodlens/data/boundaries/'+a.code+'.json',import.meta.url))).features))).flat();
+const reviewedTime=Date.parse('2026-10-26T16:30:00+05:30');
+const evidenceAt=(p,accuracy=20)=>{const areas=locationCandidates(allFeatures,p,accuracy).map(f=>catalog.divisions.find(a=>a.code===f.properties.code));return {...locationEvidence(snapshot.bulletins,areas,{uncertain:areas.length>1||accuracy>1500,now:reviewedTime}),areas};};
+test('real Ratnapura, Pelmadulla, Horana and Puttalam coordinates produce different evidence categories',()=>{
+ for(const [p,kind,level,code] of [[[80.399,6.682],'landslide',3,'LK9112'],[[80.529,6.628],'landslide',3,'LK9124'],[[80.062,6.715],'flood',0,'LK1309'],[[79.828,8.036],'rain',0,'LK6215']]){
+  const e=evidenceAt(p);assert.equal(e.kind,kind);assert.equal(e.level,level);assert.equal(e.areas[0].code,code);assert.equal(e.uncertain,false);
+ }
+});
+test('poor GPS preserves all plausible area warnings, with uncertainty',()=>{
+ const e=evidenceAt([80.399,6.682],3000);assert.equal(e.kind,'landslide');assert.equal(e.level,3);assert.equal(e.uncertain,true);assert.ok(e.areas.length>=3);
+});
+test('actual administrative edge and manual unknown accuracy retain warning evidence',()=>{
+ const horana=allFeatures.find(f=>f.properties.code==='LK1309');const polygons=horana.geometry.type==='Polygon'?[horana.geometry.coordinates]:horana.geometry.coordinates;
+ const point=polygons[0][0][Math.floor(polygons[0][0].length/2)];const e=evidenceAt(point,100);assert.ok(e.areas.some(a=>a.code==='LK1309'));assert.ok(['flood','landslide'].includes(e.kind));
+ const manual=evidenceAt([80.062,6.715],100);assert.equal(manual.kind,'flood');
+});
+test('an unlisted division has no verified local assessment; expired sources never become current',()=>{
+ const d=catalog.divisions.find(a=>a.districtCode==='LK51');const e=locationEvidence(snapshot.bulletins,[d],{now:reviewedTime});assert.equal(e.kind,'unknown');assert.equal(e.source,undefined);
+ assert.equal(locationEvidence(snapshot.bulletins,[catalog.divisions.find(a=>a.code==='LK9112')],{now:Date.parse('2026-10-28T00:00:00Z')}).kind,'unknown');
+});
+
+test('future non-landslide severity cannot silently render an Amber label',()=>{
+ const d=structuredClone(snapshot);d.bulletins.find(w=>w.kind==='flood').severity='red';assert.throws(()=>validateSnapshot(d),e=>e.code==='CLIENT_UPDATE_REQUIRED');
+ assert.throws(()=>validateSnapshot(snapshot,4),e=>e.code==='CLIENT_UPDATE_REQUIRED');
+});
+test('multiple landslide bulletins select highest applicable reviewed severity',()=>{
+ const ds=catalog.divisions.find(a=>a.code==='LK9112');const original=snapshot.bulletins.find(w=>w.kind==='landslide');const lower={...original,areas:original.areas.map(a=>({...a,level:1}))};
+ assert.equal(locationEvidence([lower,original],[ds],{now:reviewedTime}).level,3);
 });

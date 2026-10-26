@@ -102,7 +102,8 @@
         }
       ],
       "sha256": "1767a274eea705bca490879756b1ad5bd255183c0d101ba5c8e81212b4da8ca3",
-      "districtCodes": []
+      "districtCodes": [],
+      "severity": "amber"
     },
     {
       "id": "mahaweli-20261026-01",
@@ -131,7 +132,8 @@
         }
       ],
       "sha256": "8746dbc111719bf59283836919e8ead312f8889fa29d6d9992d70e57d205a560",
-      "districtCodes": []
+      "districtCodes": [],
+      "severity": "amber"
     },
     {
       "id": "LEWM-26-10-2026-1445-00",
@@ -560,7 +562,8 @@
         "LK32",
         "LK33",
         "LK71"
-      ]
+      ],
+      "severity": "amber"
     }
   ],
   "stations": [
@@ -672,5 +675,5 @@
     }
   ],
   "fetchedAt": "2026-10-26T09:33:45.662280+00:00",
-  "minClientVersion": 4
+  "minClientVersion": 5
 }
