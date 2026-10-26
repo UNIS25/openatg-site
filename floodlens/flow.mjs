@@ -1,7 +1,7 @@
-import {createContext} from './context-ui.mjs?v=20261026-11';
-import {streetEnabled} from './street-map.mjs?v=20261026-11';
-import {LocationMap} from './location-map.mjs?v=20261026-11';
-import {locationEvidence,warningState,ageState,insideGeometry,intersectsAccuracy,locationCandidates} from './core.mjs?v=20261026-11';
+import {createContext} from './context-ui.mjs?v=20261026-12';
+import {streetEnabled} from './street-map.mjs?v=20261026-12';
+import {LocationMap} from './location-map.mjs?v=20261026-12';
+import {locationEvidence,warningState,ageState,insideGeometry,intersectsAccuracy,locationCandidates} from './core.mjs?v=20261026-12';
 const $=s=>document.querySelector(s);
 export function createFlow({t,name,getData,getCatalog,onLanguage,onArea,onRefresh}){
  let stage='language',point=null,accuracy=null,mode='gps',area=null,candidates=[],state='idle',manualPoint=null,catalog=null,locationRequest=0,matchRequest=0,lastMapMode=false;
@@ -53,7 +53,7 @@ export function createFlow({t,name,getData,getCatalog,onLanguage,onArea,onRefres
   $('.flow-privacy').dataset.i18n=streetEnabled()?'streetPrivacy':'shortPrivacy';$('.flow-privacy').textContent=t($('.flow-privacy').dataset.i18n);
   resultMap.t=t;pinMap.t=t;resultMap.labels=labels();pinMap.labels=labels();resultMap.draw();pinMap.draw();
   if(stage!=='result')return;
-  context.update({point,accuracy:accuracy||0,outside:state==='outside',checking:state==='checking'});
+  context.update({point,accuracy:accuracy||0,outside:state==='outside',checking:state==='checking',areas:area?[area]:candidates});
   const {data,needsUpdate,loadFailed,loading}=getData();
   const candidateAreas=area?[area]:state==='ambiguous'?candidates:[];
   const uncertain=state==='ambiguous';

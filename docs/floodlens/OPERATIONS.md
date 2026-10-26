@@ -481,3 +481,51 @@ Verified emergency links under observation Details are DMC 117, Suwa Seriya 1990
 and Police 119, with primary DMC, Suwa Seriya and TRCSL source links. They require
 a user's tap; no automated calls or dispatch promises. The UNICEF infographic's
 conflicting numbers were not copied. Source check date: 26 October 2026.
+
+## Current-answer correction — release 20261026-12
+
+The public Puttalam phone view was reproduced: nearest-only selection omitted
+Inginimitiya and the main answer contained old satellite/NASA rows. The current
+answer now contains only dated reservoir context below independent official
+warnings. Historical satellite/rainfall observations remain public under an
+explicit collapsed Historical evidence action, downloaded only on request.
+Closing history clears the old map overlay. The 23 October satellite capture
+and 26 October 00:30 UTC rainfall estimate cannot enter the current assessment.
+This is a source-specific separation: warning validity remains governed by
+bulletin expiry; daily reservoir reports turn old at the next Sri Lanka date;
+untimed daily gate records never claim current gate operation; historical
+snapshots remain historical regardless of recent download or source-check time.
+
+Exact Puttalam district matches (including plausible boundary candidates) show
+both Tabbowa R13206 and Inginimitiya R13101. The official Irrigation GIS
+Scheme_Data_2 FeatureServer layer 10 was queried for those exact codes on
+26 October and returned `Rivr_Basin: Mi Oya` for both. This is selected district
+context, not a complete basin inventory or a claim that either reservoir reaches
+the selected pin. Elsewhere the existing nearest-mapped relationship remains.
+No nearest reservoir is used to infer basin membership.
+
+The 26 October official daily record remains six Tabbowa spill gates, 2,200
+cusecs; two Inginimitiya gates, 1,000 cusecs. Exact openings and raw Remarks are
+under Details and retain missing operation time. Daily Mirror's original
+26 October 15:40 SLST article was independently read and reports eight Tabbowa
+gates (4×2ft + 4×1ft), 2,640 cusecs:
+https://www.dailymirror.lk/breaking-news/Thabbowa-Reservoir-releases-2-640-cusecs-into-Mee-Oya/108-353422
+The discrepancy is separately attributed, is not an official update, and cannot
+replace the daily row. The disclosure is bound to that exact dated six-gate row,
+so it cannot silently carry forward onto a different subsequent official report.
+Other media also disagree; current gate operation is not independently confirmed.
+
+Tide-Forecast's homepage was checked and works, but does not directly provide a
+local tide answer. Its generic search link was removed from the product rather
+than presented as a connected tide service. Tide times and recession estimates
+remain unavailable. No restricted scraper or embedding was introduced.
+
+The requested official regional cyclone reference now links to IMD's sea-area
+bulletin (https://mausam.imd.gov.in/Forecast/seaarea_bulletin_new.php?id=0).
+The original was checked on 26 October: validity 09–21 UTC, issue 18:00 IST,
+mentioning Arnab over the Bay of Bengal. The app links the live original without
+copying an enduring storm/track assertion or implying local impact at a pin.
+
+No observation publisher path, workflow permission, source scheduler, reviewed
+warning data, credentials or automatic warning interpretation changed. The
+separate ECMWF local forecast proof is preserved outside this release.

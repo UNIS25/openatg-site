@@ -1,5 +1,5 @@
 // Dated observation context. No fetch, storage or household hazard inference.
-import {locationEvidence} from './core.mjs?v=20261026-11';
+import {locationEvidence} from './core.mjs?v=20261026-12';
 const HOUR=3600000;
 const validPoint=p=>Array.isArray(p)&&p.length===2&&p.every(Number.isFinite)&&Math.abs(p[0])<=180&&Math.abs(p[1])<=90;
 const contains=(b,p)=>b&&p[0]>=b[0]&&p[0]<=b[2]&&p[1]>=b[1]&&p[1]<=b[3];
@@ -40,6 +40,22 @@ export function nearestReservoir(points,directory,point,now=Date.now()){
  const reading=readings.length===1?readings[0]:null;const today=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Colombo',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date(now));
  const validDate=reading&&/^\d{4}-\d{2}-\d{2}$/.test(reading.observedDate||'')&&reading.observedDate<=today;
  return {status:'nearest_mapped',name:feature.properties.name,tankCode:feature.properties.tankCode,point:feature.geometry.coordinates,distanceKm:distance,coverage:points.coverage,reading:validDate?reading:null,dateStatus:!validDate?'unknown':reading.observedDate===today?'daily':'old',source:reading?.url||points.sourceUrl,connection:{status:'not_established',reason:'Licensed static catchment downloads returned HTTP 403. Proximity does not establish upstream flow or reservoir influence.'}};
+}
+// Curated district context, not a claimed catchment/route for the selected pin.
+// Official Irrigation Scheme_Data_2 layer 10 identifies both tank codes as Mi Oya.
+export const meeOyaSource='https://services3.arcgis.com/J7ZFXmR8rSmQ3FGf/ArcGIS/rest/services/Scheme_Data_2/FeatureServer/10';
+export function reservoirsForContext(points,directory,point,areas=[],now=Date.now()){
+ const districtContext=areas.some(a=>a.districtCode==='LK62'||a.type==='district'&&a.code==='LK62');
+ if(!districtContext)return {scope:'nearest',items:[nearestReservoir(points,directory,point,now)]};
+ const items=['R13206','R13101'].map(code=>{
+  const matches=(points?.features||[]).filter(f=>f.properties?.tankCode===code);
+  if(matches.length!==1)return {status:'locations_unavailable',tankCode:code,name:code==='R13206'?'Tabbowa':'Inginimitiya'};
+  return nearestReservoir({...points,features:matches},directory,point,now);
+ });
+ return {scope:'puttalam_district_context',basin:'Mi Oya',source:meeOyaSource,items,connection:'not_established',completeInventory:false};
+}
+export function gateConflict(record){
+ return record?.name==='Tabbowa'&&record.observedDate==='2026-10-26'&&record.gateConfiguration?.gateCount===6&&record.spillCusecs===2200;
 }
 export function assemble(point,{satellite,rainfall,points,directory,reviewed,areas=[]},{now=Date.now(),accuracy=0}={}){
  if(!validPoint(point))throw Error('Invalid point');

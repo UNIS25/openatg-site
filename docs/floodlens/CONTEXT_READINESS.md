@@ -67,3 +67,11 @@ satellite/rainfall coverage or a household forecasting model.
 Source terms: [Copernicus GFM](https://global-flood.emergency.copernicus.eu/terms-of-service/),
 [NASA GPM policy](https://gpm.nasa.gov/data/policy),
 [FAO basin release](https://www.fao.org/agroinformatics/training-and-resources/data-sets/data-set-detail/hydrological-basins-new-release/en).
+
+Correction 20261026-12: satellite/NASA values now appear only after opening
+Historical evidence, never as a current-status answer. Puttalam district context
+shows both named Mee Oya reservoirs; exact untimed gate configurations and a
+reviewed conflicting media report are in Details. Download checks are explicitly
+separate from observation time. The generic tide directory link was removed;
+tide predictions remain unavailable. ECMWF forecast proof is in an isolated
+experimental checkout and has not been included in this corrective release.
