@@ -1,5 +1,5 @@
-import {copy} from './i18n.mjs';
-import {warningState,ageState,dailyAgeState,warningMatches,assessment,validateSnapshot,intersectsAccuracy,locationCandidates,insideGeometry} from './core.mjs';
+import {copy} from './i18n.mjs?v=20261026-3';
+import {warningState,ageState,dailyAgeState,warningMatches,assessment,validateSnapshot,intersectsAccuracy,locationCandidates,insideGeometry} from './core.mjs?v=20261026-3';
 const $=s=>document.querySelector(s);
 let lang='en',data=null,catalog=null,selected=null,locationMessage='',outside=false,loadFailed=false,loading=false;
 const t=k=>copy[lang][k]??copy.en[k]??k;
@@ -51,7 +51,7 @@ function renderWarnings(){
   $('#warning-freshness').textContent=`${t('snapshot')}: ${date(data.reviewedAt)}. ${fresh==='stale'?t('snapshotStale'):fresh==='unknown'?t('clockError'):''}`;
 }
 function renderStations(){
-  const wrap=$('#stations');wrap.replaceChildren();if(!data){wrap.append(el('p','empty-state',t('dataError')));return;}
+  const wrap=$('#stations');wrap.replaceChildren();if(!data){wrap.append(el('p','empty-state',t(loadFailed?'dataError':'loading')));return;}
   const query=$('#station-search').value.trim().toLocaleLowerCase();
   const stations=data.stations.filter(s=>(s.name+' '+s.basin).toLocaleLowerCase().includes(query));
   for(const s of stations){const card=el('article','station');card.append(el('h3','',s.name),el('p','basin',s.basin));const level=el('div','level',s.value.toFixed(2)+' ');level.append(el('span','',s.unit));card.append(level,el('p','status',t(s.status)),el('p','small',`${t('observationAt')}: ${date(s.observedAt)}`));
