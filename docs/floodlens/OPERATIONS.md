@@ -678,3 +678,20 @@ Consent is per page, not stored, and no external provider request precedes it.
 Forecast data now refresh on the visible page's five-minute render cycle, in
 addition to the existing official snapshot refresh; this retrieves published
 files and does not create an automatic model publisher.
+
+## No-popup road map and plain tide explanation
+
+The earlier external-tile preference is superseded by `LOCAL_ROAD_MAP.md`:
+licensed first-party OSM road data is the default, without a popup or any
+third-party map request. Only coarse static map-cell requests reach existing
+OpenATG hosting; no exact coordinates, storage, new endpoint or permissions.
+The simple boundary fallback remains usable. ODbL credit and derived database
+are public. No raster tiles were prefetched from the OSM tile server.
+
+The tide panel now explains the practical relationship in plain language:
+high tide can slow coastal drainage, falling/low tide can help seaward flow,
+but rain, river inflow and blocked drains prevent a guaranteed drainage time.
+It retains prediction-not-measurement wording and compact accessible source,
+licence and modification credits. The numerical source and validity period
+are unchanged. Selected reviewed news remains accurately scoped; no social
+platform connection has been added or advertised.

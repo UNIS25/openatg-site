@@ -1,10 +1,10 @@
-import {mountTides} from './tides-ui.mjs?v=20261026-17';
-import {renderNews} from './news.mjs?v=20261026-17';
-import {mountForecast} from './forecast-ui.mjs?v=20261026-17';
-import {createContext} from './context-ui.mjs?v=20261026-17';
-import {streetEnabled} from './street-map.mjs?v=20261026-17';
-import {LocationMap} from './location-map.mjs?v=20261026-17';
-import {locationEvidence,warningState,warningMatches,ageState,insideGeometry,intersectsAccuracy,locationCandidates} from './core.mjs?v=20261026-17';
+import {mountTides} from './tides-ui.mjs?v=20261026-18';
+import {renderNews} from './news.mjs?v=20261026-18';
+import {mountForecast} from './forecast-ui.mjs?v=20261026-18';
+import {createContext} from './context-ui.mjs?v=20261026-18';
+import {streetEnabled} from './street-map.mjs?v=20261026-18';
+import {LocationMap} from './location-map.mjs?v=20261026-18';
+import {locationEvidence,warningState,warningMatches,ageState,insideGeometry,intersectsAccuracy,locationCandidates} from './core.mjs?v=20261026-18';
 const $=s=>document.querySelector(s);
 export function createFlow({t,name,getData,getCatalog,onLanguage,onArea,onRefresh}){
  let stage='language',point=null,accuracy=null,mode='gps',area=null,candidates=[],state='idle',manualPoint=null,catalog=null,locationRequest=0,matchRequest=0,lastMapMode=false;
@@ -56,7 +56,7 @@ export function createFlow({t,name,getData,getCatalog,onLanguage,onArea,onRefres
  }
  function render(){
   if(streetEnabled()!==lastMapMode){lastMapMode=streetEnabled();if(point){const a=area?.bbox;const localSpan=a?Math.max(.08,Math.min(.65,Math.max(a[2]-a[0],(a[3]-a[1])/.75)*1.35)):.15;resultMap.set({center:point,span:lastMapMode?Math.max(.012,(accuracy||0)/111320*6):localSpan});}}
-  $('.flow-privacy').dataset.i18n=streetEnabled()?'streetPrivacy':'shortPrivacy';$('.flow-privacy').textContent=t($('.flow-privacy').dataset.i18n);
+  $('.flow-privacy').dataset.i18n='localMapPrivacy';$('.flow-privacy').textContent=t($('.flow-privacy').dataset.i18n);
   resultMap.t=t;pinMap.t=t;resultMap.labels=labels();pinMap.labels=labels();resultMap.draw();pinMap.draw();
   if(stage!=='result')return;
   context.update({point,accuracy:accuracy||0,outside:state==='outside',checking:state==='checking',areas:area?[area]:candidates});

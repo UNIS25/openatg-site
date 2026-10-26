@@ -1,35 +1,25 @@
-// Optional per-page opt-in. Normal browser caching; current viewport only.
-let enabled=false,consented=false,offered=false;
-const instances=new Set();
+// First-party ODbL roads. No external tile service, geocoder or visitor coordinates in requests.
+let enabled=true,manifestPromise;
+const instances=new Set(),cache=new Map(),projected=new WeakMap();
 export function streetEnabled(){return enabled;}
+const overlaps=(a,b)=>a[0]<=b[2]&&a[2]>=b[0]&&a[1]<=b[3]&&a[3]>=b[1];
+const world=([lon,lat])=>[(lon+180)/360,(1-Math.log(Math.tan(Math.PI/4+lat*Math.PI/360))/Math.PI)/2];
+const lat=y=>Math.atan(Math.sinh(Math.PI*(1-2*y)))*180/Math.PI;
+const svgNode=(tag,attrs={})=>{const e=document.createElementNS('http://www.w3.org/2000/svg',tag);for(const[k,v]of Object.entries(attrs))e.setAttribute(k,String(v));return e;};
+async function manifest(){return manifestPromise??=fetch('/floodlens/data/roads/manifest.json?v=20261025',{credentials:'omit',referrerPolicy:'no-referrer'}).then(r=>{if(!r.ok)throw Error();return r.json();}).then(d=>{if(d.schemaVersion!==1||d.kind!=='osm_basemap_manifest'||!Array.isArray(d.regions)||d.regions.length>1200)throw Error();return d;}).catch(e=>{manifestPromise=null;throw e;});}
+async function region(code){if(!/^(r\d{4}|overview)$/.test(code))throw Error();if(!cache.has(code)){cache.set(code,fetch('/floodlens/data/roads/'+code+'.json?v=20261025',{credentials:'omit',referrerPolicy:'no-referrer',signal:AbortSignal.timeout(12000)}).then(async r=>{if(!r.ok)throw Error();const text=await r.text();if(text.length>5000000)throw Error();const d=JSON.parse(text);if(d.schemaVersion!==1||d.kind!=='osm_basemap'||!Array.isArray(d.roads)||!Array.isArray(d.places))throw Error();return d;}).catch(e=>{cache.delete(code);throw e;}));while(cache.size>18)cache.delete(cache.keys().next().value);}return cache.get(code);}
+function coordinates(row){if(projected.has(row))return projected.get(row);const p=[];let x=0,y=0;for(let i=0;i<row[8].length;i+=2){x+=row[8][i];y+=row[8][i+1];p.push(world([x/1e5,y/1e5]));}projected.set(row,p);return p;}
 function setEnabled(next){enabled=next;for(const item of instances)item.changed();document.dispatchEvent(new Event('floodlens-map-mode'));}
 export class StreetMap{
- constructor(root,{t,redraw}){
-  this.root=root;this.t=t;this.redraw=redraw;this.images=new Map();instances.add(this);
-  this.layer=document.createElement('div');this.layer.className='street-tiles';root.prepend(this.layer);
-  this.toggle=document.createElement('button');this.toggle.type='button';this.toggle.className='map-mode';this.toggle.addEventListener('click',()=>{if(enabled)setEnabled(false);else if(consented)setEnabled(true);else this.ask();});root.append(this.toggle);
-  this.credit=document.createElement('a');this.credit.className='map-credit';this.credit.href='https://www.openstreetmap.org/copyright';this.credit.target='_blank';this.credit.rel='noopener noreferrer';this.credit.textContent='© OpenStreetMap contributors';root.append(this.credit);this.changed();
- }
- offerDefault(){if(!offered&&!consented&&!enabled){offered=true;this.ask(true);}}
- ask(defaultOffer=false){
-  if(document.querySelector('.map-consent'))return;const dialog=document.createElement('dialog');dialog.className='map-consent';if(defaultOffer)dialog.dataset.defaultOffer='true';const heading=document.createElement('h2');heading.textContent=this.t('streetConsentTitle');const text=document.createElement('p');text.textContent=this.t('streetConsentBody');const allow=document.createElement('button');allow.type='button';allow.className='button';allow.textContent=this.t('streetConsentAccept');const cancel=document.createElement('button');cancel.type='button';cancel.className='text-button';cancel.textContent=this.t('streetConsentDecline');allow.addEventListener('click',()=>{consented=true;dialog.close();setEnabled(true);});cancel.addEventListener('click',()=>dialog.close());dialog.addEventListener('close',()=>{dialog.remove();if(this.root.checkVisibility())this.toggle.focus({preventScroll:true});});dialog.append(heading,text,allow,cancel);document.body.append(dialog);dialog.showModal();
- }
- changed(){this.toggle.textContent=this.t(enabled?'privateMap':'streetMap');this.credit.hidden=!enabled;this.layer.hidden=!enabled;this.root.classList.toggle('street-enabled',enabled);if(!enabled){clearTimeout(this.timer);this.layer.replaceChildren();this.images.clear();}this.redraw();}
- draw(view){
-  this.view=view;this.toggle.textContent=this.t(enabled?'privateMap':'streetMap');if(!enabled||this.root.closest('[hidden]'))return;
-  for(const image of this.images.values())this.position(image);
-  clearTimeout(this.timer);this.timer=setTimeout(()=>this.loadVisible(),150);
- }
- position(image){const {world,scale}=this.view,n=2**Number(image.dataset.z);const size=scale/n;image.style.left=(200+(Number(image.dataset.x)/n-world[0])*scale)/4+'%';image.style.top=(150+(Number(image.dataset.y)/n-world[1])*scale)/3+'%';image.style.width=size/4+'%';image.style.height=size/3+'%';}
- loadVisible(){
-  if(!enabled||this.root.closest('[hidden]')||!this.view)return;
-  const {world,scale}=this.view,z=Math.max(0,Math.min(19,Math.ceil(Math.log2(scale/256)))),n=2**z;
-  const x0=Math.floor((world[0]-200/scale)*n),x1=Math.floor((world[0]+200/scale)*n),y0=Math.max(0,Math.floor((world[1]-150/scale)*n)),y1=Math.min(n-1,Math.floor((world[1]+150/scale)*n));
-  if((x1-x0+1)*(y1-y0+1)>25)return;
-  const wanted=new Set();for(let x=x0;x<=x1;x++)for(let y=y0;y<=y1;y++){
-   const key=z+'/'+x+'/'+y;wanted.add(key);let image=this.images.get(key);
-   if(!image){image=document.createElement('img');image.alt='';image.draggable=false;image.referrerPolicy='origin';image.dataset.z=z;image.dataset.x=x;image.dataset.y=y;image.addEventListener('error',()=>{if(!enabled)return;setEnabled(false);this.toggle.textContent=this.t('streetUnavailable');});this.images.set(key,image);this.position(image);this.layer.append(image);image.src='https://tile.openstreetmap.org/'+z+'/'+((x%n+n)%n)+'/'+y+'.png';}else this.position(image);
-  }
-  for(const [key,image] of this.images)if(!wanted.has(key)){image.remove();this.images.delete(key);}
+ constructor(root,{t,redraw}){this.root=root;this.t=t;this.redraw=redraw;this.data=[];this.key='';this.request=0;instances.add(this);this.toggle=document.createElement('button');this.toggle.type='button';this.toggle.className='map-mode';this.toggle.addEventListener('click',()=>setEnabled(!enabled));root.append(this.toggle);this.credit=document.createElement('a');this.credit.className='map-credit';this.credit.href='https://www.openstreetmap.org/copyright';this.credit.target='_blank';this.credit.rel='noopener noreferrer';this.credit.textContent='© OpenStreetMap contributors';root.append(this.credit);this.changed();}
+ offerDefault(){} // Kept for old flow callers; first-party roads need no consent dialog.
+ changed(){this.toggle.textContent=this.t(enabled?'simpleMap':'streetMap');this.credit.hidden=!enabled;this.root.classList.toggle('street-enabled',enabled);this.redraw();}
+ draw(view){this.view=view;this.toggle.textContent=this.t(enabled?'simpleMap':'streetMap');if(!enabled||this.root.closest('[hidden]'))return;const {world:w,scale,svg}=view;if(!svg)return;const bbox=[(w[0]-202/scale)*360-180,lat(w[1]+152/scale),(w[0]+202/scale)*360-180,lat(w[1]-152/scale)];const span=400/scale*360;
+ const select=async()=>{try{const m=await manifest();const codes=span>.3?['overview']:m.regions.filter(r=>overlaps(r.bbox,bbox)).map(r=>r.code);const key=codes.join(',');if(key===this.key)return;this.key=key;const request=++this.request;this.root.dataset.roadStatus='loading';if(codes.length>20)throw Error();const data=[];for(let i=0;i<codes.length;i+=3)data.push(...await Promise.all(codes.slice(i,i+3).map(region)));if(request!==this.request)return;this.data=data;this.root.dataset.roadStatus='ready';this.redraw();}catch{this.key='';this.root.dataset.roadStatus='unavailable';}};clearTimeout(this.timer);this.timer=setTimeout(select,100);
+ const groups=Array.from({length:6},()=>[]),seen=new Set(),roadLabels=[];const project=p=>[200+(p[0]-w[0])*scale,150+(p[1]-w[1])*scale];
+ for(const d of this.data)for(const r of d.roads){if(seen.has(r[0])||!overlaps(r[7],bbox)||r[1]<0||r[1]>5||(span>.8&&r[1]>1)||(span>.08&&r[1]>3))continue;seen.add(r[0]);const points=coordinates(r).map(project);let path='';let last;for(const p of points){if(!last||Math.hypot(p[0]-last[0],p[1]-last[1])>1){path+=(path?'L':'M')+p.map(v=>v.toFixed(1)).join(',');last=p;}}if(path)groups[r[1]].push(path);if(span<.08){const p=points[Math.floor(points.length/2)],language=document.documentElement.lang,name=(language==='si'?r[4]:language==='ta'?r[5]:r[3])||r[2]||r[6];if(name&&p[0]>60&&p[0]<335&&p[1]>35&&p[1]<260)roadLabels.push({p,name,kind:r[1]});}}
+ const group=svgNode('g',{'data-road-layer':'true','pointer-events':'none',fill:'none','stroke-linejoin':'round','stroke-linecap':'round'});for(let k=5;k>=0;k--){if(!groups[k].length)continue;const width=k<2?3:k<4?2.2:1.4,d=groups[k].join(' ');group.append(svgNode('path',{d,stroke:'#c5c7bf','stroke-width':width+1}),svgNode('path',{d,stroke:k<2?'#f2ca79':k<4?'#f7e9b8':'#ffffff','stroke-width':width}));}svg.append(group);
+ const labels=[],placeSeen=new Set();for(const d of this.data)for(const p of d.places){if(placeSeen.has(p[0]))continue;placeSeen.add(p[0]);if((span>1&&p[1]>1)||(span>.3&&p[1]>2))continue;const q=project(world([p[2],p[3]]));if(q[0]>40&&q[0]<345&&q[1]>35&&q[1]<260){const l=document.documentElement.lang;labels.push({p:q,name:(l==='si'?p[6]:l==='ta'?p[7]:p[5])||p[4],kind:p[1]-10});}}
+ const used=[];for(const item of [...labels.sort((a,b)=>a.kind-b.kind),...roadLabels.sort((a,b)=>a.kind-b.kind)]){if(used.length>=12||used.some(p=>Math.abs(p[0]-item.p[0])<85&&Math.abs(p[1]-item.p[1])<24))continue;used.push(item.p);const label=svgNode('text',{x:item.p[0],y:item.p[1],'text-anchor':'middle',fill:'#465f59','font-size':item.kind<0?11:9,'paint-order':'stroke',stroke:'#ffffff','stroke-width':3,'pointer-events':'none'});label.textContent=item.name;svg.append(label);}
  }
 }

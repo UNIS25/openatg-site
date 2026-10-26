@@ -81,3 +81,7 @@ Object.assign(copy.ta,{waterHere:'உங்கள் அருகில் வ�
 Object.assign(copy.en,{mapYourLocation:'Location map'});
 Object.assign(copy.si,{mapYourLocation:'ස්ථාන සිතියම'});
 Object.assign(copy.ta,{mapYourLocation:'இருப்பிட வரைபடம்'});
+
+Object.assign(copy.en,{simpleMap:'Simple map',localMapPrivacy:'Your exact location stays on this page. Maps come from OpenATG; no external map service is contacted.'});
+Object.assign(copy.si,{simpleMap:'සරල සිතියම',localMapPrivacy:'ඔබේ නිශ්චිත ස්ථානය මෙම පිටුවේ පවතී. සිතියම් OpenATG වෙතින්ය; බාහිර සිතියම් සේවාවකට සම්බන්ධ නොවේ.'});
+Object.assign(copy.ta,{simpleMap:'எளிய வரைபடம்',localMapPrivacy:'உங்கள் துல்லியமான இடம் இப்பக்கத்திலேயே இருக்கும். வரைபடங்கள் OpenATG இலிருந்து; வெளி வரைபட சேவைக்கு இணைப்பு இல்லை.'});

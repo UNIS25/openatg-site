@@ -1,5 +1,5 @@
 // Dated observation context. No fetch, storage or household hazard inference.
-import {locationEvidence} from './core.mjs?v=20261026-17';
+import {locationEvidence} from './core.mjs?v=20261026-18';
 const HOUR=3600000;
 const validPoint=p=>Array.isArray(p)&&p.length===2&&p.every(Number.isFinite)&&Math.abs(p[0])<=180&&Math.abs(p[1])<=90;
 const contains=(b,p)=>b&&p[0]>=b[0]&&p[0]<=b[2]&&p[1]>=b[1]&&p[1]<=b[3];

@@ -1,0 +1,7 @@
+© OpenStreetMap contributors. This road/place database is available under the Open Database License (ODbL) 1.0: https://opendatacommons.org/licenses/odbl/1-0/
+
+Source: Geofabrik Sri Lanka extract, https://download.geofabrik.de/asia/sri-lanka-261025.osm.pbf . Source data through 2026-10-25T21:21:21Z, verified from the PBF header. Raw checksum, derived-file hashes and field definitions are in manifest.json.
+
+Modifications: selected road and place features, 3 m approximate line simplification (overview 50 m), 1e-5-degree coordinate rounding and delta encoding, fixed 0.1-degree display cells. No user coordinates were used to create this dataset. The full derived database is available as these public JSON files under the same ODbL; reproduction scripts are in the public repository scripts/floodlens/build_roads.py and tile_roads.py.
+
+No warranty. This is a map background, not current road closures, passability, flood extent or an evacuation route. OpenStreetMap contributors and Geofabrik do not endorse Ark. Boundary and warning layers remain separate datasets with their own provenance.
