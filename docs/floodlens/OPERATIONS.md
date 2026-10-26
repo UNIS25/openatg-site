@@ -64,7 +64,7 @@ the compatibility guard was introduced require a one-time reload.
 on manual dispatch. This is a best-effort GitHub Actions schedule; it can be
 delayed or disabled by GitHub for inactivity. It uses the existing public
 repository's free standard Ubuntu runner, `contents: read` and no stored token.
-It reads nine allowlisted public sources, verifies file shape, records hashes,
+It reads ten allowlisted public sources, verifies file shape, records hashes,
 and writes a public job summary and run log. No Actions artifacts/cache storage
 is allocated. Raw retrievals are temporary in the runner; source hashes and
 parsed provenance persist in the run log. Fetch failure fails the job visibly.
@@ -281,3 +281,32 @@ Client version 6 adds only Normal and Minor Flood/Falling station labels in all
 three languages and rejects unknown future station classifications. The snapshot
 requires version 6 so older open tabs request a reload instead of showing raw
 classification keys. Normal remains a station classification, never an all-clear.
+
+## Current lightning advisory, release 20261026-10
+
+Bulletin 03 / LLA/26/10/26/01, Amber, issued 26 October 11:30 SLST and valid
+until 23:00 SLST the same day. Original two-page source visually verified, hash
+`e5a055762cc5fff61fe0ae610ce6241395f811d76ae020b955d21c98f707ac5c`.
+Text scope is North-central Province (Anuradhapura LK71 and Polonnaruwa LK72),
+Trincomalee LK53 and Batticaloa LK51. Map illustration red/orange colours are
+not converted into different warning levels or a nationwide advisory.
+
+Lightning is a separate explicit weather kind. It cannot imply floodwater,
+percentage probability, or a safe location outside the named scope. The compact
+result preserves Red landslide/flood warnings before lightning, then rain;
+all relevant originals remain under Details. Expiry is exact and never an
+all-clear. The primary lightning result links the original, shows its expiry
+and a short shelter/trees instruction grounded in official guidance.
+
+The current original has Sinhala and English. Tamil terminology and generic
+action wording were visually checked against the 25 October official Tamil
+lightning bulletin. That prior bulletin is a wording reference only; its scope,
+time and map are not current evidence. The translated current summary remains
+non-official, and the existing native-speaker review limitation remains visible.
+
+Source checks now request and record 100 entries per DMC list to avoid relying
+on only the first ten. Manual review of those lists found no replacement for
+the current Kalu/Mahaweli or 14:45 landslide warnings. Client version 7 and
+minClientVersion 7 guard older clients against an unknown hazard kind. Slow
+initial bulletin loading stays in Checking rather than briefly presenting a
+completed unknown assessment. No reservoir workflow permissions changed.

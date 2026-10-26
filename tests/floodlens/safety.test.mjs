@@ -73,7 +73,7 @@ test('actual administrative edge and manual unknown accuracy retain warning evid
  const manual=evidenceAt([80.062,6.715],100);assert.equal(manual.kind,'flood');
 });
 test('an unlisted division has no verified local assessment; expired sources never become current',()=>{
- const d=catalog.divisions.find(a=>a.districtCode==='LK51');const e=locationEvidence(snapshot.bulletins,[d],{now:reviewedTime});assert.equal(e.kind,'unknown');assert.equal(e.source,undefined);
+ const d=catalog.divisions.find(a=>a.districtCode==='LK52');const e=locationEvidence(snapshot.bulletins,[d],{now:reviewedTime});assert.equal(e.kind,'unknown');assert.equal(e.source,undefined);
  assert.equal(locationEvidence(snapshot.bulletins,[catalog.divisions.find(a=>a.code==='LK9112')],{now:Date.parse('2026-10-28T00:00:00Z')}).kind,'unknown');
 });
 
@@ -93,4 +93,12 @@ test('15:30 official river report retains eight stations and adds three reviewed
  assert.equal(locationEvidence(snapshot.bulletins,[catalog.divisions.find(a=>a.code==='LK9112')],{now:reviewedTime}).level,3);
  assert.throws(()=>validateSnapshot(snapshot,5),e=>e.code==='CLIENT_UPDATE_REQUIRED');
  const d=structuredClone(snapshot);d.stations[0].status='unreviewed';assert.throws(()=>validateSnapshot(d),e=>e.code==='CLIENT_UPDATE_REQUIRED');
+});
+
+test('current lightning advisory is Amber in exactly the four text-named districts',()=>{
+ const w=snapshot.bulletins.find(w=>w.kind==='lightning');assert.equal(w.id,'LLA-26-10-26-01-03');assert.equal(w.severity,'amber');assert.equal(w.issuedAt,'2026-10-26T11:30:00+05:30');assert.equal(w.expiresAt,'2026-10-26T23:00:00+05:30');assert.deepEqual([...w.districtCodes].sort(),['LK51','LK53','LK71','LK72']);assert.equal(w.areas.length,0);
+ for(const code of ['LK51','LK53','LK71','LK72']){const area=catalog.divisions.find(a=>a.districtCode===code);assert.equal(warningMatches(w,area),true);assert.equal(locationEvidence(snapshot.bulletins,[area],{now:reviewedTime}).kind,'lightning');}
+ for(const code of ['LK62','LK91','LK52'])assert.equal(warningMatches(w,catalog.divisions.find(a=>a.districtCode===code)),false);
+ const batti=catalog.divisions.find(a=>a.districtCode==='LK51');assert.equal(warningState(w,Date.parse(w.expiresAt)),'expired');assert.equal(locationEvidence(snapshot.bulletins,[batti],{now:Date.parse(w.expiresAt)}).kind,'unknown');assert.equal(assessment([w],batti,reviewedTime),'unmatched');
+ assert.throws(()=>validateSnapshot(snapshot,6),e=>e.code==='CLIENT_UPDATE_REQUIRED');
 });

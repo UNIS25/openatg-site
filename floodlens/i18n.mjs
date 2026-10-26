@@ -55,3 +55,8 @@ Object.assign(copy.ta,{possibleDivisions:'உங்கள் இருப்ப�
 Object.assign(copy.en,{normal:'Normal · station classification',minorFalling:'Minor flood · falling'});
 Object.assign(copy.si,{normal:'සාමාන්‍ය · මිනුම් ස්ථානයේ වර්ගීකරණය',minorFalling:'සුළු ගංවතුර · පහළ යමින්'});
 Object.assign(copy.ta,{normal:'சாதாரணம் · நிலைய வகைப்பாடு',minorFalling:'சிறிய வெள்ளம் · குறைகிறது'});
+
+// Lightning scope comes from the current original; these remain non-official interface summaries.
+Object.assign(copy.en,{lightning:'Lightning advisory · Amber',lightningBody:'Your district is named in an official severe-lightning advisory.',possibleLightningBody:'This lightning advisory may cover your location.',lightningAction:'During thunder, shelter indoors; never under trees.'});
+Object.assign(copy.si,{lightning:'අකුණු අවවාදය · ඇම්බර්',lightningBody:'ඔබේ දිස්ත්‍රික්කය නිල ප්‍රබල අකුණු අවවාදයේ නම් කර ඇත.',possibleLightningBody:'මෙම අකුණු අවවාදය ඔබේ ස්ථානයට අදාළ විය හැක.',lightningAction:'ආරක්ෂිත ගොඩනැගිල්ලක් තුළ රැඳී සිටින්න. ගස් යට නොසිටින්න.'});
+Object.assign(copy.ta,{lightning:'மின்னல் ஆலோசனை · ஆம்பர்',lightningBody:'அதிகாரப்பூர்வ கடும் மின்னல் ஆலோசனையில் உங்கள் மாவட்டம் குறிப்பிடப்பட்டுள்ளது.',possibleLightningBody:'இந்த மின்னல் ஆலோசனை உங்கள் இடத்திற்குப் பொருந்தலாம்.',lightningAction:'உள்ளகப் பகுதிகளில் புகலிடம் தேடுங்கள். மரங்களின் கீழ் ஒருபோதும் நிற்க வேண்டாம்.'});

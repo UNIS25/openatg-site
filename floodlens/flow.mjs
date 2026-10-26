@@ -1,6 +1,6 @@
-import {streetEnabled} from './street-map.mjs?v=20261026-9';
-import {LocationMap} from './location-map.mjs?v=20261026-9';
-import {locationEvidence,warningState,ageState,insideGeometry,intersectsAccuracy,locationCandidates} from './core.mjs?v=20261026-9';
+import {streetEnabled} from './street-map.mjs?v=20261026-10';
+import {LocationMap} from './location-map.mjs?v=20261026-10';
+import {locationEvidence,warningState,ageState,insideGeometry,intersectsAccuracy,locationCandidates} from './core.mjs?v=20261026-10';
 const $=s=>document.querySelector(s);
 export function createFlow({t,name,getData,getCatalog,onLanguage,onArea,onRefresh}){
  let stage='language',point=null,accuracy=null,mode='gps',area=null,candidates=[],state='idle',manualPoint=null,catalog=null,locationRequest=0,matchRequest=0,lastMapMode=false;
@@ -51,7 +51,7 @@ export function createFlow({t,name,getData,getCatalog,onLanguage,onArea,onRefres
   $('.flow-privacy').dataset.i18n=streetEnabled()?'streetPrivacy':'shortPrivacy';$('.flow-privacy').textContent=t($('.flow-privacy').dataset.i18n);
   resultMap.t=t;pinMap.t=t;resultMap.labels=labels();pinMap.labels=labels();resultMap.draw();pinMap.draw();
   if(stage!=='result')return;
-  const {data,needsUpdate,loadFailed}=getData();
+  const {data,needsUpdate,loadFailed,loading}=getData();
   const candidateAreas=area?[area]:state==='ambiguous'?candidates:[];
   const uncertain=state==='ambiguous';
   const evidence=locationEvidence(data?.bulletins||[],candidateAreas,{uncertain});
@@ -59,14 +59,16 @@ export function createFlow({t,name,getData,getCatalog,onLanguage,onArea,onRefres
   let title='riskUnknown',body='noClearResult',facts=['missingNotSafe','checkOfficialShort'];let severity='unknown';
   if(state==='checking'){title='checkingPlace';body='checkingPlaceBody';facts=[];}
   else if(state==='outside'){title='outsideShort';body='outsideShortBody';facts=['checkLocalAuthorities'];}
+  else if(!data&&loading){title='checkingPlace';body='loading';facts=[];}
   else if(state==='unavailable'){title='matchUnknown';body='matchUnavailable';facts=['missingNotSafe','checkOfficialShort'];}
   else if(primary){
    if(evidence.kind==='landslide'){
     title=evidence.level===3?'redShort':evidence.level===2?'amberLandslide':'yellowLandslide';
     body=uncertain?'possibleLandslideBody':evidence.level===3?'redShortBody':'landslideShortBody';severity=evidence.level===3?'red':'warning';
    }else if(evidence.kind==='flood'){title='amberFlood';body=uncertain?'possibleFloodBody':'floodShortBody';severity='warning';}
+   else if(evidence.kind==='lightning'){title='lightning';body=uncertain?'possibleLightningBody':'lightningBody';severity='advisory';}
    else{title='rainAdvisory';body=uncertain?'possibleRainBody':'rainAdvisoryBody';severity='advisory';}
-   facts=[evidence.level===3?'followOfficialEvacuation':evidence.kind==='rain'?'checkOfficialShort':'avoidWaterShort',uncertain?'improvePinAction':'areaNotHome'];
+   facts=evidence.kind==='lightning'?['lightningAction',uncertain?'improvePinAction':'validUntil']:[evidence.level===3?'followOfficialEvacuation':evidence.kind==='rain'?'checkOfficialShort':'avoidWaterShort',uncertain?'improvePinAction':'areaNotHome'];
   }else if(uncertain){title='matchUnknown';body='boundaryUncertain';facts=['improvePinAction','missingNotSafe'];}
   else if(data&&!data.bulletins.some(w=>warningState(w)==='active')){title='outdatedShort';body='checkLatestShort';}
   if(needsUpdate){title='updateShort';body='updateShortBody';facts=['checkOfficialShort'];severity='unknown';}
@@ -74,7 +76,7 @@ export function createFlow({t,name,getData,getCatalog,onLanguage,onArea,onRefres
   $('#area-selection').textContent=area?name(area)+' · '+t('division'):t(mode==='gps'?'yourGps':'yourPin');
   $('#accuracy-label').textContent=mode==='gps'?t(accuracy>1500?'approximateGps':'gpsAccuracy')+' ±'+Math.round(accuracy)+' m':t('manualAccuracy');$('#improve-location').hidden=!uncertain;
   $('#assessment').className='compact-assessment '+severity;$('#assessment-title').textContent=t(title);$('#assessment-copy').textContent=t(body);$('#result-symbol').textContent=severity!=='unknown'?'!':'?';
-  const list=$('#quick-facts');list.replaceChildren();for(const key of facts.slice(0,2)){const li=document.createElement('li');li.textContent=t(key);list.append(li);}
+  const list=$('#quick-facts');list.replaceChildren();for(const key of facts.slice(0,2)){const li=document.createElement('li');li.textContent=key==='validUntil'&&primary?t(key)+': '+new Intl.DateTimeFormat(document.documentElement.lang,{timeZone:'Asia/Colombo',day:'numeric',month:'short',hour:'2-digit',minute:'2-digit',hour12:false}).format(new Date(primary.expiresAt))+' · SLST':t(key);list.append(li);}
   if(data&&state!=='checking'){const li=document.createElement('li');li.className='checked-fact';const date=new Date(data.reviewedAt);li.textContent=ageState(data.reviewedAt,3)==='stale'?t('warningReviewOld'):ageState(data.reviewedAt,3)==='unknown'?t('warningTimeUnknown'):Number.isFinite(date.getTime())?t('checkedShort')+' '+new Intl.DateTimeFormat(document.documentElement.lang,{timeZone:'Asia/Colombo',hour:'2-digit',minute:'2-digit',hour12:false}).format(date)+' · SLST':t('ageUnknown');list.append(li);}
   $('#quick-source').href=primary?.url||'https://www.dmc.gov.lk/';$('#quick-source').textContent=t(needsUpdate?'reloadPage':'officialUpdate');$('#quick-source').onclick=needsUpdate?e=>{e.preventDefault();window.location.reload();}:null;
   const choices=$('#candidate-choices');choices.replaceChildren();choices.hidden=state!=='ambiguous';if(state==='ambiguous'){const heading=document.createElement('strong');heading.textContent=t('possibleDivisions');choices.append(heading);for(const candidate of candidates){const label=document.createElement('span');label.dataset.candidate=candidate.code;label.textContent=name(candidate);choices.append(label);}}

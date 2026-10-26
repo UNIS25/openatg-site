@@ -54,7 +54,7 @@ def main():
     items.append(dict(id='river-observations',url=snapshot['stations'][0]['url'],kind='pdf'))
     items.append(dict(id='major-reservoir-csv',url=snapshot['reservoirs'][0]['url'],kind='csv'))
     for kind,number in [('flood',6),('landslide',5),('weather',2)]:
-        items.append(dict(id=kind+'-listing',url=f'https://www.dmc.gov.lk/index.php?option=com_dmcreports&view=reports&report_type_id={number}&lang=en',kind='listing'))
+        items.append(dict(id=kind+'-listing',url=f'https://www.dmc.gov.lk/index.php?option=com_dmcreports&view=reports&report_type_id={number}&lang=en&limit=100',kind='listing'))
     provenance=ROOT/'floodlens/data/provenance.json'
     expected=json.loads(provenance.read_text()).get('sources',[]) if provenance.exists() else []
     expected={x['id']:x for x in expected}

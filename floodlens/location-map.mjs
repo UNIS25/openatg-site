@@ -1,4 +1,4 @@
-import {StreetMap,streetEnabled} from './street-map.mjs?v=20261026-9';
+import {StreetMap,streetEnabled} from './street-map.mjs?v=20261026-10';
 // Matching is local. Optional street tiles require per-page consent; no geocoder or location storage.
 const ns='http://www.w3.org/2000/svg';
 const node=(tag,attrs={})=>{const n=document.createElementNS(ns,tag);for(const [k,v] of Object.entries(attrs))n.setAttribute(k,String(v));return n;};

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "reviewedAt": "2026-10-26T12:45:14.489375+00:00",
+  "reviewedAt": "2026-10-26T12:57:16.041528+00:00",
   "reviewMethod": "Official PDFs visually checked; structured source transcription. Not an agency endorsement.",
   "bulletins": [
     {
@@ -564,6 +564,35 @@
         "LK71"
       ],
       "severity": "amber"
+    },
+    {
+      "id": "LLA-26-10-26-01-03",
+      "kind": "lightning",
+      "severity": "amber",
+      "title": {
+        "en": "Severe lightning",
+        "si": "ප්‍රබල අකුණු",
+        "ta": "கடும் மின்னல்"
+      },
+      "authority": "Department of Meteorology · Natural Hazards Early Warning Centre",
+      "issuedAt": "2026-10-26T11:30:00+05:30",
+      "expiresAt": "2026-10-26T23:00:00+05:30",
+      "listingAt": "2026-10-26T11:30:00+05:30",
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Advisory_for_Severe_Lightning_at_1130hrs_on_2026__1792997048.pdf",
+      "summary": {
+        "en": "Severe lightning is likely at several places in North-central Province and Trincomalee and Batticaloa districts. Temporary strong winds may occur during thunderstorms.",
+        "si": "උතුරු මැද පළාතේත් ත්‍රිකුණාමලය සහ මඩකලපුව දිස්ත්‍රික්කවලත් තැනින් තැන ප්‍රබල අකුණු ඇති විය හැක. ගිගුරුම් සහිත වැසි සමඟ තාවකාලික තද සුළං ඇති විය හැක.",
+        "ta": "வடமத்திய மாகாணத்திலும் திருகோணமலை மற்றும் மட்டக்களப்பு மாவட்டங்களிலும் பல இடங்களில் கடும் மின்னல் ஏற்படலாம். இடியுடன் கூடிய மழையின்போது தற்காலிக பலத்த காற்றும் வீசலாம்."
+      },
+      "areas": [],
+      "districtCodes": [
+        "LK71",
+        "LK72",
+        "LK53",
+        "LK51"
+      ],
+      "sha256": "e5a055762cc5fff61fe0ae610ce6241395f811d76ae020b955d21c98f707ac5c",
+      "scopeBasis": "Original bulletin text: North-central province, Trincomalee and Batticaloa districts. Bulletin severity Amber; illustration colours are not converted into separate warning levels or safe areas."
     }
   ],
   "stations": [
@@ -738,5 +767,5 @@
     }
   ],
   "fetchedAt": "2026-10-26T12:39:51.443152+00:00",
-  "minClientVersion": 6
+  "minClientVersion": 7
 }

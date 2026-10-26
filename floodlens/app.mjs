@@ -1,7 +1,7 @@
-import {copy} from './i18n.mjs?v=20261026-9';
-import {renderReservoirs,refreshReservoirs} from './reservoirs.mjs?v=20261026-9';
-import {createFlow} from './flow.mjs?v=20261026-9';
-import {warningState,ageState,dailyAgeState,warningMatches,assessment,validateSnapshot,intersectsAccuracy,locationCandidates,insideGeometry} from './core.mjs?v=20261026-9';
+import {copy} from './i18n.mjs?v=20261026-10';
+import {renderReservoirs,refreshReservoirs} from './reservoirs.mjs?v=20261026-10';
+import {createFlow} from './flow.mjs?v=20261026-10';
+import {warningState,ageState,dailyAgeState,warningMatches,assessment,validateSnapshot,intersectsAccuracy,locationCandidates,insideGeometry} from './core.mjs?v=20261026-10';
 const $=s=>document.querySelector(s);
 let lang='en',data=null,catalog=null,selected=null,locationMessage='',outside=false,loadFailed=false,loading=false,needsUpdate=false;
 const t=k=>copy[lang][k]??copy.en[k]??k;
@@ -79,5 +79,5 @@ setInterval(()=>{if(!document.hidden&&navigator.onLine){loadSnapshot();if($('#ob
 const boundaryNote=link('https://data.humdata.org/dataset/cod-ab-lka','');boundaryNote.dataset.i18n='boundarySource';const boundaryP=el('p','');boundaryP.append(boundaryNote);$('.about-content').append(boundaryP);
 const history=link('https://github.com/UNIS25/openatg-site/actions/workflows/floodlens-source-check.yml','');history.dataset.i18n='scheduler';const historyP=el('p','');historyP.append(history);$('.about-content').append(historyP);
 const pointSource=link('./data/reservoir-locations.json','');pointSource.dataset.i18n='mapPointSource';const pointP=el('p','');pointP.append(pointSource);$('.about-content').append(pointP);
-const flow=createFlow({t,name:areaName,getData:()=>({data,needsUpdate,loadFailed}),getCatalog:loadCatalog,onLanguage:next=>{lang=next;translate();},onArea:next=>{selected=next;render();},onRefresh:loadSnapshot});
+const flow=createFlow({t,name:areaName,getData:()=>({data,needsUpdate,loadFailed,loading}),getCatalog:loadCatalog,onLanguage:next=>{lang=next;translate();},onArea:next=>{selected=next;render();},onRefresh:loadSnapshot});
 translate();
