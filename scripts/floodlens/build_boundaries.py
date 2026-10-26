@@ -28,6 +28,8 @@ def main():
             b=districts[parent]['bbox'];b[:]=[min(b[0],bbox[0]),min(b[1],bbox[1]),max(b[2],bbox[2]),max(b[3],bbox[3])]
         shards.setdefault(parent,[]).append(dict(type='Feature',properties={'code':code},geometry=g))
     assert len(districts)==25 and len({d['code'] for d in divisions})==339
+    districts['LK91']['displayNames']={'ta':'இரத்தினபுரி மாவட்டம்'}
+    districts['LK91']['displayCorrection']='Tamil district display spelling curated; original source names retained in names.'
     shard_meta=[]
     for code,features in shards.items():
         payload=json.dumps(dict(type='FeatureCollection',features=features),ensure_ascii=False,separators=(',',':')).encode()

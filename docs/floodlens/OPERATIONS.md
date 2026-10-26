@@ -7,7 +7,7 @@ No framework, backend, external font, runtime map library or new credential.
 ## Data contract and release scope
 
 `floodlens/data/reviewed.json` contains manually reviewed, selected official
-bulletins, eight dated station observations and two dated reservoir observations.
+bulletins, eight dated station observations and two dated reservoir fallback observations.
 It is not complete national alert or gauge coverage. Every warning has original
 URL, issue time, expiry, scope, authority, SHA-256 and explicit DS-code mapping.
 The rainfall advisory's document issue time (03:00 SLST) is kept separately from
@@ -33,6 +33,30 @@ observations over three hours old are explicitly stale. Daily reservoirs become
 older observations on the next Sri Lanka calendar day. Expired, unknown,
 missing, future-dated or failed data never produce an all-clear.
 
+## Reservoir directory and client compatibility
+
+`reservoirs.json` adds all 74 records from the verified CSV capture: 55 have the
+26 October date, 14 have older dates and 5 contain invalid source dates. The five
+invalid dates are null/unknown, never the retrieval date. Missing spill discharge
+and source spreadsheet errors also remain null. Units and dates are preserved.
+The parser rejects unexpected schema/numeric formats; its tests check missing,
+zero, invalid and dated values. This is source coverage, not all Sri Lanka dams.
+National observations are collapsed by default and never labeled as local to
+the selected DS. The directory loads when opened and is searchable across all
+74 records; six display initially, with a show-all option.
+
+The optional area outline uses the same licensed local boundary shards and no
+third-party tiles. It depicts an administrative area, never a hazard extent.
+The original Tamil Ratnapura district name is retained in the catalogue while
+a curated display spelling corrects its truncated source label.
+
+All executable/style assets carry one release version in their URLs. Snapshot
+`minClientVersion` and explicit supported-severity checks reject incompatible
+future data in an already-open client, remove partial warning cards, request a
+page reload, and retain the official DMC link. Overview severity is derived from
+the actual source levels, not a fixed range string. Older tabs opened before
+the compatibility guard was introduced require a one-time reload.
+
 ## Deployed source checks and permission boundary
 
 `.github/workflows/floodlens-source-check.yml` runs at minute 17 each hour and
@@ -50,15 +74,34 @@ The page fetches the published snapshot every five minutes while visible and
 updates age/expiry each minute. It sends no location and does not claim anyone
 is continuously monitoring the user.
 
-Automatic snapshot publishing would require a workflow-level permission delta
-from `contents: read` to `contents: write` plus `pages: write` for the ephemeral
-`GITHUB_TOKEN`. GitHub-token commits do not automatically trigger a Pages build;
-the existing legacy route would require an explicit Pages build API request.
-No new credential is necessary, but that grants a workflow repository writes.
-That expansion is not authorized by this release and is not implemented.
-Repository default permissions, security settings and deployment settings are
-unchanged. New/changed warning interpretation must remain review-gated even if
-deterministic observations are later automatically published.
+The user explicitly approved a separate reservoir observation publisher with
+job-level `contents: write` and `pages: write` on 26 October 2026.
+`.github/workflows/floodlens-observation-update.yml` runs at minute 37 hourly
+and on manual dispatch, using the ephemeral `GITHUB_TOKEN`. Its only permitted
+changed/staged/committed path is `floodlens/data/reservoirs.json`. Actual token
+permissions are repository-wide; the path restriction is a code safeguard.
+The publisher validates exact column names/units, all 74 reviewed identities,
+number bounds, dates (no future or regressed dates), and unknown fields. It
+makes a normal non-force push, explicitly requests the existing Pages build,
+checks the exact commit's successful build, and compares the public file hash.
+Concurrent runs are serialized. An advancing main aborts the push; the next run
+starts fresh. A fetch/validation failure preserves prior readings and dates,
+publishes failure metadata, and fails the workflow visibly. A failed build or
+public verification also fails visibly; no success is inferred from a commit.
+
+The job uses the existing free standard public-repository runner, no artifact
+or cache storage and no permanent credential. Repository defaults, security,
+domain and Pages configuration are unchanged. Raw CSV is temporary on the
+runner; its hash, validated records, provenance and each status persist in the
+data commit and run log. The UI displays source-check time/failure, warns when
+no check within two hours is confirmed, and labels every observation date.
+
+New/changed warning interpretation remains review-gated. Source-check run logs
+include raw official document links and changed hashes as a concrete review
+queue. Automatic comparison of actual issue times in new PDF layouts is not
+validated, so no automatic newer-bulletin banner or severity is inferred from
+listing timestamps. The warning section prominently discloses that hourly
+checks do not update assessments and newer official bulletins may await review.
 
 ## Update procedure
 
@@ -138,7 +181,10 @@ evacuation decision is generated. Previous source hashes remain in provenance.
 
 ## Rollback
 
-Revert the single FloodLens release commit (normal git revert; never reset or
-force-push) and push to `main`. This removes only FloodLens, its homepage notice,
-and read-only source checker while preserving other projects. Verify the Pages
-build and existing home/store/signal routes after any rollback.
+For a faulty update, revert that release commit with a normal git revert and
+push to `main`; never reset or force-push. To remove FloodLens entirely, revert
+its release commits in reverse order through `e11350e`, preserving unrelated
+commits. This removes FloodLens, its homepage notice, and the read-only source
+checker. Verify the Pages build and existing home/store/signal routes after
+any rollback. Never restore a superseded warning as a current warning without
+rechecking its validity and the latest official bulletin.

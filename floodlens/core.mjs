@@ -1,4 +1,5 @@
 export const HOUR = 3600000;
+export const CLIENT_VERSION = 4;
 export function warningState(w, now=Date.now()) {
   const start=Date.parse(w.issuedAt),end=Date.parse(w.expiresAt);
   if(!Number.isFinite(start)||!Number.isFinite(end)||end<=start||now<start) return 'unknown';
@@ -60,11 +61,13 @@ export function intersectsAccuracy(bbox,point,radius) {
 export function locationCandidates(features,point,accuracy) {
   return features.filter(f=>insideGeometry(point,f.geometry)||boundaryDistance(point,f.geometry)<=accuracy+30);
 }
-export function validateSnapshot(d) {
+export function validateSnapshot(d,clientVersion=CLIENT_VERSION) {
+  if((Number.isInteger(d?.minClientVersion)&&d.minClientVersion>clientVersion)||(Number.isInteger(d?.schemaVersion)&&d.schemaVersion>1)){const error=new Error('Newer client required');error.code='CLIENT_UPDATE_REQUIRED';throw error;}
   if(d?.schemaVersion!==1||!Array.isArray(d.bulletins)||!Array.isArray(d.stations)||!Array.isArray(d.reservoirs)) throw Error('Invalid data schema');
   for(const w of d.bulletins) {
     if(!w.id||!['flood','landslide','rain'].includes(w.kind)||!Array.isArray(w.areas)||!w.title?.en||!w.summary?.en) throw Error('Invalid bulletin');
     if(!safeSource(w.url))throw Error('Invalid source');
+    if(w.areas.some(a=>a.level!==undefined&&![1,2,3].includes(a.level))){const error=new Error('Unsupported warning severity');error.code='CLIENT_UPDATE_REQUIRED';throw error;}
   }
   for(const s of d.stations) if(!Number.isFinite(s.value)||!['m','ft'].includes(s.unit)||!safeSource(s.url))throw Error('Invalid station');
   for(const r of d.reservoirs)if(!Number.isFinite(r.effectivePercent)||!Number.isFinite(r.spillCusecs)||typeof r.name!=='string'||!safeSource(r.url))throw Error('Invalid reservoir');

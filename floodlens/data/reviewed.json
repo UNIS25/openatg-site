@@ -671,5 +671,6 @@
       "url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTcSGhi9RESl7CMCl1TQnrKe07Gx5Q696YiSB9jneIHqIP9lifpqSErgI3D5k9KtQXSdW5JpycIIr5e/pub?gid=1238978530&single=true&output=csv"
     }
   ],
-  "fetchedAt": "2026-10-26T09:33:45.662280+00:00"
+  "fetchedAt": "2026-10-26T09:33:45.662280+00:00",
+  "minClientVersion": 4
 }

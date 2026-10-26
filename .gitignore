@@ -1,2 +1,3 @@
 artifacts/windows/
 artifacts/floodlens/
+scripts/floodlens/__pycache__/

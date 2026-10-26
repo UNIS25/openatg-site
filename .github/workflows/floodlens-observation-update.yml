@@ -1,0 +1,41 @@
+name: FloodLens observation publication
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '37 * * * *'
+permissions:
+  contents: read
+concurrency:
+  group: floodlens-observation-publication
+  cancel-in-progress: false
+jobs:
+  publish-observations:
+    if: github.repository == 'UNIS25/openatg-site' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    permissions:
+      contents: write
+      pages: write
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: main
+          persist-credentials: false
+          sparse-checkout: |
+            /.gitignore
+            scripts/floodlens
+            tests/floodlens
+            floodlens/data/reservoirs.json
+          sparse-checkout-cone-mode: false
+      - name: Check publisher safeguards
+        run: python3 tests/floodlens/test_observation_updater.py
+      - name: Fetch and validate dated observations
+        id: source
+        run: python3 scripts/floodlens/update_reservoirs.py
+      - name: Publish only reservoir data and verify the public build
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 scripts/floodlens/publish_reservoirs.py
+      - name: Fail visibly when source fetch or validation failed
+        if: steps.source.outputs.source_status != 'ok'
+        run: exit 1

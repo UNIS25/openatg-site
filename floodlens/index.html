@@ -10,8 +10,8 @@
   <title>FloodLens · OpenATG</title>
   <link rel="canonical" href="https://openatg.com/floodlens/">
   <link rel="icon" href="../atg-mark-transparent.png">
-  <link rel="stylesheet" href="floodlens.css?v=20261026-3">
-  <script type="module" src="app.mjs?v=20261026-3"></script>
+  <link rel="stylesheet" href="floodlens.css?v=20261026-4">
+  <script type="module" src="app.mjs?v=20261026-4"></script>
 </head>
 <body>
   <a href="#main" class="skip" data-i18n="skip">Skip to content</a>
@@ -42,14 +42,17 @@
     <div id="warnings" class="warnings"><p data-i18n="loading">Loading the published source snapshot…</p></div>
     <p class="source-note" data-i18n="warningLimit">This is a selected bulletin snapshot, not a complete alert feed. Open the official source for changes, cancellations and the latest local instructions.</p>
     <a class="source-link" id="all-warnings" href="https://www.dmc.gov.lk/" target="_blank" rel="noopener noreferrer"><span data-i18n="allWarnings">All DMC warnings</span><span aria-hidden="true">↗</span></a>
+    <a class="source-link" href="https://github.com/UNIS25/openatg-site/actions/workflows/floodlens-source-check.yml" target="_blank" rel="noopener noreferrer" data-i18n="reviewQueue">Source checks &amp; review queue ↗</a>
     <section class="water-section" aria-labelledby="water-title">
       <div class="section-heading"><div><p class="eyebrow" data-i18n="observationsLabel">OBSERVATIONS · SEPARATE FROM WARNINGS</p><h2 id="water-title" data-i18n="waterTitle">Rivers & reservoirs</h2></div><span class="section-symbol" aria-hidden="true">≈</span></div>
       <p class="section-intro" data-i18n="waterIntro">A gauge measures water at one station. It cannot tell you the depth at your home or when floodwater will arrive.</p>
+      <details id="observation-browser" class="observation-browser"><summary data-i18n="browseObservations">Browse island-wide observations</summary><div class="observation-content">
       <div class="water-toolbar"><label for="station-search" class="sr-only" data-i18n="stationSearch">Search river stations</label><input id="station-search" type="search" data-placeholder="stationSearch" placeholder="Search river stations"><button id="load-observations" class="button secondary" data-i18n="getReadings">Update river records</button></div>
       <p class="source-note" data-i18n="liveDisclosure">Updating contacts the Irrigation Department’s ArcGIS service. No location is sent. Source record-edit times are not measurement times.</p>
       <p id="observation-status" class="source-note" role="status"></p>
       <div id="stations" class="stations"></div>
       <details class="map-panel"><summary><span data-i18n="mapTitle">Open the official water maps</span><span class="map-label" data-i18n="optional">Optional ↗</span></summary><div class="map-content"><p data-i18n="mapCopy">Maps open on the official ArcGIS service in a new tab. Check each station’s date and coverage there. FloodLens does not send your coordinates.</p><div class="map-links"><a target="_blank" rel="noopener noreferrer" href="https://slirrigation.maps.arcgis.com/apps/dashboards/2cffe83c9ff5497d97375498bdf3ff38" data-i18n="riverMap">River levels ↗</a><a target="_blank" rel="noopener noreferrer" href="https://slirrigation.maps.arcgis.com/apps/dashboards/97be51156fa84712851286408eb09c45" data-i18n="majorMap">Major reservoirs ↗</a><a target="_blank" rel="noopener noreferrer" href="https://slirrigation.maps.arcgis.com/apps/dashboards/9b114013dce14faca2c6bf8de3de6d3f" data-i18n="mediumMap">Medium reservoirs ↗</a></div><p class="small" data-i18n="reservoirLimit">Reservoir levels and gate releases are not ingested here yet. An open gate, reservoir percentage or nearby river alone does not establish risk at your location.</p></div></details>
+      </div></details>
     </section>
     <section class="context-grid" aria-label="Weather and coastal context"><article class="context-card"><span class="context-icon" aria-hidden="true">☂</span><h3 data-i18n="rainTitle">Rainfall</h3><p data-i18n="rainCopy">Rain forecasts and station rainfall are different. Use the official report’s time window and location.</p><a target="_blank" rel="noopener noreferrer" href="https://slirrigation.maps.arcgis.com/apps/dashboards/5c30e3fc436543ecbaa74b6f2835b67a" data-i18n="rainLink">Official rainfall map ↗</a></article><article class="context-card"><span class="context-icon" aria-hidden="true">≋</span><h3 data-i18n="seaTitle">Sea & tides</h3><p data-i18n="seaCopy">A verified local tide feed is not connected. Sea forecasts do not establish river flooding or storm-surge depth.</p><a target="_blank" rel="noopener noreferrer" href="https://meteo.gov.lk/index.php?lang=en" data-i18n="seaLink">Meteorology forecasts ↗</a></article></section>
     <section class="help-panel" id="help" aria-labelledby="help-title"><div><p class="eyebrow" data-i18n="actionLabel">PRACTICAL NEXT STEPS</p><h2 id="help-title" data-i18n="helpTitle">Take the warning seriously.</h2><ul><li data-i18n="action1">Do not walk or drive through floodwater.</li><li data-i18n="action2">Follow evacuation instructions from local authorities.</li><li data-i18n="action3">Check the latest official bulletin and help others access it.</li></ul><a class="small guidance-link" target="_blank" rel="noopener noreferrer" href="https://np.gov.lk/pdf/DMC/irrigation_NPC.pdf" data-i18n="guidanceSource">Official flood guidance ↗</a></div><a class="emergency" href="tel:117"><span data-i18n="emergencyLabel">Disaster help · DMC</span><strong>117 <span aria-hidden="true">↗</span></strong><span data-i18n="callHelp">Call for disaster assistance</span></a></section>
