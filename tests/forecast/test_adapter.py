@@ -10,8 +10,8 @@ meta=next(s['metadata'] for s in manifest['sources'] if s.get('parameter')=='tp'
 def field(step,values):
  m=copy.deepcopy(meta);m['endStep']=step;return {'metadata':m,'values':values}
 class Forecast(unittest.TestCase):
- def test_actual_grib_metadata_all_30_fields(self):
-  sources=[s for s in manifest['sources'] if s['kind']=='grib'];self.assertEqual(len(sources),30)
+ def test_actual_grib_metadata_all_54_fields(self):
+  sources=[s for s in manifest['sources'] if s['kind']=='grib'];self.assertEqual(len(sources),54)
   for s in sources:b.validate_meta(s['metadata'],s['parameter'],run,s['step'])
  def test_future_run_rejected_but_future_valid_forecast_allowed(self):
   with self.assertRaises(ValueError):b.validate_run(run,run-timedelta(seconds=1))
@@ -54,6 +54,6 @@ class Forecast(unittest.TestCase):
    def read(self,*a):raise AssertionError('Full file must not be read')
   with patch.object(b.urllib.request,'urlopen',return_value=Response()),self.assertRaises(ValueError):b.read_bounded('https://example.test',100,0,100)
  def test_actual_dataset_hash_complete_and_small(self):
-  raw=(DATA/'forecast.json').read_bytes();d=json.loads(raw);self.assertEqual(b.digest(raw),manifest['forecastSha256']);self.assertLess(len(raw),150000);self.assertFalse(d['captureErrors']);self.assertEqual(len(d['grid']['points']),198)
+  raw=(DATA/'forecast.json').read_bytes();d=json.loads(raw);self.assertEqual(b.digest(raw),manifest['forecastSha256']);self.assertLess(len(raw),200000);self.assertFalse(d['captureErrors']);self.assertEqual(len(d['grid']['points']),198)
   for f in d['frames']:self.assertEqual(len(f['rainMm']),198);self.assertTrue(all(x is not None for x in f['rainMm']));self.assertEqual(f['endStep']-f['startStep'],3)
 if __name__=='__main__':unittest.main()

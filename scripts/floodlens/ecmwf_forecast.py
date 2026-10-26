@@ -12,7 +12,8 @@ import numpy as np
 UTC = timezone.utc
 HOST = 'https://data.ecmwf.int/forecasts'
 PARAMS = {'tp': (228, 'm', 'surface', 0, 'accum'), '10u': (165, 'm s**-1', 'heightAboveGround', 10, 'instant'), '10v': (166, 'm s**-1', 'heightAboveGround', 10, 'instant')}
-STEPS = list(range(9, 37, 3))
+# Keep enough lead time for a full upcoming day as the reviewed snapshot ages.
+STEPS = list(range(9, 61, 3))
 BBOX = [79.5, 5.75, 82.0, 10.0]
 GRID_KEYS = 'gridType Ni Nj iDirectionIncrementInDegrees jDirectionIncrementInDegrees latitudeOfFirstGridPointInDegrees longitudeOfFirstGridPointInDegrees latitudeOfLastGridPointInDegrees longitudeOfLastGridPointInDegrees iScansNegatively jScansPositively jPointsAreConsecutive alternativeRowScanning'.split()
 META_KEYS = 'edition centre shortName paramId units dataDate dataTime validityDate validityTime stepType stepUnits startStep endStep typeOfLevel level uvRelativeToGrid bitmapPresent numberOfMissing missingValue packingType bitsPerValue binaryScaleFactor decimalScaleFactor packingError'.split() + GRID_KEYS

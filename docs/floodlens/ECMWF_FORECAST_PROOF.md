@@ -112,3 +112,29 @@ reservoir/source-check jobs do not gain an ecCodes dependency. Frontend tests
 are `tests/floodlens/forecast.test.mjs` and `forecast-browser.mjs`.
 No scheduled job calls the new adapter. Public source hashes and parsed GRIB
 metadata are in `floodlens/data/forecast/provenance.json`.
+
+
+## Reviewed horizon extension, 26 October 18:44 UTC
+
+The 12 UTC official directory lists AIFS single/ensemble, but no IFS directory;
+the expected IFS index returned 404. The refreshed snapshot therefore retains
+the **06 UTC IFS run** and extends validated lead times through 60 hours. No
+AIFS values or later run timestamp are substituted. Directory evidence/hash is
+recorded in provenance. Eighteen steps / 54 GRIB fields now provide 17 complete
+three-hour intervals, 198 fixed regional points, and no capture errors.
+
+At review, the complete upcoming window is 26 October 21:00 through 27 October
+21:00 UTC (27 October 02:30 through 28 October 02:30 SLST). It is an explicit
+native-interval 24-hour window, not interpolation from the current minute.
+Colombo public test pin 79.8612,6.9271 maps to grid 79.75,7: 6.9581 mm and sampled
+10 m wind 6.94–29.82 km/h. Puttalam: 2.3193 mm; Ratnapura: 23.4375 mm.
+Independent raw accumulation-endpoint checks cover every grid point. The maximum
+0.1221 mm discrepancy is accounted for by flagged small negative intervals
+within actual GRIB packing precision, plus four-decimal rounding; it is not
+missing rainfall imputed as zero. All 24-hour totals remain sums of the same
+eight displayed complete intervals.
+
+This is a manually reviewed publication. No automatic publisher or permission
+change. Newer model runs still require review; the client displays the original
+run time and flags an older run after 18 hours. A longer forecast horizon does
+not make the underlying model newer.
