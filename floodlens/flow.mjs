@@ -1,5 +1,5 @@
-import {LocationMap} from './location-map.mjs?v=20261026-6';
-import {warningMatches,warningState,ageState,insideGeometry,intersectsAccuracy,locationCandidates} from './core.mjs?v=20261026-6';
+import {LocationMap} from './location-map.mjs?v=20261026-7';
+import {warningMatches,warningState,ageState,insideGeometry,intersectsAccuracy,locationCandidates} from './core.mjs?v=20261026-7';
 const $=s=>document.querySelector(s);
 export function createFlow({t,name,getData,getCatalog,onLanguage,onArea,onRefresh}){
  let stage='language',point=null,accuracy=null,mode='gps',area=null,candidates=[],state='idle',manualPoint=null,catalog=null,locationRequest=0,matchRequest=0;
@@ -11,9 +11,9 @@ export function createFlow({t,name,getData,getCatalog,onLanguage,onArea,onRefres
  async function openManual(approximate){
   locationRequest++;matchRequest++;$('#locate').disabled=false;
   show('location');$('#manual-panel').hidden=false;$('#location-screen').classList.add('manual-open');manualPoint=null;$('#use-pin').disabled=true;$('#manual-status').textContent=t('pinInstruction');
-  await pinMap.load();if(pinMap.error)$('#location-help').hidden=false;try{catalog=await getCatalog();pinMap.set({labels:labels()});}catch{}
   if(approximate)pinMap.set({center:approximate.point,span:Math.max(.08,approximate.accuracy/111320*6),point:approximate.point,accuracy:approximate.accuracy});
   else pinMap.set({center:point||[80.7,7.9],span:point? .1:4.7,point:null,accuracy:null});
+  await pinMap.load();if(pinMap.error)$('#location-help').hidden=false;try{catalog=await getCatalog();pinMap.set({labels:labels()});}catch{}
   $('#manual-title').focus({preventScroll:true});
  }
  async function match(p,uncertainty,source){
