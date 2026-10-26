@@ -32,7 +32,7 @@ test('accuracy circle near an edge produces multiple candidates, not nearest fal
  assert.equal(locationCandidates([poly(80),poly(80.01)],[80.0099,7.005],100).length,2);assert.equal(locationCandidates([poly(80)],[81,7],50).length,0);
 });
 test('production source records and units are valid; no fixture switches',()=>{
- validateSnapshot(snapshot);assert.equal(snapshot.stations.length,8);assert.ok(snapshot.stations.every(s=>s.unit==='m'));assert.ok(snapshot.bulletins.every(b=>/^[a-f0-9]{64}$/.test(b.sha256)));assert.equal(snapshot.reservoirs.find(r=>r.name==='Tabbowa').effectivePercent,99.98);
+ validateSnapshot(snapshot);assert.equal(snapshot.stations.length,11);assert.ok(snapshot.stations.every(s=>s.unit==='m'));assert.ok(snapshot.bulletins.every(b=>/^[a-f0-9]{64}$/.test(b.sha256)));assert.equal(snapshot.reservoirs.find(r=>r.name==='Tabbowa').effectivePercent,99.98);
 });
 test('all UI translation keys exist in Sinhala and Tamil',()=>{
  for(const language of ['si','ta'])for(const k of Object.keys(copy.en))assert.equal(typeof copy[language][k],'string',`${language}.${k}`);
@@ -84,4 +84,13 @@ test('future non-landslide severity cannot silently render an Amber label',()=>{
 test('multiple landslide bulletins select highest applicable reviewed severity',()=>{
  const ds=catalog.divisions.find(a=>a.code==='LK9112');const original=snapshot.bulletins.find(w=>w.kind==='landslide');const lower={...original,areas:original.areas.map(a=>({...a,level:1}))};
  assert.equal(locationEvidence([lower,original],[ds],{now:reviewedTime}).level,3);
+});
+
+test('15:30 official river report retains eight stations and adds three reviewed alerts without inferred trends',()=>{
+ const expected=[['Holombuwa',4.83,'minorFalling'],['Rathnapura',7.96,'minorRising'],['Kithulgala',2.90,'normal'],['Norwood',2.39,'alertRising'],['Magura',4.24,'alertRising'],['Kalawellawa (Millakanda)',6.20,'alertRising'],['Nawalapitiya',2.97,'normal'],['Dunamale',3.80,'alertRising'],['Panadugama',5.37,'alertRising'],['Urawa',2.53,'alertRising'],['Peradeniya',5.53,'alertRising']];
+ assert.deepEqual(snapshot.stations.map(s=>[s.name,s.value,s.status]),expected);
+ for(const s of snapshot.stations){assert.equal(s.unit,'m');assert.equal(s.observedAt,'2026-10-26T15:00:00+05:30');assert.equal(s.issuedAt,'2026-10-26T15:30:00+05:30');assert.equal(s.sha256,'68f6608b19221bc5b16569b128f59a717163ad27a8bad111760b3a3cfefb60fd');assert.ok(s.url.endsWith('1793017314.pdf'));if(s.status==='normal')assert.equal(s.sourceTrend,null);assert.equal('rainfall' in s,false);}
+ assert.equal(locationEvidence(snapshot.bulletins,[catalog.divisions.find(a=>a.code==='LK9112')],{now:reviewedTime}).level,3);
+ assert.throws(()=>validateSnapshot(snapshot,5),e=>e.code==='CLIENT_UPDATE_REQUIRED');
+ const d=structuredClone(snapshot);d.stations[0].status='unreviewed';assert.throws(()=>validateSnapshot(d),e=>e.code==='CLIENT_UPDATE_REQUIRED');
 });

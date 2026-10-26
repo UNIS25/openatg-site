@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "reviewedAt": "2026-10-26T09:54:27.957419+00:00",
+  "reviewedAt": "2026-10-26T12:45:14.489375+00:00",
   "reviewMethod": "Official PDFs visually checked; structured source transcription. Not an agency endorsement.",
   "bulletins": [
     {
@@ -570,82 +570,145 @@
     {
       "name": "Holombuwa",
       "basin": "Gurugoda Oya · Kelani",
-      "value": 4.65,
+      "value": 4.83,
       "unit": "m",
-      "status": "minorRising",
-      "observedAt": "2026-10-26T12:00:00+05:30",
-      "issuedAt": "2026-10-26T12:30:00+05:30",
-      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1792998944.pdf"
+      "status": "minorFalling",
+      "observedAt": "2026-10-26T15:00:00+05:30",
+      "issuedAt": "2026-10-26T15:30:00+05:30",
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793017314.pdf",
+      "sha256": "68f6608b19221bc5b16569b128f59a717163ad27a8bad111760b3a3cfefb60fd",
+      "sourceRemarks": "Minor Flood",
+      "sourceTrend": "Falling"
     },
     {
       "name": "Rathnapura",
       "basin": "Kalu Ganga",
-      "value": 7.62,
+      "value": 7.96,
       "unit": "m",
       "status": "minorRising",
-      "observedAt": "2026-10-26T12:00:00+05:30",
-      "issuedAt": "2026-10-26T12:30:00+05:30",
-      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1792998944.pdf"
+      "observedAt": "2026-10-26T15:00:00+05:30",
+      "issuedAt": "2026-10-26T15:30:00+05:30",
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793017314.pdf",
+      "sha256": "68f6608b19221bc5b16569b128f59a717163ad27a8bad111760b3a3cfefb60fd",
+      "sourceRemarks": "Minor Flood",
+      "sourceTrend": "Rising"
     },
     {
       "name": "Kithulgala",
       "basin": "Kelani Ganga",
-      "value": 3.14,
+      "value": 2.9,
       "unit": "m",
-      "status": "alertRising",
-      "observedAt": "2026-10-26T12:00:00+05:30",
-      "issuedAt": "2026-10-26T12:30:00+05:30",
-      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1792998944.pdf"
+      "status": "normal",
+      "observedAt": "2026-10-26T15:00:00+05:30",
+      "issuedAt": "2026-10-26T15:30:00+05:30",
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793017314.pdf",
+      "sha256": "68f6608b19221bc5b16569b128f59a717163ad27a8bad111760b3a3cfefb60fd",
+      "sourceRemarks": "Normal",
+      "sourceTrend": null
     },
     {
       "name": "Norwood",
       "basin": "Kehelgamu Oya · Kelani",
-      "value": 2.26,
+      "value": 2.39,
       "unit": "m",
       "status": "alertRising",
-      "observedAt": "2026-10-26T12:00:00+05:30",
-      "issuedAt": "2026-10-26T12:30:00+05:30",
-      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1792998944.pdf"
+      "observedAt": "2026-10-26T15:00:00+05:30",
+      "issuedAt": "2026-10-26T15:30:00+05:30",
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793017314.pdf",
+      "sha256": "68f6608b19221bc5b16569b128f59a717163ad27a8bad111760b3a3cfefb60fd",
+      "sourceRemarks": "Alert",
+      "sourceTrend": "Rising"
     },
     {
       "name": "Magura",
       "basin": "Maguru Ganga · Kalu",
-      "value": 4.18,
+      "value": 4.24,
       "unit": "m",
-      "status": "alertFalling",
-      "observedAt": "2026-10-26T12:00:00+05:30",
-      "issuedAt": "2026-10-26T12:30:00+05:30",
-      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1792998944.pdf"
+      "status": "alertRising",
+      "observedAt": "2026-10-26T15:00:00+05:30",
+      "issuedAt": "2026-10-26T15:30:00+05:30",
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793017314.pdf",
+      "sha256": "68f6608b19221bc5b16569b128f59a717163ad27a8bad111760b3a3cfefb60fd",
+      "sourceRemarks": "Alert",
+      "sourceTrend": "Rising"
     },
     {
       "name": "Kalawellawa (Millakanda)",
       "basin": "Kuda Ganga · Kalu",
-      "value": 5.92,
+      "value": 6.2,
       "unit": "m",
       "status": "alertRising",
-      "observedAt": "2026-10-26T12:00:00+05:30",
-      "issuedAt": "2026-10-26T12:30:00+05:30",
-      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1792998944.pdf"
+      "observedAt": "2026-10-26T15:00:00+05:30",
+      "issuedAt": "2026-10-26T15:30:00+05:30",
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793017314.pdf",
+      "sha256": "68f6608b19221bc5b16569b128f59a717163ad27a8bad111760b3a3cfefb60fd",
+      "sourceRemarks": "Alert",
+      "sourceTrend": "Rising"
     },
     {
       "name": "Nawalapitiya",
       "basin": "Mahaweli Ganga",
-      "value": 3.93,
+      "value": 2.97,
       "unit": "m",
-      "status": "alertRising",
-      "observedAt": "2026-10-26T12:00:00+05:30",
-      "issuedAt": "2026-10-26T12:30:00+05:30",
-      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1792998944.pdf"
+      "status": "normal",
+      "observedAt": "2026-10-26T15:00:00+05:30",
+      "issuedAt": "2026-10-26T15:30:00+05:30",
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793017314.pdf",
+      "sha256": "68f6608b19221bc5b16569b128f59a717163ad27a8bad111760b3a3cfefb60fd",
+      "sourceRemarks": "Normal",
+      "sourceTrend": null
     },
     {
       "name": "Dunamale",
       "basin": "Attanagalu Oya",
-      "value": 3.41,
+      "value": 3.8,
       "unit": "m",
       "status": "alertRising",
-      "observedAt": "2026-10-26T12:00:00+05:30",
-      "issuedAt": "2026-10-26T12:30:00+05:30",
-      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1792998944.pdf"
+      "observedAt": "2026-10-26T15:00:00+05:30",
+      "issuedAt": "2026-10-26T15:30:00+05:30",
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793017314.pdf",
+      "sha256": "68f6608b19221bc5b16569b128f59a717163ad27a8bad111760b3a3cfefb60fd",
+      "sourceRemarks": "Alert",
+      "sourceTrend": "Rising"
+    },
+    {
+      "name": "Panadugama",
+      "basin": "Nilwala Ganga",
+      "unit": "m",
+      "value": 5.37,
+      "status": "alertRising",
+      "observedAt": "2026-10-26T15:00:00+05:30",
+      "issuedAt": "2026-10-26T15:30:00+05:30",
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793017314.pdf",
+      "sha256": "68f6608b19221bc5b16569b128f59a717163ad27a8bad111760b3a3cfefb60fd",
+      "sourceRemarks": "Alert",
+      "sourceTrend": "Rising"
+    },
+    {
+      "name": "Urawa",
+      "basin": "Urubokka Ganga · Nilwala",
+      "unit": "m",
+      "value": 2.53,
+      "status": "alertRising",
+      "observedAt": "2026-10-26T15:00:00+05:30",
+      "issuedAt": "2026-10-26T15:30:00+05:30",
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793017314.pdf",
+      "sha256": "68f6608b19221bc5b16569b128f59a717163ad27a8bad111760b3a3cfefb60fd",
+      "sourceRemarks": "Alert",
+      "sourceTrend": "Rising"
+    },
+    {
+      "name": "Peradeniya",
+      "basin": "Mahaweli Ganga",
+      "unit": "m",
+      "value": 5.53,
+      "status": "alertRising",
+      "observedAt": "2026-10-26T15:00:00+05:30",
+      "issuedAt": "2026-10-26T15:30:00+05:30",
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793017314.pdf",
+      "sha256": "68f6608b19221bc5b16569b128f59a717163ad27a8bad111760b3a3cfefb60fd",
+      "sourceRemarks": "Alert",
+      "sourceTrend": "Rising"
     }
   ],
   "reservoirs": [
@@ -674,6 +737,6 @@
       "url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTcSGhi9RESl7CMCl1TQnrKe07Gx5Q696YiSB9jneIHqIP9lifpqSErgI3D5k9KtQXSdW5JpycIIr5e/pub?gid=1238978530&single=true&output=csv"
     }
   ],
-  "fetchedAt": "2026-10-26T09:33:45.662280+00:00",
-  "minClientVersion": 5
+  "fetchedAt": "2026-10-26T12:39:51.443152+00:00",
+  "minClientVersion": 6
 }

@@ -7,15 +7,16 @@ No framework, backend, external font, runtime map library or new credential.
 ## Data contract and release scope
 
 `floodlens/data/reviewed.json` contains manually reviewed, selected official
-bulletins, eight dated station observations and two dated reservoir fallback observations.
+bulletins, eleven dated station observations and two dated reservoir fallback observations.
 It is not complete national alert or gauge coverage. Every warning has original
 URL, issue time, expiry, scope, authority, SHA-256 and explicit DS-code mapping.
 The rainfall advisory's document issue time (03:00 SLST) is kept separately from
 its DMC listing time (03:30). All timestamps include time-zone offsets.
 
-The 26 October river PDF was issued at 12:30 SLST; its selected measurements are
-at 12:00. Source remarks are station classifications, not area predictions.
-All eight selected gauges use metres. Nagalagam Street is deliberately not
+The current 26 October river PDF was issued at 15:30 SLST; its selected measurements
+are at 15:00. The superseded 12:30 report and eight previous readings remain in
+provenance. Source remarks are station classifications, not area predictions.
+All eleven selected gauges use metres. Nagalagam Street is deliberately not
 ingested; its official unit is feet. No ArcGIS `CreationDate` or `EditDate` is
 presented as an observation timestamp, and rainfall-period semantics are not
 invented. Reservoir values are daily reports dated 26 October; time unknown.
@@ -257,3 +258,26 @@ snapshot minClientVersion 5 also causes already-open older clients to request
 a reload. Raw source hashes, issue times, validity and reviewed geography remain
 unchanged. Multiple concurrent landslide bulletins are ranked by the highest
 applicable reviewed DS level, never by source order.
+
+## 15:30 river report review, release 20261026-9
+
+Original PDF SHA-256: `68f6608b19221bc5b16569b128f59a717163ad27a8bad111760b3a3cfefb60fd`.
+The 14:00 and 15:00 columns were independently read from the rendered original.
+All eight existing stations are retained. Holombuwa is Minor Flood/Falling;
+Rathnapura is Minor Flood/Rising. Kithulgala and Nawalapitiya have source
+classification Normal with blank trend, preserved as null rather than inferred.
+Panadugama, Urawa and Peradeniya are added as Alert/Rising. This is eleven
+selected stations, including all nine non-normal rows in this particular report,
+not continuous or comprehensive national coverage. The 6-hour rainfall column
+is not ingested or mixed with earlier 3-hour figures.
+
+Existing warning objects, severities, scope, issue/expiry times and reservoir
+data/workflows are unchanged. DMC flood/landslide/weather listing snapshots and
+unchanged warning PDF hashes are included in the review provenance. General
+weather forecasts issued 14:00 and 16:00 were reviewed; they are not a cancellation
+or a local-flood replacement for the 03:00 Amber advisory.
+
+Client version 6 adds only Normal and Minor Flood/Falling station labels in all
+three languages and rejects unknown future station classifications. The snapshot
+requires version 6 so older open tabs request a reload instead of showing raw
+classification keys. Normal remains a station classification, never an all-clear.

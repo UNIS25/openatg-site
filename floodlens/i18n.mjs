@@ -50,3 +50,8 @@ Object.assign(copy.ta,{riskUnknown:'உறுதிப்படுத்தப�
 Object.assign(copy.en,{possibleDivisions:'Divisions overlapping your location uncertainty'});
 Object.assign(copy.si,{possibleDivisions:'ඔබේ අවිනිශ්චිත ස්ථාන ප්‍රදේශයට අදාළ කොට්ඨාස'});
 Object.assign(copy.ta,{possibleDivisions:'உங்கள் இருப்பிட நிச்சயமின்மையுடன் ஒட்டும் பிரிவுகள்'});
+
+// Official station remarks, not a household safety assessment.
+Object.assign(copy.en,{normal:'Normal · station classification',minorFalling:'Minor flood · falling'});
+Object.assign(copy.si,{normal:'සාමාන්‍ය · මිනුම් ස්ථානයේ වර්ගීකරණය',minorFalling:'සුළු ගංවතුර · පහළ යමින්'});
+Object.assign(copy.ta,{normal:'சாதாரணம் · நிலைய வகைப்பாடு',minorFalling:'சிறிய வெள்ளம் · குறைகிறது'});

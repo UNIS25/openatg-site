@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-10-26T09:33:45.662280+00:00",
+  "checkedAt": "2026-10-26T12:39:47.525172+00:00",
   "publishing": "read-only; no automatic public publication",
   "sources": [
     {
@@ -52,7 +52,7 @@
       "changed": false
     },
     {
-      "id": "river-observations",
+      "id": "river-observations-20261026-1230",
       "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1792998944.pdf",
       "checkedAt": "2026-10-26T09:33:27.049780+00:00",
       "status": "ok",
@@ -184,6 +184,267 @@
       "contentType": "application/pdf",
       "review": "Visual verification of pages 1, 2 and 3; exact severity columns, original validity period and district-scoped DS aliases.",
       "supersedes": "LEWM-26-10-2026-0900-31"
+    },
+    {
+      "id": "river-observations",
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793017314.pdf",
+      "checkedAt": "2026-10-26T12:39:51.443152+00:00",
+      "status": "ok",
+      "sha256": "68f6608b19221bc5b16569b128f59a717163ad27a8bad111760b3a3cfefb60fd",
+      "bytes": 215490,
+      "contentType": "application/pdf",
+      "finalUrl": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793017314.pdf",
+      "rawFile": "river-observations-20261026-1530-68f6608b1922.pdf",
+      "changed": false,
+      "review": "Original one-page table visually checked: 26 October, issue 15:30 SLST, 15:00 measurement column, metres, Remarks and explicit Rising/Falling column. Blank trends for Normal remain unknown. No rainfall values ingested; source rainfall window is 6 hours.",
+      "issuedAt": "2026-10-26T15:30:00+05:30",
+      "observedAt": "2026-10-26T15:00:00+05:30",
+      "reviewedAt": "2026-10-26T12:45:14.489375+00:00",
+      "supersedes": "river-observations-20261026-1230"
+    },
+    {
+      "id": "weather-forecast-20261026-1600",
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Weather_Report_at_1600_hrs_on_2026__1793011605.pdf",
+      "checkedAt": "2026-10-26T12:41:52.310788+00:00",
+      "status": "ok",
+      "sha256": "4220f346c6f0c8598ab9447f26d06823732cf7fa47ecb9e3763ef24b2da8ecde",
+      "bytes": 878559,
+      "contentType": "application/pdf",
+      "finalUrl": "https://www.dmc.gov.lk/images/dmcreports/Weather_Report_at_1600_hrs_on_2026__1793011605.pdf",
+      "rawFile": "weather-forecast-20261026-1600-4220f346c6f0.pdf",
+      "changed": false,
+      "review": "General weather/sea forecast reviewed visually; no explicit cancellation or replacement of the existing 03:00 Amber heavy-rain advisory identified. Retained as provenance only; not converted into a local flood warning."
+    },
+    {
+      "id": "weather-report-20261026-1400",
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Weather_Report_at_1400_hrs_on_2026__1793007431.pdf",
+      "checkedAt": "2026-10-26T12:41:52.311434+00:00",
+      "status": "ok",
+      "sha256": "8b8c9d2985f04b709c330690453a2db535668a8a44efb699e4cd4138d44f0cde",
+      "bytes": 1027353,
+      "contentType": "application/pdf",
+      "finalUrl": "https://www.dmc.gov.lk/images/dmcreports/Weather_Report_at_1400_hrs_on_2026__1793007431.pdf",
+      "rawFile": "weather-report-20261026-1400-8b8c9d2985f0.pdf",
+      "changed": false,
+      "review": "General weather/sea forecast reviewed visually; no explicit cancellation or replacement of the existing 03:00 Amber heavy-rain advisory identified. Retained as provenance only; not converted into a local flood warning."
+    }
+  ],
+  "reviews": [
+    {
+      "reviewedAt": "2026-10-26T12:45:14.489375+00:00",
+      "scope": "15:00 selected station observations and current official-warning source check",
+      "source": "river-observations",
+      "previousStations": [
+        {
+          "name": "Holombuwa",
+          "basin": "Gurugoda Oya \u00b7 Kelani",
+          "value": 4.65,
+          "unit": "m",
+          "status": "minorRising",
+          "observedAt": "2026-10-26T12:00:00+05:30",
+          "issuedAt": "2026-10-26T12:30:00+05:30",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1792998944.pdf"
+        },
+        {
+          "name": "Rathnapura",
+          "basin": "Kalu Ganga",
+          "value": 7.62,
+          "unit": "m",
+          "status": "minorRising",
+          "observedAt": "2026-10-26T12:00:00+05:30",
+          "issuedAt": "2026-10-26T12:30:00+05:30",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1792998944.pdf"
+        },
+        {
+          "name": "Kithulgala",
+          "basin": "Kelani Ganga",
+          "value": 3.14,
+          "unit": "m",
+          "status": "alertRising",
+          "observedAt": "2026-10-26T12:00:00+05:30",
+          "issuedAt": "2026-10-26T12:30:00+05:30",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1792998944.pdf"
+        },
+        {
+          "name": "Norwood",
+          "basin": "Kehelgamu Oya \u00b7 Kelani",
+          "value": 2.26,
+          "unit": "m",
+          "status": "alertRising",
+          "observedAt": "2026-10-26T12:00:00+05:30",
+          "issuedAt": "2026-10-26T12:30:00+05:30",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1792998944.pdf"
+        },
+        {
+          "name": "Magura",
+          "basin": "Maguru Ganga \u00b7 Kalu",
+          "value": 4.18,
+          "unit": "m",
+          "status": "alertFalling",
+          "observedAt": "2026-10-26T12:00:00+05:30",
+          "issuedAt": "2026-10-26T12:30:00+05:30",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1792998944.pdf"
+        },
+        {
+          "name": "Kalawellawa (Millakanda)",
+          "basin": "Kuda Ganga \u00b7 Kalu",
+          "value": 5.92,
+          "unit": "m",
+          "status": "alertRising",
+          "observedAt": "2026-10-26T12:00:00+05:30",
+          "issuedAt": "2026-10-26T12:30:00+05:30",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1792998944.pdf"
+        },
+        {
+          "name": "Nawalapitiya",
+          "basin": "Mahaweli Ganga",
+          "value": 3.93,
+          "unit": "m",
+          "status": "alertRising",
+          "observedAt": "2026-10-26T12:00:00+05:30",
+          "issuedAt": "2026-10-26T12:30:00+05:30",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1792998944.pdf"
+        },
+        {
+          "name": "Dunamale",
+          "basin": "Attanagalu Oya",
+          "value": 3.41,
+          "unit": "m",
+          "status": "alertRising",
+          "observedAt": "2026-10-26T12:00:00+05:30",
+          "issuedAt": "2026-10-26T12:30:00+05:30",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1792998944.pdf"
+        }
+      ],
+      "retainedStationCount": 8,
+      "addedStations": [
+        "Panadugama",
+        "Urawa",
+        "Peradeniya"
+      ],
+      "warningDecision": "All four existing reviewed warning objects unchanged. Source PDF hashes unchanged. Current DMC listings contain no later flood or landslide warning or cancellation. Newer 14:00 and 16:00 general weather products do not explicitly cancel the existing heavy-rain advisory. Station Normal does not cancel a warning or establish household safety.",
+      "warningSourceChecks": [
+        {
+          "id": "kalu-20261026-01",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Flood_warning_for_Kalu_River_Basin_-_No_01_-_2026__1792995574.pdf",
+          "checkedAt": "2026-10-26T12:39:31.630749+00:00",
+          "status": "ok",
+          "sha256": "1767a274eea705bca490879756b1ad5bd255183c0d101ba5c8e81212b4da8ca3",
+          "bytes": 633187,
+          "contentType": "application/pdf",
+          "finalUrl": "https://www.dmc.gov.lk/images/dmcreports/Flood_warning_for_Kalu_River_Basin_-_No_01_-_2026__1792995574.pdf",
+          "rawFile": "kalu-20261026-01-1767a274eea7.pdf",
+          "changed": false
+        },
+        {
+          "id": "mahaweli-20261026-01",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Flood_Warning_for_Mahaweli_River_-_No_01_-_2026__1792998739.pdf",
+          "checkedAt": "2026-10-26T12:39:31.631494+00:00",
+          "status": "ok",
+          "sha256": "8746dbc111719bf59283836919e8ead312f8889fa29d6d9992d70e57d205a560",
+          "bytes": 583618,
+          "contentType": "application/pdf",
+          "finalUrl": "https://www.dmc.gov.lk/images/dmcreports/Flood_Warning_for_Mahaweli_River_-_No_01_-_2026__1792998739.pdf",
+          "rawFile": "mahaweli-20261026-01-8746dbc11171.pdf",
+          "changed": false
+        },
+        {
+          "id": "LEWM-26-10-2026-1445-00",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Landslide_EW_Report_at_1445hrs_on_2026__1793007485.pdf",
+          "checkedAt": "2026-10-26T12:39:31.631635+00:00",
+          "status": "ok",
+          "sha256": "29f80d780c681a9090d51c713c5642db0756ab03aa74aeb003c5a5471582aa52",
+          "bytes": 498786,
+          "contentType": "application/pdf",
+          "finalUrl": "https://www.dmc.gov.lk/images/dmcreports/Landslide_EW_Report_at_1445hrs_on_2026__1793007485.pdf",
+          "rawFile": "LEWM-26-10-2026-1445-00-29f80d780c68.pdf",
+          "changed": false
+        },
+        {
+          "id": "rain-20261026-0300",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Advisory_for_Heavy_Rain_at_0330_hrs_on_2026__1792968291.pdf",
+          "checkedAt": "2026-10-26T12:39:36.726567+00:00",
+          "status": "ok",
+          "sha256": "0bd573752b1965d56fd8ec4ae0c372cba2766bb66294bfc2b6acef1c6d5e6136",
+          "bytes": 1282287,
+          "contentType": "application/pdf",
+          "finalUrl": "https://www.dmc.gov.lk/images/dmcreports/Advisory_for_Heavy_Rain_at_0330_hrs_on_2026__1792968291.pdf",
+          "rawFile": "rain-20261026-0300-0bd573752b19.pdf",
+          "changed": false
+        },
+        {
+          "id": "flood-listing",
+          "url": "https://www.dmc.gov.lk/index.php?option=com_dmcreports&view=reports&report_type_id=6&lang=en",
+          "checkedAt": "2026-10-26T12:39:40.365488+00:00",
+          "status": "ok",
+          "sha256": "ad6b9fefa977bf6a0c7aa198168ccd5063401343273fcca7bd300325cae15d2b",
+          "bytes": 39704,
+          "contentType": "text/html; charset=utf-8",
+          "finalUrl": "https://www.dmc.gov.lk/index.php?option=com_dmcreports&view=reports&report_type_id=6&lang=en",
+          "rawFile": "flood-listing-ad6b9fefa977.html",
+          "changed": true,
+          "pdfLinks": [
+            "/images/dmcreports/Flood_Warning_for_Mahaweli_River_-_No_01_-_2026__1792998739.pdf",
+            "/images/dmcreports/Flood_warning_for_Kalu_River_Basin_-_No_01_-_2026__1792995574.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792901155.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792912247.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792934282.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792956144.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792979408.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792990677.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792998944.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1793017314.pdf"
+          ]
+        },
+        {
+          "id": "landslide-listing",
+          "url": "https://www.dmc.gov.lk/index.php?option=com_dmcreports&view=reports&report_type_id=5&lang=en",
+          "checkedAt": "2026-10-26T12:39:42.456910+00:00",
+          "status": "ok",
+          "sha256": "066db2274c74a88493c08dcb6197655332f2085a245b3a8e0c94bf1af6c1ed26",
+          "bytes": 39642,
+          "contentType": "text/html; charset=utf-8",
+          "finalUrl": "https://www.dmc.gov.lk/index.php?option=com_dmcreports&view=reports&report_type_id=5&lang=en",
+          "rawFile": "landslide-listing-066db2274c74.html",
+          "changed": true,
+          "pdfLinks": [
+            "/images/dmcreports/LEWM_21-10-2026_18_00__1792589290.pdf",
+            "/images/dmcreports/LEWM_21-10-2026_22_00__1792605539.pdf",
+            "/images/dmcreports/LEWM_23-10-2026_16_00__1792754836.pdf",
+            "/images/dmcreports/Landslide_EW_Report_at_0900hrs_on_2026__1792988751.pdf",
+            "/images/dmcreports/Landslide_EW_Report_at_1445hrs_on_2026__1793007485.pdf",
+            "/images/dmcreports/Landslide_EW_Report_at_1600hrs_on_2026__1792579927.pdf",
+            "/images/dmcreports/Landslide_EW_Report_at_1600hrs_on_2026__1792839037.pdf",
+            "/images/dmcreports/Landslide_EW_Report_at_1900hrs_on_2026__1792937657.pdf",
+            "/images/dmcreports/Landslide_EW_Report_at_2200hrs_on_2026__1792950045.pdf",
+            "/images/dmcreports/Landslide_Ew_Letter__1792666962.pdf"
+          ]
+        },
+        {
+          "id": "weather-listing",
+          "url": "https://www.dmc.gov.lk/index.php?option=com_dmcreports&view=reports&report_type_id=2&lang=en",
+          "checkedAt": "2026-10-26T12:39:44.266210+00:00",
+          "status": "ok",
+          "sha256": "b7acca78c42d81b85925cd9fb176ab76c88e2dbe3476f627d9247ff5fda79c9a",
+          "bytes": 39804,
+          "contentType": "text/html; charset=utf-8",
+          "finalUrl": "https://www.dmc.gov.lk/index.php?option=com_dmcreports&view=reports&report_type_id=2&lang=en",
+          "rawFile": "weather-listing-b7acca78c42d.html",
+          "changed": true,
+          "pdfLinks": [
+            "/images/dmcreports/Advisory_for_Heavy_Rain_at_0330_hrs_on_2026__1792968291.pdf",
+            "/images/dmcreports/Advisory_for_Heavy_Rain_at_0330_hrs_on_2026__1792981386.pdf",
+            "/images/dmcreports/Advisory_for_Severe_Lightning_at_1130hrs_on_2026__1792997048.pdf",
+            "/images/dmcreports/Warning_for_strong_winds_and_rough_seas_at_0930hrs_on_26__1792991218.pdf",
+            "/images/dmcreports/Warning_for_strong_winds_and_rough_seas_at_2200hrs_on_25__1792956105.pdf",
+            "/images/dmcreports/Weather_Report_at_0530_hrs_on_2026__1792975473.pdf",
+            "/images/dmcreports/Weather_Report_at_0530_hrs_on_2026__1792979625.pdf",
+            "/images/dmcreports/Weather_Report_at_1400_hrs_on_2026__1793007431.pdf",
+            "/images/dmcreports/Weather_Report_at_1600_hrs_on_2026__1793011605.pdf",
+            "/images/dmcreports/Weather_report_at_1600_hrs_on_2026__1792926790.pdf"
+          ]
+        }
+      ]
     }
   ]
 }
