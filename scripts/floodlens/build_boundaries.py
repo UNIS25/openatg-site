@@ -7,7 +7,7 @@ import hashlib,json,sys
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[2]
 DATA=ROOT/'floodlens/data'
-ALIASES={('Kandy','Udadumbara'):'LK2118',('Kandy','Pasbage Korale'):'LK2157',('Kegalle','Yatiyanthota'):'LK9227',('Ratnapura','Kuruwita'):'LK9106',('Ratnapura','Openayake'):'LK9121'}
+ALIASES={('Kandy','Udadumbara'):'LK2118',('Kandy','Pasbage Korale'):'LK2157',('Kegalle','Yatiyanthota'):'LK9227',('Ratnapura','Kuruwita'):'LK9106',('Ratnapura','Openayake'):'LK9121',('Ratnapura','Kahawaththa'):'LK9139',('Nuwara Eliya','Kotmale East'):'LK2303'}
 def clean(s):return (s or '').replace('\\u200d','\u200d')
 def names(p,level):return dict(en=clean(p[f'adm{level}_name']),si=clean(p[f'adm{level}_name1']),ta=clean(p[f'adm{level}_name2']))
 def points(coords):

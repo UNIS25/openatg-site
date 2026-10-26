@@ -7,6 +7,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / 'floodlens/data'
+if (OUT/'reviewed.json').exists():raise SystemExit('Refusing to overwrite an existing reviewed snapshot. This script is only a first-release reproduction aid.')
 def local(en,si,ta): return dict(en=en,si=si,ta=ta)
 def groups(mapping,level=None):
     return [dict(district=d, division=n, **({'level':level} if level else {})) for d,names in mapping.items() for n in names]

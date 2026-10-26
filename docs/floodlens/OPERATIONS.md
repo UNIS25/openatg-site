@@ -51,7 +51,9 @@ updates age/expiry each minute. It sends no location and does not claim anyone
 is continuously monitoring the user.
 
 Automatic snapshot publishing would require a workflow-level permission delta
-from `contents: read` to `contents: write` for the ephemeral `GITHUB_TOKEN`.
+from `contents: read` to `contents: write` plus `pages: write` for the ephemeral
+`GITHUB_TOKEN`. GitHub-token commits do not automatically trigger a Pages build;
+the existing legacy route would require an explicit Pages build API request.
 No new credential is necessary, but that grants a workflow repository writes.
 That expansion is not authorized by this release and is not implemented.
 Repository default permissions, security settings and deployment settings are
@@ -124,6 +126,15 @@ For browser checks, install/use Playwright, then:
 synthetic states are injected by Playwright routing only, never product query
 parameters or production fixtures. Generated screenshots/results are ignored
 under `artifacts/floodlens/`. Original local OpenATG checkout stays untouched.
+
+## 14:45 bulletin update
+
+The source recheck found the newer 26 October 14:45 NBRI bulletin. PDF pages 1–3
+were visually verified before replacing the 09:00 snapshot. New ID:
+`LEWM-26-10-2026-1445-00`, valid until 27 October 14:45 SLST. The six Red DS areas
+are represented by exact codes, with original instructions linked. Selected
+division severity is explicit; no blanket district severity or autonomous
+evacuation decision is generated. Previous source hashes remain in provenance.
 
 ## Rollback
 

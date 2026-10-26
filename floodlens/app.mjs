@@ -19,6 +19,9 @@ function renderAssessment(){
   let state=outside?'outside':!data?'unknown':assessment(data.bulletins,selected);
   $('#assessment-title').textContent=t(state+'Title');
   $('#assessment-copy').textContent=outside?t('outside'):loadFailed&&!data?t('dataError'):t(state+'Body');
+  const red=selected?.type==='division'&&data?.bulletins.some(w=>warningState(w)==='active'&&w.areas.some(a=>a.divisionCode===selected.code&&a.level===3));
+  $('#assessment').classList.toggle('severe',Boolean(red));
+  if(red){$('#assessment-title').textContent=t('redTitle');$('#assessment-copy').textContent=t('redBody');}
   $('#area-selection').textContent=selected?`${t('selected')}: ${areaName(selected)} · ${t(selected.type)}`:t('allIsland');
   $('#clear-area').hidden=!selected&&!outside;
   $('#location-message').textContent=locationMessage?t(locationMessage):'';
@@ -31,6 +34,7 @@ function renderWarnings(){
   for(const w of warnings){
     const state=warningState(w),card=el('article','warning '+(state==='active'?'':'expired'));
     const matchedArea=selected?.type==='division'?w.areas.find(a=>a.divisionCode===selected.code):null;
+    if(state==='active'&&(matchedArea?matchedArea.level===3:w.areas.some(a=>a.level===3)))card.classList.add('severe');
     const warningLabel=w.kind==='landslide'&&matchedArea?.level?t('landslideKind')+' · '+t('level'+matchedArea.level):t(w.kind);
     card.append(el('p','warning-type',warningLabel+' · '+t(state==='unknown'?'clockUnknown':state)),el('h3','',local(w.title)),el('p','',local(w.summary)),el('p','small',t('summaryNote')));
     if(w.areas.length){const details=el('details'),summary=el('summary','',t('areas'));details.append(summary);

@@ -173,6 +173,17 @@
         "/images/dmcreports/Weather_report_at_1600_hrs_on_2026__1792926790.pdf",
         "/images/dmcreports/Weather_report_at_1600hrs_on_2026__1792927422.pdf"
       ]
+    },
+    {
+      "id": "LEWM-26-10-2026-1445-00",
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Landslide_EW_Report_at_1445hrs_on_2026__1793007485.pdf",
+      "checkedAt": "2026-10-26T09:54:27.957419+00:00",
+      "status": "ok",
+      "sha256": "29f80d780c681a9090d51c713c5642db0756ab03aa74aeb003c5a5471582aa52",
+      "bytes": 498786,
+      "contentType": "application/pdf",
+      "review": "Visual verification of pages 1, 2 and 3; exact severity columns, original validity period and district-scoped DS aliases.",
+      "supersedes": "LEWM-26-10-2026-0900-31"
     }
   ]
 }

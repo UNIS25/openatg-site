@@ -46,3 +46,6 @@ test('all 339 catalog codes and 25 district shards are accounted for',()=>{
 test('daily reservoir report becomes stale on next Sri Lanka calendar day',()=>{
  assert.equal(dailyAgeState('2026-10-26',now),'daily');assert.equal(dailyAgeState('2026-10-25',now),'stale');assert.equal(dailyAgeState('2026-10-27',now),'unknown');assert.equal(dailyAgeState(null,now),'unknown');
 });
+test('14:45 bulletin has the six visually verified Red divisions, not a blanket district severity',()=>{
+ const w=snapshot.bulletins.find(b=>b.kind==='landslide');assert.equal(w.id,'LEWM-26-10-2026-1445-00');assert.deepEqual(w.areas.filter(a=>a.level===3).map(a=>a.divisionCode).sort(),['LK9112','LK9130','LK9124','LK9106','LK9127','LK9121'].sort());assert.equal(warningState(w,Date.parse('2026-10-26T15:00:00+05:30')),'active');assert.equal(w.areas.find(a=>a.divisionCode==='LK9136').level,2);
+});
