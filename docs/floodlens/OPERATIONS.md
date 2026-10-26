@@ -653,3 +653,28 @@ Colombo predictions cannot substitute. NASA/NOAA cloud-imagery candidates need
 verified Sri Lanka pixel coverage/capture times before embedding; cloud imagery
 is not flood extent. No verified current inundation polygon or licensed directed
 catchment model was added. These gaps do not block this interface/source release.
+
+## Colombo tide and district news release
+
+The bounded, reviewed Colombo astronomical prediction is displayed directly
+below weather. See `COLOMBO_TIDES.md` for exact range, independent numerical
+checks, historical harmonics, dataset LAT and limitations. It is never a current
+water-level measurement or drainage/recession calculation. Failure/expiry does
+not suppress official warnings. No Puttalam substitution is made.
+
+A collapsed **Latest near you** section selects active reviewed government
+bulletins for the matched district and the separately reviewed Daily Mirror
+Mee Oya reservoir report for Puttalam. Publication and review times stay separate;
+media is labeled News outlet and never modifies official hazard classification.
+Media is dropped after 48 hours, future dates are rejected, and expired official
+bulletins are excluded. There is no Instagram/Facebook feed or private-message
+publishing connection; those platforms are not falsely advertised as covered.
+The feed is a selected reviewed snapshot, not a complete or real-time news feed.
+
+The detailed map offered on first map use is the normal OpenStreetMap road map,
+not satellite imagery. Before any tile request the visitor must accept the
+existing area/IP disclosure. Declining leaves the private local map usable.
+Consent is per page, not stored, and no external provider request precedes it.
+Forecast data now refresh on the visible page's five-minute render cycle, in
+addition to the existing official snapshot refresh; this retrieves published
+files and does not create an automatic model publisher.

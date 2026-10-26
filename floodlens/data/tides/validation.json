@@ -1,0 +1,49 @@
+{
+  "samples": 577,
+  "constituents": 36,
+  "maxDifferenceMetres": 0.01352186026479052,
+  "rmsDifferenceMetres": 0.007005700007184469,
+  "extremaComparison": [
+    {
+      "engineAt": "2026-10-26T20:51:06.121Z",
+      "uptideAt": "2026-10-26T20:50:00Z",
+      "differenceMinutes": 1.1020166666666666
+    },
+    {
+      "engineAt": "2026-10-27T03:03:38.427Z",
+      "uptideAt": "2026-10-27T03:05:00Z",
+      "differenceMinutes": 1.35955
+    },
+    {
+      "engineAt": "2026-10-27T08:47:37.518Z",
+      "uptideAt": "2026-10-27T08:50:00Z",
+      "differenceMinutes": 2.3747
+    },
+    {
+      "engineAt": "2026-10-27T14:38:56.000Z",
+      "uptideAt": "2026-10-27T14:40:00Z",
+      "differenceMinutes": 1.0666666666666667
+    },
+    {
+      "engineAt": "2026-10-27T21:22:39.129Z",
+      "uptideAt": "2026-10-27T21:20:00Z",
+      "differenceMinutes": 2.65215
+    },
+    {
+      "engineAt": "2026-10-28T03:35:07.341Z",
+      "uptideAt": "2026-10-28T03:35:00Z",
+      "differenceMinutes": 0.12235
+    },
+    {
+      "engineAt": "2026-10-28T09:17:41.829Z",
+      "uptideAt": "2026-10-28T09:20:00Z",
+      "differenceMinutes": 2.30285
+    },
+    {
+      "engineAt": "2026-10-28T15:07:28.885Z",
+      "uptideAt": "2026-10-28T15:10:00Z",
+      "differenceMinutes": 2.5185833333333334
+    }
+  ],
+  "scope": "Numerical agreement of 36 shared constituents only; not validation against observed Colombo water levels. Heights omit surge and weather."
+}

@@ -1,12 +1,14 @@
-import {mountForecast} from './forecast-ui.mjs?v=20261026-16';
-import {createContext} from './context-ui.mjs?v=20261026-16';
-import {streetEnabled} from './street-map.mjs?v=20261026-16';
-import {LocationMap} from './location-map.mjs?v=20261026-16';
-import {locationEvidence,warningState,warningMatches,ageState,insideGeometry,intersectsAccuracy,locationCandidates} from './core.mjs?v=20261026-16';
+import {mountTides} from './tides-ui.mjs?v=20261026-17';
+import {renderNews} from './news.mjs?v=20261026-17';
+import {mountForecast} from './forecast-ui.mjs?v=20261026-17';
+import {createContext} from './context-ui.mjs?v=20261026-17';
+import {streetEnabled} from './street-map.mjs?v=20261026-17';
+import {LocationMap} from './location-map.mjs?v=20261026-17';
+import {locationEvidence,warningState,warningMatches,ageState,insideGeometry,intersectsAccuracy,locationCandidates} from './core.mjs?v=20261026-17';
 const $=s=>document.querySelector(s);
 export function createFlow({t,name,getData,getCatalog,onLanguage,onArea,onRefresh}){
  let stage='language',point=null,accuracy=null,mode='gps',area=null,candidates=[],state='idle',manualPoint=null,catalog=null,locationRequest=0,matchRequest=0,lastMapMode=false;
- let forecastKey='';
+ let forecastKey='',tideKey='',newsKey='';
  const shards=new Map();const resultMap=new LocationMap($('#result-map'),{translate:t});
  const context=createContext({map:resultMap,t});
  const pinMap=new LocationMap($('#pin-map'),{translate:t,onPin:p=>{manualPoint=p;$('#use-pin').disabled=false;$('#manual-status').textContent=t('manualAccuracy');}});
@@ -19,7 +21,7 @@ export function createFlow({t,name,getData,getCatalog,onLanguage,onArea,onRefres
   if(approximate)pinMap.set({center:approximate.point,span:Math.max(.08,approximate.accuracy/111320*6),point:approximate.point,accuracy:approximate.accuracy});
   else pinMap.set({center:point||[80.7,7.9],span:point? .1:4.7,point:null,accuracy:null});
   await pinMap.load();if(pinMap.error)$('#location-help').hidden=false;try{catalog=await getCatalog();pinMap.set({labels:labels()});}catch{}
-  $('#manual-title').focus({preventScroll:true});
+  $('#manual-title').focus({preventScroll:true});pinMap.street.offerDefault();
  }
  async function match(p,uncertainty,source){
   const request=++matchRequest;
@@ -38,7 +40,7 @@ export function createFlow({t,name,getData,getCatalog,onLanguage,onArea,onRefres
    if(matches.length===1&&insideGeometry(p,matches[0].geometry)){area=candidates[0]||null;state=area?(uncertainty>1500?'ambiguous':'matched'):'unavailable';if(uncertainty>1500)area=null;if(area&&!streetEnabled()){const [x0,y0,x1,y1]=area.bbox;const span=Math.max(.08,Math.min(.65,Math.max(x1-x0,(y1-y0)/.75)*1.35));resultMap.set({center:point,span});}onArea(area);}
    else state=candidates.length?'ambiguous':'outside';
   }catch{if(request!==matchRequest)return;state='unavailable';}
-  render();
+  render();if(state!=='outside')resultMap.street.offerDefault();
  }
  function locate(){
   const request=++locationRequest;matchRequest++;
@@ -59,9 +61,13 @@ export function createFlow({t,name,getData,getCatalog,onLanguage,onArea,onRefres
   if(stage!=='result')return;
   context.update({point,accuracy:accuracy||0,outside:state==='outside',checking:state==='checking',areas:area?[area]:candidates});
   const forecastRoot=$('#location-forecast');forecastRoot.hidden=state==='outside'||state==='checking';
-  if(!forecastRoot.hidden){const key=point.join(',')+'|'+document.documentElement.lang;if(key!==forecastKey){forecastKey=key;mountForecast(forecastRoot,point,document.documentElement.lang);}}
+  if(!forecastRoot.hidden){const key=point.join(',')+'|'+document.documentElement.lang+'|'+Math.floor(Date.now()/300000);if(key!==forecastKey){forecastKey=key;mountForecast(forecastRoot,point,document.documentElement.lang);}}
   const {data,needsUpdate,loadFailed,loading}=getData();
   const candidateAreas=area?[area]:state==='ambiguous'?candidates:[];
+  const districts=[...new Set(candidateAreas.map(a=>a.districtCode))];
+  const tideRoot=$('#location-tides'),nextTideKey=districts.join(',')+'|'+document.documentElement.lang+'|'+Math.floor(Date.now()/300000);
+  if(nextTideKey!==tideKey){tideKey=nextTideKey;mountTides(tideRoot,districts,document.documentElement.lang);}
+  const nextNewsKey=nextTideKey+'|'+(data?.reviewedAt||'');if(nextNewsKey!==newsKey){newsKey=nextNewsKey;renderNews($('#local-news'),data,districts,document.documentElement.lang);}
   const uncertain=state==='ambiguous';
   const evidence=locationEvidence(data?.bulletins||[],candidateAreas,{uncertain});
   const primary=evidence.source;

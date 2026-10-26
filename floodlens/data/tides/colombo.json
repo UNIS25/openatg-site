@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "kind": "astronomical_station_prediction",
+  "station": "Colombo",
+  "stationId": "colombo-115c-lka-uhslc_rq",
+  "stationPoint": [
+    79.858,
+    6.935
+  ],
+  "displayDistricts": [
+    "LK11"
+  ],
+  "datum": "dataset LAT",
+  "units": "m",
+  "timezone": "Asia/Colombo",
+  "validFrom": "2026-10-26T18:30:00.000Z",
+  "validUntil": "2026-10-28T18:30:00.000Z",
+  "calculatedAt": "2026-10-26T18:58:28.768Z",
+  "observationAt": null,
+  "events": [
+    {
+      "at": "2026-10-26T20:50:08.809Z",
+      "kind": "high",
+      "heightMetres": 0.914
+    },
+    {
+      "at": "2026-10-27T03:06:09.211Z",
+      "kind": "low",
+      "heightMetres": 0.195
+    },
+    {
+      "at": "2026-10-27T08:48:36.194Z",
+      "kind": "high",
+      "heightMetres": 0.696
+    },
+    {
+      "at": "2026-10-27T14:37:48.454Z",
+      "kind": "low",
+      "heightMetres": 0.116
+    },
+    {
+      "at": "2026-10-27T21:23:00.962Z",
+      "kind": "high",
+      "heightMetres": 0.899
+    },
+    {
+      "at": "2026-10-28T03:37:38.808Z",
+      "kind": "low",
+      "heightMetres": 0.205
+    },
+    {
+      "at": "2026-10-28T09:18:08.438Z",
+      "kind": "high",
+      "heightMetres": 0.673
+    },
+    {
+      "at": "2026-10-28T15:07:03.640Z",
+      "kind": "low",
+      "heightMetres": 0.122
+    }
+  ],
+  "source": {
+    "url": "https://doi.org/10.17882/109129",
+    "attribution": "Hart-Davis, M., Dettmering, D. and Seitz, F. (2025), TICON-4. Adapted via Open Waters Slackwater station database.",
+    "licence": "https://creativecommons.org/licenses/by/4.0/",
+    "recordUrl": "https://github.com/openwatersio/slackwater-database/blob/4f50567f638388c75c3f3b31e4cbcc10738d9734/data/ticon/colombo-115c-lka-uhslc_rq.json",
+    "sha256": "79391ff27a1055ea8d064937119636895724f3cfe5753fe9b0d6fab348456def",
+    "harmonicEpoch": {
+      "start": "2006-05-09",
+      "end": "2016-10-25"
+    },
+    "datumEpoch": {
+      "start": "2013-07-01",
+      "end": "2016-06-30"
+    },
+    "datumOffsetMetres": 0.46099999999999985
+  },
+  "engine": {
+    "name": "@slackwater/engine",
+    "version": "1.0.0-beta.0",
+    "licence": "MIT",
+    "url": "https://github.com/openwatersio/slackwater",
+    "sha256": "ffef1d83cfa8a350d55cd11a414912b4a3aa4bc4f43325fac5e0ede58ecc6bfd"
+  },
+  "limits": "Station astronomical prediction from historical harmonics; not measured sea level, surge, a navigation chart, or a flood drainage forecast. No validated transfer to Puttalam or other stations.",
+  "validation": {
+    "method": "Independent uptide 1.2 comparison of 36 shared constituents at 5-minute samples. Numerical agreement is not observed accuracy; all 50 source constituents are used in published predictions.",
+    "report": "/floodlens/data/tides/validation.json"
+  }
+}

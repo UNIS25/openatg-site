@@ -1,5 +1,5 @@
 // Optional per-page opt-in. Normal browser caching; current viewport only.
-let enabled=false,consented=false;
+let enabled=false,consented=false,offered=false;
 const instances=new Set();
 export function streetEnabled(){return enabled;}
 function setEnabled(next){enabled=next;for(const item of instances)item.changed();document.dispatchEvent(new Event('floodlens-map-mode'));}
@@ -10,8 +10,9 @@ export class StreetMap{
   this.toggle=document.createElement('button');this.toggle.type='button';this.toggle.className='map-mode';this.toggle.addEventListener('click',()=>{if(enabled)setEnabled(false);else if(consented)setEnabled(true);else this.ask();});root.append(this.toggle);
   this.credit=document.createElement('a');this.credit.className='map-credit';this.credit.href='https://www.openstreetmap.org/copyright';this.credit.target='_blank';this.credit.rel='noopener noreferrer';this.credit.textContent='© OpenStreetMap contributors';root.append(this.credit);this.changed();
  }
- ask(){
-  const dialog=document.createElement('dialog');dialog.className='map-consent';const heading=document.createElement('h2');heading.textContent=this.t('streetConsentTitle');const text=document.createElement('p');text.textContent=this.t('streetConsentBody');const allow=document.createElement('button');allow.type='button';allow.className='button';allow.textContent=this.t('streetConsentAccept');const cancel=document.createElement('button');cancel.type='button';cancel.className='text-button';cancel.textContent=this.t('streetConsentDecline');allow.addEventListener('click',()=>{consented=true;dialog.close();setEnabled(true);});cancel.addEventListener('click',()=>dialog.close());dialog.addEventListener('close',()=>dialog.remove());dialog.append(heading,text,allow,cancel);document.body.append(dialog);dialog.showModal();
+ offerDefault(){if(!offered&&!consented&&!enabled){offered=true;this.ask(true);}}
+ ask(defaultOffer=false){
+  if(document.querySelector('.map-consent'))return;const dialog=document.createElement('dialog');dialog.className='map-consent';if(defaultOffer)dialog.dataset.defaultOffer='true';const heading=document.createElement('h2');heading.textContent=this.t('streetConsentTitle');const text=document.createElement('p');text.textContent=this.t('streetConsentBody');const allow=document.createElement('button');allow.type='button';allow.className='button';allow.textContent=this.t('streetConsentAccept');const cancel=document.createElement('button');cancel.type='button';cancel.className='text-button';cancel.textContent=this.t('streetConsentDecline');allow.addEventListener('click',()=>{consented=true;dialog.close();setEnabled(true);});cancel.addEventListener('click',()=>dialog.close());dialog.addEventListener('close',()=>{dialog.remove();if(this.root.checkVisibility())this.toggle.focus({preventScroll:true});});dialog.append(heading,text,allow,cancel);document.body.append(dialog);dialog.showModal();
  }
  changed(){this.toggle.textContent=this.t(enabled?'privateMap':'streetMap');this.credit.hidden=!enabled;this.layer.hidden=!enabled;this.root.classList.toggle('street-enabled',enabled);if(!enabled){clearTimeout(this.timer);this.layer.replaceChildren();this.images.clear();}this.redraw();}
  draw(view){
