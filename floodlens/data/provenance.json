@@ -257,6 +257,18 @@
       "changed": false,
       "usage": "Wording reference only: prior-day official Tamil lightning terminology and generic shelter/trees instruction, visually checked. Its expired date, geographic scope and map are NOT current warning evidence and are not ingested.",
       "activeWarning": false
+    },
+    {
+      "id": "LEWM-26-10-2026-1800-33",
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Landslide_EW_Report_at_1800hrs_on_2026__1793018981.pdf",
+      "checkedAt": "2026-10-26T13:03:43.832129+00:00",
+      "status": "ok",
+      "sha256": "35e492bf3495070ff0e2fcfaf161528ebf942bb302fffbaa66f78949fdec716f",
+      "bytes": 482805,
+      "contentType": "application/pdf",
+      "finalUrl": "https://www.dmc.gov.lk/images/dmcreports/Landslide_EW_Report_at_1800hrs_on_2026__1793018981.pdf",
+      "rawFile": "landslide-20261026-1800-35e492bf3495.pdf",
+      "changed": false
     }
   ],
   "reviews": [
@@ -267,7 +279,7 @@
       "previousStations": [
         {
           "name": "Holombuwa",
-          "basin": "Gurugoda Oya \u00b7 Kelani",
+          "basin": "Gurugoda Oya · Kelani",
           "value": 4.65,
           "unit": "m",
           "status": "minorRising",
@@ -297,7 +309,7 @@
         },
         {
           "name": "Norwood",
-          "basin": "Kehelgamu Oya \u00b7 Kelani",
+          "basin": "Kehelgamu Oya · Kelani",
           "value": 2.26,
           "unit": "m",
           "status": "alertRising",
@@ -307,7 +319,7 @@
         },
         {
           "name": "Magura",
-          "basin": "Maguru Ganga \u00b7 Kalu",
+          "basin": "Maguru Ganga · Kalu",
           "value": 4.18,
           "unit": "m",
           "status": "alertFalling",
@@ -317,7 +329,7 @@
         },
         {
           "name": "Kalawellawa (Millakanda)",
-          "basin": "Kuda Ganga \u00b7 Kalu",
+          "basin": "Kuda Ganga · Kalu",
           "value": 5.92,
           "unit": "m",
           "status": "alertRising",
@@ -593,7 +605,7 @@
             "/images/dmcreports/Weather_report_at_1400_hrs_on_2026__1792919733.pdf",
             "/images/dmcreports/Weather_report_at_1600_hrs_on_2026__1792926790.pdf",
             "/images/dmcreports/Weather_report_at_1600hrs_on_2026__1792927422.pdf",
-            "/images/dmcreports/\u0dad\u0daf\u0dc0\u0dd0\u0dc3\u0dd2_\u0db4\u0dd2\u0dc5\u0dd2\u0db6\u0db3_\u0d85\u0dc0\u0dc0\u0dcf\u0daf\u0dcf\u0dad\u0dca\u0db8\u0d9a_\u0db1\u0dd2\u0dc0\u0dda\u0daf\u0db1\u0dba__1792248050.pdf"
+            "/images/dmcreports/තදවැසි_පිළිබඳ_අවවාදාත්මක_නිවේදනය__1792248050.pdf"
           ]
         },
         {
@@ -839,6 +851,797 @@
       },
       "translationReview": "Current original contains Sinhala and English. Tamil interface summary is non-official; general lightning terminology and shelter/trees action were checked against the prior-day official Tamil source, not treated as a current translation. Independent native-speaker review remains pending.",
       "unchanged": "All existing flood, landslide and rain bulletins, eleven river observations, and reservoir data are preserved."
+    },
+    {
+      "reviewedAt": "2026-10-26T13:06:24.235947+00:00",
+      "scope": "18:00 landslide replacement; original pages 1–4 visually inspected (page 5 blank)",
+      "source": "LEWM-26-10-2026-1800-33",
+      "previousBulletin": {
+        "id": "LEWM-26-10-2026-1445-00",
+        "kind": "landslide",
+        "title": {
+          "en": "Landslide early warning",
+          "si": "නායයෑම් පූර්ව අනතුරු ඇඟවීම",
+          "ta": "மண்சரிவு முன்னெச்சரிக்கை"
+        },
+        "authority": "NBRI / DMC",
+        "issuedAt": "2026-10-26T14:45:00+05:30",
+        "expiresAt": "2026-10-27T14:45:00+05:30",
+        "listingAt": "2026-10-26T14:45:00+05:30",
+        "url": "https://www.dmc.gov.lk/images/dmcreports/Landslide_EW_Report_at_1445hrs_on_2026__1793007485.pdf",
+        "summary": {
+          "en": "Levels 1 (Yellow), 2 (Amber) and 3 (Red) apply to named DS divisions and surrounding areas. Level 3 names six Ratnapura district divisions. Read the original warning and the authority’s evacuation instructions for the affected areas.",
+          "si": "නම් කළ කොට්ඨාස සහ අවට ප්‍රදේශ සඳහා මට්ටම් 1 (කහ), 2 (ඇම්බර්) සහ 3 (රතු) අදාළය. රත්නපුර දිස්ත්‍රික්කයේ කොට්ඨාස හයක් මට්ටම 3 යටතේ ඇත. අදාළ ප්‍රදේශ සඳහා මුල් අනතුරු ඇඟවීම සහ බලධාරීන්ගේ ඉවත් වීමේ උපදෙස් කියවන්න.",
+          "ta": "பெயரிடப்பட்ட பிரிவுகளிலும் சுற்றுப்பகுதிகளிலும் நிலைகள் 1 (மஞ்சள்), 2 (அம்பர்), 3 (சிவப்பு) பொருந்துகின்றன. இரத்தினபுரி மாவட்டத்தின் ஆறு பிரிவுகள் நிலை 3 இல் உள்ளன. பாதிக்கப்பட்ட பகுதிகளுக்கான அசல் எச்சரிக்கையையும் அதிகாரிகளின் வெளியேற்ற அறிவுறுத்தல்களையும் படிக்கவும்."
+        },
+        "areas": [
+          {
+            "district": "Galle",
+            "division": "Karandeniya",
+            "level": 1,
+            "districtCode": "LK31",
+            "divisionCode": "LK3109"
+          },
+          {
+            "district": "Galle",
+            "division": "Thawalama",
+            "level": 1,
+            "districtCode": "LK31",
+            "divisionCode": "LK3118"
+          },
+          {
+            "district": "Gampaha",
+            "division": "Attanagalla",
+            "level": 1,
+            "districtCode": "LK12",
+            "divisionCode": "LK1227"
+          },
+          {
+            "district": "Kalutara",
+            "division": "Millaniya",
+            "level": 1,
+            "districtCode": "LK13",
+            "divisionCode": "LK1318"
+          },
+          {
+            "district": "Kalutara",
+            "division": "Ingiriya",
+            "level": 1,
+            "districtCode": "LK13",
+            "divisionCode": "LK1310"
+          },
+          {
+            "district": "Kalutara",
+            "division": "Beruwala",
+            "level": 1,
+            "districtCode": "LK13",
+            "divisionCode": "LK1324"
+          },
+          {
+            "district": "Kalutara",
+            "division": "Horana",
+            "level": 1,
+            "districtCode": "LK13",
+            "divisionCode": "LK1309"
+          },
+          {
+            "district": "Kalutara",
+            "division": "Palindanuwara",
+            "level": 1,
+            "districtCode": "LK13",
+            "divisionCode": "LK1336"
+          },
+          {
+            "district": "Kandy",
+            "division": "Udapalatha",
+            "level": 1,
+            "districtCode": "LK21",
+            "divisionCode": "LK2151"
+          },
+          {
+            "district": "Kandy",
+            "division": "Udadumbara",
+            "level": 1,
+            "districtCode": "LK21",
+            "divisionCode": "LK2118"
+          },
+          {
+            "district": "Kandy",
+            "division": "Ganga Ihala Korale",
+            "level": 1,
+            "districtCode": "LK21",
+            "divisionCode": "LK2154"
+          },
+          {
+            "district": "Kegalle",
+            "division": "Ruwanwella",
+            "level": 1,
+            "districtCode": "LK92",
+            "divisionCode": "LK9221"
+          },
+          {
+            "district": "Kegalle",
+            "division": "Warakapola",
+            "level": 1,
+            "districtCode": "LK92",
+            "divisionCode": "LK9218"
+          },
+          {
+            "district": "Kegalle",
+            "division": "Kegalle",
+            "level": 1,
+            "districtCode": "LK92",
+            "divisionCode": "LK9212"
+          },
+          {
+            "district": "Kegalle",
+            "division": "Mawanella",
+            "level": 1,
+            "districtCode": "LK92",
+            "divisionCode": "LK9206"
+          },
+          {
+            "district": "Kegalle",
+            "division": "Yatiyanthota",
+            "level": 1,
+            "districtCode": "LK92",
+            "divisionCode": "LK9227"
+          },
+          {
+            "district": "Kurunegala",
+            "division": "Mawathagama",
+            "level": 1,
+            "districtCode": "LK61",
+            "divisionCode": "LK6160"
+          },
+          {
+            "district": "Kurunegala",
+            "division": "Narammala",
+            "level": 1,
+            "districtCode": "LK61",
+            "divisionCode": "LK6181"
+          },
+          {
+            "district": "Kurunegala",
+            "division": "Alawwa",
+            "level": 1,
+            "districtCode": "LK61",
+            "divisionCode": "LK6184"
+          },
+          {
+            "district": "Nuwara Eliya",
+            "division": "Kothmale West",
+            "level": 1,
+            "districtCode": "LK23",
+            "divisionCode": "LK2321"
+          },
+          {
+            "district": "Ratnapura",
+            "division": "Imbulpe",
+            "level": 1,
+            "districtCode": "LK91",
+            "divisionCode": "LK9115"
+          },
+          {
+            "district": "Ratnapura",
+            "division": "Weligepola",
+            "level": 1,
+            "districtCode": "LK91",
+            "divisionCode": "LK9145"
+          },
+          {
+            "district": "Ratnapura",
+            "division": "Kahawaththa",
+            "level": 1,
+            "districtCode": "LK91",
+            "divisionCode": "LK9139"
+          },
+          {
+            "district": "Ratnapura",
+            "division": "Kolonna",
+            "level": 1,
+            "districtCode": "LK91",
+            "divisionCode": "LK9151"
+          },
+          {
+            "district": "Kalutara",
+            "division": "Walallawita",
+            "level": 2,
+            "districtCode": "LK13",
+            "divisionCode": "LK1339"
+          },
+          {
+            "district": "Kalutara",
+            "division": "Dodangoda",
+            "level": 2,
+            "districtCode": "LK13",
+            "divisionCode": "LK1327"
+          },
+          {
+            "district": "Kalutara",
+            "division": "Bulathsinhala",
+            "level": 2,
+            "districtCode": "LK13",
+            "divisionCode": "LK1312"
+          },
+          {
+            "district": "Kalutara",
+            "division": "Madurawala",
+            "level": 2,
+            "districtCode": "LK13",
+            "divisionCode": "LK1315"
+          },
+          {
+            "district": "Kandy",
+            "division": "Udunuwara",
+            "level": 2,
+            "districtCode": "LK21",
+            "divisionCode": "LK2139"
+          },
+          {
+            "district": "Kandy",
+            "division": "Pasbage Korale",
+            "level": 2,
+            "districtCode": "LK21",
+            "divisionCode": "LK2157"
+          },
+          {
+            "district": "Kegalle",
+            "division": "Dehiowita",
+            "level": 2,
+            "districtCode": "LK92",
+            "divisionCode": "LK9230"
+          },
+          {
+            "district": "Kegalle",
+            "division": "Aranayake",
+            "level": 2,
+            "districtCode": "LK92",
+            "divisionCode": "LK9209"
+          },
+          {
+            "district": "Kegalle",
+            "division": "Galigamuwa",
+            "level": 2,
+            "districtCode": "LK92",
+            "divisionCode": "LK9215"
+          },
+          {
+            "district": "Kegalle",
+            "division": "Deraniyagala",
+            "level": 2,
+            "districtCode": "LK92",
+            "divisionCode": "LK9233"
+          },
+          {
+            "district": "Kurunegala",
+            "division": "Kurunegala",
+            "level": 2,
+            "districtCode": "LK61",
+            "divisionCode": "LK6154"
+          },
+          {
+            "district": "Nuwara Eliya",
+            "division": "Ambagamuwa Korale",
+            "level": 2,
+            "districtCode": "LK23",
+            "divisionCode": "LK2315"
+          },
+          {
+            "district": "Nuwara Eliya",
+            "division": "Kotmale East",
+            "level": 2,
+            "districtCode": "LK23",
+            "divisionCode": "LK2303"
+          },
+          {
+            "district": "Nuwara Eliya",
+            "division": "Norwood",
+            "level": 2,
+            "districtCode": "LK23",
+            "divisionCode": "LK2330"
+          },
+          {
+            "district": "Ratnapura",
+            "division": "Nivithigala",
+            "level": 2,
+            "districtCode": "LK91",
+            "divisionCode": "LK9136"
+          },
+          {
+            "district": "Ratnapura",
+            "division": "Kiriella",
+            "level": 2,
+            "districtCode": "LK91",
+            "divisionCode": "LK9109"
+          },
+          {
+            "district": "Ratnapura",
+            "division": "Balangoda",
+            "level": 2,
+            "districtCode": "LK91",
+            "divisionCode": "LK9118"
+          },
+          {
+            "district": "Ratnapura",
+            "division": "Eheliyagoda",
+            "level": 2,
+            "districtCode": "LK91",
+            "divisionCode": "LK9103"
+          },
+          {
+            "district": "Ratnapura",
+            "division": "Kalawana",
+            "level": 2,
+            "districtCode": "LK91",
+            "divisionCode": "LK9133"
+          },
+          {
+            "district": "Ratnapura",
+            "division": "Ratnapura",
+            "level": 3,
+            "districtCode": "LK91",
+            "divisionCode": "LK9112"
+          },
+          {
+            "district": "Ratnapura",
+            "division": "Ayagama",
+            "level": 3,
+            "districtCode": "LK91",
+            "divisionCode": "LK9130"
+          },
+          {
+            "district": "Ratnapura",
+            "division": "Pelmadulla",
+            "level": 3,
+            "districtCode": "LK91",
+            "divisionCode": "LK9124"
+          },
+          {
+            "district": "Ratnapura",
+            "division": "Kuruwita",
+            "level": 3,
+            "districtCode": "LK91",
+            "divisionCode": "LK9106"
+          },
+          {
+            "district": "Ratnapura",
+            "division": "Elapatha",
+            "level": 3,
+            "districtCode": "LK91",
+            "divisionCode": "LK9127"
+          },
+          {
+            "district": "Ratnapura",
+            "division": "Openayake",
+            "level": 3,
+            "districtCode": "LK91",
+            "divisionCode": "LK9121"
+          }
+        ],
+        "sha256": "29f80d780c681a9090d51c713c5642db0756ab03aa74aeb003c5a5471582aa52",
+        "districtCodes": []
+      },
+      "previousMessageId": "LEWM-26-10-2026-1445-00",
+      "levelCounts": {
+        "1": 28,
+        "2": 33,
+        "3": 10
+      },
+      "districtScopedAliases": [
+        {
+          "district": "Kalutara",
+          "bulletinName": "Mathugama",
+          "catalogName": "Matugama",
+          "divisionCode": "LK1330"
+        },
+        {
+          "district": "Kandy",
+          "bulletinName": "Thumpane",
+          "catalogName": "Tumpane",
+          "divisionCode": "LK2103"
+        },
+        {
+          "district": "Kandy",
+          "bulletinName": "Udadumbara",
+          "catalogName": "Ududumbara",
+          "divisionCode": "LK2118"
+        },
+        {
+          "district": "Kandy",
+          "bulletinName": "Pasbage Korale",
+          "catalogName": "Pasbagekorale",
+          "divisionCode": "LK2157"
+        },
+        {
+          "district": "Kegalle",
+          "bulletinName": "Yatiyanthota",
+          "catalogName": "Yatiyantota",
+          "divisionCode": "LK9227"
+        },
+        {
+          "district": "Kegalle",
+          "bulletinName": "Bulathkohupitiya",
+          "catalogName": "Bulathkohipitiya",
+          "divisionCode": "LK9224"
+        },
+        {
+          "district": "Matara",
+          "bulletinName": "Pitabeddara",
+          "catalogName": "Pitabaddara",
+          "divisionCode": "LK3203"
+        },
+        {
+          "district": "Nuwara Eliya",
+          "bulletinName": "Kotmale East",
+          "catalogName": "Kothmale East",
+          "divisionCode": "LK2303"
+        },
+        {
+          "district": "Ratnapura",
+          "bulletinName": "Kahawaththa",
+          "catalogName": "Kahawattha",
+          "divisionCode": "LK9139"
+        },
+        {
+          "district": "Ratnapura",
+          "bulletinName": "Kuruwita",
+          "catalogName": "Kuruvita",
+          "divisionCode": "LK9106"
+        },
+        {
+          "district": "Ratnapura",
+          "bulletinName": "Openayake",
+          "catalogName": "Opanayake",
+          "divisionCode": "LK9121"
+        }
+      ],
+      "listingChecks": [
+        {
+          "id": "flood-listing",
+          "url": "https://www.dmc.gov.lk/index.php?option=com_dmcreports&view=reports&report_type_id=6&lang=en&limit=100",
+          "checkedAt": "2026-10-26T13:02:42.763881+00:00",
+          "status": "ok",
+          "sha256": "6f1f29e5c85c884456e14c1b50282929580537fb6d085f18e60cf476a2324cd4",
+          "bytes": 65544,
+          "contentType": "text/html; charset=utf-8",
+          "finalUrl": "https://www.dmc.gov.lk/index.php?option=com_dmcreports&view=reports&report_type_id=6&lang=en&limit=100",
+          "rawFile": "flood-listing-6f1f29e5c85c.html",
+          "changed": true,
+          "pdfLinks": [
+            "/images/dmcreports/Deduru_Oya_Flood_Warning_-_NO_01_(2026__1792642274.pdf",
+            "/images/dmcreports/Flood_Warning_for_Mahaweli_River_-_No_01_-_2026__1792998739.pdf",
+            "/images/dmcreports/Flood_warning_for_Kala_Oya_Basin_-_NO_01_(2026__1792648900.pdf",
+            "/images/dmcreports/Flood_warning_for_Kalu_River_Basin_-_No_01_-_2026__1792995574.pdf",
+            "/images/dmcreports/Flood_warning_for_Nilwala_River_Basin_-_NO_01_(2026__1792069011.pdf",
+            "/images/dmcreports/Water_Level_&_Rainfall_on_2026__1792169790.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1791443615.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1791511232.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1791552225.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1791573051.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1791599312.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1791605241.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1791615901.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1791686019.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1791691573.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1791702393.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1791766516.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1791779449.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1791789176.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1791849238.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1791853872.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1791864437.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1791874832.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1791906269.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1791921828.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1791951644.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1791963804.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1791982862.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792005678.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792027164.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792037251.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792051128.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792072400.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792083039.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792092687.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792106686.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792113332.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792126432.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792135117.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792146528.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792178164.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792188285.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792199830.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792213238.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792224899.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792231264.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792253048.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792264004.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792279547.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792286352.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792296345.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792306671.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792318086.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792340684.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792350554.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792361423.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792372569.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792383037.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792393386.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792404307.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792416446.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792426610.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792446111.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792452733.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792458705.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792470772.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792479680.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792491175.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792501808.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792512885.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792534891.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792544885.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792556003.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792566521.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792577779.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792589310.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792599252.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792620775.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792636547.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792652554.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792663890.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792686004.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792696423.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792707181.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792717608.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792728997.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792741750.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792760391.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792782314.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792808848.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792826481.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792893335.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792901155.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792912247.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792934282.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792956144.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792979408.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792990677.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792998944.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1793017314.pdf"
+          ]
+        },
+        {
+          "id": "landslide-listing",
+          "url": "https://www.dmc.gov.lk/index.php?option=com_dmcreports&view=reports&report_type_id=5&lang=en&limit=100",
+          "checkedAt": "2026-10-26T13:02:42.819888+00:00",
+          "status": "ok",
+          "sha256": "c3e21eb84509d4b731f90d80b0579424b22e87e2593ed8b876ed61994325df67",
+          "bytes": 66820,
+          "contentType": "text/html; charset=utf-8",
+          "finalUrl": "https://www.dmc.gov.lk/index.php?option=com_dmcreports&view=reports&report_type_id=5&lang=en&limit=100",
+          "rawFile": "landslide-listing-c3e21eb84509.html",
+          "changed": true,
+          "pdfLinks": [
+            "/images/dmcreports/(Merged)Landslide_early_warning_Report_at_0600hrs___1779412352.pdf",
+            "/images/dmcreports/LEWM_14-05-2026_16_00__1778757021.pdf",
+            "/images/dmcreports/LEWM_15-10-2026_16_00__1792063558.pdf",
+            "/images/dmcreports/LEWM_21-02-2026_20_30-1__1771688491.pdf",
+            "/images/dmcreports/LEWM_21-10-2026_18_00__1792589290.pdf",
+            "/images/dmcreports/LEWM_21-10-2026_22_00__1792605539.pdf",
+            "/images/dmcreports/LEWM_23-10-2026_16_00__1792754836.pdf",
+            "/images/dmcreports/LEWM_24-04-2026_16_00__1777027275.pdf",
+            "/images/dmcreports/LEWM_25-05-2026_16_00__1779705918.pdf",
+            "/images/dmcreports/LEWM_26-05-2026_16_00__1779796966.pdf",
+            "/images/dmcreports/LandSlide_Early_warning_report___1778350473.pdf",
+            "/images/dmcreports/Landslide_EW_Report_at_0400hrs_on_2026__1790205325.pdf",
+            "/images/dmcreports/Landslide_EW_Report_at_0700hrs_on_2026__1771119917.pdf",
+            "/images/dmcreports/Landslide_EW_Report_at_0700hrs_on_2026__1789870835.pdf",
+            "/images/dmcreports/Landslide_EW_Report_at_0800hrs_on_2026__1771556682.pdf",
+            "/images/dmcreports/Landslide_EW_Report_at_0900hrs_on_2026__1771215166.pdf",
+            "/images/dmcreports/Landslide_EW_Report_at_0900hrs_on_2026__1785988143.pdf",
+            "/images/dmcreports/Landslide_EW_Report_at_0900hrs_on_2026__1786075964.pdf",
+            "/images/dmcreports/Landslide_EW_Report_at_0900hrs_on_2026__1786161107.pdf",
+            "/images/dmcreports/Landslide_EW_Report_at_0900hrs_on_2026__1786251019.pdf",
+            "/images/dmcreports/Landslide_EW_Report_at_0900hrs_on_2026__1792988751.pdf",
+            "/images/dmcreports/Landslide_EW_Report_at_09__1785729374.pdf",
+            "/images/dmcreports/Landslide_EW_Report_at_09__1785816590.pdf",
+            "/images/dmcreports/Landslide_EW_Report_at_09__1785902381.pdf",
+            "/images/dmcreports/Landslide_EW_Report_at_1000hrs_on_2026__1789448963.pdf",
+            "/images/dmcreports/Landslide_EW_Report_at_1000hrs_on_2026__1789534365.pdf",
+            "/images/dmcreports/Landslide_EW_Report_at_1000hrs_on_2026__1789879344.pdf",
+            "/images/dmcreports/Landslide_EW_Report_at_1030hrs_on_2026__1771393203.pdf",
+            "/images/dmcreports/Landslide_EW_Report_at_12__1785742696.pdf",
+            "/images/dmcreports/Landslide_EW_Report_at_1300hrs_on_2026__1790236908.pdf",
+            "/images/dmcreports/Landslide_EW_Report_at_1300hrs_on_2026__1790237433.pdf",
+            "/images/dmcreports/Landslide_EW_Report_at_1400hrs_on_2026__1789894283.pdf",
+            "/images/dmcreports/Landslide_EW_Report_at_1445hrs_on_2026__1793007485.pdf",
+            "/images/dmcreports/Landslide_EW_Report_at_1600hrs_on_2026__1779021090.pdf",
+            "/images/dmcreports/Landslide_EW_Report_at_1600hrs_on_2026__1789987708.pdf",
+            "/images/dmcreports/Landslide_EW_Report_at_1600hrs_on_2026__1790075641.pdf",
+            "/images/dmcreports/Landslide_EW_Report_at_1600hrs_on_2026__1790160812.pdf",
+            "/images/dmcreports/Landslide_EW_Report_at_1600hrs_on_2026__1790333042.pdf",
+            "/images/dmcreports/Landslide_EW_Report_at_1600hrs_on_2026__1790421382.pdf",
+            "/images/dmcreports/Landslide_EW_Report_at_1600hrs_on_2026__1791113233.pdf",
+            "/images/dmcreports/Landslide_EW_Report_at_1600hrs_on_2026__1791197863.pdf",
+            "/images/dmcreports/Landslide_EW_Report_at_1600hrs_on_2026__1791282469.pdf",
+            "/images/dmcreports/Landslide_EW_Report_at_1600hrs_on_2026__1791371317.pdf",
+            "/images/dmcreports/Landslide_EW_Report_at_1600hrs_on_2026__1791543928.pdf",
+            "/images/dmcreports/Landslide_EW_Report_at_1600hrs_on_2026__1791629923.pdf",
+            "/images/dmcreports/Landslide_EW_Report_at_1600hrs_on_2026__1791717348.pdf",
+            "/images/dmcreports/Landslide_EW_Report_at_1600hrs_on_2026__1791802714.pdf",
+            "/images/dmcreports/Landslide_EW_Report_at_1600hrs_on_2026__1791889014.pdf",
+            "/images/dmcreports/Landslide_EW_Report_at_1600hrs_on_2026__1791975134.pdf",
+            "/images/dmcreports/Landslide_EW_Report_at_1600hrs_on_2026__1792149759.pdf",
+            "/images/dmcreports/Landslide_EW_Report_at_1600hrs_on_2026__1792408386.pdf",
+            "/images/dmcreports/Landslide_EW_Report_at_1600hrs_on_2026__1792493826.pdf",
+            "/images/dmcreports/Landslide_EW_Report_at_1600hrs_on_2026__1792579927.pdf",
+            "/images/dmcreports/Landslide_EW_Report_at_1600hrs_on_2026__1792839037.pdf",
+            "/images/dmcreports/Landslide_EW_Report_at_1630hrs_on_2026__1790508308.pdf",
+            "/images/dmcreports/Landslide_EW_Report_at_1700hrs_on_2026__1790251970.pdf",
+            "/images/dmcreports/Landslide_EW_Report_at_1800hrs_on_2026__1792242515.pdf",
+            "/images/dmcreports/Landslide_EW_Report_at_1800hrs_on_2026__1792328311.pdf",
+            "/images/dmcreports/Landslide_EW_Report_at_1800hrs_on_2026__1793018981.pdf",
+            "/images/dmcreports/Landslide_EW_Report_at_1900hrs_on_2026__1791388539.pdf",
+            "/images/dmcreports/Landslide_EW_Report_at_1900hrs_on_2026__1791735713.pdf",
+            "/images/dmcreports/Landslide_EW_Report_at_1900hrs_on_2026__1791817266.pdf",
+            "/images/dmcreports/Landslide_EW_Report_at_1900hrs_on_2026__1792937657.pdf",
+            "/images/dmcreports/Landslide_EW_Report_at_2100hrs_on_2026__1792080337.pdf",
+            "/images/dmcreports/Landslide_EW_Report_at_2200hrs_on_2026__1789931576.pdf",
+            "/images/dmcreports/Landslide_EW_Report_at_2200hrs_on_2026__1792950045.pdf",
+            "/images/dmcreports/Landslide_EW_Report_at_2350hrs_on_2026__1785696011.pdf",
+            "/images/dmcreports/Landslide_Early_Warning_Report_at_1600hrs_on_15__1778844228.pdf",
+            "/images/dmcreports/Landslide_Early_Warning_Report_at_1600hrs_on_16__1778928261.pdf",
+            "/images/dmcreports/Landslide_Early_Warning_Report_at_1700hrs_on_2026__1775305024.pdf",
+            "/images/dmcreports/Landslide_Early_Warning_at_0300hrs_at_22__1779400855.pdf",
+            "/images/dmcreports/Landslide_Early_Warning_at_0900hrs_at_22__1779423870.pdf",
+            "/images/dmcreports/Landslide_Early_Warning_at_0900hrs_at_23__1779509025.pdf",
+            "/images/dmcreports/Landslide_Early_Warning_at_1600hrs_on_27__1779880374.pdf",
+            "/images/dmcreports/Landslide_Early_Warning_at_1600hrs_on_28__1779964569.pdf",
+            "/images/dmcreports/Landslide_Early_Warning_at_1600hrs_on_29__1780052116.pdf",
+            "/images/dmcreports/Landslide_Early_warning_report_at_0400hrs_on_12__1781221492.pdf",
+            "/images/dmcreports/Landslide_Early_warning_report_at_0900hrs_on_13__1778644336.pdf",
+            "/images/dmcreports/Landslide_Early_warning_report_at_0900hrs_on_14__1778733408.pdf",
+            "/images/dmcreports/Landslide_Early_warning_report_at_1600hrs_on_12__1781261099.pdf",
+            "/images/dmcreports/Landslide_Early_warning_report_at_1600hrs_on_13__1781348104.pdf",
+            "/images/dmcreports/Landslide_Early_warning_report_at_1600hrs_on_13__1781348112.pdf",
+            "/images/dmcreports/Landslide_Early_warning_report_at_2200hrs_on_14__1778779033.pdf",
+            "/images/dmcreports/Landslide_Ew_Letter__1792666962.pdf",
+            "/images/dmcreports/Landslide_Ew_Report_at_0800hrs_on_21__1771643034.pdf",
+            "/images/dmcreports/Landslide_Ew_Report_at_0830hrs_on_22__1771733754.pdf",
+            "/images/dmcreports/Landslide_Ew_Report_at_0830hrs_on_23__1771817075.pdf",
+            "/images/dmcreports/Landslide_Ew_Report_at_0830hrs_on_24__1771903346.pdf",
+            "/images/dmcreports/Landslide_Ew_Report_at_1600hrs_on_2026__1776081161.pdf",
+            "/images/dmcreports/Landslide_Ew_Report_at_1600hrs_on_2026__1776942433.pdf",
+            "/images/dmcreports/Landslide_Ew_Report_at_1900hrs_on_2026__1771682960.pdf",
+            "/images/dmcreports/Landslide_Ew_Repots_at_1600hrs_on_2026__1778497802.pdf",
+            "/images/dmcreports/Landslide_early_warning__1778430610.pdf",
+            "/images/dmcreports/Landslide_early_warning_at_0600_hrs_on_14-02-2026__1771031819.pdf",
+            "/images/dmcreports/Landslide_early_warning_at_2200hrs_on_2026__1778517844.pdf",
+            "/images/dmcreports/Landslide_early_warning_message_at_1600_hrs_on_08-10-2026__1791456596.pdf",
+            "/images/dmcreports/Landslide_early_warning_message_at_1800_hrs_on_08-10-2026__1791464690.pdf",
+            "/images/dmcreports/Landslide_warning_report_at_1700hrs__1779624141.pdf",
+            "/images/dmcreports/Lanslide_Early_Warning_at_0600_on_24__1779584677.pdf",
+            "/images/dmcreports/landslide_EW_Report_at_1600hrs_on_2026__1779101540.pdf"
+          ]
+        },
+        {
+          "id": "weather-listing",
+          "url": "https://www.dmc.gov.lk/index.php?option=com_dmcreports&view=reports&report_type_id=2&lang=en&limit=100",
+          "checkedAt": "2026-10-26T13:02:44.219925+00:00",
+          "status": "ok",
+          "sha256": "087d240758a6ac8e9d17d197902a42d689cd3e3bdde10f3eccfb19fa5630a4f2",
+          "bytes": 67451,
+          "contentType": "text/html; charset=utf-8",
+          "finalUrl": "https://www.dmc.gov.lk/index.php?option=com_dmcreports&view=reports&report_type_id=2&lang=en&limit=100",
+          "rawFile": "weather-listing-087d240758a6.html",
+          "changed": true,
+          "pdfLinks": [
+            "/images/dmcreports/Advisory_for_Heavy_Rain_(Tamil_Language)__1792894181.pdf",
+            "/images/dmcreports/Advisory_for_Heavy_Rain__1792546880.pdf",
+            "/images/dmcreports/Advisory_for_Heavy_Rain_at_0330_hrs_on_2026__1792968291.pdf",
+            "/images/dmcreports/Advisory_for_Heavy_Rain_at_0330_hrs_on_2026__1792981386.pdf",
+            "/images/dmcreports/Advisory_for_Heavy_Rain_at_0530_hrs_on_2026__1792894123.pdf",
+            "/images/dmcreports/Advisory_for_Heavy_Rain_at_0530hrs_on_22__1792636213.pdf",
+            "/images/dmcreports/Advisory_for_Heavy_Rain_at_1530hrs_on_2026__1792493077.pdf",
+            "/images/dmcreports/Advisory_for_Heavy_Rain_st_1500hrs_on_15__1792058688.pdf",
+            "/images/dmcreports/Advisory_for_Rough_Seas_Issued_at_05__1792412698.pdf",
+            "/images/dmcreports/Advisory_for_Rough_Seas__1792653551.pdf",
+            "/images/dmcreports/Advisory_for_Rough_Seas___1792539146.pdf",
+            "/images/dmcreports/Advisory_for_Rough_Seas_at_1600hrs_on_18__1792321833.pdf",
+            "/images/dmcreports/Advisory_for_Rough_Seas_at_1630hrs_on_14__1791977608.pdf",
+            "/images/dmcreports/Advisory_for_Rough_Seas_at_1630hrs_on_20__1792495235.pdf",
+            "/images/dmcreports/Advisory_for_Severe_Lightning_at_1100hrs_on_15__1792044858.pdf",
+            "/images/dmcreports/Advisory_for_Severe_Lightning_at_1130hrs_on_18__1792305477.pdf",
+            "/images/dmcreports/Advisory_for_Severe_Lightning_at_1130hrs_on_18__1792314593.pdf",
+            "/images/dmcreports/Advisory_for_Severe_Lightning_at_1130hrs_on_19__1792392467.pdf",
+            "/images/dmcreports/Advisory_for_Severe_Lightning_at_1130hrs_on_19__1792393312.pdf",
+            "/images/dmcreports/Advisory_for_Severe_Lightning_at_1130hrs_on_2026__1792132601.pdf",
+            "/images/dmcreports/Advisory_for_Severe_Lightning_at_1130hrs_on_2026__1792139967.pdf",
+            "/images/dmcreports/Advisory_for_Severe_Lightning_at_1130hrs_on_2026__1792651632.pdf",
+            "/images/dmcreports/Advisory_for_Severe_Lightning_at_1130hrs_on_2026__1792997048.pdf",
+            "/images/dmcreports/Advisory_for_Severe_Lightning_at_1130hrs_on_22__1792650693.pdf",
+            "/images/dmcreports/Advisory_for_Severe_Lightning_at_1130hrs_on_24__1792824215.pdf",
+            "/images/dmcreports/Advisory_for_Severe_Lightning_at_1130hrs_on_25__1792908975.pdf",
+            "/images/dmcreports/Advisory_for_Severe_Lightning_at_1130hrs_on_25__1792909124.pdf",
+            "/images/dmcreports/Fishermen_bulletin_for_strong_winds_and_rough_seas,_Issued_at_03__1792840056.pdf",
+            "/images/dmcreports/LRA_26102101_TM__1792548788.pdf",
+            "/images/dmcreports/MLA_26102101_TM__1792548837.pdf",
+            "/images/dmcreports/MLA_26102102_TM__1792584612.pdf",
+            "/images/dmcreports/Special_Weather_Bulletin__1792680475.pdf",
+            "/images/dmcreports/The_Weather_Report_at_1400hrs_on_2026__1792401872.pdf",
+            "/images/dmcreports/W20261021a_TM__1792547250.pdf",
+            "/images/dmcreports/W20261023a_TM__1792719475.pdf",
+            "/images/dmcreports/Warm_Weather_Advisory_at_1600hrs_on_19__1792407583.pdf",
+            "/images/dmcreports/Warm_Weather_Advisory_at_1600hrs_on_19__1792407606.pdf",
+            "/images/dmcreports/Warm_advisory_at_1600hrs_on_2026__1792150486.pdf",
+            "/images/dmcreports/Warm_advisory_at_1600hrs_on_2026__1792235496.pdf",
+            "/images/dmcreports/Warm_advisory_at_1600hrs_on_2026__1792322389.pdf",
+            "/images/dmcreports/Warning_for_strong_winds_and_rough_seas__-_Tamil__1792760306.pdf",
+            "/images/dmcreports/Warning_for_strong_winds_and_rough_seas__1792756684.pdf",
+            "/images/dmcreports/Warning_for_strong_winds_and_rough_seas_at_0700hrs_on_25__1792894219.pdf",
+            "/images/dmcreports/Warning_for_strong_winds_and_rough_seas_at_0700hrs_on_25__1792894610.pdf",
+            "/images/dmcreports/Warning_for_strong_winds_and_rough_seas_at_0930hrs_on_26__1792991218.pdf",
+            "/images/dmcreports/Warning_for_strong_winds_and_rough_seas_at_1630hrs_on_24__1792841662.pdf",
+            "/images/dmcreports/Warning_for_strong_winds_and_rough_seas_at_2200hrs_on_25__1792956105.pdf",
+            "/images/dmcreports/Water_level_&_Rainfall_2026__1792642935.pdf",
+            "/images/dmcreports/Weather_Forecast_at_0530hrs__1792629841.pdf",
+            "/images/dmcreports/Weather_Forecast_at_0530hrs__1792714951.pdf",
+            "/images/dmcreports/Weather_Forecast_at_1600hrs_on_23__1792760606.pdf",
+            "/images/dmcreports/Weather_Report_at_0530_hrs_on_2026__1792023560.pdf",
+            "/images/dmcreports/Weather_Report_at_0530_hrs_on_2026__1792110117.pdf",
+            "/images/dmcreports/Weather_Report_at_0530_hrs_on_2026__1792197394.pdf",
+            "/images/dmcreports/Weather_Report_at_0530_hrs_on_2026__1792292731.pdf",
+            "/images/dmcreports/Weather_Report_at_0530_hrs_on_2026__1792373118.pdf",
+            "/images/dmcreports/Weather_Report_at_0530_hrs_on_2026__1792455586.pdf",
+            "/images/dmcreports/Weather_Report_at_0530_hrs_on_2026__1792461596.pdf",
+            "/images/dmcreports/Weather_Report_at_0530_hrs_on_2026__1792543747.pdf",
+            "/images/dmcreports/Weather_Report_at_0530_hrs_on_2026__1792802094.pdf",
+            "/images/dmcreports/Weather_Report_at_0530_hrs_on_2026__1792975473.pdf",
+            "/images/dmcreports/Weather_Report_at_0530_hrs_on_2026__1792979625.pdf",
+            "/images/dmcreports/Weather_Report_at_0530hrs_on_2026__1792118850.pdf",
+            "/images/dmcreports/Weather_Report_at_0530hrs_on_2026__1792369004.pdf",
+            "/images/dmcreports/Weather_Report_at_1400_hrs_on_2026__1792141114.pdf",
+            "/images/dmcreports/Weather_Report_at_1400_hrs_on_2026__1792312576.pdf",
+            "/images/dmcreports/Weather_Report_at_1400_hrs_on_2026__1792314735.pdf",
+            "/images/dmcreports/Weather_Report_at_1400_hrs_on_2026__1792400898.pdf",
+            "/images/dmcreports/Weather_Report_at_1400_hrs_on_2026__1792488874.pdf",
+            "/images/dmcreports/Weather_Report_at_1400_hrs_on_2026__1792573150.pdf",
+            "/images/dmcreports/Weather_Report_at_1400_hrs_on_2026__1792575596.pdf",
+            "/images/dmcreports/Weather_Report_at_1400_hrs_on_2026__1792660481.pdf",
+            "/images/dmcreports/Weather_Report_at_1400_hrs_on_2026__1792662133.pdf",
+            "/images/dmcreports/Weather_Report_at_1400_hrs_on_2026__1792833541.pdf",
+            "/images/dmcreports/Weather_Report_at_1400_hrs_on_2026__1793007431.pdf",
+            "/images/dmcreports/Weather_Report_at_1400hrs__1792227310.pdf",
+            "/images/dmcreports/Weather_Report_at_1400hrs_on_2026__1792141374.pdf",
+            "/images/dmcreports/Weather_Report_at_1400hrs_on_2026__1792487531.pdf",
+            "/images/dmcreports/Weather_Report_at_1600_hrs_on_2026__1792062451.pdf",
+            "/images/dmcreports/Weather_Report_at_1600_hrs_on_2026__1792148541.pdf",
+            "/images/dmcreports/Weather_Report_at_1600_hrs_on_2026__1792233740.pdf",
+            "/images/dmcreports/Weather_Report_at_1600_hrs_on_2026__1792322079.pdf",
+            "/images/dmcreports/Weather_Report_at_1600_hrs_on_2026__1792406372.pdf",
+            "/images/dmcreports/Weather_Report_at_1600_hrs_on_2026__1792580501.pdf",
+            "/images/dmcreports/Weather_Report_at_1600_hrs_on_2026__1792581236.pdf",
+            "/images/dmcreports/Weather_Report_at_1600_hrs_on_2026__1792840317.pdf",
+            "/images/dmcreports/Weather_Report_at_1600_hrs_on_2026__1793011605.pdf",
+            "/images/dmcreports/Weather_Report_at_1600hrs_on_2026__1792493104.pdf",
+            "/images/dmcreports/Weather_Report_at_1600hrs_on_2026__1792665610.pdf",
+            "/images/dmcreports/Weather_forecast_at_0530hrs__1792284131.pdf",
+            "/images/dmcreports/Weather_forecast_at_1600hrs__1792756746.pdf",
+            "/images/dmcreports/Weather_forecast_for_Multiday_boats__1792724294.pdf",
+            "/images/dmcreports/Weather_forecast_for_multi-day_boats_for_sea_areas_at_0700hrs_on_22__1792636861.pdf",
+            "/images/dmcreports/Weather_report_at_0530_hrs_on_2026__1792888633.pdf",
+            "/images/dmcreports/Weather_report_at_0530_hrs_on_2026__1792894738.pdf",
+            "/images/dmcreports/Weather_report_at_1400_hrs_on_2026__1792919375.pdf",
+            "/images/dmcreports/Weather_report_at_1400_hrs_on_2026__1792919733.pdf",
+            "/images/dmcreports/Weather_report_at_1600_hrs_on_2026__1792926790.pdf",
+            "/images/dmcreports/Weather_report_at_1600hrs_on_2026__1792927422.pdf",
+            "/images/dmcreports/තදවැසි_පිළිබඳ_අවවාදාත්මක_නිවේදනය__1792248050.pdf"
+          ]
+        }
+      ],
+      "mapping": "Explicit district-scoped codes; no fuzzy or nearest-area matching. 71 unique divisions, including Kotmale East/West and Thalawakele in the existing catalogue. Administrative boundary age and surrounding-area limits remain.",
+      "otherSources": "Kalu and Mahaweli flood warnings, heavy rain and lightning original hashes unchanged. River 15:00 measurements and all reservoirs unchanged."
     }
   ]
 }

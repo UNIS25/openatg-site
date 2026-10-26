@@ -310,3 +310,26 @@ the current Kalu/Mahaweli or 14:45 landslide warnings. Client version 7 and
 minClientVersion 7 guard older clients against an unknown hazard kind. Slow
 initial bulletin loading stays in Checking rather than briefly presenting a
 completed unknown assessment. No reservoir workflow permissions changed.
+
+
+## 18:00 landslide replacement, same release 20261026-10
+
+The final pre-publication source check discovered bulletin
+`LEWM-26-10-2026-1800-33`, issued 26 October 18:00 SLST, valid through
+27 October 18:00. Original SHA-256
+`35e492bf3495070ff0e2fcfaf161528ebf942bb302fffbaa66f78949fdec716f`.
+Pages 1–4 were visually inspected; page 5 is blank. The original explicitly
+identifies the previous 14:45 message. Its full snapshot remains in provenance.
+
+The replacement lists 71 unique DS divisions: 28 Yellow, 33 Amber and 10 Red.
+New Red areas are Bulathsinhala, Dodangoda, Ambagamuwa Korale and Norwood;
+the six Ratnapura Red divisions remain. All named divisions resolve to exact
+existing district-scoped codes, including Kotmale East/West and Thalawakele.
+Spelling aliases are recorded explicitly in provenance, with no fuzzy matching.
+Surrounding-area and 2022-boundary limitations remain visible. The generic
+existing translations are preserved with the obsolete six-division sentence
+removed. Flood, lightning, rainfall, river and reservoir records are unchanged.
+
+Regression checks include the four new Red divisions, Attanagalla Amber,
+Pitabeddara Yellow, all 71 unique codes, exact expiry and all previous location,
+privacy, stale-data and failure cases. No new UI kind or permission is needed.

@@ -46,8 +46,8 @@ test('all 339 catalog codes and 25 district shards are accounted for',()=>{
 test('daily reservoir report becomes stale on next Sri Lanka calendar day',()=>{
  assert.equal(dailyAgeState('2026-10-26',now),'daily');assert.equal(dailyAgeState('2026-10-25',now),'stale');assert.equal(dailyAgeState('2026-10-27',now),'unknown');assert.equal(dailyAgeState(null,now),'unknown');
 });
-test('14:45 bulletin has the six visually verified Red divisions, not a blanket district severity',()=>{
- const w=snapshot.bulletins.find(b=>b.kind==='landslide');assert.equal(w.id,'LEWM-26-10-2026-1445-00');assert.deepEqual(w.areas.filter(a=>a.level===3).map(a=>a.divisionCode).sort(),['LK9112','LK9130','LK9124','LK9106','LK9127','LK9121'].sort());assert.equal(warningState(w,Date.parse('2026-10-26T15:00:00+05:30')),'active');assert.equal(w.areas.find(a=>a.divisionCode==='LK9136').level,2);
+test('18:00 bulletin has ten visually verified Red divisions and exact 71-division scope',()=>{
+ const w=snapshot.bulletins.find(b=>b.kind==='landslide');assert.equal(w.id,'LEWM-26-10-2026-1800-33');assert.deepEqual(w.areas.filter(a=>a.level===3).map(a=>a.divisionCode).sort(),['LK1312','LK1327','LK2315','LK2330','LK9112','LK9130','LK9124','LK9106','LK9127','LK9121'].sort());assert.equal(w.areas.length,71);assert.equal(new Set(w.areas.map(a=>a.divisionCode)).size,71);assert.deepEqual([1,2,3].map(level=>w.areas.filter(a=>a.level===level).length),[28,33,10]);assert.equal(warningState(w,Date.parse('2026-10-26T18:00:00+05:30')),'active');assert.equal(warningState(w,Date.parse('2026-10-27T18:00:00+05:30')),'expired');assert.equal(w.areas.find(a=>a.divisionCode==='LK1227').level,2);assert.equal(w.areas.find(a=>a.divisionCode==='LK3203').level,1);assert.equal(w.areas.find(a=>a.divisionCode==='LK2321').level,2);assert.equal(w.areas.find(a=>a.divisionCode==='LK2303').level,2);assert.equal(w.areas.find(a=>a.divisionCode==='LK9136').level,2);
 });
 test('future warning formats and unsupported severity require a page update',()=>{
  assert.throws(()=>validateSnapshot({...snapshot,minClientVersion:999}),{code:'CLIENT_UPDATE_REQUIRED'});assert.throws(()=>validateSnapshot(snapshot,3),{code:'CLIENT_UPDATE_REQUIRED'});const w=snapshot.bulletins.find(w=>w.kind==='landslide');assert.throws(()=>validateSnapshot({...snapshot,bulletins:[{...w,areas:[{...w.areas[0],level:4}]}]}),{code:'CLIENT_UPDATE_REQUIRED'});
@@ -57,7 +57,7 @@ test('reservoir map joins are unique, explicit, and limited to source directory 
 });
 
 const allFeatures=(await Promise.all(catalog.districts.map(async a=>JSON.parse(await readFile(new URL('../../floodlens/data/boundaries/'+a.code+'.json',import.meta.url))).features))).flat();
-const reviewedTime=Date.parse('2026-10-26T16:30:00+05:30');
+const reviewedTime=Date.parse('2026-10-26T19:00:00+05:30');
 const evidenceAt=(p,accuracy=20)=>{const areas=locationCandidates(allFeatures,p,accuracy).map(f=>catalog.divisions.find(a=>a.code===f.properties.code));return {...locationEvidence(snapshot.bulletins,areas,{uncertain:areas.length>1||accuracy>1500,now:reviewedTime}),areas};};
 test('real Ratnapura, Pelmadulla, Horana and Puttalam coordinates produce different evidence categories',()=>{
  for(const [p,kind,level,code] of [[[80.399,6.682],'landslide',3,'LK9112'],[[80.529,6.628],'landslide',3,'LK9124'],[[80.062,6.715],'flood',0,'LK1309'],[[79.828,8.036],'rain',0,'LK6215']]){
