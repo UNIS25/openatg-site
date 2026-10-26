@@ -1,7 +1,7 @@
-import {copy} from './explore-copy.mjs?v=20261026-20';
-import {ExploreMap} from './explore-map.mjs?v=20261026-20';
-import {warningLayer,forecastLayer,forecastCells,reviewedReports,cycloneState} from './explore-model.mjs?v=20261026-20';
-import {cloudState} from './clouds-model.mjs?v=20261026-20';
+import {copy} from './explore-copy.mjs?v=20261026-21';
+import {ExploreMap} from './explore-map.mjs?v=20261026-21';
+import {warningLayer,forecastLayer,forecastCells,reviewedReports,cycloneState} from './explore-model.mjs?v=20261026-21';
+import {cloudState} from './clouds-model.mjs?v=20261026-21';
 const $=s=>document.querySelector(s),node=(tag,text,cls)=>{const e=document.createElement(tag);if(text!==undefined)e.textContent=text;if(cls)e.className=cls;return e;};
 const paths={warnings:'/floodlens/data/reviewed.json',catalog:'/floodlens/data/areas.json',overview:'/floodlens/data/map-overview.json',outline:'/floodlens/data/clouds/outline.json',land:'/floodlens/data/explore/region-land.json',forecast:'/floodlens/data/forecast/forecast.json',cloud:'/floodlens/data/clouds/clouds.json',media:'/floodlens/data/reservoir-reports.json',locations:'/floodlens/data/reservoir-locations.json',cyclone:'/floodlens/data/explore/cyclone.json'};
 let language='en',layer='warnings',warningKind='flood',frame=0,selected=null,playing=null,loading=false,generation=0,cloudBroken=false;
@@ -16,7 +16,7 @@ function legend(items){$('#legend').replaceChildren(...items.map(([text,cls])=>{
 function select(id,focus=false){selected=id;renderSelection();if(focus)$('#selection').scrollIntoView({block:'nearest'});}
 function selectDistrict(){const code=$('#district').value,area=data.catalog?.districts.find(d=>d.code===code);selected=null;if(!area){map.home(layer==='cyclone');renderSelection();return;}const point=[(area.bbox[0]+area.bbox[2])/2,(area.bbox[1]+area.bbox[3])/2];map.target(point,Math.max(1.5,(area.bbox[3]-area.bbox[1])*1.8));if(['rain','wind'].includes(layer)&&current.cells){let best=0,d=Infinity;for(const [i,c]of current.cells.entries()){const dist=(c.point[0]-point[0])**2+(c.point[1]-point[1])**2;if(dist<d){d=dist;best=i;}}selected='cell:'+best;}else selected='district:'+code;renderSelection();}
 function renderSelection(){
- const root=$('#selection');root.replaceChildren();const parts=selected?.split(':')||[],kind=parts[0],id=parts[1];
+ const root=$('#selection');root.hidden=layer==='clouds'||(layer==='reports'&&!selected);root.replaceChildren();const parts=selected?.split(':')||[],kind=parts[0],id=parts[1];
  const add=(tag,text,cls)=>root.append(node(tag,text,cls));
  if(kind==='warning'){
   const a=current.warnings?.areas.find(a=>a.area.code===id);if(!a){selected=null;return renderSelection();}
