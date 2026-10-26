@@ -13,14 +13,16 @@ URL, issue time, expiry, scope, authority, SHA-256 and explicit DS-code mapping.
 The rainfall advisory's document issue time (03:00 SLST) is kept separately from
 its DMC listing time (03:30). All timestamps include time-zone offsets.
 
-The current 26 October river PDF was issued at 21:30 SLST; its selected measurements
-are at 21:00, separately from the 21:30 DMC listing time. The superseded 12:30,
-15:30 and 18:30 reports and their selected readings remain in provenance. Source remarks are station classifications, not area predictions.
-Panadugama is now Minor Flood; Badalgama on Maha Oya is newly included as Alert.
-Glencourse remains Alert with no reported trend. Its blank trend is not interpreted
-as steady and does not retain the earlier rising direction. Missing readings at
-Weraganthota, Thanthirimale and Galgamuwa are not converted to Normal. The report
-rainfall window is 12 hours and is not ingested into the station level fields.
+The current river PDF was issued at 00:30 SLST on 27 October; its selected
+measurements are at 00:00, with a separate 23:00 previous column. Superseded
+reports and readings remain in provenance. Eighteen selected stations include
+four Minor Flood and ten Alert classifications, plus four Normal readings.
+Dunamale is now Minor Flood. Hanwella, Putupaula, Baddegama and Thalgahagoda are
+newly included. Thalgahagoda's blank trend is null, not inferred as steady.
+Missing Horowpothana, Weraganthota, Thanthirimale and Galgamuwa readings are not
+converted to Normal. The 15-hour rainfall column is not ingested as level data.
+Station classifications do not cancel official area warnings. The river-only
+review time is separate from the unchanged official-warning review time.
 All eighteen selected gauges use metres. Nagalagam Street is deliberately not
 ingested; its official unit is feet. No ArcGIS `CreationDate` or `EditDate` is
 presented as an observation timestamp, and rainfall-period semantics are not
@@ -51,8 +53,7 @@ National observations are collapsed by default and never labeled as local to
 the selected DS. The directory loads when opened and is searchable across all
 74 records; six display initially, with a show-all option.
 
-The private location map uses the licensed local boundary data. Optional
-third-party street tiles require consent as described below. It depicts administrative areas, never a hazard extent.
+The location map uses licensed local boundaries and first-party OSM-derived road cells. No third-party map tiles load at runtime. It depicts administrative areas, never a hazard extent.
 The original Tamil Ratnapura district name is retained in the catalogue while
 a curated display spelling corrects its truncated source label.
 
@@ -151,11 +152,11 @@ retains warnings from all plausible divisions; it is not a hazard boundary. No n
 administrative matching, never hydrologic routing.
 
 Exact coordinates never enter request URLs, storage, console, telemetry, analytics
-or source queries. The private map uses bundled data. Optional OpenStreetMap tiles
-are off until explicit per-page consent naming the provider and disclosing the
-viewed area and IP/network information. Tile indices reveal a map area; therefore
-the street map does not promise that the viewed location stays private. District shard filenames may indicate a coarse area to the
-same-origin host as an ordinary asset request. Map links disclose that external
+or source queries. The map uses bundled boundaries and first-party OSM-derived
+road cells. District and 0.1-degree road-cell filenames disclose a coarse viewed
+area to the same-origin host/CDN, which also receives normal network metadata.
+No external tile or geocoding provider receives the map viewport. See
+LOCAL_ROAD_MAP.md for the build-time source, attribution and ODbL derived database. Map links disclose that external
 providers receive normal network information (such as IP); no coordinates are
 added. No map embeds or analytics scripts are included. CSP blocks scripts from
 external origins; existing Cloudflare analytics injection may consequently
@@ -724,3 +725,10 @@ and Galgamuwa remain absent; no old Galgamuwa reading is presented as current.
 All selected units are metres. The 15-hour rainfall column is not ingested.
 Warning objects, translations, review timestamps and reservoir automation
 are unchanged; the observation review time and source provenance are separate.
+
+## Optional situation map, release 20261026-20
+
+`/ark/explore/` is a separate regional view linked from the location result.
+See [EXPLORE.md](EXPLORE.md) for layer semantics, original cyclone sources,
+review deadlines and tests. It does not change the approved reservoir-only
+publisher, schedules, token permissions or main location assessment.

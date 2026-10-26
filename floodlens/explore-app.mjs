@@ -1,0 +1,79 @@
+import {copy} from './explore-copy.mjs?v=20261026-20';
+import {ExploreMap} from './explore-map.mjs?v=20261026-20';
+import {warningLayer,forecastLayer,forecastCells,reviewedReports,cycloneState} from './explore-model.mjs?v=20261026-20';
+import {cloudState} from './clouds-model.mjs?v=20261026-20';
+const $=s=>document.querySelector(s),node=(tag,text,cls)=>{const e=document.createElement(tag);if(text!==undefined)e.textContent=text;if(cls)e.className=cls;return e;};
+const paths={warnings:'/floodlens/data/reviewed.json',catalog:'/floodlens/data/areas.json',overview:'/floodlens/data/map-overview.json',outline:'/floodlens/data/clouds/outline.json',land:'/floodlens/data/explore/region-land.json',forecast:'/floodlens/data/forecast/forecast.json',cloud:'/floodlens/data/clouds/clouds.json',media:'/floodlens/data/reservoir-reports.json',locations:'/floodlens/data/reservoir-locations.json',cyclone:'/floodlens/data/explore/cyclone.json'};
+let language='en',layer='warnings',warningKind='flood',frame=0,selected=null,playing=null,loading=false,generation=0,cloudBroken=false;
+const data={},failed=new Set();let current={};
+const map=new ExploreMap($('#explore-map'),id=>select(id));
+const t=k=>copy[language][k]||copy.en[k]||k,local=v=>v?.[language]||v?.en||'',time=v=>new Intl.DateTimeFormat(language,{timeZone:'Asia/Colombo',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit',hour12:false}).format(new Date(v))+' SLST';
+const link=(title,url)=>{const a=node('a',title);a.href=url;a.target='_blank';a.rel='noopener noreferrer';return a;};
+function stop(){clearInterval(playing);playing=null;$('#play').textContent=t('play');$('#play').setAttribute('aria-pressed','false');}
+function addSource(title,body,url){const e=node('div',undefined,'source-pair');e.append(node('strong',title),node('p',body));if(url)e.append(link(t('source'),url));$('#source-content').append(e);}
+function button(text,id,small){const e=node('button',text,'list-button');e.type='button';if(small)e.append(node('small',small));e.onclick=()=>select(id,true);return e;}
+function legend(items){$('#legend').replaceChildren(...items.map(([text,cls])=>{const e=node('span');if(cls)e.append(node('i',undefined,'swatch-'+cls));e.append(document.createTextNode(text));return e;}));}
+function select(id,focus=false){selected=id;renderSelection();if(focus)$('#selection').scrollIntoView({block:'nearest'});}
+function selectDistrict(){const code=$('#district').value,area=data.catalog?.districts.find(d=>d.code===code);selected=null;if(!area){map.home(layer==='cyclone');renderSelection();return;}const point=[(area.bbox[0]+area.bbox[2])/2,(area.bbox[1]+area.bbox[3])/2];map.target(point,Math.max(1.5,(area.bbox[3]-area.bbox[1])*1.8));if(['rain','wind'].includes(layer)&&current.cells){let best=0,d=Infinity;for(const [i,c]of current.cells.entries()){const dist=(c.point[0]-point[0])**2+(c.point[1]-point[1])**2;if(dist<d){d=dist;best=i;}}selected='cell:'+best;}else selected='district:'+code;renderSelection();}
+function renderSelection(){
+ const root=$('#selection');root.replaceChildren();const parts=selected?.split(':')||[],kind=parts[0],id=parts[1];
+ const add=(tag,text,cls)=>root.append(node(tag,text,cls));
+ if(kind==='warning'){
+  const a=current.warnings?.areas.find(a=>a.area.code===id);if(!a){selected=null;return renderSelection();}
+  add('h2',local(a.area.names));add('span',t(warningKind==='rain'?'rainAdvisory':warningKind)+' · '+t('level')+' '+a.level,'badge '+({1:'yellow',2:'amber',3:'red'}[a.level]));
+  for(const w of a.bulletins){const article=node('article');article.append(node('h3',local(w.title)),node('p',local(w.summary)),node('small',t('issued')+': '+time(w.issuedAt)),node('small',t('validUntil')+': '+time(w.expiresAt)),link(t('source'),w.url));root.append(article);}return;
+ }
+ if(kind==='cell'){
+  const cell=current.cells?.[Number(id)];if(!cell){selected=null;return renderSelection();}
+  add('span',t('modelForecast'),'badge');add('h2',t('gridSample'));add('p',cell.value===null?t('noData'):(cell.value.toFixed(layer==='rain'?1:0)+' '+(layer==='rain'?'mm':'km/h')),'data-value');add('p',t(layer==='rain'?'rainAmount':'windSpeed'));add('small',t('interval')+': '+time(cell.start)+' → '+time(cell.end));add('p',t('forecastNote'));add('small',t('run')+': '+time(data.forecast.runAt));return;
+ }
+ if(kind==='report'){
+  const r=current.reports?.find(x=>x.tankCode===id);if(!r){selected=null;return renderSelection();}
+  add('span',t('news')+' · '+r.source,'badge');add('h2',r.name);add('p',r.spillCusecs.toLocaleString(language)+' '+t('cusecs'),'data-value');add('p',t('reportedRelease')+' · '+r.gateCount+' '+t('gates'));add('p',t('operationUnknown'));add('small',t('published')+': '+time(r.publishedAt));add('small',t('reviewed')+': '+time(r.reviewedAt));add('p',t('reservoirLocation'));root.append(link(t('source'),r.url));return;
+ }
+ if(kind==='cyclone'){
+  const p=data.cyclone?.points[Number(id)];if(!p||!current.cyclone){selected=null;return renderSelection();}
+  add('span',t(p.type==='reported'?'reported':'forecast'),'badge');add('h2',data.cyclone.name+' · '+time(p.at));add('p',p.windKmh.join('–')+' km/h','data-value');add('p',t('sustained')+' · '+t('gusts')+' '+p.gustKmh+' km/h');add('small',t('sourceClass')+': '+p.classification);add('p',t('cycloneNote'));root.append(link(t('source'),data.cyclone.source.url));return;
+ }
+ if(kind==='district'){
+  const a=data.catalog?.districts.find(d=>d.code===id);add('h2',a?local(a.names):t('selectDistrict'));add('p',t('warningNote'));const entries=current.warnings?.areas.filter(x=>x.area.districtCode===id)||[];for(const a of entries)root.append(button(local(a.area.names),'warning:'+a.area.code,t('level')+' '+a.level));if(!entries.length)add('p',t('noWarnings'));return;
+ }
+ if(layer==='cyclone'&&current.cyclone){add('h2',data.cyclone.name);add('p',t(current.cyclone.status==='review_due'?'reviewDue':'cycloneNote'));add('small',t('issued')+': '+time(data.cyclone.issuedAt));add('small',t('nextReview')+': '+time(data.cyclone.nextReviewDueAt));root.append(button(t('reported')+' · '+time(data.cyclone.analysisAt),'cyclone:0'));return;}
+ add('h2',t('choose'));add('p',t('chooseNote'));if(layer==='reports')add('p',t('reportsNote'));if(layer==='warnings')add('p',t('noCurrent'));
+}
+function translate(){document.documentElement.lang=language;document.querySelectorAll('[data-copy]').forEach(e=>e.textContent=t(e.dataset.copy));$('#explore-map svg').setAttribute('aria-label',t('title'));$('#district').replaceChildren(new Option(t('allIsland'),''));for(const d of data.catalog?.districts||[])$('#district').append(new Option(local(d.names),d.code));$('#play').textContent=t(playing?'pause':'play');}
+function render(){
+ current={};$('#source-content').replaceChildren(node('p',t('sourcesNote')),node('small',t('timeZone')));$('#list-content').replaceChildren();$('#timeline').hidden=true;$('#warning-filter').hidden=layer!=='warnings';$('#district-filter').hidden=['cyclone','clouds','reports'].includes(layer);$('#legend').replaceChildren();
+ const model={land:data.land,outline:data.outline};let title=t('loading'),note='',timestamp='',status='available';
+ try{
+  if(layer==='warnings'){
+   if(!data.warnings||!data.catalog||!data.overview)throw Error('Missing warning data');
+   const w=warningLayer(data.warnings,data.catalog,data.overview,warningKind);current.warnings=w;title=t('warningTitle')+' · '+t(warningKind==='rain'?'rainAdvisory':warningKind);note=t(['rain','lightning'].includes(warningKind)?'rainWarningNote':'warningNote');timestamp=t('reviewed')+': '+time(w.reviewedAt)+(w.reviewOlder?' · '+t('reviewOlder'):'');model.warnings=w.areas.map(a=>({...a,label:local(a.area.names)+' · '+t('level')+' '+a.level}));
+   for(const a of w.areas)$('#list-content').append(button(local(a.area.names),'warning:'+a.area.code,t('level')+' '+a.level));
+   for(const b of w.bulletins)addSource(local(b.title),b.authority+' · '+t('issued')+': '+time(b.issuedAt)+' · '+t('validUntil')+': '+time(b.expiresAt),b.url);
+   if(!w.bulletins.length){note=t('noWarnings');status='empty';}if(w.unmapped.length)$('#list-content').append(node('p',t('mapUnmapped')), ...w.unmapped.map(x=>node('p',x.area.division)));
+   legend(warningKind==='landslide'?[[t('level')+' 1','yellow'],[t('level')+' 2','amber'],[t('level')+' 3','red']]:[[t('level')+' 2 · Amber','amber']]);
+  }else if(['rain','wind'].includes(layer)){
+   if(!data.forecast)throw Error('No forecast');const f=forecastLayer(data.forecast);current.forecast=f;title=t(layer==='rain'?'rainTitle':'windTitle');note=t('forecastNote');timestamp=t('run')+': '+time(data.forecast.runAt);status=f.status;if(f.status==='incomplete'){note=t('incomplete');}else{frame=Math.min(frame,f.frames.length-1);current.cells=forecastCells(data.forecast,f.frames[frame],layer);model.cells=current.cells.map(c=>({...c,label:t('gridSample')+' '+(c.value===null?t('noData'):c.value.toFixed(1)+(layer==='rain'?' mm':' km/h'))}));if(f.status==='older_run')note=t('olderRun')+' '+note;timeline(f.frames.length,time(f.frames[frame].intervalStart)+' → '+time(f.frames[frame].validAt));}
+   legend(layer==='rain'?[['0–1 mm','rain0'],['1–5','rain1'],['5–15','rain2'],['15–30','rain3'],['30+','rain4'],[t('noData'),'missing']]:[['0–10 km/h','wind0'],['10–25','wind1'],['25–40','wind2'],['40–60','wind3'],['60+','wind4'],[t('noData'),'missing']]);
+   for(const d of data.catalog?.districts||[])$('#list-content').append(button(local(d.names),'weatherDistrict:'+d.code));
+   addSource(t('forecastCredit'),t('run')+': '+time(data.forecast.runAt)+' · '+t('reviewed')+': '+time(data.forecast.capturedAt),data.forecast.source);addSource('Provenance','0.25° · 198 regional points · m/s → km/h','/floodlens/data/forecast/provenance.json');
+  }else if(layer==='reports'){
+   if(!data.media||!data.locations)throw Error('No reports');current.reports=reviewedReports(data.media,data.locations);model.reports=current.reports;title=t('reportsTitle');note=t('reportsNote');timestamp=t('published')+': '+time(data.media.publishedAt);if(!current.reports.length){note=t('noReports');status='empty';}for(const r of current.reports)$('#list-content').append(button(r.name,'report:'+r.tankCode,r.spillCusecs.toLocaleString(language)+' '+t('cusecs')+' · '+t('news')));addSource(data.media.source,t('published')+': '+time(data.media.publishedAt)+' · '+t('reviewed')+': '+time(data.media.reviewedAt),data.media.url);
+  }else if(layer==='clouds'){
+   if(!data.cloud||cloudBroken)throw Error('No cloud image');const c=cloudState(data.cloud);title=t('cloudTitle');note=t('cloudNote');status=c.status;if(c.status==='available'){frame=Math.min(frame,data.cloud.frames.length-1);const f=data.cloud.frames[frame];model.cloud={bbox:data.cloud.bbox,path:f.path};model.onCloudError=()=>{cloudBroken=true;stop();render();};timestamp=t('captured')+': '+time(f.captureAt)+' · '+Math.floor((Date.now()-Date.parse(f.captureAt))/60000)+' '+t('minutesAgo');timeline(data.cloud.frames.length,t('captured')+': '+time(f.captureAt));for(const [i,f]of data.cloud.frames.entries())$('#list-content').append(button(time(f.captureAt),'cloud:'+i));}else note=t(c.status==='stale'?'cloudStale':'clockUnknown');addSource(t('cloudCredit'),data.cloud.attribution+' '+data.cloud.acknowledgement,data.cloud.source);addSource('JMA · CC BY 4.0',data.cloud.publication,data.cloud.terms);
+  }else{
+   if(!data.cyclone)throw Error('No cyclone source');const c=cycloneState(data.cyclone);title=t('cycloneTitle')+' · '+data.cyclone.name;status=c.status;note=t(c.status==='expired'?'cycloneExpired':c.status==='clock_unknown'?'clockUnknown':'cycloneNote');timestamp=t('issued')+': '+time(data.cyclone.issuedAt);if(['available','review_due'].includes(c.status)){current.cyclone=c;model.cyclone=data.cyclone;model.cycloneOld=c.status==='review_due';if(c.status==='review_due')note=t('reviewDue')+' '+note;for(const [i,p]of data.cyclone.points.entries())$('#list-content').append(button(t(p.type==='reported'?'reported':'forecast')+' · '+time(p.at),'cyclone:'+i,p.windKmh.join('–')+' km/h · '+p.classification));}legend([[t('reported'),null],[t('forecast')+' - - -',null]]);addSource('IMD / RSMC New Delhi',t('issued')+': '+time(data.cyclone.issuedAt)+' · '+t('validUntil')+': '+time(data.cyclone.validUntil)+' · '+t('reviewed')+': '+time(data.cyclone.reviewedAt),data.cyclone.source.url);addSource(t('nextReview'),time(data.cyclone.nextReviewDueAt),data.cyclone.corroboration.url);
+  }
+ }catch{title=t(layer);note=loading?t('loading'):t('unavailable');status=loading?'loading':'unavailable';}
+ $('#layer-title').textContent=title;$('#layer-time').textContent=timestamp;$('#map-note').textContent=note;$('#explore-map').dataset.layer=layer;$('#explore-map').dataset.layerStatus=status;
+ $('#source-message').hidden=!failed.size;$('#source-message').textContent=t('partial');map.set(model);renderSelection();
+}
+function timeline(count,text){$('#timeline').hidden=false;$('#frame-slider').max=count-1;$('#frame-slider').value=frame;$('#frame-slider').setAttribute('aria-valuetext',text);$('#frame-time').textContent=text;}
+const originalSelect=select;select=(id,focus=false)=>{if(id.startsWith('weatherDistrict:')){$('#district').value=id.split(':')[1];selectDistrict();if(focus)$('#selection').scrollIntoView({block:'nearest'});return;}if(id.startsWith('cloud:')){stop();frame=Number(id.split(':')[1]);render();return;}originalSelect(id,focus);};
+async function loadAll(){if(loading)return;loading=true;$('#refresh').disabled=true;const request=++generation;await Promise.allSettled(Object.entries(paths).map(async([key,url])=>{try{const r=await fetch(url,{cache:'no-store',credentials:'omit',referrerPolicy:'no-referrer',signal:AbortSignal.timeout(12000)});if(!r.ok)throw Error();const value=await r.json();if(request!==generation)return;data[key]=value;failed.delete(key);}catch{if(request===generation)failed.add(key);}}));if(request!==generation)return;loading=false;cloudBroken=false;$('#refresh').disabled=false;const district=$('#district').value;translate();$('#district').value=district;render();document.documentElement.dataset.exploreReady='true';}
+for(const b of document.querySelectorAll('.layers button[data-layer]'))b.onclick=()=>{stop();layer=b.dataset.layer;selected=null;frame=layer==='clouds'?2:0;$('#district').value='';document.querySelectorAll('.layers button[data-layer]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));map.home(layer==='cyclone');if(layer==='reports')map.target([80.04,8.0],1.4);render();};
+$('#explore-language').onchange=e=>{language=e.target.value;translate();render();};$('#warning-kind').onchange=e=>{warningKind=e.target.value;selected=null;render();};$('#district').onchange=selectDistrict;$('#zoom-in').onclick=()=>map.zoom(.65);$('#zoom-out').onclick=()=>map.zoom(1/.65);$('#map-home').onclick=()=>layer==='reports'?map.target([80.04,8.0],1.4):map.home(layer==='cyclone');$('#refresh').onclick=()=>{stop();loadAll();};$('#frame-slider').oninput=e=>{stop();frame=Number(e.target.value);render();};
+$('#play').onclick=()=>{if(playing){stop();return;}if(frame>=Number($('#frame-slider').max))frame=0;render();$('#play').textContent=t('pause');$('#play').setAttribute('aria-pressed','true');playing=setInterval(()=>{if(document.hidden||frame>=Number($('#frame-slider').max)){stop();return;}frame++;render();},1700);};
+document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();else render();});setInterval(()=>{if(!document.hidden)render();},60000);setInterval(()=>{if(!document.hidden)loadAll();},300000);
+translate();render();loadAll();

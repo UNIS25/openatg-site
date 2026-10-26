@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#f6f8f7">
+<meta name="description" content="Explore Sri Lanka's reviewed warnings, regional rain and wind forecasts, cloud images, reservoir reports and official cyclone guidance with Ark by OpenATG.">
+<meta name="referrer" content="no-referrer"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'">
+<title>Explore Sri Lanka · Ark by OpenATG</title><link rel="canonical" href="https://openatg.com/ark/explore/"><link rel="icon" href="/atg-mark-transparent.png">
+<link rel="stylesheet" href="/floodlens/explore.css?v=20261026-20"><script type="module" src="/floodlens/explore-app.mjs?v=20261026-20"></script>
+</head>
+<body>
+<a href="#explore-main" class="skip">Skip to map controls</a>
+<header><a href="/ark/" class="brand"><strong>Ark</strong><span>by <img src="/atg-mark-transparent.png" alt=""> OpenATG</span></a><a href="/ark/" data-copy="back">My location ↗</a></header>
+<main id="explore-main">
+<div class="heading"><div><p class="eyebrow" data-copy="eyebrow">SRI LANKA + BAY OF BENGAL</p><h1 data-copy="title">Explore the situation</h1></div><label><span class="sr-only" data-copy="language">Language</span><select id="explore-language" aria-label="Language"><option value="en">English</option><option value="si">සිංහල</option><option value="ta">தமிழ்</option></select></label></div>
+<p class="intro" data-copy="intro">Choose a layer. Every source keeps its own time and meaning.</p>
+<nav class="layers" aria-label="Map layers"><button data-layer="warnings" aria-pressed="true" data-copy="warnings">Warnings</button><button data-layer="rain" aria-pressed="false" data-copy="rain">Rain</button><button data-layer="wind" aria-pressed="false" data-copy="wind">Wind</button><button data-layer="clouds" aria-pressed="false" data-copy="clouds">Clouds</button><button data-layer="reports" aria-pressed="false" data-copy="reports">Reports</button><button data-layer="cyclone" aria-pressed="false" data-copy="cyclone">Cyclone</button></nav>
+<div id="source-message" class="notice" role="status" hidden></div>
+<div class="workspace"><section class="map-panel" aria-label="Situation map">
+<div class="map-heading"><div><strong id="layer-title">Reviewed warning areas</strong><p id="layer-time">Loading published sources…</p></div><button id="refresh" class="quiet" data-copy="refresh">Refresh</button></div>
+<div class="filters"><label id="warning-filter"><span data-copy="warningKind">Warning type</span><select id="warning-kind"><option value="flood" data-copy="flood">Flood</option><option value="landslide" data-copy="landslide">Landslide</option><option value="rain" data-copy="rainAdvisory">Heavy rain</option><option value="lightning" data-copy="lightning">Lightning</option></select></label><label id="district-filter"><span data-copy="district">Find district</span><select id="district"><option value="" data-copy="allIsland">All Sri Lanka</option></select></label></div>
+<div id="explore-map" class="explore-map"><div class="map-buttons"><button id="zoom-in" aria-label="Zoom in">+</button><button id="zoom-out" aria-label="Zoom out">−</button><button id="map-home" aria-label="Reset map">⌂</button></div></div>
+<p id="map-note" class="map-note"></p><div id="legend" class="legend"></div>
+<div id="timeline" class="timeline" hidden><div><button id="play" aria-pressed="false" data-copy="play">Play</button><span id="frame-time"></span></div><input id="frame-slider" type="range" min="0" max="7" step="1" value="0" aria-label="Time step"></div>
+<p class="map-help" data-copy="gesture">Drag to move · pinch or +/− to zoom · tap a marked area</p>
+</section><aside class="information"><section id="selection" aria-live="polite"><h2 data-copy="choose">Tap the map to explore</h2><p data-copy="chooseNote">Or choose a district. This is a regional overview, not a safety assessment for a home.</p></section><details id="layer-list"><summary data-copy="browse">Browse this layer</summary><div id="list-content"></div></details><details id="sources"><summary data-copy="sources">Sources & update times</summary><div id="source-content"></div></details><a class="help" href="tel:117"><strong>117</strong><span data-copy="help">Disaster help · Sri Lanka</span></a><p class="translation" data-copy="translation">Interface translations are not official. Original bulletins are linked.</p></aside></div>
+<p class="footer-note" data-copy="footer">Missing data does not mean safe. Reported events, official warnings and model forecasts are separate evidence.</p>
+<footer><a href="/ark/" data-copy="back">My location ↗</a><a href="https://www.dmc.gov.lk/" target="_blank" rel="noopener noreferrer">DMC ↗</a><a href="https://www.naturalearthdata.com/about/terms-of-use/" target="_blank" rel="noopener noreferrer">Natural Earth</a><a href="https://data.humdata.org/dataset/cod-ab-lka" target="_blank" rel="noopener noreferrer">Survey Department / OCHA · CC BY 3.0 IGO</a></footer>
+</main><noscript><p>JavaScript is required for this optional map. <a href="https://www.dmc.gov.lk/">Open official DMC warnings</a> or call <a href="tel:117">117</a>.</p></noscript>
+</body></html>
