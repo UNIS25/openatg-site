@@ -222,7 +222,7 @@ official warnings with “may cover” language. Rain-only coverage explicitly s
 a broad Heavy-rain advisory, not local inundation. Unlisted areas remain unassessed.
 Manual placement uses a fixed centre crosshair, one-finger pan, two-finger pinch,
 keyboard controls, and a separate large confirmation button. Search does not
-submit a pin; a map interaction followed by confirmation is required.
+submit a pin. Since release 15, search centres the visible map approximately and the user can explicitly confirm that centre without a mandatory drag. Manual accuracy remains unknown.
 
 The on-device administrative basemap is a 246 KB display-only simplification
 of the licensed 2022 boundaries. Exact unsimplified district shards still perform
@@ -576,3 +576,34 @@ into Ark and no issue/expiry time is invented. Primary Google support describes
 20 km flash-flood weather modelling and explicitly notes limitations around
 man-made causes/dam operations. It does not replace official warnings, the
 reservoir daily record or parcel-specific hydraulic evidence.
+
+
+## Simplified public result — release 20261026-15
+
+The header reads Ark by OpenATG, with the existing mark beside OpenATG. The
+result keeps the official status and action, one location map, two 24-hour weather
+numbers, optional three-hour playback, and compact reservoir records. Technical
+grid/coverage metadata, raw records and full sources remain behind disclosures.
+The 24-hour rainfall sum and playback now use exactly the same eight native
+three-hour intervals. The earlier interval outside that window is not the default
+playback frame. Expired forecast horizons have no playback or current total.
+
+The earlier historical-evidence UI described in releases 12/13 is removed from
+the public result at the user's request. No public control, old flood overlay,
+satellite/NASA raster request or historical summary remains in that result.
+Scientific source files, pixel logic, provenance and tests are preserved; they
+are not used to claim current inundation. Official weather and IMD regional
+bulletin links remain available, without fabricated current imagery.
+
+The floodwater help question is optional. Advice opens only after the visitor
+selects Yes; No/unsure hides it. The answer is not sent, stored or used to change
+hazard classification, and resets when the location changes. Disaster help 117
+also remains accessible beside the primary result.
+
+No-current-warning wording requires a fresh reviewed snapshot, a resolved
+location, no load failure and no expired/unknown locally matching bulletin.
+A recently expired local warning remains Information outdated, not an all-clear.
+Reservoir gate counts/openings keep the source date, unknown operation time and
+source-conflict disclosure; no zero-gate or non-spill value creates a safe state.
+No warning/observation data, forecast data, publisher permission or workflow was
+changed in this presentation release.

@@ -1,8 +1,8 @@
-import {mountForecast} from './forecast-ui.mjs?v=20261026-14';
-import {createContext} from './context-ui.mjs?v=20261026-14';
-import {streetEnabled} from './street-map.mjs?v=20261026-14';
-import {LocationMap} from './location-map.mjs?v=20261026-14';
-import {locationEvidence,warningState,ageState,insideGeometry,intersectsAccuracy,locationCandidates} from './core.mjs?v=20261026-14';
+import {mountForecast} from './forecast-ui.mjs?v=20261026-15';
+import {createContext} from './context-ui.mjs?v=20261026-15';
+import {streetEnabled} from './street-map.mjs?v=20261026-15';
+import {LocationMap} from './location-map.mjs?v=20261026-15';
+import {locationEvidence,warningState,warningMatches,ageState,insideGeometry,intersectsAccuracy,locationCandidates} from './core.mjs?v=20261026-15';
 const $=s=>document.querySelector(s);
 export function createFlow({t,name,getData,getCatalog,onLanguage,onArea,onRefresh}){
  let stage='language',point=null,accuracy=null,mode='gps',area=null,candidates=[],state='idle',manualPoint=null,catalog=null,locationRequest=0,matchRequest=0,lastMapMode=false;
@@ -23,6 +23,7 @@ export function createFlow({t,name,getData,getCatalog,onLanguage,onArea,onRefres
  }
  async function match(p,uncertainty,source){
   const request=++matchRequest;
+  $('#water-guidance').hidden=true;$('#water-yes').setAttribute('aria-pressed','false');$('#water-no').setAttribute('aria-pressed','false');$('#water-here').open=false;
   point=[...p];accuracy=uncertainty;mode=source;area=null;candidates=[];state='checking';onArea(null);show('result');
   resultMap.set({center:point,span:Math.max(streetEnabled()?.012:.055,(uncertainty||0)/111320*6),point,accuracy,mode:source});resultMap.load();render();
   if(p[1]<5.7||p[1]>10.1||p[0]<79.3||p[0]>82.1){state='outside';render();return;}
@@ -75,12 +76,13 @@ export function createFlow({t,name,getData,getCatalog,onLanguage,onArea,onRefres
    }else if(evidence.kind==='flood'){title='amberFlood';body=uncertain?'possibleFloodBody':'floodShortBody';severity='warning';}
    else if(evidence.kind==='lightning'){title='lightning';body=uncertain?'possibleLightningBody':'lightningBody';severity='advisory';}
    else{title='rainAdvisory';body=uncertain?'possibleRainBody':'rainAdvisoryBody';severity='advisory';}
-   facts=evidence.kind==='lightning'?['lightningAction',uncertain?'improvePinAction':'validUntil']:[evidence.level===3?'followOfficialEvacuation':evidence.kind==='rain'?'checkOfficialShort':'avoidWaterShort',uncertain?'improvePinAction':'areaNotHome'];
+   facts=evidence.kind==='lightning'?['lightningAction',uncertain?'improvePinAction':'validUntil']:[evidence.level===3?'followOfficialEvacuation':evidence.kind==='rain'?'checkOfficialShort':'avoidWaterShort',...(uncertain?['improvePinAction']:[])];
   }else if(uncertain){title='matchUnknown';body='boundaryUncertain';facts=['improvePinAction','missingNotSafe'];}
-  else if(data&&!data.bulletins.some(w=>warningState(w)==='active')){title='outdatedShort';body='checkLatestShort';}
+  else if(data&&(!data.bulletins.some(w=>warningState(w)==='active')||data.bulletins.some(w=>candidateAreas.some(a=>warningMatches(w,a))&&warningState(w)!=='active'))){title='outdatedShort';body='checkLatestShort';}
+  else if(data&&ageState(data.reviewedAt,3)==='fresh'&&!loadFailed){title='noWarningFound';body='notAllClear';facts=['checkOfficialShort'];}
   if(needsUpdate){title='updateShort';body='updateShortBody';facts=['checkOfficialShort'];severity='unknown';}
   if(!navigator.onLine)facts.unshift('offlineShort');else if(loadFailed)facts.unshift('refreshFailedShort');
-  $('#area-selection').textContent=area?name(area)+' · '+t('division'):t(mode==='gps'?'yourGps':'yourPin');
+  $('#area-selection').textContent=area?name(area):t(mode==='gps'?'yourGps':'yourPin');
   $('#accuracy-label').textContent=mode==='gps'?t(accuracy>1500?'approximateGps':'gpsAccuracy')+' ±'+Math.round(accuracy)+' m':t('manualAccuracy');$('#improve-location').hidden=!uncertain;
   $('#assessment').className='compact-assessment '+severity;$('#assessment-title').textContent=t(title);$('#assessment-copy').textContent=t(body);$('#result-symbol').textContent=severity!=='unknown'?'!':'?';
   const list=$('#quick-facts');list.replaceChildren();for(const key of facts.slice(0,2)){const li=document.createElement('li');li.textContent=key==='validUntil'&&primary?t(key)+': '+new Intl.DateTimeFormat(document.documentElement.lang,{timeZone:'Asia/Colombo',day:'numeric',month:'short',hour:'2-digit',minute:'2-digit',hour12:false}).format(new Date(primary.expiresAt))+' · SLST':t(key);list.append(li);}
@@ -95,8 +97,10 @@ export function createFlow({t,name,getData,getCatalog,onLanguage,onArea,onRefres
  $('#improve-location').addEventListener('click',()=>openManual({point,accuracy:accuracy||100}));
  $('#cancel-pin').addEventListener('click',()=>{$('#manual-panel').hidden=true;$('#location-screen').classList.remove('manual-open');});
  $('#use-pin').addEventListener('click',()=>{if(manualPoint)match(manualPoint,null,'manual');});
- $('#area-search').addEventListener('input',async()=>{const query=$('#area-search').value.trim().toLocaleLowerCase();const list=$('#area-results');list.replaceChildren();list.hidden=!query;if(!query)return;try{catalog=await getCatalog();for(const a of [...catalog.districts,...catalog.divisions].filter(a=>Object.values(a.names).concat(Object.values(a.displayNames||{}),a.aliases||[],a.code).some(n=>String(n).toLocaleLowerCase().includes(query))).slice(0,12)){const b=document.createElement('button');b.type='button';b.textContent=name(a)+' · '+t(a.type);b.addEventListener('click',()=>{const [x0,y0,x1,y1]=a.bbox;pinMap.set({center:[(x0+x1)/2,(y0+y1)/2],span:Math.max(x1-x0,(y1-y0)/.75)*1.15,point:null,accuracy:null,labels:labels()});manualPoint=null;$('#use-pin').disabled=true;$('#area-search').value=name(a);list.hidden=true;$('#manual-status').textContent=t('pinInstruction');});list.append(b);}if(!list.childElementCount)list.textContent=t('noSearch');}catch{list.textContent=t('mapUnavailable');}});
+ $('#area-search').addEventListener('input',async()=>{const query=$('#area-search').value.trim().toLocaleLowerCase();const list=$('#area-results');list.replaceChildren();list.hidden=!query;if(!query)return;try{catalog=await getCatalog();for(const a of [...catalog.districts,...catalog.divisions].filter(a=>Object.values(a.names).concat(Object.values(a.displayNames||{}),a.aliases||[],a.code).some(n=>String(n).toLocaleLowerCase().includes(query))).slice(0,12)){const b=document.createElement('button');b.type='button';b.textContent=name(a)+' · '+t(a.type);b.addEventListener('click',()=>{const [x0,y0,x1,y1]=a.bbox;const centre=[(x0+x1)/2,(y0+y1)/2];pinMap.set({center:centre,span:Math.max(x1-x0,(y1-y0)/.75)*1.15,point:null,accuracy:null,labels:labels()});manualPoint=pinMap.error?null:centre;$('#use-pin').disabled=!manualPoint;$('#area-search').value=name(a);list.hidden=true;$('#manual-status').textContent=t('searchPinHint');});list.append(b);}if(!list.childElementCount)list.textContent=t('noSearch');}catch{list.textContent=t('mapUnavailable');}});
  $('#all-details').addEventListener('toggle',()=>{if($('#all-details').open)onRefresh();});
+ $('#water-yes').addEventListener('click',()=>{$('#water-guidance').hidden=false;$('#water-yes').setAttribute('aria-pressed','true');$('#water-no').setAttribute('aria-pressed','false');});
+ $('#water-no').addEventListener('click',()=>{$('#water-guidance').hidden=true;$('#water-yes').setAttribute('aria-pressed','false');$('#water-no').setAttribute('aria-pressed','true');});
  document.addEventListener('floodlens-map-mode',render);
  return {render};
 }

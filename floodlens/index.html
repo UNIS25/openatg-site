@@ -10,14 +10,14 @@
   <title>Ark by OpenATG · Sri Lanka weather & flood awareness</title>
   <link rel="canonical" href="https://openatg.com/floodlens/">
   <link rel="icon" href="../atg-mark-transparent.png">
-  <link rel="stylesheet" href="floodlens.css?v=20261026-14">
-  <link rel="stylesheet" href="forecast.css?v=20261026-14">
-  <script type="module" src="app.mjs?v=20261026-14"></script>
+  <link rel="stylesheet" href="floodlens.css?v=20261026-15">
+  <link rel="stylesheet" href="forecast.css?v=20261026-15">
+  <script type="module" src="app.mjs?v=20261026-15"></script>
 </head>
 <body>
   <a href="#main" class="skip" data-i18n="skip">Skip to content</a>
   <header class="header"><div class="header-inner">
-    <a class="brand" href="/" aria-label="OpenATG home"><img src="../atg-mark-transparent.png" width="30" height="28" alt=""><strong>Ark</strong><span class="brand-divider">by</span>OpenATG</a>
+    <a class="brand" href="/" aria-label="OpenATG home"><strong>Ark</strong><span class="brand-divider">by</span><span class="brand-maker"><img src="../atg-mark-transparent.png" width="25" height="25" alt="">OpenATG</span></a>
     <label class="language" hidden><span class="sr-only" data-i18n="language">Language</span><select id="language" aria-label="Language"><option value="en">English</option><option value="si">සිංහල</option><option value="ta">தமிழ்</option></select></label>
   </div></header>
   <main id="main" class="shell">
@@ -45,16 +45,16 @@
     <section id="result-screen" class="flow-screen result-screen" hidden aria-labelledby="assessment-title">
       <div class="result-place"><div><span id="area-selection"></span><span id="accuracy-label"></span></div><button id="change-location" class="text-button" data-i18n="changeLocation">Change</button></div>
       <section id="assessment" class="compact-assessment" aria-live="polite"><span id="result-symbol" aria-hidden="true">?</span><div><h1 id="assessment-title">Risk unknown</h1><p id="assessment-copy"></p></div></section>
-      <div id="result-map" class="location-map"></div>
-      <div class="map-caption"><span data-i18n="adminMap">Area boundaries · 2022</span><span data-i18n="notHazardMap">Not a flood map</span></div>
       <ul id="quick-facts" class="quick-facts"></ul>
       <button id="improve-location" class="text-button" data-i18n="improvePin" hidden>Improve location</button>
       <div class="result-actions"><a id="quick-source" class="button" href="https://www.dmc.gov.lk/" target="_blank" rel="noopener noreferrer" data-i18n="officialUpdate">Official warning ↗</a><a class="help-short" href="tel:117"><span data-i18n="helpShort">Help</span><strong>117</strong></a></div>
-      <details id="water-here" class="water-here"><summary data-i18n="waterHere">Water is already here</summary><div><p data-i18n="waterHereAction">Do not walk or drive through floodwater. Follow official evacuation instructions.</p><p data-i18n="waterHereLimit">This opens safety guidance; it does not record or verify flooding at your pin. Current nearby shelter opening and safe routes are not verified.</p><div class="quick-help"><a href="tel:117" data-i18n="helpDisaster">117 · Disaster help</a><a href="tel:1990" data-i18n="helpAmbulance">1990 · Ambulance</a><a href="tel:119" data-i18n="helpPolice">119 · Police</a></div><a href="https://np.gov.lk/pdf/DMC/irrigation_NPC.pdf" target="_blank" rel="noopener noreferrer" data-i18n="guidanceSource">Official flood guidance ↗</a></div></details>
+      <div id="result-map" class="location-map"></div>
+      <div class="map-caption"><span data-i18n="mapYourLocation">Location map</span><span data-i18n="notHazardMap">Not a flood map</span></div>
       <section id="location-forecast" aria-label="Regional weather forecast" hidden></section>
       <section id="location-context" class="location-context" aria-live="polite" hidden></section>
-      <details id="historical-evidence" class="historical-evidence" hidden><summary></summary><div class="history-body"></div></details>
-      <details id="all-details" class="all-details"><summary data-i18n="detailsShort">Details</summary><div class="details-content"><details id="context-details" class="context-details"><summary></summary><div></div></details>
+      <details id="water-here" class="water-here"><summary data-i18n="waterHere">Is there floodwater near you?</summary><div><div class="water-answer"><button id="water-yes" type="button" class="button" data-i18n="waterYes" aria-pressed="false">Yes — show help</button><button id="water-no" type="button" class="text-button" data-i18n="waterNo" aria-pressed="false">No / unsure</button></div><div id="water-guidance" hidden><p data-i18n="waterHereAction">Do not walk or drive through floodwater. Follow official evacuation instructions.</p><div class="quick-help"><a href="tel:117" data-i18n="helpDisaster">117 · Disaster help</a><a href="tel:1990" data-i18n="helpAmbulance">1990 · Ambulance</a><a href="tel:119" data-i18n="helpPolice">119 · Police</a></div><a href="https://np.gov.lk/pdf/DMC/irrigation_NPC.pdf" target="_blank" rel="noopener noreferrer" data-i18n="guidanceSource">Official flood guidance ↗</a></div><p class="small" data-i18n="waterPrivate">Your answer stays on this page.</p></div></details>
+      <nav class="weather-links" aria-label="Official weather sources"><a href="https://meteo.gov.lk/index.php?lang=en" target="_blank" rel="noopener noreferrer" data-i18n="weatherOfficial">Official weather ↗</a><a href="https://mausam.imd.gov.in/Forecast/seaarea_bulletin_new.php?id=0" target="_blank" rel="noopener noreferrer" data-i18n="cycloneOfficial">IMD cyclone bulletin ↗</a></nav>
+      <details id="all-details" class="all-details"><summary data-i18n="detailsShort">Sources & updates</summary><div class="details-content"><details id="context-details" class="context-details"><summary></summary><div></div></details>
         <div id="candidate-choices" class="candidate-choices" hidden></div><div id="connection" class="connection" role="status" hidden></div>
     <div class="section-heading"><div><p class="eyebrow" data-i18n="officialLabel">FROM THE AUTHORITIES</p><h2 data-i18n="warningsTitle">Official warning bulletins</h2></div><button id="refresh" class="text-button" data-i18n="refresh">↻ Check updates</button></div>
     <p id="warning-freshness" class="source-note" role="status"></p>

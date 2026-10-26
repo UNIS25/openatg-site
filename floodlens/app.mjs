@@ -1,7 +1,7 @@
-import {copy} from './i18n.mjs?v=20261026-14';
-import {renderReservoirs,refreshReservoirs} from './reservoirs.mjs?v=20261026-14';
-import {createFlow} from './flow.mjs?v=20261026-14';
-import {warningState,ageState,dailyAgeState,warningMatches,assessment,validateSnapshot,intersectsAccuracy,locationCandidates,insideGeometry} from './core.mjs?v=20261026-14';
+import {copy} from './i18n.mjs?v=20261026-15';
+import {renderReservoirs,refreshReservoirs} from './reservoirs.mjs?v=20261026-15';
+import {createFlow} from './flow.mjs?v=20261026-15';
+import {warningState,ageState,dailyAgeState,warningMatches,assessment,validateSnapshot,intersectsAccuracy,locationCandidates,insideGeometry} from './core.mjs?v=20261026-15';
 const $=s=>document.querySelector(s);
 let lang='en',data=null,catalog=null,selected=null,locationMessage='',outside=false,loadFailed=false,loading=false,needsUpdate=false;
 const t=k=>copy[lang][k]??copy.en[k]??k;
