@@ -732,3 +732,20 @@ are unchanged; the observation review time and source provenance are separate.
 See [EXPLORE.md](EXPLORE.md) for layer semantics, original cyclone sources,
 review deadlines and tests. It does not change the approved reservoir-only
 publisher, schedules, token permissions or main location assessment.
+
+## Reviewed overnight weather refresh, 26 October 2026
+
+The ECMWF 12:00 UTC run became available during the 20:51 UTC source check.
+All 54 GRIB fields passed run/time/unit/grid validation, with 17 complete
+three-hour regional intervals and no capture errors. Direct cumulative-GRIB
+endpoint differences independently verified three rolling 24-hour windows at
+all 198 grid points, accounting for documented packing precision. Eight raw
+wind-vector samples per window also matched at three public test points.
+The original 06:00 run remains in Git history; the displayed run is never
+relabelled as retrieval time. No automatic publishing permission changed.
+
+NASA GIBS advertised and supplied actual 19:40, 19:50 and 20:00 UTC Himawari
+frames. All four source tiles per frame, country alpha coverage and four
+public-location pixels passed validation; the latest source crop was visually
+inspected. New timestamped images preserve immutable paths for older clients.
+The new cloud snapshot hides after 23:00 UTC, three hours after capture.

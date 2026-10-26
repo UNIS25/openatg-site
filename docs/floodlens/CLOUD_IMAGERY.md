@@ -29,9 +29,10 @@ derives the CRS84 grid from the 2km/5 matrix: origin -180,90; 512-pixel tiles;
 pixel-aligned lossless crop, with no recolouring or resampling. The resulting
 189 × 274 images cover [79.189453125, 5.484375, 82.51171875, 10.30078125].
 
-The reviewed capture contains 26 October 2026 **18:30, 18:40 and 19:00 UTC**.
-An advertised 18:50 frame returned 404 for a required tile and is recorded as
-unavailable, not interpolated. A 401/403 stops capture rather than trying an
+The current reviewed capture contains 26 October 2026 **19:40, 19:50 and 20:00 UTC**,
+retrieved at about 20:52 UTC. All three advertised frames were available. The
+initial 18:30/18:40/19:00 capture and its missing 18:50 frame remain in Git history;
+that missing frame was never interpolated. A 401/403 stops capture rather than trying an
 alternative identity. The bounded search examines at most six advertised time
 slots and requires three complete, distinct frames.
 
@@ -44,7 +45,9 @@ and missing frames are preserved in `data/clouds/provenance.json` and the manife
 
 ## Runtime and privacy
 
-No cloud metadata or image is requested until the visitor opens the section.
+On the location view, no cloud metadata or image is requested until the visitor
+opens the section. Explore loads its fixed manifest with the other layer metadata,
+but loads imagery only when the cloud layer is chosen.
 All files come from OpenATG; there is no NASA/JMA browser request and no precise
 coordinate in a URL or storage. The pin is drawn locally over the same country
 image for every visitor. Local outlines provide geographic context. Three

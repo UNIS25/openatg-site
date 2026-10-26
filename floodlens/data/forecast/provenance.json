@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "createdAt": "2026-10-26T18:44:08.507787Z",
-  "runAt": "2026-10-26T06:00:00Z",
-  "forecastSha256": "708ab6ee8216b37f07d15bbf55d8dc7d42244084213333cfed93fd43674c64fa",
-  "forecastBytes": 174574,
+  "createdAt": "2026-10-26T20:56:41.349854Z",
+  "runAt": "2026-10-26T12:00:00Z",
+  "forecastSha256": "ff66d2a31f8a9694f87eca38daf86ceeb6bde765016a8576dd509bdb90791061",
+  "forecastBytes": 172401,
   "decoder": {
     "ecCodes": "2.50.0",
     "pythonPackage": "2.50.0"
@@ -11,11 +11,11 @@
   "sources": [
     {
       "kind": "index",
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-9h-oper-fc.index",
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-9h-oper-fc.index",
       "rangeStart": null,
-      "bytes": 41352,
-      "sha256": "982f0af7b5268abf50f33831ebd1e5f342f5f9f81d985903d3263dfa2ddeca7f",
-      "retrievedAt": "2026-10-26T15:56:11.172820Z"
+      "bytes": 41345,
+      "sha256": "506e7f1654842568d2c08951afb142d7231a3a8ca13ec6d8f60870754be34850",
+      "retrievedAt": "2026-10-26T20:52:57.941429Z"
     },
     {
       "kind": "grib",
@@ -24,7 +24,7 @@
       "indexRow": {
         "domain": "g",
         "date": "20261026",
-        "time": "0600",
+        "time": "1200",
         "expver": "0001",
         "class": "od",
         "type": "fc",
@@ -32,8 +32,8 @@
         "levtype": "sfc",
         "step": "9",
         "param": "tp",
-        "_offset": 17506568,
-        "_length": 277833
+        "_offset": 11802354,
+        "_length": 279550
       },
       "metadata": {
         "edition": 2,
@@ -42,9 +42,9 @@
         "paramId": 228,
         "units": "m",
         "dataDate": 20261026,
-        "dataTime": 600,
+        "dataTime": 1200,
         "validityDate": 20261026,
-        "validityTime": 1500,
+        "validityTime": 2100,
         "stepType": "accum",
         "stepUnits": 1,
         "startStep": 0,
@@ -74,11 +74,11 @@
         "jPointsAreConsecutive": 0,
         "alternativeRowScanning": 0
       },
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-9h-oper-fc.grib2",
-      "rangeStart": 17506568,
-      "bytes": 277833,
-      "sha256": "d1d5d49d174dcd5fe3b9a1eda43f70ccc15cdfdb9daa376d495bd1f6649be23d",
-      "retrievedAt": "2026-10-26T15:56:14.259499Z"
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-9h-oper-fc.grib2",
+      "rangeStart": 11802354,
+      "bytes": 279550,
+      "sha256": "b13384b668c20fdefd960b539c92b2aeef92f65f565c7003705bdf95fa34e61e",
+      "retrievedAt": "2026-10-26T20:53:00.893566Z"
     },
     {
       "kind": "grib",
@@ -87,7 +87,7 @@
       "indexRow": {
         "domain": "g",
         "date": "20261026",
-        "time": "0600",
+        "time": "1200",
         "expver": "0001",
         "class": "od",
         "type": "fc",
@@ -95,8 +95,8 @@
         "step": "9",
         "levtype": "sfc",
         "param": "10u",
-        "_offset": 22115051,
-        "_length": 737202
+        "_offset": 18391040,
+        "_length": 738290
       },
       "metadata": {
         "edition": 2,
@@ -105,9 +105,9 @@
         "paramId": 165,
         "units": "m s**-1",
         "dataDate": 20261026,
-        "dataTime": 600,
+        "dataTime": 1200,
         "validityDate": 20261026,
-        "validityTime": 1500,
+        "validityTime": 2100,
         "stepType": "instant",
         "stepUnits": 1,
         "startStep": 9,
@@ -137,11 +137,11 @@
         "jPointsAreConsecutive": 0,
         "alternativeRowScanning": 0
       },
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-9h-oper-fc.grib2",
-      "rangeStart": 22115051,
-      "bytes": 737202,
-      "sha256": "0d37cd4636d5443875a2242803d48a8a99e0e5113089f201e6b929b7ad55b507",
-      "retrievedAt": "2026-10-26T15:56:18.225298Z"
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-9h-oper-fc.grib2",
+      "rangeStart": 18391040,
+      "bytes": 738290,
+      "sha256": "a13a295478e704cf56da0c2221aaa913a88d98aa1c4e6fd249da084d7aa7a60d",
+      "retrievedAt": "2026-10-26T20:53:04.861154Z"
     },
     {
       "kind": "grib",
@@ -150,7 +150,7 @@
       "indexRow": {
         "domain": "g",
         "date": "20261026",
-        "time": "0600",
+        "time": "1200",
         "expver": "0001",
         "class": "od",
         "type": "fc",
@@ -158,8 +158,8 @@
         "step": "9",
         "levtype": "sfc",
         "param": "10v",
-        "_offset": 23803158,
-        "_length": 602065
+        "_offset": 20828855,
+        "_length": 727337
       },
       "metadata": {
         "edition": 2,
@@ -168,9 +168,9 @@
         "paramId": 166,
         "units": "m s**-1",
         "dataDate": 20261026,
-        "dataTime": 600,
+        "dataTime": 1200,
         "validityDate": 20261026,
-        "validityTime": 1500,
+        "validityTime": 2100,
         "stepType": "instant",
         "stepUnits": 1,
         "startStep": 9,
@@ -183,9 +183,9 @@
         "missingValue": 9999,
         "packingType": "grid_ccsds",
         "bitsPerValue": 11,
-        "binaryScaleFactor": -4,
+        "binaryScaleFactor": -5,
         "decimalScaleFactor": 0,
-        "packingError": 0.03125190734863281,
+        "packingError": 0.015625953674316406,
         "gridType": "regular_ll",
         "Ni": 1440,
         "Nj": 721,
@@ -200,19 +200,19 @@
         "jPointsAreConsecutive": 0,
         "alternativeRowScanning": 0
       },
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-9h-oper-fc.grib2",
-      "rangeStart": 23803158,
-      "bytes": 602065,
-      "sha256": "bad858279df68eba2ad167e3712c1ce73cd8fc847baab29463e28a54b5b1a14b",
-      "retrievedAt": "2026-10-26T15:56:21.684595Z"
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-9h-oper-fc.grib2",
+      "rangeStart": 20828855,
+      "bytes": 727337,
+      "sha256": "3e92bb242f4cd8c99bcf86c06e2d1c90fd5d3a3100ab17f9423163da244d2bc8",
+      "retrievedAt": "2026-10-26T20:53:08.273993Z"
     },
     {
       "kind": "index",
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-12h-oper-fc.index",
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-12h-oper-fc.index",
       "rangeStart": null,
       "bytes": 41541,
-      "sha256": "76e9d8bec5b271074df054130d3f134f2f9f0cc7aca0032f9143132763af9f03",
-      "retrievedAt": "2026-10-26T15:56:23.939470Z"
+      "sha256": "407a0e147ed63eb6c3591265f95052a7729c2d934cc86e675efc06627331db39",
+      "retrievedAt": "2026-10-26T20:53:10.455177Z"
     },
     {
       "kind": "grib",
@@ -221,7 +221,7 @@
       "indexRow": {
         "domain": "g",
         "date": "20261026",
-        "time": "0600",
+        "time": "1200",
         "expver": "0001",
         "class": "od",
         "type": "fc",
@@ -229,8 +229,8 @@
         "levtype": "sfc",
         "step": "12",
         "param": "tp",
-        "_offset": 14157211,
-        "_length": 307424
+        "_offset": 15268881,
+        "_length": 306106
       },
       "metadata": {
         "edition": 2,
@@ -239,9 +239,9 @@
         "paramId": 228,
         "units": "m",
         "dataDate": 20261026,
-        "dataTime": 600,
-        "validityDate": 20261026,
-        "validityTime": 1800,
+        "dataTime": 1200,
+        "validityDate": 20261027,
+        "validityTime": 0,
         "stepType": "accum",
         "stepUnits": 1,
         "startStep": 0,
@@ -271,11 +271,11 @@
         "jPointsAreConsecutive": 0,
         "alternativeRowScanning": 0
       },
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-12h-oper-fc.grib2",
-      "rangeStart": 14157211,
-      "bytes": 307424,
-      "sha256": "c49eb5f302a3ec235acba0c5cd88c44295e4eb931e941f9d4c56e4344b11241d",
-      "retrievedAt": "2026-10-26T15:56:27.463239Z"
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-12h-oper-fc.grib2",
+      "rangeStart": 15268881,
+      "bytes": 306106,
+      "sha256": "d70b30d81802db17f0b91069f2264fa7d1b9697cf7e4db8ab73316dfa564e02c",
+      "retrievedAt": "2026-10-26T20:53:13.393780Z"
     },
     {
       "kind": "grib",
@@ -284,7 +284,7 @@
       "indexRow": {
         "domain": "g",
         "date": "20261026",
-        "time": "0600",
+        "time": "1200",
         "expver": "0001",
         "class": "od",
         "type": "fc",
@@ -292,8 +292,8 @@
         "step": "12",
         "levtype": "sfc",
         "param": "10u",
-        "_offset": 19173407,
-        "_length": 738798
+        "_offset": 19375744,
+        "_length": 736754
       },
       "metadata": {
         "edition": 2,
@@ -302,13 +302,210 @@
         "paramId": 165,
         "units": "m s**-1",
         "dataDate": 20261026,
-        "dataTime": 600,
-        "validityDate": 20261026,
-        "validityTime": 1800,
+        "dataTime": 1200,
+        "validityDate": 20261027,
+        "validityTime": 0,
         "stepType": "instant",
         "stepUnits": 1,
         "startStep": 12,
         "endStep": 12,
+        "typeOfLevel": "heightAboveGround",
+        "level": 10,
+        "uvRelativeToGrid": 0,
+        "bitmapPresent": 0,
+        "numberOfMissing": 0,
+        "missingValue": 9999,
+        "packingType": "grid_ccsds",
+        "bitsPerValue": 11,
+        "binaryScaleFactor": -5,
+        "decimalScaleFactor": 0,
+        "packingError": 0.015625953674316406,
+        "gridType": "regular_ll",
+        "Ni": 1440,
+        "Nj": 721,
+        "iDirectionIncrementInDegrees": 0.25,
+        "jDirectionIncrementInDegrees": 0.25,
+        "latitudeOfFirstGridPointInDegrees": 90.0,
+        "longitudeOfFirstGridPointInDegrees": 180.0,
+        "latitudeOfLastGridPointInDegrees": -90.0,
+        "longitudeOfLastGridPointInDegrees": 179.75,
+        "iScansNegatively": 0,
+        "jScansPositively": 0,
+        "jPointsAreConsecutive": 0,
+        "alternativeRowScanning": 0
+      },
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-12h-oper-fc.grib2",
+      "rangeStart": 19375744,
+      "bytes": 736754,
+      "sha256": "9382bb5df68ce919f108f59d309df8f9c1d760c6eba52f34111914f403b2c5d9",
+      "retrievedAt": "2026-10-26T20:53:17.060974Z"
+    },
+    {
+      "kind": "grib",
+      "step": 12,
+      "parameter": "10v",
+      "indexRow": {
+        "domain": "g",
+        "date": "20261026",
+        "time": "1200",
+        "expver": "0001",
+        "class": "od",
+        "type": "fc",
+        "stream": "oper",
+        "step": "12",
+        "levtype": "sfc",
+        "param": "10v",
+        "_offset": 20902788,
+        "_length": 725691
+      },
+      "metadata": {
+        "edition": 2,
+        "centre": "ecmf",
+        "shortName": "10v",
+        "paramId": 166,
+        "units": "m s**-1",
+        "dataDate": 20261026,
+        "dataTime": 1200,
+        "validityDate": 20261027,
+        "validityTime": 0,
+        "stepType": "instant",
+        "stepUnits": 1,
+        "startStep": 12,
+        "endStep": 12,
+        "typeOfLevel": "heightAboveGround",
+        "level": 10,
+        "uvRelativeToGrid": 0,
+        "bitmapPresent": 0,
+        "numberOfMissing": 0,
+        "missingValue": 9999,
+        "packingType": "grid_ccsds",
+        "bitsPerValue": 11,
+        "binaryScaleFactor": -5,
+        "decimalScaleFactor": 0,
+        "packingError": 0.015625953674316406,
+        "gridType": "regular_ll",
+        "Ni": 1440,
+        "Nj": 721,
+        "iDirectionIncrementInDegrees": 0.25,
+        "jDirectionIncrementInDegrees": 0.25,
+        "latitudeOfFirstGridPointInDegrees": 90.0,
+        "longitudeOfFirstGridPointInDegrees": 180.0,
+        "latitudeOfLastGridPointInDegrees": -90.0,
+        "longitudeOfLastGridPointInDegrees": 179.75,
+        "iScansNegatively": 0,
+        "jScansPositively": 0,
+        "jPointsAreConsecutive": 0,
+        "alternativeRowScanning": 0
+      },
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-12h-oper-fc.grib2",
+      "rangeStart": 20902788,
+      "bytes": 725691,
+      "sha256": "cc7e9df0fb2fd12d02daf9d4f3e36592b90790af486f4347f61ea8067b7abbb0",
+      "retrievedAt": "2026-10-26T20:53:20.605171Z"
+    },
+    {
+      "kind": "index",
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-15h-oper-fc.index",
+      "rangeStart": null,
+      "bytes": 41540,
+      "sha256": "d55de2367889ac6cf5e7dad847e5bb5ad6484d17f2457faa00cbeaed07d1b17b",
+      "retrievedAt": "2026-10-26T20:53:22.910004Z"
+    },
+    {
+      "kind": "grib",
+      "step": 15,
+      "parameter": "tp",
+      "indexRow": {
+        "domain": "g",
+        "date": "20261026",
+        "time": "1200",
+        "expver": "0001",
+        "class": "od",
+        "type": "fc",
+        "stream": "oper",
+        "levtype": "sfc",
+        "step": "15",
+        "param": "tp",
+        "_offset": 14576247,
+        "_length": 328941
+      },
+      "metadata": {
+        "edition": 2,
+        "centre": "ecmf",
+        "shortName": "tp",
+        "paramId": 228,
+        "units": "m",
+        "dataDate": 20261026,
+        "dataTime": 1200,
+        "validityDate": 20261027,
+        "validityTime": 300,
+        "stepType": "accum",
+        "stepUnits": 1,
+        "startStep": 0,
+        "endStep": 15,
+        "typeOfLevel": "surface",
+        "level": 0,
+        "uvRelativeToGrid": 0,
+        "bitmapPresent": 0,
+        "numberOfMissing": 0,
+        "missingValue": 9999,
+        "packingType": "grid_ccsds",
+        "bitsPerValue": 12,
+        "binaryScaleFactor": -13,
+        "decimalScaleFactor": 0,
+        "packingError": 6.103515625e-05,
+        "gridType": "regular_ll",
+        "Ni": 1440,
+        "Nj": 721,
+        "iDirectionIncrementInDegrees": 0.25,
+        "jDirectionIncrementInDegrees": 0.25,
+        "latitudeOfFirstGridPointInDegrees": 90.0,
+        "longitudeOfFirstGridPointInDegrees": 180.0,
+        "latitudeOfLastGridPointInDegrees": -90.0,
+        "longitudeOfLastGridPointInDegrees": 179.75,
+        "iScansNegatively": 0,
+        "jScansPositively": 0,
+        "jPointsAreConsecutive": 0,
+        "alternativeRowScanning": 0
+      },
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-15h-oper-fc.grib2",
+      "rangeStart": 14576247,
+      "bytes": 328941,
+      "sha256": "f3294b29ab0ac7e70822f5134c94aa4ee480121d137085b680c491996580d84d",
+      "retrievedAt": "2026-10-26T20:53:25.979498Z"
+    },
+    {
+      "kind": "grib",
+      "step": 15,
+      "parameter": "10u",
+      "indexRow": {
+        "domain": "g",
+        "date": "20261026",
+        "time": "1200",
+        "expver": "0001",
+        "class": "od",
+        "type": "fc",
+        "stream": "oper",
+        "step": "15",
+        "levtype": "sfc",
+        "param": "10u",
+        "_offset": 19917165,
+        "_length": 737359
+      },
+      "metadata": {
+        "edition": 2,
+        "centre": "ecmf",
+        "shortName": "10u",
+        "paramId": 165,
+        "units": "m s**-1",
+        "dataDate": 20261026,
+        "dataTime": 1200,
+        "validityDate": 20261027,
+        "validityTime": 300,
+        "stepType": "instant",
+        "stepUnits": 1,
+        "startStep": 15,
+        "endStep": 15,
         "typeOfLevel": "heightAboveGround",
         "level": 10,
         "uvRelativeToGrid": 0,
@@ -334,29 +531,29 @@
         "jPointsAreConsecutive": 0,
         "alternativeRowScanning": 0
       },
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-12h-oper-fc.grib2",
-      "rangeStart": 19173407,
-      "bytes": 738798,
-      "sha256": "4db99a9f0d3f0daacc96c9792d8e95d97e33864931fa3fe3b47137841a6f908d",
-      "retrievedAt": "2026-10-26T15:56:30.906865Z"
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-15h-oper-fc.grib2",
+      "rangeStart": 19917165,
+      "bytes": 737359,
+      "sha256": "96e492b01263c8e9d5bd9f053fe013e048e7ec6598d9eca1413d711344c861a1",
+      "retrievedAt": "2026-10-26T20:53:29.350722Z"
     },
     {
       "kind": "grib",
-      "step": 12,
+      "step": 15,
       "parameter": "10v",
       "indexRow": {
         "domain": "g",
         "date": "20261026",
-        "time": "0600",
+        "time": "1200",
         "expver": "0001",
         "class": "od",
         "type": "fc",
         "stream": "oper",
-        "step": "12",
+        "step": "15",
         "levtype": "sfc",
         "param": "10v",
-        "_offset": 19912205,
-        "_length": 727285
+        "_offset": 23641520,
+        "_length": 725461
       },
       "metadata": {
         "edition": 2,
@@ -365,13 +562,13 @@
         "paramId": 166,
         "units": "m s**-1",
         "dataDate": 20261026,
-        "dataTime": 600,
-        "validityDate": 20261026,
-        "validityTime": 1800,
+        "dataTime": 1200,
+        "validityDate": 20261027,
+        "validityTime": 300,
         "stepType": "instant",
         "stepUnits": 1,
-        "startStep": 12,
-        "endStep": 12,
+        "startStep": 15,
+        "endStep": 15,
         "typeOfLevel": "heightAboveGround",
         "level": 10,
         "uvRelativeToGrid": 0,
@@ -397,216 +594,19 @@
         "jPointsAreConsecutive": 0,
         "alternativeRowScanning": 0
       },
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-12h-oper-fc.grib2",
-      "rangeStart": 19912205,
-      "bytes": 727285,
-      "sha256": "220aee5f330074de267a3a21252b92bd2f9ee7b765d25d9a7b374a2f81f74141",
-      "retrievedAt": "2026-10-26T15:56:34.503617Z"
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-15h-oper-fc.grib2",
+      "rangeStart": 23641520,
+      "bytes": 725461,
+      "sha256": "911405a3dd4964f0c512bfabef2ca9d9a080a48e107995a7b9e44edccb47ee85",
+      "retrievedAt": "2026-10-26T20:53:32.858494Z"
     },
     {
       "kind": "index",
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-15h-oper-fc.index",
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-18h-oper-fc.index",
       "rangeStart": null,
-      "bytes": 41543,
-      "sha256": "668c893d72012431c77ac343267751d1c81b436e09a8870366a257d30071e5b2",
-      "retrievedAt": "2026-10-26T15:56:36.868984Z"
-    },
-    {
-      "kind": "grib",
-      "step": 15,
-      "parameter": "tp",
-      "indexRow": {
-        "domain": "g",
-        "date": "20261026",
-        "time": "0600",
-        "expver": "0001",
-        "class": "od",
-        "type": "fc",
-        "stream": "oper",
-        "levtype": "sfc",
-        "step": "15",
-        "param": "tp",
-        "_offset": 16446707,
-        "_length": 331735
-      },
-      "metadata": {
-        "edition": 2,
-        "centre": "ecmf",
-        "shortName": "tp",
-        "paramId": 228,
-        "units": "m",
-        "dataDate": 20261026,
-        "dataTime": 600,
-        "validityDate": 20261026,
-        "validityTime": 2100,
-        "stepType": "accum",
-        "stepUnits": 1,
-        "startStep": 0,
-        "endStep": 15,
-        "typeOfLevel": "surface",
-        "level": 0,
-        "uvRelativeToGrid": 0,
-        "bitmapPresent": 0,
-        "numberOfMissing": 0,
-        "missingValue": 9999,
-        "packingType": "grid_ccsds",
-        "bitsPerValue": 12,
-        "binaryScaleFactor": -13,
-        "decimalScaleFactor": 0,
-        "packingError": 6.103515625e-05,
-        "gridType": "regular_ll",
-        "Ni": 1440,
-        "Nj": 721,
-        "iDirectionIncrementInDegrees": 0.25,
-        "jDirectionIncrementInDegrees": 0.25,
-        "latitudeOfFirstGridPointInDegrees": 90.0,
-        "longitudeOfFirstGridPointInDegrees": 180.0,
-        "latitudeOfLastGridPointInDegrees": -90.0,
-        "longitudeOfLastGridPointInDegrees": 179.75,
-        "iScansNegatively": 0,
-        "jScansPositively": 0,
-        "jPointsAreConsecutive": 0,
-        "alternativeRowScanning": 0
-      },
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-15h-oper-fc.grib2",
-      "rangeStart": 16446707,
-      "bytes": 331735,
-      "sha256": "0e15449fae00a8639b8f3c20e76ad1cbb3cb8ba2416964649cfe27c0a37c47a6",
-      "retrievedAt": "2026-10-26T15:56:40.136772Z"
-    },
-    {
-      "kind": "grib",
-      "step": 15,
-      "parameter": "10u",
-      "indexRow": {
-        "domain": "g",
-        "date": "20261026",
-        "time": "0600",
-        "expver": "0001",
-        "class": "od",
-        "type": "fc",
-        "stream": "oper",
-        "step": "15",
-        "levtype": "sfc",
-        "param": "10u",
-        "_offset": 21371098,
-        "_length": 614954
-      },
-      "metadata": {
-        "edition": 2,
-        "centre": "ecmf",
-        "shortName": "10u",
-        "paramId": 165,
-        "units": "m s**-1",
-        "dataDate": 20261026,
-        "dataTime": 600,
-        "validityDate": 20261026,
-        "validityTime": 2100,
-        "stepType": "instant",
-        "stepUnits": 1,
-        "startStep": 15,
-        "endStep": 15,
-        "typeOfLevel": "heightAboveGround",
-        "level": 10,
-        "uvRelativeToGrid": 0,
-        "bitmapPresent": 0,
-        "numberOfMissing": 0,
-        "missingValue": 9999,
-        "packingType": "grid_ccsds",
-        "bitsPerValue": 11,
-        "binaryScaleFactor": -4,
-        "decimalScaleFactor": 0,
-        "packingError": 0.03125190734863281,
-        "gridType": "regular_ll",
-        "Ni": 1440,
-        "Nj": 721,
-        "iDirectionIncrementInDegrees": 0.25,
-        "jDirectionIncrementInDegrees": 0.25,
-        "latitudeOfFirstGridPointInDegrees": 90.0,
-        "longitudeOfFirstGridPointInDegrees": 180.0,
-        "latitudeOfLastGridPointInDegrees": -90.0,
-        "longitudeOfLastGridPointInDegrees": 179.75,
-        "iScansNegatively": 0,
-        "jScansPositively": 0,
-        "jPointsAreConsecutive": 0,
-        "alternativeRowScanning": 0
-      },
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-15h-oper-fc.grib2",
-      "rangeStart": 21371098,
-      "bytes": 614954,
-      "sha256": "45392ec24d68b51494ad207cabe013893e584fe8ebcb6f1994e3d8436d009904",
-      "retrievedAt": "2026-10-26T15:56:44.039709Z"
-    },
-    {
-      "kind": "grib",
-      "step": 15,
-      "parameter": "10v",
-      "indexRow": {
-        "domain": "g",
-        "date": "20261026",
-        "time": "0600",
-        "expver": "0001",
-        "class": "od",
-        "type": "fc",
-        "stream": "oper",
-        "step": "15",
-        "levtype": "sfc",
-        "param": "10v",
-        "_offset": 21986052,
-        "_length": 602512
-      },
-      "metadata": {
-        "edition": 2,
-        "centre": "ecmf",
-        "shortName": "10v",
-        "paramId": 166,
-        "units": "m s**-1",
-        "dataDate": 20261026,
-        "dataTime": 600,
-        "validityDate": 20261026,
-        "validityTime": 2100,
-        "stepType": "instant",
-        "stepUnits": 1,
-        "startStep": 15,
-        "endStep": 15,
-        "typeOfLevel": "heightAboveGround",
-        "level": 10,
-        "uvRelativeToGrid": 0,
-        "bitmapPresent": 0,
-        "numberOfMissing": 0,
-        "missingValue": 9999,
-        "packingType": "grid_ccsds",
-        "bitsPerValue": 11,
-        "binaryScaleFactor": -4,
-        "decimalScaleFactor": 0,
-        "packingError": 0.031250953674316406,
-        "gridType": "regular_ll",
-        "Ni": 1440,
-        "Nj": 721,
-        "iDirectionIncrementInDegrees": 0.25,
-        "jDirectionIncrementInDegrees": 0.25,
-        "latitudeOfFirstGridPointInDegrees": 90.0,
-        "longitudeOfFirstGridPointInDegrees": 180.0,
-        "latitudeOfLastGridPointInDegrees": -90.0,
-        "longitudeOfLastGridPointInDegrees": 179.75,
-        "iScansNegatively": 0,
-        "jScansPositively": 0,
-        "jPointsAreConsecutive": 0,
-        "alternativeRowScanning": 0
-      },
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-15h-oper-fc.grib2",
-      "rangeStart": 21986052,
-      "bytes": 602512,
-      "sha256": "539c1f618e0acfe00d74995473b58390baf23fdc4164ced1456b5bb64c0b30c7",
-      "retrievedAt": "2026-10-26T15:56:47.391407Z"
-    },
-    {
-      "kind": "index",
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-18h-oper-fc.index",
-      "rangeStart": null,
-      "bytes": 41543,
-      "sha256": "30918f8bc250a2a6a140e35538618c0ac0e68027c130d1d46393b9803d583573",
-      "retrievedAt": "2026-10-26T15:56:49.892211Z"
+      "bytes": 41536,
+      "sha256": "f4998c6815e3a4e777f2117f4773691bdf684cdb4d357e0f84d262c7bbd5c325",
+      "retrievedAt": "2026-10-26T20:53:35.031183Z"
     },
     {
       "kind": "grib",
@@ -615,7 +615,7 @@
       "indexRow": {
         "domain": "g",
         "date": "20261026",
-        "time": "0600",
+        "time": "1200",
         "expver": "0001",
         "class": "od",
         "type": "fc",
@@ -623,8 +623,8 @@
         "levtype": "sfc",
         "step": "18",
         "param": "tp",
-        "_offset": 15865137,
-        "_length": 350764
+        "_offset": 13373741,
+        "_length": 350737
       },
       "metadata": {
         "edition": 2,
@@ -633,9 +633,9 @@
         "paramId": 228,
         "units": "m",
         "dataDate": 20261026,
-        "dataTime": 600,
+        "dataTime": 1200,
         "validityDate": 20261027,
-        "validityTime": 0,
+        "validityTime": 600,
         "stepType": "accum",
         "stepUnits": 1,
         "startStep": 0,
@@ -665,11 +665,11 @@
         "jPointsAreConsecutive": 0,
         "alternativeRowScanning": 0
       },
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-18h-oper-fc.grib2",
-      "rangeStart": 15865137,
-      "bytes": 350764,
-      "sha256": "5dbc97c2223f3455702bb7d1a34e1c37961707820794e42957457c0c01308132",
-      "retrievedAt": "2026-10-26T15:56:53.051055Z"
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-18h-oper-fc.grib2",
+      "rangeStart": 13373741,
+      "bytes": 350737,
+      "sha256": "cd610176c4850e192655306a176020a9253317bb2dd0a567e829aa6f6f53b80f",
+      "retrievedAt": "2026-10-26T20:53:38.384996Z"
     },
     {
       "kind": "grib",
@@ -678,7 +678,7 @@
       "indexRow": {
         "domain": "g",
         "date": "20261026",
-        "time": "0600",
+        "time": "1200",
         "expver": "0001",
         "class": "od",
         "type": "fc",
@@ -686,8 +686,8 @@
         "step": "18",
         "levtype": "sfc",
         "param": "10u",
-        "_offset": 22286849,
-        "_length": 613108
+        "_offset": 19036864,
+        "_length": 613676
       },
       "metadata": {
         "edition": 2,
@@ -696,9 +696,9 @@
         "paramId": 165,
         "units": "m s**-1",
         "dataDate": 20261026,
-        "dataTime": 600,
+        "dataTime": 1200,
         "validityDate": 20261027,
-        "validityTime": 0,
+        "validityTime": 600,
         "stepType": "instant",
         "stepUnits": 1,
         "startStep": 18,
@@ -728,11 +728,11 @@
         "jPointsAreConsecutive": 0,
         "alternativeRowScanning": 0
       },
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-18h-oper-fc.grib2",
-      "rangeStart": 22286849,
-      "bytes": 613108,
-      "sha256": "06ca7ee1b78705a66cc03649baf48a5bed9482132e94580c81354cd27550f7d0",
-      "retrievedAt": "2026-10-26T15:56:56.458109Z"
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-18h-oper-fc.grib2",
+      "rangeStart": 19036864,
+      "bytes": 613676,
+      "sha256": "2eca51f4328ab538991fe6933f8125a23490cdb81231fb8ec50993885d495e57",
+      "retrievedAt": "2026-10-26T20:53:41.673076Z"
     },
     {
       "kind": "grib",
@@ -741,7 +741,7 @@
       "indexRow": {
         "domain": "g",
         "date": "20261026",
-        "time": "0600",
+        "time": "1200",
         "expver": "0001",
         "class": "od",
         "type": "fc",
@@ -749,8 +749,8 @@
         "step": "18",
         "levtype": "sfc",
         "param": "10v",
-        "_offset": 23317577,
-        "_length": 725574
+        "_offset": 19953106,
+        "_length": 601361
       },
       "metadata": {
         "edition": 2,
@@ -759,9 +759,9 @@
         "paramId": 166,
         "units": "m s**-1",
         "dataDate": 20261026,
-        "dataTime": 600,
+        "dataTime": 1200,
         "validityDate": 20261027,
-        "validityTime": 0,
+        "validityTime": 600,
         "stepType": "instant",
         "stepUnits": 1,
         "startStep": 18,
@@ -774,140 +774,6 @@
         "missingValue": 9999,
         "packingType": "grid_ccsds",
         "bitsPerValue": 11,
-        "binaryScaleFactor": -5,
-        "decimalScaleFactor": 0,
-        "packingError": 0.015625953674316406,
-        "gridType": "regular_ll",
-        "Ni": 1440,
-        "Nj": 721,
-        "iDirectionIncrementInDegrees": 0.25,
-        "jDirectionIncrementInDegrees": 0.25,
-        "latitudeOfFirstGridPointInDegrees": 90.0,
-        "longitudeOfFirstGridPointInDegrees": 180.0,
-        "latitudeOfLastGridPointInDegrees": -90.0,
-        "longitudeOfLastGridPointInDegrees": 179.75,
-        "iScansNegatively": 0,
-        "jScansPositively": 0,
-        "jPointsAreConsecutive": 0,
-        "alternativeRowScanning": 0
-      },
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-18h-oper-fc.grib2",
-      "rangeStart": 23317577,
-      "bytes": 725574,
-      "sha256": "6c1df9395e84f472ffb3247629d61cb808a717e3a0429277c194caa318222b7b",
-      "retrievedAt": "2026-10-26T15:56:59.966592Z"
-    },
-    {
-      "kind": "index",
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-21h-oper-fc.index",
-      "rangeStart": null,
-      "bytes": 41537,
-      "sha256": "c9b721e22bffa2efc6a95d3134f14a7927ea60cf5b3d4acfc34c96e72ce7af7a",
-      "retrievedAt": "2026-10-26T15:57:02.500076Z"
-    },
-    {
-      "kind": "grib",
-      "step": 21,
-      "parameter": "tp",
-      "indexRow": {
-        "domain": "g",
-        "date": "20261026",
-        "time": "0600",
-        "expver": "0001",
-        "class": "od",
-        "type": "fc",
-        "stream": "oper",
-        "levtype": "sfc",
-        "step": "21",
-        "param": "tp",
-        "_offset": 10851416,
-        "_length": 287009
-      },
-      "metadata": {
-        "edition": 2,
-        "centre": "ecmf",
-        "shortName": "tp",
-        "paramId": 228,
-        "units": "m",
-        "dataDate": 20261026,
-        "dataTime": 600,
-        "validityDate": 20261027,
-        "validityTime": 300,
-        "stepType": "accum",
-        "stepUnits": 1,
-        "startStep": 0,
-        "endStep": 21,
-        "typeOfLevel": "surface",
-        "level": 0,
-        "uvRelativeToGrid": 0,
-        "bitmapPresent": 0,
-        "numberOfMissing": 0,
-        "missingValue": 9999,
-        "packingType": "grid_ccsds",
-        "bitsPerValue": 12,
-        "binaryScaleFactor": -12,
-        "decimalScaleFactor": 0,
-        "packingError": 0.0001220703125,
-        "gridType": "regular_ll",
-        "Ni": 1440,
-        "Nj": 721,
-        "iDirectionIncrementInDegrees": 0.25,
-        "jDirectionIncrementInDegrees": 0.25,
-        "latitudeOfFirstGridPointInDegrees": 90.0,
-        "longitudeOfFirstGridPointInDegrees": 180.0,
-        "latitudeOfLastGridPointInDegrees": -90.0,
-        "longitudeOfLastGridPointInDegrees": 179.75,
-        "iScansNegatively": 0,
-        "jScansPositively": 0,
-        "jPointsAreConsecutive": 0,
-        "alternativeRowScanning": 0
-      },
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-21h-oper-fc.grib2",
-      "rangeStart": 10851416,
-      "bytes": 287009,
-      "sha256": "422334c409357874f8453ec7289a1b68e60447cacc697275644a9ee32da34bc3",
-      "retrievedAt": "2026-10-26T15:57:05.398525Z"
-    },
-    {
-      "kind": "grib",
-      "step": 21,
-      "parameter": "10u",
-      "indexRow": {
-        "domain": "g",
-        "date": "20261026",
-        "time": "0600",
-        "expver": "0001",
-        "class": "od",
-        "type": "fc",
-        "stream": "oper",
-        "step": "21",
-        "levtype": "sfc",
-        "param": "10u",
-        "_offset": 17709183,
-        "_length": 613322
-      },
-      "metadata": {
-        "edition": 2,
-        "centre": "ecmf",
-        "shortName": "10u",
-        "paramId": 165,
-        "units": "m s**-1",
-        "dataDate": 20261026,
-        "dataTime": 600,
-        "validityDate": 20261027,
-        "validityTime": 300,
-        "stepType": "instant",
-        "stepUnits": 1,
-        "startStep": 21,
-        "endStep": 21,
-        "typeOfLevel": "heightAboveGround",
-        "level": 10,
-        "uvRelativeToGrid": 0,
-        "bitmapPresent": 0,
-        "numberOfMissing": 0,
-        "missingValue": 9999,
-        "packingType": "grid_ccsds",
-        "bitsPerValue": 11,
         "binaryScaleFactor": -4,
         "decimalScaleFactor": 0,
         "packingError": 0.03125190734863281,
@@ -925,100 +791,37 @@
         "jPointsAreConsecutive": 0,
         "alternativeRowScanning": 0
       },
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-21h-oper-fc.grib2",
-      "rangeStart": 17709183,
-      "bytes": 613322,
-      "sha256": "949639022945b61209165716c57ae55b439eed4e4635eb3a52026f46c9d59820",
-      "retrievedAt": "2026-10-26T15:57:09.430035Z"
-    },
-    {
-      "kind": "grib",
-      "step": 21,
-      "parameter": "10v",
-      "indexRow": {
-        "domain": "g",
-        "date": "20261026",
-        "time": "0600",
-        "expver": "0001",
-        "class": "od",
-        "type": "fc",
-        "stream": "oper",
-        "step": "21",
-        "levtype": "sfc",
-        "param": "10v",
-        "_offset": 18758192,
-        "_length": 600791
-      },
-      "metadata": {
-        "edition": 2,
-        "centre": "ecmf",
-        "shortName": "10v",
-        "paramId": 166,
-        "units": "m s**-1",
-        "dataDate": 20261026,
-        "dataTime": 600,
-        "validityDate": 20261027,
-        "validityTime": 300,
-        "stepType": "instant",
-        "stepUnits": 1,
-        "startStep": 21,
-        "endStep": 21,
-        "typeOfLevel": "heightAboveGround",
-        "level": 10,
-        "uvRelativeToGrid": 0,
-        "bitmapPresent": 0,
-        "numberOfMissing": 0,
-        "missingValue": 9999,
-        "packingType": "grid_ccsds",
-        "bitsPerValue": 11,
-        "binaryScaleFactor": -4,
-        "decimalScaleFactor": 0,
-        "packingError": 0.03125190734863281,
-        "gridType": "regular_ll",
-        "Ni": 1440,
-        "Nj": 721,
-        "iDirectionIncrementInDegrees": 0.25,
-        "jDirectionIncrementInDegrees": 0.25,
-        "latitudeOfFirstGridPointInDegrees": 90.0,
-        "longitudeOfFirstGridPointInDegrees": 180.0,
-        "latitudeOfLastGridPointInDegrees": -90.0,
-        "longitudeOfLastGridPointInDegrees": 179.75,
-        "iScansNegatively": 0,
-        "jScansPositively": 0,
-        "jPointsAreConsecutive": 0,
-        "alternativeRowScanning": 0
-      },
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-21h-oper-fc.grib2",
-      "rangeStart": 18758192,
-      "bytes": 600791,
-      "sha256": "b23cff5cc925de50394b8c7a246624837c98b63d2bb201d25e43f03ee63ba7b3",
-      "retrievedAt": "2026-10-26T15:57:13.100270Z"
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-18h-oper-fc.grib2",
+      "rangeStart": 19953106,
+      "bytes": 601361,
+      "sha256": "52879912c2198de38d1503822d61bf339c33e8652ef64a669a7f4fa07e8575f1",
+      "retrievedAt": "2026-10-26T20:53:45.058591Z"
     },
     {
       "kind": "index",
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-24h-oper-fc.index",
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-21h-oper-fc.index",
       "rangeStart": null,
       "bytes": 41542,
-      "sha256": "6af67bf267b9736c5204acbf08493ed71c916a8f2430ffd5ccc32c66233f087d",
-      "retrievedAt": "2026-10-26T15:57:15.256657Z"
+      "sha256": "147bbc070948007a77e2ea952c5b4f75e89eb85d818e39c7d24d4acf76ef6752",
+      "retrievedAt": "2026-10-26T20:53:47.253060Z"
     },
     {
       "kind": "grib",
-      "step": 24,
+      "step": 21,
       "parameter": "tp",
       "indexRow": {
         "domain": "g",
         "date": "20261026",
-        "time": "0600",
+        "time": "1200",
         "expver": "0001",
         "class": "od",
         "type": "fc",
         "stream": "oper",
         "levtype": "sfc",
-        "step": "24",
+        "step": "21",
         "param": "tp",
-        "_offset": 17627354,
-        "_length": 301535
+        "_offset": 15799983,
+        "_length": 369610
       },
       "metadata": {
         "edition": 2,
@@ -1027,9 +830,206 @@
         "paramId": 228,
         "units": "m",
         "dataDate": 20261026,
-        "dataTime": 600,
+        "dataTime": 1200,
         "validityDate": 20261027,
-        "validityTime": 600,
+        "validityTime": 900,
+        "stepType": "accum",
+        "stepUnits": 1,
+        "startStep": 0,
+        "endStep": 21,
+        "typeOfLevel": "surface",
+        "level": 0,
+        "uvRelativeToGrid": 0,
+        "bitmapPresent": 0,
+        "numberOfMissing": 0,
+        "missingValue": 9999,
+        "packingType": "grid_ccsds",
+        "bitsPerValue": 12,
+        "binaryScaleFactor": -13,
+        "decimalScaleFactor": 0,
+        "packingError": 6.103515625e-05,
+        "gridType": "regular_ll",
+        "Ni": 1440,
+        "Nj": 721,
+        "iDirectionIncrementInDegrees": 0.25,
+        "jDirectionIncrementInDegrees": 0.25,
+        "latitudeOfFirstGridPointInDegrees": 90.0,
+        "longitudeOfFirstGridPointInDegrees": 180.0,
+        "latitudeOfLastGridPointInDegrees": -90.0,
+        "longitudeOfLastGridPointInDegrees": 179.75,
+        "iScansNegatively": 0,
+        "jScansPositively": 0,
+        "jPointsAreConsecutive": 0,
+        "alternativeRowScanning": 0
+      },
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-21h-oper-fc.grib2",
+      "rangeStart": 15799983,
+      "bytes": 369610,
+      "sha256": "8a4164ead44bcdd600a1bbbac4dd9933d2ca2c0891efb54b336bef978662f0a9",
+      "retrievedAt": "2026-10-26T20:53:50.293515Z"
+    },
+    {
+      "kind": "grib",
+      "step": 21,
+      "parameter": "10u",
+      "indexRow": {
+        "domain": "g",
+        "date": "20261026",
+        "time": "1200",
+        "expver": "0001",
+        "class": "od",
+        "type": "fc",
+        "stream": "oper",
+        "step": "21",
+        "levtype": "sfc",
+        "param": "10u",
+        "_offset": 21894576,
+        "_length": 614262
+      },
+      "metadata": {
+        "edition": 2,
+        "centre": "ecmf",
+        "shortName": "10u",
+        "paramId": 165,
+        "units": "m s**-1",
+        "dataDate": 20261026,
+        "dataTime": 1200,
+        "validityDate": 20261027,
+        "validityTime": 900,
+        "stepType": "instant",
+        "stepUnits": 1,
+        "startStep": 21,
+        "endStep": 21,
+        "typeOfLevel": "heightAboveGround",
+        "level": 10,
+        "uvRelativeToGrid": 0,
+        "bitmapPresent": 0,
+        "numberOfMissing": 0,
+        "missingValue": 9999,
+        "packingType": "grid_ccsds",
+        "bitsPerValue": 11,
+        "binaryScaleFactor": -4,
+        "decimalScaleFactor": 0,
+        "packingError": 0.03125190734863281,
+        "gridType": "regular_ll",
+        "Ni": 1440,
+        "Nj": 721,
+        "iDirectionIncrementInDegrees": 0.25,
+        "jDirectionIncrementInDegrees": 0.25,
+        "latitudeOfFirstGridPointInDegrees": 90.0,
+        "longitudeOfFirstGridPointInDegrees": 180.0,
+        "latitudeOfLastGridPointInDegrees": -90.0,
+        "longitudeOfLastGridPointInDegrees": 179.75,
+        "iScansNegatively": 0,
+        "jScansPositively": 0,
+        "jPointsAreConsecutive": 0,
+        "alternativeRowScanning": 0
+      },
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-21h-oper-fc.grib2",
+      "rangeStart": 21894576,
+      "bytes": 614262,
+      "sha256": "b681e98b9ad12938051ea19ec8d44c06ff69c2ad2e65ab7a433c1027776baf85",
+      "retrievedAt": "2026-10-26T20:53:53.608088Z"
+    },
+    {
+      "kind": "grib",
+      "step": 21,
+      "parameter": "10v",
+      "indexRow": {
+        "domain": "g",
+        "date": "20261026",
+        "time": "1200",
+        "expver": "0001",
+        "class": "od",
+        "type": "fc",
+        "stream": "oper",
+        "step": "21",
+        "levtype": "sfc",
+        "param": "10v",
+        "_offset": 24319150,
+        "_length": 601401
+      },
+      "metadata": {
+        "edition": 2,
+        "centre": "ecmf",
+        "shortName": "10v",
+        "paramId": 166,
+        "units": "m s**-1",
+        "dataDate": 20261026,
+        "dataTime": 1200,
+        "validityDate": 20261027,
+        "validityTime": 900,
+        "stepType": "instant",
+        "stepUnits": 1,
+        "startStep": 21,
+        "endStep": 21,
+        "typeOfLevel": "heightAboveGround",
+        "level": 10,
+        "uvRelativeToGrid": 0,
+        "bitmapPresent": 0,
+        "numberOfMissing": 0,
+        "missingValue": 9999,
+        "packingType": "grid_ccsds",
+        "bitsPerValue": 11,
+        "binaryScaleFactor": -4,
+        "decimalScaleFactor": 0,
+        "packingError": 0.03125190734863281,
+        "gridType": "regular_ll",
+        "Ni": 1440,
+        "Nj": 721,
+        "iDirectionIncrementInDegrees": 0.25,
+        "jDirectionIncrementInDegrees": 0.25,
+        "latitudeOfFirstGridPointInDegrees": 90.0,
+        "longitudeOfFirstGridPointInDegrees": 180.0,
+        "latitudeOfLastGridPointInDegrees": -90.0,
+        "longitudeOfLastGridPointInDegrees": 179.75,
+        "iScansNegatively": 0,
+        "jScansPositively": 0,
+        "jPointsAreConsecutive": 0,
+        "alternativeRowScanning": 0
+      },
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-21h-oper-fc.grib2",
+      "rangeStart": 24319150,
+      "bytes": 601401,
+      "sha256": "cebfac92bdb29dcb07259d0330f6a51fbf114f3f4b88be27264bc28695a50af4",
+      "retrievedAt": "2026-10-26T20:53:57.039195Z"
+    },
+    {
+      "kind": "index",
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-24h-oper-fc.index",
+      "rangeStart": null,
+      "bytes": 41538,
+      "sha256": "e3050ad85dbe624865a34ba37fe97ed0e875f1fcd511fe448c0a049bd8cb0c47",
+      "retrievedAt": "2026-10-26T20:53:59.236566Z"
+    },
+    {
+      "kind": "grib",
+      "step": 24,
+      "parameter": "tp",
+      "indexRow": {
+        "domain": "g",
+        "date": "20261026",
+        "time": "1200",
+        "expver": "0001",
+        "class": "od",
+        "type": "fc",
+        "stream": "oper",
+        "levtype": "sfc",
+        "step": "24",
+        "param": "tp",
+        "_offset": 13618721,
+        "_length": 303730
+      },
+      "metadata": {
+        "edition": 2,
+        "centre": "ecmf",
+        "shortName": "tp",
+        "paramId": 228,
+        "units": "m",
+        "dataDate": 20261026,
+        "dataTime": 1200,
+        "validityDate": 20261027,
+        "validityTime": 1200,
         "stepType": "accum",
         "stepUnits": 1,
         "startStep": 0,
@@ -1059,11 +1059,11 @@
         "jPointsAreConsecutive": 0,
         "alternativeRowScanning": 0
       },
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-24h-oper-fc.grib2",
-      "rangeStart": 17627354,
-      "bytes": 301535,
-      "sha256": "e07179ce219b690f1dde828a1e55d02e813f970b34f78c47872cbf8553c489c6",
-      "retrievedAt": "2026-10-26T15:57:18.445500Z"
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-24h-oper-fc.grib2",
+      "rangeStart": 13618721,
+      "bytes": 303730,
+      "sha256": "ea4a85dc55e40bc0698ea8a8d8290700ff5416e604e830cf95dfd013fed1424a",
+      "retrievedAt": "2026-10-26T20:54:02.372084Z"
     },
     {
       "kind": "grib",
@@ -1072,7 +1072,7 @@
       "indexRow": {
         "domain": "g",
         "date": "20261026",
-        "time": "0600",
+        "time": "1200",
         "expver": "0001",
         "class": "od",
         "type": "fc",
@@ -1080,8 +1080,8 @@
         "step": "24",
         "levtype": "sfc",
         "param": "10u",
-        "_offset": 22062713,
-        "_length": 614113
+        "_offset": 20193495,
+        "_length": 614552
       },
       "metadata": {
         "edition": 2,
@@ -1090,9 +1090,9 @@
         "paramId": 165,
         "units": "m s**-1",
         "dataDate": 20261026,
-        "dataTime": 600,
+        "dataTime": 1200,
         "validityDate": 20261027,
-        "validityTime": 600,
+        "validityTime": 1200,
         "stepType": "instant",
         "stepUnits": 1,
         "startStep": 24,
@@ -1122,11 +1122,11 @@
         "jPointsAreConsecutive": 0,
         "alternativeRowScanning": 0
       },
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-24h-oper-fc.grib2",
-      "rangeStart": 22062713,
-      "bytes": 614113,
-      "sha256": "bb5844a8b3bb640dc65b03cbc4f7c048f99aaf8b06000b5b95bddf34298d6bf4",
-      "retrievedAt": "2026-10-26T15:57:21.941741Z"
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-24h-oper-fc.grib2",
+      "rangeStart": 20193495,
+      "bytes": 614552,
+      "sha256": "963ed20e44b1799115c0f41aab8b2d6ad1302a4fd79963556fab32a5fa9731f5",
+      "retrievedAt": "2026-10-26T20:54:06.033330Z"
     },
     {
       "kind": "grib",
@@ -1135,7 +1135,7 @@
       "indexRow": {
         "domain": "g",
         "date": "20261026",
-        "time": "0600",
+        "time": "1200",
         "expver": "0001",
         "class": "od",
         "type": "fc",
@@ -1143,8 +1143,8 @@
         "step": "24",
         "levtype": "sfc",
         "param": "10v",
-        "_offset": 24394812,
-        "_length": 601094
+        "_offset": 22211952,
+        "_length": 601720
       },
       "metadata": {
         "edition": 2,
@@ -1153,9 +1153,9 @@
         "paramId": 166,
         "units": "m s**-1",
         "dataDate": 20261026,
-        "dataTime": 600,
+        "dataTime": 1200,
         "validityDate": 20261027,
-        "validityTime": 600,
+        "validityTime": 1200,
         "stepType": "instant",
         "stepUnits": 1,
         "startStep": 24,
@@ -1185,19 +1185,19 @@
         "jPointsAreConsecutive": 0,
         "alternativeRowScanning": 0
       },
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-24h-oper-fc.grib2",
-      "rangeStart": 24394812,
-      "bytes": 601094,
-      "sha256": "4808ebeca257d16cc225cb4042a52139bcf76b37699189893ae2fc114cd1bb79",
-      "retrievedAt": "2026-10-26T15:57:25.236608Z"
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-24h-oper-fc.grib2",
+      "rangeStart": 22211952,
+      "bytes": 601720,
+      "sha256": "8fd15334cd975fe9c793e4fcf201bf153329c2f2ab70c75f348ab10cfcf43a85",
+      "retrievedAt": "2026-10-26T20:54:09.334291Z"
     },
     {
       "kind": "index",
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-27h-oper-fc.index",
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-27h-oper-fc.index",
       "rangeStart": null,
-      "bytes": 41539,
-      "sha256": "ebe9e44675885c65bec32f42b09a7e0e29ce3a7af620bb7867622c0665844997",
-      "retrievedAt": "2026-10-26T15:57:27.727609Z"
+      "bytes": 41535,
+      "sha256": "67d0edc977e5538ae44c1a901a397ef1b3f7022655848a4f9f49f4b64b11c1d5",
+      "retrievedAt": "2026-10-26T20:54:11.501615Z"
     },
     {
       "kind": "grib",
@@ -1206,7 +1206,7 @@
       "indexRow": {
         "domain": "g",
         "date": "20261026",
-        "time": "0600",
+        "time": "1200",
         "expver": "0001",
         "class": "od",
         "type": "fc",
@@ -1214,8 +1214,8 @@
         "levtype": "sfc",
         "step": "27",
         "param": "tp",
-        "_offset": 16108426,
-        "_length": 314839
+        "_offset": 14623563,
+        "_length": 317998
       },
       "metadata": {
         "edition": 2,
@@ -1224,9 +1224,9 @@
         "paramId": 228,
         "units": "m",
         "dataDate": 20261026,
-        "dataTime": 600,
+        "dataTime": 1200,
         "validityDate": 20261027,
-        "validityTime": 900,
+        "validityTime": 1500,
         "stepType": "accum",
         "stepUnits": 1,
         "startStep": 0,
@@ -1256,11 +1256,11 @@
         "jPointsAreConsecutive": 0,
         "alternativeRowScanning": 0
       },
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-27h-oper-fc.grib2",
-      "rangeStart": 16108426,
-      "bytes": 314839,
-      "sha256": "9d62cca35a35c9f13ca1268df61132b466d65ebac9af9c886570ba6b359bb3a7",
-      "retrievedAt": "2026-10-26T15:57:30.851762Z"
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-27h-oper-fc.grib2",
+      "rangeStart": 14623563,
+      "bytes": 317998,
+      "sha256": "a0a4fd22e7bb1a4527fd6644b17923ee31d10e33f42b369a1bab4f11a17cccf2",
+      "retrievedAt": "2026-10-26T20:54:14.735337Z"
     },
     {
       "kind": "grib",
@@ -1269,7 +1269,7 @@
       "indexRow": {
         "domain": "g",
         "date": "20261026",
-        "time": "0600",
+        "time": "1200",
         "expver": "0001",
         "class": "od",
         "type": "fc",
@@ -1277,8 +1277,8 @@
         "step": "27",
         "levtype": "sfc",
         "param": "10u",
-        "_offset": 20939605,
-        "_length": 614540
+        "_offset": 18463246,
+        "_length": 617782
       },
       "metadata": {
         "edition": 2,
@@ -1287,9 +1287,9 @@
         "paramId": 165,
         "units": "m s**-1",
         "dataDate": 20261026,
-        "dataTime": 600,
+        "dataTime": 1200,
         "validityDate": 20261027,
-        "validityTime": 900,
+        "validityTime": 1500,
         "stepType": "instant",
         "stepUnits": 1,
         "startStep": 27,
@@ -1319,11 +1319,11 @@
         "jPointsAreConsecutive": 0,
         "alternativeRowScanning": 0
       },
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-27h-oper-fc.grib2",
-      "rangeStart": 20939605,
-      "bytes": 614540,
-      "sha256": "7877a01d742c53c546a1ce27677da4e3e2a592c87d32cb3b82f71e90eac4c97a",
-      "retrievedAt": "2026-10-26T15:57:34.661894Z"
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-27h-oper-fc.grib2",
+      "rangeStart": 18463246,
+      "bytes": 617782,
+      "sha256": "1f73d2b243dc2771ec84b52ae09444b2162fa6487bda89e3b3b498bb51a831e1",
+      "retrievedAt": "2026-10-26T20:54:18.249468Z"
     },
     {
       "kind": "grib",
@@ -1332,7 +1332,7 @@
       "indexRow": {
         "domain": "g",
         "date": "20261026",
-        "time": "0600",
+        "time": "1200",
         "expver": "0001",
         "class": "od",
         "type": "fc",
@@ -1340,8 +1340,8 @@
         "step": "27",
         "levtype": "sfc",
         "param": "10v",
-        "_offset": 21554145,
-        "_length": 601450
+        "_offset": 21817531,
+        "_length": 604212
       },
       "metadata": {
         "edition": 2,
@@ -1350,9 +1350,9 @@
         "paramId": 166,
         "units": "m s**-1",
         "dataDate": 20261026,
-        "dataTime": 600,
+        "dataTime": 1200,
         "validityDate": 20261027,
-        "validityTime": 900,
+        "validityTime": 1500,
         "stepType": "instant",
         "stepUnits": 1,
         "startStep": 27,
@@ -1382,19 +1382,19 @@
         "jPointsAreConsecutive": 0,
         "alternativeRowScanning": 0
       },
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-27h-oper-fc.grib2",
-      "rangeStart": 21554145,
-      "bytes": 601450,
-      "sha256": "924db0abd3f56b809efeb54759d96091541c8f20f50bf4140d086b2dc7bc8fb4",
-      "retrievedAt": "2026-10-26T15:57:38.220364Z"
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-27h-oper-fc.grib2",
+      "rangeStart": 21817531,
+      "bytes": 604212,
+      "sha256": "877ef24c0cf33026ab2bc63cc8b66557cdcd8ae681b043fbf929b5d1b8b5bd2d",
+      "retrievedAt": "2026-10-26T20:54:21.477003Z"
     },
     {
       "kind": "index",
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-30h-oper-fc.index",
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-30h-oper-fc.index",
       "rangeStart": null,
       "bytes": 41539,
-      "sha256": "2b1e445b014fc8a878fb81ffc38a2889745fe9e4be9c428caab2e05ed8a39de1",
-      "retrievedAt": "2026-10-26T15:57:40.450808Z"
+      "sha256": "960ea585a499e4cf5ae358f6c2d13020e33e203b940e787f3cac802179926a36",
+      "retrievedAt": "2026-10-26T20:54:23.723300Z"
     },
     {
       "kind": "grib",
@@ -1403,7 +1403,7 @@
       "indexRow": {
         "domain": "g",
         "date": "20261026",
-        "time": "0600",
+        "time": "1200",
         "expver": "0001",
         "class": "od",
         "type": "fc",
@@ -1411,8 +1411,8 @@
         "levtype": "sfc",
         "step": "30",
         "param": "tp",
-        "_offset": 13892316,
-        "_length": 327838
+        "_offset": 16666751,
+        "_length": 330698
       },
       "metadata": {
         "edition": 2,
@@ -1421,9 +1421,9 @@
         "paramId": 228,
         "units": "m",
         "dataDate": 20261026,
-        "dataTime": 600,
+        "dataTime": 1200,
         "validityDate": 20261027,
-        "validityTime": 1200,
+        "validityTime": 1800,
         "stepType": "accum",
         "stepUnits": 1,
         "startStep": 0,
@@ -1453,11 +1453,11 @@
         "jPointsAreConsecutive": 0,
         "alternativeRowScanning": 0
       },
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-30h-oper-fc.grib2",
-      "rangeStart": 13892316,
-      "bytes": 327838,
-      "sha256": "f73b0b16c16e3ae5013ee9d83359e571ff32d2d523a9eb82dccf27b7568d5056",
-      "retrievedAt": "2026-10-26T15:57:43.510102Z"
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-30h-oper-fc.grib2",
+      "rangeStart": 16666751,
+      "bytes": 330698,
+      "sha256": "6fab38ef06bf4a7c5969dd6577c837aefe32ad8ed56fcc7c44187d34a59cadb5",
+      "retrievedAt": "2026-10-26T20:54:26.796875Z"
     },
     {
       "kind": "grib",
@@ -1466,7 +1466,7 @@
       "indexRow": {
         "domain": "g",
         "date": "20261026",
-        "time": "0600",
+        "time": "1200",
         "expver": "0001",
         "class": "od",
         "type": "fc",
@@ -1474,8 +1474,8 @@
         "step": "30",
         "levtype": "sfc",
         "param": "10u",
-        "_offset": 19688023,
-        "_length": 614769
+        "_offset": 21436378,
+        "_length": 619256
       },
       "metadata": {
         "edition": 2,
@@ -1484,9 +1484,9 @@
         "paramId": 165,
         "units": "m s**-1",
         "dataDate": 20261026,
-        "dataTime": 600,
+        "dataTime": 1200,
         "validityDate": 20261027,
-        "validityTime": 1200,
+        "validityTime": 1800,
         "stepType": "instant",
         "stepUnits": 1,
         "startStep": 30,
@@ -1516,11 +1516,11 @@
         "jPointsAreConsecutive": 0,
         "alternativeRowScanning": 0
       },
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-30h-oper-fc.grib2",
-      "rangeStart": 19688023,
-      "bytes": 614769,
-      "sha256": "6446bbeb3dcaac3718dbd38bec041e1dea60d35030c869878b9153d94797122f",
-      "retrievedAt": "2026-10-26T15:57:47.081211Z"
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-30h-oper-fc.grib2",
+      "rangeStart": 21436378,
+      "bytes": 619256,
+      "sha256": "dba6829a18c1a9c940e5b229c1e762b664c73732479a3adf01b53265036b0fe1",
+      "retrievedAt": "2026-10-26T20:54:30.092335Z"
     },
     {
       "kind": "grib",
@@ -1529,7 +1529,7 @@
       "indexRow": {
         "domain": "g",
         "date": "20261026",
-        "time": "0600",
+        "time": "1200",
         "expver": "0001",
         "class": "od",
         "type": "fc",
@@ -1537,8 +1537,8 @@
         "step": "30",
         "levtype": "sfc",
         "param": "10v",
-        "_offset": 20302792,
-        "_length": 602071
+        "_offset": 23710707,
+        "_length": 605460
       },
       "metadata": {
         "edition": 2,
@@ -1547,9 +1547,9 @@
         "paramId": 166,
         "units": "m s**-1",
         "dataDate": 20261026,
-        "dataTime": 600,
+        "dataTime": 1200,
         "validityDate": 20261027,
-        "validityTime": 1200,
+        "validityTime": 1800,
         "stepType": "instant",
         "stepUnits": 1,
         "startStep": 30,
@@ -1579,19 +1579,19 @@
         "jPointsAreConsecutive": 0,
         "alternativeRowScanning": 0
       },
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-30h-oper-fc.grib2",
-      "rangeStart": 20302792,
-      "bytes": 602071,
-      "sha256": "f3c1ce58cd41e23d0787d962aacd13d3c9602ae26ff68d17eb7d948a1574e151",
-      "retrievedAt": "2026-10-26T15:57:50.498904Z"
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-30h-oper-fc.grib2",
+      "rangeStart": 23710707,
+      "bytes": 605460,
+      "sha256": "5c24519c63f487e10fb72bbf148759cbc1968fb74f86f1e0d704b96d53070bfc",
+      "retrievedAt": "2026-10-26T20:54:33.311729Z"
     },
     {
       "kind": "index",
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-33h-oper-fc.index",
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-33h-oper-fc.index",
       "rangeStart": null,
-      "bytes": 41538,
-      "sha256": "cb1e17eaea0634acb2605a42bf314e8bf5c83123d9b327c5d7ec36bb40fb6629",
-      "retrievedAt": "2026-10-26T15:57:52.656996Z"
+      "bytes": 41540,
+      "sha256": "c9ce8c935c05f9add772528007ce704c83de720f246ea61bd9336d316d3df1d0",
+      "retrievedAt": "2026-10-26T20:54:35.563354Z"
     },
     {
       "kind": "grib",
@@ -1600,7 +1600,7 @@
       "indexRow": {
         "domain": "g",
         "date": "20261026",
-        "time": "0600",
+        "time": "1200",
         "expver": "0001",
         "class": "od",
         "type": "fc",
@@ -1608,8 +1608,8 @@
         "levtype": "sfc",
         "step": "33",
         "param": "tp",
-        "_offset": 17250917,
-        "_length": 340107
+        "_offset": 12984295,
+        "_length": 342143
       },
       "metadata": {
         "edition": 2,
@@ -1618,9 +1618,9 @@
         "paramId": 228,
         "units": "m",
         "dataDate": 20261026,
-        "dataTime": 600,
+        "dataTime": 1200,
         "validityDate": 20261027,
-        "validityTime": 1500,
+        "validityTime": 2100,
         "stepType": "accum",
         "stepUnits": 1,
         "startStep": 0,
@@ -1650,11 +1650,11 @@
         "jPointsAreConsecutive": 0,
         "alternativeRowScanning": 0
       },
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-33h-oper-fc.grib2",
-      "rangeStart": 17250917,
-      "bytes": 340107,
-      "sha256": "39ff307ebd839e24fc08176fe1898b7b36126ef9b205b68678c90029d6a6eab1",
-      "retrievedAt": "2026-10-26T15:57:55.688579Z"
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-33h-oper-fc.grib2",
+      "rangeStart": 12984295,
+      "bytes": 342143,
+      "sha256": "8f96fcab1cce54518eac94fd39e1638c38ce936b44b6b37a1c13c99e211e5f13",
+      "retrievedAt": "2026-10-26T20:54:39.407337Z"
     },
     {
       "kind": "grib",
@@ -1663,7 +1663,7 @@
       "indexRow": {
         "domain": "g",
         "date": "20261026",
-        "time": "0600",
+        "time": "1200",
         "expver": "0001",
         "class": "od",
         "type": "fc",
@@ -1671,8 +1671,8 @@
         "step": "33",
         "levtype": "sfc",
         "param": "10u",
-        "_offset": 22504767,
-        "_length": 617706
+        "_offset": 18653073,
+        "_length": 619907
       },
       "metadata": {
         "edition": 2,
@@ -1681,9 +1681,9 @@
         "paramId": 165,
         "units": "m s**-1",
         "dataDate": 20261026,
-        "dataTime": 600,
+        "dataTime": 1200,
         "validityDate": 20261027,
-        "validityTime": 1500,
+        "validityTime": 2100,
         "stepType": "instant",
         "stepUnits": 1,
         "startStep": 33,
@@ -1713,11 +1713,11 @@
         "jPointsAreConsecutive": 0,
         "alternativeRowScanning": 0
       },
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-33h-oper-fc.grib2",
-      "rangeStart": 22504767,
-      "bytes": 617706,
-      "sha256": "3fe7fcfdcb6f7237d8e901e573f9788544449c40a278189299934cd12b47828d",
-      "retrievedAt": "2026-10-26T15:58:00.861509Z"
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-33h-oper-fc.grib2",
+      "rangeStart": 18653073,
+      "bytes": 619907,
+      "sha256": "d38b33feb4270e54ecbf79a9b7ae4ea1d5e4884b38ab174e2397515f9b4f0c6d",
+      "retrievedAt": "2026-10-26T20:54:42.888511Z"
     },
     {
       "kind": "grib",
@@ -1726,7 +1726,7 @@
       "indexRow": {
         "domain": "g",
         "date": "20261026",
-        "time": "0600",
+        "time": "1200",
         "expver": "0001",
         "class": "od",
         "type": "fc",
@@ -1734,8 +1734,8 @@
         "step": "33",
         "levtype": "sfc",
         "param": "10v",
-        "_offset": 23843621,
-        "_length": 603769
+        "_offset": 20419628,
+        "_length": 606096
       },
       "metadata": {
         "edition": 2,
@@ -1744,9 +1744,9 @@
         "paramId": 166,
         "units": "m s**-1",
         "dataDate": 20261026,
-        "dataTime": 600,
+        "dataTime": 1200,
         "validityDate": 20261027,
-        "validityTime": 1500,
+        "validityTime": 2100,
         "stepType": "instant",
         "stepUnits": 1,
         "startStep": 33,
@@ -1776,19 +1776,19 @@
         "jPointsAreConsecutive": 0,
         "alternativeRowScanning": 0
       },
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-33h-oper-fc.grib2",
-      "rangeStart": 23843621,
-      "bytes": 603769,
-      "sha256": "606a41c193bc263c5406327728f909489efcf12c266235fe4f68a4def996d986",
-      "retrievedAt": "2026-10-26T15:58:04.731768Z"
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-33h-oper-fc.grib2",
+      "rangeStart": 20419628,
+      "bytes": 606096,
+      "sha256": "cbadd9489df64b11b2bdba5d133b22b744d8d7ab5a477716100237f397ba9bdb",
+      "retrievedAt": "2026-10-26T20:54:46.590907Z"
     },
     {
       "kind": "index",
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-36h-oper-fc.index",
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-36h-oper-fc.index",
       "rangeStart": null,
-      "bytes": 41538,
-      "sha256": "7514e1e1ad0f7ea6e742d2002d7e68dec65e0ad052565393269ff3140e9d81e1",
-      "retrievedAt": "2026-10-26T15:58:07.301384Z"
+      "bytes": 41536,
+      "sha256": "580441e5ae549f5ea80c1da1b00173cb271dfd16d4cce9fc1c09932945d6ea53",
+      "retrievedAt": "2026-10-26T20:54:49.018733Z"
     },
     {
       "kind": "grib",
@@ -1797,7 +1797,7 @@
       "indexRow": {
         "domain": "g",
         "date": "20261026",
-        "time": "0600",
+        "time": "1200",
         "expver": "0001",
         "class": "od",
         "type": "fc",
@@ -1805,8 +1805,8 @@
         "levtype": "sfc",
         "step": "36",
         "param": "tp",
-        "_offset": 16086396,
-        "_length": 351147
+        "_offset": 13862727,
+        "_length": 352256
       },
       "metadata": {
         "edition": 2,
@@ -1815,9 +1815,9 @@
         "paramId": 228,
         "units": "m",
         "dataDate": 20261026,
-        "dataTime": 600,
-        "validityDate": 20261027,
-        "validityTime": 1800,
+        "dataTime": 1200,
+        "validityDate": 20261028,
+        "validityTime": 0,
         "stepType": "accum",
         "stepUnits": 1,
         "startStep": 0,
@@ -1847,11 +1847,11 @@
         "jPointsAreConsecutive": 0,
         "alternativeRowScanning": 0
       },
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-36h-oper-fc.grib2",
-      "rangeStart": 16086396,
-      "bytes": 351147,
-      "sha256": "b3119c897c5f4db0f82a2fd6cdc28a33f51f3516385988a824091517a9ee0844",
-      "retrievedAt": "2026-10-26T15:58:10.332870Z"
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-36h-oper-fc.grib2",
+      "rangeStart": 13862727,
+      "bytes": 352256,
+      "sha256": "98191998a783d2daa87e27b605553ac5a81f2f04840dc3ca95d8c966d39cefbf",
+      "retrievedAt": "2026-10-26T20:54:52.517127Z"
     },
     {
       "kind": "grib",
@@ -1860,7 +1860,7 @@
       "indexRow": {
         "domain": "g",
         "date": "20261026",
-        "time": "0600",
+        "time": "1200",
         "expver": "0001",
         "class": "od",
         "type": "fc",
@@ -1868,8 +1868,8 @@
         "step": "36",
         "levtype": "sfc",
         "param": "10u",
-        "_offset": 20060882,
-        "_length": 619376
+        "_offset": 20746939,
+        "_length": 618190
       },
       "metadata": {
         "edition": 2,
@@ -1878,9 +1878,9 @@
         "paramId": 165,
         "units": "m s**-1",
         "dataDate": 20261026,
-        "dataTime": 600,
-        "validityDate": 20261027,
-        "validityTime": 1800,
+        "dataTime": 1200,
+        "validityDate": 20261028,
+        "validityTime": 0,
         "stepType": "instant",
         "stepUnits": 1,
         "startStep": 36,
@@ -1910,11 +1910,11 @@
         "jPointsAreConsecutive": 0,
         "alternativeRowScanning": 0
       },
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-36h-oper-fc.grib2",
-      "rangeStart": 20060882,
-      "bytes": 619376,
-      "sha256": "c5fa523824138cfde7fd6d3fa6ab0cf33233309d4cfdac3d43f528080ee778a5",
-      "retrievedAt": "2026-10-26T15:58:13.812661Z"
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-36h-oper-fc.grib2",
+      "rangeStart": 20746939,
+      "bytes": 618190,
+      "sha256": "24568cb0d856d0183ba8171642e54d3a3af0e8ad20cafa4aa78bc12529a97ff7",
+      "retrievedAt": "2026-10-26T20:54:55.982333Z"
     },
     {
       "kind": "grib",
@@ -1923,7 +1923,7 @@
       "indexRow": {
         "domain": "g",
         "date": "20261026",
-        "time": "0600",
+        "time": "1200",
         "expver": "0001",
         "class": "od",
         "type": "fc",
@@ -1931,8 +1931,8 @@
         "step": "36",
         "levtype": "sfc",
         "param": "10v",
-        "_offset": 21825412,
-        "_length": 605171
+        "_offset": 22656940,
+        "_length": 605724
       },
       "metadata": {
         "edition": 2,
@@ -1941,9 +1941,9 @@
         "paramId": 166,
         "units": "m s**-1",
         "dataDate": 20261026,
-        "dataTime": 600,
-        "validityDate": 20261027,
-        "validityTime": 1800,
+        "dataTime": 1200,
+        "validityDate": 20261028,
+        "validityTime": 0,
         "stepType": "instant",
         "stepUnits": 1,
         "startStep": 36,
@@ -1973,19 +1973,19 @@
         "jPointsAreConsecutive": 0,
         "alternativeRowScanning": 0
       },
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-36h-oper-fc.grib2",
-      "rangeStart": 21825412,
-      "bytes": 605171,
-      "sha256": "5fe7b1ce94fa1c704fe60980dfc16ee91da7158687742ce5f9f660a7c7d68467",
-      "retrievedAt": "2026-10-26T15:58:17.114710Z"
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-36h-oper-fc.grib2",
+      "rangeStart": 22656940,
+      "bytes": 605724,
+      "sha256": "3940657a846a4846b80eefd0eed84007464267d260e7038dbe396e7ddc59fc15",
+      "retrievedAt": "2026-10-26T20:54:59.418330Z"
     },
     {
       "kind": "index",
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-39h-oper-fc.index",
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-39h-oper-fc.index",
       "rangeStart": null,
       "bytes": 41541,
-      "sha256": "6f23e8097e0652fe097223096873de6856ad7a4bebb014ab169a8c6c86600eaf",
-      "retrievedAt": "2026-10-26T18:42:31.728096Z"
+      "sha256": "97ceef2faecdde146044d47d74eaf214a42468841da3a6e5847afc1e3feb1100",
+      "retrievedAt": "2026-10-26T20:55:01.648576Z"
     },
     {
       "kind": "grib",
@@ -1994,7 +1994,7 @@
       "indexRow": {
         "domain": "g",
         "date": "20261026",
-        "time": "0600",
+        "time": "1200",
         "expver": "0001",
         "class": "od",
         "type": "fc",
@@ -2002,8 +2002,8 @@
         "levtype": "sfc",
         "step": "39",
         "param": "tp",
-        "_offset": 17904062,
-        "_length": 361162
+        "_offset": 16620926,
+        "_length": 361534
       },
       "metadata": {
         "edition": 2,
@@ -2012,9 +2012,9 @@
         "paramId": 228,
         "units": "m",
         "dataDate": 20261026,
-        "dataTime": 600,
-        "validityDate": 20261027,
-        "validityTime": 2100,
+        "dataTime": 1200,
+        "validityDate": 20261028,
+        "validityTime": 300,
         "stepType": "accum",
         "stepUnits": 1,
         "startStep": 0,
@@ -2044,11 +2044,11 @@
         "jPointsAreConsecutive": 0,
         "alternativeRowScanning": 0
       },
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-39h-oper-fc.grib2",
-      "rangeStart": 17904062,
-      "bytes": 361162,
-      "sha256": "1916493b83ba37e3c960884242291a84085125a5fd0ac208b0ec951eda1fd4b7",
-      "retrievedAt": "2026-10-26T18:42:34.726760Z"
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-39h-oper-fc.grib2",
+      "rangeStart": 16620926,
+      "bytes": 361534,
+      "sha256": "346a0c873b4dfe43cb8c6f9d17fde95f85e04dbdc6ea529e4d6592ccb4aa5308",
+      "retrievedAt": "2026-10-26T20:55:04.777282Z"
     },
     {
       "kind": "grib",
@@ -2057,7 +2057,7 @@
       "indexRow": {
         "domain": "g",
         "date": "20261026",
-        "time": "0600",
+        "time": "1200",
         "expver": "0001",
         "class": "od",
         "type": "fc",
@@ -2065,8 +2065,8 @@
         "step": "39",
         "levtype": "sfc",
         "param": "10u",
-        "_offset": 22401737,
-        "_length": 620120
+        "_offset": 23045070,
+        "_length": 617423
       },
       "metadata": {
         "edition": 2,
@@ -2075,9 +2075,9 @@
         "paramId": 165,
         "units": "m s**-1",
         "dataDate": 20261026,
-        "dataTime": 600,
-        "validityDate": 20261027,
-        "validityTime": 2100,
+        "dataTime": 1200,
+        "validityDate": 20261028,
+        "validityTime": 300,
         "stepType": "instant",
         "stepUnits": 1,
         "startStep": 39,
@@ -2107,11 +2107,11 @@
         "jPointsAreConsecutive": 0,
         "alternativeRowScanning": 0
       },
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-39h-oper-fc.grib2",
-      "rangeStart": 22401737,
-      "bytes": 620120,
-      "sha256": "d9b2b45744640744bf46b537222ae843f3f2222e78037b466252935b6570a602",
-      "retrievedAt": "2026-10-26T18:42:38.152833Z"
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-39h-oper-fc.grib2",
+      "rangeStart": 23045070,
+      "bytes": 617423,
+      "sha256": "cc00d890bf0179cdbed29bb08d41fbecd9dfa0231a424b9ee15cbb217e458208",
+      "retrievedAt": "2026-10-26T20:55:08.149185Z"
     },
     {
       "kind": "grib",
@@ -2120,7 +2120,7 @@
       "indexRow": {
         "domain": "g",
         "date": "20261026",
-        "time": "0600",
+        "time": "1200",
         "expver": "0001",
         "class": "od",
         "type": "fc",
@@ -2128,8 +2128,8 @@
         "step": "39",
         "levtype": "sfc",
         "param": "10v",
-        "_offset": 24659865,
-        "_length": 605914
+        "_offset": 23977448,
+        "_length": 604760
       },
       "metadata": {
         "edition": 2,
@@ -2138,9 +2138,9 @@
         "paramId": 166,
         "units": "m s**-1",
         "dataDate": 20261026,
-        "dataTime": 600,
-        "validityDate": 20261027,
-        "validityTime": 2100,
+        "dataTime": 1200,
+        "validityDate": 20261028,
+        "validityTime": 300,
         "stepType": "instant",
         "stepUnits": 1,
         "startStep": 39,
@@ -2170,19 +2170,19 @@
         "jPointsAreConsecutive": 0,
         "alternativeRowScanning": 0
       },
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-39h-oper-fc.grib2",
-      "rangeStart": 24659865,
-      "bytes": 605914,
-      "sha256": "5be73b011b049e1195c2ffff126d572022c40a4abe551fa23702a0fea08758d8",
-      "retrievedAt": "2026-10-26T18:42:41.554007Z"
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-39h-oper-fc.grib2",
+      "rangeStart": 23977448,
+      "bytes": 604760,
+      "sha256": "11bb8d807faea9d9779038337c6cdebff019b1183da3d7339ccd1ce0f143de2d",
+      "retrievedAt": "2026-10-26T20:55:11.607146Z"
     },
     {
       "kind": "index",
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-42h-oper-fc.index",
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-42h-oper-fc.index",
       "rangeStart": null,
-      "bytes": 41538,
-      "sha256": "542ed09d7bd1e91883c74887ff18742eae41d8c5f31f6e42523699b5312938d9",
-      "retrievedAt": "2026-10-26T18:42:44.616457Z"
+      "bytes": 41536,
+      "sha256": "208b3978264e822258bf3b69a6b8af450b81f5511b41591e8d4ee4c46071f1d6",
+      "retrievedAt": "2026-10-26T20:55:13.900903Z"
     },
     {
       "kind": "grib",
@@ -2191,7 +2191,7 @@
       "indexRow": {
         "domain": "g",
         "date": "20261026",
-        "time": "0600",
+        "time": "1200",
         "expver": "0001",
         "class": "od",
         "type": "fc",
@@ -2199,8 +2199,8 @@
         "levtype": "sfc",
         "step": "42",
         "param": "tp",
-        "_offset": 15064985,
-        "_length": 370078
+        "_offset": 13043530,
+        "_length": 370643
       },
       "metadata": {
         "edition": 2,
@@ -2209,9 +2209,9 @@
         "paramId": 228,
         "units": "m",
         "dataDate": 20261026,
-        "dataTime": 600,
+        "dataTime": 1200,
         "validityDate": 20261028,
-        "validityTime": 0,
+        "validityTime": 600,
         "stepType": "accum",
         "stepUnits": 1,
         "startStep": 0,
@@ -2241,11 +2241,11 @@
         "jPointsAreConsecutive": 0,
         "alternativeRowScanning": 0
       },
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-42h-oper-fc.grib2",
-      "rangeStart": 15064985,
-      "bytes": 370078,
-      "sha256": "7129f13bb7434929e7a39f30635915b21edce84c611b1cfcda66a5b15f2d1b75",
-      "retrievedAt": "2026-10-26T18:42:47.732871Z"
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-42h-oper-fc.grib2",
+      "rangeStart": 13043530,
+      "bytes": 370643,
+      "sha256": "1d57b381724cb83cee32b6b99fcc7bafb95da61e1941835cba45462e68b1a0ba",
+      "retrievedAt": "2026-10-26T20:55:17.823300Z"
     },
     {
       "kind": "grib",
@@ -2254,7 +2254,7 @@
       "indexRow": {
         "domain": "g",
         "date": "20261026",
-        "time": "0600",
+        "time": "1200",
         "expver": "0001",
         "class": "od",
         "type": "fc",
@@ -2262,8 +2262,8 @@
         "step": "42",
         "levtype": "sfc",
         "param": "10u",
-        "_offset": 20240312,
-        "_length": 618276
+        "_offset": 17102204,
+        "_length": 617569
       },
       "metadata": {
         "edition": 2,
@@ -2272,9 +2272,9 @@
         "paramId": 165,
         "units": "m s**-1",
         "dataDate": 20261026,
-        "dataTime": 600,
+        "dataTime": 1200,
         "validityDate": 20261028,
-        "validityTime": 0,
+        "validityTime": 600,
         "stepType": "instant",
         "stepUnits": 1,
         "startStep": 42,
@@ -2304,11 +2304,11 @@
         "jPointsAreConsecutive": 0,
         "alternativeRowScanning": 0
       },
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-42h-oper-fc.grib2",
-      "rangeStart": 20240312,
-      "bytes": 618276,
-      "sha256": "a4feb66c39b08cf453c9c47505905a41d70a1573d61835f0dacfcb5a17e639af",
-      "retrievedAt": "2026-10-26T18:42:51.140640Z"
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-42h-oper-fc.grib2",
+      "rangeStart": 17102204,
+      "bytes": 617569,
+      "sha256": "4037a42d4fe0d5661bb50d95d149d09eec2262ede1417945de9baaad076b91ed",
+      "retrievedAt": "2026-10-26T20:55:21.181615Z"
     },
     {
       "kind": "grib",
@@ -2317,7 +2317,7 @@
       "indexRow": {
         "domain": "g",
         "date": "20261026",
-        "time": "0600",
+        "time": "1200",
         "expver": "0001",
         "class": "od",
         "type": "fc",
@@ -2325,8 +2325,8 @@
         "step": "42",
         "levtype": "sfc",
         "param": "10v",
-        "_offset": 22314100,
-        "_length": 605902
+        "_offset": 20308601,
+        "_length": 604840
       },
       "metadata": {
         "edition": 2,
@@ -2335,9 +2335,9 @@
         "paramId": 166,
         "units": "m s**-1",
         "dataDate": 20261026,
-        "dataTime": 600,
+        "dataTime": 1200,
         "validityDate": 20261028,
-        "validityTime": 0,
+        "validityTime": 600,
         "stepType": "instant",
         "stepUnits": 1,
         "startStep": 42,
@@ -2367,19 +2367,19 @@
         "jPointsAreConsecutive": 0,
         "alternativeRowScanning": 0
       },
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-42h-oper-fc.grib2",
-      "rangeStart": 22314100,
-      "bytes": 605902,
-      "sha256": "19fdc8c55e62d8917094f023dec495eef15acefa47a25d3b259a305d01321665",
-      "retrievedAt": "2026-10-26T18:42:54.622276Z"
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-42h-oper-fc.grib2",
+      "rangeStart": 20308601,
+      "bytes": 604840,
+      "sha256": "035b2ab228f505604d9d1fc4790217f165966e92228e6e474d86ec9b7dccbef6",
+      "retrievedAt": "2026-10-26T20:55:24.763695Z"
     },
     {
       "kind": "index",
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-45h-oper-fc.index",
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-45h-oper-fc.index",
       "rangeStart": null,
       "bytes": 41538,
-      "sha256": "6741f6c34542885754150ed32b92a4eb19d301401ce278eea63fab59d4342875",
-      "retrievedAt": "2026-10-26T18:42:56.800897Z"
+      "sha256": "3ef949813af0e1b7cd2b085d00d08e2f12d4d946830fbffc8b62e48ccb3ae6f9",
+      "retrievedAt": "2026-10-26T20:55:27.240367Z"
     },
     {
       "kind": "grib",
@@ -2388,7 +2388,7 @@
       "indexRow": {
         "domain": "g",
         "date": "20261026",
-        "time": "0600",
+        "time": "1200",
         "expver": "0001",
         "class": "od",
         "type": "fc",
@@ -2396,8 +2396,8 @@
         "levtype": "sfc",
         "step": "45",
         "param": "tp",
-        "_offset": 13661239,
-        "_length": 378695
+        "_offset": 16309022,
+        "_length": 379306
       },
       "metadata": {
         "edition": 2,
@@ -2406,9 +2406,9 @@
         "paramId": 228,
         "units": "m",
         "dataDate": 20261026,
-        "dataTime": 600,
+        "dataTime": 1200,
         "validityDate": 20261028,
-        "validityTime": 300,
+        "validityTime": 900,
         "stepType": "accum",
         "stepUnits": 1,
         "startStep": 0,
@@ -2438,11 +2438,11 @@
         "jPointsAreConsecutive": 0,
         "alternativeRowScanning": 0
       },
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-45h-oper-fc.grib2",
-      "rangeStart": 13661239,
-      "bytes": 378695,
-      "sha256": "52be6f10052956462df3ef71a0c7382d2dfa68e93416874f5d3592557d51584b",
-      "retrievedAt": "2026-10-26T18:42:59.833768Z"
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-45h-oper-fc.grib2",
+      "rangeStart": 16309022,
+      "bytes": 379306,
+      "sha256": "22735666482f152559b0304a333571f1cf39da956bcab43cf993982dcfef0d90",
+      "retrievedAt": "2026-10-26T20:55:30.398489Z"
     },
     {
       "kind": "grib",
@@ -2451,7 +2451,7 @@
       "indexRow": {
         "domain": "g",
         "date": "20261026",
-        "time": "0600",
+        "time": "1200",
         "expver": "0001",
         "class": "od",
         "type": "fc",
@@ -2459,8 +2459,8 @@
         "step": "45",
         "levtype": "sfc",
         "param": "10u",
-        "_offset": 21518293,
-        "_length": 617411
+        "_offset": 19984662,
+        "_length": 618009
       },
       "metadata": {
         "edition": 2,
@@ -2469,9 +2469,9 @@
         "paramId": 165,
         "units": "m s**-1",
         "dataDate": 20261026,
-        "dataTime": 600,
+        "dataTime": 1200,
         "validityDate": 20261028,
-        "validityTime": 300,
+        "validityTime": 900,
         "stepType": "instant",
         "stepUnits": 1,
         "startStep": 45,
@@ -2501,11 +2501,11 @@
         "jPointsAreConsecutive": 0,
         "alternativeRowScanning": 0
       },
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-45h-oper-fc.grib2",
-      "rangeStart": 21518293,
-      "bytes": 617411,
-      "sha256": "a4d31c4035e6d8b2492706c1b925ead9b87c8b8d4c95cc37b81e93cbeb6f084d",
-      "retrievedAt": "2026-10-26T18:43:03.266877Z"
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-45h-oper-fc.grib2",
+      "rangeStart": 19984662,
+      "bytes": 618009,
+      "sha256": "7684faf61be78e4a071fe7d71130807dc4657da49eac07d32ec8c01beb62777a",
+      "retrievedAt": "2026-10-26T20:55:34.266039Z"
     },
     {
       "kind": "grib",
@@ -2514,7 +2514,7 @@
       "indexRow": {
         "domain": "g",
         "date": "20261026",
-        "time": "0600",
+        "time": "1200",
         "expver": "0001",
         "class": "od",
         "type": "fc",
@@ -2522,8 +2522,8 @@
         "step": "45",
         "levtype": "sfc",
         "param": "10v",
-        "_offset": 22135704,
-        "_length": 604765
+        "_offset": 22250883,
+        "_length": 605362
       },
       "metadata": {
         "edition": 2,
@@ -2532,9 +2532,9 @@
         "paramId": 166,
         "units": "m s**-1",
         "dataDate": 20261026,
-        "dataTime": 600,
+        "dataTime": 1200,
         "validityDate": 20261028,
-        "validityTime": 300,
+        "validityTime": 900,
         "stepType": "instant",
         "stepUnits": 1,
         "startStep": 45,
@@ -2564,19 +2564,19 @@
         "jPointsAreConsecutive": 0,
         "alternativeRowScanning": 0
       },
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-45h-oper-fc.grib2",
-      "rangeStart": 22135704,
-      "bytes": 604765,
-      "sha256": "8072ab0d1c4708c7b7901bf37688318d17de5b71ed3951a0f8bddf5363742f3e",
-      "retrievedAt": "2026-10-26T18:43:06.665312Z"
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-45h-oper-fc.grib2",
+      "rangeStart": 22250883,
+      "bytes": 605362,
+      "sha256": "41cd4f2aec14b333b5497735c35e0a60b6f4ee220bc9be2852ca63ec21651450",
+      "retrievedAt": "2026-10-26T20:55:37.684670Z"
     },
     {
       "kind": "index",
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-48h-oper-fc.index",
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-48h-oper-fc.index",
       "rangeStart": null,
-      "bytes": 41538,
-      "sha256": "6c54d4d3923d083ff6948864b22256ffaf08086808be3c0f819f84ea09700696",
-      "retrievedAt": "2026-10-26T18:43:08.939546Z"
+      "bytes": 41541,
+      "sha256": "6350fe6a896b24fff258192dcfd3c0592ed509c3a43af6fa5aa38d5d3f191961",
+      "retrievedAt": "2026-10-26T20:55:39.898274Z"
     },
     {
       "kind": "grib",
@@ -2585,7 +2585,7 @@
       "indexRow": {
         "domain": "g",
         "date": "20261026",
-        "time": "0600",
+        "time": "1200",
         "expver": "0001",
         "class": "od",
         "type": "fc",
@@ -2593,8 +2593,8 @@
         "levtype": "sfc",
         "step": "48",
         "param": "tp",
-        "_offset": 17190953,
-        "_length": 386619
+        "_offset": 18659430,
+        "_length": 387917
       },
       "metadata": {
         "edition": 2,
@@ -2603,9 +2603,9 @@
         "paramId": 228,
         "units": "m",
         "dataDate": 20261026,
-        "dataTime": 600,
+        "dataTime": 1200,
         "validityDate": 20261028,
-        "validityTime": 600,
+        "validityTime": 1200,
         "stepType": "accum",
         "stepUnits": 1,
         "startStep": 0,
@@ -2635,11 +2635,11 @@
         "jPointsAreConsecutive": 0,
         "alternativeRowScanning": 0
       },
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-48h-oper-fc.grib2",
-      "rangeStart": 17190953,
-      "bytes": 386619,
-      "sha256": "b547d1ef2963232c0ad67a48edd78fdfe1a106d5558aa832bf0144b069be9af7",
-      "retrievedAt": "2026-10-26T18:43:12.404275Z"
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-48h-oper-fc.grib2",
+      "rangeStart": 18659430,
+      "bytes": 387917,
+      "sha256": "20f532c5a237cc3d37ab26e77869dd967d5edb53308980a61c35e00d5c0c1b0e",
+      "retrievedAt": "2026-10-26T20:55:42.974632Z"
     },
     {
       "kind": "grib",
@@ -2648,7 +2648,7 @@
       "indexRow": {
         "domain": "g",
         "date": "20261026",
-        "time": "0600",
+        "time": "1200",
         "expver": "0001",
         "class": "od",
         "type": "fc",
@@ -2656,8 +2656,8 @@
         "step": "48",
         "levtype": "sfc",
         "param": "10u",
-        "_offset": 21790364,
-        "_length": 617905
+        "_offset": 23472578,
+        "_length": 618375
       },
       "metadata": {
         "edition": 2,
@@ -2666,9 +2666,9 @@
         "paramId": 165,
         "units": "m s**-1",
         "dataDate": 20261026,
-        "dataTime": 600,
+        "dataTime": 1200,
         "validityDate": 20261028,
-        "validityTime": 600,
+        "validityTime": 1200,
         "stepType": "instant",
         "stepUnits": 1,
         "startStep": 48,
@@ -2698,11 +2698,11 @@
         "jPointsAreConsecutive": 0,
         "alternativeRowScanning": 0
       },
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-48h-oper-fc.grib2",
-      "rangeStart": 21790364,
-      "bytes": 617905,
-      "sha256": "64c2a25970ba61e052bf764fcf4646964b85340299c3b9dbdefee60a1691db8f",
-      "retrievedAt": "2026-10-26T18:43:15.878212Z"
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-48h-oper-fc.grib2",
+      "rangeStart": 23472578,
+      "bytes": 618375,
+      "sha256": "46bdfbae52e77842f5e6ae3c2076f6981367e031aaa5cf43a1c51c5a6aa6cfea",
+      "retrievedAt": "2026-10-26T20:55:46.319612Z"
     },
     {
       "kind": "grib",
@@ -2711,7 +2711,7 @@
       "indexRow": {
         "domain": "g",
         "date": "20261026",
-        "time": "0600",
+        "time": "1200",
         "expver": "0001",
         "class": "od",
         "type": "fc",
@@ -2719,8 +2719,8 @@
         "step": "48",
         "levtype": "sfc",
         "param": "10v",
-        "_offset": 24641240,
-        "_length": 604856
+        "_offset": 25170544,
+        "_length": 605470
       },
       "metadata": {
         "edition": 2,
@@ -2729,9 +2729,9 @@
         "paramId": 166,
         "units": "m s**-1",
         "dataDate": 20261026,
-        "dataTime": 600,
+        "dataTime": 1200,
         "validityDate": 20261028,
-        "validityTime": 600,
+        "validityTime": 1200,
         "stepType": "instant",
         "stepUnits": 1,
         "startStep": 48,
@@ -2761,19 +2761,19 @@
         "jPointsAreConsecutive": 0,
         "alternativeRowScanning": 0
       },
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-48h-oper-fc.grib2",
-      "rangeStart": 24641240,
-      "bytes": 604856,
-      "sha256": "7d7631cae9340740585187b4b7c21f34a15ee063b72b471b949c5da74747b6b7",
-      "retrievedAt": "2026-10-26T18:43:19.246025Z"
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-48h-oper-fc.grib2",
+      "rangeStart": 25170544,
+      "bytes": 605470,
+      "sha256": "f0d34d06389b4397db1e31ae1280311f537f1e3404e87f22bdbfaf6863126126",
+      "retrievedAt": "2026-10-26T20:55:49.774014Z"
     },
     {
       "kind": "index",
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-51h-oper-fc.index",
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-51h-oper-fc.index",
       "rangeStart": null,
-      "bytes": 41539,
-      "sha256": "4ff09132ce64b381d43191cd3cece5e934a3abe804a35cebc70da3542daeeabe",
-      "retrievedAt": "2026-10-26T18:43:21.523746Z"
+      "bytes": 41537,
+      "sha256": "c285585e5cafe0d116e248122b3b27abe3eed571d2cd52a1158dd86f9bf903e8",
+      "retrievedAt": "2026-10-26T20:55:51.953309Z"
     },
     {
       "kind": "grib",
@@ -2782,7 +2782,7 @@
       "indexRow": {
         "domain": "g",
         "date": "20261026",
-        "time": "0600",
+        "time": "1200",
         "expver": "0001",
         "class": "od",
         "type": "fc",
@@ -2790,8 +2790,8 @@
         "levtype": "sfc",
         "step": "51",
         "param": "tp",
-        "_offset": 16988066,
-        "_length": 394636
+        "_offset": 14002706,
+        "_length": 395934
       },
       "metadata": {
         "edition": 2,
@@ -2800,9 +2800,9 @@
         "paramId": 228,
         "units": "m",
         "dataDate": 20261026,
-        "dataTime": 600,
+        "dataTime": 1200,
         "validityDate": 20261028,
-        "validityTime": 900,
+        "validityTime": 1500,
         "stepType": "accum",
         "stepUnits": 1,
         "startStep": 0,
@@ -2832,11 +2832,11 @@
         "jPointsAreConsecutive": 0,
         "alternativeRowScanning": 0
       },
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-51h-oper-fc.grib2",
-      "rangeStart": 16988066,
-      "bytes": 394636,
-      "sha256": "a06eab8a7c41e49e065cbaa76b2bd80ecde7edd84091cb751a81b3ca70712a85",
-      "retrievedAt": "2026-10-26T18:43:24.690356Z"
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-51h-oper-fc.grib2",
+      "rangeStart": 14002706,
+      "bytes": 395934,
+      "sha256": "b43c109a8da85a43f9be25dd4008ae7e4101ef7b8f3cdf3693a479ac42a21f12",
+      "retrievedAt": "2026-10-26T20:55:55.058575Z"
     },
     {
       "kind": "grib",
@@ -2845,7 +2845,7 @@
       "indexRow": {
         "domain": "g",
         "date": "20261026",
-        "time": "0600",
+        "time": "1200",
         "expver": "0001",
         "class": "od",
         "type": "fc",
@@ -2853,8 +2853,8 @@
         "step": "51",
         "levtype": "sfc",
         "param": "10u",
-        "_offset": 21710112,
-        "_length": 618564
+        "_offset": 18720089,
+        "_length": 621552
       },
       "metadata": {
         "edition": 2,
@@ -2863,9 +2863,9 @@
         "paramId": 165,
         "units": "m s**-1",
         "dataDate": 20261026,
-        "dataTime": 600,
+        "dataTime": 1200,
         "validityDate": 20261028,
-        "validityTime": 900,
+        "validityTime": 1500,
         "stepType": "instant",
         "stepUnits": 1,
         "startStep": 51,
@@ -2895,11 +2895,11 @@
         "jPointsAreConsecutive": 0,
         "alternativeRowScanning": 0
       },
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-51h-oper-fc.grib2",
-      "rangeStart": 21710112,
-      "bytes": 618564,
-      "sha256": "086e77fb7894b902354b9a5b9c5a44eb16f11d1454d70938a3efe7f599ed4aa1",
-      "retrievedAt": "2026-10-26T18:43:28.207471Z"
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-51h-oper-fc.grib2",
+      "rangeStart": 18720089,
+      "bytes": 621552,
+      "sha256": "7e0240e8a1fd139894eb840edb7e9a875cd0ae879e7712337d143c2da071a8c1",
+      "retrievedAt": "2026-10-26T20:55:58.323273Z"
     },
     {
       "kind": "grib",
@@ -2908,7 +2908,7 @@
       "indexRow": {
         "domain": "g",
         "date": "20261026",
-        "time": "0600",
+        "time": "1200",
         "expver": "0001",
         "class": "od",
         "type": "fc",
@@ -2916,8 +2916,8 @@
         "step": "51",
         "levtype": "sfc",
         "param": "10v",
-        "_offset": 23081992,
-        "_length": 605798
+        "_offset": 20106005,
+        "_length": 607590
       },
       "metadata": {
         "edition": 2,
@@ -2926,9 +2926,9 @@
         "paramId": 166,
         "units": "m s**-1",
         "dataDate": 20261026,
-        "dataTime": 600,
+        "dataTime": 1200,
         "validityDate": 20261028,
-        "validityTime": 900,
+        "validityTime": 1500,
         "stepType": "instant",
         "stepUnits": 1,
         "startStep": 51,
@@ -2958,19 +2958,19 @@
         "jPointsAreConsecutive": 0,
         "alternativeRowScanning": 0
       },
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-51h-oper-fc.grib2",
-      "rangeStart": 23081992,
-      "bytes": 605798,
-      "sha256": "9038dd0df515d8961e7afdccf9fd594f6195a32b039fb2af0de9381189219f9d",
-      "retrievedAt": "2026-10-26T18:43:32.043498Z"
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-51h-oper-fc.grib2",
+      "rangeStart": 20106005,
+      "bytes": 607590,
+      "sha256": "8b33d5be2b7472603ca04cf3fef7f6270547d438c7a64e2d0603304c2cd1ce8c",
+      "retrievedAt": "2026-10-26T20:56:01.630788Z"
     },
     {
       "kind": "index",
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-54h-oper-fc.index",
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-54h-oper-fc.index",
       "rangeStart": null,
-      "bytes": 41538,
-      "sha256": "f7c9e05eeb101d75d6c8385ee47ca01ed1fc5471427304fbcab1fb1e33a0fcb0",
-      "retrievedAt": "2026-10-26T18:43:34.476779Z"
+      "bytes": 41540,
+      "sha256": "9be40fd8e2232909f797ba9bd0403779a25dd6538c3b1b54759f5fc4f9e3a96b",
+      "retrievedAt": "2026-10-26T20:56:03.963887Z"
     },
     {
       "kind": "grib",
@@ -2979,7 +2979,7 @@
       "indexRow": {
         "domain": "g",
         "date": "20261026",
-        "time": "0600",
+        "time": "1200",
         "expver": "0001",
         "class": "od",
         "type": "fc",
@@ -2987,8 +2987,8 @@
         "levtype": "sfc",
         "step": "54",
         "param": "tp",
-        "_offset": 13463644,
-        "_length": 402442
+        "_offset": 16698308,
+        "_length": 403292
       },
       "metadata": {
         "edition": 2,
@@ -2997,9 +2997,9 @@
         "paramId": 228,
         "units": "m",
         "dataDate": 20261026,
-        "dataTime": 600,
+        "dataTime": 1200,
         "validityDate": 20261028,
-        "validityTime": 1200,
+        "validityTime": 1800,
         "stepType": "accum",
         "stepUnits": 1,
         "startStep": 0,
@@ -3029,11 +3029,11 @@
         "jPointsAreConsecutive": 0,
         "alternativeRowScanning": 0
       },
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-54h-oper-fc.grib2",
-      "rangeStart": 13463644,
-      "bytes": 402442,
-      "sha256": "9649ecf1ef8eef53b90c0444455ca56b80d01157ff6f56cfc1e82eed4774900d",
-      "retrievedAt": "2026-10-26T18:43:37.641345Z"
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-54h-oper-fc.grib2",
+      "rangeStart": 16698308,
+      "bytes": 403292,
+      "sha256": "77b3f45470bd053a8512d6745ecc0718608324402d058f847dea6a12273d69fb",
+      "retrievedAt": "2026-10-26T20:56:07.550076Z"
     },
     {
       "kind": "grib",
@@ -3042,7 +3042,7 @@
       "indexRow": {
         "domain": "g",
         "date": "20261026",
-        "time": "0600",
+        "time": "1200",
         "expver": "0001",
         "class": "od",
         "type": "fc",
@@ -3050,8 +3050,8 @@
         "step": "54",
         "levtype": "sfc",
         "param": "10u",
-        "_offset": 18427593,
-        "_length": 618674
+        "_offset": 21248311,
+        "_length": 622983
       },
       "metadata": {
         "edition": 2,
@@ -3060,9 +3060,9 @@
         "paramId": 165,
         "units": "m s**-1",
         "dataDate": 20261026,
-        "dataTime": 600,
+        "dataTime": 1200,
         "validityDate": 20261028,
-        "validityTime": 1200,
+        "validityTime": 1800,
         "stepType": "instant",
         "stepUnits": 1,
         "startStep": 54,
@@ -3092,11 +3092,11 @@
         "jPointsAreConsecutive": 0,
         "alternativeRowScanning": 0
       },
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-54h-oper-fc.grib2",
-      "rangeStart": 18427593,
-      "bytes": 618674,
-      "sha256": "3b7c787a686403fa03235eee5de84e49b7b5db333ffef74dd60efc008b0b8511",
-      "retrievedAt": "2026-10-26T18:43:40.969617Z"
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-54h-oper-fc.grib2",
+      "rangeStart": 21248311,
+      "bytes": 622983,
+      "sha256": "2fb1bc65b76feeae8ff86f3f0bd76260b0f40dc8d3eacfe796e4d97049b27be9",
+      "retrievedAt": "2026-10-26T20:56:11.190211Z"
     },
     {
       "kind": "grib",
@@ -3105,7 +3105,7 @@
       "indexRow": {
         "domain": "g",
         "date": "20261026",
-        "time": "0600",
+        "time": "1200",
         "expver": "0001",
         "class": "od",
         "type": "fc",
@@ -3113,8 +3113,8 @@
         "step": "54",
         "levtype": "sfc",
         "param": "10v",
-        "_offset": 20444219,
-        "_length": 605624
+        "_offset": 23268269,
+        "_length": 608309
       },
       "metadata": {
         "edition": 2,
@@ -3123,9 +3123,9 @@
         "paramId": 166,
         "units": "m s**-1",
         "dataDate": 20261026,
-        "dataTime": 600,
+        "dataTime": 1200,
         "validityDate": 20261028,
-        "validityTime": 1200,
+        "validityTime": 1800,
         "stepType": "instant",
         "stepUnits": 1,
         "startStep": 54,
@@ -3155,19 +3155,19 @@
         "jPointsAreConsecutive": 0,
         "alternativeRowScanning": 0
       },
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-54h-oper-fc.grib2",
-      "rangeStart": 20444219,
-      "bytes": 605624,
-      "sha256": "f283028112dfa6a9e0f14ae2f6a1db8eacfcb3bbacf73cb35e1300b7ef17f716",
-      "retrievedAt": "2026-10-26T18:43:44.353280Z"
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-54h-oper-fc.grib2",
+      "rangeStart": 23268269,
+      "bytes": 608309,
+      "sha256": "ed3b8f5390623e6d54df4285dea069b348ac66fea6aaff69593299b0c73347cb",
+      "retrievedAt": "2026-10-26T20:56:14.844711Z"
     },
     {
       "kind": "index",
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-57h-oper-fc.index",
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-57h-oper-fc.index",
       "rangeStart": null,
-      "bytes": 41539,
-      "sha256": "d1b3f879c269e5530eecdd4143d4c07588e735f4cf7e39eb41433b14b8bf6cbd",
-      "retrievedAt": "2026-10-26T18:43:46.545813Z"
+      "bytes": 41540,
+      "sha256": "a2a813b17e125f06bf35f5d8fc8ce99addc167d24b01163fb8b563c13e458fd1",
+      "retrievedAt": "2026-10-26T20:56:17.274108Z"
     },
     {
       "kind": "grib",
@@ -3176,7 +3176,7 @@
       "indexRow": {
         "domain": "g",
         "date": "20261026",
-        "time": "0600",
+        "time": "1200",
         "expver": "0001",
         "class": "od",
         "type": "fc",
@@ -3184,8 +3184,8 @@
         "levtype": "sfc",
         "step": "57",
         "param": "tp",
-        "_offset": 16320039,
-        "_length": 409706
+        "_offset": 16530990,
+        "_length": 410319
       },
       "metadata": {
         "edition": 2,
@@ -3194,9 +3194,9 @@
         "paramId": 228,
         "units": "m",
         "dataDate": 20261026,
-        "dataTime": 600,
+        "dataTime": 1200,
         "validityDate": 20261028,
-        "validityTime": 1500,
+        "validityTime": 2100,
         "stepType": "accum",
         "stepUnits": 1,
         "startStep": 0,
@@ -3226,11 +3226,11 @@
         "jPointsAreConsecutive": 0,
         "alternativeRowScanning": 0
       },
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-57h-oper-fc.grib2",
-      "rangeStart": 16320039,
-      "bytes": 409706,
-      "sha256": "3c46e078f124434d4946d594305dcca369bc65295c16202f98b9d91254328218",
-      "retrievedAt": "2026-10-26T18:43:49.681715Z"
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-57h-oper-fc.grib2",
+      "rangeStart": 16530990,
+      "bytes": 410319,
+      "sha256": "2e67a492a0e014877b075cbdb9e9338a1a739271f936081511baabbdb0edaa82",
+      "retrievedAt": "2026-10-26T20:56:20.685272Z"
     },
     {
       "kind": "grib",
@@ -3239,7 +3239,7 @@
       "indexRow": {
         "domain": "g",
         "date": "20261026",
-        "time": "0600",
+        "time": "1200",
         "expver": "0001",
         "class": "od",
         "type": "fc",
@@ -3247,8 +3247,8 @@
         "step": "57",
         "levtype": "sfc",
         "param": "10u",
-        "_offset": 22111875,
-        "_length": 621088
+        "_offset": 22644288,
+        "_length": 620322
       },
       "metadata": {
         "edition": 2,
@@ -3257,9 +3257,9 @@
         "paramId": 165,
         "units": "m s**-1",
         "dataDate": 20261026,
-        "dataTime": 600,
+        "dataTime": 1200,
         "validityDate": 20261028,
-        "validityTime": 1500,
+        "validityTime": 2100,
         "stepType": "instant",
         "stepUnits": 1,
         "startStep": 57,
@@ -3289,11 +3289,11 @@
         "jPointsAreConsecutive": 0,
         "alternativeRowScanning": 0
       },
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-57h-oper-fc.grib2",
-      "rangeStart": 22111875,
-      "bytes": 621088,
-      "sha256": "fa5dfc5c41687df3b03c0f639fe8864553fa73d2bc88993e0784ab6be6ec7e76",
-      "retrievedAt": "2026-10-26T18:43:52.996684Z"
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-57h-oper-fc.grib2",
+      "rangeStart": 22644288,
+      "bytes": 620322,
+      "sha256": "0e8e8eaf6678db3d86ed9dd4f933ce39313dfcd88a45e72e5990e0bba527419c",
+      "retrievedAt": "2026-10-26T20:56:24.767576Z"
     },
     {
       "kind": "grib",
@@ -3302,7 +3302,7 @@
       "indexRow": {
         "domain": "g",
         "date": "20261026",
-        "time": "0600",
+        "time": "1200",
         "expver": "0001",
         "class": "od",
         "type": "fc",
@@ -3310,8 +3310,8 @@
         "step": "57",
         "levtype": "sfc",
         "param": "10v",
-        "_offset": 22732963,
-        "_length": 606984
+        "_offset": 24916434,
+        "_length": 606576
       },
       "metadata": {
         "edition": 2,
@@ -3320,9 +3320,9 @@
         "paramId": 166,
         "units": "m s**-1",
         "dataDate": 20261026,
-        "dataTime": 600,
+        "dataTime": 1200,
         "validityDate": 20261028,
-        "validityTime": 1500,
+        "validityTime": 2100,
         "stepType": "instant",
         "stepUnits": 1,
         "startStep": 57,
@@ -3352,19 +3352,19 @@
         "jPointsAreConsecutive": 0,
         "alternativeRowScanning": 0
       },
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-57h-oper-fc.grib2",
-      "rangeStart": 22732963,
-      "bytes": 606984,
-      "sha256": "88e9e36a7da299ef268e04eeab059f722597c6aff8d528c84db811bc93d41a83",
-      "retrievedAt": "2026-10-26T18:43:56.409738Z"
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-57h-oper-fc.grib2",
+      "rangeStart": 24916434,
+      "bytes": 606576,
+      "sha256": "fb2558a8fdc493b6ed228cdbe87967616edf3504e7f5e81a97106a1edb49b58d",
+      "retrievedAt": "2026-10-26T20:56:28.752137Z"
     },
     {
       "kind": "index",
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-60h-oper-fc.index",
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-60h-oper-fc.index",
       "rangeStart": null,
-      "bytes": 41539,
-      "sha256": "59aa5cab68d45663b2fbe83c482c2bbeb3ed50ba6413c432bf238d8196830f11",
-      "retrievedAt": "2026-10-26T18:43:58.588849Z"
+      "bytes": 41541,
+      "sha256": "568a9a1012fc84d1fae444b647324e51615e5ae6e3f31f51a3d32aad4df07cfe",
+      "retrievedAt": "2026-10-26T20:56:31.300507Z"
     },
     {
       "kind": "grib",
@@ -3373,7 +3373,7 @@
       "indexRow": {
         "domain": "g",
         "date": "20261026",
-        "time": "0600",
+        "time": "1200",
         "expver": "0001",
         "class": "od",
         "type": "fc",
@@ -3381,8 +3381,8 @@
         "levtype": "sfc",
         "step": "60",
         "param": "tp",
-        "_offset": 16302509,
-        "_length": 416288
+        "_offset": 16210174,
+        "_length": 416683
       },
       "metadata": {
         "edition": 2,
@@ -3391,9 +3391,9 @@
         "paramId": 228,
         "units": "m",
         "dataDate": 20261026,
-        "dataTime": 600,
-        "validityDate": 20261028,
-        "validityTime": 1800,
+        "dataTime": 1200,
+        "validityDate": 20261029,
+        "validityTime": 0,
         "stepType": "accum",
         "stepUnits": 1,
         "startStep": 0,
@@ -3423,11 +3423,11 @@
         "jPointsAreConsecutive": 0,
         "alternativeRowScanning": 0
       },
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-60h-oper-fc.grib2",
-      "rangeStart": 16302509,
-      "bytes": 416288,
-      "sha256": "bdbf8837a41525526bf9d1698e4757b3d4dc3e5f26f00314ebfa6aaf619e0a6f",
-      "retrievedAt": "2026-10-26T18:44:01.754121Z"
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-60h-oper-fc.grib2",
+      "rangeStart": 16210174,
+      "bytes": 416683,
+      "sha256": "23e939048a78166babe6285fd497bbe4fe1275a646cfa847a0b657e6d9e940c7",
+      "retrievedAt": "2026-10-26T20:56:34.717529Z"
     },
     {
       "kind": "grib",
@@ -3436,7 +3436,7 @@
       "indexRow": {
         "domain": "g",
         "date": "20261026",
-        "time": "0600",
+        "time": "1200",
         "expver": "0001",
         "class": "od",
         "type": "fc",
@@ -3444,8 +3444,8 @@
         "step": "60",
         "levtype": "sfc",
         "param": "10u",
-        "_offset": 22444382,
-        "_length": 621833
+        "_offset": 21505487,
+        "_length": 617861
       },
       "metadata": {
         "edition": 2,
@@ -3454,9 +3454,9 @@
         "paramId": 165,
         "units": "m s**-1",
         "dataDate": 20261026,
-        "dataTime": 600,
-        "validityDate": 20261028,
-        "validityTime": 1800,
+        "dataTime": 1200,
+        "validityDate": 20261029,
+        "validityTime": 0,
         "stepType": "instant",
         "stepUnits": 1,
         "startStep": 60,
@@ -3486,11 +3486,11 @@
         "jPointsAreConsecutive": 0,
         "alternativeRowScanning": 0
       },
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-60h-oper-fc.grib2",
-      "rangeStart": 22444382,
-      "bytes": 621833,
-      "sha256": "a87d30191e75e41e1ce7434814c2ca0571b11ae28b0c30130c4cf3c8f2068a28",
-      "retrievedAt": "2026-10-26T18:44:05.105227Z"
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-60h-oper-fc.grib2",
+      "rangeStart": 21505487,
+      "bytes": 617861,
+      "sha256": "aafe0ffed26a8c3b858f6a506802f25b14d28de70ca6dd9388db0fb2859f6b74",
+      "retrievedAt": "2026-10-26T20:56:38.043020Z"
     },
     {
       "kind": "grib",
@@ -3499,7 +3499,7 @@
       "indexRow": {
         "domain": "g",
         "date": "20261026",
-        "time": "0600",
+        "time": "1200",
         "expver": "0001",
         "class": "od",
         "type": "fc",
@@ -3507,8 +3507,8 @@
         "step": "60",
         "levtype": "sfc",
         "param": "10v",
-        "_offset": 23745474,
-        "_length": 607858
+        "_offset": 24409790,
+        "_length": 604406
       },
       "metadata": {
         "edition": 2,
@@ -3517,9 +3517,9 @@
         "paramId": 166,
         "units": "m s**-1",
         "dataDate": 20261026,
-        "dataTime": 600,
-        "validityDate": 20261028,
-        "validityTime": 1800,
+        "dataTime": 1200,
+        "validityDate": 20261029,
+        "validityTime": 0,
         "stepType": "instant",
         "stepUnits": 1,
         "startStep": 60,
@@ -3549,23 +3549,12 @@
         "jPointsAreConsecutive": 0,
         "alternativeRowScanning": 0
       },
-      "url": "https://data.ecmwf.int/forecasts/20261026/06z/ifs/0p25/oper/20261026060000-60h-oper-fc.grib2",
-      "rangeStart": 23745474,
-      "bytes": 607858,
-      "sha256": "0a09e062e301296adce309c335d8fcbe23f5e055d937bc834621e3ad8b47c62d",
-      "retrievedAt": "2026-10-26T18:44:08.465037Z"
+      "url": "https://data.ecmwf.int/forecasts/20261026/12z/ifs/0p25/oper/20261026120000-60h-oper-fc.grib2",
+      "rangeStart": 24409790,
+      "bytes": 604406,
+      "sha256": "e3cbdcf45063f5ec0b41d78cf8ed753ee339f915fae5ff3d49fd0fbdefd02773",
+      "retrievedAt": "2026-10-26T20:56:41.299436Z"
     }
   ],
-  "errors": [],
-  "selectionReview": {
-    "checkedAt": "2026-10-26T18:45:16.243286+00:00",
-    "requestedNewerRun": "2026-10-26T12:00:00Z",
-    "listingUrl": "https://data.ecmwf.int/forecasts/20261026/12z/",
-    "listingSha256": "34b4569b5c69adfd6f15759411fbeb5fbcb1e49813fd1712bff3062488cf13c7",
-    "listedModels": [
-      "aifs-ens",
-      "aifs-single"
-    ],
-    "result": "IFS not listed; the 12-hour IFS index returned HTTP 404. AIFS is not silently substituted. Available 06 UTC IFS lead times were extended to 60 hours; original model run remains unchanged."
-  }
+  "errors": []
 }
