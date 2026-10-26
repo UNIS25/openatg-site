@@ -1,14 +1,15 @@
-import {LocationMap} from './location-map.mjs?v=20261026-5';
-import {warningMatches,warningState,ageState,insideGeometry,intersectsAccuracy,locationCandidates} from './core.mjs?v=20261026-5';
+import {LocationMap} from './location-map.mjs?v=20261026-6';
+import {warningMatches,warningState,ageState,insideGeometry,intersectsAccuracy,locationCandidates} from './core.mjs?v=20261026-6';
 const $=s=>document.querySelector(s);
 export function createFlow({t,name,getData,getCatalog,onLanguage,onArea,onRefresh}){
- let stage='language',point=null,accuracy=null,mode='gps',area=null,candidates=[],state='idle',manualPoint=null,catalog=null;
+ let stage='language',point=null,accuracy=null,mode='gps',area=null,candidates=[],state='idle',manualPoint=null,catalog=null,locationRequest=0,matchRequest=0;
  const shards=new Map();const resultMap=new LocationMap($('#result-map'),{translate:t});
  const pinMap=new LocationMap($('#pin-map'),{translate:t,onPin:p=>{manualPoint=p;pinMap.set({point:p,accuracy:null});$('#use-pin').disabled=false;$('#manual-status').textContent=t('manualAccuracy');}});
  function labels(){return [...(catalog?.districts||[]),...(catalog?.divisions||[])].map(a=>({...a,label:name(a)}));}
  function show(next){stage=next;for(const s of ['language','location','result'])$('#'+s+'-screen').hidden=s!==next;$('.language').hidden=next==='language';window.scrollTo(0,0);}
  function status(key,extra=''){$('#location-message').textContent=t(key)+(extra?' '+extra:'');$('#location-help').hidden=key==='gpsWorking';}
  async function openManual(approximate){
+  locationRequest++;matchRequest++;$('#locate').disabled=false;
   show('location');$('#manual-panel').hidden=false;$('#location-screen').classList.add('manual-open');manualPoint=null;$('#use-pin').disabled=true;$('#manual-status').textContent=t('pinInstruction');
   await pinMap.load();if(pinMap.error)$('#location-help').hidden=false;try{catalog=await getCatalog();pinMap.set({labels:labels()});}catch{}
   if(approximate)pinMap.set({center:approximate.point,span:Math.max(.08,approximate.accuracy/111320*6),point:approximate.point,accuracy:approximate.accuracy});
@@ -16,30 +17,33 @@ export function createFlow({t,name,getData,getCatalog,onLanguage,onArea,onRefres
   $('#manual-title').focus({preventScroll:true});
  }
  async function match(p,uncertainty,source){
+  const request=++matchRequest;
   point=[...p];accuracy=uncertainty;mode=source;area=null;candidates=[];state='checking';onArea(null);show('result');
   resultMap.set({center:point,span:Math.max(.055,(uncertainty||0)/111320*6),point,accuracy});resultMap.load();render();
   if(p[1]<5.7||p[1]>10.1||p[0]<79.3||p[0]>82.1){state='outside';render();return;}
   try{
-   catalog=await getCatalog();const districts=catalog.districts.filter(d=>intersectsAccuracy(d.bbox,p,(uncertainty??100)+30));
+   catalog=await getCatalog();if(request!==matchRequest)return;const districts=catalog.districts.filter(d=>intersectsAccuracy(d.bbox,p,(uncertainty??100)+30));
    if(!districts.length){state='outside';render();return;}
    const loaded=await Promise.all(districts.map(async d=>{if(!shards.has(d.code)){const response=await fetch(`./data/boundaries/${d.code}.json`,{signal:AbortSignal.timeout(20000)});if(!response.ok)throw Error('Boundary unavailable');shards.set(d.code,await response.json());}return shards.get(d.code);}));
-   const features=loaded.flatMap(s=>s.features);const matches=locationCandidates(features,p,uncertainty??100);
+   if(request!==matchRequest)return;const features=loaded.flatMap(s=>s.features);const matches=locationCandidates(features,p,uncertainty??100);
    candidates=matches.map(f=>catalog.divisions.find(a=>a.code===f.properties.code)).filter(Boolean);
    resultMap.set({features,labels:labels()});
    if(matches.length===1&&insideGeometry(p,matches[0].geometry)){area=candidates[0]||null;state=area?'matched':'unavailable';onArea(area);}
    else state=candidates.length?'ambiguous':'outside';
-  }catch{state='unavailable';}
+  }catch{if(request!==matchRequest)return;state='unavailable';}
   render();
  }
  function locate(){
+  const request=++locationRequest;matchRequest++;
   $('#locate').disabled=true;status('gpsWorking');
   if(!navigator.geolocation){$('#locate').disabled=false;status('gpsUnavailable');return;}
   navigator.geolocation.getCurrentPosition(position=>{
+   if(request!==locationRequest)return;
    $('#locate').disabled=false;const {latitude,longitude,accuracy:a}=position.coords;
-   if(![latitude,longitude,a].every(Number.isFinite)||a<0){status('gpsUnavailable');return;}
+   if(![latitude,longitude,a].every(Number.isFinite)||a<=0||Math.abs(latitude)>90||Math.abs(longitude)>180){status('gpsUnavailable');return;}
    if(a>1500){status('gpsApproximate','±'+Math.round(a)+' m');openManual({point:[longitude,latitude],accuracy:a});return;}
    $('#location-message').textContent='';match([longitude,latitude],a,'gps');
-  },error=>{$('#locate').disabled=false;status(error.code===1?'gpsDenied':'gpsUnavailable');},{enableHighAccuracy:true,timeout:15000,maximumAge:0});
+  },error=>{if(request!==locationRequest)return;$('#locate').disabled=false;status(error.code===1?'gpsDenied':'gpsUnavailable');},{enableHighAccuracy:true,timeout:15000,maximumAge:0});
  }
  function render(){
   resultMap.t=t;pinMap.t=t;resultMap.labels=labels();pinMap.labels=labels();resultMap.draw();pinMap.draw();
@@ -68,7 +72,7 @@ export function createFlow({t,name,getData,getCatalog,onLanguage,onArea,onRefres
  }
  document.querySelectorAll('[data-language]').forEach(b=>b.addEventListener('click',()=>{onLanguage(b.dataset.language);show('location');onRefresh();}));
  $('#locate').addEventListener('click',locate);$('#manual-location').addEventListener('click',()=>openManual());
- $('#change-location').addEventListener('click',()=>{show('location');$('#manual-panel').hidden=true;$('#location-screen').classList.remove('manual-open');$('#location-message').textContent='';});
+ $('#change-location').addEventListener('click',()=>{locationRequest++;matchRequest++;$('#locate').disabled=false;show('location');$('#manual-panel').hidden=true;$('#location-screen').classList.remove('manual-open');$('#location-message').textContent='';});
  $('#use-pin').addEventListener('click',()=>{if(manualPoint)match(manualPoint,null,'manual');});
  $('#area-search').addEventListener('input',async()=>{const query=$('#area-search').value.trim().toLocaleLowerCase();const list=$('#area-results');list.replaceChildren();list.hidden=!query;if(!query)return;try{catalog=await getCatalog();for(const a of [...catalog.districts,...catalog.divisions].filter(a=>Object.values(a.names).concat(Object.values(a.displayNames||{}),a.aliases||[],a.code).some(n=>String(n).toLocaleLowerCase().includes(query))).slice(0,12)){const b=document.createElement('button');b.type='button';b.textContent=name(a)+' · '+t(a.type);b.addEventListener('click',()=>{const [x0,y0,x1,y1]=a.bbox;pinMap.set({center:[(x0+x1)/2,(y0+y1)/2],span:Math.max(x1-x0,(y1-y0)/.75)*1.15,point:null,accuracy:null,labels:labels()});manualPoint=null;$('#use-pin').disabled=true;$('#area-search').value=name(a);list.hidden=true;$('#manual-status').textContent=t('pinInstruction');});list.append(b);}if(!list.childElementCount)list.textContent=t('noSearch');}catch{list.textContent=t('mapUnavailable');}});
  $('#all-details').addEventListener('toggle',()=>{if($('#all-details').open)onRefresh();});

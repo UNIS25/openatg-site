@@ -17,3 +17,12 @@ Warnings and selected water observations are attributed to the Sri Lanka
 Irrigation Department, DMC, NBRI and Department of Meteorology. Original source
 links and SHA-256 hashes appear in data/provenance.json. No official partnership
 or comprehensive/realtime coverage is claimed.
+
+Display basemap adaptation (release 20261026-5): map-overview.json is separately
+simplified at a 0.004-degree display tolerance and rounded to five decimals.
+It is for drawing only. Exact district geometry remains the matching source.
+
+Reservoir point locations: Sri Lanka Irrigation Department ICT/GIS,
+Scheme_Data_2, layer 3. Source URL, retrieval time and hash are recorded in
+data/reservoir-locations.json. Unique exact-name joins only; ambiguous and
+unmatched records are omitted. Points do not establish upstream connectivity.

@@ -196,7 +196,7 @@ checker. Verify the Pages build and existing home/store/signal routes after
 any rollback. Never restore a superseded warning as a current warning without
 rechecking its validity and the latest official bulletin.
 
-## Location-first interface, release 20261026-5
+## Location-first interface, release 20261026-6
 
 Screen 1 contains language choice only. Screen 2 requests GPS through an explicit
 button; manual map placement is a fallback. Screen 3 centers the real obtained
