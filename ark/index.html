@@ -10,22 +10,22 @@
   <title>Ark by OpenATG · Sri Lanka weather & flood awareness</title>
   <link rel="canonical" href="https://openatg.com/ark/">
   <link rel="icon" href="/atg-mark-transparent.png">
-  <link rel="stylesheet" href="/floodlens/floodlens.css?v=20261026-18">
-  <link rel="stylesheet" href="/floodlens/forecast.css?v=20261026-18">
-  <script defer src="/floodlens/boot.js?v=20261026-18"></script>
-  <link rel="modulepreload" href="/floodlens/app.mjs?v=20261026-18">
-  <link rel="modulepreload" href="/floodlens/i18n.mjs?v=20261026-18">
-  <link rel="modulepreload" href="/floodlens/flow.mjs?v=20261026-18">
-  <link rel="modulepreload" href="/floodlens/core.mjs?v=20261026-18">
-  <link rel="modulepreload" href="/floodlens/context-ui.mjs?v=20261026-18">
-  <link rel="modulepreload" href="/floodlens/forecast-ui.mjs?v=20261026-18">
-  <link rel="modulepreload" href="/floodlens/location-map.mjs?v=20261026-18">
-  <link rel="modulepreload" href="/floodlens/street-map.mjs?v=20261026-18">
-  <link rel="modulepreload" href="/floodlens/gates.mjs?v=20261026-18">
-  <link rel="modulepreload" href="/floodlens/context-evidence.mjs?v=20261026-18">
-  <link rel="modulepreload" href="/floodlens/forecast-model.mjs?v=20261026-18">
-  <link rel="modulepreload" href="/floodlens/reservoirs.mjs?v=20261026-18">
-  <script type="module" src="/floodlens/app.mjs?v=20261026-18"></script>
+  <link rel="stylesheet" href="/floodlens/floodlens.css?v=20261026-19">
+  <link rel="stylesheet" href="/floodlens/forecast.css?v=20261026-19">
+  <script defer src="/floodlens/boot.js?v=20261026-19"></script>
+  <link rel="modulepreload" href="/floodlens/app.mjs?v=20261026-19">
+  <link rel="modulepreload" href="/floodlens/i18n.mjs?v=20261026-19">
+  <link rel="modulepreload" href="/floodlens/flow.mjs?v=20261026-19">
+  <link rel="modulepreload" href="/floodlens/core.mjs?v=20261026-19">
+  <link rel="modulepreload" href="/floodlens/context-ui.mjs?v=20261026-19">
+  <link rel="modulepreload" href="/floodlens/forecast-ui.mjs?v=20261026-19">
+  <link rel="modulepreload" href="/floodlens/location-map.mjs?v=20261026-19">
+  <link rel="modulepreload" href="/floodlens/street-map.mjs?v=20261026-19">
+  <link rel="modulepreload" href="/floodlens/gates.mjs?v=20261026-19">
+  <link rel="modulepreload" href="/floodlens/context-evidence.mjs?v=20261026-19">
+  <link rel="modulepreload" href="/floodlens/forecast-model.mjs?v=20261026-19">
+  <link rel="modulepreload" href="/floodlens/reservoirs.mjs?v=20261026-19">
+  <script type="module" src="/floodlens/app.mjs?v=20261026-19"></script>
 </head>
 <body>
   <a href="#main" class="skip" data-i18n="skip">Skip to content</a>
@@ -69,6 +69,7 @@
       <section id="location-tides" aria-label="Colombo astronomical tide prediction" hidden></section>
       <section id="location-context" class="location-context" aria-live="polite" hidden></section>
       <details id="water-here" class="water-here"><summary data-i18n="waterHere">Is there floodwater near you?</summary><div><div class="water-answer"><button id="water-yes" type="button" class="button" data-i18n="waterYes" aria-pressed="false">Yes — show help</button><button id="water-no" type="button" class="text-button" data-i18n="waterNo" aria-pressed="false">No / unsure</button></div><div id="water-guidance" hidden><p data-i18n="waterHereAction">Do not walk or drive through floodwater. Follow official evacuation instructions.</p><div class="quick-help"><a href="tel:117" data-i18n="helpDisaster">117 · Disaster help</a><a href="tel:1990" data-i18n="helpAmbulance">1990 · Ambulance</a><a href="tel:119" data-i18n="helpPolice">119 · Police</a></div><a href="https://np.gov.lk/pdf/DMC/irrigation_NPC.pdf" target="_blank" rel="noopener noreferrer" data-i18n="guidanceSource">Official flood guidance ↗</a></div><p class="small" data-i18n="waterPrivate">Your answer stays on this page.</p></div></details>
+      <details id="cloud-imagery" class="cloud-widget" hidden></details>
       <details id="local-news" class="local-news" hidden></details>
       <nav class="weather-links" aria-label="Official weather sources"><a href="https://meteo.gov.lk/index.php?lang=en" target="_blank" rel="noopener noreferrer" data-i18n="weatherOfficial">Official weather ↗</a><a href="https://mausam.imd.gov.in/Forecast/seaarea_bulletin_new.php?id=0" target="_blank" rel="noopener noreferrer" data-i18n="cycloneOfficial">IMD cyclone bulletin ↗</a></nav>
       <details id="all-details" class="all-details"><summary data-i18n="detailsShort">Sources & updates</summary><div class="details-content"><details id="context-details" class="context-details"><summary></summary><div></div></details>

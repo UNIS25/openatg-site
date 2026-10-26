@@ -1,14 +1,15 @@
-import {mountTides} from './tides-ui.mjs?v=20261026-18';
-import {renderNews} from './news.mjs?v=20261026-18';
-import {mountForecast} from './forecast-ui.mjs?v=20261026-18';
-import {createContext} from './context-ui.mjs?v=20261026-18';
-import {streetEnabled} from './street-map.mjs?v=20261026-18';
-import {LocationMap} from './location-map.mjs?v=20261026-18';
-import {locationEvidence,warningState,warningMatches,ageState,insideGeometry,intersectsAccuracy,locationCandidates} from './core.mjs?v=20261026-18';
+import {mountClouds} from './clouds-ui.mjs?v=20261026-19';
+import {mountTides} from './tides-ui.mjs?v=20261026-19';
+import {renderNews} from './news.mjs?v=20261026-19';
+import {mountForecast} from './forecast-ui.mjs?v=20261026-19';
+import {createContext} from './context-ui.mjs?v=20261026-19';
+import {streetEnabled} from './street-map.mjs?v=20261026-19';
+import {LocationMap} from './location-map.mjs?v=20261026-19';
+import {locationEvidence,warningState,warningMatches,ageState,insideGeometry,intersectsAccuracy,locationCandidates} from './core.mjs?v=20261026-19';
 const $=s=>document.querySelector(s);
 export function createFlow({t,name,getData,getCatalog,onLanguage,onArea,onRefresh}){
  let stage='language',point=null,accuracy=null,mode='gps',area=null,candidates=[],state='idle',manualPoint=null,catalog=null,locationRequest=0,matchRequest=0,lastMapMode=false;
- let forecastKey='',tideKey='',newsKey='';
+ let forecastKey='',tideKey='',newsKey='',cloudKey='';
  const shards=new Map();const resultMap=new LocationMap($('#result-map'),{translate:t});
  const context=createContext({map:resultMap,t});
  const pinMap=new LocationMap($('#pin-map'),{translate:t,onPin:p=>{manualPoint=p;$('#use-pin').disabled=false;$('#manual-status').textContent=t('manualAccuracy');}});
@@ -62,6 +63,8 @@ export function createFlow({t,name,getData,getCatalog,onLanguage,onArea,onRefres
   context.update({point,accuracy:accuracy||0,outside:state==='outside',checking:state==='checking',areas:area?[area]:candidates});
   const forecastRoot=$('#location-forecast');forecastRoot.hidden=state==='outside'||state==='checking';
   if(!forecastRoot.hidden){const key=point.join(',')+'|'+document.documentElement.lang+'|'+Math.floor(Date.now()/300000);if(key!==forecastKey){forecastKey=key;mountForecast(forecastRoot,point,document.documentElement.lang);}}
+  const nextCloudKey=point.join(',')+'|'+document.documentElement.lang+'|'+state+'|'+Math.floor(Date.now()/300000);
+  if(nextCloudKey!==cloudKey){cloudKey=nextCloudKey;mountClouds($('#cloud-imagery'),point,document.documentElement.lang,state==='outside'||state==='checking');}
   const {data,needsUpdate,loadFailed,loading}=getData();
   const candidateAreas=area?[area]:state==='ambiguous'?candidates:[];
   const districts=[...new Set(candidateAreas.map(a=>a.districtCode))];

@@ -1,4 +1,4 @@
-import {warningState} from './core.mjs?v=20261026-18';
+import {warningState} from './core.mjs?v=20261026-19';
 export function nearNews(snapshot,media,districts,now=Date.now()){
  if(!Number.isFinite(now)||!districts.length)return [];
  const reviewed=Date.parse(snapshot?.reviewedAt);

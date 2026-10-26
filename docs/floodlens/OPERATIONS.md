@@ -695,3 +695,18 @@ It retains prediction-not-measurement wording and compact accessible source,
 licence and modification credits. The numerical source and validity period
 are unchanged. Selected reviewed news remains accurately scoped; no social
 platform connection has been added or advertised.
+
+## Recent cloud imagery, release 20261026-19
+
+An optional, collapsed Satellite cloud view now shows three actual JMA
+Himawari-9 infrared frames through NASA GIBS, captured at 18:30, 18:40 and
+19:00 UTC on 26 October. The advertised 18:50 frame failed retrieval and is
+omitted. These are temperature-coloured cloud images, not rain radar or
+floodwater. They never alter the official assessment or replace the default
+road map. Capture age is explicit; images expire after three hours.
+
+See `CLOUD_IMAGERY.md` for source rights, actual pixel/coverage validation,
+provenance, privacy and failure tests. The fixed country crop and local pin
+use first-party files only. Publication is manual: no workflow, permission or
+automatic publisher path was expanded. This supersedes the earlier statement
+that cloud candidates remain unverified, but does not provide a live image feed.
