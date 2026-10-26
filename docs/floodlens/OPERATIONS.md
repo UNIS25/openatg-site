@@ -7,7 +7,7 @@ No framework, backend, external font, runtime map library or new credential.
 ## Data contract and release scope
 
 `floodlens/data/reviewed.json` contains manually reviewed, selected official
-bulletins, fourteen dated station observations and two dated reservoir fallback observations.
+bulletins, eighteen dated station observations and two dated reservoir fallback observations.
 It is not complete national alert or gauge coverage. Every warning has original
 URL, issue time, expiry, scope, authority, SHA-256 and explicit DS-code mapping.
 The rainfall advisory's document issue time (03:00 SLST) is kept separately from
@@ -21,7 +21,7 @@ Glencourse remains Alert with no reported trend. Its blank trend is not interpre
 as steady and does not retain the earlier rising direction. Missing readings at
 Weraganthota, Thanthirimale and Galgamuwa are not converted to Normal. The report
 rainfall window is 12 hours and is not ingested into the station level fields.
-All fourteen selected gauges use metres. Nagalagam Street is deliberately not
+All eighteen selected gauges use metres. Nagalagam Street is deliberately not
 ingested; its official unit is feet. No ArcGIS `CreationDate` or `EditDate` is
 presented as an observation timestamp, and rainfall-period semantics are not
 invented. Reservoir values are daily reports dated 26 October; time unknown.
@@ -710,3 +710,17 @@ provenance, privacy and failure tests. The fixed country crop and local pin
 use first-party files only. Publication is manual: no workflow, permission or
 automatic publisher path was expanded. This supersedes the earlier statement
 that cloud candidates remain unverified, but does not provide a live image feed.
+
+## 00:30 October 27 river review
+
+The original 00:30 SLST report was visually reviewed, with 00:00 observations
+and the separate 23:00 previous column retained. Eighteen stations now include
+all four Minor Flood and ten Alert rows; four retained stations are Normal.
+Dunamale is Minor Flood/Rising. New stations are Hanwella, Putupaula, Baddegama
+and Thalgahagoda. Thalgahagoda has a blank trend, preserved as null despite
+equal readings. Holombuwa and Peradeniya are Normal station classifications,
+not warning cancellations. Missing Horowpothana, Weraganthota, Thanthirimale
+and Galgamuwa remain absent; no old Galgamuwa reading is presented as current.
+All selected units are metres. The 15-hour rainfall column is not ingested.
+Warning objects, translations, review timestamps and reservoir automation
+are unchanged; the observation review time and source provenance are separate.
