@@ -7,16 +7,21 @@ No framework, backend, external font, runtime map library or new credential.
 ## Data contract and release scope
 
 `floodlens/data/reviewed.json` contains manually reviewed, selected official
-bulletins, thirteen dated station observations and two dated reservoir fallback observations.
+bulletins, fourteen dated station observations and two dated reservoir fallback observations.
 It is not complete national alert or gauge coverage. Every warning has original
 URL, issue time, expiry, scope, authority, SHA-256 and explicit DS-code mapping.
 The rainfall advisory's document issue time (03:00 SLST) is kept separately from
 its DMC listing time (03:30). All timestamps include time-zone offsets.
 
-The current 26 October river PDF was issued at 18:30 SLST; its selected measurements
-are at 18:00, separately from the 18:00 DMC listing time. The superseded 12:30
-and 15:30 reports and their selected readings remain in provenance. Source remarks are station classifications, not area predictions.
-All thirteen selected gauges use metres. Nagalagam Street is deliberately not
+The current 26 October river PDF was issued at 21:30 SLST; its selected measurements
+are at 21:00, separately from the 21:30 DMC listing time. The superseded 12:30,
+15:30 and 18:30 reports and their selected readings remain in provenance. Source remarks are station classifications, not area predictions.
+Panadugama is now Minor Flood; Badalgama on Maha Oya is newly included as Alert.
+Glencourse remains Alert with no reported trend. Its blank trend is not interpreted
+as steady and does not retain the earlier rising direction. Missing readings at
+Weraganthota, Thanthirimale and Galgamuwa are not converted to Normal. The report
+rainfall window is 12 hours and is not ingested into the station level fields.
+All fourteen selected gauges use metres. Nagalagam Street is deliberately not
 ingested; its official unit is feet. No ArcGIS `CreationDate` or `EditDate` is
 presented as an observation timestamp, and rainfall-period semantics are not
 invented. Reservoir values are daily reports dated 26 October; time unknown.

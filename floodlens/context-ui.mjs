@@ -1,7 +1,7 @@
-import {gateSummary} from './gates.mjs?v=20261026-13';
-import {satelliteAt,rainfallAt,reservoirsForContext,gateConflict,meeOyaSource} from './context-evidence.mjs?v=20261026-13';
-import {contextCopy} from './context-copy.mjs?v=20261026-13';
-import {mapWorld} from './location-map.mjs?v=20261026-13';
+import {gateSummary} from './gates.mjs?v=20261026-14';
+import {satelliteAt,rainfallAt,reservoirsForContext,gateConflict,meeOyaSource} from './context-evidence.mjs?v=20261026-14';
+import {contextCopy} from './context-copy.mjs?v=20261026-14';
+import {mapWorld} from './location-map.mjs?v=20261026-14';
 const regions=[[79.75,7.9,80.18,8.2],[80.35,6.65,80.50,6.78]];
 const inside=p=>regions.some(b=>p[0]>=b[0]&&p[0]<=b[2]&&p[1]>=b[1]&&p[1]<=b[3]);
 const labels={
@@ -44,7 +44,7 @@ export function createContext({map,t}){
  history.addEventListener('toggle',()=>{if(!history.open){showSatellite=false;toggle.setAttribute('aria-pressed','false');}else if(current)load(current.point);render();map.draw();});
  function load(p){
   if(!started){started=true;fetchOne('points','./data/reservoir-locations.json');loadDirectory();}
-  if(history.open&&inside(p)&&!regional){regional=true;fetchOne('satellite','./data/context/satellite.json?v=20261026-13',hydrateSatellite);fetchOne('rainfall','./data/context/rainfall.json?v=20261026-13',v=>{if(v.schemaVersion!==1||!Array.isArray(v.cells)||v.cells.length>100)throw Error('Invalid rainfall data');return v;});}
+  if(history.open&&inside(p)&&!regional){regional=true;fetchOne('satellite','./data/context/satellite.json?v=20261026-14',hydrateSatellite);fetchOne('rainfall','./data/context/rainfall.json?v=20261026-14',v=>{if(v.schemaVersion!==1||!Array.isArray(v.cells)||v.cells.length>100)throw Error('Invalid rainfall data');return v;});}
  }
  function row(label,title,body,key,target=root){const a=node('article','evidence-row');a.dataset.evidence=key;a.append(node('small','',label),node('strong','',title),node('p','',body));target.append(a);}
  function source(label,time,url,extra){const p=node('p','context-source',label+' · '+date(time,Boolean(time&&!/^\d{4}-\d{2}-\d{2}$/.test(time)))+(extra?' · '+extra:''));if(url)p.append(document.createTextNode(' '),link(url,text('source')+' ↗'));details.lastElementChild.append(p);}

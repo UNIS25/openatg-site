@@ -67,3 +67,8 @@ Object.assign(copy.ta,{arkMetaTitle:'Ark by OpenATG · இலங்கை வா
 Object.assign(copy.en,{aboutCopy:'Ark brings together official warnings, dated observations and third-party weather forecasts. It is not an official emergency service or a validated household flood prediction system. Flood depth, arrival time, water-recession time and safe routes are not predicted.'});
 Object.assign(copy.si,{aboutCopy:'Ark නිල අනතුරු ඇඟවීම්, දිනය සහිත නිරීක්ෂණ සහ කාලගුණ ආකෘති පුරෝකථන එක් කරයි. මෙය නිල හදිසි සේවාවක් හෝ නිවසක ගංවතුර පුරෝකථන පද්ධතියක් නොවේ. ගැඹුර, පැමිණීමේ හෝ බැසීමේ වේලාව සහ ආරක්ෂිත මාර්ග පුරෝකථනය නොකරයි.'});
 Object.assign(copy.ta,{aboutCopy:'Ark அதிகாரபூர்வ எச்சரிக்கைகள், தேதியிட்ட கவனிப்புகள் மற்றும் வானிலை மாதிரி முன்னறிவிப்புகளை ஒருங்கிணைக்கிறது. இது அதிகாரபூர்வ அவசர சேவையோ வீட்டின் வெள்ளத்தை உறுதியாகக் கணிக்கும் அமைப்போ அல்ல. ஆழம், வருகை அல்லது வடியும் நேரம், பாதுகாப்பான வழிகள் கணிக்கப்படுவதில்லை.'});
+
+// Source trend is blank; do not infer steady or retain a previous direction.
+Object.assign(copy.en,{alertNoTrend:'Alert · trend not reported'});
+Object.assign(copy.si,{alertNoTrend:'අවධානය · වෙනස්වන දිශාව සඳහන් කර නැත'});
+Object.assign(copy.ta,{alertNoTrend:'எச்சரிக்கை · மாற்றத்தின் போக்கு குறிப்பிடப்படவில்லை'});
