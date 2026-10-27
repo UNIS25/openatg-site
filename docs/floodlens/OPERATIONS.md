@@ -856,3 +856,20 @@ future-clock, offline and failed-review states remain uncertain. Active official
 Red/Amber warnings retain priority independently of source age. The separately
 published banner fix is commit fce69a8; real-clock Colombo and Puttalam checks
 passed in all three languages at 05:47 UTC, with matching public asset hashes.
+
+## Verified publisher and two-choice location flow, 27 October
+
+Real GitHub run 40459050913 completed successfully. Its data-only commit
+`d6afe08534b83e7d8a5beda2431d577f3973e8a9` changed exactly the ten approved files.
+Pages built at 06:08:33 UTC; all ten public hashes matched in a real browser
+at 06:10 UTC. The initial trial safely retained cloud/tide data after clean-runner
+setup errors; missing temporary-directory creation and the pinned NetCDF
+dependency were corrected, with no change to source validation or permissions.
+
+The primary location chooser now offers only Use my location and Choose on map.
+District/place text search and its centroid shortcuts were removed at the user's
+request. The manual map retains explicit centre-pin confirmation, unknown manual
+accuracy, large pan/zoom controls, keyboard use and the GPS-denied fallback. No
+address geocoder or new third-party location request was added. Focus moves to
+the manual heading before asynchronous loading, so it cannot steal subsequent
+keyboard focus from the map. Zoom control accessible labels change with language.

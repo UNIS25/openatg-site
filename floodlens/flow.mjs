@@ -1,11 +1,11 @@
-import {mountClouds} from './clouds-ui.mjs?v=20261027-25';
-import {mountTides} from './tides-ui.mjs?v=20261027-25';
-import {renderNews} from './news.mjs?v=20261027-25';
-import {mountForecast} from './forecast-ui.mjs?v=20261027-25';
-import {createContext} from './context-ui.mjs?v=20261027-25';
-import {streetEnabled} from './street-map.mjs?v=20261027-25';
-import {LocationMap} from './location-map.mjs?v=20261027-25';
-import {locationEvidence,warningReviewStatus,ageState,insideGeometry,intersectsAccuracy,locationCandidates} from './core.mjs?v=20261027-25';
+import {mountClouds} from './clouds-ui.mjs?v=20261027-26';
+import {mountTides} from './tides-ui.mjs?v=20261027-26';
+import {renderNews} from './news.mjs?v=20261027-26';
+import {mountForecast} from './forecast-ui.mjs?v=20261027-26';
+import {createContext} from './context-ui.mjs?v=20261027-26';
+import {streetEnabled} from './street-map.mjs?v=20261027-26';
+import {LocationMap} from './location-map.mjs?v=20261027-26';
+import {locationEvidence,warningReviewStatus,ageState,insideGeometry,intersectsAccuracy,locationCandidates} from './core.mjs?v=20261027-26';
 const $=s=>document.querySelector(s);
 export function createFlow({t,name,getData,getCatalog,onLanguage,onArea,onRefresh}){
  let stage='language',point=null,accuracy=null,mode='gps',area=null,candidates=[],state='idle',manualPoint=null,catalog=null,locationRequest=0,matchRequest=0,lastMapMode=false;
@@ -18,11 +18,11 @@ export function createFlow({t,name,getData,getCatalog,onLanguage,onArea,onRefres
  function status(key,extra=''){$('#location-message').textContent=t(key)+(extra?' '+extra:'');$('#location-help').hidden=key==='gpsWorking';}
  async function openManual(approximate){
   locationRequest++;matchRequest++;$('#locate').disabled=false;
-  show('location');$('#manual-panel').hidden=false;$('#location-screen').classList.add('manual-open');manualPoint=null;$('#use-pin').disabled=true;$('#manual-status').textContent=t('pinInstruction');
+  show('location');$('#manual-panel').hidden=false;$('#location-screen').classList.add('manual-open');manualPoint=null;$('#use-pin').disabled=true;$('#manual-status').textContent=t('pinInstruction');$('#manual-title').focus({preventScroll:true});
   if(approximate)pinMap.set({center:approximate.point,span:Math.max(.08,approximate.accuracy/111320*6),point:approximate.point,accuracy:approximate.accuracy});
   else pinMap.set({center:point||[80.7,7.9],span:point? .1:4.7,point:null,accuracy:null});
   await pinMap.load();if(pinMap.error)$('#location-help').hidden=false;try{catalog=await getCatalog();pinMap.set({labels:labels()});}catch{}
-  $('#manual-title').focus({preventScroll:true});pinMap.street.offerDefault();
+  pinMap.street.offerDefault();
  }
  async function match(p,uncertainty,source){
   const request=++matchRequest;
@@ -111,7 +111,6 @@ export function createFlow({t,name,getData,getCatalog,onLanguage,onArea,onRefres
  $('#improve-location').addEventListener('click',()=>openManual({point,accuracy:accuracy||100}));
  $('#cancel-pin').addEventListener('click',()=>{$('#manual-panel').hidden=true;$('#location-screen').classList.remove('manual-open');});
  $('#use-pin').addEventListener('click',()=>{if(manualPoint)match(manualPoint,null,'manual');});
- $('#area-search').addEventListener('input',async()=>{const query=$('#area-search').value.trim().toLocaleLowerCase();const list=$('#area-results');list.replaceChildren();list.hidden=!query;if(!query)return;try{catalog=await getCatalog();for(const a of [...catalog.districts,...catalog.divisions].filter(a=>Object.values(a.names).concat(Object.values(a.displayNames||{}),a.aliases||[],a.code).some(n=>String(n).toLocaleLowerCase().includes(query))).slice(0,12)){const b=document.createElement('button');b.type='button';b.textContent=name(a)+' · '+t(a.type);b.addEventListener('click',()=>{const [x0,y0,x1,y1]=a.bbox;const centre=[(x0+x1)/2,(y0+y1)/2];pinMap.set({center:centre,span:Math.max(x1-x0,(y1-y0)/.75)*1.15,point:null,accuracy:null,labels:labels()});manualPoint=pinMap.error?null:centre;$('#use-pin').disabled=!manualPoint;$('#area-search').value=name(a);list.hidden=true;$('#manual-status').textContent=t('searchPinHint');});list.append(b);}if(!list.childElementCount)list.textContent=t('noSearch');}catch{list.textContent=t('mapUnavailable');}});
  $('#all-details').addEventListener('toggle',()=>{if($('#all-details').open)onRefresh();});
  $('#water-yes').addEventListener('click',()=>{$('#water-guidance').hidden=false;$('#water-yes').setAttribute('aria-pressed','true');$('#water-no').setAttribute('aria-pressed','false');});
  $('#water-no').addEventListener('click',()=>{$('#water-guidance').hidden=true;$('#water-yes').setAttribute('aria-pressed','false');$('#water-no').setAttribute('aria-pressed','true');});

@@ -18,10 +18,10 @@ test('unmapped named divisions remain visible and stale review does not cancel a
  const layer=warningLayer(s,catalog,overview,'flood',now);assert.equal(layer.unmapped.length,1);assert.equal(layer.reviewOlder,true);assert.ok(layer.areas.length>0);
 });
 test('forecast map uses exactly eight consecutive upcoming native intervals with explicit missing cells',()=>{
- const f=forecastLayer(forecast,now);assert.equal(f.frames.length,8);assert.equal(f.frames[0].intervalStart,'2026-10-27T06:00:00Z');assert.equal(f.frames.at(-1).validAt,'2026-10-28T06:00:00Z');
+ const weatherNow=Date.parse(forecast.capturedAt)+60000,f=forecastLayer(forecast,weatherNow);assert.equal(f.frames.length,8);assert.ok(Date.parse(f.frames[0].intervalStart)>=weatherNow);assert.equal(Date.parse(f.frames.at(-1).validAt)-Date.parse(f.frames[0].intervalStart),24*3600000);
  const rain=forecastCells(forecast,f.frames[0],'rain'),wind=forecastCells(forecast,f.frames[0],'wind');assert.equal(rain.length,198);assert.equal(wind.length,198);assert.equal(rain[0].value,f.frames[0].rainMm[0]);assert.ok(Math.abs(wind[0].value-Math.hypot(f.frames[0].windUms[0],f.frames[0].windVms[0])*3.6)<1e-10);
  const frame=structuredClone(f.frames[0]);frame.rainMm[0]=null;assert.equal(forecastCells(forecast,frame,'rain')[0].value,null);
- assert.equal(forecastLayer(forecast,Date.parse('2026-10-29T00:00:00Z')).status,'incomplete');
+ assert.equal(forecastLayer(forecast,Date.parse(forecast.frames.at(-1).validAt)-6*3600000).status,'incomplete');
 });
 test('reports join exact reservoir identities and remain media claims with unknown operation times',()=>{
  const r=reviewedReports(media,locations,now);assert.deepEqual(r.map(x=>x.tankCode),['R13206','R13101']);assert.deepEqual(r.map(x=>x.spillCusecs),[4400,3000]);assert.ok(r.every(x=>x.operationAt===null&&x.source==='Daily Mirror'));

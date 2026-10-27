@@ -10,22 +10,22 @@
   <title>Ark by OpenATG · Sri Lanka weather & flood awareness</title>
   <link rel="canonical" href="https://openatg.com/ark/">
   <link rel="icon" href="/atg-mark-transparent.png">
-  <link rel="stylesheet" href="/floodlens/floodlens.css?v=20261027-25">
-  <link rel="stylesheet" href="/floodlens/forecast.css?v=20261027-25">
-  <script defer src="/floodlens/boot.js?v=20261027-25"></script>
-  <link rel="modulepreload" href="/floodlens/app.mjs?v=20261027-25">
-  <link rel="modulepreload" href="/floodlens/i18n.mjs?v=20261027-25">
-  <link rel="modulepreload" href="/floodlens/flow.mjs?v=20261027-25">
-  <link rel="modulepreload" href="/floodlens/core.mjs?v=20261027-25">
-  <link rel="modulepreload" href="/floodlens/context-ui.mjs?v=20261027-25">
-  <link rel="modulepreload" href="/floodlens/forecast-ui.mjs?v=20261027-25">
-  <link rel="modulepreload" href="/floodlens/location-map.mjs?v=20261027-25">
-  <link rel="modulepreload" href="/floodlens/street-map.mjs?v=20261027-25">
-  <link rel="modulepreload" href="/floodlens/gates.mjs?v=20261027-25">
-  <link rel="modulepreload" href="/floodlens/context-evidence.mjs?v=20261027-25">
-  <link rel="modulepreload" href="/floodlens/forecast-model.mjs?v=20261027-25">
-  <link rel="modulepreload" href="/floodlens/reservoirs.mjs?v=20261027-25">
-  <script type="module" src="/floodlens/app.mjs?v=20261027-25"></script>
+  <link rel="stylesheet" href="/floodlens/floodlens.css?v=20261027-26">
+  <link rel="stylesheet" href="/floodlens/forecast.css?v=20261027-26">
+  <script defer src="/floodlens/boot.js?v=20261027-26"></script>
+  <link rel="modulepreload" href="/floodlens/app.mjs?v=20261027-26">
+  <link rel="modulepreload" href="/floodlens/i18n.mjs?v=20261027-26">
+  <link rel="modulepreload" href="/floodlens/flow.mjs?v=20261027-26">
+  <link rel="modulepreload" href="/floodlens/core.mjs?v=20261027-26">
+  <link rel="modulepreload" href="/floodlens/context-ui.mjs?v=20261027-26">
+  <link rel="modulepreload" href="/floodlens/forecast-ui.mjs?v=20261027-26">
+  <link rel="modulepreload" href="/floodlens/location-map.mjs?v=20261027-26">
+  <link rel="modulepreload" href="/floodlens/street-map.mjs?v=20261027-26">
+  <link rel="modulepreload" href="/floodlens/gates.mjs?v=20261027-26">
+  <link rel="modulepreload" href="/floodlens/context-evidence.mjs?v=20261027-26">
+  <link rel="modulepreload" href="/floodlens/forecast-model.mjs?v=20261027-26">
+  <link rel="modulepreload" href="/floodlens/reservoirs.mjs?v=20261027-26">
+  <script type="module" src="/floodlens/app.mjs?v=20261027-26"></script>
 </head>
 <body>
   <a href="#main" class="skip" data-i18n="skip">Skip to content</a>
@@ -47,11 +47,9 @@
       <p class="flow-privacy" data-i18n="shortPrivacy">Your location stays on this device.</p>
       <p id="location-message" class="location-status" role="status"></p>
       <p id="location-help" class="small" hidden><a href="https://www.dmc.gov.lk/" target="_blank" rel="noopener noreferrer" data-i18n="officialUpdate">Official warning ↗</a> · <a href="tel:117">117</a></p>
-      <button id="manual-location" class="text-button" data-i18n="placePin">Place a pin instead</button>
+      <button id="manual-location" class="text-button" data-i18n="placePin">Choose on map</button>
       <section id="manual-panel" hidden aria-labelledby="manual-title">
-        <button id="cancel-pin" class="text-button" data-i18n="backLocation">Back</button><h2 id="manual-title" data-i18n="tapYourPlace">Move the map to your place</h2>
-        <div class="search-wrap"><label for="area-search" class="sr-only" data-i18n="findMapArea">Find an area on the map</label><input id="area-search" type="search" autocomplete="off" spellcheck="false" data-placeholder="findMapArea" placeholder="Find an area on the map" aria-controls="area-results"></div>
-        <div id="area-results" class="search-results" hidden></div>
+        <button id="cancel-pin" class="text-button" data-i18n="backLocation">Back</button><h2 id="manual-title" tabindex="-1" data-i18n="tapYourPlace">Move the map to your place</h2>
         <div id="pin-map" class="location-map"></div>
         <p id="manual-status" class="small" data-i18n="pinInstruction">Drag the map under the centre pin. Pinch or use + / − to zoom.</p>
         <button id="use-pin" class="button" data-i18n="usePin" disabled>Confirm this pin</button>
