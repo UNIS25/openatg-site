@@ -5,53 +5,53 @@
     "maxDifferenceMetres": 0.02,
     "maxExtremaDifferenceMinutes": 5
   },
-  "maxDifferenceMetres": 0.013519143167074865,
-  "rmsDifferenceMetres": 0.006827106898810659,
+  "maxDifferenceMetres": 0.013518628716959413,
+  "rmsDifferenceMetres": 0.006904356718129807,
   "extremaComparison": [
     {
-      "engineAt": "2026-10-27T08:47:37.619Z",
-      "uptideAt": "2026-10-27T08:52:05.947Z",
-      "differenceMinutes": 4.472133333333334
+      "engineAt": "2026-10-27T08:47:37.207Z",
+      "uptideAt": "2026-10-27T08:52:05.945Z",
+      "differenceMinutes": 4.4789666666666665
     },
     {
-      "engineAt": "2026-10-27T14:38:56.101Z",
-      "uptideAt": "2026-10-27T14:41:54.270Z",
-      "differenceMinutes": 2.9694833333333333
+      "engineAt": "2026-10-27T14:38:56.371Z",
+      "uptideAt": "2026-10-27T14:41:54.266Z",
+      "differenceMinutes": 2.964916666666667
     },
     {
-      "engineAt": "2026-10-27T21:22:39.230Z",
-      "uptideAt": "2026-10-27T21:19:32.985Z",
-      "differenceMinutes": 3.1040833333333335
+      "engineAt": "2026-10-27T21:22:38.818Z",
+      "uptideAt": "2026-10-27T21:19:32.982Z",
+      "differenceMinutes": 3.0972666666666666
     },
     {
-      "engineAt": "2026-10-28T03:35:07.443Z",
-      "uptideAt": "2026-10-28T03:34:25.784Z",
-      "differenceMinutes": 0.6943166666666667
+      "engineAt": "2026-10-28T03:35:07.030Z",
+      "uptideAt": "2026-10-28T03:34:25.782Z",
+      "differenceMinutes": 0.6874666666666667
     },
     {
-      "engineAt": "2026-10-28T09:17:41.931Z",
-      "uptideAt": "2026-10-28T09:21:41.784Z",
-      "differenceMinutes": 3.99755
+      "engineAt": "2026-10-28T09:17:42.200Z",
+      "uptideAt": "2026-10-28T09:21:41.788Z",
+      "differenceMinutes": 3.993133333333333
     },
     {
-      "engineAt": "2026-10-28T15:07:28.987Z",
+      "engineAt": "2026-10-28T15:07:28.574Z",
       "uptideAt": "2026-10-28T15:11:30.928Z",
-      "differenceMinutes": 4.03235
+      "differenceMinutes": 4.039233333333334
     },
     {
-      "engineAt": "2026-10-28T21:54:55.222Z",
-      "uptideAt": "2026-10-28T21:52:01.463Z",
-      "differenceMinutes": 2.895983333333333
+      "engineAt": "2026-10-28T21:54:54.810Z",
+      "uptideAt": "2026-10-28T21:52:01.462Z",
+      "differenceMinutes": 2.8891333333333336
     },
     {
-      "engineAt": "2026-10-29T04:07:05.695Z",
-      "uptideAt": "2026-10-29T04:04:54.840Z",
-      "differenceMinutes": 2.1809166666666666
+      "engineAt": "2026-10-29T04:07:05.283Z",
+      "uptideAt": "2026-10-29T04:04:54.839Z",
+      "differenceMinutes": 2.1740666666666666
     }
   ],
-  "validFrom": "2026-10-27T05:00:00.000Z",
-  "validUntil": "2026-10-29T05:00:00.000Z",
-  "predictionSha256": "64f0b1414f9a89f8bba9a62dcc6c0f9036a46f38f70af6bc0d19c149582e51fc",
+  "validFrom": "2026-10-27T06:00:00.000Z",
+  "validUntil": "2026-10-29T06:00:00.000Z",
+  "predictionSha256": "3021a6fe5583433f09e4bbbb16c25866931b3f419f4ebd25ec4780836259763b",
   "extremaMethod": "Quadratic vertex within adjacent 1-minute samples; no extrapolation beyond the extremum bracket.",
   "scope": "Numerical agreement of 36 shared constituents only (different astronomical/nodal formulations; bounded to 2 cm and 5 minutes);  not validation against observed Colombo water levels. Heights omit surge and weather."
 }
