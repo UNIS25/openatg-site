@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "createdAt": "2026-10-27T05:15:42.956793Z",
+  "createdAt": "2026-10-27T06:01:48.172058Z",
   "runAt": "2026-10-26T18:00:00Z",
-  "forecastSha256": "65033ffad76457dd1de6f2b647b8992f63fd51ec23f9bc6bfae398ef33151fdb",
-  "forecastBytes": 167632,
+  "forecastSha256": "5160952f148f2059bb9307817275a99be90a6d822a09792c74c6390f6f80755e",
+  "forecastBytes": 188093,
   "decoder": {
     "ecCodes": "2.50.0",
     "pythonPackage": "2.50.0"
@@ -11,11 +11,405 @@
   "sources": [
     {
       "kind": "index",
+      "url": "https://data.ecmwf.int/forecasts/20261026/18z/ifs/0p25/oper/20261026180000-3h-oper-fc.index",
+      "rangeStart": null,
+      "bytes": 41349,
+      "sha256": "aaab37cb232bab4b472a1cd003fe5e71b4f55a58a1cec783319958b53740654c",
+      "retrievedAt": "2026-10-27T06:00:25.394511Z"
+    },
+    {
+      "kind": "grib",
+      "step": 3,
+      "parameter": "tp",
+      "indexRow": {
+        "domain": "g",
+        "date": "20261026",
+        "time": "1800",
+        "expver": "0001",
+        "class": "od",
+        "type": "fc",
+        "stream": "oper",
+        "levtype": "sfc",
+        "step": "3",
+        "param": "tp",
+        "_offset": 14587032,
+        "_length": 247234
+      },
+      "metadata": {
+        "edition": 2,
+        "centre": "ecmf",
+        "shortName": "tp",
+        "paramId": 228,
+        "units": "m",
+        "dataDate": 20261026,
+        "dataTime": 1800,
+        "validityDate": 20261026,
+        "validityTime": 2100,
+        "stepType": "accum",
+        "stepUnits": 1,
+        "startStep": 0,
+        "endStep": 3,
+        "typeOfLevel": "surface",
+        "level": 0,
+        "uvRelativeToGrid": 0,
+        "bitmapPresent": 0,
+        "numberOfMissing": 0,
+        "missingValue": 9999,
+        "packingType": "grid_ccsds",
+        "bitsPerValue": 12,
+        "binaryScaleFactor": -14,
+        "decimalScaleFactor": 0,
+        "packingError": 3.0517578125e-05,
+        "gridType": "regular_ll",
+        "Ni": 1440,
+        "Nj": 721,
+        "iDirectionIncrementInDegrees": 0.25,
+        "jDirectionIncrementInDegrees": 0.25,
+        "latitudeOfFirstGridPointInDegrees": 90.0,
+        "longitudeOfFirstGridPointInDegrees": 180.0,
+        "latitudeOfLastGridPointInDegrees": -90.0,
+        "longitudeOfLastGridPointInDegrees": 179.75,
+        "iScansNegatively": 0,
+        "jScansPositively": 0,
+        "jPointsAreConsecutive": 0,
+        "alternativeRowScanning": 0
+      },
+      "url": "https://data.ecmwf.int/forecasts/20261026/18z/ifs/0p25/oper/20261026180000-3h-oper-fc.grib2",
+      "rangeStart": 14587032,
+      "bytes": 247234,
+      "sha256": "f5c6c30166eaf0789f94b591d6776b1abcc4a48991438efc369553667371440d",
+      "retrievedAt": "2026-10-27T06:00:26.185770Z"
+    },
+    {
+      "kind": "grib",
+      "step": 3,
+      "parameter": "10u",
+      "indexRow": {
+        "domain": "g",
+        "date": "20261026",
+        "time": "1800",
+        "expver": "0001",
+        "class": "od",
+        "type": "fc",
+        "stream": "oper",
+        "step": "3",
+        "levtype": "sfc",
+        "param": "10u",
+        "_offset": 18175816,
+        "_length": 736421
+      },
+      "metadata": {
+        "edition": 2,
+        "centre": "ecmf",
+        "shortName": "10u",
+        "paramId": 165,
+        "units": "m s**-1",
+        "dataDate": 20261026,
+        "dataTime": 1800,
+        "validityDate": 20261026,
+        "validityTime": 2100,
+        "stepType": "instant",
+        "stepUnits": 1,
+        "startStep": 3,
+        "endStep": 3,
+        "typeOfLevel": "heightAboveGround",
+        "level": 10,
+        "uvRelativeToGrid": 0,
+        "bitmapPresent": 0,
+        "numberOfMissing": 0,
+        "missingValue": 9999,
+        "packingType": "grid_ccsds",
+        "bitsPerValue": 11,
+        "binaryScaleFactor": -5,
+        "decimalScaleFactor": 0,
+        "packingError": 0.015625953674316406,
+        "gridType": "regular_ll",
+        "Ni": 1440,
+        "Nj": 721,
+        "iDirectionIncrementInDegrees": 0.25,
+        "jDirectionIncrementInDegrees": 0.25,
+        "latitudeOfFirstGridPointInDegrees": 90.0,
+        "longitudeOfFirstGridPointInDegrees": 180.0,
+        "latitudeOfLastGridPointInDegrees": -90.0,
+        "longitudeOfLastGridPointInDegrees": 179.75,
+        "iScansNegatively": 0,
+        "jScansPositively": 0,
+        "jPointsAreConsecutive": 0,
+        "alternativeRowScanning": 0
+      },
+      "url": "https://data.ecmwf.int/forecasts/20261026/18z/ifs/0p25/oper/20261026180000-3h-oper-fc.grib2",
+      "rangeStart": 18175816,
+      "bytes": 736421,
+      "sha256": "033d87ee794eb3a6126285f601879134afa6a207496b2e6b6010eddd66c49c2c",
+      "retrievedAt": "2026-10-27T06:00:27.861915Z"
+    },
+    {
+      "kind": "grib",
+      "step": 3,
+      "parameter": "10v",
+      "indexRow": {
+        "domain": "g",
+        "date": "20261026",
+        "time": "1800",
+        "expver": "0001",
+        "class": "od",
+        "type": "fc",
+        "stream": "oper",
+        "step": "3",
+        "levtype": "sfc",
+        "param": "10v",
+        "_offset": 20400227,
+        "_length": 725819
+      },
+      "metadata": {
+        "edition": 2,
+        "centre": "ecmf",
+        "shortName": "10v",
+        "paramId": 166,
+        "units": "m s**-1",
+        "dataDate": 20261026,
+        "dataTime": 1800,
+        "validityDate": 20261026,
+        "validityTime": 2100,
+        "stepType": "instant",
+        "stepUnits": 1,
+        "startStep": 3,
+        "endStep": 3,
+        "typeOfLevel": "heightAboveGround",
+        "level": 10,
+        "uvRelativeToGrid": 0,
+        "bitmapPresent": 0,
+        "numberOfMissing": 0,
+        "missingValue": 9999,
+        "packingType": "grid_ccsds",
+        "bitsPerValue": 11,
+        "binaryScaleFactor": -5,
+        "decimalScaleFactor": 0,
+        "packingError": 0.015625953674316406,
+        "gridType": "regular_ll",
+        "Ni": 1440,
+        "Nj": 721,
+        "iDirectionIncrementInDegrees": 0.25,
+        "jDirectionIncrementInDegrees": 0.25,
+        "latitudeOfFirstGridPointInDegrees": 90.0,
+        "longitudeOfFirstGridPointInDegrees": 180.0,
+        "latitudeOfLastGridPointInDegrees": -90.0,
+        "longitudeOfLastGridPointInDegrees": 179.75,
+        "iScansNegatively": 0,
+        "jScansPositively": 0,
+        "jPointsAreConsecutive": 0,
+        "alternativeRowScanning": 0
+      },
+      "url": "https://data.ecmwf.int/forecasts/20261026/18z/ifs/0p25/oper/20261026180000-3h-oper-fc.grib2",
+      "rangeStart": 20400227,
+      "bytes": 725819,
+      "sha256": "9cf71a5cac9e82e415d9723da0df9002993171918c8f2eaa51b63c0b01fb6ecd",
+      "retrievedAt": "2026-10-27T06:00:29.139623Z"
+    },
+    {
+      "kind": "index",
+      "url": "https://data.ecmwf.int/forecasts/20261026/18z/ifs/0p25/oper/20261026180000-6h-oper-fc.index",
+      "rangeStart": null,
+      "bytes": 41346,
+      "sha256": "5a39dfad4d448621443ba08f1790c1335f42146fff6d89543a6a13e8b232e05d",
+      "retrievedAt": "2026-10-27T06:00:29.756019Z"
+    },
+    {
+      "kind": "grib",
+      "step": 6,
+      "parameter": "tp",
+      "indexRow": {
+        "domain": "g",
+        "date": "20261026",
+        "time": "1800",
+        "expver": "0001",
+        "class": "od",
+        "type": "fc",
+        "stream": "oper",
+        "levtype": "sfc",
+        "step": "6",
+        "param": "tp",
+        "_offset": 10653948,
+        "_length": 237116
+      },
+      "metadata": {
+        "edition": 2,
+        "centre": "ecmf",
+        "shortName": "tp",
+        "paramId": 228,
+        "units": "m",
+        "dataDate": 20261026,
+        "dataTime": 1800,
+        "validityDate": 20261027,
+        "validityTime": 0,
+        "stepType": "accum",
+        "stepUnits": 1,
+        "startStep": 0,
+        "endStep": 6,
+        "typeOfLevel": "surface",
+        "level": 0,
+        "uvRelativeToGrid": 0,
+        "bitmapPresent": 0,
+        "numberOfMissing": 0,
+        "missingValue": 9999,
+        "packingType": "grid_ccsds",
+        "bitsPerValue": 12,
+        "binaryScaleFactor": -13,
+        "decimalScaleFactor": 0,
+        "packingError": 6.103515625e-05,
+        "gridType": "regular_ll",
+        "Ni": 1440,
+        "Nj": 721,
+        "iDirectionIncrementInDegrees": 0.25,
+        "jDirectionIncrementInDegrees": 0.25,
+        "latitudeOfFirstGridPointInDegrees": 90.0,
+        "longitudeOfFirstGridPointInDegrees": 180.0,
+        "latitudeOfLastGridPointInDegrees": -90.0,
+        "longitudeOfLastGridPointInDegrees": 179.75,
+        "iScansNegatively": 0,
+        "jScansPositively": 0,
+        "jPointsAreConsecutive": 0,
+        "alternativeRowScanning": 0
+      },
+      "url": "https://data.ecmwf.int/forecasts/20261026/18z/ifs/0p25/oper/20261026180000-6h-oper-fc.grib2",
+      "rangeStart": 10653948,
+      "bytes": 237116,
+      "sha256": "bb3e3245b4a3030b036a4e7ae6c497743cb141c29272739bbab5be5e848157dc",
+      "retrievedAt": "2026-10-27T06:00:34.280272Z"
+    },
+    {
+      "kind": "grib",
+      "step": 6,
+      "parameter": "10u",
+      "indexRow": {
+        "domain": "g",
+        "date": "20261026",
+        "time": "1800",
+        "expver": "0001",
+        "class": "od",
+        "type": "fc",
+        "stream": "oper",
+        "step": "6",
+        "levtype": "sfc",
+        "param": "10u",
+        "_offset": 18124418,
+        "_length": 735824
+      },
+      "metadata": {
+        "edition": 2,
+        "centre": "ecmf",
+        "shortName": "10u",
+        "paramId": 165,
+        "units": "m s**-1",
+        "dataDate": 20261026,
+        "dataTime": 1800,
+        "validityDate": 20261027,
+        "validityTime": 0,
+        "stepType": "instant",
+        "stepUnits": 1,
+        "startStep": 6,
+        "endStep": 6,
+        "typeOfLevel": "heightAboveGround",
+        "level": 10,
+        "uvRelativeToGrid": 0,
+        "bitmapPresent": 0,
+        "numberOfMissing": 0,
+        "missingValue": 9999,
+        "packingType": "grid_ccsds",
+        "bitsPerValue": 11,
+        "binaryScaleFactor": -5,
+        "decimalScaleFactor": 0,
+        "packingError": 0.015625953674316406,
+        "gridType": "regular_ll",
+        "Ni": 1440,
+        "Nj": 721,
+        "iDirectionIncrementInDegrees": 0.25,
+        "jDirectionIncrementInDegrees": 0.25,
+        "latitudeOfFirstGridPointInDegrees": 90.0,
+        "longitudeOfFirstGridPointInDegrees": 180.0,
+        "latitudeOfLastGridPointInDegrees": -90.0,
+        "longitudeOfLastGridPointInDegrees": 179.75,
+        "iScansNegatively": 0,
+        "jScansPositively": 0,
+        "jPointsAreConsecutive": 0,
+        "alternativeRowScanning": 0
+      },
+      "url": "https://data.ecmwf.int/forecasts/20261026/18z/ifs/0p25/oper/20261026180000-6h-oper-fc.grib2",
+      "rangeStart": 18124418,
+      "bytes": 735824,
+      "sha256": "c7c918bbd3394962fe5f297f7d1e656e7d34269b0c74eb81432076fbad20a169",
+      "retrievedAt": "2026-10-27T06:00:35.998319Z"
+    },
+    {
+      "kind": "grib",
+      "step": 6,
+      "parameter": "10v",
+      "indexRow": {
+        "domain": "g",
+        "date": "20261026",
+        "time": "1800",
+        "expver": "0001",
+        "class": "od",
+        "type": "fc",
+        "stream": "oper",
+        "step": "6",
+        "levtype": "sfc",
+        "param": "10v",
+        "_offset": 20124821,
+        "_length": 600644
+      },
+      "metadata": {
+        "edition": 2,
+        "centre": "ecmf",
+        "shortName": "10v",
+        "paramId": 166,
+        "units": "m s**-1",
+        "dataDate": 20261026,
+        "dataTime": 1800,
+        "validityDate": 20261027,
+        "validityTime": 0,
+        "stepType": "instant",
+        "stepUnits": 1,
+        "startStep": 6,
+        "endStep": 6,
+        "typeOfLevel": "heightAboveGround",
+        "level": 10,
+        "uvRelativeToGrid": 0,
+        "bitmapPresent": 0,
+        "numberOfMissing": 0,
+        "missingValue": 9999,
+        "packingType": "grid_ccsds",
+        "bitsPerValue": 11,
+        "binaryScaleFactor": -4,
+        "decimalScaleFactor": 0,
+        "packingError": 0.03125190734863281,
+        "gridType": "regular_ll",
+        "Ni": 1440,
+        "Nj": 721,
+        "iDirectionIncrementInDegrees": 0.25,
+        "jDirectionIncrementInDegrees": 0.25,
+        "latitudeOfFirstGridPointInDegrees": 90.0,
+        "longitudeOfFirstGridPointInDegrees": 180.0,
+        "latitudeOfLastGridPointInDegrees": -90.0,
+        "longitudeOfLastGridPointInDegrees": 179.75,
+        "iScansNegatively": 0,
+        "jScansPositively": 0,
+        "jPointsAreConsecutive": 0,
+        "alternativeRowScanning": 0
+      },
+      "url": "https://data.ecmwf.int/forecasts/20261026/18z/ifs/0p25/oper/20261026180000-6h-oper-fc.grib2",
+      "rangeStart": 20124821,
+      "bytes": 600644,
+      "sha256": "bb56f0baa01c24c1a241e4eacd4f15c94a9e61477cb22549df39652dae580fa2",
+      "retrievedAt": "2026-10-27T06:00:37.170847Z"
+    },
+    {
+      "kind": "index",
       "url": "https://data.ecmwf.int/forecasts/20261026/18z/ifs/0p25/oper/20261026180000-9h-oper-fc.index",
       "rangeStart": null,
       "bytes": 41350,
       "sha256": "6e0350ddff0239255041cb4d9f3b1fbd6c0342b28fbe682ea92d479f759af452",
-      "retrievedAt": "2026-10-27T05:11:05.039914Z"
+      "retrievedAt": "2026-10-27T06:00:37.757587Z"
     },
     {
       "kind": "grib",
@@ -78,7 +472,7 @@
       "rangeStart": 17798278,
       "bytes": 272573,
       "sha256": "aa915e75bd32d03da28960cc598dd67a1693c8d4b66b767cdbf53271791dc8e8",
-      "retrievedAt": "2026-10-27T05:11:08.409118Z"
+      "retrievedAt": "2026-10-27T06:00:38.540188Z"
     },
     {
       "kind": "grib",
@@ -141,7 +535,7 @@
       "rangeStart": 25249612,
       "bytes": 736293,
       "sha256": "579a0c1c18acb203646087883e801af006fdd606be6ed5da6b3b5326d6681170",
-      "retrievedAt": "2026-10-27T05:11:13.119043Z"
+      "retrievedAt": "2026-10-27T06:00:39.552762Z"
     },
     {
       "kind": "grib",
@@ -204,7 +598,7 @@
       "rangeStart": 26730094,
       "bytes": 600668,
       "sha256": "30c316f333a2c29a062af9ed15f7538bac14024c13436853b923c9baf01b05ff",
-      "retrievedAt": "2026-10-27T05:11:20.412047Z"
+      "retrievedAt": "2026-10-27T06:00:40.525319Z"
     },
     {
       "kind": "index",
@@ -212,7 +606,7 @@
       "rangeStart": null,
       "bytes": 41537,
       "sha256": "787c36b3b9d33688fd9cf6bb93686e77a58d92daa5c6587acd9795943b71aa6f",
-      "retrievedAt": "2026-10-27T05:11:22.960015Z"
+      "retrievedAt": "2026-10-27T06:00:41.039108Z"
     },
     {
       "kind": "grib",
@@ -275,7 +669,7 @@
       "rangeStart": 15093076,
       "bytes": 302439,
       "sha256": "99eb9047336f95496d990a082e7499a543060f5e93b0ad97eac3b04dbc95b033",
-      "retrievedAt": "2026-10-27T05:11:34.152335Z"
+      "retrievedAt": "2026-10-27T06:00:41.795447Z"
     },
     {
       "kind": "grib",
@@ -338,7 +732,7 @@
       "rangeStart": 18645926,
       "bytes": 612802,
       "sha256": "fe3e8853a5f9769cf76f0b9938ff83ee0b04d2294a385473d22a30561ae1ab9b",
-      "retrievedAt": "2026-10-27T05:11:37.710591Z"
+      "retrievedAt": "2026-10-27T06:00:43.129583Z"
     },
     {
       "kind": "grib",
@@ -401,7 +795,7 @@
       "rangeStart": 22313541,
       "bytes": 601121,
       "sha256": "c8bb5e3c6c6c404277b29fb2b7745bc648cbac606a4cf6e2207f60de0653013e",
-      "retrievedAt": "2026-10-27T05:11:41.198340Z"
+      "retrievedAt": "2026-10-27T06:00:44.185729Z"
     },
     {
       "kind": "index",
@@ -409,7 +803,7 @@
       "rangeStart": null,
       "bytes": 41536,
       "sha256": "7e27b393b3220bc1055003a5f21b3d575bda3e2d9bcd9331ef5b739e019b9d14",
-      "retrievedAt": "2026-10-27T05:11:43.525774Z"
+      "retrievedAt": "2026-10-27T06:00:44.697309Z"
     },
     {
       "kind": "grib",
@@ -472,7 +866,7 @@
       "rangeStart": 14267964,
       "bytes": 327903,
       "sha256": "b7175315c84f8fac862bb2528ea9ca768ce379d3a9d5d7060e9bd885d9ecb145",
-      "retrievedAt": "2026-10-27T05:11:48.177578Z"
+      "retrievedAt": "2026-10-27T06:00:45.521347Z"
     },
     {
       "kind": "grib",
@@ -535,7 +929,7 @@
       "rangeStart": 19996902,
       "bytes": 614158,
       "sha256": "35e55122c2f53d594e87f2c0b800d0ec1fcd237af6977ed9f639ecec8a6cab1b",
-      "retrievedAt": "2026-10-27T05:12:04.244666Z"
+      "retrievedAt": "2026-10-27T06:00:46.525754Z"
     },
     {
       "kind": "grib",
@@ -598,7 +992,7 @@
       "rangeStart": 21630492,
       "bytes": 601956,
       "sha256": "d87ed38e71398c7317d46e9df2b694be69b6c2fdcfa455c97ea10eb41761431d",
-      "retrievedAt": "2026-10-27T05:12:08.202869Z"
+      "retrievedAt": "2026-10-27T06:00:47.586153Z"
     },
     {
       "kind": "index",
@@ -606,7 +1000,7 @@
       "rangeStart": null,
       "bytes": 41538,
       "sha256": "86cc5ed2f05cc1cd659902b0d661cdc78d34b94a80b24ca4d4de2b3672553617",
-      "retrievedAt": "2026-10-27T05:12:11.218599Z"
+      "retrievedAt": "2026-10-27T06:00:48.209236Z"
     },
     {
       "kind": "grib",
@@ -669,7 +1063,7 @@
       "rangeStart": 15593108,
       "bytes": 351272,
       "sha256": "ed6e2b203cd835a33fcd0a3aa21368b732c5f69869e62c9f474c3ea62e7c7e2d",
-      "retrievedAt": "2026-10-27T05:12:15.051589Z"
+      "retrievedAt": "2026-10-27T06:00:48.975528Z"
     },
     {
       "kind": "grib",
@@ -732,7 +1126,7 @@
       "rangeStart": 21845835,
       "bytes": 614384,
       "sha256": "caae2dd74410b324a29c648feab220859ca6486896ba5dd8ebe99f48e8ad0ec7",
-      "retrievedAt": "2026-10-27T05:12:18.733711Z"
+      "retrievedAt": "2026-10-27T06:00:50.165537Z"
     },
     {
       "kind": "grib",
@@ -795,7 +1189,7 @@
       "rangeStart": 23502003,
       "bytes": 602124,
       "sha256": "f78c75a650c9de74402b91c42576406a69e5a731a89501e690dd799aff6158c9",
-      "retrievedAt": "2026-10-27T05:12:22.252020Z"
+      "retrievedAt": "2026-10-27T06:00:51.172546Z"
     },
     {
       "kind": "index",
@@ -803,7 +1197,7 @@
       "rangeStart": null,
       "bytes": 41539,
       "sha256": "7a816bf40f71d1ebcbe86d309c80000b245095a6dfdc88c142f9b3e6d1331e84",
-      "retrievedAt": "2026-10-27T05:12:24.683470Z"
+      "retrievedAt": "2026-10-27T06:00:52.450079Z"
     },
     {
       "kind": "grib",
@@ -866,7 +1260,7 @@
       "rangeStart": 17375977,
       "bytes": 371974,
       "sha256": "24d878e663857b068355de3444d6c48f7624e82206e0acc25cd8bcbf8d6ef223",
-      "retrievedAt": "2026-10-27T05:12:27.983289Z"
+      "retrievedAt": "2026-10-27T06:00:53.507765Z"
     },
     {
       "kind": "grib",
@@ -929,7 +1323,7 @@
       "rangeStart": 22235258,
       "bytes": 617630,
       "sha256": "7a642c062dd3272f6bd1ee656a636e33781ad9b0073fd098024486b2db38a916",
-      "retrievedAt": "2026-10-27T05:12:31.277367Z"
+      "retrievedAt": "2026-10-27T06:00:54.711900Z"
     },
     {
       "kind": "grib",
@@ -992,7 +1386,7 @@
       "rangeStart": 23481136,
       "bytes": 604102,
       "sha256": "7aa588a23fcd9de16c11f674cd9e031f6d410bc48e39ad61a835b17d25b7de11",
-      "retrievedAt": "2026-10-27T05:12:35.278748Z"
+      "retrievedAt": "2026-10-27T06:00:55.857304Z"
     },
     {
       "kind": "index",
@@ -1000,7 +1394,7 @@
       "rangeStart": null,
       "bytes": 41538,
       "sha256": "d9f587ba8b0178d18f1d4e310f89b03847a68e792f2bc1d89336a9ca6cf244e4",
-      "retrievedAt": "2026-10-27T05:12:40.248327Z"
+      "retrievedAt": "2026-10-27T06:00:56.343343Z"
     },
     {
       "kind": "grib",
@@ -1063,7 +1457,7 @@
       "rangeStart": 16220421,
       "bytes": 389656,
       "sha256": "cceb10dd89c36cb6cf0c251a48a3c8c447b00852593883f9cdd4cbec52cdf5ea",
-      "retrievedAt": "2026-10-27T05:12:43.703774Z"
+      "retrievedAt": "2026-10-27T06:00:57.124129Z"
     },
     {
       "kind": "grib",
@@ -1126,7 +1520,7 @@
       "rangeStart": 22618891,
       "bytes": 619379,
       "sha256": "e67a6a88ef6e4639db692b08927f1e8912fb290ce878699edcb237aea1ff7249",
-      "retrievedAt": "2026-10-27T05:12:49.118145Z"
+      "retrievedAt": "2026-10-27T06:00:58.113433Z"
     },
     {
       "kind": "grib",
@@ -1189,7 +1583,7 @@
       "rangeStart": 23238270,
       "bytes": 605414,
       "sha256": "69968d51d0875abc2acf3f3ff71d56a0025ec1335c1172dd3c6bd8aa63fd2afb",
-      "retrievedAt": "2026-10-27T05:12:53.873903Z"
+      "retrievedAt": "2026-10-27T06:00:59.241824Z"
     },
     {
       "kind": "index",
@@ -1197,7 +1591,7 @@
       "rangeStart": null,
       "bytes": 41539,
       "sha256": "17b14f30c55d684d406e65f923c4cc6e6c0fdf193f75a53cc7087932cf7a2857",
-      "retrievedAt": "2026-10-27T05:12:56.148660Z"
+      "retrievedAt": "2026-10-27T06:00:59.733161Z"
     },
     {
       "kind": "grib",
@@ -1260,7 +1654,7 @@
       "rangeStart": 14992845,
       "bytes": 319384,
       "sha256": "7889b68447c0f9301583afe7b3063d0c63c864be45f4510039ea4e2f59638891",
-      "retrievedAt": "2026-10-27T05:12:59.253872Z"
+      "retrievedAt": "2026-10-27T06:01:00.491081Z"
     },
     {
       "kind": "grib",
@@ -1323,7 +1717,7 @@
       "rangeStart": 22099512,
       "bytes": 619511,
       "sha256": "4e8298d86163c32696a07f68947da07168e04653f235996cf003e7235f68e75f",
-      "retrievedAt": "2026-10-27T05:13:03.204244Z"
+      "retrievedAt": "2026-10-27T06:01:01.478152Z"
     },
     {
       "kind": "grib",
@@ -1386,7 +1780,7 @@
       "rangeStart": 24355749,
       "bytes": 606324,
       "sha256": "6df18502eb037637779ea7526616e890a9ce7cabd5af992e52256a077e62271e",
-      "retrievedAt": "2026-10-27T05:13:07.336895Z"
+      "retrievedAt": "2026-10-27T06:01:02.504249Z"
     },
     {
       "kind": "index",
@@ -1394,7 +1788,7 @@
       "rangeStart": null,
       "bytes": 41538,
       "sha256": "8eeb2d25059125f4317742431d9973615725b28292fc30f640a0ec6fa7233ea6",
-      "retrievedAt": "2026-10-27T05:13:09.494941Z"
+      "retrievedAt": "2026-10-27T06:01:03.007345Z"
     },
     {
       "kind": "grib",
@@ -1457,7 +1851,7 @@
       "rangeStart": 14954062,
       "bytes": 330995,
       "sha256": "2463eba8685533d942937e254ba5a23c09d791df95b4263c8315dd1dec0e4d26",
-      "retrievedAt": "2026-10-27T05:13:12.546000Z"
+      "retrievedAt": "2026-10-27T06:01:03.936112Z"
     },
     {
       "kind": "grib",
@@ -1520,7 +1914,7 @@
       "rangeStart": 19802195,
       "bytes": 617602,
       "sha256": "24459572b1de5478db134c389c7bff45d9d889a6076973277c0171892d75bcef",
-      "retrievedAt": "2026-10-27T05:13:16.017290Z"
+      "retrievedAt": "2026-10-27T06:01:05.983360Z"
     },
     {
       "kind": "grib",
@@ -1583,7 +1977,7 @@
       "rangeStart": 21436816,
       "bytes": 605895,
       "sha256": "bd7cce33a1c96f3b7ea1b3e9a9b10bcae977c3e2ae815eb2405b95d456e4a1f5",
-      "retrievedAt": "2026-10-27T05:13:19.598274Z"
+      "retrievedAt": "2026-10-27T06:01:06.892358Z"
     },
     {
       "kind": "index",
@@ -1591,7 +1985,7 @@
       "rangeStart": null,
       "bytes": 41538,
       "sha256": "2e859a2b20d3616a00a97b11e45e18dbf795df87f1f2a654e4d0b78aeeae1caf",
-      "retrievedAt": "2026-10-27T05:13:22.009050Z"
+      "retrievedAt": "2026-10-27T06:01:07.379852Z"
     },
     {
       "kind": "grib",
@@ -1654,7 +2048,7 @@
       "rangeStart": 14628666,
       "bytes": 341505,
       "sha256": "70d7524446230af1177fd63377b02c8a026eee546607e942ace87b28cf937e77",
-      "retrievedAt": "2026-10-27T05:13:25.140076Z"
+      "retrievedAt": "2026-10-27T06:01:08.494802Z"
     },
     {
       "kind": "grib",
@@ -1717,7 +2111,7 @@
       "rangeStart": 19367592,
       "bytes": 617319,
       "sha256": "9fbc1d314200d5c862faae52513abb6a65fa5f69cb38140fa2aae5a80bcde510",
-      "retrievedAt": "2026-10-27T05:13:30.119451Z"
+      "retrievedAt": "2026-10-27T06:01:09.559784Z"
     },
     {
       "kind": "grib",
@@ -1780,7 +2174,7 @@
       "rangeStart": 21709875,
       "bytes": 605150,
       "sha256": "46e19b5d287db31db04dcfdbf7f826a0cd0058f85f8b95ad73b3db86a1bb4db7",
-      "retrievedAt": "2026-10-27T05:13:37.225607Z"
+      "retrievedAt": "2026-10-27T06:01:10.575258Z"
     },
     {
       "kind": "index",
@@ -1788,7 +2182,7 @@
       "rangeStart": null,
       "bytes": 41541,
       "sha256": "1cf391c460cdea7a43baeee47afee591f110dab29af7a9c08794acaf137e6ec7",
-      "retrievedAt": "2026-10-27T05:13:39.574439Z"
+      "retrievedAt": "2026-10-27T06:01:11.071353Z"
     },
     {
       "kind": "grib",
@@ -1851,7 +2245,7 @@
       "rangeStart": 17667671,
       "bytes": 351694,
       "sha256": "3c0118bacc5461aeed71086bc42c63f9f1cf611f832dab2b1a52b4e64988f566",
-      "retrievedAt": "2026-10-27T05:13:43.044765Z"
+      "retrievedAt": "2026-10-27T06:01:11.784930Z"
     },
     {
       "kind": "grib",
@@ -1914,7 +2308,7 @@
       "rangeStart": 21130562,
       "bytes": 617629,
       "sha256": "c26c74378a7e940c7a8535e053d132d9524e3222396bda388e403ff8554db708",
-      "retrievedAt": "2026-10-27T05:13:46.622405Z"
+      "retrievedAt": "2026-10-27T06:01:13.077546Z"
     },
     {
       "kind": "grib",
@@ -1977,7 +2371,7 @@
       "rangeStart": 23748191,
       "bytes": 605589,
       "sha256": "26e9a70c488ca22e478a4f63a0a6b7d4159d881fbab978ea0d75b9151d6898cc",
-      "retrievedAt": "2026-10-27T05:13:50.102953Z"
+      "retrievedAt": "2026-10-27T06:01:14.196890Z"
     },
     {
       "kind": "index",
@@ -1985,7 +2379,7 @@
       "rangeStart": null,
       "bytes": 41539,
       "sha256": "0e8a759c4d2bb656c621f85ac59ac119fc8154f435b1abd11d912236d1dac78e",
-      "retrievedAt": "2026-10-27T05:13:52.240526Z"
+      "retrievedAt": "2026-10-27T06:01:16.259235Z"
     },
     {
       "kind": "grib",
@@ -2048,7 +2442,7 @@
       "rangeStart": 15902379,
       "bytes": 361780,
       "sha256": "581482dab1137b4b3a813efd357dd8baf2b6e52dafc70dc039cdc26fc9945684",
-      "retrievedAt": "2026-10-27T05:13:56.062538Z"
+      "retrievedAt": "2026-10-27T06:01:17.171655Z"
     },
     {
       "kind": "grib",
@@ -2111,7 +2505,7 @@
       "rangeStart": 21405756,
       "bytes": 618122,
       "sha256": "72515e8fd75d70bafea1ccca7b42b28f131f82bd46a4e4d7c71c74046771b2bf",
-      "retrievedAt": "2026-10-27T05:14:00.971903Z"
+      "retrievedAt": "2026-10-27T06:01:18.190592Z"
     },
     {
       "kind": "grib",
@@ -2174,7 +2568,7 @@
       "rangeStart": 24007598,
       "bytes": 605990,
       "sha256": "fdf312c741f889cc2c25b77a40521f4d32cc7c1488865a38d48854f87e6ddd49",
-      "retrievedAt": "2026-10-27T05:14:06.240654Z"
+      "retrievedAt": "2026-10-27T06:01:19.258818Z"
     },
     {
       "kind": "index",
@@ -2182,7 +2576,7 @@
       "rangeStart": null,
       "bytes": 41537,
       "sha256": "b94ec1348070b4e21dd2d75f7239c093bc946e6a0835793f0293dfdfa1ed4490",
-      "retrievedAt": "2026-10-27T05:14:08.486737Z"
+      "retrievedAt": "2026-10-27T06:01:19.789132Z"
     },
     {
       "kind": "grib",
@@ -2245,7 +2639,7 @@
       "rangeStart": 14425400,
       "bytes": 371607,
       "sha256": "a26fc43b12e9475318467d0a3397d88fd01db50b6bbe8b3314dfdb527c206b1d",
-      "retrievedAt": "2026-10-27T05:14:11.507955Z"
+      "retrievedAt": "2026-10-27T06:01:20.556888Z"
     },
     {
       "kind": "grib",
@@ -2308,7 +2702,7 @@
       "rangeStart": 19037086,
       "bytes": 618722,
       "sha256": "40ec68cfb1dac46856e3e483fdddd9f84da7f5b9693247ce3c648156b14a70f7",
-      "retrievedAt": "2026-10-27T05:14:14.878663Z"
+      "retrievedAt": "2026-10-27T06:01:21.752777Z"
     },
     {
       "kind": "grib",
@@ -2371,7 +2765,7 @@
       "rangeStart": 21309189,
       "bytes": 606059,
       "sha256": "9c597cd27f9ce695c472106a0154f8a4a25522da8a92cfb8069e8745761411da",
-      "retrievedAt": "2026-10-27T05:14:18.619711Z"
+      "retrievedAt": "2026-10-27T06:01:23.903012Z"
     },
     {
       "kind": "index",
@@ -2379,7 +2773,7 @@
       "rangeStart": null,
       "bytes": 41537,
       "sha256": "d488bf285107731d0467177088b2b487accaf85e59d10ee8469b84fafba67765",
-      "retrievedAt": "2026-10-27T05:14:20.856389Z"
+      "retrievedAt": "2026-10-27T06:01:24.645675Z"
     },
     {
       "kind": "grib",
@@ -2442,7 +2836,7 @@
       "rangeStart": 13870212,
       "bytes": 380766,
       "sha256": "fd31648102b3904e1e7297871bf4acf8da4cf7e09377fcb8347f13c8e3490087",
-      "retrievedAt": "2026-10-27T05:14:25.353317Z"
+      "retrievedAt": "2026-10-27T06:01:25.540979Z"
     },
     {
       "kind": "grib",
@@ -2505,7 +2899,7 @@
       "rangeStart": 18603829,
       "bytes": 621055,
       "sha256": "9566ea709ff46e66f412254fd0d7b2a21bfd2c34cd7d4262b2b927b9c1666525",
-      "retrievedAt": "2026-10-27T05:14:29.146127Z"
+      "retrievedAt": "2026-10-27T06:01:26.880691Z"
     },
     {
       "kind": "grib",
@@ -2568,7 +2962,7 @@
       "rangeStart": 21573188,
       "bytes": 607446,
       "sha256": "540da2246079a38d555782776a3f885fb9f8047d34a5215e7b486944dccbf617",
-      "retrievedAt": "2026-10-27T05:14:33.130936Z"
+      "retrievedAt": "2026-10-27T06:01:27.950965Z"
     },
     {
       "kind": "index",
@@ -2576,7 +2970,7 @@
       "rangeStart": null,
       "bytes": 41543,
       "sha256": "fe35347c8088afb1b06e50586ab8fc3312eac6eaffdafe38e44fbd5bf2707945",
-      "retrievedAt": "2026-10-27T05:14:35.665827Z"
+      "retrievedAt": "2026-10-27T06:01:28.554734Z"
     },
     {
       "kind": "grib",
@@ -2639,7 +3033,7 @@
       "rangeStart": 17602660,
       "bytes": 389124,
       "sha256": "63c9917ce8beb4fa726a9269a33effba6730d66fe0cd99576abaa8f46c5b711b",
-      "retrievedAt": "2026-10-27T05:14:38.834736Z"
+      "retrievedAt": "2026-10-27T06:01:30.098086Z"
     },
     {
       "kind": "grib",
@@ -2702,7 +3096,7 @@
       "rangeStart": 23081273,
       "bytes": 622753,
       "sha256": "6cf0fcfe3c7187ce7c42644b019a31c2798d7ca0c3636605f765776387a8bdc0",
-      "retrievedAt": "2026-10-27T05:14:42.348198Z"
+      "retrievedAt": "2026-10-27T06:01:31.284152Z"
     },
     {
       "kind": "grib",
@@ -2765,7 +3159,7 @@
       "rangeStart": 23704026,
       "bytes": 608705,
       "sha256": "54300d2c4254dbac912f9928d449843529965331a2782b93e19b493f5e867a4a",
-      "retrievedAt": "2026-10-27T05:14:47.470169Z"
+      "retrievedAt": "2026-10-27T06:01:32.401333Z"
     },
     {
       "kind": "index",
@@ -2773,7 +3167,7 @@
       "rangeStart": null,
       "bytes": 41540,
       "sha256": "ae24b5ee2582e801cca214de2cfb5593e92c5c46346e3adae2821e47e4e05755",
-      "retrievedAt": "2026-10-27T05:14:50.102465Z"
+      "retrievedAt": "2026-10-27T06:01:33.141750Z"
     },
     {
       "kind": "grib",
@@ -2836,7 +3230,7 @@
       "rangeStart": 16645599,
       "bytes": 396837,
       "sha256": "7758ad35d27c5eefc8a46c60fb185f1a9f175af9e33ce4fb85942c3b37da4fc6",
-      "retrievedAt": "2026-10-27T05:14:53.307719Z"
+      "retrievedAt": "2026-10-27T06:01:33.918738Z"
     },
     {
       "kind": "grib",
@@ -2899,7 +3293,7 @@
       "rangeStart": 21532438,
       "bytes": 620687,
       "sha256": "bbba81c3b0849f300d10b40185f49646fb44b001aa874a4d7f74ee5b2edc0e12",
-      "retrievedAt": "2026-10-27T05:14:57.932092Z"
+      "retrievedAt": "2026-10-27T06:01:34.930493Z"
     },
     {
       "kind": "grib",
@@ -2962,7 +3356,7 @@
       "rangeStart": 22489295,
       "bytes": 607025,
       "sha256": "a9d819af1d4f07235a446146ceec5d4cf49059c74c3dc43c084cf9202f2d2a5f",
-      "retrievedAt": "2026-10-27T05:15:01.897327Z"
+      "retrievedAt": "2026-10-27T06:01:35.932564Z"
     },
     {
       "kind": "index",
@@ -2970,7 +3364,7 @@
       "rangeStart": null,
       "bytes": 41540,
       "sha256": "f1d4bc7d414c0b12641192338f80866c991a7c4619570477460316ccda42aede",
-      "retrievedAt": "2026-10-27T05:15:04.136822Z"
+      "retrievedAt": "2026-10-27T06:01:36.443599Z"
     },
     {
       "kind": "grib",
@@ -3033,7 +3427,7 @@
       "rangeStart": 15333260,
       "bytes": 403685,
       "sha256": "b1c029d1acdd0bdefeef653edbf0382c276e33417b2be72c2ff875baaa202fee",
-      "retrievedAt": "2026-10-27T05:15:07.299254Z"
+      "retrievedAt": "2026-10-27T06:01:37.344284Z"
     },
     {
       "kind": "grib",
@@ -3096,7 +3490,7 @@
       "rangeStart": 18610699,
       "bytes": 617529,
       "sha256": "fba403e8fe2bb079a6cbb3bf3880b0d000d8282c88e8d249a18a3c2e1b190999",
-      "retrievedAt": "2026-10-27T05:15:10.686842Z"
+      "retrievedAt": "2026-10-27T06:01:38.426225Z"
     },
     {
       "kind": "grib",
@@ -3159,7 +3553,7 @@
       "rangeStart": 21912754,
       "bytes": 604852,
       "sha256": "d3216ada5d723c8aa568506ff503c4eb404803d97c97527f716a84173c2444a6",
-      "retrievedAt": "2026-10-27T05:15:14.284547Z"
+      "retrievedAt": "2026-10-27T06:01:40.505996Z"
     },
     {
       "kind": "index",
@@ -3167,7 +3561,7 @@
       "rangeStart": null,
       "bytes": 41538,
       "sha256": "90171b83a00441749d438ec38a69602f5a9efcc1e9044247e03f53fced4ca60c",
-      "retrievedAt": "2026-10-27T05:15:16.514572Z"
+      "retrievedAt": "2026-10-27T06:01:40.991363Z"
     },
     {
       "kind": "grib",
@@ -3230,7 +3624,7 @@
       "rangeStart": 14727769,
       "bytes": 410204,
       "sha256": "ca00367c5023627183b4c33326a369204f4095d160a7fdb8f6ec1961f6f6304f",
-      "retrievedAt": "2026-10-27T05:15:21.565870Z"
+      "retrievedAt": "2026-10-27T06:01:41.870739Z"
     },
     {
       "kind": "grib",
@@ -3293,7 +3687,7 @@
       "rangeStart": 18552044,
       "bytes": 616292,
       "sha256": "fe64e9adb1e10bd9c02ae3a43caec28612179fe6145306aa250ae0c5b9fcbda3",
-      "retrievedAt": "2026-10-27T05:15:25.326334Z"
+      "retrievedAt": "2026-10-27T06:01:42.971713Z"
     },
     {
       "kind": "grib",
@@ -3356,7 +3750,7 @@
       "rangeStart": 21256522,
       "bytes": 603678,
       "sha256": "eca406a9f995765d778b552691b8eb0c38be474a055c054e6f12f2ffd9a76668",
-      "retrievedAt": "2026-10-27T05:15:29.435274Z"
+      "retrievedAt": "2026-10-27T06:01:44.257922Z"
     },
     {
       "kind": "index",
@@ -3364,7 +3758,7 @@
       "rangeStart": null,
       "bytes": 41540,
       "sha256": "0ae79c715eb62496b17c29a0d65e44deb26ebd55ce7437863f2762d557105734",
-      "retrievedAt": "2026-10-27T05:15:31.618252Z"
+      "retrievedAt": "2026-10-27T06:01:44.856952Z"
     },
     {
       "kind": "grib",
@@ -3427,7 +3821,7 @@
       "rangeStart": 15986458,
       "bytes": 416805,
       "sha256": "223209f794faf655a8d26a23193937bbce2f0f39b57645774eb761dacff4113f",
-      "retrievedAt": "2026-10-27T05:15:35.493158Z"
+      "retrievedAt": "2026-10-27T06:01:45.772610Z"
     },
     {
       "kind": "grib",
@@ -3490,7 +3884,7 @@
       "rangeStart": 21095267,
       "bytes": 615425,
       "sha256": "8ffe87eca9f12e1c5dda4dbc52831dd8c7a7fd4e947a08e156998c4d77977438",
-      "retrievedAt": "2026-10-27T05:15:38.842248Z"
+      "retrievedAt": "2026-10-27T06:01:46.928990Z"
     },
     {
       "kind": "grib",
@@ -3553,7 +3947,7 @@
       "rangeStart": 22078141,
       "bytes": 603537,
       "sha256": "f229f4d22777d3676396004280c5400808689d7568653d998a886f9dbaafe9a7",
-      "retrievedAt": "2026-10-27T05:15:42.929609Z"
+      "retrievedAt": "2026-10-27T06:01:48.116717Z"
     }
   ],
   "errors": []
