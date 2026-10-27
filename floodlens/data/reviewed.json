@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "reviewedAt": "2026-10-27T16:42:29+00:00",
+  "reviewedAt": "2026-10-27T17:11:59+00:00",
   "reviewMethod": "Official PDFs visually checked; structured source transcription. Not an agency endorsement.",
   "bulletins": [
     {
@@ -1337,7 +1337,7 @@
     }
   ],
   "fetchedAt": "2026-10-27T06:48:51.499938+00:00",
-  "minClientVersion": 10,
+  "minClientVersion": 11,
   "observationsReviewedAt": "2026-10-27T16:20:48.766272+00:00",
   "marineBulletins": [
     {
@@ -1361,6 +1361,47 @@
         "si": "බෙංගාල බොක්ක සහ ශ්‍රී ලංකාව අවට ගැඹුරු හා නොගැඹුරු මුහුද සඳහාය. ධීවර හා නාවික ප්‍රජාව: නිල මුහුදු සීමා සහ උපදෙස් කියවන්න. මෙය ගොඩබිම් ගංවතුර අනතුරු ඇඟවීමක් නොවේ.",
         "ta": "வங்காள விரிகுடா மற்றும் இலங்கையைச் சுற்றியுள்ள ஆழமான/ஆழமற்ற கடலுக்கானது. மீனவர், கடல்சார் சமூகங்கள்: அதிகாரபூர்வ கடல் எல்லைகளையும் முன்னெச்சரிக்கைகளையும் படிக்கவும். இது நிலப்பகுதி வெள்ள எச்சரிக்கை அல்ல."
       }
+    },
+    {
+      "id": "MSW-26-10-27-02-08",
+      "kind": "marine",
+      "scope": "sea_only",
+      "severity": "red",
+      "authority": "Department of Meteorology",
+      "issuedAt": null,
+      "expiresAt": null,
+      "reviewedAt": "2026-10-27T17:17:52.824640+00:00",
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Warning_for_strong_winds_and_rough_seas_at_2100hrs_on_27__1793119377.pdf",
+      "sha256": "a6ae16c15d85ba25e3e8613ed6a1ac0da42d24cdceb389f4ddb32de6d92c294f",
+      "title": {
+        "en": "At sea only · Red wind and rough-sea warning",
+        "si": "මුහුද සඳහා පමණි · තද සුළං සහ රළු මුහුද පිළිබඳ රතු අනතුරු ඇඟවීම",
+        "ta": "கடலில் மட்டும் · பலத்த காற்று, கொந்தளிப்பான கடல் சிவப்பு எச்சரிக்கை"
+      },
+      "summary": {
+        "en": "For the Bay of Bengal and deep/shallow seas around Sri Lanka. Fishing and naval communities: read the official restricted sea area and precautions. This is not an inland flood warning.",
+        "si": "බෙංගාල බොක්ක සහ ශ්‍රී ලංකාව අවට ගැඹුරු හා නොගැඹුරු මුහුද සඳහාය. ධීවර හා නාවික ප්‍රජාව: නිල මුහුදු සීමා සහ උපදෙස් කියවන්න. මෙය ගොඩබිම් ගංවතුර අනතුරු ඇඟවීමක් නොවේ.",
+        "ta": "வங்காள விரிகுடா மற்றும் இலங்கையைச் சுற்றியுள்ள ஆழமான/ஆழமற்ற கடலுக்கானது. மீனவர், கடல்சார் சமூகங்கள்: அதிகாரபூர்வ கடல் எல்லைகளையும் முன்னெச்சரிக்கைகளையும் படிக்கவும். இது நிலப்பகுதி வெள்ள எச்சரிக்கை அல்ல."
+      },
+      "timeConflict": true,
+      "sourceTimeWindows": [
+        {
+          "part": "header",
+          "issuedAt": "2026-10-27T21:00:00+05:30",
+          "expiresAt": "2026-10-28T21:00:00+05:30",
+          "expiryBasis": "Header says next 24 hours"
+        },
+        {
+          "part": "map",
+          "issuedAt": "2026-10-27T20:00:00+05:30",
+          "expiresAt": "2026-10-28T20:00:00+05:30",
+          "expiryBasis": "Explicit map caption"
+        }
+      ],
+      "sourceDiscrepancy": "Header issued 21:00 SLST on 27 October for 24 hours; map caption issued 20:00 and valid until 20:00 on 28 October. No unambiguous issue/expiry is asserted. Until-further-notice guidance remains distinct.",
+      "bulletinNumber": "08",
+      "sourceBulletinId": "MSW/26/10/27/02",
+      "untilFurtherNotice": true
     }
   ]
 }

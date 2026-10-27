@@ -1092,3 +1092,25 @@ marine until-further-notice instructions and review-age safeguards are unchanged
 The completed DMC review is 16:13:47 UTC; the separate Google public observation
 is 16:13–16:14 UTC, unchanged Warning at the Kala Wewa HYBAS forecast node, with
 provider issuance/validity unknown. These checks do not renew source times.
+
+## 27 October Marine Bulletin 08: conflicting original times
+
+All six original pages were visually checked locally. Bulletin 08,
+MSW/26/10/27/02, is Red for sea areas only. Its header says 21:00 SLST on
+27 October, valid for 24 hours. The map says issued 20:00 on 27 October and
+valid until 20:00 on 28 October. `issuedAt` and `expiresAt` are therefore null;
+both original windows are kept in `sourceTimeWindows` with `timeConflict: true`.
+No single expiry is chosen or presented as authoritative. The separate marine
+notice displays both dated windows and the until-further-notice distinction.
+It records whether the time is within both windows, between their ends, or
+past both ends; these states never cancel indefinite instructions or imply safety.
+
+Client 11 validates this representation; older clients request a reload. Client
+10's missing-station contract is retained. Bulletin 07 remains in the data and
+provenance, but its old expiry card is not presented as the latest marine source
+once Bulletin 08 is reviewed. No explicit cancellation or supersedes wording was
+found. New numeric sea and storm context is retained with exact scope in source
+provenance, not added as an inland forecast, arrival estimate or unverified track.
+Existing trilingual sea-only summary and non-official translation labels remain;
+new plain interface labels explain the timing conflict and link the original.
+Gin's 22:30 SLST validity has elapsed without a verified extension or cancellation.

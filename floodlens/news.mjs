@@ -1,9 +1,22 @@
-import {warningState,safeSource} from './core.mjs?v=20261027-31';
-export function expiredMarineBulletin(snapshot,now=Date.now()){
+import {warningState,safeSource,marineTimeWindows} from './core.mjs?v=20261027-32';
+function latestMarine(snapshot,now){
  if(!Number.isFinite(now)||!Number.isFinite(Date.parse(snapshot?.reviewedAt))||Date.parse(snapshot.reviewedAt)>now)return null;
- const latest=(snapshot?.marineBulletins||[]).filter(w=>w.kind==='marine'&&w.scope==='sea_only'&&safeSource(w.url)&&/^[a-f0-9]{64}$/.test(w.sha256)&&Date.parse(w.reviewedAt)<=now&&Date.parse(w.issuedAt)<=now&&Date.parse(w.expiresAt)>Date.parse(w.issuedAt)).sort((a,b)=>Date.parse(b.issuedAt)-Date.parse(a.issuedAt))[0];
- return latest&&warningState(latest,now)==='expired'?latest:null;
+ return (snapshot?.marineBulletins||[]).filter(w=>w.kind==='marine'&&w.scope==='sea_only'&&w.severity==='red'&&safeSource(w.url)&&/^[a-f0-9]{64}$/.test(w.sha256)&&Date.parse(w.reviewedAt)<=now&&marineTimeWindows(w)?.every(x=>Date.parse(x.issuedAt)<=now)).sort((a,b)=>Math.max(...marineTimeWindows(b).map(x=>Date.parse(x.issuedAt)))-Math.max(...marineTimeWindows(a).map(x=>Date.parse(x.issuedAt))))[0]||null;
 }
+export function conflictingMarineBulletin(snapshot,now=Date.now()){
+ const w=latestMarine(snapshot,now);if(!w?.timeConflict)return null;
+ const ends=marineTimeWindows(w).map(x=>Date.parse(x.expiresAt));
+ return {...w,timingState:now>=Math.max(...ends)?'expired':now>=Math.min(...ends)?'uncertain':'within_both'};
+}
+export function expiredMarineBulletin(snapshot,now=Date.now()){
+ const latest=latestMarine(snapshot,now);
+ return latest&&!latest.timeConflict&&warningState(latest,now)==='expired'?latest:null;
+}
+export const marineConflictCopy={
+ en:{note:'The bulletin header and map give different times. No single expiry is confirmed. “Until further notice” sea instructions are not cancelled by either expiry.',header:'Header',map:'Map',issued:'Issued',until:'Valid until',expired:'Both stated validity periods have ended. Check for a newer official bulletin.'},
+ si:{note:'නිවේදනයේ ශීර්ෂයේ සහ සිතියමේ වේලාවන් වෙනස් ය. එක් නිශ්චිත අවසන් වේලාවක් තහවුරු නැත. “නැවත දැනුම් දෙන තුරු” මුහුදු උපදෙස් එම වේලාවන් අවසන් වීමෙන් අවලංගු නොවේ.',header:'ශීර්ෂය',map:'සිතියම',issued:'නිකුත් කළේ',until:'වලංගු වන්නේ',expired:'සඳහන් වලංගු කාල දෙකම අවසන් වී ඇත. නව නිල නිවේදනයක් පරීක්ෂා කරන්න.'},
+ ta:{note:'அறிக்கையின் தலைப்பிலும் வரைபடத்திலும் நேரங்கள் வேறுபடுகின்றன. ஒரே முடிவு நேரம் உறுதியாகவில்லை. “மறு அறிவித்தல் வரை” உள்ள கடல் அறிவுறுத்தல்கள் இவற்றின் காலாவதியால் ரத்தாகாது.',header:'தலைப்பு',map:'வரைபடம்',issued:'வெளியிட்டது',until:'செல்லுபடியாகும் வரை',expired:'குறிப்பிட்ட இரு செல்லுபடிக் காலங்களும் முடிந்துவிட்டன. புதிய அதிகாரபூர்வ அறிவிப்பைப் பார்க்கவும்.'}
+};
 export const marineExpiryCopy={
  en:{title:'Marine bulletin: validity ended',note:'Its timed validity has ended. Instructions that say “until further notice” are not cancelled by expiry. Read the original for sea guidance.',source:'Original marine bulletin',ended:'Validity ended'},
  si:{title:'මුහුදු නිවේදනය: වලංගු කාලය අවසන්',note:'මෙහි සඳහන් වලංගු කාලය අවසන් වී ඇත. “නැවත දැනුම් දෙන තුරු” යන උපදෙස් එම නිසා අවලංගු නොවේ. මුහුදු උපදෙස් සඳහා මුල් නිවේදනය කියවන්න.',source:'මුල් මුහුදු නිවේදනය',ended:'වලංගු කාලය අවසන් වූයේ'},
@@ -14,7 +27,7 @@ export function nearNews(snapshot,media,districts,now=Date.now()){
  const reviewed=Date.parse(snapshot?.reviewedAt);
  const official=Number.isFinite(reviewed)&&reviewed<=now?(snapshot.bulletins||[]).filter(w=>warningState(w,now)==='active'&&Date.parse(w.issuedAt)<=now&&(w.districtCodes?.some(c=>districts.includes(c))||w.areas?.some(a=>districts.includes(a.districtCode)))).map(w=>({kind:'government',title:w.title,summary:w.summary,url:w.url,source:w.authority,publishedAt:w.issuedAt,reviewedAt:snapshot.reviewedAt,expiresAt:w.expiresAt})):[];
  for(const w of snapshot?.marineBulletins||[]){
-  if(w.kind==='marine'&&w.scope==='sea_only'&&w.severity==='red'&&safeSource(w.url)&&warningState(w,now)==='active'&&Date.parse(w.reviewedAt)<=now&&/^[a-f0-9]{64}$/.test(w.sha256))official.push({kind:'government',title:w.title,summary:w.summary,url:w.url,source:w.authority,publishedAt:w.issuedAt,reviewedAt:w.reviewedAt,expiresAt:w.expiresAt,scope:'sea_only'});
+  if(!w.timeConflict&&w.kind==='marine'&&w.scope==='sea_only'&&w.severity==='red'&&safeSource(w.url)&&warningState(w,now)==='active'&&Date.parse(w.reviewedAt)<=now&&/^[a-f0-9]{64}$/.test(w.sha256))official.push({kind:'government',title:w.title,summary:w.summary,url:w.url,source:w.authority,publishedAt:w.issuedAt,reviewedAt:w.reviewedAt,expiresAt:w.expiresAt,scope:'sea_only'});
  }
  if(districts.includes('LK62')&&media?.schemaVersion===1&&media.kind==='reviewed_media_report'&&media.url==='https://www.dailymirror.lk/breaking-news/Two-reservoirs-release-7-400-cusecs-into-Mee-Oya-residents-warned/108-353450'&&Date.parse(media.publishedAt)<=now&&Date.parse(media.reviewedAt)<=now&&now-Date.parse(media.publishedAt)<48*3600000){
  official.push({kind:'media',title:{en:'Mee Oya reservoir releases reported',si:'මී ඔය ජලාශවල ජලය නිකුත් කිරීමේ වාර්තාව',ta:'மீ ஓயா நீர்த்தேக்க நீர் வெளியேற்றச் செய்தி'},summary:{en:'Daily Mirror reports increased releases from Tabbowa and Inginimitiya. The operation time and present gate state are unconfirmed.',si:'තබ්බෝව සහ ඉඟිනිමිටිය ජල නිකුත් කිරීම් වැඩිවීම Daily Mirror වාර්තා කරයි. ක්‍රියාත්මක වූ වේලාව සහ වත්මන් දොරටු තත්ත්වය තහවුරු නැත.',ta:'தப்போவ, இங்கினிமிட்டிய வெளியேற்றம் அதிகரித்ததாக Daily Mirror தெரிவிக்கிறது. செயல்பாட்டு நேரமும் தற்போதைய கதவு நிலையும் உறுதியில்லை.'},source:media.source,url:media.url,publishedAt:media.publishedAt,reviewedAt:media.reviewedAt});
@@ -27,7 +40,8 @@ export async function renderNews(root,snapshot,districts,language='en'){
  const token={};root._newsToken=token;root.hidden=!districts.length;if(root.hidden)return;
  const s=copy[language]||copy.en,node=(tag,value)=>{const e=document.createElement(tag);e.textContent=value;return e;},local=v=>v?.[language]||v?.en||'',time=v=>new Intl.DateTimeFormat(language,{timeZone:'Asia/Colombo',day:'numeric',month:'short',hour:'2-digit',minute:'2-digit',hour12:false}).format(new Date(v));
  let media;try{media=await(mediaPromise??=fetch('/floodlens/data/reservoir-reports.json',{cache:'no-store',credentials:'omit',referrerPolicy:'no-referrer',signal:AbortSignal.timeout(10000)}).then(r=>{if(!r.ok)throw Error();return r.json();}).catch(e=>{mediaPromise=null;throw e;}));}catch{}
- if(root._newsToken!==token)return;const items=nearNews(snapshot,media,districts),expired=expiredMarineBulletin(snapshot);root.replaceChildren(node('summary',s.title));const body=node('div','');body.append(node('p',s.note));if(!items.length&&!expired)body.append(node('p',s.none));
+ if(root._newsToken!==token)return;const items=nearNews(snapshot,media,districts),expired=expiredMarineBulletin(snapshot),conflict=conflictingMarineBulletin(snapshot);root.replaceChildren(node('summary',s.title));const body=node('div','');body.append(node('p',s.note));if(!items.length&&!expired&&!conflict)body.append(node('p',s.none));
+ if(conflict){const c=marineConflictCopy[language]||marineConflictCopy.en,article=node('article','');article.dataset.marineValidity='time-conflict';article.dataset.timingState=conflict.timingState;article.append(node('small',s.government+' · '+conflict.authority),node('strong',local(conflict.title)),node('p',local(conflict.summary)),node('p',c.note));if(conflict.timingState==='expired')article.append(node('p',c.expired));for(const window of conflict.sourceTimeWindows)article.append(node('small',c[window.part]+' · '+c.issued+': '+time(window.issuedAt)+' · '+c.until+': '+time(window.expiresAt)+' · SLST'));const a=node('a',(marineExpiryCopy[language]||marineExpiryCopy.en).source+' ↗');a.href=conflict.url;a.target='_blank';a.rel='noopener noreferrer';article.append(a,node('small',s.reviewed+': '+time(conflict.reviewedAt)+' · SLST'));body.append(article);}
  if(expired){const c=marineExpiryCopy[language]||marineExpiryCopy.en,article=node('article','');article.dataset.marineValidity='expired';article.append(node('strong',c.title),node('p',c.note));const a=node('a',c.source+' ↗');a.href=expired.url;a.target='_blank';a.rel='noopener noreferrer';article.append(a,node('small',s.published+': '+time(expired.issuedAt)+' · SLST'),node('small',c.ended+': '+time(expired.expiresAt)+' · SLST'));body.append(article);}
  for(const item of items){const article=node('article','');article.append(node('small',s[item.kind]+' · '+item.source));const a=node('a',local(item.title)+' ↗');a.href=item.url;a.target='_blank';a.rel='noopener noreferrer';article.append(a,node('p',local(item.summary)),node('small',s.published+': '+time(item.publishedAt)+' · SLST'),node('small',s.reviewed+': '+time(item.reviewedAt)+' · SLST'));body.append(article);}root.append(body);
 }

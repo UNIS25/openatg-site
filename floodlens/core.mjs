@@ -1,5 +1,12 @@
 export const HOUR = 3600000;
-export const CLIENT_VERSION = 10;
+export const CLIENT_VERSION = 11;
+// Retain conflicting original time windows rather than choosing one as truth.
+export function marineTimeWindows(w){
+  const windows=w?.timeConflict===true?w.sourceTimeWindows:[{issuedAt:w?.issuedAt,expiresAt:w?.expiresAt}];
+  if(!Array.isArray(windows)||!windows.length||windows.some(x=>!Number.isFinite(Date.parse(x.issuedAt))||!Number.isFinite(Date.parse(x.expiresAt))||Date.parse(x.expiresAt)<=Date.parse(x.issuedAt)))return null;
+  if(w.timeConflict===true&&(w.issuedAt!==null||w.expiresAt!==null||windows.length!==2||new Set(windows.map(x=>x.part)).size!==2||windows.some(x=>!['header','map'].includes(x.part))))return null;
+  return windows;
+}
 export function warningState(w, now=Date.now()) {
   const start=Date.parse(w.issuedAt),end=Date.parse(w.expiresAt);
   if(!Number.isFinite(start)||!Number.isFinite(end)||end<=start||now<start) return 'unknown';
@@ -112,6 +119,7 @@ export function validateSnapshot(d,clientVersion=CLIENT_VERSION) {
     if(!['normal','minorRising','minorFalling','minorNoTrend','alertRising','alertFalling','alertNoTrend'].includes(s.status)){const error=new Error('Unsupported station classification');error.code='CLIENT_UPDATE_REQUIRED';throw error;}
   }
   for(const s of d.stations)if(['alertNoTrend','minorNoTrend'].includes(s.status)&&(s.sourceTrend!==null||s.sourceRemarks!==(s.status==='minorNoTrend'?'Minor Flood':'Alert')))throw Error('Invalid no-trend station');
+  for(const w of d.marineBulletins||[])if(w.timeConflict!==undefined&&(w.timeConflict!==true||!Number.isInteger(d.minClientVersion)||d.minClientVersion<11||w.kind!=='marine'||w.scope!=='sea_only'||w.severity!=='red'||!safeSource(w.url)||!marineTimeWindows(w)))throw Error('Invalid conflicting marine times');
   for(const r of d.reservoirs)if(!Number.isFinite(r.effectivePercent)||!Number.isFinite(r.spillCusecs)||typeof r.name!=='string'||!safeSource(r.url))throw Error('Invalid reservoir');
   return d;
 }
