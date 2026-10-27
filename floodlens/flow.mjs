@@ -1,11 +1,11 @@
-import {mountClouds} from './clouds-ui.mjs?v=20261026-22';
-import {mountTides} from './tides-ui.mjs?v=20261026-22';
-import {renderNews} from './news.mjs?v=20261026-22';
-import {mountForecast} from './forecast-ui.mjs?v=20261026-22';
-import {createContext} from './context-ui.mjs?v=20261026-22';
-import {streetEnabled} from './street-map.mjs?v=20261026-22';
-import {LocationMap} from './location-map.mjs?v=20261026-22';
-import {locationEvidence,warningState,warningMatches,ageState,insideGeometry,intersectsAccuracy,locationCandidates} from './core.mjs?v=20261026-22';
+import {mountClouds} from './clouds-ui.mjs?v=20261027-23';
+import {mountTides} from './tides-ui.mjs?v=20261027-23';
+import {renderNews} from './news.mjs?v=20261027-23';
+import {mountForecast} from './forecast-ui.mjs?v=20261027-23';
+import {createContext} from './context-ui.mjs?v=20261027-23';
+import {streetEnabled} from './street-map.mjs?v=20261027-23';
+import {LocationMap} from './location-map.mjs?v=20261027-23';
+import {locationEvidence,warningReviewStatus,ageState,insideGeometry,intersectsAccuracy,locationCandidates} from './core.mjs?v=20261027-23';
 const $=s=>document.querySelector(s);
 export function createFlow({t,name,getData,getCatalog,onLanguage,onArea,onRefresh}){
  let stage='language',point=null,accuracy=null,mode='gps',area=null,candidates=[],state='idle',manualPoint=null,catalog=null,locationRequest=0,matchRequest=0,lastMapMode=false;
@@ -88,8 +88,12 @@ export function createFlow({t,name,getData,getCatalog,onLanguage,onArea,onRefres
    else{title='rainAdvisory';body=uncertain?'possibleRainBody':'rainAdvisoryBody';severity='advisory';}
    facts=evidence.kind==='lightning'?['lightningAction',uncertain?'improvePinAction':'validUntil']:[evidence.level===3?'followOfficialEvacuation':evidence.kind==='rain'?'checkOfficialShort':'avoidWaterShort',...(uncertain?['improvePinAction']:[])];
   }else if(uncertain){title='matchUnknown';body='boundaryUncertain';facts=['improvePinAction','missingNotSafe'];}
-  else if(data&&(!data.bulletins.some(w=>warningState(w)==='active')||data.bulletins.some(w=>candidateAreas.some(a=>warningMatches(w,a))&&warningState(w)!=='active'))){title='outdatedShort';body='checkLatestShort';}
-  else if(data&&ageState(data.reviewedAt,3)==='fresh'&&!loadFailed){title='noWarningFound';body='notAllClear';facts=['checkOfficialShort'];}
+  else {
+   const review=warningReviewStatus(data,candidateAreas,{online:navigator.onLine,loadFailed});
+   if(review==='reviewed_absence'){title='noWarningFound';body='notAllClear';facts=['checkOfficialShort'];}
+   else if(review==='expired_since_review'){title='previousWarningExpired';body='checkLatestShort';}
+   else if(review==='stale'){title='outdatedShort';body='checkLatestShort';}
+  }
   if(needsUpdate){title='updateShort';body='updateShortBody';facts=['checkOfficialShort'];severity='unknown';}
   if(!navigator.onLine)facts.unshift('offlineShort');else if(loadFailed)facts.unshift('refreshFailedShort');
   $('#area-selection').textContent=area?name(area):t(mode==='gps'?'yourGps':'yourPin');

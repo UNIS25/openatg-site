@@ -40,6 +40,19 @@ export function locationEvidence(bulletins,areas,{uncertain=false,now=Date.now()
   const source=level===3?landslide:flood||landslide||lightning||rain;
   return {source,kind:source?.kind||'unknown',level:source===landslide?level:0,uncertain,otherFlood:level===3&&Boolean(flood)};
 }
+// Reviewed absence is distinct from an expired bulletin awaiting another review.
+// This never establishes that a location is safe or that sources are complete.
+export function warningReviewStatus(data,areas,{now=Date.now(),online=true,loadFailed=false}={}) {
+ if(!data||!areas.length||!online||loadFailed)return 'unknown';
+ const reviewed=Date.parse(data.reviewedAt);
+ if(!Number.isFinite(reviewed)||reviewed>now)return 'unknown';
+ if(ageState(data.reviewedAt,3,now)!=='fresh')return 'stale';
+ const relevant=data.bulletins.filter(w=>areas.some(a=>warningMatches(w,a)));
+ if(relevant.some(w=>warningState(w,now)==='unknown'))return 'unknown';
+ if(relevant.some(w=>warningState(w,now)==='active'))return 'active';
+ if(relevant.some(w=>Date.parse(w.expiresAt)>reviewed))return 'expired_since_review';
+ return 'reviewed_absence';
+}
 export function insideRing(point,ring) {
   let inside=false;const [x,y]=point;
   for(let i=0,j=ring.length-1;i<ring.length;j=i++) {

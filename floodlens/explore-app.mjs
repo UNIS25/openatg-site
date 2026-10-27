@@ -1,7 +1,7 @@
-import {copy} from './explore-copy.mjs?v=20261026-22';
-import {ExploreMap} from './explore-map.mjs?v=20261026-22';
-import {warningLayer,forecastLayer,forecastCells,reviewedReports,cycloneState} from './explore-model.mjs?v=20261026-22';
-import {cloudState} from './clouds-model.mjs?v=20261026-22';
+import {copy} from './explore-copy.mjs?v=20261027-23';
+import {ExploreMap} from './explore-map.mjs?v=20261027-23';
+import {warningLayer,forecastLayer,forecastCells,reviewedReports,cycloneState} from './explore-model.mjs?v=20261027-23';
+import {cloudState} from './clouds-model.mjs?v=20261027-23';
 const $=s=>document.querySelector(s),node=(tag,text,cls)=>{const e=document.createElement(tag);if(text!==undefined)e.textContent=text;if(cls)e.className=cls;return e;};
 const paths={warnings:'/floodlens/data/reviewed.json',catalog:'/floodlens/data/areas.json',overview:'/floodlens/data/map-overview.json',outline:'/floodlens/data/clouds/outline.json',land:'/floodlens/data/explore/region-land.json',forecast:'/floodlens/data/forecast/forecast.json',cloud:'/floodlens/data/clouds/clouds.json',media:'/floodlens/data/reservoir-reports.json',locations:'/floodlens/data/reservoir-locations.json',cyclone:'/floodlens/data/explore/cyclone.json'};
 let language='en',layer='warnings',warningKind='flood',frame=0,selected=null,playing=null,loading=false,generation=0,cloudBroken=false;

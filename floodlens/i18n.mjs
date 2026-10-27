@@ -88,3 +88,7 @@ Object.assign(copy.ta,{mapYourLocation:'இருப்பிட வரைபட
 Object.assign(copy.en,{simpleMap:'Simple map',localMapPrivacy:'Your exact location stays on this page. Maps come from OpenATG; no external map service is contacted.'});
 Object.assign(copy.si,{simpleMap:'සරල සිතියම',localMapPrivacy:'ඔබේ නිශ්චිත ස්ථානය මෙම පිටුවේ පවතී. සිතියම් OpenATG වෙතින්ය; බාහිර සිතියම් සේවාවකට සම්බන්ධ නොවේ.'});
 Object.assign(copy.ta,{simpleMap:'எளிய வரைபடம்',localMapPrivacy:'உங்கள் துல்லியமான இடம் இப்பக்கத்திலேயே இருக்கும். வரைபடங்கள் OpenATG இலிருந்து; வெளி வரைபட சேவைக்கு இணைப்பு இல்லை.'});
+
+Object.assign(copy.en,{noWarningFound:'No active warning in reviewed reports',previousWarningExpired:'Previous warning expired'});
+Object.assign(copy.si,{noWarningFound:'පරීක්ෂා කළ නිවේදනවල ක්‍රියාත්මක ඇඟවීමක් නැත',previousWarningExpired:'පෙර ඇඟවීමේ වලංගු කාලය අවසන්'});
+Object.assign(copy.ta,{noWarningFound:'மதிப்பாய்வு செய்த அறிக்கைகளில் நடப்பு எச்சரிக்கை இல்லை',previousWarningExpired:'முந்தைய எச்சரிக்கை காலாவதியானது'});

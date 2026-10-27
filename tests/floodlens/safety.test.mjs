@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {locationEvidence,warningState,ageState,dailyAgeState,warningMatches,assessment,insideGeometry,locationCandidates,validateSnapshot} from '../../floodlens/core.mjs';
+import {warningReviewStatus,locationEvidence,warningState,ageState,dailyAgeState,warningMatches,assessment,insideGeometry,locationCandidates,validateSnapshot} from '../../floodlens/core.mjs';
 import {copy} from '../../floodlens/i18n.mjs';
 const snapshot=JSON.parse(await readFile(new URL('../../floodlens/data/reviewed.json',import.meta.url)));
 const catalog=JSON.parse(await readFile(new URL('../../floodlens/data/areas.json',import.meta.url)));
@@ -109,3 +109,16 @@ test('current lightning advisory is Amber in exactly the four text-named distric
 });
 
 test('Gin Amber original maps exactly four Galle DS divisions and never the whole district',()=>{const w=snapshot.bulletins.find(w=>w.id==='gin-20261026-01');assert.equal(w.severity,'amber');assert.equal(w.issuedAt,'2026-10-26T22:30:00+05:30');assert.equal(w.expiresAt,'2026-10-27T22:30:00+05:30');assert.deepEqual(w.areas.map(a=>a.divisionCode),['LK3118','LK3124','LK3127','LK3130']);assert.deepEqual(w.districtCodes,[]);for(const code of ['LK3118','LK3124','LK3127','LK3130'])assert.ok(warningMatches(w,catalog.divisions.find(a=>a.code===code)));assert.equal(warningMatches(w,catalog.divisions.find(a=>a.code==='LK3139')),false);assert.equal(warningState(w,Date.parse('2026-10-27T17:00:00Z')),'expired');assert.match(w.summary.en,/low-lying/);});
+
+test('fresh review after local expiry is reviewed absence, not outdated or safe',()=>{
+ const area={code:'test',districtCode:'district'},w={issuedAt:'2026-10-26T00:00:00Z',expiresAt:'2026-10-27T00:00:00Z',areas:[{divisionCode:'test'}]},now=Date.parse('2026-10-27T05:40:00Z');
+ const data={reviewedAt:'2026-10-27T05:10:00Z',bulletins:[w]};
+ assert.equal(warningReviewStatus(data,[area],{now}),'reviewed_absence');
+ assert.equal(warningReviewStatus({...data,reviewedAt:'2026-10-27T02:30:00Z'},[area],{now}),'stale');
+ assert.equal(warningReviewStatus({...data,reviewedAt:'2026-10-27T05:41:00Z'},[area],{now}),'unknown');
+ for(const option of [{online:false},{loadFailed:true}])assert.equal(warningReviewStatus(data,[area],{now,...option}),'unknown');
+ assert.equal(warningReviewStatus({...data,bulletins:[{...w,expiresAt:'2026-10-27T05:20:00Z'}]},[area],{now}),'expired_since_review');
+ assert.equal(warningReviewStatus({...data,bulletins:[{...w,expiresAt:null}]},[area],{now}),'unknown');
+ assert.equal(warningReviewStatus({...data,bulletins:[{...w,expiresAt:'2026-10-27T06:00:00Z'}]},[area],{now}),'active');
+ assert.equal(warningReviewStatus(data,[],{now}),'unknown');
+});
