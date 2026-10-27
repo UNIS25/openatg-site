@@ -1,0 +1,27 @@
+import assert from 'node:assert/strict';
+import {createServer} from 'node:http';
+import {readFile,writeFile,mkdir} from 'node:fs/promises';
+import {createHash} from 'node:crypto';
+import path from 'node:path';
+import {pathToFileURL} from 'node:url';
+import {insideGeometry,boundaryDistance} from '../../floodlens/core.mjs';
+import {copy} from '../../floodlens/i18n.mjs';
+const {chromium}=await import(process.env.PLAYWRIGHT_PATH?pathToFileURL(process.env.PLAYWRIGHT_PATH).href:'playwright');
+const root=process.cwd(),out='artifacts/floodlens/lightning-27';await mkdir(out,{recursive:true});
+const catalog=JSON.parse(await readFile('floodlens/data/areas.json'));
+const types={'.html':'text/html','.mjs':'text/javascript','.css':'text/css','.json':'application/json','.png':'image/png'};
+const server=createServer(async(req,res)=>{try{let p=new URL(req.url,'http://localhost').pathname;if(p.endsWith('/'))p+='index.html';const f=path.resolve(root,'.'+decodeURIComponent(p));if(!f.startsWith(root+'/'))throw Error();res.writeHead(200,{'Content-Type':types[path.extname(f)]||'application/octet-stream','Cache-Control':'no-store'}).end(await readFile(f));}catch{res.writeHead(404).end();}});
+await new Promise(r=>server.listen(0,'127.0.0.1',r));const base=process.env.BASE_URL||`http://127.0.0.1:${server.address().port}`;
+const browser=await chromium.launch({headless:true,...(process.env.CHROME_PATH?{executablePath:process.env.CHROME_PATH}:{})}),results={base,checkedAt:new Date().toISOString(),cases:[],hashes:[],errors:[]};
+async function pointFor(district){const features=JSON.parse(await readFile(`floodlens/data/boundaries/${district}.json`)).features;for(const area of catalog.divisions.filter(a=>a.districtCode===district)){const g=features.find(f=>f.properties.code===area.code).geometry;for(let i=1;i<10;i++)for(let j=1;j<10;j++){const p=[area.bbox[0]+(area.bbox[2]-area.bbox[0])*i/10,area.bbox[1]+(area.bbox[3]-area.bbox[1])*j/10];if(insideGeometry(p,g)&&boundaryDistance(p,g)>200)return {point:p,area};}}throw Error('No verified interior test point');}
+try{
+ for(const district of ['LK51','LK52','LK53','LK71','LK72']){
+  const {point,area}=await pointFor(district),active=['LK51','LK52'].includes(district),context=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true}),page=await context.newPage();page.on('pageerror',e=>results.errors.push(e.message));
+  await page.goto(base+'/ark/');await page.locator('[data-language=en]').click();await page.evaluate(p=>{navigator.geolocation.getCurrentPosition=ok=>ok({coords:{longitude:p[0],latitude:p[1],accuracy:20}})},point);await page.locator('#locate').click();await page.waitForFunction(()=>!document.querySelector('#result-screen').hidden&&!document.querySelector('#refresh').disabled&&!document.querySelector('#assessment-title').textContent.includes('Checking'));
+  for(const lang of active?['en','si','ta']:['en']){await page.locator('#language').selectOption(lang);const title=await page.locator('#assessment-title').innerText();if(active){assert.equal(title,copy[lang].lightning);assert.equal(await page.locator('#assessment').getAttribute('class'),'compact-assessment advisory');assert.match(await page.locator('#quick-facts').innerText(),/23:30/);assert.ok((await page.locator('#quick-source').getAttribute('href')).endsWith('1793082700.pdf'));await page.screenshot({path:`${out}/${base.startsWith('http://127.')?'local':'public'}-${district}-${lang}.png`,fullPage:true});}else{assert.notEqual(title,copy.en.lightning);assert.equal(title,copy.en.noWarningFound);assert.equal(await page.locator('#assessment-copy').innerText(),copy.en.notAllClear);}assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);results.cases.push({district,division:area.code,point,lang,title});}
+  await context.close();
+ }
+ const context=await browser.newContext({viewport:{width:390,height:844}}),page=await context.newPage();page.on('pageerror',e=>results.errors.push(e.message));await page.goto(base+'/ark/explore/');await page.waitForFunction(()=>document.documentElement.dataset.exploreReady==='true');await page.locator('#warning-kind').selectOption('lightning');const marks=await page.locator('[data-select^="warning:"]').evaluateAll(nodes=>nodes.map(n=>({id:n.getAttribute('data-select'),fill:n.getAttribute('fill')})));assert.ok(marks.length>0);for(const {id}of marks){const code=id.split(':')[1],area=catalog.divisions.find(a=>a.code===code);assert.ok(area&&['LK51','LK52'].includes(area.districtCode));}results.mapAreas=marks;await page.screenshot({path:`${out}/${base.startsWith('http://127.')?'local':'public'}-lightning-map.png`,fullPage:true});
+ for(const file of ['reviewed.json','provenance.json']){const expected=await readFile('floodlens/data/'+file),bytes=Buffer.from(await page.evaluate(async file=>{const r=await fetch('/floodlens/data/'+file,{cache:'no-store'});if(!r.ok)throw Error(r.status);return [...new Uint8Array(await r.arrayBuffer())]},file));assert.ok(bytes.equals(expected));results.hashes.push({file,sha256:createHash('sha256').update(bytes).digest('hex')});}
+ assert.deepEqual(results.errors,[]);await context.close();await writeFile(`${out}/${base.startsWith('http://127.')?'local':'public'}-lightning-results.json`,JSON.stringify(results,null,2));console.log(JSON.stringify({base,cases:results.cases.length,mapAreas:marks.length,hashes:results.hashes,errors:results.errors}));
+}finally{await browser.close();server.close();}

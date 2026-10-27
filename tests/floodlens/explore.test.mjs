@@ -5,6 +5,8 @@ import {warningLayer,forecastLayer,forecastCells,reviewedReports,cycloneState} f
 const json=async path=>JSON.parse(await readFile('floodlens/data/'+path));
 const [warnings,catalog,overview,forecast,media,locations,cyclone]=await Promise.all(['reviewed.json','areas.json','map-overview.json','forecast/forecast.json','reservoir-reports.json','reservoir-locations.json','explore/cyclone.json'].map(json));
 const now=Date.parse('2026-10-27T05:30:00Z');
+// Historical clock fixture for the earlier basin-warning comparisons.
+const currentWarnings=structuredClone(warnings);warnings.reviewedAt='2026-10-27T05:10:04.423322Z';
 test('warning geometry is the named administrative scope, with exact levels and expiry',()=>{
  const flood=warningLayer(warnings,catalog,overview,'flood',now);
  assert.equal(flood.bulletins.length,5);assert.ok(flood.areas.some(a=>a.area.code==='LK9112'));assert.ok(!flood.areas.some(a=>a.area.districtCode==='LK62'));
@@ -34,3 +36,5 @@ test('official cyclone reported and forecast positions never become an interpola
  assert.equal(cycloneState(cyclone,Date.parse(cyclone.nextReviewDueAt)+60000).status,'review_due');assert.equal(cycloneState(cyclone,Date.parse('2026-11-01T06:00:00Z')).status,'expired');assert.equal(cycloneState(cyclone,Date.parse('2026-10-26T17:00:00Z')).status,'clock_unknown');
  const future=structuredClone(cyclone);future.reviewedAt='2026-10-27T08:00:00Z';assert.equal(cycloneState(future,now).status,'clock_unknown');const bad=structuredClone(cyclone);bad.points[1].type='reported';assert.throws(()=>cycloneState(bad,now));bad.points[1].type='forecast';bad.source.url='https://example.com/track.pdf';assert.throws(()=>cycloneState(bad,now));
 });
+
+test('current lightning map shades only Ampara/Batticaloa at Amber, not illustration Red',()=>{const at=Date.parse(currentWarnings.reviewedAt)+60000,layer=warningLayer(currentWarnings,catalog,overview,'lightning',at);assert.deepEqual([...new Set(layer.areas.map(a=>a.area.districtCode))].sort(),['LK51','LK52']);assert.ok(layer.areas.every(a=>a.level===2));assert.equal(layer.areas.length,catalog.divisions.filter(a=>['LK51','LK52'].includes(a.districtCode)).length);assert.equal(warningLayer(currentWarnings,catalog,overview,'lightning',Date.parse('2026-10-27T18:00:00Z')).areas.length,0);});

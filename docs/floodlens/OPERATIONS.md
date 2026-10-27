@@ -873,3 +873,28 @@ accuracy, large pan/zoom controls, keyboard use and the GPS-denied fallback. No
 address geocoder or new third-party location request was added. Focus moves to
 the manual heading before asynchronous loading, so it cannot steal subsequent
 keyboard focus from the map. Zoom control accessible labels change with language.
+
+## 27 October 11:30 SLST lightning review
+
+Bulletin 04, LLA/26/10/27/01, is Amber for Ampara and Batticaloa districts
+only (LK52/LK51), issued 11:30 and valid until 23:30 SLST on 27 October. Both
+original pages were visually checked. The map's red shading is not reinterpreted
+as the bulletin severity. The prior expired bulletin and its four-district scope
+remain in provenance; they are replaced in the current assessment snapshot.
+Sinhala/English originals support the unchanged shelter/trees action. Tamil
+remains an explicitly non-official summary with the existing reviewed wording
+and catalog-confirmed district names; no official Tamil translation is claimed.
+
+All 300 official list rows and selected original hashes were checked. No newer
+river/basin/landslide bulletin or Kalu/Mahaweli extension was found. Other warning
+and observation records, automated weather/reservoir publishing and its exact
+ten-file boundary are unchanged. Expiry remains explicit and never an all-clear.
+
+A completed manual no-change review can also be published through this same
+reviewed release procedure: record the actual completed review time and the
+checked source hashes/listing coverage in provenance, run the safety tests, and
+verify the public snapshot. Never change source issue/expiry/observation times.
+Do not advance the review time after an incomplete check or unresolved new
+warning. Read-only scheduled checks and reviews in another task do not change
+the public snapshot by themselves; a reviewed commit and verified deployment
+are required. The automated ten-file publisher still excludes these warning files.

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "reviewedAt": "2026-10-27T05:10:04.423322+00:00",
+  "reviewedAt": "2026-10-27T06:50:57.442423+00:00",
   "reviewMethod": "Official PDFs visually checked; structured source transcription. Not an agency endorsement.",
   "bulletins": [
     {
@@ -720,7 +720,7 @@
       "severity": "amber"
     },
     {
-      "id": "LLA-26-10-26-01-03",
+      "id": "LLA-26-10-27-01-04",
       "kind": "lightning",
       "severity": "amber",
       "title": {
@@ -729,24 +729,22 @@
         "ta": "கடும் மின்னல்"
       },
       "authority": "Department of Meteorology · Natural Hazards Early Warning Centre",
-      "issuedAt": "2026-10-26T11:30:00+05:30",
-      "expiresAt": "2026-10-26T23:00:00+05:30",
-      "listingAt": "2026-10-26T11:30:00+05:30",
-      "url": "https://www.dmc.gov.lk/images/dmcreports/Advisory_for_Severe_Lightning_at_1130hrs_on_2026__1792997048.pdf",
+      "issuedAt": "2026-10-27T11:30:00+05:30",
+      "expiresAt": "2026-10-27T23:30:00+05:30",
+      "listingAt": "2026-10-27T11:30:00+05:30",
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Advisory_for_Severe_Lightning_at_1130hrs_on_27__1793082700.pdf",
       "summary": {
-        "en": "Severe lightning is likely at several places in North-central Province and Trincomalee and Batticaloa districts. Temporary strong winds may occur during thunderstorms.",
-        "si": "උතුරු මැද පළාතේත් ත්‍රිකුණාමලය සහ මඩකලපුව දිස්ත්‍රික්කවලත් තැනින් තැන ප්‍රබල අකුණු ඇති විය හැක. ගිගුරුම් සහිත වැසි සමඟ තාවකාලික තද සුළං ඇති විය හැක.",
-        "ta": "வடமத்திய மாகாணத்திலும் திருகோணமலை மற்றும் மட்டக்களப்பு மாவட்டங்களிலும் பல இடங்களில் கடும் மின்னல் ஏற்படலாம். இடியுடன் கூடிய மழையின்போது தற்காலிக பலத்த காற்றும் வீசலாம்."
+        "en": "Severe lightning is likely at several places in Ampara and Batticaloa districts. Temporary local strong winds may occur during thunderstorms.",
+        "si": "අම්පාර සහ මඩකලපුව දිස්ත්‍රික්කවල තැනින් තැන ප්‍රබල අකුණු ඇති විය හැක. ගිගුරුම් සහිත වැසි සමඟ තාවකාලික තද සුළං ඇති විය හැක.",
+        "ta": "அம்பாறை மற்றும் மட்டக்களப்பு மாவட்டங்களில் பல இடங்களில் கடும் மின்னல் ஏற்படலாம். இடியுடன் கூடிய மழையின்போது தற்காலிக பலத்த காற்றும் வீசலாம்."
       },
       "areas": [],
       "districtCodes": [
-        "LK71",
-        "LK72",
-        "LK53",
+        "LK52",
         "LK51"
       ],
-      "sha256": "e5a055762cc5fff61fe0ae610ce6241395f811d76ae020b955d21c98f707ac5c",
-      "scopeBasis": "Original bulletin text: North-central province, Trincomalee and Batticaloa districts. Bulletin severity Amber; illustration colours are not converted into separate warning levels or safe areas."
+      "sha256": "34383e5c53aef78a5d6f93e4636a3d1d794f992178d3b3e148e24f935211a445",
+      "scopeBasis": "Original Sinhala and English bulletin text names Ampara and Batticaloa districts only. Explicit bulletin severity Amber; red illustration shading is not a separate bulletin severity and other map colours are not an all-clear."
     },
     {
       "id": "kelani-20261026-01",
@@ -1305,7 +1303,7 @@
       "url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTcSGhi9RESl7CMCl1TQnrKe07Gx5Q696YiSB9jneIHqIP9lifpqSErgI3D5k9KtQXSdW5JpycIIr5e/pub?gid=1238978530&single=true&output=csv"
     }
   ],
-  "fetchedAt": "2026-10-27T05:06:11.227583+00:00",
+  "fetchedAt": "2026-10-27T06:48:51.499938+00:00",
   "minClientVersion": 8,
   "observationsReviewedAt": "2026-10-27T05:10:04.423322+00:00",
   "marineBulletins": [

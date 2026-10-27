@@ -100,11 +100,12 @@ test('new Kelani and Attanagalu warnings apply only to their text-named low-vall
  const attan=snapshot.bulletins.find(w=>w.id==='attanagalu-20261026-01');assert.equal(warningMatches(attan,catalog.divisions.find(a=>a.code==='LK1236')),false);
 });
 
-test('current lightning advisory is Amber in exactly the four text-named districts',()=>{
- const w=snapshot.bulletins.find(w=>w.kind==='lightning');assert.equal(w.id,'LLA-26-10-26-01-03');assert.equal(w.severity,'amber');assert.equal(w.issuedAt,'2026-10-26T11:30:00+05:30');assert.equal(w.expiresAt,'2026-10-26T23:00:00+05:30');assert.deepEqual([...w.districtCodes].sort(),['LK51','LK53','LK71','LK72']);assert.equal(w.areas.length,0);
- for(const code of ['LK51','LK53','LK71','LK72']){const area=catalog.divisions.find(a=>a.districtCode===code);assert.equal(warningMatches(w,area),true);assert.equal(locationEvidence(snapshot.bulletins,[area],{now:reviewedTime}).kind,'lightning');}
- for(const code of ['LK62','LK91','LK52'])assert.equal(warningMatches(w,catalog.divisions.find(a=>a.districtCode===code)),false);
- const batti=catalog.divisions.find(a=>a.districtCode==='LK51');assert.equal(warningState(w,Date.parse(w.expiresAt)),'expired');assert.equal(locationEvidence(snapshot.bulletins,[batti],{now:Date.parse(w.expiresAt)}).kind,'unknown');assert.equal(assessment([w],batti,reviewedTime),'unmatched');
+test('27 October lightning is Amber only in Ampara and Batticaloa, with exact validity',()=>{
+ const w=snapshot.bulletins.find(w=>w.kind==='lightning'),current=Date.parse('2026-10-27T07:00:00Z');assert.equal(w.id,'LLA-26-10-27-01-04');assert.equal(w.severity,'amber');assert.equal(w.issuedAt,'2026-10-27T11:30:00+05:30');assert.equal(w.expiresAt,'2026-10-27T23:30:00+05:30');assert.deepEqual([...w.districtCodes].sort(),['LK51','LK52']);assert.equal(w.areas.length,0);assert.equal(w.sha256,'34383e5c53aef78a5d6f93e4636a3d1d794f992178d3b3e148e24f935211a445');
+ for(const district of catalog.districts){const ds=catalog.divisions.filter(a=>a.districtCode===district.code);for(const area of ds)assert.equal(warningMatches(w,area),['LK51','LK52'].includes(district.code));}
+ for(const code of ['LK51','LK52']){const area=catalog.divisions.find(a=>a.districtCode===code);assert.equal(locationEvidence(snapshot.bulletins,[area],{now:current}).kind,'lightning');}
+ for(const code of ['LK53','LK71','LK72']){const area=catalog.divisions.find(a=>a.districtCode===code);assert.notEqual(locationEvidence(snapshot.bulletins,[area],{now:current}).kind,'lightning');}
+ const batti=catalog.divisions.find(a=>a.districtCode==='LK51');assert.equal(warningState(w,Date.parse(w.issuedAt)-1),'unknown');assert.equal(warningState(w,Date.parse(w.issuedAt)),'active');assert.equal(warningState(w,Date.parse(w.expiresAt)),'expired');assert.equal(locationEvidence(snapshot.bulletins,[batti],{now:Date.parse(w.expiresAt)}).kind,'unknown');assert.equal(warningReviewStatus(snapshot,[batti],{now:Date.parse(w.expiresAt)}),'stale');assert.equal(assessment([w],batti,current),'unmatched');
  assert.throws(()=>validateSnapshot(snapshot,6),e=>e.code==='CLIENT_UPDATE_REQUIRED');
 });
 
