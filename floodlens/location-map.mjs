@@ -1,5 +1,5 @@
-import {gateSummary} from './gates.mjs?v=20261027-26';
-import {StreetMap,streetEnabled} from './street-map.mjs?v=20261027-26';
+import {gateSummary} from './gates.mjs?v=20261027-27';
+import {StreetMap,streetEnabled} from './street-map.mjs?v=20261027-27';
 // Matching and road rendering are local; no geocoder, tile service or location storage.
 const ns='http://www.w3.org/2000/svg';
 const node=(tag,attrs={})=>{const n=document.createElementNS(ns,tag);for(const [k,v] of Object.entries(attrs))n.setAttribute(k,String(v));return n;};
@@ -61,7 +61,15 @@ export class LocationMap{
  // Only the bounded display overview is drawn. Exact DS shards never enter this path.
  for(const f of this.features){const {rings,bounds}=displayGeometry(f);const marginX=205/scale,marginY=155/scale;if(bounds[2]<world[0]-marginX||bounds[0]>world[0]+marginX||bounds[3]<world[1]-marginY||bounds[1]>world[1]+marginY)continue;let d='';for(const ring of rings){let previous;const points=[];for(const p of ring){const xy=[200+(p[0]-world[0])*scale,150+(p[1]-world[1])*scale];if(!previous||Math.hypot(xy[0]-previous[0],xy[1]-previous[1])>1.1){points.push(xy);previous=xy;}}if(points.length>=3)d+=points.map((p,i)=>(i?'L':'M')+p.map(v=>v.toFixed(1)).join(',')).join(' ')+' Z ';}if(d)svg.append(node('path',{d,fill:'#f7f8f0',stroke:'#b7c9be','stroke-width':.7,'fill-rule':'evenodd'}));}
  if(this.street){this.street.t=this.t;this.street.draw({world,scale,svg});}
- for(const a of streetEnabled()&&this.street?.data.length?[]:this.labels||[]){const xy=project([(a.bbox[0]+a.bbox[2])/2,(a.bbox[1]+a.bbox[3])/2]);if(xy[0]<25||xy[0]>375||xy[1]<20||xy[1]>280)continue;const label=node('text',{x:xy[0],y:xy[1],'text-anchor':'middle',fill:'#516c65','font-size':10,'paint-order':'stroke',stroke:'#f7f8f0','stroke-width':3});label.textContent=a.label;svg.append(label);}
+ const labelBoxes=[];
+ const mapLabels=streetEnabled()&&this.street?.data.length?[]:(this.labels||[]).filter(a=>this.span<1||a.type==='district');
+ for(const a of mapLabels){
+  const xy=project([(a.bbox[0]+a.bbox[2])/2,(a.bbox[1]+a.bbox[3])/2]);if(xy[0]<25||xy[0]>375||xy[1]<20||xy[1]>280)continue;
+  const half=Math.max(22,Math.min(75,Array.from(a.label||'').length*3)),box=[xy[0]-half,xy[1]-13,xy[0]+half,xy[1]+5];
+  if(labelBoxes.some(b=>box[0]<b[2]&&box[2]>b[0]&&box[1]<b[3]&&box[3]>b[1]))continue;labelBoxes.push(box);
+  const label=node('text',{x:xy[0],y:xy[1],'text-anchor':'middle',fill:'#516c65','font-size':10,'paint-order':'stroke',stroke:'#f7f8f0','stroke-width':3,'data-area-label':a.type});label.textContent=a.label;svg.append(label);
+ }
+
  for(const f of this.water||[]){const [x,y]=project(f.geometry.coordinates);if(x<0||x>400||y<0||y>300)continue;const group=node('g',{role:this.manual?'img':'button',tabindex:this.manual?-1:0,'data-reservoir':f.properties.tankCode,'aria-label':f.properties.name});group.append(node('circle',{cx:x,cy:y,r:32,fill:'transparent'}),node('circle',{cx:x,cy:y,r:6,fill:'#2d79a4',stroke:'white','stroke-width':2}));group.addEventListener('keydown',e=>{if(e.key==='Enter'){e.stopPropagation();this.showReservoir(f);}});svg.append(group);}
  if(this.point&&!this.manual){const [x,y]=project(this.point);if(Number.isFinite(this.accuracy)){const radius=this.accuracy/(111320*Math.cos(this.point[1]*Math.PI/180))/this.span*400;svg.append(node('circle',{cx:x,cy:y,r:radius,fill:'#1d6cae20',stroke:'#1d6cae70','stroke-width':1,'data-accuracy-circle':'true','pointer-events':'none'}));}svg.append(node('circle',{cx:x,cy:y,r:11,fill:'#fff',stroke:'#fff','stroke-width':4,'pointer-events':'none'}),node('circle',{cx:x,cy:y,r:8,fill:'#126b63',stroke:'#0c4943','stroke-width':1.5,'data-position-pin':'true','pointer-events':'none'}));}
  else if(this.manual){svg.append(node('circle',{cx:200,cy:150,r:13,fill:'#ffffffcc',stroke:'#126b63','stroke-width':2,'pointer-events':'none','data-centre-crosshair':'true'}),node('path',{d:'M181 150H195 M205 150H219 M200 131V145 M200 155V169',stroke:'#126b63','stroke-width':2,'pointer-events':'none'}));}
