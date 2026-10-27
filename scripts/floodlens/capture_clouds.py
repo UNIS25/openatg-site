@@ -6,7 +6,7 @@ from rasterio.io import MemoryFile
 from rasterio.transform import from_origin
 from rasterio.features import geometry_mask
 BASE='https://gibs.earthdata.nasa.gov';LAYER='Himawari_AHI_Band13_Clean_Infrared';NS={'w':'http://www.opengis.net/wmts/1.0','o':'http://www.opengis.net/ows/1.1'}
-work=Path('artifacts/floodlens/clouds');out=Path(os.environ.get('ARK_CLOUD_OUT',str(work/'candidate')));out.mkdir(parents=True,exist_ok=True)
+work=Path('artifacts/floodlens/clouds');work.mkdir(parents=True,exist_ok=True);out=Path(os.environ.get('ARK_CLOUD_OUT',str(work/'candidate')));out.mkdir(parents=True,exist_ok=True)
 sha=lambda b:hashlib.sha256(b).hexdigest()
 capabilities_url=BASE+'/wmts/epsg4326/best/1.0.0/WMTSCapabilities.xml'
 with urllib.request.urlopen(capabilities_url,timeout=30) as response:

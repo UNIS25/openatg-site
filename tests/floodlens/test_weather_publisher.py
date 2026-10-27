@@ -7,6 +7,9 @@ ROOT=Path(__file__).resolve().parents[2];sys.path.insert(0,str(ROOT/'scripts/flo
 import update_weather as u
 import publish_reservoirs as p
 class WeatherPublisher(unittest.TestCase):
+ def test_clean_runner_imports_all_required_decoders(self):
+  import rasterio,eccodes,uptide,netCDF4
+  self.assertTrue(eccodes.codes_get_api_version())
  def test_allowed_paths_are_exact_and_warning_news_code_are_excluded(self):
   self.assertEqual(len(p.ALLOWED),10)
   for name in p.ALLOWED:p.assert_paths([name])

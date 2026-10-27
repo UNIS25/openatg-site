@@ -1,11 +1,11 @@
-import {mountClouds} from './clouds-ui.mjs?v=20261027-24';
-import {mountTides} from './tides-ui.mjs?v=20261027-24';
-import {renderNews} from './news.mjs?v=20261027-24';
-import {mountForecast} from './forecast-ui.mjs?v=20261027-24';
-import {createContext} from './context-ui.mjs?v=20261027-24';
-import {streetEnabled} from './street-map.mjs?v=20261027-24';
-import {LocationMap} from './location-map.mjs?v=20261027-24';
-import {locationEvidence,warningReviewStatus,ageState,insideGeometry,intersectsAccuracy,locationCandidates} from './core.mjs?v=20261027-24';
+import {mountClouds} from './clouds-ui.mjs?v=20261027-25';
+import {mountTides} from './tides-ui.mjs?v=20261027-25';
+import {renderNews} from './news.mjs?v=20261027-25';
+import {mountForecast} from './forecast-ui.mjs?v=20261027-25';
+import {createContext} from './context-ui.mjs?v=20261027-25';
+import {streetEnabled} from './street-map.mjs?v=20261027-25';
+import {LocationMap} from './location-map.mjs?v=20261027-25';
+import {locationEvidence,warningReviewStatus,ageState,insideGeometry,intersectsAccuracy,locationCandidates} from './core.mjs?v=20261027-25';
 const $=s=>document.querySelector(s);
 export function createFlow({t,name,getData,getCatalog,onLanguage,onArea,onRefresh}){
  let stage='language',point=null,accuracy=null,mode='gps',area=null,candidates=[],state='idle',manualPoint=null,catalog=null,locationRequest=0,matchRequest=0,lastMapMode=false;

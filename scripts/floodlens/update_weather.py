@@ -43,7 +43,7 @@ def update_forecast(now,out,force=False):
   return 'unchanged: newest fully indexed run is already published; source times retained'
  result=forecast.build(run,WORK/'grib'/run.strftime('%Y%m%d%H'),out,selection='Newest fully indexed run found in at most four already-issued slots; deterministic validation, no manual forecast interpretation')
  if result['captureErrors']:raise ValueError('Incomplete forecast candidate')
- install_group('forecast',out);return 'validated new model run '+result['runAt']
+ install_group('forecast',out);return ('validated re-fetch of existing run ' if run==oldrun else 'validated new model run ')+result['runAt']
 
 def update_clouds(now,out,force=False):
  subprocess.run([sys.executable,'scripts/floodlens/capture_clouds.py'],env={**os.environ,'ARK_CLOUD_OUT':str(out)},cwd=ROOT,check=True,timeout=420)
