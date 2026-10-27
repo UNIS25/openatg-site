@@ -1,0 +1,7 @@
+# Public standard GitHub runner only; no cache/artifact service or credentials.
+numpy==2.5.4
+eccodes==2.50.0
+eccodeslib==2.50.0.33
+eckitlib==2.5.0.33
+rasterio==1.5.2
+uptide==1.2

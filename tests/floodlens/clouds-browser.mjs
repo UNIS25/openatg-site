@@ -16,7 +16,8 @@ async function make({point=[79.8612,6.9271],lang='en',time=cloudNow,fail}={}){
  const context=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true}),page=await context.newPage(),requests=[],errors=[];
  await page.clock.setFixedTime(new Date(time));page.on('request',r=>requests.push(r.url()));page.on('pageerror',e=>errors.push(e.message));
  if(fail==='metadata')await page.route('**/data/clouds/clouds.json',r=>r.abort());
- if(fail==='image')await page.route('**/data/clouds/*.png',r=>r.abort());
+ if(fail==='mixed')await page.route('**/data/clouds/*.png*',async r=>r.fulfill({body:await readFile('.'+cloud.frames[0].path),contentType:'image/png'}));
+ if(fail==='image')await page.route('**/data/clouds/*.png*',r=>r.abort());
  await page.goto(base+'/ark/');await page.waitForFunction(()=>document.documentElement.dataset.arkReady==='true');
  await page.locator(`[data-language="${lang}"]`).click();
  await page.evaluate(p=>{navigator.geolocation.getCurrentPosition=ok=>ok({coords:{longitude:p[0],latitude:p[1],accuracy:40}});},point);
@@ -35,16 +36,17 @@ try{
   assert.equal(await page.locator('#cloud-imagery').getAttribute('open'),null);
   assert.ok(!requests.some(u=>u.includes('/data/clouds/')));
   await open(page);await page.locator('#cloud-imagery svg image').waitFor();
-  assert.match(await page.locator('#cloud-imagery .cloud-time').innerText(),/09:40/);
+  console.log({lang,actual:await page.locator('#cloud-imagery .cloud-time').innerText(),expected:cloud.frames[2].captureAt});
+  assert.ok((await page.locator('#cloud-imagery .cloud-time').innerText()).includes(await page.evaluate(({lang,time})=>new Intl.DateTimeFormat(lang,{timeZone:'Asia/Colombo',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit',hour12:false}).format(new Date(time)),{lang,time:cloud.frames[2].captureAt})));
   assert.match(await page.locator('#cloud-imagery .cloud-time').innerText(),/40/);
   assert.equal(await page.locator('#cloud-imagery svg path').count(),2);
   assert.equal(await page.locator('#cloud-imagery svg circle').count(),1);
-  assert.equal(await page.locator('#cloud-imagery svg image').getAttribute('href'),cloud.frames[2].path);
+  assert.equal(createHash('sha256').update(Buffer.from((await page.locator('#cloud-imagery svg image').getAttribute('href')).split(',')[1],'base64')).digest('hex'),cloud.frames[2].sha256);
   const slider=page.locator('#cloud-imagery input[type=range]');
-  await slider.fill('0');assert.match(await page.locator('#cloud-imagery .cloud-time').innerText(),/09:20/);
+  await slider.fill('0');assert.ok((await page.locator('#cloud-imagery .cloud-time').innerText()).includes(await page.evaluate(({lang,time})=>new Intl.DateTimeFormat(lang,{timeZone:'Asia/Colombo',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit',hour12:false}).format(new Date(time)),{lang,time:cloud.frames[0].captureAt})));
   await page.locator('#cloud-imagery .cloud-controls button').click();
   await page.waitForFunction(()=>document.querySelector('#cloud-imagery input').value==='1');
-  assert.equal(await page.locator('#cloud-imagery svg image').getAttribute('href'),cloud.frames[1].path);
+  assert.equal(createHash('sha256').update(Buffer.from((await page.locator('#cloud-imagery svg image').getAttribute('href')).split(',')[1],'base64')).digest('hex'),cloud.frames[1].sha256);
   await page.locator('#cloud-imagery>summary').click();
   await page.waitForFunction(()=>document.querySelector('#cloud-imagery .cloud-controls button').getAttribute('aria-pressed')==='false');
   await page.locator('#cloud-imagery>summary').click();await slider.fill('2');
@@ -60,7 +62,8 @@ try{
   ['old images',{time:new Date(Date.parse(cloud.capturedAt)+3*3600000+60000).toISOString()},'stale'],
   ['future clock',{time:new Date(Date.parse(cloud.capturedAt)-60000).toISOString()},'clock_unknown'],
   ['source failure',{fail:'metadata'},'unavailable'],
-  ['image failure',{fail:'image'},'image_failed']]){
+  ['image failure',{fail:'image'},'unavailable'],
+  ['mixed cached image version',{fail:'mixed'},'unavailable']]){
   const {context,page}=await make({...options,point:[80.4037,6.6828]});await open(page,status);
   assert.equal(await page.locator('#cloud-imagery svg').isVisible(),false);
   assert.match(await page.locator('#assessment-title').innerText(),/Red/);

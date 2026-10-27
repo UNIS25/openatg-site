@@ -1,6 +1,11 @@
 name: FloodLens observation publication
 on:
   workflow_dispatch:
+    inputs:
+      force_refresh:
+        description: 'Re-fetch the selected forecast and recalculate tides with all validation gates'
+        type: boolean
+        default: false
   schedule:
     - cron: '7,37 * * * *'
 permissions:
@@ -12,7 +17,7 @@ jobs:
   publish-observations:
     if: github.repository == 'UNIS25/openatg-site' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 25
     permissions:
       contents: write
       pages: write
@@ -26,16 +31,32 @@ jobs:
             scripts/floodlens
             tests/floodlens
             floodlens/data/reservoirs.json
+            floodlens/data/map-overview.json
+            floodlens/data/forecast
+            floodlens/data/clouds
+            floodlens/data/tides
+            floodlens/forecast-model.mjs
+            floodlens/clouds-model.mjs
+            floodlens/tides-model.mjs
           sparse-checkout-cone-mode: false
+      - name: Install pinned decoders and independent tide checker
+        run: python3 -m pip install --disable-pip-version-check --no-cache-dir -r scripts/floodlens/publisher-requirements.txt
       - name: Check publisher safeguards
-        run: python3 tests/floodlens/test_observation_updater.py
-      - name: Fetch and validate dated observations
-        id: source
+        run: |
+          python3 tests/floodlens/test_observation_updater.py
+          python3 tests/floodlens/test_weather_publisher.py
+      - name: Fetch and validate dated reservoir observations
+        id: reservoir
         run: python3 scripts/floodlens/update_reservoirs.py
-      - name: Publish only reservoir data and verify the public build
+      - name: Validate forecast, cloud and tide candidates separately
+        id: weather
+        env:
+          ARK_FORCE_REFRESH: ${{ inputs.force_refresh == true && 'true' || 'false' }}
+        run: python3 scripts/floodlens/update_weather.py
+      - name: Publish only the ten approved data files and verify Pages build
         env:
           GH_TOKEN: ${{ github.token }}
         run: python3 scripts/floodlens/publish_reservoirs.py
-      - name: Fail visibly when source fetch or validation failed
-        if: steps.source.outputs.source_status != 'ok'
+      - name: Fail visibly when any source fetch or validation failed
+        if: steps.reservoir.outputs.source_status != 'ok' || steps.weather.outputs.source_status != 'ok'
         run: exit 1

@@ -82,33 +82,77 @@ The page fetches the published snapshot every five minutes while visible and
 updates age/expiry each minute. It sends no location and does not claim anyone
 is continuously monitoring the user.
 
-The user explicitly approved a separate reservoir observation publisher with
-job-level `contents: write` and `pages: write` on 26 October 2026.
-`.github/workflows/floodlens-observation-update.yml` runs at minutes 7 and 37 each hour
-and on manual dispatch, using the ephemeral `GITHUB_TOKEN`. Its only permitted
-changed/staged/committed path is `floodlens/data/reservoirs.json`. Actual token
-permissions are repository-wide; the path restriction is a code safeguard.
-The publisher validates exact column names/units, all 74 reviewed identities,
-number bounds, dates (no future or regressed dates), and unknown fields. It
-makes a normal non-force push, explicitly requests the existing Pages build,
-checks the exact commit's successful build, and attempts a public file hash check.
-Cloudflare rejects default Python requests with HTTP 403 / error 1010. The job
-respects this rejection, records a visible warning and a blocked edge check,
-and never claims a public hash match in that case. Separate real-browser
-verification confirmed the first published data. No user-agent disguise,
-challenge bypass or security configuration change is used.
-Concurrent runs are serialized. An advancing main aborts the push; the next run
-starts fresh. A fetch/validation failure preserves prior readings and dates,
-publishes failure metadata, and fails the workflow visibly. A failed build, a public data mismatch or an unclassified verification error
-also fails visibly; no successful build is inferred from a commit. An explicit
-401/403 edge denial is a warning distinct from confirmed Pages publication.
+The user approved the original reservoir publisher on 26 October and the bounded
+forecast/cloud/tide extension on 27 October 2026. The same job-level ephemeral
+`contents: write` and `pages: write` permissions remain; repository defaults and
+security settings are unchanged. Actual token scope is repository-wide. The
+following exact **ten paths** are enforced by code at the worktree, staged and
+commit boundaries (no wildcards):
 
-The job uses the existing free standard public-repository runner, no artifact
-or cache storage and no permanent credential. Repository defaults, security,
-domain and Pages configuration are unchanged. Raw CSV is temporary on the
-runner; its hash, validated records, provenance and each status persist in the
-data commit and run log. The UI displays source-check time/failure, warns when
-no check within two hours is confirmed, and labels every observation date.
+- `floodlens/data/reservoirs.json`
+- `floodlens/data/forecast/forecast.json`
+- `floodlens/data/forecast/provenance.json`
+- `floodlens/data/clouds/clouds.json`
+- `floodlens/data/clouds/provenance.json`
+- `floodlens/data/clouds/frame-0.png`
+- `floodlens/data/clouds/frame-1.png`
+- `floodlens/data/clouds/frame-2.png`
+- `floodlens/data/tides/colombo.json`
+- `floodlens/data/tides/validation.json`
+
+`.github/workflows/floodlens-observation-update.yml` checks at minutes 7 and 37,
+plus manual dispatch. The optional manual `force_refresh` input performs a real
+forecast re-fetch and tide recalculation through the same gates; it never just
+rewrites freshness timestamps. GitHub schedules are best-effort and may be delayed. The
+existing public repository's standard Ubuntu runner is used, with no new keys,
+paid service, persistent credentials, Actions artifacts or cache allocation.
+Pinned decoders are installed on the temporary runner. Checkout credentials
+are not persisted. Source constants, scripts, warnings, news, cyclone bulletins,
+translations and map files are excluded from publication.
+
+ECMWF candidates use anonymous bounded GRIB byte ranges from data.ecmwf.int.
+At most four already-issued 6-hour run slots are checked. Missing (404) slots
+are not treated as data; an access denial stops that source. A newer run must
+pass same-run, exact grid, physical-unit, finite-pixel, provenance/hash and
+complete-upcoming-24-hour checks at all 198 Sri Lanka grid points. Missing
+intervals never become zero rain. Unchanged runs retain original capture times.
+
+NASA GIBS uses advertised Himawari timestamps, four fixed country tiles per
+frame and three distinct validated frames. Masks/coverage, dimensions, hashes,
+capture times and the three-hour expiry are checked. Schema 2 uses three fixed
+image slots. Both clients fetch and SHA-256 verify bytes before using a data-URI
+image. A cross-version cache mismatch displays unavailable imagery rather than
+attaching the new timestamp to old pixels. Old clients reject schema 2; older
+timestamped images remain for already-open legacy views. No GPS is transmitted.
+
+Colombo predictions use the existing immutable CC BY 4.0 harmonic record and
+MIT engine, with a rolling 48-hour interval. They refresh when fewer than 42
+hours remain, not by relabelling old predictions as new observations. Each new
+snapshot is independently compared with uptide 1.2 on 36 shared constituents
+at 2,881 one-minute samples. Quadratic refinement stays within adjacent samples;
+publication requires maximum level difference <= 0.02 m and extrema difference
+<= 5 minutes. The first rolling trial showed why the old five-minute sampled
+extrema were not a three-minute precision test: refined extrema differed by up
+to about 4.5 minutes while height differences stayed below 0.014 m. These bounds
+are numerical cross-checks of differing astronomical formulations, not observed
+accuracy, storm surge, navigation, or a Puttalam/lagoon transfer model. All 50
+licensed constituents are retained in displayed predictions.
+
+Each source group validates before any published file is changed. Failed weather
+or tide candidates preserve the prior group and all original source times.
+Reservoir failures preserve prior readings and dates, with explicit failure
+metadata as before. Successful groups may publish while a failed group remains
+old; the job then fails visibly and the client retains honest age/expiry states.
+No failed check bumps an observation, model-run, capture or validity timestamp.
+
+Only pre-existing regular non-executable files are eligible. Unknown paths,
+symlinks, untracked/staged surprises and regressed dates are rejected. Concurrent
+runs are serialized. An advancing main aborts the normal push; no force push is
+used. The publisher requests the existing Pages build and waits for the exact
+commit to build. It checks public hashes when permitted. A 401/403 edge rejection
+stops further probes and is reported separately; it is never bypassed or claimed
+as a hash match. A separate real browser verifies that case. No security or
+Cloudflare setting is changed.
 
 New/changed warning interpretation remains review-gated. Source-check run logs
 include structured document identities, listing timestamps, original links,
@@ -801,3 +845,14 @@ Google Puttalam remained unsupported at the independent 05:14 UTC review
 Both existing GitHub workflows are active, but the API history at 05:09 UTC had
 no run after 00:21. The missed cadence is confirmed; its cause is not. No
 schedule, permission or automated publishing path was changed.
+
+## Fresh review versus expired local advisory, 27 October
+
+A freshly reviewed, resolved location with no active matching bulletin says
+“No active warning in reviewed reports” and “Not an all-clear.” It does not call
+the whole app outdated because an earlier advisory expired before that review.
+An expiry after the last review instead says “Previous warning expired”; stale,
+future-clock, offline and failed-review states remain uncertain. Active official
+Red/Amber warnings retain priority independently of source age. The separately
+published banner fix is commit fce69a8; real-clock Colombo and Puttalam checks
+passed in all three languages at 05:47 UTC, with matching public asset hashes.

@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Reviewed ECMWF IFS snapshot adapter. Anonymous bounded Range reads, never visitor coordinates.
-Run explicitly selected by a reviewer; no schedule or production publisher changes.
+Run chosen explicitly or by the bounded approved publisher; candidates require independent publication validation.
 """
 from __future__ import annotations
-import argparse, hashlib, json, math, re, urllib.request
+import argparse, hashlib, json, math, re, urllib.request, urllib.parse
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 import eccodes as ec
@@ -13,7 +13,7 @@ UTC = timezone.utc
 HOST = 'https://data.ecmwf.int/forecasts'
 PARAMS = {'tp': (228, 'm', 'surface', 0, 'accum'), '10u': (165, 'm s**-1', 'heightAboveGround', 10, 'instant'), '10v': (166, 'm s**-1', 'heightAboveGround', 10, 'instant')}
 # Keep enough lead time for a full upcoming day as the reviewed snapshot ages.
-STEPS = list(range(9, 61, 3))
+STEPS = list(range(3, 61, 3))
 BBOX = [79.5, 5.75, 82.0, 10.0]
 GRID_KEYS = 'gridType Ni Nj iDirectionIncrementInDegrees jDirectionIncrementInDegrees latitudeOfFirstGridPointInDegrees longitudeOfFirstGridPointInDegrees latitudeOfLastGridPointInDegrees longitudeOfLastGridPointInDegrees iScansNegatively jScansPositively jPointsAreConsecutive alternativeRowScanning'.split()
 META_KEYS = 'edition centre shortName paramId units dataDate dataTime validityDate validityTime stepType stepUnits startStep endStep typeOfLevel level uvRelativeToGrid bitmapPresent numberOfMissing missingValue packingType bitsPerValue binaryScaleFactor decimalScaleFactor packingError'.split() + GRID_KEYS
@@ -89,6 +89,7 @@ def read_bounded(url, limit, start=None, size=None):
         if start is not None:
             if r.status!=206 or not re.fullmatch(rf'bytes {start}-{start+size-1}/\d+',r.headers.get('Content-Range','')):raise ValueError('Server did not honor bounded byte range')
         elif r.status!=200:raise ValueError('Index unavailable')
+        if urllib.parse.urlparse(r.geturl()).hostname!='data.ecmwf.int':raise ValueError('Unexpected source redirect host')
         raw=r.read(limit+1)
     if len(raw)>limit or (size is not None and len(raw)!=size):raise ValueError('Source size mismatch')
     if start is not None and (raw[:4]!=b'GRIB' or raw[-4:]!=b'7777' or raw[7]!=2 or int.from_bytes(raw[8:16],'big')!=len(raw)):raise ValueError('Not one complete GRIB2 message')
@@ -120,7 +121,7 @@ def decode(raw,p,run,step):
         return {'metadata':m,'values':regional},coords
     finally:ec.codes_release(h)
 
-def build(run, cache, out):
+def build(run, cache, out, selection="Explicit reviewed run, not an assertion that no newer run exists"):
     now=datetime.now(UTC);validate_run(run,now);cache.mkdir(parents=True,exist_ok=True);out.mkdir(parents=True,exist_ok=True)
     base=f"{HOST}/{run:%Y%m%d}/{run:%H}z/ifs/0p25/oper/{run:%Y%m%d%H%M%S}"
     fields={};provenance=[];errors=[];coords=None
@@ -149,7 +150,7 @@ def build(run, cache, out):
             except ValueError as e:errors.append({'step':step,'error':'IntervalInvalid','message':str(e)})
         u=current.get('10u',{}).get('values',[None]*len(coords));v=current.get('10v',{}).get('values',[None]*len(coords))
         frames.append({'startStep':step-3,'endStep':step,'intervalStart':iso(run+timedelta(hours=step-3)),'validAt':iso(run+timedelta(hours=step)),'rainMm':rain,'rainQuality':quality,'packingToleranceMm':tolerance,'windUms':u,'windVms':v})
-    result={'schemaVersion':1,'kind':'model_forecast','model':'ECMWF IFS control','runAt':iso(run),'capturedAt':max(p['retrievedAt'] for p in provenance),'generatedAt':iso(datetime.now(UTC)),'units':{'rainMm':'mm/3h','windUms':'m/s','windVms':'m/s'},'runSelection':'Explicit reviewed run, not an assertion that no newer run exists','grid':{'type':'regular_ll','spacingDegrees':.25,'approximateKm':28,'bbox':BBOX,'points':coords,'matching':'nearest published grid point, no interpolation'},'intervalHours':3,'frames':frames,'captureErrors':errors,'attribution':'This service is based on data and products of the European Centre for Medium-Range Weather Forecasts (ECMWF).','copyright':'© 2026 European Centre for Medium-Range Weather Forecasts (ECMWF)','licence':'https://creativecommons.org/licenses/by/4.0/','terms':'https://apps.ecmwf.int/datasets/licences/general/','source':'https://www.ecmwf.int/en/forecasts/datasets/open-data','modifications':'Fixed Sri Lanka region crop; consecutive cumulative precipitation differences converted from m to mm; wind speed/direction derived from earth-relative 10 m u/v. No bias correction, downscaling, hazard inference or visitor data.'}
+    result={'schemaVersion':1,'kind':'model_forecast','model':'ECMWF IFS control','runAt':iso(run),'capturedAt':max(p['retrievedAt'] for p in provenance),'generatedAt':iso(datetime.now(UTC)),'units':{'rainMm':'mm/3h','windUms':'m/s','windVms':'m/s'},'runSelection':selection,'grid':{'type':'regular_ll','spacingDegrees':.25,'approximateKm':28,'bbox':BBOX,'points':coords,'matching':'nearest published grid point, no interpolation'},'intervalHours':3,'frames':frames,'captureErrors':errors,'attribution':'This service is based on data and products of the European Centre for Medium-Range Weather Forecasts (ECMWF).','copyright':'© 2026 European Centre for Medium-Range Weather Forecasts (ECMWF)','licence':'https://creativecommons.org/licenses/by/4.0/','terms':'https://apps.ecmwf.int/datasets/licences/general/','source':'https://www.ecmwf.int/en/forecasts/datasets/open-data','modifications':'Fixed Sri Lanka region crop; consecutive cumulative precipitation differences converted from m to mm; wind speed/direction derived from earth-relative 10 m u/v. No bias correction, downscaling, hazard inference or visitor data.'}
     raw=json.dumps(result,separators=(',',':'),allow_nan=False).encode();(out/'forecast.json').write_bytes(raw)
     manifest={'schemaVersion':1,'createdAt':iso(datetime.now(UTC)),'runAt':iso(run),'forecastSha256':digest(raw),'forecastBytes':len(raw),'decoder':{'ecCodes':ec.codes_get_api_version(),'pythonPackage':ec.__version__},'sources':provenance,'errors':errors}
     (out/'provenance.json').write_text(json.dumps(manifest,indent=2,allow_nan=False))

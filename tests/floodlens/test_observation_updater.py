@@ -4,7 +4,7 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[2]
 sys.path.insert(0,str(ROOT/'scripts/floodlens'))
 import update_reservoirs as updater
-from publish_reservoirs import assert_paths,PATH
+from publish_reservoirs import assert_paths,PATH,ALLOWED
 
 class ObservationUpdater(unittest.TestCase):
  def setUp(self):
@@ -46,8 +46,8 @@ class ObservationUpdater(unittest.TestCase):
   for field,value in [('Effective Storage_per','999'),('Spilling_Cusec','-1'),('Range','New identity')]:
    rows=copy.deepcopy(self.rows);rows[0][field]=value
    with self.assertRaises(ValueError):updater.validate(self.raw(rows),self.before,self.now)
- def test_exact_single_path_allowlist(self):
-  assert_paths([PATH])
-  for paths in [[],[PATH,'.github/workflows/other.yml'],['floodlens/data/reviewed.json'],['floodlens/data/../app.mjs']]:
+ def test_exact_ten_path_allowlist(self):
+  assert_paths([PATH]);assert_paths(sorted(ALLOWED));self.assertEqual(len(ALLOWED),10)
+  for paths in [[],[PATH,'.github/workflows/other.yml'],['floodlens/data/reviewed.json'],['floodlens/data/../app.mjs'],[PATH,PATH],['floodlens/data/clouds/frame-3.png'],['floodlens/data/tides/colombo-source.json'],['floodlens/data/reservoir-reports.json']]:
    with self.assertRaises(ValueError):assert_paths(paths)
 if __name__=='__main__':unittest.main()
