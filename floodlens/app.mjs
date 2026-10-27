@@ -1,7 +1,7 @@
-import {copy} from './i18n.mjs?v=20261027-27';
-import {renderReservoirs,refreshReservoirs} from './reservoirs.mjs?v=20261027-27';
-import {createFlow} from './flow.mjs?v=20261027-27';
-import {warningState,ageState,dailyAgeState,warningMatches,assessment,validateSnapshot,intersectsAccuracy,locationCandidates,insideGeometry} from './core.mjs?v=20261027-27';
+import {copy} from './i18n.mjs?v=20261027-28';
+import {renderReservoirs,refreshReservoirs} from './reservoirs.mjs?v=20261027-28';
+import {createFlow} from './flow.mjs?v=20261027-28';
+import {warningSourceUrl,warningState,ageState,dailyAgeState,warningMatches,assessment,validateSnapshot,intersectsAccuracy,locationCandidates,insideGeometry} from './core.mjs?v=20261027-28';
 const $=s=>document.querySelector(s);
 let lang='en',data=null,catalog=null,selected=null,locationMessage='',outside=false,loadFailed=false,loading=false,needsUpdate=false;
 const t=k=>copy[lang][k]??copy.en[k]??k;
@@ -39,7 +39,7 @@ function renderWarnings(){
       }details.append(list);card.append(details);
     }
     const times=el('div','warning-times');times.append(el('div','',`${t('issued')}: ${date(w.issuedAt)}`),el('div','',`${t('validUntil')}: ${date(w.expiresAt)}`),el('div','',w.authority));
-    card.append(times,link(w.url,t('original')+' ↗','bulletin-link'));wrap.append(card);
+    card.append(times,link(warningSourceUrl(w,lang),t('original')+' ↗','bulletin-link'));wrap.append(card);
   }
   const fresh=ageState(data.reviewedAt,3);
   $('#warning-freshness').textContent=`${t('snapshot')}: ${date(data.reviewedAt)}. ${fresh==='stale'?t('snapshotStale'):fresh==='unknown'?t('clockError'):''}`;

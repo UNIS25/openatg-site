@@ -1,0 +1,69 @@
+{
+  "purpose": "Historical test fixture only. Never imported by production. Preserves previously verified source rows so automated data refreshes do not rewrite historical expectations.",
+  "sourceCommit": "9cb1372f018835509042661111a238f955a1e4d7",
+  "sourceSha256": "c1ba4c62b010a01aabbcd7962dc4eed147005bd1cf6c4934f475297358469703",
+  "retrievedAt": "2026-10-27T06:05:56.614909+00:00",
+  "records": [
+    {
+      "name": "Inginimitiya",
+      "range": "PUTTALAM",
+      "observedDate": "2026-10-27",
+      "updatedDate": "2026-10-27",
+      "observedAt": null,
+      "depthFeet": 21.83,
+      "effectiveStorageAcreFeet": 49917.0,
+      "grossStorageAcreFeet": 57917.0,
+      "effectivePercent": 98.15,
+      "spilling": true,
+      "spillCusecs": 3000.0,
+      "previousDayRainfallMm": 15.0,
+      "url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTcSGhi9RESl7CMCl1TQnrKe07Gx5Q696YiSB9jneIHqIP9lifpqSErgI3D5k9KtQXSdW5JpycIIr5e/pub?gid=1238978530&single=true&output=csv",
+      "remarks": "GO=3000(24\"@2,12\"@2) SD=LB=2\" RB=0\" center=1\"",
+      "gateConfiguration": {
+        "status": "reported_configuration",
+        "groups": [
+          {
+            "count": 2,
+            "openingInches": 24.0,
+            "openingFeet": 2.0
+          },
+          {
+            "count": 2,
+            "openingInches": 12.0,
+            "openingFeet": 1.0
+          }
+        ],
+        "gateCount": 4,
+        "operationTime": null
+      }
+    },
+    {
+      "name": "Tabbowa",
+      "range": "PUTTALAM",
+      "observedDate": "2026-10-27",
+      "updatedDate": "2026-10-27",
+      "observedAt": null,
+      "depthFeet": 16.83,
+      "effectiveStorageAcreFeet": 15000.0,
+      "grossStorageAcreFeet": 15400.0,
+      "effectivePercent": 99.98,
+      "spilling": true,
+      "spillCusecs": 1320.0,
+      "previousDayRainfallMm": null,
+      "url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTcSGhi9RESl7CMCl1TQnrKe07Gx5Q696YiSB9jneIHqIP9lifpqSErgI3D5k9KtQXSdW5JpycIIr5e/pub?gid=1238978530&single=true&output=csv",
+      "remarks": "GO=1320(12\"@6) SD,LB=0\", RB=3\"",
+      "gateConfiguration": {
+        "status": "reported_configuration",
+        "groups": [
+          {
+            "count": 6,
+            "openingInches": 12.0,
+            "openingFeet": 1.0
+          }
+        ],
+        "gateCount": 6,
+        "operationTime": null
+      }
+    }
+  ]
+}

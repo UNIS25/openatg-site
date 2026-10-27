@@ -1,7 +1,8 @@
-import {copy} from './explore-copy.mjs?v=20261027-27';
-import {ExploreMap} from './explore-map.mjs?v=20261027-27';
-import {warningLayer,forecastLayer,forecastCells,reviewedReports,cycloneState} from './explore-model.mjs?v=20261027-27';
-import {cloudState,verifiedCloudImages} from './clouds-model.mjs?v=20261027-27';
+import {warningSourceUrl} from './core.mjs?v=20261027-28';
+import {copy} from './explore-copy.mjs?v=20261027-28';
+import {ExploreMap} from './explore-map.mjs?v=20261027-28';
+import {warningLayer,forecastLayer,forecastCells,reviewedReports,cycloneState} from './explore-model.mjs?v=20261027-28';
+import {cloudState,verifiedCloudImages} from './clouds-model.mjs?v=20261027-28';
 const $=s=>document.querySelector(s),node=(tag,text,cls)=>{const e=document.createElement(tag);if(text!==undefined)e.textContent=text;if(cls)e.className=cls;return e;};
 const paths={warnings:'/floodlens/data/reviewed.json',catalog:'/floodlens/data/areas.json',overview:'/floodlens/data/map-overview.json',outline:'/floodlens/data/clouds/outline.json',land:'/floodlens/data/explore/region-land.json',forecast:'/floodlens/data/forecast/forecast.json',cloud:'/floodlens/data/clouds/clouds.json',media:'/floodlens/data/reservoir-reports.json',locations:'/floodlens/data/reservoir-locations.json',cyclone:'/floodlens/data/explore/cyclone.json'};
 let language='en',layer='warnings',warningKind='flood',frame=0,selected=null,playing=null,loading=false,generation=0,cloudBroken=false;
@@ -21,7 +22,7 @@ function renderSelection(){
  if(kind==='warning'){
   const a=current.warnings?.areas.find(a=>a.area.code===id);if(!a){selected=null;return renderSelection();}
   add('h2',local(a.area.names));add('span',t(warningKind==='rain'?'rainAdvisory':warningKind)+' · '+t('level')+' '+a.level,'badge '+({1:'yellow',2:'amber',3:'red'}[a.level]));
-  for(const w of a.bulletins){const article=node('article');article.append(node('h3',local(w.title)),node('p',local(w.summary)),node('small',t('issued')+': '+time(w.issuedAt)),node('small',t('validUntil')+': '+time(w.expiresAt)),link(t('source'),w.url));root.append(article);}return;
+  for(const w of a.bulletins){const article=node('article');article.append(node('h3',local(w.title)),node('p',local(w.summary)),node('small',t('issued')+': '+time(w.issuedAt)),node('small',t('validUntil')+': '+time(w.expiresAt)),link(t('source'),warningSourceUrl(w,language)));root.append(article);}return;
  }
  if(kind==='cell'){
   const cell=current.cells?.[Number(id)];if(!cell){selected=null;return renderSelection();}
@@ -50,7 +51,7 @@ function render(){
    if(!data.warnings||!data.catalog||!data.overview)throw Error('Missing warning data');
    const w=warningLayer(data.warnings,data.catalog,data.overview,warningKind);current.warnings=w;title=t('warningTitle')+' · '+t(warningKind==='rain'?'rainAdvisory':warningKind);note=t(['rain','lightning'].includes(warningKind)?'rainWarningNote':'warningNote');timestamp=t('reviewed')+': '+time(w.reviewedAt)+(w.reviewOlder?' · '+t('reviewOlder'):'');model.warnings=w.areas.map(a=>({...a,label:local(a.area.names)+' · '+t('level')+' '+a.level}));
    for(const a of w.areas)$('#list-content').append(button(local(a.area.names),'warning:'+a.area.code,t('level')+' '+a.level));
-   for(const b of w.bulletins)addSource(local(b.title),b.authority+' · '+t('issued')+': '+time(b.issuedAt)+' · '+t('validUntil')+': '+time(b.expiresAt),b.url);
+   for(const b of w.bulletins)addSource(local(b.title),b.authority+' · '+t('issued')+': '+time(b.issuedAt)+' · '+t('validUntil')+': '+time(b.expiresAt),warningSourceUrl(b,language));
    if(!w.bulletins.length){note=t('noWarnings');status='empty';}if(w.unmapped.length)$('#list-content').append(node('p',t('mapUnmapped')), ...w.unmapped.map(x=>node('p',x.area.division)));
    legend(warningKind==='landslide'?[[t('level')+' 1','yellow'],[t('level')+' 2','amber'],[t('level')+' 3','red']]:[[t('level')+' 2 · Amber','amber']]);
   }else if(['rain','wind'].includes(layer)){

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "reviewedAt": "2026-10-27T07:12:41+00:00",
+  "reviewedAt": "2026-10-27T07:42:22+00:00",
   "reviewMethod": "Official PDFs visually checked; structured source transcription. Not an agency endorsement.",
   "bulletins": [
     {
@@ -744,7 +744,18 @@
         "LK51"
       ],
       "sha256": "34383e5c53aef78a5d6f93e4636a3d1d794f992178d3b3e148e24f935211a445",
-      "scopeBasis": "Original Sinhala and English bulletin text names Ampara and Batticaloa districts only. Explicit bulletin severity Amber; red illustration shading is not a separate bulletin severity and other map colours are not an all-clear."
+      "scopeBasis": "Original Sinhala and English bulletin text names Ampara and Batticaloa districts only. Explicit bulletin severity Amber; red illustration shading is not a separate bulletin severity and other map colours are not an all-clear.",
+      "officialTranslations": {
+        "ta": {
+          "bulletinId": "LLA-26-10-27-01-04",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Advisory_for_Severe_Lightning_at_1130hrs_on_27__1793085463.pdf",
+          "sha256": "8b0358d94e2291952b23235d8511eb683146eca1fd25938cb8c5a22dbc5c7485",
+          "issuedAt": "2026-10-27T11:30:00+05:30",
+          "expiresAt": "2026-10-27T23:30:00+05:30",
+          "listingAt": "2026-10-27T12:45:00+05:30",
+          "reviewedAt": "2026-10-27T07:52:08.547526+00:00"
+        }
+      }
     },
     {
       "id": "kelani-20261026-01",

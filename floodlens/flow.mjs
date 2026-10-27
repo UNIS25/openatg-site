@@ -1,11 +1,11 @@
-import {mountClouds} from './clouds-ui.mjs?v=20261027-27';
-import {mountTides} from './tides-ui.mjs?v=20261027-27';
-import {renderNews} from './news.mjs?v=20261027-27';
-import {mountForecast} from './forecast-ui.mjs?v=20261027-27';
-import {createContext} from './context-ui.mjs?v=20261027-27';
-import {streetEnabled} from './street-map.mjs?v=20261027-27';
-import {LocationMap} from './location-map.mjs?v=20261027-27';
-import {locationEvidence,warningReviewStatus,ageState,insideGeometry,intersectsAccuracy,locationCandidates} from './core.mjs?v=20261027-27';
+import {mountClouds} from './clouds-ui.mjs?v=20261027-28';
+import {mountTides} from './tides-ui.mjs?v=20261027-28';
+import {renderNews} from './news.mjs?v=20261027-28';
+import {mountForecast} from './forecast-ui.mjs?v=20261027-28';
+import {createContext} from './context-ui.mjs?v=20261027-28';
+import {streetEnabled} from './street-map.mjs?v=20261027-28';
+import {LocationMap} from './location-map.mjs?v=20261027-28';
+import {warningSourceUrl,locationEvidence,warningReviewStatus,ageState,insideGeometry,intersectsAccuracy,locationCandidates} from './core.mjs?v=20261027-28';
 const $=s=>document.querySelector(s);
 export function createFlow({t,name,getData,getCatalog,onLanguage,onArea,onRefresh}){
  let stage='language',point=null,accuracy=null,mode='gps',area=null,candidates=[],state='idle',manualPoint=null,catalog=null,locationRequest=0,matchRequest=0,lastMapMode=false;
@@ -101,7 +101,7 @@ export function createFlow({t,name,getData,getCatalog,onLanguage,onArea,onRefres
   $('#assessment').className='compact-assessment '+severity;$('#assessment-title').textContent=t(title);$('#assessment-copy').textContent=t(body);$('#result-symbol').textContent=severity!=='unknown'?'!':'?';
   const list=$('#quick-facts');list.replaceChildren();for(const key of facts.slice(0,2)){const li=document.createElement('li');li.textContent=key==='validUntil'&&primary?t(key)+': '+new Intl.DateTimeFormat(document.documentElement.lang,{timeZone:'Asia/Colombo',day:'numeric',month:'short',hour:'2-digit',minute:'2-digit',hour12:false}).format(new Date(primary.expiresAt))+' · SLST':t(key);list.append(li);}
   if(data&&state!=='checking'){const li=document.createElement('li');li.className='checked-fact';const date=new Date(data.reviewedAt);li.textContent=ageState(data.reviewedAt,3)==='stale'?t('warningReviewOld'):ageState(data.reviewedAt,3)==='unknown'?t('warningTimeUnknown'):Number.isFinite(date.getTime())?t('checkedShort')+' '+new Intl.DateTimeFormat(document.documentElement.lang,{timeZone:'Asia/Colombo',hour:'2-digit',minute:'2-digit',hour12:false}).format(date)+' · SLST':t('ageUnknown');list.append(li);}
-  $('#quick-source').href=primary?.url||'https://www.dmc.gov.lk/';$('#quick-source').textContent=t(needsUpdate?'reloadPage':'officialUpdate');$('#quick-source').onclick=needsUpdate?e=>{e.preventDefault();window.location.reload();}:null;
+  $('#quick-source').href=warningSourceUrl(primary,document.documentElement.lang)||'https://www.dmc.gov.lk/';$('#quick-source').textContent=t(needsUpdate?'reloadPage':'officialUpdate');$('#quick-source').onclick=needsUpdate?e=>{e.preventDefault();window.location.reload();}:null;
   const choices=$('#candidate-choices');choices.replaceChildren();choices.hidden=state!=='ambiguous';if(state==='ambiguous'){const heading=document.createElement('strong');heading.textContent=t('possibleDivisions');choices.append(heading);for(const candidate of candidates){const label=document.createElement('span');label.dataset.candidate=candidate.code;label.textContent=name(candidate);choices.append(label);}}
 
  }

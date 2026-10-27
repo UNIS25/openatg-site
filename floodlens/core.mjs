@@ -90,6 +90,15 @@ export function validateSnapshot(d,clientVersion=CLIENT_VERSION) {
   for(const w of d.bulletins) {
     if(!w.id||!['flood','landslide','rain','lightning'].includes(w.kind)||!Array.isArray(w.areas)||!w.title?.en||!w.summary?.en) throw Error('Invalid bulletin');
     if(!safeSource(w.url))throw Error('Invalid source');
+    if(w.officialTranslations!==undefined) {
+      if(!w.officialTranslations||typeof w.officialTranslations!=='object'||Array.isArray(w.officialTranslations))throw Error('Invalid official translation');
+      for(const [language,source] of Object.entries(w.officialTranslations)) {
+        let url;try{url=new URL(source?.url);}catch{throw Error('Invalid official translation source');}
+        if(!['en','si','ta'].includes(language)||url.origin!=='https://www.dmc.gov.lk'||url.username||url.password||!/^\/images\/dmcreports\/[^/]+\.pdf$/.test(url.pathname)||url.search||url.hash||
+          !/^[a-f0-9]{64}$/.test(source.sha256)||source.bulletinId!==w.id||source.issuedAt!==w.issuedAt||source.expiresAt!==w.expiresAt||
+          !Number.isFinite(Date.parse(source.listingAt))||!Number.isFinite(Date.parse(source.reviewedAt)))throw Error('Invalid official translation');
+      }
+    }
     if(w.kind!=='landslide'&&w.severity!=='amber'){const error=new Error('Unsupported warning severity');error.code='CLIENT_UPDATE_REQUIRED';throw error;}
     if(w.areas.some(a=>a.level!==undefined&&![1,2,3].includes(a.level))){const error=new Error('Unsupported warning severity');error.code='CLIENT_UPDATE_REQUIRED';throw error;}
   }
@@ -103,4 +112,8 @@ export function validateSnapshot(d,clientVersion=CLIENT_VERSION) {
 }
 export function safeSource(url) {
   try{const u=new URL(url);return u.protocol==='https:'&&['www.dmc.gov.lk','docs.google.com','www.irrigation.gov.lk','irrigation.gov.lk'].includes(u.hostname);}catch{return false;}
+}
+// This selects a reviewed original document, not an official status for our UI summary.
+export function warningSourceUrl(w,language) {
+  return w?.officialTranslations?.[language]?.url||w?.url;
 }

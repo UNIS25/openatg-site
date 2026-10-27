@@ -1,5 +1,5 @@
-import {validateSnapshot, warningState, warningMatches} from './core.mjs?v=20261027-27';
-import {validateForecast, wind} from './forecast-model.mjs?v=20261027-27';
+import {validateSnapshot, warningState, warningMatches} from './core.mjs?v=20261027-28';
+import {validateForecast, wind} from './forecast-model.mjs?v=20261027-28';
 
 // Each layer retains its own meaning and clock. No cross-layer risk score.
 export function warningLayer(snapshot, catalog, overview, kind, now=Date.now()) {

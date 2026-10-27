@@ -10,6 +10,8 @@ const satellite=read('../../floodlens/data/context/satellite.json');
 for(const r of satellite.regions){const bytes=inflateSync(Buffer.from(r.grid,'base64'));r.values=new Uint16Array(bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength));}
 satellite.project=p=>proj4('EPSG:4326','+proj=aeqd +lat_0=47 +lon_0=94 +x_0=4340913.84808 +y_0=4812712.92347 +datum=WGS84 +units=m +no_defs',p);
 const data={satellite,rainfall:read('../../floodlens/data/context/rainfall.json'),points:read('../../floodlens/data/reservoir-locations.json'),directory:read('../../floodlens/data/reservoirs.json'),reviewed:read('../../floodlens/data/reviewed.json')};
+const historicalReservoirs=read('./fixtures/reservoirs-20261027-morning.json');
+for(const record of historicalReservoirs.records)data.directory.records[data.directory.records.findIndex(r=>r.name===record.name)]=record;
 const now=Date.parse('2026-10-27T05:30:00Z'),positive=[80.13354808129566,7.957387827486872],puttalam=[79.828,8.036],ratnapura=[80.4037,6.6828];
 const catalog=read('../../floodlens/data/areas.json');
 const areasAt=p=>{let features=[];for(const d of catalog.districts)if(p[0]>=d.bbox[0]&&p[0]<=d.bbox[2]&&p[1]>=d.bbox[1]&&p[1]<=d.bbox[3])features.push(...read('../../floodlens/data/boundaries/'+d.code+'.json').features);return locationCandidates(features,p,0).map(f=>catalog.divisions.find(d=>d.code===f.properties.code)).filter(Boolean);};

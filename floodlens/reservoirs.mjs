@@ -1,5 +1,5 @@
-import {gateSummary} from './gates.mjs?v=20261027-27';
-import {dailyAgeState,ageState,safeSource} from './core.mjs?v=20261027-27';
+import {gateSummary} from './gates.mjs?v=20261027-28';
+import {dailyAgeState,ageState,safeSource} from './core.mjs?v=20261027-28';
 let directory=null,context=null,busy=false,failed=false,showAll=false;
 const el=(tag,cls,text)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n;};
 const value=v=>Number.isFinite(v)?v.toLocaleString(undefined,{maximumFractionDigits:2}):'—';

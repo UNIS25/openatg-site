@@ -941,3 +941,25 @@ the runner probe. A successful manual recovery is **not** proof GitHub cron work
 Do not dispatch again to make the schedule look healthy. Record both event type
 and actual publication time. Warnings, news and review timestamps remain outside
 this publisher and require the separate completed-review release procedure.
+
+## 27 October 07:42 UTC completed review and Tamil original
+
+The coordinating review completed at 07:42:22 UTC (13:12:22 SLST), covering
+100 rows each in DMC types 6, 5 and 2. Eleven existing relevant originals were
+reported byte-identical, with no cancellation, supersession or extension.
+The review record advances; issue, expiry and observation times do not.
+The unchanged 09:00 SLST river observations remain visibly old.
+
+A separately listed official Tamil PDF for Bulletin 04 was fetched and both
+pages visually checked locally. It has the same Amber severity, Ampara and
+Batticaloa scope, 11:30 issue and 23:30 expiry; its 12:45 listing is not a new
+warning. Optional `officialTranslations` metadata requires the same bulletin
+identity and validity, a reviewed hash and an allowlisted DMC PDF URL. Tamil
+original-source links now select that document in the location result, details
+and situation map. The app's summaries remain non-official translations.
+Older clients retain the original primary source URL safely.
+
+The 07:42 Google public-page observation is recorded only in review provenance:
+Puttalam remains unsupported/no data, not an all-clear; Kala Wewa remains a
+HYBAS discharge forecast node, not reservoir telemetry. No provider issue or
+expiry time is invented.
