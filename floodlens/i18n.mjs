@@ -75,6 +75,8 @@ Object.assign(copy.ta,{aboutCopy:'Ark அதிகாரபூர்வ எச�
 Object.assign(copy.en,{alertNoTrend:'Alert · trend not reported'});
 Object.assign(copy.si,{alertNoTrend:'අවධානය · වෙනස්වන දිශාව සඳහන් කර නැත'});
 Object.assign(copy.ta,{alertNoTrend:'எச்சரிக்கை · மாற்றத்தின் போக்கு குறிப்பிடப்படவில்லை'});
+// Reuse the existing non-official severity and missing-trend wording.
+for(const language of ['en','si','ta'])copy[language].minorNoTrend=copy[language].minorRising.split(' · ')[0]+' · '+copy[language].alertNoTrend.split(' · ')[1];
 
 // Concise public result; sources retain the full reviewed scope and limitations.
 Object.assign(copy.en,{waterHere:'Is there floodwater near you?',waterYes:'Yes — show help',waterNo:'No / unsure',waterPrivate:'Your answer stays on this page.',weatherOfficial:'Official weather ↗',cycloneOfficial:'IMD cyclone bulletin ↗',detailsShort:'Sources & updates',rainAdvisoryBody:'Heavy rain is possible in your wider area. Flooding here is not confirmed.',noWarningFound:'No current warning found',notAllClear:'Not an all-clear.',usePin:'Confirm map centre',arkStory:'Inspired by Noah’s Ark: shelter, care and helping one another.'});

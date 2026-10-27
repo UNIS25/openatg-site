@@ -1,5 +1,5 @@
 export const HOUR = 3600000;
-export const CLIENT_VERSION = 8;
+export const CLIENT_VERSION = 9;
 export function warningState(w, now=Date.now()) {
   const start=Date.parse(w.issuedAt),end=Date.parse(w.expiresAt);
   if(!Number.isFinite(start)||!Number.isFinite(end)||end<=start||now<start) return 'unknown';
@@ -104,9 +104,9 @@ export function validateSnapshot(d,clientVersion=CLIENT_VERSION) {
   }
   for(const s of d.stations){
     if(!Number.isFinite(s.value)||!['m','ft'].includes(s.unit)||!safeSource(s.url))throw Error('Invalid station');
-    if(!['normal','minorRising','minorFalling','alertRising','alertFalling','alertNoTrend'].includes(s.status)){const error=new Error('Unsupported station classification');error.code='CLIENT_UPDATE_REQUIRED';throw error;}
+    if(!['normal','minorRising','minorFalling','minorNoTrend','alertRising','alertFalling','alertNoTrend'].includes(s.status)){const error=new Error('Unsupported station classification');error.code='CLIENT_UPDATE_REQUIRED';throw error;}
   }
-  for(const s of d.stations)if(s.status==='alertNoTrend'&&(s.sourceTrend!==null||s.sourceRemarks!=='Alert'))throw Error('Invalid no-trend station');
+  for(const s of d.stations)if(['alertNoTrend','minorNoTrend'].includes(s.status)&&(s.sourceTrend!==null||s.sourceRemarks!==(s.status==='minorNoTrend'?'Minor Flood':'Alert')))throw Error('Invalid no-trend station');
   for(const r of d.reservoirs)if(!Number.isFinite(r.effectivePercent)||!Number.isFinite(r.spillCusecs)||typeof r.name!=='string'||!safeSource(r.url))throw Error('Invalid reservoir');
   return d;
 }

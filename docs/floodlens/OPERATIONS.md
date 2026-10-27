@@ -980,3 +980,18 @@ all unrelated warnings remain unchanged. Historical tests use the actual No. 01
 fixture; new tests separately cover No. 02 issue/expiry, exact scope, original
 source and priority despite stale gauge observations. The completed source-list
 review time is 08:43:59 UTC, not the new bulletin's issue time or a gauge reading.
+
+## 27 October 15:30 SLST river review
+
+The original one-page table was visually verified: current readings at 15:00,
+previous readings at 14:00, issued at 15:30. The 21 existing selected metre gauges
+are retained and Ellagawa is added, giving 22 selected stations: five Minor Flood,
+five Alert and twelve Normal. Baddegama is now Minor Flood; Thawalama and
+Badalgama are Normal. A station classification never cancels a basin warning.
+Dunamale's Minor Flood and Thalgahagoda's Alert have blank printed trends, retained
+as null rather than inferred as steady/rising. Client 9 adds the missing Minor
+Flood/no-trend label using existing non-official translated terms. Older clients
+request a reload; versioned assets and data compatibility guards prevent a raw
+unknown label. The six-hour rainfall column ending 15:00 is not ingested, and
+Nagalagam Street's feet measurement is excluded from these metre records.
+Superseded readings and original PDF hashes remain in provenance.

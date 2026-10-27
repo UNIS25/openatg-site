@@ -34,7 +34,7 @@ test('accuracy circle near an edge produces multiple candidates, not nearest fal
  assert.equal(locationCandidates([poly(80),poly(80.01)],[80.0099,7.005],100).length,2);assert.equal(locationCandidates([poly(80)],[81,7],50).length,0);
 });
 test('production source records and units are valid; no fixture switches',()=>{
- validateSnapshot(currentSnapshot);assert.equal(snapshot.stations.length,21);assert.ok(snapshot.stations.every(s=>s.unit==='m'));assert.ok(snapshot.bulletins.every(b=>/^[a-f0-9]{64}$/.test(b.sha256)));assert.equal(snapshot.reservoirs.find(r=>r.name==='Tabbowa').effectivePercent,99.98);
+ validateSnapshot(currentSnapshot);assert.equal(snapshot.stations.length,22);assert.ok(snapshot.stations.every(s=>s.unit==='m'));assert.ok(snapshot.bulletins.every(b=>/^[a-f0-9]{64}$/.test(b.sha256)));assert.equal(snapshot.reservoirs.find(r=>r.name==='Tabbowa').effectivePercent,99.98);
 });
 test('all UI translation keys exist in Sinhala and Tamil',()=>{
  for(const language of ['si','ta'])for(const k of Object.keys(copy.en))assert.equal(typeof copy[language][k],'string',`${language}.${k}`);
@@ -88,11 +88,21 @@ test('multiple landslide bulletins select highest applicable reviewed severity',
  assert.equal(locationEvidence([lower,original],[ds],{now:reviewedTime}).level,3);
 });
 
-test('09:30 river preserves 09:00 source values, blank trends and 21 selected metre gauges',()=>{
- const expected=[["Holombuwa", 1.85, "normal"], ["Rathnapura", 8.55, "minorFalling"], ["Kithulgala", 2.43, "normal"], ["Norwood", 1.48, "normal"], ["Magura", 5.3, "alertFalling"], ["Kalawellawa (Millakanda)", 7.37, "minorRising"], ["Nawalapitiya", 1.82, "normal"], ["Dunamale", 4.81, "minorRising"], ["Panadugama", 6.43, "minorFalling"], ["Urawa", 1.65, "normal"], ["Peradeniya", 3.62, "normal"], ["Glencourse", 13.6, "normal"], ["Thawalama", 4.44, "alertFalling"], ["Badalgama", 5.44, "alertFalling"], ["Hanwella", 6.47, "normal"], ["Putupaula", 3.25, "alertRising"], ["Baddegama", 3.93, "alertRising"], ["Thalgahagoda", 1.6, "alertNoTrend"], ["Moragaswewa", 5.25, "alertNoTrend"], ["Galgamuwa", 4.08, "normal"], ["Thanthirimale", 3.12, "normal"]];
+test('15:30 river preserves 15:00 source values, blank trends and 22 selected metre gauges',()=>{
+ const expected=[["Holombuwa", 1.55, "normal"], ["Rathnapura", 8.1, "minorFalling"], ["Kithulgala", 2.26, "normal"], ["Norwood", 1.37, "normal"], ["Magura", 5, "alertFalling"], ["Kalawellawa (Millakanda)", 7.58, "minorRising"], ["Nawalapitiya", 1.71, "normal"], ["Dunamale", 4.83, "minorNoTrend"], ["Panadugama", 6.26, "minorFalling"], ["Urawa", 1.39, "normal"], ["Peradeniya", 3.4, "normal"], ["Glencourse", 12.64, "normal"], ["Thawalama", 3.1, "normal"], ["Badalgama", 4.53, "normal"], ["Hanwella", 5.75, "normal"], ["Putupaula", 3.36, "alertRising"], ["Baddegama", 4.09, "minorRising"], ["Thalgahagoda", 1.6, "alertNoTrend"], ["Moragaswewa", 4.96, "alertFalling"], ["Galgamuwa", 4.04, "normal"], ["Thanthirimale", 3.12, "normal"], ["Ellagawa", 10.05, "alertRising"]];
  assert.deepEqual(snapshot.stations.map(s=>[s.name,s.value,s.status]),expected);
- for(const s of snapshot.stations){assert.equal(s.unit,'m');assert.ok(Number.isFinite(s.previousValue));assert.equal(s.previousObservedAt,'2026-10-27T08:00:00+05:30');assert.equal(s.observedAt,'2026-10-27T09:00:00+05:30');assert.equal(s.issuedAt,'2026-10-27T09:30:00+05:30');assert.equal(s.sha256,'e27c924dc0d06d42bf99380c2ca4b4900dc7b3b0d010a2bdb923992d0b0b4f1a');if(s.status==='normal'||s.status==='alertNoTrend')assert.equal(s.sourceTrend,null);assert.equal('rainfall' in s,false);}
- assert.equal(snapshot.stations.filter(s=>s.status.startsWith('minor')).length,4);assert.equal(snapshot.stations.filter(s=>s.status.startsWith('alert')).length,7);
+ for(const s of snapshot.stations){assert.equal(s.unit,'m');assert.ok(Number.isFinite(s.previousValue));assert.equal(s.previousObservedAt,'2026-10-27T14:00:00+05:30');assert.equal(s.observedAt,'2026-10-27T15:00:00+05:30');assert.equal(s.issuedAt,'2026-10-27T15:30:00+05:30');assert.equal(s.sha256,'d1037a2a98cbbba25e484911d7087da875c87785f2b15b60487211880ec532db');if(s.status==='normal'||s.status.endsWith('NoTrend'))assert.equal(s.sourceTrend,null);assert.equal('rainfall' in s,false);}
+ assert.equal(snapshot.stations.filter(s=>s.status.startsWith('minor')).length,5);assert.equal(snapshot.stations.filter(s=>s.status.startsWith('alert')).length,5);
+ assert.equal(snapshot.stations.find(s=>s.name==='Dunamale').previousValue,4.83);
+ assert.equal(snapshot.stations.find(s=>s.name==='Baddegama').previousValue,4.07);
+ assert.equal(snapshot.stations.find(s=>s.name==='Ellagawa').previousValue,10.03);
+});
+
+test('minor flood without a printed trend is supported and older clients fail closed',()=>{
+ assert.throws(()=>validateSnapshot(currentSnapshot,8),{code:'CLIENT_UPDATE_REQUIRED'});
+ const d=structuredClone(currentSnapshot),s=d.stations.find(s=>s.name==='Dunamale');assert.equal(s.status,'minorNoTrend');validateSnapshot(d);
+ for(const language of ['en','si','ta']){assert.ok(copy[language].minorNoTrend.startsWith(copy[language].minorRising.split(' · ')[0]));assert.ok(copy[language].minorNoTrend.endsWith(copy[language].alertNoTrend.split(' · ')[1]));}
+ s.sourceTrend='Rising';assert.throws(()=>validateSnapshot(d),/Invalid no-trend station/);s.sourceTrend=null;s.sourceRemarks='Normal';assert.throws(()=>validateSnapshot(d),/Invalid no-trend station/);
 });
 
 test('new Kelani and Attanagalu warnings apply only to their text-named low-valley divisions',()=>{
