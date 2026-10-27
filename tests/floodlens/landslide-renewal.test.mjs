@@ -33,11 +33,11 @@ test('renewed Red warning and mapped areas remain active after old expiry withou
  const now=Date.parse('2026-10-27T13:00:00Z'),ratnapura=catalog.divisions.find(a=>a.code==='LK9112');
  assert.equal(warningState(previous,now),'expired');
  const evidence=locationEvidence(current.bulletins,[ratnapura],{now});assert.equal(evidence.kind,'landslide');assert.equal(evidence.level,3);
- const layer=warningLayer(current,catalog,overview,'landslide',now);
+ const historicalReview={...current,reviewedAt:'2026-10-27T11:13:41Z'};const layer=warningLayer(historicalReview,catalog,overview,'landslide',now);
  assert.equal(layer.areas.length,71);assert.equal(layer.areas.filter(a=>a.level===3).length,10);assert.equal(layer.unmapped.length,0);
  assert.equal(warningLayer(current,catalog,overview,'landslide',Date.parse(warning.expiresAt)).areas.length,0);
  for(const id of ['kelani-20261026-01','attanagalu-20261026-01'])assert.equal(warningState(current.bulletins.find(w=>w.id===id),now),'expired');
- assert.ok(current.stations.every(s=>s.observedAt==='2026-10-27T15:00:00+05:30'&&s.issuedAt==='2026-10-27T15:30:00+05:30'));
+ const retained=provenance.reviews.find(r=>r.source?.sha256==='24f403b0375b169fcdbbd54a4e4002f967aa3486a49c3453a9412478e5b8fc41').previousStations;assert.ok(retained.every(s=>s.observedAt==='2026-10-27T15:00:00+05:30'&&s.issuedAt==='2026-10-27T15:30:00+05:30'));
 });
 test('full previous bulletin is preserved and review time is distinct from source validity',()=>{
  const review=provenance.reviews.find(r=>r.currentBulletinId===warning.id);assert.deepEqual(review.previousBulletin,previous);

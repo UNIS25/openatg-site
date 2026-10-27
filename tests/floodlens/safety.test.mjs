@@ -7,6 +7,8 @@ const currentSnapshot=JSON.parse(await readFile(new URL('../../floodlens/data/re
 // Historical safety cases retain their actual No. 01 source; production now uses No. 02.
 const snapshot=structuredClone(currentSnapshot);snapshot.bulletins[0]=JSON.parse(await readFile(new URL('./fixtures/kalu-20261026-01.json',import.meta.url))).bulletin;
 snapshot.bulletins[snapshot.bulletins.findIndex(w=>w.kind==='landslide')]=JSON.parse(await readFile(new URL('./fixtures/landslide-20261026-1800.json',import.meta.url))).bulletin;
+const previousRiver=JSON.parse(await readFile(new URL('../../floodlens/data/provenance.json',import.meta.url))).reviews.find(r=>r.source?.sha256==='24f403b0375b169fcdbbd54a4e4002f967aa3486a49c3453a9412478e5b8fc41').previousStations;
+snapshot.stations=structuredClone(previousRiver);
 const catalog=JSON.parse(await readFile(new URL('../../floodlens/data/areas.json',import.meta.url)));
 const now=Date.parse('2026-10-26T13:00:00+05:30');
 test('official bulletin validity expires exactly; missing/future times are unknown',()=>{
@@ -89,7 +91,7 @@ test('multiple landslide bulletins select highest applicable reviewed severity',
  assert.equal(locationEvidence([lower,original],[ds],{now:reviewedTime}).level,3);
 });
 
-test('15:30 river preserves 15:00 source values, blank trends and 22 selected metre gauges',()=>{
+test('historical 15:30 river preserves 15:00 source values, blank trends and 22 selected metre gauges',()=>{
  const expected=[["Holombuwa", 1.55, "normal"], ["Rathnapura", 8.1, "minorFalling"], ["Kithulgala", 2.26, "normal"], ["Norwood", 1.37, "normal"], ["Magura", 5, "alertFalling"], ["Kalawellawa (Millakanda)", 7.58, "minorRising"], ["Nawalapitiya", 1.71, "normal"], ["Dunamale", 4.83, "minorNoTrend"], ["Panadugama", 6.26, "minorFalling"], ["Urawa", 1.39, "normal"], ["Peradeniya", 3.4, "normal"], ["Glencourse", 12.64, "normal"], ["Thawalama", 3.1, "normal"], ["Badalgama", 4.53, "normal"], ["Hanwella", 5.75, "normal"], ["Putupaula", 3.36, "alertRising"], ["Baddegama", 4.09, "minorRising"], ["Thalgahagoda", 1.6, "alertNoTrend"], ["Moragaswewa", 4.96, "alertFalling"], ["Galgamuwa", 4.04, "normal"], ["Thanthirimale", 3.12, "normal"], ["Ellagawa", 10.05, "alertRising"]];
  assert.deepEqual(snapshot.stations.map(s=>[s.name,s.value,s.status]),expected);
  for(const s of snapshot.stations){assert.equal(s.unit,'m');assert.ok(Number.isFinite(s.previousValue));assert.equal(s.previousObservedAt,'2026-10-27T14:00:00+05:30');assert.equal(s.observedAt,'2026-10-27T15:00:00+05:30');assert.equal(s.issuedAt,'2026-10-27T15:30:00+05:30');assert.equal(s.sha256,'d1037a2a98cbbba25e484911d7087da875c87785f2b15b60487211880ec532db');if(s.status==='normal'||s.status.endsWith('NoTrend'))assert.equal(s.sourceTrend,null);assert.equal('rainfall' in s,false);}
@@ -101,7 +103,7 @@ test('15:30 river preserves 15:00 source values, blank trends and 22 selected me
 
 test('minor flood without a printed trend is supported and older clients fail closed',()=>{
  assert.throws(()=>validateSnapshot(currentSnapshot,8),{code:'CLIENT_UPDATE_REQUIRED'});
- const d=structuredClone(currentSnapshot),s=d.stations.find(s=>s.name==='Dunamale');assert.equal(s.status,'minorNoTrend');validateSnapshot(d);
+ const d=structuredClone(currentSnapshot);d.stations=structuredClone(previousRiver);const s=d.stations.find(s=>s.name==='Dunamale');assert.equal(s.status,'minorNoTrend');validateSnapshot(d);
  for(const language of ['en','si','ta']){assert.ok(copy[language].minorNoTrend.startsWith(copy[language].minorRising.split(' · ')[0]));assert.ok(copy[language].minorNoTrend.endsWith(copy[language].alertNoTrend.split(' · ')[1]));}
  s.sourceTrend='Rising';assert.throws(()=>validateSnapshot(d),/Invalid no-trend station/);s.sourceTrend=null;s.sourceRemarks='Normal';assert.throws(()=>validateSnapshot(d),/Invalid no-trend station/);
 });

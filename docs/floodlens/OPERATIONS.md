@@ -1042,3 +1042,16 @@ this renewal does not extend them. River readings remain at 15:00, issued 15:30.
 Regression cases cover the renewed Red result in all three languages after the
 previous bulletin's expiry, exact 71-division map scope, future/expiry boundaries,
 and unchanged station observations. No app version or publisher path changes.
+
+## 27 October 18:30 SLST river review
+
+The original table is issued at 18:30 SLST although the DMC listing says 18:00.
+Its readings are at 18:00, with a separate 17:00 comparison. All 22 selected
+metre gauges are retained: five Minor Flood, four Alert and thirteen Normal.
+Moragaswewa becomes Normal with a blank printed trend. Dunamale explicitly
+shows Falling; Thalgahagoda shows Rising. These station classes do not cancel
+area warnings or establish household conditions. Nagalagam Street uses feet
+and remains excluded. The nine-hour rainfall column is not ingested as water
+level or a 24-hour rainfall value. The full preceding station snapshot and
+original hashes remain in provenance; historical no-trend tests use that record.
+Kelani and Attanagalu expiry remains unchanged, without a verified replacement.
