@@ -1,5 +1,17 @@
 # OpenATG FloodLens
 
+Latest reviewed river update: the 28 October 00:30 SLST report contains 00:00
+observations and the previous 23:00 column dated 27 October. The same 22 selected
+metre gauges now include five Minor Flood, four Alert, eleven Normal and two
+unavailable readings. Rathnapura changes from Minor Flood to Alert; area warnings
+are unchanged. Galgamuwa and Thanthirimale remain missing. Weraganthota and newly
+missing Yaka Wewa are outside the selected directory, and Nagalagam Street's
+feet-based measurements are not added. Printed Normal rows have no inferred
+trend. The fifteen-hour rainfall totals ending midnight are not ingested as
+hourly rainfall or water level. Prior readings remain in provenance. Regression
+coverage verifies midnight date rollover, missing values and independent
+observation freshness. Later sections record the historical release sequence.
+
 Public route: `https://openatg.com/ark/`. The legacy `/floodlens/` entry redirects to `/ark/`; data/assets and automated publisher paths remain under `/floodlens/`. Existing deployment route: GitHub
 Pages, `UNIS25/openatg-site`, `main`, repository root, behind existing Cloudflare.
 No framework, backend, external font, runtime map library or new credential.
