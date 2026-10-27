@@ -3,8 +3,8 @@
   "kind": "infrared_cloud_imagery",
   "layer": "Himawari_AHI_Band13_Clean_Infrared",
   "provider": "JMA Himawari-9 AHI via NASA GIBS",
-  "capturedAt": "2026-10-27T13:10:00Z",
-  "retrievedAt": "2026-10-27T14:13:30.526647+00:00",
+  "capturedAt": "2026-10-27T14:00:00Z",
+  "retrievedAt": "2026-10-27T14:43:43.992900+00:00",
   "nativeResolutionKm": 2,
   "bbox": [
     79.189453125,
@@ -16,135 +16,135 @@
   "pixelHeight": 274,
   "frames": [
     {
-      "captureAt": "2026-10-27T12:50:00Z",
+      "captureAt": "2026-10-27T13:40:00Z",
       "path": "/floodlens/data/clouds/frame-0.png",
-      "sha256": "8039fe22e38288866398449d5f7f60d0384f95cd1120812772696245cc348c4b",
-      "bytes": 39011,
+      "sha256": "6a01037ab70efe0efeb5d9f04fee4cb769b7fb4dea98054bcf3dab35b2c1d7cd",
+      "bytes": 37262,
       "landPixelCoverage": 1.0,
       "samples": [
         {
           "publicTestLocation": "Colombo",
           "rgba": [
-            167,
-            167,
-            167,
+            149,
+            149,
+            149,
             255
           ]
         },
         {
           "publicTestLocation": "Puttalam",
           "rgba": [
-            134,
-            134,
-            134,
+            144,
+            144,
+            144,
             255
           ]
         },
         {
           "publicTestLocation": "Jaffna",
           "rgba": [
-            118,
-            118,
-            118,
+            123,
+            123,
+            123,
             255
           ]
         },
         {
           "publicTestLocation": "Ratnapura",
           "rgba": [
-            189,
-            189,
-            189,
+            117,
+            184,
+            186,
             255
           ]
         }
       ]
     },
     {
-      "captureAt": "2026-10-27T13:00:00Z",
+      "captureAt": "2026-10-27T13:50:00Z",
       "path": "/floodlens/data/clouds/frame-1.png",
-      "sha256": "941aad420a5b9957757754f8174d6a88e697378da1682ad35c992b509224ea23",
-      "bytes": 38086,
+      "sha256": "d1fc91f8870e66525451e473e78a72b65c3ea1527c348aa9ef7b7df523c665dc",
+      "bytes": 37572,
       "landPixelCoverage": 1.0,
       "samples": [
         {
           "publicTestLocation": "Colombo",
           "rgba": [
-            148,
-            148,
-            148,
+            140,
+            140,
+            140,
             255
           ]
         },
         {
           "publicTestLocation": "Puttalam",
           "rgba": [
-            148,
-            148,
-            148,
+            144,
+            144,
+            144,
             255
           ]
         },
         {
           "publicTestLocation": "Jaffna",
           "rgba": [
-            121,
-            121,
-            121,
+            125,
+            125,
+            125,
             255
           ]
         },
         {
           "publicTestLocation": "Ratnapura",
           "rgba": [
-            190,
-            190,
-            190,
+            168,
+            168,
+            168,
             255
           ]
         }
       ]
     },
     {
-      "captureAt": "2026-10-27T13:10:00Z",
+      "captureAt": "2026-10-27T14:00:00Z",
       "path": "/floodlens/data/clouds/frame-2.png",
-      "sha256": "3dc51ddc7ac764a974e6148c28d1f5e69d73fbd4a0bfd1039540ea4d2a87026a",
-      "bytes": 37928,
+      "sha256": "1eae3cd3c41b4eaf702fa370b033950ce99fa4bc8276c720869e4ebe9ecf4d49",
+      "bytes": 37709,
       "landPixelCoverage": 1.0,
       "samples": [
         {
           "publicTestLocation": "Colombo",
           "rgba": [
-            147,
-            147,
-            147,
+            130,
+            130,
+            130,
             255
           ]
         },
         {
           "publicTestLocation": "Puttalam",
           "rgba": [
-            152,
-            152,
-            152,
+            143,
+            143,
+            143,
             255
           ]
         },
         {
           "publicTestLocation": "Jaffna",
           "rgba": [
-            122,
-            122,
-            122,
+            127,
+            127,
+            127,
             255
           ]
         },
         {
           "publicTestLocation": "Ratnapura",
           "rgba": [
-            195,
-            195,
-            195,
+            175,
+            175,
+            175,
             255
           ]
         }
@@ -152,7 +152,7 @@
     }
   ],
   "unavailableFrames": [],
-  "advertisedLatestAt": "2026-10-27T13:10:00+00:00",
+  "advertisedLatestAt": "2026-10-27T14:00:00+00:00",
   "interpretation": "Infrared brightness-temperature colours. Clouds, not rain radar, floodwater, a warning or a forecast. Data are delayed; capture time is not retrieval time.",
   "attribution": "Japan Meteorological Agency Himawari-9 imagery, provided by NASA GIBS / ESDIS. Sri Lanka crop and outline display prepared by OpenATG. No endorsement.",
   "terms": "https://www.jma.go.jp/jma/en/copyright.html",
