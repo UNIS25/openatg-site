@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "capabilitiesUrl": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/1.0.0/WMTSCapabilities.xml",
-  "capabilitiesSha256": "aa8a33b606388b278d9290a281f900de51ae99fc24f94cb4258905b9cbf589be",
+  "capabilitiesSha256": "0acda75481ec574013c141b8b85496a19952c7fd480ccc32c561a2c3a9a93136",
   "matrix": {
     "identifier": "2km",
     "zoom": 5,
@@ -21,10 +21,82 @@
   "modifications": "Lossless mosaic and pixel-aligned fixed-country crop. No interpolation, recolouring, hazard interpretation or visitor-location query. Outline overlaid separately in the client.",
   "sources": [
     {
+      "url": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/Himawari_AHI_Band13_Clean_Infrared/default/2026-10-27T14:30:00Z/2km/5/8/28.png",
+      "sha256": "c67b6a3fdbcc15b06e26e06a7be15358fb8ba35c6356806686caa3ef58455a9a",
+      "bytes": 123638,
+      "retrievedAt": "2026-10-27T15:44:37.362775+00:00",
+      "captureAt": "2026-10-27T14:30:00Z",
+      "tileRow": 8,
+      "tileCol": 28
+    },
+    {
+      "url": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/Himawari_AHI_Band13_Clean_Infrared/default/2026-10-27T14:30:00Z/2km/5/8/29.png",
+      "sha256": "3ce623cc4a988396e65f665aa23252a7f1bdabb700d130f6db9581291f369c1e",
+      "bytes": 223912,
+      "retrievedAt": "2026-10-27T15:44:37.610675+00:00",
+      "captureAt": "2026-10-27T14:30:00Z",
+      "tileRow": 8,
+      "tileCol": 29
+    },
+    {
+      "url": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/Himawari_AHI_Band13_Clean_Infrared/default/2026-10-27T14:30:00Z/2km/5/9/28.png",
+      "sha256": "e8a7034f6a590d0772f12b93e41b4eae8c66164a10814647b09668319a587f9d",
+      "bytes": 177505,
+      "retrievedAt": "2026-10-27T15:44:37.846804+00:00",
+      "captureAt": "2026-10-27T14:30:00Z",
+      "tileRow": 9,
+      "tileCol": 28
+    },
+    {
+      "url": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/Himawari_AHI_Band13_Clean_Infrared/default/2026-10-27T14:30:00Z/2km/5/9/29.png",
+      "sha256": "0f2716209533b111e1b0716b7b3753681ef8c9f6a46efc01a623335df07baee6",
+      "bytes": 193526,
+      "retrievedAt": "2026-10-27T15:44:38.156621+00:00",
+      "captureAt": "2026-10-27T14:30:00Z",
+      "tileRow": 9,
+      "tileCol": 29
+    },
+    {
+      "url": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/Himawari_AHI_Band13_Clean_Infrared/default/2026-10-27T14:20:00Z/2km/5/8/28.png",
+      "sha256": "e4d24bd7b467bc3bc9e723125815ea9555c6cc397736b4a692411924b06f9fe1",
+      "bytes": 122874,
+      "retrievedAt": "2026-10-27T15:44:38.382460+00:00",
+      "captureAt": "2026-10-27T14:20:00Z",
+      "tileRow": 8,
+      "tileCol": 28
+    },
+    {
+      "url": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/Himawari_AHI_Band13_Clean_Infrared/default/2026-10-27T14:20:00Z/2km/5/8/29.png",
+      "sha256": "1311f592427fcb5816a3bf26cc2bdc228810685cca81e3f7897bf6eb26372ad0",
+      "bytes": 224375,
+      "retrievedAt": "2026-10-27T15:44:38.598042+00:00",
+      "captureAt": "2026-10-27T14:20:00Z",
+      "tileRow": 8,
+      "tileCol": 29
+    },
+    {
+      "url": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/Himawari_AHI_Band13_Clean_Infrared/default/2026-10-27T14:20:00Z/2km/5/9/28.png",
+      "sha256": "72f4efc092239e8d4734a29ef6084b5cb85e301a8c4fcb2efdd05997519a4ba8",
+      "bytes": 176868,
+      "retrievedAt": "2026-10-27T15:44:38.859048+00:00",
+      "captureAt": "2026-10-27T14:20:00Z",
+      "tileRow": 9,
+      "tileCol": 28
+    },
+    {
+      "url": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/Himawari_AHI_Band13_Clean_Infrared/default/2026-10-27T14:20:00Z/2km/5/9/29.png",
+      "sha256": "3c08e2396ba6d4f1147998e0ead2e390b90090a9eaae7c315e797114597a375e",
+      "bytes": 191596,
+      "retrievedAt": "2026-10-27T15:44:39.091157+00:00",
+      "captureAt": "2026-10-27T14:20:00Z",
+      "tileRow": 9,
+      "tileCol": 29
+    },
+    {
       "url": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/Himawari_AHI_Band13_Clean_Infrared/default/2026-10-27T14:10:00Z/2km/5/8/28.png",
       "sha256": "f5d092e0a1109ebda61b43f7f95d1fcf6edaf08afae228c4b7dd9534f726ad7b",
       "bytes": 122999,
-      "retrievedAt": "2026-10-27T15:13:21.343991+00:00",
+      "retrievedAt": "2026-10-27T15:44:39.380518+00:00",
       "captureAt": "2026-10-27T14:10:00Z",
       "tileRow": 8,
       "tileCol": 28
@@ -33,7 +105,7 @@
       "url": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/Himawari_AHI_Band13_Clean_Infrared/default/2026-10-27T14:10:00Z/2km/5/8/29.png",
       "sha256": "fcf36dec8a0eed5927befc6e602a78563abb0f292d1909a1ed99b26c726a5dd2",
       "bytes": 223997,
-      "retrievedAt": "2026-10-27T15:13:21.613310+00:00",
+      "retrievedAt": "2026-10-27T15:44:39.614868+00:00",
       "captureAt": "2026-10-27T14:10:00Z",
       "tileRow": 8,
       "tileCol": 29
@@ -42,7 +114,7 @@
       "url": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/Himawari_AHI_Band13_Clean_Infrared/default/2026-10-27T14:10:00Z/2km/5/9/28.png",
       "sha256": "ae36cea7895f132965db943dd4174b07d719fc917520860896dee4dff46e2ae5",
       "bytes": 177189,
-      "retrievedAt": "2026-10-27T15:13:21.937036+00:00",
+      "retrievedAt": "2026-10-27T15:44:39.907732+00:00",
       "captureAt": "2026-10-27T14:10:00Z",
       "tileRow": 9,
       "tileCol": 28
@@ -51,80 +123,8 @@
       "url": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/Himawari_AHI_Band13_Clean_Infrared/default/2026-10-27T14:10:00Z/2km/5/9/29.png",
       "sha256": "b06e8bdf5a2ed7b05907c50a93af38f348401bcd47fd14f75ab1ee7f5cb71013",
       "bytes": 190726,
-      "retrievedAt": "2026-10-27T15:13:22.222931+00:00",
+      "retrievedAt": "2026-10-27T15:44:40.326276+00:00",
       "captureAt": "2026-10-27T14:10:00Z",
-      "tileRow": 9,
-      "tileCol": 29
-    },
-    {
-      "url": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/Himawari_AHI_Band13_Clean_Infrared/default/2026-10-27T14:00:00Z/2km/5/8/28.png",
-      "sha256": "b4efa4ff0face2acd5d1de3459365c54d3ff32b564b3f0ee489e8255add224d6",
-      "bytes": 121937,
-      "retrievedAt": "2026-10-27T15:13:22.423622+00:00",
-      "captureAt": "2026-10-27T14:00:00Z",
-      "tileRow": 8,
-      "tileCol": 28
-    },
-    {
-      "url": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/Himawari_AHI_Band13_Clean_Infrared/default/2026-10-27T14:00:00Z/2km/5/8/29.png",
-      "sha256": "dd007846faea9ed7260d04cf19ff89e4f955c44b37cb5d329c7daf61c262ee2c",
-      "bytes": 225574,
-      "retrievedAt": "2026-10-27T15:13:22.663528+00:00",
-      "captureAt": "2026-10-27T14:00:00Z",
-      "tileRow": 8,
-      "tileCol": 29
-    },
-    {
-      "url": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/Himawari_AHI_Band13_Clean_Infrared/default/2026-10-27T14:00:00Z/2km/5/9/28.png",
-      "sha256": "c8692dd8230b2e56b5a9b455f18a3c53331f3f6c52e67ec3692eff1fd5c53ac6",
-      "bytes": 176747,
-      "retrievedAt": "2026-10-27T15:13:22.916088+00:00",
-      "captureAt": "2026-10-27T14:00:00Z",
-      "tileRow": 9,
-      "tileCol": 28
-    },
-    {
-      "url": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/Himawari_AHI_Band13_Clean_Infrared/default/2026-10-27T14:00:00Z/2km/5/9/29.png",
-      "sha256": "edd939e26b484950c02cdcb4bd2364594ef0bd06664720cc81d9da3f8cb5a5cd",
-      "bytes": 191554,
-      "retrievedAt": "2026-10-27T15:13:23.095877+00:00",
-      "captureAt": "2026-10-27T14:00:00Z",
-      "tileRow": 9,
-      "tileCol": 29
-    },
-    {
-      "url": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/Himawari_AHI_Band13_Clean_Infrared/default/2026-10-27T13:50:00Z/2km/5/8/28.png",
-      "sha256": "7977c4f3b1ef017ba10bd2cad6d1f3351c25f0ee62e242f9644029d3a8da3dfa",
-      "bytes": 120960,
-      "retrievedAt": "2026-10-27T15:13:23.236874+00:00",
-      "captureAt": "2026-10-27T13:50:00Z",
-      "tileRow": 8,
-      "tileCol": 28
-    },
-    {
-      "url": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/Himawari_AHI_Band13_Clean_Infrared/default/2026-10-27T13:50:00Z/2km/5/8/29.png",
-      "sha256": "330d997263ee4e16762da707f3ef68af534ae9c815a7e99801080e6046d8eaa1",
-      "bytes": 225238,
-      "retrievedAt": "2026-10-27T15:13:23.438110+00:00",
-      "captureAt": "2026-10-27T13:50:00Z",
-      "tileRow": 8,
-      "tileCol": 29
-    },
-    {
-      "url": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/Himawari_AHI_Band13_Clean_Infrared/default/2026-10-27T13:50:00Z/2km/5/9/28.png",
-      "sha256": "3c88ba9ef909a0cdef89449f52e2c4ae699a39bce3aec7d05ab1139d776d5fec",
-      "bytes": 177461,
-      "retrievedAt": "2026-10-27T15:13:23.736938+00:00",
-      "captureAt": "2026-10-27T13:50:00Z",
-      "tileRow": 9,
-      "tileCol": 28
-    },
-    {
-      "url": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/Himawari_AHI_Band13_Clean_Infrared/default/2026-10-27T13:50:00Z/2km/5/9/29.png",
-      "sha256": "32d5c7c63bd03f28b6e33c5f707a83bf6dc2043bbcd349339c39327e07c2c2d7",
-      "bytes": 191316,
-      "retrievedAt": "2026-10-27T15:13:23.968013+00:00",
-      "captureAt": "2026-10-27T13:50:00Z",
       "tileRow": 9,
       "tileCol": 29
     }
