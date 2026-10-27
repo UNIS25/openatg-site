@@ -12133,6 +12133,154 @@
         "finding": "Prior Bulletin 07 timed validity elapsed. Newer Bulletin 08 has conflicting header/map times and is displayed separately; no cancellation or explicit supersedes statement found. Until-further-notice guidance is not cancelled by expiry."
       },
       "marineTimingDiscrepancy": "Header issued 21:00 SLST on 27 October for 24 hours; map caption issued 20:00 and valid until 20:00 on 28 October. No unambiguous issue/expiry is asserted. Until-further-notice guidance remains distinct."
+    },
+    {
+      "checkedAt": "2026-10-27T20:42:21+00:00",
+      "reviewedAt": "2026-10-27T20:42:21+00:00",
+      "method": "Completed independent public DMC review relayed by coordinating task: 100 listings in each of types 6, 5 and 2 and fresh hashes of all twenty-two relevant original PDFs; no changed source interpretation.",
+      "result": "No source change: all 300 listings and twenty-two original PDFs were freshly fetched and match the visually reviewed versions, with no source blockers. DMC review completed at 20:42:21 UTC on 27 October / 02:12:21 SLST on 28 October. No new warning, renewal, cancellation or supersession found. Midnight river observations remain 00:00 SLST on 28 October, issued 00:30, with the previous column at 23:00 on 27 October; five Minor Flood and four Alert classifications, and missing readings unchanged. Marine Bulletin 08 retains both conflicting time windows and until-further-notice sea guidance. Lightning and Gin validity remains elapsed, not an all-clear. Review time does not refresh observations.",
+      "previousPublicReviewAt": "2026-10-27T20:15:18+00:00",
+      "listingCoverage": {
+        "rowsScanned": 300,
+        "categories": [
+          6,
+          5,
+          2
+        ],
+        "completeForListingWindow": true
+      },
+      "verifiedCurrentSnapshotHashes": [
+        {
+          "id": "kalu-20261027-02",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Flood_warning_for_Kalu_River_Basin_-_No_02_-_(Extended_warning)_2026__1793090488.pdf",
+          "sha256": "c552b54d56512af5fcd2a8b3a26bcf3f718b13a76168ff910dc5c8ae87142a80"
+        },
+        {
+          "id": "mahaweli-20261026-01",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Flood_Warning_for_Mahaweli_River_-_No_01_-_2026__1792998739.pdf",
+          "sha256": "8746dbc111719bf59283836919e8ead312f8889fa29d6d9992d70e57d205a560"
+        },
+        {
+          "id": "LEWM-27-10-2026-1600-34",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Landslide_EW_Report_at_1600hrs_on_2026__1793098165.pdf",
+          "sha256": "6734f8541331b9fcbf5a70a60b2d1dcca291f90a138fa2e7240180a71bfe64aa"
+        },
+        {
+          "id": "rain-20261026-0300",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Advisory_for_Heavy_Rain_at_0330_hrs_on_2026__1792968291.pdf",
+          "sha256": "0bd573752b1965d56fd8ec4ae0c372cba2766bb66294bfc2b6acef1c6d5e6136"
+        },
+        {
+          "id": "LLA-26-10-27-01-04",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Advisory_for_Severe_Lightning_at_1130hrs_on_27__1793082700.pdf",
+          "sha256": "34383e5c53aef78a5d6f93e4636a3d1d794f992178d3b3e148e24f935211a445"
+        },
+        {
+          "id": "kelani-20261026-01",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Flood_Warning_for_Kelani_Basin-_No_01_-_2026__1793020603.pdf",
+          "sha256": "7ef2fd77855a9bf433e6bab591dcdbf53cc4b7301925ef0bfe248e3aa0e3edd4"
+        },
+        {
+          "id": "attanagalu-20261026-01",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Flood_Warning_FOR_Attanagalu_Oya__-_NO_01_%282026__1793020643.pdf",
+          "sha256": "aee26763cf95bbe1c092b17161ac34a0f33c7c6cf24b6b9fc118bc0453f67b72"
+        },
+        {
+          "id": "gin-20261026-01",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Flood_warning_for_Gin_River_Basin_-_NO_01_(2026__1793038211.pdf",
+          "sha256": "8c83b04f7f2c1126a6bb5334ae48b69b842d2d6962d9d0c179cd97ba670de9c3"
+        },
+        {
+          "id": "river-observations",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793128484.pdf",
+          "sha256": "758cc85a7b562c60dc1f891f86e1dc0a53c7b6a662744a91d5a370ab0283d21c"
+        }
+      ],
+      "verifiedOfficialTranslations": [
+        {
+          "id": "LLA-26-10-27-01-04-ta",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Advisory_for_Severe_Lightning_at_1130hrs_on_27__1793085463.pdf",
+          "sha256": "8b0358d94e2291952b23235d8511eb683146eca1fd25938cb8c5a22dbc5c7485"
+        }
+      ],
+      "googlePublicObservation": {
+        "checkedAt": "2026-10-27T20:42:00+00:00",
+        "observationWindow": "2026-10-27 20:42 UTC, minute precision as reported by reviewer",
+        "method": "Independent public-browser review relayed by coordinating task.",
+        "overview": "Expanded orange shading south of Puttalam and west of Kurunegala unchanged. Provider display only, not observed inundation or copied geometry.",
+        "puttalam": "Unsupported/no flooding data, unshaded. Unavailable information, not an all-clear.",
+        "kalaWewa": "Orange Warning with the same banner and discharge curve. Higher-confidence HYBAS designation and 41/73/153 m3/s thresholds unchanged. River-discharge forecast node, not reservoir or gate measurements.",
+        "providerIssuedAt": null,
+        "providerValidUntil": null,
+        "limitations": "No explicit issuance/update time or exact validity endpoints displayed. Observation time, chart Now and relative chart labels (currently in 3 hours) are not issuance, validity or household flood-arrival times. No copied geometry, inundation footprint, reservoir telemetry, household danger or safety is inferred. Puttalam remains unsupported/no flooding data, not an all-clear.",
+        "sourceUrl": "https://sites.research.google/floods/l/8.01027646645311/80.5352783203125/10/g/hybas_4121156830?hl=en-LK",
+        "nodeId": "hybas_4121156830",
+        "displayStatus": "Warning",
+        "previousDisplayStatus": "Warning",
+        "previousObservedAt": "2026-10-27T20:16:00+00:00",
+        "observedBanner": "Similar to highest river level in 2026",
+        "changeType": "public_forecast_display_unchanged",
+        "thresholdsCubicMetresPerSecond": [
+          41,
+          73,
+          153
+        ]
+      },
+      "unchangedGeneralForecastDiscrepancy": {
+        "id": "general-weather-20261027-1600-conflicted",
+        "sha256": "7e5725887258706ffeb7845502dec6fca6d8d267014d3177b80969cf0787c678",
+        "resolution": "Unresolved; original language dates and both same-observation-time positions retained in previous review provenance."
+      },
+      "elapsedWarningValidity": [
+        {
+          "id": "kelani-20261026-01",
+          "expiresAt": "2026-10-27T18:00:00+05:30",
+          "finding": "Validity elapsed; no extension, replacement or cancellation found. Not an all-clear."
+        },
+        {
+          "id": "attanagalu-20261026-01",
+          "expiresAt": "2026-10-27T18:00:00+05:30",
+          "finding": "Validity elapsed; no extension, replacement or cancellation found. Not an all-clear."
+        },
+        {
+          "id": "gin-20261026-01",
+          "expiresAt": "2026-10-27T22:30:00+05:30",
+          "finding": "Validity elapsed; no extension, replacement or cancellation found. Not an all-clear."
+        },
+        {
+          "id": "LLA-26-10-27-01-04",
+          "expiresAt": "2026-10-27T23:30:00+05:30",
+          "finding": "Validity elapsed; no renewal, replacement or cancellation found. Not an all-clear."
+        }
+      ],
+      "verifiedBaselineOriginalCount": 22,
+      "verifiedMarineSource": {
+        "id": "MSW-26-10-27-02-08",
+        "url": "https://www.dmc.gov.lk/images/dmcreports/Warning_for_strong_winds_and_rough_seas_at_2100hrs_on_27__1793119377.pdf",
+        "sha256": "a6ae16c15d85ba25e3e8613ed6a1ac0da42d24cdceb389f4ddb32de6d92c294f",
+        "issuedAt": null,
+        "expiresAt": null,
+        "sourceTimeWindows": [
+          {
+            "part": "header",
+            "issuedAt": "2026-10-27T21:00:00+05:30",
+            "expiresAt": "2026-10-28T21:00:00+05:30",
+            "expiryBasis": "Header says next 24 hours"
+          },
+          {
+            "part": "map",
+            "issuedAt": "2026-10-27T20:00:00+05:30",
+            "expiresAt": "2026-10-28T20:00:00+05:30",
+            "expiryBasis": "Explicit map caption"
+          }
+        ]
+      },
+      "elapsedMarineValidity": {
+        "id": "MSW-26-10-27-01-07",
+        "expiresAt": "2026-10-27T20:00:00+05:30",
+        "finding": "Prior Bulletin 07 timed validity elapsed. Newer Bulletin 08 has conflicting header/map times and is displayed separately; no cancellation or explicit supersedes statement found. Until-further-notice guidance is not cancelled by expiry."
+      },
+      "marineTimingDiscrepancy": "Header issued 21:00 SLST on 27 October for 24 hours; map caption issued 20:00 and valid until 20:00 on 28 October. No unambiguous issue/expiry is asserted. Until-further-notice guidance remains distinct."
     }
   ]
 }
