@@ -1,7 +1,7 @@
-import {copy} from './i18n.mjs?v=20261027-29';
-import {renderReservoirs,refreshReservoirs} from './reservoirs.mjs?v=20261027-29';
-import {createFlow} from './flow.mjs?v=20261027-30';
-import {warningSourceUrl,warningState,ageState,dailyAgeState,warningMatches,assessment,validateSnapshot,intersectsAccuracy,locationCandidates,insideGeometry} from './core.mjs?v=20261027-29';
+import {copy} from './i18n.mjs?v=20261027-31';
+import {renderReservoirs,refreshReservoirs} from './reservoirs.mjs?v=20261027-31';
+import {createFlow} from './flow.mjs?v=20261027-31';
+import {warningSourceUrl,warningState,ageState,dailyAgeState,warningMatches,assessment,validateSnapshot,intersectsAccuracy,locationCandidates,insideGeometry} from './core.mjs?v=20261027-31';
 const $=s=>document.querySelector(s);
 let lang='en',data=null,catalog=null,selected=null,locationMessage='',outside=false,loadFailed=false,loading=false,needsUpdate=false;
 const t=k=>copy[lang][k]??copy.en[k]??k;
@@ -48,8 +48,9 @@ function renderStations(){
   const wrap=$('#stations');wrap.replaceChildren();if(!data){wrap.append(el('p','empty-state',t(needsUpdate?'updateRequiredBody':loadFailed?'dataError':'loading')));return;}
   const query=$('#station-search').value.trim().toLocaleLowerCase();
   const stations=data.stations.filter(s=>(s.name+' '+s.basin).toLocaleLowerCase().includes(query));
-  for(const s of stations){const card=el('article','station');card.append(el('h3','',s.name),el('p','basin',s.basin));const level=el('div','level',s.value.toFixed(2)+' ');level.append(el('span','',s.unit));card.append(level,el('p','status',t(s.status)),el('p','small',`${t('observationAt')}: ${date(s.observedAt)}`));
-    const freshness=ageState(s.observedAt,3);if(freshness!=='fresh')card.append(el('p','small',t(freshness==='unknown'?'ageUnknown':'stale')));
+  for(const s of stations){const missing=s.status==='unavailable',card=el('article','station');card.append(el('h3','',s.name),el('p','basin',s.basin));const level=el('div','level',missing?'—':s.value.toFixed(2)+' ');if(!missing)level.append(el('span','',s.unit));card.append(level,el('p','status',t(s.status)),el('p','small',`${t(missing?'reportObservationAt':'observationAt')}: ${date(missing?s.reportObservationAt:s.observedAt)}`));
+    if(missing)card.append(el('p','small',t('missingReading')));
+    else{const freshness=ageState(s.observedAt,3);if(freshness!=='fresh')card.append(el('p','small',t(freshness==='unknown'?'ageUnknown':'stale')));}
     card.append(el('p','small',t('gaugeNote')),link(s.url,t('report')));wrap.append(card);
   }
   if(!stations.length)wrap.append(el('p','empty-state',t('noStations')));

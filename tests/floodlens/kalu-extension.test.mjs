@@ -22,6 +22,6 @@ test('old Kalu source is preserved in provenance; unrelated Mahaweli expiry is u
  assert.equal(data.bulletins.some(w=>w.id===previous.id),false);const m=data.bulletins.find(w=>w.id==='mahaweli-20261026-01');assert.equal(m.expiresAt,'2026-10-27T11:30:00+05:30');assert.equal(warningState(m,Date.parse('2026-10-27T08:44:00Z')),'expired');
 });
 test('dated river observations cannot suppress the new active Kalu warning',()=>{
- const now=Math.max(...data.stations.map(s=>Date.parse(s.observedAt)))+4*3600000,area=catalog.divisions.find(a=>a.code==='LK1309');assert.equal(warningState(current,now),'active');assert.equal(locationEvidence(data.bulletins,[area],{now}).source.id,current.id);
- for(const station of data.stations)assert.equal(ageState(station.observedAt,3,now),'stale');
+ const now=Math.max(...data.stations.map(s=>Date.parse(s.observedAt)).filter(Number.isFinite))+4*3600000,area=catalog.divisions.find(a=>a.code==='LK1309');assert.equal(warningState(current,now),'active');assert.equal(locationEvidence(data.bulletins,[area],{now}).source.id,current.id);
+ for(const station of data.stations)assert.equal(ageState(station.observedAt,3,now),station.status==='unavailable'?'unknown':'stale');
 });

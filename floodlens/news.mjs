@@ -1,4 +1,4 @@
-import {warningState,safeSource} from './core.mjs?v=20261027-29';
+import {warningState,safeSource} from './core.mjs?v=20261027-31';
 export function expiredMarineBulletin(snapshot,now=Date.now()){
  if(!Number.isFinite(now)||!Number.isFinite(Date.parse(snapshot?.reviewedAt))||Date.parse(snapshot.reviewedAt)>now)return null;
  const latest=(snapshot?.marineBulletins||[]).filter(w=>w.kind==='marine'&&w.scope==='sea_only'&&safeSource(w.url)&&/^[a-f0-9]{64}$/.test(w.sha256)&&Date.parse(w.reviewedAt)<=now&&Date.parse(w.issuedAt)<=now&&Date.parse(w.expiresAt)>Date.parse(w.issuedAt)).sort((a,b)=>Date.parse(b.issuedAt)-Date.parse(a.issuedAt))[0];

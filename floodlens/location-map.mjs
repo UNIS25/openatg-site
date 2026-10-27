@@ -1,5 +1,5 @@
-import {gateSummary} from './gates.mjs?v=20261027-29';
-import {StreetMap,streetEnabled} from './street-map.mjs?v=20261027-29';
+import {gateSummary} from './gates.mjs?v=20261027-31';
+import {StreetMap,streetEnabled} from './street-map.mjs?v=20261027-31';
 // Matching and road rendering are local; no geocoder, tile service or location storage.
 const ns='http://www.w3.org/2000/svg';
 const node=(tag,attrs={})=>{const n=document.createElementNS(ns,tag);for(const [k,v] of Object.entries(attrs))n.setAttribute(k,String(v));return n;};

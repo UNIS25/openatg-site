@@ -1069,3 +1069,26 @@ A newer active marine bulletin suppresses the older expiry notice. Invalid,
 future or non-marine sources fail closed. Inland assessments are unchanged.
 Changed app/flow/news modules use version 20261027-30; unchanged modules retain
 their existing cache identities. No snapshot schema or publisher path change.
+
+## 27 October 21:30 SLST river update and missing readings
+
+The original 21:30 report was downloaded and visually checked locally against
+an independent review. Its 21:00 observations and 20:00 comparison replace the
+selected 18:00 snapshot: six Minor Flood, three Alert, eleven Normal and two
+unavailable stations. Thalgahagoda becomes Minor Flood with a blank trend;
+Putupaula is Alert with a blank trend. No trend is inferred from equal numbers.
+Galgamuwa and Thanthirimale have dashes and no classification. Both values,
+observation times, source remarks and trend remain null. Their report's target
+21:00 time is a separate `reportObservationAt`, not an actual observation.
+Old values remain in provenance only. Weraganthota is also missing in the source
+but outside the selected station directory. The twelve-hour rainfall column is
+not ingested as level data. All selected numeric gauges use metres.
+
+Client 10 validates this explicit unavailable contract and renders an em dash,
+non-official trilingual missing-reading labels and the original PDF link. The
+snapshot requires client 10; older open clients request a reload before using
+this data. Null never becomes zero, Normal or an all-clear. Warning validity,
+marine until-further-notice instructions and review-age safeguards are unchanged.
+The completed DMC review is 16:13:47 UTC; the separate Google public observation
+is 16:13–16:14 UTC, unchanged Warning at the Kala Wewa HYBAS forecast node, with
+provider issuance/validity unknown. These checks do not renew source times.

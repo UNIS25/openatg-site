@@ -1,5 +1,5 @@
 export const HOUR = 3600000;
-export const CLIENT_VERSION = 9;
+export const CLIENT_VERSION = 10;
 export function warningState(w, now=Date.now()) {
   const start=Date.parse(w.issuedAt),end=Date.parse(w.expiresAt);
   if(!Number.isFinite(start)||!Number.isFinite(end)||end<=start||now<start) return 'unknown';
@@ -103,7 +103,12 @@ export function validateSnapshot(d,clientVersion=CLIENT_VERSION) {
     if(w.areas.some(a=>a.level!==undefined&&![1,2,3].includes(a.level))){const error=new Error('Unsupported warning severity');error.code='CLIENT_UPDATE_REQUIRED';throw error;}
   }
   for(const s of d.stations){
-    if(!Number.isFinite(s.value)||!['m','ft'].includes(s.unit)||!safeSource(s.url))throw Error('Invalid station');
+    if(!['m','ft'].includes(s.unit)||!safeSource(s.url))throw Error('Invalid station');
+    if(s.status==='unavailable'){
+      if(!Number.isInteger(d.minClientVersion)||d.minClientVersion<10||['value','previousValue','observedAt','previousObservedAt','sourceRemarks','sourceTrend'].some(k=>s[k]!==null)||!Number.isFinite(Date.parse(s.reportObservationAt))||!Number.isFinite(Date.parse(s.issuedAt))||Date.parse(s.reportObservationAt)>Date.parse(s.issuedAt))throw Error('Invalid unavailable station');
+      continue;
+    }
+    if(!Number.isFinite(s.value))throw Error('Invalid station');
     if(!['normal','minorRising','minorFalling','minorNoTrend','alertRising','alertFalling','alertNoTrend'].includes(s.status)){const error=new Error('Unsupported station classification');error.code='CLIENT_UPDATE_REQUIRED';throw error;}
   }
   for(const s of d.stations)if(['alertNoTrend','minorNoTrend'].includes(s.status)&&(s.sourceTrend!==null||s.sourceRemarks!==(s.status==='minorNoTrend'?'Minor Flood':'Alert')))throw Error('Invalid no-trend station');

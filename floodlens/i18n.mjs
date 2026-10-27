@@ -98,3 +98,8 @@ Object.assign(copy.ta,{noWarningFound:'மதிப்பாய்வு செ�
 Object.assign(copy.en,{placePin:'Choose on map',zoomIn:'Zoom in',zoomOut:'Zoom out'});
 Object.assign(copy.si,{placePin:'සිතියමෙන් තෝරන්න',zoomIn:'සිතියම විශාල කරන්න',zoomOut:'සිතියම කුඩා කරන්න'});
 Object.assign(copy.ta,{placePin:'வரைபடத்தில் தேர்ந்தெடு',zoomIn:'வரைபடத்தைப் பெரிதாக்கு',zoomOut:'வரைபடத்தைச் சிறிதாக்கு'});
+
+// Non-official interface labels; original station report remains linked.
+Object.assign(copy.en,{unavailable:'Reading unavailable',reportObservationAt:'Report for',missingReading:'No reading or classification reported. Not an all-clear.'});
+Object.assign(copy.si,{unavailable:'මිනුම ලබා දී නැත',reportObservationAt:'වාර්තාව අදාළ වේලාව',missingReading:'මිනුමක් හෝ තත්ත්ව වර්ගීකරණයක් වාර්තා කර නැත. මෙය ආරක්ෂිත බවට තහවුරු කිරීමක් නොවේ.'});
+Object.assign(copy.ta,{unavailable:'அளவீடு கிடைக்கவில்லை',reportObservationAt:'அறிக்கைக்கான நேரம்',missingReading:'அளவீடும் நிலை வகைப்பாடும் தெரிவிக்கப்படவில்லை. இது பாதுகாப்பு உறுதிப்படுத்தல் அல்ல.'});
