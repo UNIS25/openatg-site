@@ -1,5 +1,5 @@
 // Dated observation context. No fetch, storage or household hazard inference.
-import {locationEvidence} from './core.mjs?v=20261026-20';
+import {locationEvidence} from './core.mjs?v=20261026-22';
 const HOUR=3600000;
 const validPoint=p=>Array.isArray(p)&&p.length===2&&p.every(Number.isFinite)&&Math.abs(p[0])<=180&&Math.abs(p[1])<=90;
 const contains=(b,p)=>b&&p[0]>=b[0]&&p[0]<=b[2]&&p[1]>=b[1]&&p[1]<=b[3];
@@ -64,6 +64,10 @@ export function mediaReservoirReport(data,tankCode,now=Date.now()){
  const records=data.records?.filter(r=>r.tankCode===tankCode);if(records?.length!==1)return null;const r=records[0];
  if(!Number.isInteger(r.gateCount)||r.gateCount<1||r.gateCount>30||!Number.isFinite(r.spillCusecs)||r.spillCusecs<0||!Array.isArray(r.groups)||r.groups.some(g=>!Number.isInteger(g.count)||g.count<1||!Number.isFinite(g.openingFeet)||g.openingFeet<=0||g.openingFeet>30)||r.groups.reduce((n,g)=>n+g.count,0)!==r.gateCount)return null;
  return {...r,source:data.source,url:data.url,publishedAt:data.publishedAt,operationAt:null};
+}
+export function officialRecordAfterMedia(record,report){
+ const t=Date.parse(report?.publishedAt);if(!record?.observedDate||!Number.isFinite(t))return false;
+ const publishedDay=new Date(t+19800000).toISOString().slice(0,10);return /^\d{4}-\d{2}-\d{2}$/.test(record.observedDate)&&record.observedDate>publishedDay;
 }
 export function assemble(point,{satellite,rainfall,points,directory,reviewed,areas=[]},{now=Date.now(),accuracy=0}={}){
  if(!validPoint(point))throw Error('Invalid point');

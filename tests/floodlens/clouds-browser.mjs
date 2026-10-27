@@ -35,13 +35,13 @@ try{
   assert.equal(await page.locator('#cloud-imagery').getAttribute('open'),null);
   assert.ok(!requests.some(u=>u.includes('/data/clouds/')));
   await open(page);await page.locator('#cloud-imagery svg image').waitFor();
-  assert.match(await page.locator('#cloud-imagery .cloud-time').innerText(),/01:30/);
+  assert.match(await page.locator('#cloud-imagery .cloud-time').innerText(),/09:40/);
   assert.match(await page.locator('#cloud-imagery .cloud-time').innerText(),/40/);
   assert.equal(await page.locator('#cloud-imagery svg path').count(),2);
   assert.equal(await page.locator('#cloud-imagery svg circle').count(),1);
   assert.equal(await page.locator('#cloud-imagery svg image').getAttribute('href'),cloud.frames[2].path);
   const slider=page.locator('#cloud-imagery input[type=range]');
-  await slider.fill('0');assert.match(await page.locator('#cloud-imagery .cloud-time').innerText(),/01:10/);
+  await slider.fill('0');assert.match(await page.locator('#cloud-imagery .cloud-time').innerText(),/09:20/);
   await page.locator('#cloud-imagery .cloud-controls button').click();
   await page.waitForFunction(()=>document.querySelector('#cloud-imagery input').value==='1');
   assert.equal(await page.locator('#cloud-imagery svg image').getAttribute('href'),cloud.frames[1].path);

@@ -749,3 +749,55 @@ frames. All four source tiles per frame, country alpha coverage and four
 public-location pixels passed validation; the latest source crop was visually
 inspected. New timestamped images preserve immutable paths for older clients.
 The new cloud snapshot hides after 23:00 UTC, three hours after capture.
+
+## Google Puttalam availability note, checked 26 October 21:13 UTC
+
+Independent public-page review found the Puttalam place panel unsupported / no
+flooding data, with the earlier orange shading absent on the later check.
+Ark never copied that shading or the previous Likely label. Its fixed town
+link now records the unavailable-data check at 27 October 02:43 SLST, not a
+forecast issue/valid time. This is explicitly not a cancellation or all-clear;
+the limitation around dam operations is retained in all three languages. No
+Google geometry, private API, visitor coordinates or inferred expiry is used.
+
+## Morning restoration, 27 October 2026
+
+Manual release after Mac reconnection. DMC categories 6/5/2 lists (100 rows each)
+and all eight selected warning PDF hashes were checked; no newer land warning
+or cancellation was found. Warning review time records this actual review;
+expired heavy-rain/lightning validity is not extended by the general forecast.
+The 09:30 SLST river report was visually reviewed: 09:00 current and 08:00
+previous columns, all 21 selected gauges in metres, four Minor Flood and seven
+Alert. Moragaswewa, Galgamuwa and Thanthirimale were added. Blank source trends
+remain null; Normal station readings never cancel land warnings. The 24-hour
+rainfall column ends 08:30 and is not mixed into water levels.
+
+The 08:00 Red marine bulletin 07 expires 20:00 SLST and is kept in a separate
+sea-only news collection. It never enters inland location assessments or DS
+warning polygons. Original restricted sea areas/instructions remain linked.
+
+The actual official CSV now includes 56 Oct 27 records, eight Oct 26, five older
+and five invalid/unknown dates. Batalagoda is dated Oct 27, 230 cusecs. Tabbowa
+reports 1,320 cusecs, six gates at 1 ft; Inginimitiya 3,000 cusecs, two 2 ft and two 1 ft.
+No operation time is reported. A newer official report date now keeps that
+record prominent and collapses the older Oct 26 media report separately. Raw
+remarks, source hashes and all unknown dates are retained.
+
+ECMWF 18 UTC Oct 26 was the latest actually available run in the public listing;
+Oct 27 00 UTC index returned 404. All 54 fields and 17 native 3-hour intervals were
+validated. Independent original GRIB endpoint/wind checks cover three full
+24-hour windows at 198 grid centres. No newer model issue was invented.
+Clouds were actually acquired03:50/04:00/04:10 UTC Oct 27, expiry 07:10 UTC; all
+country coverage and public test pixels passed. The existing Colombo tide
+snapshot remains valid until 28 Oct 18:30 UTC and was not cosmetically re-dated.
+
+RSMC 09 issued 04 UTC based 00 UTC and national 16 issued 09:30 IST agree on all ten
+track-table rows. Only reported/discrete forecast centres are drawn.07UTC is
+Ark's three-hour review deadline, not an invented official next issue. Prior
+source identity/hashes remain in the new snapshot and Git history.
+
+Google Puttalam remained unsupported at the independent 05:14 UTC review
+(10:44 SLST); this source-check time is not a model issue/expiry or cancellation.
+Both existing GitHub workflows are active, but the API history at 05:09 UTC had
+no run after 00:21. The missed cadence is confirmed; its cause is not. No
+schedule, permission or automated publishing path was changed.

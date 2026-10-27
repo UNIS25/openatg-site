@@ -3,58 +3,30 @@
   "kind": "reviewed_official_cyclone_forecast",
   "name": "Arnab",
   "agency": "IMD / RSMC New Delhi",
-  "issuedAt": "2026-10-26T18:00:00Z",
-  "analysisAt": "2026-10-26T15:00:00Z",
-  "validUntil": "2026-10-31T18:00:00Z",
-  "nextReviewDueAt": "2026-10-26T21:00:00Z",
-  "reviewedAt": "2026-10-26T20:14:41.509370+00:00",
+  "issuedAt": "2026-10-27T04:00:00Z",
+  "analysisAt": "2026-10-27T00:00:00Z",
+  "validUntil": "2026-11-01T04:00:00Z",
+  "nextReviewDueAt": "2026-10-27T07:00:00Z",
+  "reviewedAt": "2026-10-27T05:22:26.797578+00:00",
   "source": {
-    "file": "rsmc06.pdf",
-    "url": "https://mausam.imd.gov.in/backend/assets/cyclone_pdf/Tropical_cyclone_advisory_No__6_based_on_1500_UTC_of_26_10_2026.pdf",
-    "sha256": "e1e1e20189bf9806672c3747525140e80d5f568c80468b2d5c5021e8576aa790",
-    "bytes": 1822281,
-    "retrievedAt": "2026-10-26T20:10:00.938283+00:00"
+    "id": "rsmc09",
+    "url": "https://mausam.imd.gov.in/backend/assets/cyclone_pdf/Tropical_cyclone_advisory_No__9_based_on_0000_UTC_of_27_10_2026.pdf",
+    "sha256": "872958e7e106f51b2839ba4d98a0e7eaf387f43276ac83cf5b11ca68d9f2c2ce",
+    "bytes": 1836666,
+    "retrievedAt": "2026-10-27T05:11:59.430915+00:00"
   },
   "corroboration": {
-    "file": "national13.pdf",
-    "url": "https://mausam.imd.gov.in/Forecast/marquee_data/13.%20National%20Bulletin%20No%2013-26Oct2026_2030IST.pdf",
-    "sha256": "0ce2ba8b86ac033ce5d76ab1c05c15d9c751dc8baf3f5c8d555982e8772ea93b",
-    "bytes": 3527527,
-    "retrievedAt": "2026-10-26T20:09:54.201205+00:00"
+    "id": "national16",
+    "url": "https://mausam.imd.gov.in/Forecast/marquee_data/16.%20National%20Bulletin%20No%2016-27Oct2026_0530IST.pdf",
+    "sha256": "2a365e6e509c32102af7fe1b465eb82b4b0f53bd6fdc4f39b80fe3fa978f4b43",
+    "bytes": 4015761,
+    "retrievedAt": "2026-10-27T05:14:30.848068+00:00"
   },
   "points": [
     {
-      "at": "2026-10-26T15:00:00Z",
-      "point": [
-        86.8,
-        15.8
-      ],
-      "windKmh": [
-        105,
-        115
-      ],
-      "gustKmh": 125,
-      "classification": "Severe Cyclonic Storm",
-      "type": "reported"
-    },
-    {
-      "at": "2026-10-26T18:00:00Z",
-      "point": [
-        86.5,
-        15.8
-      ],
-      "windKmh": [
-        115,
-        125
-      ],
-      "gustKmh": 140,
-      "classification": "Very Severe Cyclonic Storm",
-      "type": "forecast"
-    },
-    {
       "at": "2026-10-27T00:00:00Z",
       "point": [
-        85.7,
+        84.8,
         15.9
       ],
       "windKmh": [
@@ -63,27 +35,41 @@
       ],
       "gustKmh": 155,
       "classification": "Very Severe Cyclonic Storm",
-      "type": "forecast"
+      "type": "reported"
     },
     {
       "at": "2026-10-27T06:00:00Z",
       "point": [
-        84.9,
+        83.9,
         16.0
       ],
       "windKmh": [
-        135,
-        145
+        150,
+        160
       ],
-      "gustKmh": 160,
+      "gustKmh": 180,
       "classification": "Very Severe Cyclonic Storm",
       "type": "forecast"
     },
     {
       "at": "2026-10-27T12:00:00Z",
       "point": [
-        84.1,
+        83.2,
         16.1
+      ],
+      "windKmh": [
+        150,
+        160
+      ],
+      "gustKmh": 180,
+      "classification": "Very Severe Cyclonic Storm",
+      "type": "forecast"
+    },
+    {
+      "at": "2026-10-27T18:00:00Z",
+      "point": [
+        82.4,
+        16.2
       ],
       "windKmh": [
         135,
@@ -96,8 +82,8 @@
     {
       "at": "2026-10-28T00:00:00Z",
       "point": [
-        82.6,
-        16.5
+        82.2,
+        16.4
       ],
       "windKmh": [
         125,
@@ -110,22 +96,22 @@
     {
       "at": "2026-10-28T12:00:00Z",
       "point": [
-        81.7,
-        17.6
+        81.8,
+        17.4
       ],
       "windKmh": [
-        70,
-        80
+        90,
+        100
       ],
-      "gustKmh": 90,
-      "classification": "Cyclonic Storm",
+      "gustKmh": 110,
+      "classification": "Severe Cyclonic Storm",
       "type": "forecast"
     },
     {
       "at": "2026-10-29T00:00:00Z",
       "point": [
-        81.4,
-        19.4
+        81.6,
+        19.2
       ],
       "windKmh": [
         50,
@@ -138,22 +124,36 @@
     {
       "at": "2026-10-29T12:00:00Z",
       "point": [
-        81.4,
+        81.6,
         21.1
       ],
       "windKmh": [
-        35,
-        45
+        45,
+        55
       ],
-      "gustKmh": 55,
+      "gustKmh": 65,
       "classification": "Depression",
       "type": "forecast"
     },
     {
       "at": "2026-10-30T00:00:00Z",
       "point": [
-        81.5,
-        22.8
+        81.8,
+        22.9
+      ],
+      "windKmh": [
+        30,
+        40
+      ],
+      "gustKmh": 50,
+      "classification": "Depression",
+      "type": "forecast"
+    },
+    {
+      "at": "2026-10-30T12:00:00Z",
+      "point": [
+        82.0,
+        24.6
       ],
       "windKmh": [
         25,
@@ -165,12 +165,30 @@
     }
   ],
   "reviewNotes": [
-    "Rendered original RSMC pages 1 and 2; verified UTC issue/analysis, 120-hour stated validity and all ten table rows. National bulletin 13 table agrees after conversion from IST to UTC.",
-    "RSMC heading says advisory 06 but its prose says 05. Identity is source URL/hash and issue/analysis times, not the repeated number.",
-    "Next national bulletin is scheduled 27 October 02:30 IST = 26 October 21:00 UTC. This is a review-due time, not a claim the 120-hour forecast expires then.",
-    "Embedded track graphics are labelled based on 12 UTC; do not mix that older graphic/cone with the 15 UTC table. Only table centres are plotted."
+    "Original RSMC09 pages1\u20132 visually reviewed: issue04UTC, analysis00UTC Oct27, stated120hour validity and all10 forecast-table rows. National16 pages1\u20132 agrees after IST\u2192UTC conversion.",
+    "National16 filename says0530IST (analysis), but original issue is0930IST=04UTC; the actual content issue time is preserved.",
+    "07UTC is the Ark three-hour review deadline after issuance, not an asserted official next-bulletin issue or forecast expiry.",
+    "Only discrete table centres plotted. No cone extracted from older embedded graphics, no Sri Lanka land-warning inference."
   ],
   "scope": "North Indian Ocean regional guidance. The Andhra Pradesh/South Odisha warning is not mapped as a Sri Lanka warning. No inferred local cyclone impact, risk percentage, storm surge or arrival time.",
   "display": "Reported centre and discrete forecast centres. Dashed straight segments only join published positions; they are not a hazard footprint, probability cone or interpolated current centre.",
-  "publication": "Manually reviewed facts from the public official bulletin; no restricted API or automatic interpretation."
+  "publication": "Manually reviewed facts from the public official bulletin; no restricted API or automatic interpretation.",
+  "supersedes": {
+    "issuedAt": "2026-10-26T18:00:00Z",
+    "analysisAt": "2026-10-26T15:00:00Z",
+    "source": {
+      "file": "rsmc06.pdf",
+      "url": "https://mausam.imd.gov.in/backend/assets/cyclone_pdf/Tropical_cyclone_advisory_No__6_based_on_1500_UTC_of_26_10_2026.pdf",
+      "sha256": "e1e1e20189bf9806672c3747525140e80d5f568c80468b2d5c5021e8576aa790",
+      "bytes": 1822281,
+      "retrievedAt": "2026-10-26T20:10:00.938283+00:00"
+    },
+    "corroboration": {
+      "file": "national13.pdf",
+      "url": "https://mausam.imd.gov.in/Forecast/marquee_data/13.%20National%20Bulletin%20No%2013-26Oct2026_2030IST.pdf",
+      "sha256": "0ce2ba8b86ac033ce5d76ab1c05c15d9c751dc8baf3f5c8d555982e8772ea93b",
+      "bytes": 3527527,
+      "retrievedAt": "2026-10-26T20:09:54.201205+00:00"
+    }
+  }
 }
