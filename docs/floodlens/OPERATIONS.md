@@ -920,8 +920,9 @@ The deadline must be in the future and at most 48 hours away. A local file lock,
 recent run/job inspection, a second pre-dispatch check, and a unique :07/:37 slot
 identity prevent duplicate dispatches. Any active publisher blocks dispatch.
 A completed run is fresh only if its reservoir, weather validation and publishing
-steps actually succeeded within 30 minutes. A skipped/no-op guard is not a data
-refresh. Dispatch intent is saved before the API request; an uncertain or accepted
+steps actually succeeded in the current :07/:37 slot, or within the 15-minute
+race cooldown. This avoids a rolling 30-minute completion timer skipping alternate
+review turns. A skipped/no-op guard is not a data refresh. Dispatch intent is saved before the API request; an uncertain or accepted
 request with no visible run blocks retries until its exact identity is resolved.
 The script does not retry denied or uncertain dispatches through another route.
 

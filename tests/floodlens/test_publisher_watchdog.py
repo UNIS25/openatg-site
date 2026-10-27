@@ -63,6 +63,15 @@ class WatchdogTests(unittest.TestCase):
  def test_runner_ignores_later_queued_run_while_holding_concurrency_slot(self):
   history=[run(id=2,status='in_progress',age=0),run(id=3,status='queued',age=-1)]
   self.assertEqual(w.decision(history,lambda _:None,NOW,minutes=15,current_id=2,check_active=False)['state'],'due')
+ def test_half_hour_review_does_not_skip_alternate_slots_after_delayed_completion(self):
+  at=datetime(2026,10,27,7,42,tzinfo=timezone.utc);r=run();r.update(updated_at='2026-10-27T07:23:22Z');j=jobs();j['jobs'][0]['completed_at']='2026-10-27T07:23:21Z'
+  self.assertEqual(w.decision([r],lambda _:j,at,minutes=w.due_window(at))['state'],'due')
+  self.assertEqual(w.request_id(at),'watchdog-20261027T0737Z')
+ def test_current_slot_refresh_and_short_race_cooldown_remain_fresh(self):
+  at=datetime(2026,10,27,7,42,tzinfo=timezone.utc)
+  for completed in ['2026-10-27T07:38:00Z','2026-10-27T07:30:00Z']:
+   r=run();r['updated_at']=completed;j=jobs();j['jobs'][0]['completed_at']=completed
+   self.assertEqual(w.decision([r],lambda _:j,at,minutes=w.due_window(at))['state'],'fresh')
  def test_no_new_permissions_secrets_or_publisher_paths(self):
   p=ROOT/'.github/workflows/floodlens-observation-update.yml'
   if not p.exists():return
