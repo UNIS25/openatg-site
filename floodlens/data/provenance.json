@@ -509,6 +509,35 @@
         "si",
         "ta"
       ]
+    },
+    {
+      "id": "general-weather-20261027-1600-conflicted",
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Weather_Report_at_1600_hrs_on_2026__1793099831.pdf",
+      "checkedAt": "2026-10-27T11:45:39.914382+00:00",
+      "status": "ok",
+      "sha256": "7e5725887258706ffeb7845502dec6fca6d8d267014d3177b80969cf0787c678",
+      "bytes": 1137284,
+      "contentType": "application/pdf",
+      "finalUrl": "https://www.dmc.gov.lk/images/dmcreports/Weather_Report_at_1600_hrs_on_2026__1793099831.pdf",
+      "rawFile": "weather-1600.pdf",
+      "kind": "general_forecast_with_unresolved_source_discrepancies",
+      "languages": [
+        "si",
+        "en",
+        "ta"
+      ],
+      "listingAt": "2026-10-27T16:00:00+05:30",
+      "issuedAt": null,
+      "issuedAtResolution": "Unresolved: language headers disagree; listing time is not used to repair the source.",
+      "issueHeaders": {
+        "en": "2026-10-26T16:00:00+05:30",
+        "si": "2026-10-27T16:00:00+05:30",
+        "ta": "2026-10-27T16:00:00+05:30"
+      },
+      "statedForecastPeriod": "Next 36 hours; no single reconciled absolute validity interval assigned.",
+      "cityForecastDate": "2026-10-28",
+      "reviewedAt": "2026-10-27T11:47:31.935815+00:00",
+      "review": "All four original pages visually inspected locally. English header says 26 October; Sinhala and Tamil headers say 27 October. All describe the same 27 October 11:30 SLST cyclone observation time but give a different position from the earlier 14:00 forecast. Source discrepancies retained; not resolved by listing time. No colored severity or explicit cancellation, extension or marine-warning replacement. No conflicted date/position is promoted to the warning assessment, model forecast or cyclone map."
     }
   ],
   "reviews": [
@@ -5556,6 +5585,117 @@
       },
       "currentBulletinId": "LEWM-27-10-2026-1600-34",
       "preserved": "Existing non-official summary translations, area-code mapping and all warning levels unchanged. Other warnings, river measurements, reservoir records, automated weather data and original timestamps retained."
+    },
+    {
+      "reviewedAt": "2026-10-27T11:47:31.935815+00:00",
+      "scope": "General forecast source discrepancy audit only; no active warning, station, cyclone-track or forecast-model change.",
+      "source": {
+        "id": "general-weather-20261027-1600-conflicted",
+        "url": "https://www.dmc.gov.lk/images/dmcreports/Weather_Report_at_1600_hrs_on_2026__1793099831.pdf",
+        "checkedAt": "2026-10-27T11:45:39.914382+00:00",
+        "status": "ok",
+        "sha256": "7e5725887258706ffeb7845502dec6fca6d8d267014d3177b80969cf0787c678",
+        "bytes": 1137284,
+        "contentType": "application/pdf",
+        "finalUrl": "https://www.dmc.gov.lk/images/dmcreports/Weather_Report_at_1600_hrs_on_2026__1793099831.pdf",
+        "rawFile": "weather-1600.pdf",
+        "kind": "general_forecast_with_unresolved_source_discrepancies",
+        "languages": [
+          "si",
+          "en",
+          "ta"
+        ],
+        "listingAt": "2026-10-27T16:00:00+05:30",
+        "issuedAt": null,
+        "issuedAtResolution": "Unresolved: language headers disagree; listing time is not used to repair the source.",
+        "issueHeaders": {
+          "en": "2026-10-26T16:00:00+05:30",
+          "si": "2026-10-27T16:00:00+05:30",
+          "ta": "2026-10-27T16:00:00+05:30"
+        },
+        "statedForecastPeriod": "Next 36 hours; no single reconciled absolute validity interval assigned.",
+        "cityForecastDate": "2026-10-28",
+        "reviewedAt": "2026-10-27T11:47:31.935815+00:00",
+        "review": "All four original pages visually inspected locally. English header says 26 October; Sinhala and Tamil headers say 27 October. All describe the same 27 October 11:30 SLST cyclone observation time but give a different position from the earlier 14:00 forecast. Source discrepancies retained; not resolved by listing time. No colored severity or explicit cancellation, extension or marine-warning replacement. No conflicted date/position is promoted to the warning assessment, model forecast or cyclone map."
+      },
+      "previousSources": [
+        {
+          "id": "general-weather-20261027-1400-general-en-si",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Weather_Report_at_1400_hrs_on_2026__1793092347.pdf",
+          "checkedAt": "2026-10-27T09:45:44.566741+00:00",
+          "status": "ok",
+          "sha256": "b0f8aa55b9af13e1e41473976d7af27aa03464d67ed5d03f3c0ea50197d9bd68",
+          "bytes": 1042597,
+          "contentType": "application/pdf",
+          "finalUrl": "https://www.dmc.gov.lk/images/dmcreports/Weather_Report_at_1400_hrs_on_2026__1793092347.pdf",
+          "rawFile": "general-en-si.pdf",
+          "kind": "general_forecast_context",
+          "languages": [
+            "en",
+            "si"
+          ],
+          "issuedAt": "2026-10-27T14:00:00+05:30",
+          "landForecastDate": "2026-10-28",
+          "seaForecastPeriod": "Next 24 hours from issue; this is general forecast context, not a replacement colored warning.",
+          "reviewedAt": "2026-10-27T09:51:08.750713+00:00",
+          "review": "All 4 original PDF pages visually inspected locally; header issue time, land date, separate sea period and numeric position/wind/wave statements verified. Original language documents retained. General context only; no active warning cancellation or new colored severity."
+        },
+        {
+          "id": "general-weather-20261027-1400-general-ta",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Weather_Report_at_1400_hrs_on_2026__1793093828.pdf",
+          "checkedAt": "2026-10-27T09:45:48.966998+00:00",
+          "status": "ok",
+          "sha256": "425e8b9cf2617cbae6ef81675f6bcf7c5780ba134227e6000b9c0df16821a252",
+          "bytes": 389173,
+          "contentType": "application/pdf",
+          "finalUrl": "https://www.dmc.gov.lk/images/dmcreports/Weather_Report_at_1400_hrs_on_2026__1793093828.pdf",
+          "rawFile": "general-ta.pdf",
+          "kind": "general_forecast_context",
+          "languages": [
+            "ta"
+          ],
+          "issuedAt": "2026-10-27T14:00:00+05:30",
+          "landForecastDate": "2026-10-28",
+          "seaForecastPeriod": "Next 24 hours from issue; this is general forecast context, not a replacement colored warning.",
+          "reviewedAt": "2026-10-27T09:51:08.750713+00:00",
+          "review": "All 3 original PDF pages visually inspected locally; header issue time, land date, separate sea period and numeric position/wind/wave statements verified. Original language documents retained. General context only; no active warning cancellation or new colored severity."
+        }
+      ],
+      "positionDiscrepancy": {
+        "type": "same_observation_time_different_reported_position",
+        "observationAtStated": "2026-10-27T11:30:00+05:30",
+        "earlierSources": [
+          {
+            "id": "general-weather-20261027-1400-general-en-si",
+            "url": "https://www.dmc.gov.lk/images/dmcreports/Weather_Report_at_1400_hrs_on_2026__1793092347.pdf",
+            "sha256": "b0f8aa55b9af13e1e41473976d7af27aa03464d67ed5d03f3c0ea50197d9bd68"
+          },
+          {
+            "id": "general-weather-20261027-1400-general-ta",
+            "url": "https://www.dmc.gov.lk/images/dmcreports/Weather_Report_at_1400_hrs_on_2026__1793093828.pdf",
+            "sha256": "425e8b9cf2617cbae6ef81675f6bcf7c5780ba134227e6000b9c0df16821a252"
+          }
+        ],
+        "earlierPositionStated": {
+          "latitudeN": 16.0,
+          "longitudeE": 84.3,
+          "distanceFromKankesanthuraiKm": 820,
+          "direction": "north-east"
+        },
+        "newSource": {
+          "id": "general-weather-20261027-1600-conflicted",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Weather_Report_at_1600_hrs_on_2026__1793099831.pdf",
+          "sha256": "7e5725887258706ffeb7845502dec6fca6d8d267014d3177b80969cf0787c678"
+        },
+        "newPositionStated": {
+          "latitudeN": 16.2,
+          "longitudeE": 83.7,
+          "distanceFromKankesanthuraiKm": 800,
+          "direction": "north-east"
+        },
+        "resolution": "Unresolved source-version discrepancy; not storm movement, a new analysis time or an authoritative track correction."
+      },
+      "publicationDecision": "Keep both versions and original hashes in provenance. Do not choose a conflicted date/position, infer movement, or alter active marine/basin/landslide/lightning warnings."
     }
   ],
   "reviewChecks": [
@@ -7452,6 +7592,94 @@
         "providerIssuedAt": null,
         "providerValidUntil": null,
         "limitations": "No explicit issue/update time or validity endpoints displayed. Review time and chart Now are not issuance; no cancellation, observed flood extent or household safety inferred."
+      }
+    },
+    {
+      "checkedAt": "2026-10-27T11:44:04+00:00",
+      "reviewedAt": "2026-10-27T11:44:04+00:00",
+      "method": "Completed independent 300-listing DMC review relayed by coordinating task; new general-weather original fetched, hashed and all four pages visually inspected locally.",
+      "result": "No warning or river change. Seventeen baseline originals reported freshly fetched and byte-identical. Kelani/Attanagalu still expire at 18:00 SLST today with no replacement found; NBRI update 34 remains valid through 16:00 SLST October 28. River issue 15:30 and observation 15:00 retained. New general 16:00 forecast has unresolved language-header date and same-time cyclone-position discrepancies, recorded separately without guessed warning/track changes.",
+      "previousPublicReviewAt": "2026-10-27T11:13:41+00:00",
+      "listingCoverage": {
+        "rowsScanned": 300,
+        "categories": [
+          6,
+          5,
+          2
+        ],
+        "completeForListingWindow": true
+      },
+      "verifiedCurrentSnapshotHashes": [
+        {
+          "id": "kalu-20261027-02",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Flood_warning_for_Kalu_River_Basin_-_No_02_-_(Extended_warning)_2026__1793090488.pdf",
+          "sha256": "c552b54d56512af5fcd2a8b3a26bcf3f718b13a76168ff910dc5c8ae87142a80"
+        },
+        {
+          "id": "mahaweli-20261026-01",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Flood_Warning_for_Mahaweli_River_-_No_01_-_2026__1792998739.pdf",
+          "sha256": "8746dbc111719bf59283836919e8ead312f8889fa29d6d9992d70e57d205a560"
+        },
+        {
+          "id": "LEWM-27-10-2026-1600-34",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Landslide_EW_Report_at_1600hrs_on_2026__1793098165.pdf",
+          "sha256": "6734f8541331b9fcbf5a70a60b2d1dcca291f90a138fa2e7240180a71bfe64aa"
+        },
+        {
+          "id": "rain-20261026-0300",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Advisory_for_Heavy_Rain_at_0330_hrs_on_2026__1792968291.pdf",
+          "sha256": "0bd573752b1965d56fd8ec4ae0c372cba2766bb66294bfc2b6acef1c6d5e6136"
+        },
+        {
+          "id": "LLA-26-10-27-01-04",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Advisory_for_Severe_Lightning_at_1130hrs_on_27__1793082700.pdf",
+          "sha256": "34383e5c53aef78a5d6f93e4636a3d1d794f992178d3b3e148e24f935211a445"
+        },
+        {
+          "id": "kelani-20261026-01",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Flood_Warning_for_Kelani_Basin-_No_01_-_2026__1793020603.pdf",
+          "sha256": "7ef2fd77855a9bf433e6bab591dcdbf53cc4b7301925ef0bfe248e3aa0e3edd4"
+        },
+        {
+          "id": "attanagalu-20261026-01",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Flood_Warning_FOR_Attanagalu_Oya__-_NO_01_%282026__1793020643.pdf",
+          "sha256": "aee26763cf95bbe1c092b17161ac34a0f33c7c6cf24b6b9fc118bc0453f67b72"
+        },
+        {
+          "id": "gin-20261026-01",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Flood_warning_for_Gin_River_Basin_-_NO_01_(2026__1793038211.pdf",
+          "sha256": "8c83b04f7f2c1126a6bb5334ae48b69b842d2d6962d9d0c179cd97ba670de9c3"
+        },
+        {
+          "id": "river-observations",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793095515.pdf",
+          "sha256": "d1037a2a98cbbba25e484911d7087da875c87785f2b15b60487211880ec532db"
+        }
+      ],
+      "verifiedOfficialTranslations": [
+        {
+          "id": "LLA-26-10-27-01-04-ta",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Advisory_for_Severe_Lightning_at_1130hrs_on_27__1793085463.pdf",
+          "sha256": "8b0358d94e2291952b23235d8511eb683146eca1fd25938cb8c5a22dbc5c7485"
+        }
+      ],
+      "googlePublicObservation": {
+        "checkedAt": "2026-10-27T11:44:00+00:00",
+        "observationWindow": "2026-10-27 11:43–11:44 UTC, minute precision as reported by reviewer",
+        "method": "Independent public-browser review relayed by coordinating task.",
+        "overview": "No material change from 11:13 UTC reduced regional shading. No geometry copied or interpreted as observed flood extent.",
+        "puttalam": "Unsupported/no flooding data, unshaded. Unavailable information, not an all-clear.",
+        "kalaWewa": "Green Normal; unchanged higher-confidence HYBAS discharge curve and thresholds 41/73/153 m3/s, not reservoir or gate telemetry.",
+        "providerIssuedAt": null,
+        "providerValidUntil": null,
+        "limitations": "No explicit issue/update time or validity endpoints displayed. Review time and chart Now are not issuance; no cancellation, observed flood extent or household safety inferred."
+      },
+      "newSourceDiscrepancy": {
+        "id": "general-weather-20261027-1600-conflicted",
+        "url": "https://www.dmc.gov.lk/images/dmcreports/Weather_Report_at_1600_hrs_on_2026__1793099831.pdf",
+        "sha256": "7e5725887258706ffeb7845502dec6fca6d8d267014d3177b80969cf0787c678",
+        "canonicalIssuedAt": null,
+        "warningsChanged": false
       }
     }
   ]

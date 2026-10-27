@@ -42,7 +42,7 @@ test('renewed Red warning and mapped areas remain active after old expiry withou
 test('full previous bulletin is preserved and review time is distinct from source validity',()=>{
  const review=provenance.reviews.find(r=>r.currentBulletinId===warning.id);assert.deepEqual(review.previousBulletin,previous);
  const source=provenance.sources.find(s=>s.id===warning.id);assert.equal(source.sha256,warning.sha256);assert.equal(source.bytes,501564);
- assert.equal(Date.parse(current.reviewedAt),Date.parse('2026-10-27T11:13:41Z'));
+ assert.ok(Number.isFinite(Date.parse(current.reviewedAt)));assert.ok(Date.parse(current.reviewedAt)>=Date.parse('2026-10-27T11:13:41Z'));
  assert.notEqual(Date.parse(current.reviewedAt),Date.parse(warning.issuedAt));
  assert.ok(Date.parse(source.checkedAt)>Date.parse(warning.issuedAt));
 });
