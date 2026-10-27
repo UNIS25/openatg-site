@@ -7681,6 +7681,92 @@
         "canonicalIssuedAt": null,
         "warningsChanged": false
       }
+    },
+    {
+      "checkedAt": "2026-10-27T12:13:01+00:00",
+      "reviewedAt": "2026-10-27T12:13:01+00:00",
+      "method": "Completed independent 300-listing DMC review and fresh original-PDF hash comparisons relayed by coordinating task; no changed source interpretation.",
+      "result": "No change from the 11:44:04 UTC review: 100 listings each of types 6, 5 and 2 and eighteen relevant original PDFs freshly checked, with all baseline PDF bytes identical. No new warning, cancellation, replacement or extension found. Kelani and Attanagalu still expire at 18:00 SLST today; expiry is not an all-clear. NBRI update 34 remains valid through 16:00 SLST October 28. River issue 15:30 and observation 15:00 remain unchanged. The general-forecast language-header date and same-time position discrepancies remain unresolved; no guessed forecast facts published.",
+      "previousPublicReviewAt": "2026-10-27T11:44:04+00:00",
+      "listingCoverage": {
+        "rowsScanned": 300,
+        "categories": [
+          6,
+          5,
+          2
+        ],
+        "completeForListingWindow": true
+      },
+      "verifiedCurrentSnapshotHashes": [
+        {
+          "id": "kalu-20261027-02",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Flood_warning_for_Kalu_River_Basin_-_No_02_-_(Extended_warning)_2026__1793090488.pdf",
+          "sha256": "c552b54d56512af5fcd2a8b3a26bcf3f718b13a76168ff910dc5c8ae87142a80"
+        },
+        {
+          "id": "mahaweli-20261026-01",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Flood_Warning_for_Mahaweli_River_-_No_01_-_2026__1792998739.pdf",
+          "sha256": "8746dbc111719bf59283836919e8ead312f8889fa29d6d9992d70e57d205a560"
+        },
+        {
+          "id": "LEWM-27-10-2026-1600-34",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Landslide_EW_Report_at_1600hrs_on_2026__1793098165.pdf",
+          "sha256": "6734f8541331b9fcbf5a70a60b2d1dcca291f90a138fa2e7240180a71bfe64aa"
+        },
+        {
+          "id": "rain-20261026-0300",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Advisory_for_Heavy_Rain_at_0330_hrs_on_2026__1792968291.pdf",
+          "sha256": "0bd573752b1965d56fd8ec4ae0c372cba2766bb66294bfc2b6acef1c6d5e6136"
+        },
+        {
+          "id": "LLA-26-10-27-01-04",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Advisory_for_Severe_Lightning_at_1130hrs_on_27__1793082700.pdf",
+          "sha256": "34383e5c53aef78a5d6f93e4636a3d1d794f992178d3b3e148e24f935211a445"
+        },
+        {
+          "id": "kelani-20261026-01",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Flood_Warning_for_Kelani_Basin-_No_01_-_2026__1793020603.pdf",
+          "sha256": "7ef2fd77855a9bf433e6bab591dcdbf53cc4b7301925ef0bfe248e3aa0e3edd4"
+        },
+        {
+          "id": "attanagalu-20261026-01",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Flood_Warning_FOR_Attanagalu_Oya__-_NO_01_%282026__1793020643.pdf",
+          "sha256": "aee26763cf95bbe1c092b17161ac34a0f33c7c6cf24b6b9fc118bc0453f67b72"
+        },
+        {
+          "id": "gin-20261026-01",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Flood_warning_for_Gin_River_Basin_-_NO_01_(2026__1793038211.pdf",
+          "sha256": "8c83b04f7f2c1126a6bb5334ae48b69b842d2d6962d9d0c179cd97ba670de9c3"
+        },
+        {
+          "id": "river-observations",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793095515.pdf",
+          "sha256": "d1037a2a98cbbba25e484911d7087da875c87785f2b15b60487211880ec532db"
+        }
+      ],
+      "verifiedOfficialTranslations": [
+        {
+          "id": "LLA-26-10-27-01-04-ta",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Advisory_for_Severe_Lightning_at_1130hrs_on_27__1793085463.pdf",
+          "sha256": "8b0358d94e2291952b23235d8511eb683146eca1fd25938cb8c5a22dbc5c7485"
+        }
+      ],
+      "googlePublicObservation": {
+        "checkedAt": "2026-10-27T12:13:00+00:00",
+        "observationWindow": "2026-10-27 12:12–12:13 UTC, minute precision as reported by reviewer",
+        "method": "Independent public-browser review relayed by coordinating task.",
+        "overview": "No material change from 11:43–11:44 UTC reduced regional shading. No geometry copied or interpreted as observed flood extent.",
+        "puttalam": "Unsupported/no flooding data, unshaded. Unavailable information, not an all-clear.",
+        "kalaWewa": "Green Normal; unchanged higher-confidence HYBAS discharge curve and thresholds 41/73/153 m3/s, not reservoir or gate telemetry.",
+        "providerIssuedAt": null,
+        "providerValidUntil": null,
+        "limitations": "No explicit issue/update time or validity endpoints displayed. Review time and chart Now are not issuance; no cancellation, observed flood extent or household safety inferred."
+      },
+      "unchangedGeneralForecastDiscrepancy": {
+        "id": "general-weather-20261027-1600-conflicted",
+        "sha256": "7e5725887258706ffeb7845502dec6fca6d8d267014d3177b80969cf0787c678",
+        "resolution": "Unresolved; original language dates and both same-observation-time positions retained in previous review provenance."
+      }
     }
   ]
 }
