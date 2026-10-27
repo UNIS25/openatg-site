@@ -1,7 +1,12 @@
 name: FloodLens observation publication
+run-name: "Ark data · ${{ github.event_name }} · ${{ inputs.watchdog_request_id || 'regular' }}"
 on:
   workflow_dispatch:
     inputs:
+      watchdog_request_id:
+        description: 'One-shot recovery identity from the existing review turn; not a new schedule'
+        type: string
+        default: ''
       force_refresh:
         description: 'Re-fetch the selected forecast and recalculate tides with all validation gates'
         type: boolean
@@ -39,24 +44,36 @@ jobs:
             floodlens/clouds-model.mjs
             floodlens/tides-model.mjs
           sparse-checkout-cone-mode: false
+      - name: Avoid duplicate refresh after serialized run
+        id: due
+        env:
+          ARK_FORCE_REFRESH: ${{ inputs.force_refresh == true && 'true' || 'false' }}
+          ARK_WATCHDOG_REQUEST_ID: ${{ inputs.watchdog_request_id }}
+        run: python3 scripts/floodlens/publisher_watchdog.py --runner-gate
       - name: Install pinned decoders and independent tide checker
+        if: steps.due.outputs.proceed == 'true'
         run: python3 -m pip install --disable-pip-version-check --no-cache-dir -r scripts/floodlens/publisher-requirements.txt
       - name: Check publisher safeguards
+        if: steps.due.outputs.proceed == 'true'
         run: |
           python3 tests/floodlens/test_observation_updater.py
+          python3 tests/floodlens/test_publisher_watchdog.py
           python3 tests/floodlens/test_weather_publisher.py
       - name: Fetch and validate dated reservoir observations
+        if: steps.due.outputs.proceed == 'true'
         id: reservoir
         run: python3 scripts/floodlens/update_reservoirs.py
       - name: Validate forecast, cloud and tide candidates separately
+        if: steps.due.outputs.proceed == 'true'
         id: weather
         env:
           ARK_FORCE_REFRESH: ${{ inputs.force_refresh == true && 'true' || 'false' }}
         run: python3 scripts/floodlens/update_weather.py
       - name: Publish only the ten approved data files and verify Pages build
+        if: steps.due.outputs.proceed == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
         run: python3 scripts/floodlens/publish_reservoirs.py
       - name: Fail visibly when any source fetch or validation failed
-        if: steps.reservoir.outputs.source_status != 'ok' || steps.weather.outputs.source_status != 'ok'
+        if: steps.due.outputs.proceed == 'true' && (steps.reservoir.outputs.source_status != 'ok' || steps.weather.outputs.source_status != 'ok')
         run: exit 1

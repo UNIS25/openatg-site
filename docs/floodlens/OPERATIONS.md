@@ -898,3 +898,45 @@ Do not advance the review time after an incomplete check or unresolved new
 warning. Read-only scheduled checks and reviews in another task do not change
 the public snapshot by themselves; a reviewed commit and verified deployment
 are required. The automated ten-file publisher still excludes these warning files.
+
+## One-shot recovery when GitHub misses its schedule
+
+The existing 30-minute review turn may invoke `publisher_watchdog.py`; this is
+not a new scheduler or daemon. The local invocation needs the Mac online and its
+existing authorized `gh` session. After dispatch, the existing GitHub job runs
+independently of the Mac. No new credential, permission, service or paid runner
+is added. The exact ten-file publication allowlist remains unchanged.
+
+Pass the **original monitoring end time**; do not restart a 48-hour window on
+each invocation. First inspect with the default read-only mode, then allow one
+due recovery using the same deadline:
+
+```sh
+python3 scripts/floodlens/publisher_watchdog.py --until ORIGINAL_MONITOR_END_UTC
+python3 scripts/floodlens/publisher_watchdog.py --until ORIGINAL_MONITOR_END_UTC --dispatch-if-due
+```
+
+The deadline must be in the future and at most 48 hours away. A local file lock,
+recent run/job inspection, a second pre-dispatch check, and a unique :07/:37 slot
+identity prevent duplicate dispatches. Any active publisher blocks dispatch.
+A completed run is fresh only if its reservoir, weather validation and publishing
+steps actually succeeded within 30 minutes. A skipped/no-op guard is not a data
+refresh. Dispatch intent is saved before the API request; an uncertain or accepted
+request with no visible run blocks retries until its exact identity is resolved.
+The script does not retry denied or uncertain dispatches through another route.
+
+The unchanged workflow concurrency group serializes cron and recovery runs.
+After acquiring that slot, a public read-only API guard skips a redundant run if
+a real combined refresh finished in the preceding 15 minutes. This covers a cron
+arriving between the local preflight and manual dispatch. The guard uses anonymous
+public GETs, not additional token permissions. Failed/rate-limited inspection
+fails closed, visibly. Existing explicit `force_refresh` remains a deliberate
+manual re-fetch; the watchdog never sets it.
+
+After an accepted request, inspect its run ID and completion. Verify the data-only
+commit against the exact path allowlist, the exact Pages build, original source
+run/capture/observation times, and public bytes in the browser if Cloudflare blocks
+the runner probe. A successful manual recovery is **not** proof GitHub cron works.
+Do not dispatch again to make the schedule look healthy. Record both event type
+and actual publication time. Warnings, news and review timestamps remain outside
+this publisher and require the separate completed-review release procedure.

@@ -5548,6 +5548,78 @@
         "maxPagesPerStream": 5,
         "rowsScanned": 300
       }
+    },
+    {
+      "checkedAt": "2026-10-27T07:12:41+00:00",
+      "reviewedAt": "2026-10-27T07:12:41+00:00",
+      "method": "Independent source review relayed by the coordinating review task; no new warning interpretation.",
+      "result": "Fresh 100-row DMC listings for each of types 6, 5 and 2 matched the 06:44 review. Eleven relevant originals were freshly fetched and reported byte-identical to reviewed originals: river, lightning, marine, landslide, five basin warnings, expired rain and general forecast. No cancellation, supersession or Kalu/Mahaweli extension found. Only completed review time changes; all source issue/observation/expiry times retained.",
+      "previousPublicReviewAt": "2026-10-27T06:50:57.442423+00:00",
+      "listingCoverage": {
+        "rowsScanned": 300,
+        "categories": [
+          6,
+          5,
+          2
+        ],
+        "completeForListingWindow": true
+      },
+      "verifiedCurrentSnapshotHashes": [
+        {
+          "id": "kalu-20261026-01",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Flood_warning_for_Kalu_River_Basin_-_No_01_-_2026__1792995574.pdf",
+          "sha256": "1767a274eea705bca490879756b1ad5bd255183c0d101ba5c8e81212b4da8ca3"
+        },
+        {
+          "id": "mahaweli-20261026-01",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Flood_Warning_for_Mahaweli_River_-_No_01_-_2026__1792998739.pdf",
+          "sha256": "8746dbc111719bf59283836919e8ead312f8889fa29d6d9992d70e57d205a560"
+        },
+        {
+          "id": "LEWM-26-10-2026-1800-33",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Landslide_EW_Report_at_1800hrs_on_2026__1793018981.pdf",
+          "sha256": "35e492bf3495070ff0e2fcfaf161528ebf942bb302fffbaa66f78949fdec716f"
+        },
+        {
+          "id": "rain-20261026-0300",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Advisory_for_Heavy_Rain_at_0330_hrs_on_2026__1792968291.pdf",
+          "sha256": "0bd573752b1965d56fd8ec4ae0c372cba2766bb66294bfc2b6acef1c6d5e6136"
+        },
+        {
+          "id": "LLA-26-10-27-01-04",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Advisory_for_Severe_Lightning_at_1130hrs_on_27__1793082700.pdf",
+          "sha256": "34383e5c53aef78a5d6f93e4636a3d1d794f992178d3b3e148e24f935211a445"
+        },
+        {
+          "id": "kelani-20261026-01",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Flood_Warning_for_Kelani_Basin-_No_01_-_2026__1793020603.pdf",
+          "sha256": "7ef2fd77855a9bf433e6bab591dcdbf53cc4b7301925ef0bfe248e3aa0e3edd4"
+        },
+        {
+          "id": "attanagalu-20261026-01",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Flood_Warning_FOR_Attanagalu_Oya__-_NO_01_%282026__1793020643.pdf",
+          "sha256": "aee26763cf95bbe1c092b17161ac34a0f33c7c6cf24b6b9fc118bc0453f67b72"
+        },
+        {
+          "id": "gin-20261026-01",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Flood_warning_for_Gin_River_Basin_-_NO_01_(2026__1793038211.pdf",
+          "sha256": "8c83b04f7f2c1126a6bb5334ae48b69b842d2d6962d9d0c179cd97ba670de9c3"
+        },
+        {
+          "id": "river-observations",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793074896.pdf",
+          "sha256": "e27c924dc0d06d42bf99380c2ca4b4900dc7b3b0d010a2bdb923992d0b0b4f1a"
+        }
+      ],
+      "googlePublicObservation": {
+        "checkedAt": "2026-10-27T07:12:00+00:00",
+        "method": "Independent public-browser review relayed by coordinating task.",
+        "puttalam": "Place panel still unsupported/no flooding data; no orange shading. This is unavailable information, not an all-clear.",
+        "kalaWewa": "Green Normal at a HYBAS discharge forecast node; thresholds 41/73/153 m3/s, not reservoir telemetry.",
+        "providerIssuedAt": null,
+        "providerValidUntil": null,
+        "limitations": "No explicit issue/update timestamp or exact validity endpoints visible. Review time is not model issue time."
+      }
     }
   ]
 }
