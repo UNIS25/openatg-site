@@ -1,4 +1,4 @@
-import test from 'node:test';import assert from 'node:assert/strict';import {readFile} from 'node:fs/promises';import {selectTides} from '../../floodlens/tides-model.mjs';import {nearNews} from '../../floodlens/news.mjs';
+import test from 'node:test';import assert from 'node:assert/strict';import {readFile} from 'node:fs/promises';import {selectTides} from '../../floodlens/tides-model.mjs';import {nearNews,expiredMarineBulletin,marineExpiryCopy} from '../../floodlens/news.mjs';
 const data=JSON.parse(await readFile('floodlens/data/tides/colombo.json')),snapshot=JSON.parse(await readFile('floodlens/data/reviewed.json')),media=JSON.parse(await readFile('floodlens/data/reservoir-reports.json')),now=Date.parse('2026-10-26T19:00:00Z');
 test('Colombo next high and low are dated astronomical station predictions',()=>{const time=Date.parse(data.validFrom)+60000,r=selectTides(data,['LK11'],time);assert.equal(r.status,'available');assert.deepEqual(new Set(r.events.map(e=>e.kind)),new Set(['high','low']));assert.ok(r.events.every(e=>Date.parse(e.at)>time));assert.equal(data.observationAt,null);assert.equal(data.datum,'dataset LAT');});
 test('never substitute Colombo tide at Puttalam or Ratnapura',()=>{assert.equal(selectTides(data,['LK62'],now).status,'outside');assert.equal(selectTides(data,['LK91'],now).status,'outside');});
@@ -14,4 +14,14 @@ test('sea-only Red bulletin is separate news, expires, and never affects inland 
  const items=nearNews(snapshot,null,['LK11'],now);const sea=items.find(x=>x.scope==='sea_only');assert.ok(sea);assert.match(sea.title.en,/At sea only/);assert.match(sea.summary.en,/not an inland flood warning/);assert.ok(!snapshot.bulletins.some(w=>w.kind==='marine'));
  assert.ok(!nearNews(snapshot,null,['LK11'],Date.parse('2026-10-27T14:30:00Z')).some(x=>x.scope==='sea_only'));
  const invalid=structuredClone(snapshot);invalid.marineBulletins[0].scope='inland';assert.ok(!nearNews(invalid,null,['LK11'],now).some(x=>x.scope==='sea_only'));
+});
+test('expired marine source remains accessible without extending the timed warning or cancelling indefinite guidance',()=>{
+ const at=Date.parse('2026-10-27T14:42:03Z'),d={...snapshot,reviewedAt:'2026-10-27T14:42:03Z'},w=expiredMarineBulletin(d,at);assert.equal(w.id,'MSW-26-10-27-01-07');assert.equal(w.expiresAt,'2026-10-27T20:00:00+05:30');assert.ok(!nearNews(d,null,['LK11'],at).some(x=>x.scope==='sea_only'));assert.match(marineExpiryCopy.en.note,/not cancelled/);for(const lang of ['en','si','ta'])assert.ok(marineExpiryCopy[lang].note&&marineExpiryCopy[lang].source);
+});
+test('marine expiry note is absent before expiry and for invalid or future source data',()=>{
+ const at=Date.parse('2026-10-27T14:29:59Z'),d={...snapshot,reviewedAt:'2026-10-27T14:12:29Z'};assert.equal(expiredMarineBulletin(d,at),null);
+ for(const change of [d=>d.marineBulletins[0].scope='inland',d=>d.marineBulletins[0].url='https://untrusted.example/report.pdf',d=>d.marineBulletins[0].sha256='',d=>d.marineBulletins[0].expiresAt=d.marineBulletins[0].issuedAt,d=>d.reviewedAt='2099-01-01T00:00:00Z']){const bad=structuredClone(d);change(bad);assert.equal(expiredMarineBulletin(bad,at+60000),null);}
+});
+test('a newer active marine bulletin suppresses the old expiry note',()=>{
+ const d=structuredClone(snapshot),at=Date.parse('2026-10-27T14:42:03Z');d.reviewedAt=new Date(at).toISOString();d.marineBulletins.push({...d.marineBulletins[0],id:'test-only-replacement',issuedAt:'2026-10-27T14:31:00Z',expiresAt:'2026-10-27T18:00:00Z'});assert.equal(expiredMarineBulletin(d,at),null);
 });

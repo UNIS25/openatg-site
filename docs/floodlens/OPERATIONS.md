@@ -1055,3 +1055,17 @@ and remains excluded. The nine-hour rainfall column is not ingested as water
 level or a 24-hour rainfall value. The full preceding station snapshot and
 original hashes remain in provenance; historical no-trend tests use that record.
 Kelani and Attanagalu expiry remains unchanged, without a verified replacement.
+
+## Marine timed expiry and continuing wording
+
+The 08:00 October 27 marine bulletin's stated validity ends at 20:00 SLST.
+No cancellation or replacement was found in the completed 14:42 UTC review.
+The expired bulletin is excluded from active news/warnings. A separate compact
+notice under Latest near you keeps its original source and issue/expiry times
+accessible and explains that expiry does not cancel instructions worded
+“until further notice”. This is interface explanation, not a new official
+translation or an assertion that the timed Red warning has been extended.
+A newer active marine bulletin suppresses the older expiry notice. Invalid,
+future or non-marine sources fail closed. Inland assessments are unchanged.
+Changed app/flow/news modules use version 20261027-30; unchanged modules retain
+their existing cache identities. No snapshot schema or publisher path change.

@@ -1,4 +1,14 @@
 import {warningState,safeSource} from './core.mjs?v=20261027-29';
+export function expiredMarineBulletin(snapshot,now=Date.now()){
+ if(!Number.isFinite(now)||!Number.isFinite(Date.parse(snapshot?.reviewedAt))||Date.parse(snapshot.reviewedAt)>now)return null;
+ const latest=(snapshot?.marineBulletins||[]).filter(w=>w.kind==='marine'&&w.scope==='sea_only'&&safeSource(w.url)&&/^[a-f0-9]{64}$/.test(w.sha256)&&Date.parse(w.reviewedAt)<=now&&Date.parse(w.issuedAt)<=now&&Date.parse(w.expiresAt)>Date.parse(w.issuedAt)).sort((a,b)=>Date.parse(b.issuedAt)-Date.parse(a.issuedAt))[0];
+ return latest&&warningState(latest,now)==='expired'?latest:null;
+}
+export const marineExpiryCopy={
+ en:{title:'Marine bulletin: validity ended',note:'Its timed validity has ended. Instructions that say “until further notice” are not cancelled by expiry. Read the original for sea guidance.',source:'Original marine bulletin',ended:'Validity ended'},
+ si:{title:'මුහුදු නිවේදනය: වලංගු කාලය අවසන්',note:'මෙහි සඳහන් වලංගු කාලය අවසන් වී ඇත. “නැවත දැනුම් දෙන තුරු” යන උපදෙස් එම නිසා අවලංගු නොවේ. මුහුදු උපදෙස් සඳහා මුල් නිවේදනය කියවන්න.',source:'මුල් මුහුදු නිවේදනය',ended:'වලංගු කාලය අවසන් වූයේ'},
+ ta:{title:'கடல் அறிவிப்பு: செல்லுபடிக் காலம் முடிந்தது',note:'குறிப்பிட்ட செல்லுபடிக் காலம் முடிந்துவிட்டது. “மறு அறிவித்தல் வரை” என்ற அறிவுறுத்தல்கள் இதனால் ரத்தாகாது. கடல் தொடர்பான வழிகாட்டுதலுக்கு அசல் அறிவிப்பைப் படிக்கவும்.',source:'அசல் கடல் அறிவிப்பு',ended:'செல்லுபடிக் காலம் முடிந்தது'}
+};
 export function nearNews(snapshot,media,districts,now=Date.now()){
  if(!Number.isFinite(now)||!districts.length)return [];
  const reviewed=Date.parse(snapshot?.reviewedAt);
@@ -17,6 +27,7 @@ export async function renderNews(root,snapshot,districts,language='en'){
  const token={};root._newsToken=token;root.hidden=!districts.length;if(root.hidden)return;
  const s=copy[language]||copy.en,node=(tag,value)=>{const e=document.createElement(tag);e.textContent=value;return e;},local=v=>v?.[language]||v?.en||'',time=v=>new Intl.DateTimeFormat(language,{timeZone:'Asia/Colombo',day:'numeric',month:'short',hour:'2-digit',minute:'2-digit',hour12:false}).format(new Date(v));
  let media;try{media=await(mediaPromise??=fetch('/floodlens/data/reservoir-reports.json',{cache:'no-store',credentials:'omit',referrerPolicy:'no-referrer',signal:AbortSignal.timeout(10000)}).then(r=>{if(!r.ok)throw Error();return r.json();}).catch(e=>{mediaPromise=null;throw e;}));}catch{}
- if(root._newsToken!==token)return;const items=nearNews(snapshot,media,districts);root.replaceChildren(node('summary',s.title));const body=node('div','');body.append(node('p',s.note));if(!items.length)body.append(node('p',s.none));
+ if(root._newsToken!==token)return;const items=nearNews(snapshot,media,districts),expired=expiredMarineBulletin(snapshot);root.replaceChildren(node('summary',s.title));const body=node('div','');body.append(node('p',s.note));if(!items.length&&!expired)body.append(node('p',s.none));
+ if(expired){const c=marineExpiryCopy[language]||marineExpiryCopy.en,article=node('article','');article.dataset.marineValidity='expired';article.append(node('strong',c.title),node('p',c.note));const a=node('a',c.source+' ↗');a.href=expired.url;a.target='_blank';a.rel='noopener noreferrer';article.append(a,node('small',s.published+': '+time(expired.issuedAt)+' · SLST'),node('small',c.ended+': '+time(expired.expiresAt)+' · SLST'));body.append(article);}
  for(const item of items){const article=node('article','');article.append(node('small',s[item.kind]+' · '+item.source));const a=node('a',local(item.title)+' ↗');a.href=item.url;a.target='_blank';a.rel='noopener noreferrer';article.append(a,node('p',local(item.summary)),node('small',s.published+': '+time(item.publishedAt)+' · SLST'),node('small',s.reviewed+': '+time(item.reviewedAt)+' · SLST'));body.append(article);}root.append(body);
 }

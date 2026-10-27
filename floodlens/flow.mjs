@@ -1,6 +1,6 @@
 import {mountClouds} from './clouds-ui.mjs?v=20261027-29';
 import {mountTides} from './tides-ui.mjs?v=20261027-29';
-import {renderNews} from './news.mjs?v=20261027-29';
+import {renderNews} from './news.mjs?v=20261027-30';
 import {mountForecast} from './forecast-ui.mjs?v=20261027-29';
 import {createContext} from './context-ui.mjs?v=20261027-29';
 import {streetEnabled} from './street-map.mjs?v=20261027-29';
