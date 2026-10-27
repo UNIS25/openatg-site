@@ -1,5 +1,5 @@
 """Ten exact approved data paths; normal push and explicit Pages build with an ephemeral token."""
-import base64,hashlib,json,os,subprocess,time
+import base64,hashlib,json,os,re,subprocess,time
 from datetime import datetime,timezone
 from pathlib import Path
 from urllib.error import HTTPError
@@ -51,6 +51,28 @@ def api(endpoint,token,method='GET'):
         'Authorization':'Bearer '+token,'Accept':'application/vnd.github+json','Content-Type':'application/json','User-Agent':'OpenATG-FloodLens-publisher'})
     with urlopen(request,timeout=30) as response:return json.load(response)
 
+def wait_for_pages_build(commit,get,deadline,clock=time.monotonic,pause=time.sleep):
+    """A duplicate failed build is not proof that every build of this commit failed.
+
+    Poll the bounded recent history until an exact-commit success or the existing
+    deadline. Never accept a newer unrelated commit, or retry a denied API call.
+    """
+    if not re.fullmatch(r'[a-f0-9]{40}',commit):raise ValueError('Invalid publication commit')
+    saw_failed=False
+    while clock()<deadline:
+        history=get('/pages/builds')
+        if not isinstance(history,list) or len(history)>100 or any(not isinstance(b,dict) for b in history):raise ValueError('Invalid Pages build history')
+        matching=[b for b in history if b.get('commit')==commit]
+        for build in matching:
+            if build.get('status') not in ['queued','building','built','errored']:raise ValueError('Unknown Pages build outcome')
+            if build['status']=='built':
+                if not re.fullmatch(r'https://api\.github\.com/repos/'+re.escape(REPOSITORY)+r'/pages/builds/\d+',build.get('url','')):raise ValueError('Unexpected Pages build identity')
+                return build
+        saw_failed=saw_failed or any(b['status']=='errored' for b in matching)
+        pause(min(15,max(0,deadline-clock())))
+    if saw_failed:raise RuntimeError('Pages build errored; no successful build for the exact published commit confirmed before deadline')
+    raise TimeoutError('Pages build for the exact published commit not confirmed before deadline')
+
 def main():
     if os.environ.get('GITHUB_ACTIONS')!='true' or os.environ.get('GITHUB_REPOSITORY')!=REPOSITORY or os.environ.get('GITHUB_REF')!='refs/heads/main':
         raise ValueError('Publisher only runs on the approved repository main workflow')
@@ -70,16 +92,11 @@ def main():
     remote='https://github.com/'+REPOSITORY+'.git'
     if git('ls-remote',remote,'refs/heads/main',env=env).split()[0]!=base:raise ValueError('Main advanced; next scheduled run must re-fetch')
     git('push',remote,'HEAD:main',env=env)  # No force, no credential persisted.
+    print(json.dumps({'publicationCommit':commit,'committedSha256':expected,'state':'pushed-awaiting-pages'}),flush=True)
     api('/pages/builds',token,'POST')
-    deadline=time.monotonic()+480;build=None
+    deadline=time.monotonic()+480
     public_verified=False;public_status='pending'
-    while time.monotonic()<deadline:
-        latest=api('/pages/builds/latest',token)
-        if latest.get('commit')==commit:
-            if latest.get('status')=='errored':raise RuntimeError('Pages build failed')
-            if latest.get('status')=='built':build=latest;break
-        time.sleep(15)
-    if not build:raise TimeoutError('Pages build for published commit not confirmed')
+    build=wait_for_pages_build(commit,lambda endpoint:api(endpoint,token),deadline)
     checks={}
     for name,digest in expected.items():
         while time.monotonic()<deadline:

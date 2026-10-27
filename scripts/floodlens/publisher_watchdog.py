@@ -17,6 +17,7 @@ WORKFLOW_ID=396918646
 ENDPOINT=f'repos/{REPO}/actions/workflows/{WORKFLOW}'
 JOURNAL=ROOT/'artifacts/floodlens/watchdog/request.json'
 REQUIRED_STEPS={'Fetch and validate dated reservoir observations','Validate forecast, cloud and tide candidates separately','Publish only the ten approved data files and verify Pages build'}
+PUBLICATION_STEP='Publish only the ten approved data files and verify Pages build'
 
 def stamp(value):
  d=datetime.fromisoformat(value.replace('Z','+00:00'))
@@ -50,23 +51,28 @@ def decision(history,get,now,minutes=30,current_id=None,check_active=True):
  relevant=[r for r in history if r['id']!=current_id]
  active=[r['id'] for r in relevant if r.get('status')!='completed']
  if check_active and active:return {'state':'active','runIds':active}
- inspected=0
+ inspected=0;unconfirmed=[]
  for r in sorted(relevant,key=lambda r:stamp(r['updated_at']),reverse=True):
   if r.get('status')!='completed':continue
   at=stamp(r['updated_at'])
   if at>now:raise ValueError('Future run timestamp')
   if at<=now-timedelta(minutes=minutes):continue
-  if r.get('conclusion')!='success':continue
+  if r.get('conclusion') not in ['success','failure','cancelled','timed_out']:continue
   inspected+=1
-  if inspected>6:raise ValueError('Too many recent successful runs to verify safely')
+  if inspected>6:raise ValueError('Too many recent runs to verify safely')
   data=get(f'repos/{REPO}/actions/runs/{r["id"]}/jobs?per_page=100')
+  if not isinstance(data,dict) or not isinstance(data.get('jobs'),list):raise ValueError('Invalid jobs history')
   if data.get('total_count',0)>100:raise ValueError('Incomplete jobs history')
   for job in data.get('jobs',[]):
    successful={s.get('name') for s in job.get('steps',[]) if s.get('conclusion')=='success'}
-   if job.get('conclusion')=='success' and REQUIRED_STEPS<=successful:
+   if r.get('conclusion')=='success' and job.get('conclusion')=='success' and REQUIRED_STEPS<=successful:
     completed=stamp(job['completed_at'])
     if completed>now:raise ValueError('Future completion time')
     if completed>now-timedelta(minutes=minutes):return {'state':'fresh','runId':r['id'],'completedAt':job['completed_at']}
+   publication=next((s for s in job.get('steps',[]) if s.get('name')==PUBLICATION_STEP),{})
+   if (REQUIRED_STEPS-{PUBLICATION_STEP})<=successful and publication.get('conclusion') in ['failure','cancelled','timed_out']:
+    unconfirmed.append(r)
+ if unconfirmed:return {'state':'publication-unconfirmed','runId':unconfirmed[0]['id'],'runUpdatedAt':unconfirmed[0]['updated_at'],'reason':'Publication may have pushed before verification failed. Inspect exact commit/build/public bytes; do not redispatch blindly.'}
  return {'state':'due','reason':'No active run or verified successful combined refresh in the interval'}
 
 def request_slot(now):
@@ -108,9 +114,11 @@ def recover(get,post,now,until,journal=JOURNAL,dispatch=False):
   if not matched:return {'state':'pending-or-uncertain','requestId':prior['requestId'],'reason':'Prior request has no confirmed run; do not redispatch'}
   prior.update(state='run-found',runId=matched['id']);save(journal,prior)
  state=decision(history,get,now,minutes=due_window(now))
- if state['state']!='due' or not dispatch:return state
+ if state['state'] not in ['due','publication-unconfirmed']:return state
  key=request_id(now);existing=find_request(history,key)
- if existing:return {'state':'already-requested','runId':existing['id'],'requestId':key}
+ if existing:return {'state':'already-requested','runId':existing['id'],'requestId':key,'runConclusion':existing.get('conclusion'),'verificationState':state['state'],'reason':'Current slot has a confirmed request; inspect its outcome instead of dispatching again.'}
+ if prior and prior.get('requestId')==key and prior.get('state')=='run-found':return {'state':'pending-or-uncertain','requestId':key,'reason':'Current slot is journaled but absent from returned history; do not redispatch'}
+ if state['state']!='due' or not dispatch:return state
  # Re-read immediately before the side effect. Local lock + workflow concurrency
  # + runner freshness gate cover independent callers and a simultaneous cron.
  history=runs(get);state=decision(history,get,now,minutes=due_window(now))

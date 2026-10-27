@@ -995,3 +995,33 @@ request a reload; versioned assets and data compatibility guards prevent a raw
 unknown label. The six-hour rainfall column ending 15:00 is not ingested, and
 Nagalagam Street's feet measurement is excluded from these metre records.
 Superseded readings and original PDF hashes remain in provenance.
+
+## Exact-commit Pages race verification, 27 October
+
+Run 40486792246 pushed b165218, then observed an errored Pages build. GitHub
+also recorded a successful build for that exact commit at 10:14:43 UTC, and
+its published bytes were independently verified. The historical workflow
+remains failed; a later unrelated commit does not prove that run succeeded.
+
+The publisher now examines the bounded recent Pages build list, rather than
+only `/latest`, within the existing eight-minute deadline. One errored build
+does not terminate verification while another build of the exact full commit
+can finish. Only a successful exact-commit build with the expected repository
+build identity is accepted. All-failed, missing, pending or unrelated-commit
+outcomes remain failures at the deadline. API denial stops immediately; it is
+not retried or routed around. Public hash verification is still separate.
+
+A failed publication step after successful source-processing steps may have
+pushed already. The watchdog now reports `publication-unconfirmed` instead of
+blindly treating that interval as due. Read-only and dispatch modes both report
+`already-requested` for an existing current-slot request, preserving the failed
+run conclusion rather than calling it fresh. A current-slot journal entry
+missing from returned history remains uncertain. The runner also skips an
+unconfirmed recent publication. A fully successful source/publication job is
+still required for automatic `fresh`; partial source failures are not promoted
+to success. Inspect exact commit, build history and public hashes to reconcile
+a failed run. No same-slot redispatch is used to turn a failed run green.
+
+The :07/:37 schedule, original monitoring deadline, job permissions, normal-push
+checks and exact ten-file allowlist are unchanged. The new Pages race tests run
+with the existing publisher safeguards. No new credential or service is used.

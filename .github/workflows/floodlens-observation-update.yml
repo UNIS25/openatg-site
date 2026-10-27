@@ -58,6 +58,7 @@ jobs:
         run: |
           python3 tests/floodlens/test_observation_updater.py
           python3 tests/floodlens/test_publisher_watchdog.py
+          python3 tests/floodlens/test_pages_publication.py
           python3 tests/floodlens/test_weather_publisher.py
       - name: Fetch and validate dated reservoir observations
         if: steps.due.outputs.proceed == 'true'
