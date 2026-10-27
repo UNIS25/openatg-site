@@ -3,8 +3,8 @@
   "kind": "infrared_cloud_imagery",
   "layer": "Himawari_AHI_Band13_Clean_Infrared",
   "provider": "JMA Himawari-9 AHI via NASA GIBS",
-  "capturedAt": "2026-10-27T20:00:00Z",
-  "retrievedAt": "2026-10-27T20:43:28.703812+00:00",
+  "capturedAt": "2026-10-27T20:10:00Z",
+  "retrievedAt": "2026-10-27T20:55:08.069438+00:00",
   "nativeResolutionKm": 2,
   "bbox": [
     79.189453125,
@@ -16,55 +16,10 @@
   "pixelHeight": 274,
   "frames": [
     {
-      "captureAt": "2026-10-27T19:30:00Z",
+      "captureAt": "2026-10-27T19:50:00Z",
       "path": "/floodlens/data/clouds/frame-0.png",
-      "sha256": "114698f5060e9f6cf1eb184bd7536de006a5f9032de733aa432749c71b1002cc",
-      "bytes": 33743,
-      "landPixelCoverage": 1.0,
-      "samples": [
-        {
-          "publicTestLocation": "Colombo",
-          "rgba": [
-            150,
-            150,
-            150,
-            255
-          ]
-        },
-        {
-          "publicTestLocation": "Puttalam",
-          "rgba": [
-            0,
-            87,
-            163,
-            255
-          ]
-        },
-        {
-          "publicTestLocation": "Jaffna",
-          "rgba": [
-            160,
-            160,
-            160,
-            255
-          ]
-        },
-        {
-          "publicTestLocation": "Ratnapura",
-          "rgba": [
-            165,
-            165,
-            165,
-            255
-          ]
-        }
-      ]
-    },
-    {
-      "captureAt": "2026-10-27T19:40:00Z",
-      "path": "/floodlens/data/clouds/frame-1.png",
-      "sha256": "4000bc6bd679694c350cc7c492f7dd53b1547f01a87198d6bb09b9a0e28de74f",
-      "bytes": 34230,
+      "sha256": "5bacf5ee59c5e24c3284b8276168cecf0a5c5a5f769be7482e4b4a9a3ba0fcbf",
+      "bytes": 34182,
       "landPixelCoverage": 1.0,
       "samples": [
         {
@@ -80,26 +35,26 @@
           "publicTestLocation": "Puttalam",
           "rgba": [
             0,
-            110,
-            175,
+            189,
+            219,
             255
           ]
         },
         {
           "publicTestLocation": "Jaffna",
           "rgba": [
-            150,
-            150,
-            150,
+            158,
+            158,
+            158,
             255
           ]
         },
         {
           "publicTestLocation": "Ratnapura",
           "rgba": [
-            162,
-            162,
-            162,
+            170,
+            170,
+            170,
             255
           ]
         }
@@ -107,7 +62,7 @@
     },
     {
       "captureAt": "2026-10-27T20:00:00Z",
-      "path": "/floodlens/data/clouds/frame-2.png",
+      "path": "/floodlens/data/clouds/frame-1.png",
       "sha256": "05fac0d0e8d5bf9246f73b98e98d132e9d6c6d774906e033515039f0bc54347d",
       "bytes": 34343,
       "landPixelCoverage": 1.0,
@@ -149,16 +104,66 @@
           ]
         }
       ]
+    },
+    {
+      "captureAt": "2026-10-27T20:10:00Z",
+      "path": "/floodlens/data/clouds/frame-2.png",
+      "sha256": "89271760c6cd8a11921d694d3c1feb0811b8cfd9782dad3a32103e2600147ddf",
+      "bytes": 33963,
+      "landPixelCoverage": 1.0,
+      "samples": [
+        {
+          "publicTestLocation": "Colombo",
+          "rgba": [
+            157,
+            157,
+            157,
+            255
+          ]
+        },
+        {
+          "publicTestLocation": "Puttalam",
+          "rgba": [
+            0,
+            163,
+            205,
+            255
+          ]
+        },
+        {
+          "publicTestLocation": "Jaffna",
+          "rgba": [
+            151,
+            205,
+            205,
+            255
+          ]
+        },
+        {
+          "publicTestLocation": "Ratnapura",
+          "rgba": [
+            176,
+            176,
+            176,
+            255
+          ]
+        }
+      ]
     }
   ],
   "unavailableFrames": [
     {
-      "captureAt": "2026-10-27T19:50:00+00:00",
-      "url": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/Himawari_AHI_Band13_Clean_Infrared/default/2026-10-27T19:50:00Z/2km/5/8/29.png",
+      "captureAt": "2026-10-27T20:30:00+00:00",
+      "url": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/Himawari_AHI_Band13_Clean_Infrared/default/2026-10-27T20:30:00Z/2km/5/8/29.png",
+      "status": 404
+    },
+    {
+      "captureAt": "2026-10-27T20:20:00+00:00",
+      "url": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/Himawari_AHI_Band13_Clean_Infrared/default/2026-10-27T20:20:00Z/2km/5/8/29.png",
       "status": 404
     }
   ],
-  "advertisedLatestAt": "2026-10-27T20:00:00+00:00",
+  "advertisedLatestAt": "2026-10-27T20:30:00+00:00",
   "interpretation": "Infrared brightness-temperature colours. Clouds, not rain radar, floodwater, a warning or a forecast. Data are delayed; capture time is not retrieval time.",
   "attribution": "Japan Meteorological Agency Himawari-9 imagery, provided by NASA GIBS / ESDIS. Sri Lanka crop and outline display prepared by OpenATG. No endorsement.",
   "terms": "https://www.jma.go.jp/jma/en/copyright.html",
