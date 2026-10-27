@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "reviewedAt": "2026-10-27T08:13:23+00:00",
+  "reviewedAt": "2026-10-27T08:43:59+00:00",
   "reviewMethod": "Official PDFs visually checked; structured source transcription. Not an agency endorsement.",
   "bulletins": [
     {
-      "id": "kalu-20261026-01",
+      "id": "kalu-20261027-02",
       "kind": "flood",
       "title": {
         "en": "Kalu River Basin",
@@ -12,10 +12,10 @@
         "ta": "களு கங்கை ஆற்றுப் படுகை"
       },
       "authority": "Irrigation Department",
-      "issuedAt": "2026-10-26T11:30:00+05:30",
-      "expiresAt": "2026-10-27T11:30:00+05:30",
-      "listingAt": "2026-10-26T11:30:00+05:30",
-      "url": "https://www.dmc.gov.lk/images/dmcreports/Flood_warning_for_Kalu_River_Basin_-_No_01_-_2026__1792995574.pdf",
+      "issuedAt": "2026-10-27T13:30:00+05:30",
+      "expiresAt": "2026-10-28T13:30:00+05:30",
+      "listingAt": "2026-10-27T13:30:00+05:30",
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Flood_warning_for_Kalu_River_Basin_-_No_02_-_(Extended_warning)_2026__1793090488.pdf",
       "summary": {
         "en": "Minor flooding is possible in low-lying parts of the Kalu floodplain in the named DS divisions. The warning does not apply uniformly to every place in a division.",
         "si": "නම් කළ කොට්ඨාසවල කළු ගඟ ගංවතුර තැනිතලාවේ පහත් බිම්වල සුළු ගංවතුර ඇති විය හැක. කොට්ඨාසයක සෑම ස්ථානයකටම එක සේ අදාළ නොවේ.",
@@ -101,9 +101,12 @@
           "divisionCode": "LK1336"
         }
       ],
-      "sha256": "1767a274eea705bca490879756b1ad5bd255183c0d101ba5c8e81212b4da8ca3",
+      "sha256": "c552b54d56512af5fcd2a8b3a26bcf3f718b13a76168ff910dc5c8ae87142a80",
       "districtCodes": [],
-      "severity": "amber"
+      "severity": "amber",
+      "extendsBulletinId": "kalu-20261026-01",
+      "scopeBasis": "No. 02 explicitly extends No. 01. The attached original names the same 13 DS divisions, only low-lying Kalu floodplain portions; not a whole-division or whole-district inundation footprint.",
+      "sourceDiscrepancy": "No. 02 prose references No. 01 as issued on 27 October at 11:30; the attached No. 01 visibly states 26 October with expiry 27 October. No. 02 explicit header issue (27 October 13:30) and validity (28 October 13:30) govern this extension. The original dates have not been silently rewritten."
     },
     {
       "id": "mahaweli-20261026-01",

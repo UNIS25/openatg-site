@@ -1,0 +1,105 @@
+{
+  "purpose": "Source-backed historical test record only, not imported by production.",
+  "bulletin": {
+    "id": "kalu-20261026-01",
+    "kind": "flood",
+    "title": {
+      "en": "Kalu River Basin",
+      "si": "කළු ගඟ ද්‍රෝණිය",
+      "ta": "களு கங்கை ஆற்றுப் படுகை"
+    },
+    "authority": "Irrigation Department",
+    "issuedAt": "2026-10-26T11:30:00+05:30",
+    "expiresAt": "2026-10-27T11:30:00+05:30",
+    "listingAt": "2026-10-26T11:30:00+05:30",
+    "url": "https://www.dmc.gov.lk/images/dmcreports/Flood_warning_for_Kalu_River_Basin_-_No_01_-_2026__1792995574.pdf",
+    "summary": {
+      "en": "Minor flooding is possible in low-lying parts of the Kalu floodplain in the named DS divisions. The warning does not apply uniformly to every place in a division.",
+      "si": "නම් කළ කොට්ඨාසවල කළු ගඟ ගංවතුර තැනිතලාවේ පහත් බිම්වල සුළු ගංවතුර ඇති විය හැක. කොට්ඨාසයක සෑම ස්ථානයකටම එක සේ අදාළ නොවේ.",
+      "ta": "பெயரிடப்பட்ட பிரிவுகளில் களு கங்கை வெள்ளச் சமவெளியின் தாழ்நிலப் பகுதிகளில் சிறிய வெள்ளம் ஏற்படலாம். பிரிவின் எல்லா இடங்களுக்கும் ஒரே விதமாகப் பொருந்தாது."
+    },
+    "areas": [
+      {
+        "district": "Ratnapura",
+        "division": "Pelmadulla",
+        "districtCode": "LK91",
+        "divisionCode": "LK9124"
+      },
+      {
+        "district": "Ratnapura",
+        "division": "Nivithigala",
+        "districtCode": "LK91",
+        "divisionCode": "LK9136"
+      },
+      {
+        "district": "Ratnapura",
+        "division": "Ratnapura",
+        "districtCode": "LK91",
+        "divisionCode": "LK9112"
+      },
+      {
+        "district": "Ratnapura",
+        "division": "Kuruwita",
+        "districtCode": "LK91",
+        "divisionCode": "LK9106"
+      },
+      {
+        "district": "Ratnapura",
+        "division": "Ayagama",
+        "districtCode": "LK91",
+        "divisionCode": "LK9130"
+      },
+      {
+        "district": "Ratnapura",
+        "division": "Elapatha",
+        "districtCode": "LK91",
+        "divisionCode": "LK9127"
+      },
+      {
+        "district": "Kalutara",
+        "division": "Ingiriya",
+        "districtCode": "LK13",
+        "divisionCode": "LK1310"
+      },
+      {
+        "district": "Kalutara",
+        "division": "Horana",
+        "districtCode": "LK13",
+        "divisionCode": "LK1309"
+      },
+      {
+        "district": "Kalutara",
+        "division": "Dodangoda",
+        "districtCode": "LK13",
+        "divisionCode": "LK1327"
+      },
+      {
+        "district": "Kalutara",
+        "division": "Millaniya",
+        "districtCode": "LK13",
+        "divisionCode": "LK1318"
+      },
+      {
+        "district": "Kalutara",
+        "division": "Bulathsinhala",
+        "districtCode": "LK13",
+        "divisionCode": "LK1312"
+      },
+      {
+        "district": "Kalutara",
+        "division": "Madurawala",
+        "districtCode": "LK13",
+        "divisionCode": "LK1315"
+      },
+      {
+        "district": "Kalutara",
+        "division": "Palindanuwara",
+        "districtCode": "LK13",
+        "divisionCode": "LK1336"
+      }
+    ],
+    "sha256": "1767a274eea705bca490879756b1ad5bd255183c0d101ba5c8e81212b4da8ca3",
+    "districtCodes": [],
+    "severity": "amber"
+  }
+}

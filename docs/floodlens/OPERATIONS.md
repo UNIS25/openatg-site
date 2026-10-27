@@ -963,3 +963,20 @@ The 07:42 Google public-page observation is recorded only in review provenance:
 Puttalam remains unsupported/no data, not an all-clear; Kala Wewa remains a
 HYBAS discharge forecast node, not reservoir telemetry. No provider issue or
 expiry time is invented.
+
+## 27 October 13:30 SLST Kalu extension
+
+No. 02 Amber explicitly extends the same No. 01 low-lying Kalu floodplain
+warning across 13 named DS divisions. All three original PDF pages were visually
+checked. The explicit header issues No. 02 at 13:30 SLST October 27 and expires
+it at 13:30 October 28. Its prose references No. 01 as October 27, while the
+attached No. 01 visibly says October 26. This inconsistency is retained in the
+snapshot and provenance; neither original date is silently rewritten.
+
+No. 01 is retained as a complete previous bulletin in provenance, with its
+original hash and validity. Existing translated limited-scope summaries remain
+unchanged and non-official. Mahaweli is still expired. Station measurements and
+all unrelated warnings remain unchanged. Historical tests use the actual No. 01
+fixture; new tests separately cover No. 02 issue/expiry, exact scope, original
+source and priority despite stale gauge observations. The completed source-list
+review time is 08:43:59 UTC, not the new bulletin's issue time or a gauge reading.

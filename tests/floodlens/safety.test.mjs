@@ -3,7 +3,9 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {warningReviewStatus,locationEvidence,warningState,ageState,dailyAgeState,warningMatches,assessment,insideGeometry,locationCandidates,validateSnapshot} from '../../floodlens/core.mjs';
 import {copy} from '../../floodlens/i18n.mjs';
-const snapshot=JSON.parse(await readFile(new URL('../../floodlens/data/reviewed.json',import.meta.url)));
+const currentSnapshot=JSON.parse(await readFile(new URL('../../floodlens/data/reviewed.json',import.meta.url)));
+// Historical safety cases retain their actual No. 01 source; production now uses No. 02.
+const snapshot=structuredClone(currentSnapshot);snapshot.bulletins[0]=JSON.parse(await readFile(new URL('./fixtures/kalu-20261026-01.json',import.meta.url))).bulletin;
 const catalog=JSON.parse(await readFile(new URL('../../floodlens/data/areas.json',import.meta.url)));
 const now=Date.parse('2026-10-26T13:00:00+05:30');
 test('official bulletin validity expires exactly; missing/future times are unknown',()=>{
@@ -32,7 +34,7 @@ test('accuracy circle near an edge produces multiple candidates, not nearest fal
  assert.equal(locationCandidates([poly(80),poly(80.01)],[80.0099,7.005],100).length,2);assert.equal(locationCandidates([poly(80)],[81,7],50).length,0);
 });
 test('production source records and units are valid; no fixture switches',()=>{
- validateSnapshot(snapshot);assert.equal(snapshot.stations.length,21);assert.ok(snapshot.stations.every(s=>s.unit==='m'));assert.ok(snapshot.bulletins.every(b=>/^[a-f0-9]{64}$/.test(b.sha256)));assert.equal(snapshot.reservoirs.find(r=>r.name==='Tabbowa').effectivePercent,99.98);
+ validateSnapshot(currentSnapshot);assert.equal(snapshot.stations.length,21);assert.ok(snapshot.stations.every(s=>s.unit==='m'));assert.ok(snapshot.bulletins.every(b=>/^[a-f0-9]{64}$/.test(b.sha256)));assert.equal(snapshot.reservoirs.find(r=>r.name==='Tabbowa').effectivePercent,99.98);
 });
 test('all UI translation keys exist in Sinhala and Tamil',()=>{
  for(const language of ['si','ta'])for(const k of Object.keys(copy.en))assert.equal(typeof copy[language][k],'string',`${language}.${k}`);

@@ -6,7 +6,7 @@ const json=async path=>JSON.parse(await readFile('floodlens/data/'+path));
 const [warnings,catalog,overview,forecast,media,locations,cyclone]=await Promise.all(['reviewed.json','areas.json','map-overview.json','forecast/forecast.json','reservoir-reports.json','reservoir-locations.json','explore/cyclone.json'].map(json));
 const now=Date.parse('2026-10-27T05:30:00Z');
 // Historical clock fixture for the earlier basin-warning comparisons.
-const currentWarnings=structuredClone(warnings);warnings.reviewedAt='2026-10-27T05:10:04.423322Z';
+const currentWarnings=structuredClone(warnings);warnings.bulletins[0]=JSON.parse(await readFile('tests/floodlens/fixtures/kalu-20261026-01.json')).bulletin;warnings.reviewedAt='2026-10-27T05:10:04.423322Z';
 test('warning geometry is the named administrative scope, with exact levels and expiry',()=>{
  const flood=warningLayer(warnings,catalog,overview,'flood',now);
  assert.equal(flood.bulletins.length,5);assert.ok(flood.areas.some(a=>a.area.code==='LK9112'));assert.ok(!flood.areas.some(a=>a.area.districtCode==='LK62'));
