@@ -3,8 +3,8 @@
   "kind": "infrared_cloud_imagery",
   "layer": "Himawari_AHI_Band13_Clean_Infrared",
   "provider": "JMA Himawari-9 AHI via NASA GIBS",
-  "capturedAt": "2026-10-27T07:10:00Z",
-  "retrievedAt": "2026-10-27T08:14:26.043920+00:00",
+  "capturedAt": "2026-10-27T08:10:00Z",
+  "retrievedAt": "2026-10-27T08:44:20.109640+00:00",
   "nativeResolutionKm": 2,
   "bbox": [
     79.189453125,
@@ -16,108 +16,18 @@
   "pixelHeight": 274,
   "frames": [
     {
-      "captureAt": "2026-10-27T06:50:00Z",
+      "captureAt": "2026-10-27T07:50:00Z",
       "path": "/floodlens/data/clouds/frame-0.png",
-      "sha256": "5500ef9f145e007726a0d41cb04f0d654c1edebe87b6a325e5feaf27c1a9822a",
-      "bytes": 43654,
+      "sha256": "31586e8b8605a8d70599b3f970f1aa1064b365d59cb392b74d7791f5fbdf9ad5",
+      "bytes": 42387,
       "landPixelCoverage": 1.0,
       "samples": [
         {
           "publicTestLocation": "Colombo",
-          "rgba": [
-            188,
-            188,
-            188,
-            255
-          ]
-        },
-        {
-          "publicTestLocation": "Puttalam",
-          "rgba": [
-            167,
-            167,
-            167,
-            255
-          ]
-        },
-        {
-          "publicTestLocation": "Jaffna",
-          "rgba": [
-            188,
-            188,
-            188,
-            255
-          ]
-        },
-        {
-          "publicTestLocation": "Ratnapura",
-          "rgba": [
-            73,
-            205,
-            44,
-            255
-          ]
-        }
-      ]
-    },
-    {
-      "captureAt": "2026-10-27T07:00:00Z",
-      "path": "/floodlens/data/clouds/frame-1.png",
-      "sha256": "e57d09a2428d52ad2ecda5f0c905805cbd525d8f80b51ea18e8382b836935e5c",
-      "bytes": 43493,
-      "landPixelCoverage": 1.0,
-      "samples": [
-        {
-          "publicTestLocation": "Colombo",
-          "rgba": [
-            180,
-            180,
-            180,
-            255
-          ]
-        },
-        {
-          "publicTestLocation": "Puttalam",
-          "rgba": [
-            52,
-            136,
-            182,
-            255
-          ]
-        },
-        {
-          "publicTestLocation": "Jaffna",
-          "rgba": [
-            176,
-            176,
-            176,
-            255
-          ]
-        },
-        {
-          "publicTestLocation": "Ratnapura",
           "rgba": [
             147,
-            231,
-            11,
-            255
-          ]
-        }
-      ]
-    },
-    {
-      "captureAt": "2026-10-27T07:10:00Z",
-      "path": "/floodlens/data/clouds/frame-2.png",
-      "sha256": "1d45c197e891d5ac41f4d50124e96cdc44ed8ef31a7009a3caac0becaeb3fc59",
-      "bytes": 43691,
-      "landPixelCoverage": 1.0,
-      "samples": [
-        {
-          "publicTestLocation": "Colombo",
-          "rgba": [
-            184,
-            184,
-            184,
+            147,
+            147,
             255
           ]
         },
@@ -125,24 +35,114 @@
           "publicTestLocation": "Puttalam",
           "rgba": [
             0,
-            33,
-            133,
+            54,
+            144,
             255
           ]
         },
         {
           "publicTestLocation": "Jaffna",
           "rgba": [
-            162,
-            162,
-            162,
+            0,
+            237,
+            245,
             255
           ]
         },
         {
           "publicTestLocation": "Ratnapura",
           "rgba": [
-            128,
+            255,
+            223,
+            0,
+            255
+          ]
+        }
+      ]
+    },
+    {
+      "captureAt": "2026-10-27T08:00:00Z",
+      "path": "/floodlens/data/clouds/frame-1.png",
+      "sha256": "7ff65242a4595e3890c9d630d7f820a4e836d09da76206254a934ef297f7cf86",
+      "bytes": 42427,
+      "landPixelCoverage": 1.0,
+      "samples": [
+        {
+          "publicTestLocation": "Colombo",
+          "rgba": [
+            159,
+            159,
+            159,
+            255
+          ]
+        },
+        {
+          "publicTestLocation": "Puttalam",
+          "rgba": [
+            115,
+            181,
+            182,
+            255
+          ]
+        },
+        {
+          "publicTestLocation": "Jaffna",
+          "rgba": [
+            153,
+            202,
+            204,
+            255
+          ]
+        },
+        {
+          "publicTestLocation": "Ratnapura",
+          "rgba": [
+            211,
+            255,
+            0,
+            255
+          ]
+        }
+      ]
+    },
+    {
+      "captureAt": "2026-10-27T08:10:00Z",
+      "path": "/floodlens/data/clouds/frame-2.png",
+      "sha256": "28274836422161c6a01937c6940c1d5652d479d5a69bcb68a8be4dc9282e5f58",
+      "bytes": 42077,
+      "landPixelCoverage": 1.0,
+      "samples": [
+        {
+          "publicTestLocation": "Colombo",
+          "rgba": [
+            0,
+            242,
+            248,
+            255
+          ]
+        },
+        {
+          "publicTestLocation": "Puttalam",
+          "rgba": [
+            142,
+            142,
+            142,
+            255
+          ]
+        },
+        {
+          "publicTestLocation": "Jaffna",
+          "rgba": [
+            180,
+            180,
+            180,
+            255
+          ]
+        },
+        {
+          "publicTestLocation": "Ratnapura",
+          "rgba": [
+            190,
             255,
             0,
             255
@@ -152,7 +152,7 @@
     }
   ],
   "unavailableFrames": [],
-  "advertisedLatestAt": "2026-10-27T07:10:00+00:00",
+  "advertisedLatestAt": "2026-10-27T08:10:00+00:00",
   "interpretation": "Infrared brightness-temperature colours. Clouds, not rain radar, floodwater, a warning or a forecast. Data are delayed; capture time is not retrieval time.",
   "attribution": "Japan Meteorological Agency Himawari-9 imagery, provided by NASA GIBS / ESDIS. Sri Lanka crop and outline display prepared by OpenATG. No endorsement.",
   "terms": "https://www.jma.go.jp/jma/en/copyright.html",
