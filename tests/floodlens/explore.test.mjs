@@ -7,6 +7,7 @@ const [warnings,catalog,overview,forecast,media,locations,cyclone]=await Promise
 const now=Date.parse('2026-10-27T05:30:00Z');
 // Historical clock fixture for the earlier basin-warning comparisons.
 const currentWarnings=structuredClone(warnings);warnings.bulletins[0]=JSON.parse(await readFile('tests/floodlens/fixtures/kalu-20261026-01.json')).bulletin;warnings.reviewedAt='2026-10-27T05:10:04.423322Z';
+warnings.bulletins[warnings.bulletins.findIndex(w=>w.kind==='landslide')]=JSON.parse(await readFile('tests/floodlens/fixtures/landslide-20261026-1800.json')).bulletin;
 test('warning geometry is the named administrative scope, with exact levels and expiry',()=>{
  const flood=warningLayer(warnings,catalog,overview,'flood',now);
  assert.equal(flood.bulletins.length,5);assert.ok(flood.areas.some(a=>a.area.code==='LK9112'));assert.ok(!flood.areas.some(a=>a.area.districtCode==='LK62'));

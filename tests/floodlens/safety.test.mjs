@@ -6,6 +6,7 @@ import {copy} from '../../floodlens/i18n.mjs';
 const currentSnapshot=JSON.parse(await readFile(new URL('../../floodlens/data/reviewed.json',import.meta.url)));
 // Historical safety cases retain their actual No. 01 source; production now uses No. 02.
 const snapshot=structuredClone(currentSnapshot);snapshot.bulletins[0]=JSON.parse(await readFile(new URL('./fixtures/kalu-20261026-01.json',import.meta.url))).bulletin;
+snapshot.bulletins[snapshot.bulletins.findIndex(w=>w.kind==='landslide')]=JSON.parse(await readFile(new URL('./fixtures/landslide-20261026-1800.json',import.meta.url))).bulletin;
 const catalog=JSON.parse(await readFile(new URL('../../floodlens/data/areas.json',import.meta.url)));
 const now=Date.parse('2026-10-26T13:00:00+05:30');
 test('official bulletin validity expires exactly; missing/future times are unknown',()=>{

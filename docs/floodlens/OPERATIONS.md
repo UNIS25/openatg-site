@@ -1025,3 +1025,20 @@ a failed run. No same-slot redispatch is used to turn a failed run green.
 The :07/:37 schedule, original monitoring deadline, job permissions, normal-push
 checks and exact ten-file allowlist are unchanged. The new Pages race tests run
 with the existing publisher safeguards. No new credential or service is used.
+
+## 27 October 16:00 SLST landslide renewal
+
+All four original pages of LEWM-27-10-2026-1600-34 were visually checked.
+Update 34 renews the same 71 named divisions and surrounding susceptible areas:
+28 Yellow, 33 Amber and ten Red. It is valid from 16:00 SLST October 27 through
+16:00 October 28. Reordered names and removed old change markers do not change
+severity or coverage. Exact district-scoped codes and the existing non-official
+translated summaries are retained. The complete prior 18:00 bulletin and its
+original hash/validity remain in provenance and in a test-only historical fixture.
+
+The completed listing review is 11:13:41 UTC (16:43:41 SLST), separate from the
+new source issue time. Kelani and Attanagalu still expire at 18:00 SLST October 27;
+this renewal does not extend them. River readings remain at 15:00, issued 15:30.
+Regression cases cover the renewed Red result in all three languages after the
+previous bulletin's expiry, exact 71-division map scope, future/expiry boundaries,
+and unchanged station observations. No app version or publisher path changes.

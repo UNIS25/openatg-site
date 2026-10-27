@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "reviewedAt": "2026-10-27T10:43:34+00:00",
+  "reviewedAt": "2026-10-27T11:13:41+00:00",
   "reviewMethod": "Official PDFs visually checked; structured source transcription. Not an agency endorsement.",
   "bulletins": [
     {
@@ -139,7 +139,7 @@
       "severity": "amber"
     },
     {
-      "id": "LEWM-26-10-2026-1800-33",
+      "id": "LEWM-27-10-2026-1600-34",
       "kind": "landslide",
       "title": {
         "en": "Landslide early warning",
@@ -147,10 +147,10 @@
         "ta": "மண்சரிவு முன்னெச்சரிக்கை"
       },
       "authority": "NBRI / DMC",
-      "issuedAt": "2026-10-26T18:00:00+05:30",
-      "expiresAt": "2026-10-27T18:00:00+05:30",
-      "listingAt": "2026-10-26T18:00:00+05:30",
-      "url": "https://www.dmc.gov.lk/images/dmcreports/Landslide_EW_Report_at_1800hrs_on_2026__1793018981.pdf",
+      "issuedAt": "2026-10-27T16:00:00+05:30",
+      "expiresAt": "2026-10-28T16:00:00+05:30",
+      "listingAt": "2026-10-27T16:00:00+05:30",
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Landslide_EW_Report_at_1600hrs_on_2026__1793098165.pdf",
       "summary": {
         "en": "Levels 1 (Yellow), 2 (Amber) and 3 (Red) apply to named DS divisions and surrounding areas. Read the original warning and the authority’s evacuation instructions for the affected areas.",
         "si": "නම් කළ කොට්ඨාස සහ අවට ප්‍රදේශ සඳහා මට්ටම් 1 (කහ), 2 (ඇම්බර්) සහ 3 (රතු) අදාළය. අදාළ ප්‍රදේශ සඳහා මුල් අනතුරු ඇඟවීම සහ බලධාරීන්ගේ ඉවත් වීමේ උපදෙස් කියවන්න.",
@@ -655,8 +655,9 @@
           "divisionCode": "LK9112"
         }
       ],
-      "sha256": "35e492bf3495070ff0e2fcfaf161528ebf942bb302fffbaa66f78949fdec716f",
-      "districtCodes": []
+      "sha256": "6734f8541331b9fcbf5a70a60b2d1dcca291f90a138fa2e7240180a71bfe64aa",
+      "districtCodes": [],
+      "previousBulletinId": "LEWM-26-10-2026-1800-33"
     },
     {
       "id": "rain-20261026-0300",
