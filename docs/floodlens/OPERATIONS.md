@@ -1,5 +1,15 @@
 # OpenATG FloodLens
 
+Latest reviewed basin extension: Kalu No. 03, Amber, issued 28 October 13:30
+SLST and valid until 29 October 13:30 SLST. All three original PDF pages were
+visually reviewed. The same 13 named DS divisions apply only to low-lying Kalu
+floodplain portions. No. 02 and its source remain in provenance. No. 03's prose
+dates the referenced No. 01 to 27 October, while its annex dates No. 01 to
+26 October; this discrepancy is retained, using the explicit No. 03 header for
+its own issue and expiry. The later review/publication does not imply Ark had
+displayed the new extension earlier. Noon station readings, NBRO scope and the
+marine bulletin's conflicting time windows are unchanged.
+
 Latest reviewed river update: the 28 October 12:30 SLST report contains noon
 observations and the previous 11:00 comparison. The same 22 selected metre
 gauges include three Minor Flood, six Alert and thirteen Normal classifications.

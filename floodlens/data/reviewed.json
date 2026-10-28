@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "reviewedAt": "2026-10-28T08:51:21.707458+00:00",
+  "reviewedAt": "2026-10-28T09:20:19.320071+00:00",
   "reviewMethod": "Official PDFs visually checked; structured source transcription. Not an agency endorsement.",
   "bulletins": [
     {
@@ -1029,6 +1029,111 @@
       ],
       "districtCodes": [],
       "extendsBulletinId": "gin-20261026-01"
+    },
+    {
+      "id": "kalu-20261028-03",
+      "kind": "flood",
+      "title": {
+        "en": "Kalu River Basin",
+        "si": "කළු ගඟ ද්‍රෝණිය",
+        "ta": "களு கங்கை ஆற்றுப் படுகை"
+      },
+      "authority": "Irrigation Department",
+      "issuedAt": "2026-10-28T13:30:00+05:30",
+      "expiresAt": "2026-10-29T13:30:00+05:30",
+      "listingAt": "2026-10-28T13:30:00+05:30",
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Flood_warning_for_Kalu_River_Basin_-_No_03_-_%28Extended_warning%29_2026__1793177654.pdf",
+      "summary": {
+        "en": "Minor flooding is possible in low-lying parts of the Kalu floodplain in the named DS divisions. The warning does not apply uniformly to every place in a division.",
+        "si": "නම් කළ කොට්ඨාසවල කළු ගඟ ගංවතුර තැනිතලාවේ පහත් බිම්වල සුළු ගංවතුර ඇති විය හැක. කොට්ඨාසයක සෑම ස්ථානයකටම එක සේ අදාළ නොවේ.",
+        "ta": "பெயரிடப்பட்ட பிரிவுகளில் களு கங்கை வெள்ளச் சமவெளியின் தாழ்நிலப் பகுதிகளில் சிறிய வெள்ளம் ஏற்படலாம். பிரிவின் எல்லா இடங்களுக்கும் ஒரே விதமாகப் பொருந்தாது."
+      },
+      "areas": [
+        {
+          "district": "Ratnapura",
+          "division": "Pelmadulla",
+          "districtCode": "LK91",
+          "divisionCode": "LK9124"
+        },
+        {
+          "district": "Ratnapura",
+          "division": "Nivithigala",
+          "districtCode": "LK91",
+          "divisionCode": "LK9136"
+        },
+        {
+          "district": "Ratnapura",
+          "division": "Ratnapura",
+          "districtCode": "LK91",
+          "divisionCode": "LK9112"
+        },
+        {
+          "district": "Ratnapura",
+          "division": "Kuruwita",
+          "districtCode": "LK91",
+          "divisionCode": "LK9106"
+        },
+        {
+          "district": "Ratnapura",
+          "division": "Ayagama",
+          "districtCode": "LK91",
+          "divisionCode": "LK9130"
+        },
+        {
+          "district": "Ratnapura",
+          "division": "Elapatha",
+          "districtCode": "LK91",
+          "divisionCode": "LK9127"
+        },
+        {
+          "district": "Kalutara",
+          "division": "Ingiriya",
+          "districtCode": "LK13",
+          "divisionCode": "LK1310"
+        },
+        {
+          "district": "Kalutara",
+          "division": "Horana",
+          "districtCode": "LK13",
+          "divisionCode": "LK1309"
+        },
+        {
+          "district": "Kalutara",
+          "division": "Dodangoda",
+          "districtCode": "LK13",
+          "divisionCode": "LK1327"
+        },
+        {
+          "district": "Kalutara",
+          "division": "Millaniya",
+          "districtCode": "LK13",
+          "divisionCode": "LK1318"
+        },
+        {
+          "district": "Kalutara",
+          "division": "Bulathsinhala",
+          "districtCode": "LK13",
+          "divisionCode": "LK1312"
+        },
+        {
+          "district": "Kalutara",
+          "division": "Madurawala",
+          "districtCode": "LK13",
+          "divisionCode": "LK1315"
+        },
+        {
+          "district": "Kalutara",
+          "division": "Palindanuwara",
+          "districtCode": "LK13",
+          "divisionCode": "LK1336"
+        }
+      ],
+      "sha256": "de78a7e17264a9a3494dc15cbec0d7c817b2316ea26324a1182550e8ea3ff8c6",
+      "districtCodes": [],
+      "severity": "amber",
+      "extendsBulletinId": "kalu-20261026-01",
+      "scopeBasis": "No. 03 explicitly extends No. 01. The attached original names the same 13 DS divisions, only low-lying Kalu floodplain portions; not a whole-division or whole-district inundation footprint.",
+      "sourceDiscrepancy": "No. 03 prose references No. 01 as issued on 27 October at 11:30; the attached No. 01 visibly states 26 October with expiry 27 October. No. 03 explicit header issue (28 October 13:30) and validity (29 October 13:30) govern this extension. Original dates are retained without silent correction."
     }
   ],
   "stations": [
