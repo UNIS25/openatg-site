@@ -7,9 +7,16 @@ test('forecast publication rejects incomplete/future/regressed or mismatched sou
  for(const fn of [d=>d.runAt='2099-01-01T00:00:00Z',d=>d.frames[0].rainMm[0]=null,d=>d.frames[0].windUms[0]=null,d=>d.units.rainMm='m',d=>d.captureErrors.push({error:'source failed'})])await candidate('forecast',async dir=>{await changeJSON(dir,'forecast.json',fn);await assert.rejects(validateGroup('forecast',dir,'floodlens/data/forecast'));});
 });
 test('cloud publication rejects swapped bytes, unapproved paths and false times',async()=>{
- await validateGroup('clouds','floodlens/data/clouds','floodlens/data/clouds');
- await candidate('clouds',async dir=>{await cp(dir+'/frame-0.png',dir+'/frame-2.png');await assert.rejects(validateGroup('clouds',dir,'floodlens/data/clouds'),/hash/);});
- for(const fn of [d=>d.frames[0].path='/floodlens/app.mjs',d=>d.frames[0].landPixelCoverage=.98,d=>d.capturedAt='2099-01-01T00:00:00Z'])await candidate('clouds',async dir=>{await changeJSON(dir,'clouds.json',fn);await assert.rejects(validateGroup('clouds',dir,'floodlens/data/clouds'));});
+ const retained=JSON.parse(await readFile('floodlens/data/clouds/clouds.json'));
+ // Validate the retained artifact at its real retrieval time. Its subsequent
+ // expiry must not mask the separate byte/path/source integrity assertions.
+ const verifiedAt=Date.parse(retained.retrievedAt);
+ await validateGroup('clouds','floodlens/data/clouds','floodlens/data/clouds',verifiedAt);
+ await candidate('clouds',async dir=>{await cp(dir+'/frame-0.png',dir+'/frame-2.png');await assert.rejects(validateGroup('clouds',dir,'floodlens/data/clouds',verifiedAt),/hash/);});
+ for(const fn of [d=>d.frames[0].path='/floodlens/app.mjs',d=>d.frames[0].landPixelCoverage=.98,d=>d.capturedAt='2099-01-01T00:00:00Z'])await candidate('clouds',async dir=>{await changeJSON(dir,'clouds.json',fn);await assert.rejects(validateGroup('clouds',dir,'floodlens/data/clouds',verifiedAt));});
+ const expiry=Date.parse(retained.capturedAt)+3*3600000;
+ await validateGroup('clouds','floodlens/data/clouds','floodlens/data/clouds',expiry);
+ await assert.rejects(validateGroup('clouds','floodlens/data/clouds','floodlens/data/clouds',expiry+1),/Old\/unavailable cloud capture/);
 });
 test('tide publication requires matching licensed inputs, validation and upcoming coverage',async()=>{
  const retained=JSON.parse(await readFile('floodlens/data/tides/colombo.json'));
