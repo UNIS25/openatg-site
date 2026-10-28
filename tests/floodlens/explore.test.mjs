@@ -39,5 +39,11 @@ test('official cyclone reported and forecast positions never become an interpola
 });
 
 test('lightning map is Amber only in named districts during validity and empty after expiry',()=>{
- const historical={...currentWarnings,bulletins:currentWarnings.bulletins.filter(w=>Date.parse(w.issuedAt)<Date.parse('2026-10-28T00:00:00Z')),reviewedAt:'2026-10-27T06:15:00Z'},at=Date.parse('2026-10-27T06:30:00Z'),layer=warningLayer(historical,catalog,overview,'lightning',at);assert.deepEqual([...new Set(layer.areas.map(a=>a.area.districtCode))].sort(),['LK51','LK52']);assert.ok(layer.areas.every(a=>a.level===2));assert.equal(layer.areas.length,catalog.divisions.filter(a=>['LK51','LK52'].includes(a.districtCode)).length);assert.equal(warningLayer(historical,catalog,overview,'lightning',Date.parse('2026-10-27T18:00:00Z')).areas.length,0);assert.equal(warningLayer(currentWarnings,catalog,overview,'lightning',Math.max(...currentWarnings.bulletins.filter(w=>w.kind==='lightning').map(w=>Date.parse(w.expiresAt)))).areas.length,0);
+ const historical={...currentWarnings,bulletins:currentWarnings.bulletins.filter(w=>Date.parse(w.issuedAt)<Date.parse('2026-10-28T00:00:00Z')),reviewedAt:'2026-10-27T06:15:00Z'},at=Date.parse('2026-10-27T06:30:00Z'),layer=warningLayer(historical,catalog,overview,'lightning',at);assert.deepEqual([...new Set(layer.areas.map(a=>a.area.districtCode))].sort(),['LK51','LK52']);assert.ok(layer.areas.every(a=>a.level===2));assert.equal(layer.areas.length,catalog.divisions.filter(a=>['LK51','LK52'].includes(a.districtCode)).length);assert.equal(warningLayer(historical,catalog,overview,'lightning',Date.parse('2026-10-27T18:00:00Z')).areas.length,0);
+ const expiresAt=Math.max(...currentWarnings.bulletins.filter(w=>w.kind==='lightning').map(w=>Date.parse(w.expiresAt)));
+ // A later real review must not be projected into the historical expiry instant.
+ const expiryFixture={...currentWarnings,reviewedAt:new Date(expiresAt-60000).toISOString()};
+ assert.equal(warningLayer(expiryFixture,catalog,overview,'lightning',expiresAt).areas.length,0);
+ assert.equal(warningLayer(currentWarnings,catalog,overview,'lightning',Math.max(expiresAt,Date.parse(currentWarnings.reviewedAt))).areas.length,0);
+ assert.throws(()=>warningLayer({...expiryFixture,reviewedAt:new Date(expiresAt+1).toISOString()},catalog,overview,'lightning',expiresAt),/Unreviewed warning time/);
 });
