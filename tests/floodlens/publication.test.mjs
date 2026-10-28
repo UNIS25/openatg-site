@@ -12,7 +12,14 @@ test('cloud publication rejects swapped bytes, unapproved paths and false times'
  for(const fn of [d=>d.frames[0].path='/floodlens/app.mjs',d=>d.frames[0].landPixelCoverage=.98,d=>d.capturedAt='2099-01-01T00:00:00Z'])await candidate('clouds',async dir=>{await changeJSON(dir,'clouds.json',fn);await assert.rejects(validateGroup('clouds',dir,'floodlens/data/clouds'));});
 });
 test('tide publication requires matching licensed inputs, validation and upcoming coverage',async()=>{
- await validateGroup('tides','floodlens/data/tides','floodlens/data/tides');
- for(const fn of [d=>d.predictionSha256='0'.repeat(64),d=>d.maxDifferenceMetres=.021,d=>d.extremaComparison[0].differenceMinutes=5.01,d=>d.samples=2])await candidate('tides',async dir=>{await changeJSON(dir,'validation.json',fn);await assert.rejects(validateGroup('tides',dir,'floodlens/data/tides'));});
- await candidate('tides',async dir=>{await changeJSON(dir,'colombo.json',d=>d.source.sha256='0'.repeat(64));await assert.rejects(validateGroup('tides',dir,'floodlens/data/tides'));});
+ const retained=JSON.parse(await readFile('floodlens/data/tides/colombo.json'));
+ // Verify the previously accepted artifact at its actual calculation time, not
+ // a wall clock that eventually makes retained data ineligible for new publication.
+ const verifiedAt=Date.parse(retained.calculatedAt);
+ await validateGroup('tides','floodlens/data/tides','floodlens/data/tides',verifiedAt);
+ for(const fn of [d=>d.predictionSha256='0'.repeat(64),d=>d.maxDifferenceMetres=.021,d=>d.extremaComparison[0].differenceMinutes=5.01,d=>d.samples=2])await candidate('tides',async dir=>{await changeJSON(dir,'validation.json',fn);await assert.rejects(validateGroup('tides',dir,'floodlens/data/tides',verifiedAt));});
+ await candidate('tides',async dir=>{await changeJSON(dir,'colombo.json',d=>d.source.sha256='0'.repeat(64));await assert.rejects(validateGroup('tides',dir,'floodlens/data/tides',verifiedAt));});
+ const boundary=Date.parse(retained.validUntil)-24*3600000;
+ await validateGroup('tides','floodlens/data/tides','floodlens/data/tides',boundary);
+ await assert.rejects(validateGroup('tides','floodlens/data/tides','floodlens/data/tides',boundary+1),/Incomplete.regressed tide coverage/);
 });
