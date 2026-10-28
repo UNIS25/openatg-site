@@ -19,7 +19,7 @@ test('Kalu No. 03 uses its explicit header dates while preserving conflicting No
  assert.ok(provenance.sources.some(s=>s.id===current.id&&s.sha256===current.sha256));assert.ok(provenance.sources.some(s=>s.id===previous.id&&s.sha256===previous.sha256));
 });
 test('stale noon gauges do not suppress Kalu No. 03 or the higher Red landslide warning',()=>{
- const now=Date.parse('2026-10-28T09:31:00Z');for(const s of data.stations){assert.equal(s.observedAt,'2026-10-28T12:00:00+05:30');assert.equal(ageState(s.observedAt,3,now),'stale');}
+ const now=Date.parse('2026-10-28T09:31:00Z');for(const s of provenance.reviews.find(r=>r.source?.id==='river-20261028-1530').previousStations){assert.equal(s.observedAt,'2026-10-28T12:00:00+05:30');assert.equal(ageState(s.observedAt,3,now),'stale');}
  for(const code of ['LK1309','LK1318','LK9136'])assert.equal(locationEvidence(data.bulletins,[catalog.divisions.find(a=>a.code===code)],{now}).source.id,current.id);
  const ratnapura=locationEvidence(data.bulletins,[catalog.divisions.find(a=>a.code==='LK9112')],{now});assert.equal(ratnapura.level,3);assert.equal(ratnapura.source.id,'LEWM-27-10-2026-1600-34');assert.equal(ratnapura.otherFlood,true);
 });

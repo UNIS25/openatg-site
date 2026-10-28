@@ -1,5 +1,15 @@
 # OpenATG FloodLens
 
+Latest river review: 28 October 15:30 SLST issue, 15:00 observations,
+14:00 comparison. All 22 selected metre gauges were visually checked: three
+Minor Flood, six Alert, thirteen Normal. Panadugama now has an official Rising
+trend; the three Minor Flood rows and Ellagawa have blank trends, retained as
+null. The rainfall column covers six hours ending 15:00; Thawalama
+68.6 mm is a six-hour total, not the prior noon report's three-hour period.
+Prior noon measurements remain in provenance. No station status cancels a
+basin warning or establishes household safety. Warning issue/expiry, marine
+conflicting windows, translation labels and tide validation hold are unchanged.
+
 Latest reviewed basin extension: Kalu No. 03, Amber, issued 28 October 13:30
 SLST and valid until 29 October 13:30 SLST. All three original PDF pages were
 visually reviewed. The same 13 named DS divisions apply only to low-lying Kalu
