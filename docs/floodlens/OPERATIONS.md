@@ -1173,3 +1173,19 @@ Historical regression cases use their actual dated source snapshots. Current
 recovery tests cover all 22 rows, returned missing gauges, exact lightning scope,
 Gin validity gap, preserved warning priority and trilingual current browser flow.
 The independent tide checker and retained validated tide snapshot are unchanged.
+
+## 28 October 16:00 SLST landslide Update 35
+
+All four original pages of LEWM-28-10-2026-1600-35 were visually reviewed.
+The explicit validity is 28 October 16:00 through 29 October 16:00 SLST.
+The revised table contains 54 named divisions: 41 Yellow, 13 Amber and no Red
+entries. Exact district-scoped codes were checked against the boundary catalogue;
+Deraniyagala continues from page 2 into page 3. Named divisions and surrounding
+susceptible areas remain the source scope, not parcel hazard precision.
+Update 34 remains as expired history. Its Red entries cannot override current
+levels; separate active basin warnings retain their own priority. Omitted areas
+and lower levels do not imply an all-clear. Station readings and their original
+observation times, marine timing conflict and tide validation hold are unchanged.
+The official Tamil 16:00 general forecast companion is retained in provenance,
+not interpreted as a coloured warning or cancellation. Its source does not
+retroactively resolve earlier forecast discrepancies.

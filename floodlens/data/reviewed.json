@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "reviewedAt": "2026-10-28T11:18:18.266175+00:00",
+  "reviewedAt": "2026-10-28T11:54:53.855090+00:00",
   "reviewMethod": "Official PDFs visually checked; structured source transcription. Not an agency endorsement.",
   "bulletins": [
     {
@@ -1134,6 +1134,409 @@
       "extendsBulletinId": "kalu-20261026-01",
       "scopeBasis": "No. 03 explicitly extends No. 01. The attached original names the same 13 DS divisions, only low-lying Kalu floodplain portions; not a whole-division or whole-district inundation footprint.",
       "sourceDiscrepancy": "No. 03 prose references No. 01 as issued on 27 October at 11:30; the attached No. 01 visibly states 26 October with expiry 27 October. No. 03 explicit header issue (28 October 13:30) and validity (29 October 13:30) govern this extension. Original dates are retained without silent correction."
+    },
+    {
+      "id": "LEWM-28-10-2026-1600-35",
+      "kind": "landslide",
+      "title": {
+        "en": "Landslide early warning",
+        "si": "නායයෑම් පූර්ව අනතුරු ඇඟවීම",
+        "ta": "மண்சரிவு முன்னெச்சரிக்கை"
+      },
+      "authority": "NBRI / DMC",
+      "issuedAt": "2026-10-28T16:00:00+05:30",
+      "expiresAt": "2026-10-29T16:00:00+05:30",
+      "listingAt": "2026-10-28T16:00:00+05:30",
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Landslide_EW_Report_at_1600hrs_on_2026__1793186280.pdf",
+      "summary": {
+        "en": "Levels 1 (Yellow) and 2 (Amber) apply to the named DS divisions and surrounding areas. Read the original warning and follow official instructions.",
+        "si": "නම් කළ කොට්ඨාස සහ අවට ප්‍රදේශ සඳහා මට්ටම් 1 (කහ) සහ 2 (ඇම්බර්) අදාළය. මුල් නිල අනතුරු ඇඟවීම සහ උපදෙස් කියවන්න.",
+        "ta": "பெயரிடப்பட்ட பிரிவுகளிலும் சுற்றுப்பகுதிகளிலும் நிலைகள் 1 (மஞ்சள்), 2 (அம்பர்) பொருந்துகின்றன. அசல் எச்சரிக்கையையும் அதிகாரிகளின் அறிவுறுத்தல்களையும் படிக்கவும்."
+      },
+      "areas": [
+        {
+          "district": "Colombo",
+          "division": "Seethawaka",
+          "level": 1,
+          "districtCode": "LK11",
+          "divisionCode": "LK1115"
+        },
+        {
+          "district": "Colombo",
+          "division": "Padukka",
+          "level": 1,
+          "districtCode": "LK11",
+          "divisionCode": "LK1118"
+        },
+        {
+          "district": "Galle",
+          "division": "Neluwa",
+          "level": 1,
+          "districtCode": "LK31",
+          "divisionCode": "LK3121"
+        },
+        {
+          "district": "Galle",
+          "division": "Elpitiya",
+          "level": 1,
+          "districtCode": "LK31",
+          "divisionCode": "LK3112"
+        },
+        {
+          "district": "Galle",
+          "division": "Thawalama",
+          "level": 1,
+          "districtCode": "LK31",
+          "divisionCode": "LK3118"
+        },
+        {
+          "district": "Galle",
+          "division": "Niyagama",
+          "level": 1,
+          "districtCode": "LK31",
+          "divisionCode": "LK3115"
+        },
+        {
+          "district": "Galle",
+          "division": "Karandeniya",
+          "level": 1,
+          "districtCode": "LK31",
+          "divisionCode": "LK3109"
+        },
+        {
+          "district": "Kalutara",
+          "division": "Beruwala",
+          "level": 1,
+          "districtCode": "LK13",
+          "divisionCode": "LK1324"
+        },
+        {
+          "district": "Kalutara",
+          "division": "Millaniya",
+          "level": 1,
+          "districtCode": "LK13",
+          "divisionCode": "LK1318"
+        },
+        {
+          "district": "Kalutara",
+          "division": "Agalawatta",
+          "level": 1,
+          "districtCode": "LK13",
+          "divisionCode": "LK1333"
+        },
+        {
+          "district": "Kalutara",
+          "division": "Madurawala",
+          "level": 1,
+          "districtCode": "LK13",
+          "divisionCode": "LK1315"
+        },
+        {
+          "district": "Kalutara",
+          "division": "Horana",
+          "level": 1,
+          "districtCode": "LK13",
+          "divisionCode": "LK1309"
+        },
+        {
+          "district": "Kalutara",
+          "division": "Walallawita",
+          "level": 1,
+          "districtCode": "LK13",
+          "divisionCode": "LK1339"
+        },
+        {
+          "district": "Kalutara",
+          "division": "Palindanuwara",
+          "level": 1,
+          "districtCode": "LK13",
+          "divisionCode": "LK1336"
+        },
+        {
+          "district": "Kalutara",
+          "division": "Mathugama",
+          "level": 1,
+          "districtCode": "LK13",
+          "divisionCode": "LK1330"
+        },
+        {
+          "district": "Kalutara",
+          "division": "Ingiriya",
+          "level": 1,
+          "districtCode": "LK13",
+          "divisionCode": "LK1310"
+        },
+        {
+          "district": "Kandy",
+          "division": "Udapalatha",
+          "level": 1,
+          "districtCode": "LK21",
+          "divisionCode": "LK2151"
+        },
+        {
+          "district": "Kandy",
+          "division": "Yatinuwara",
+          "level": 1,
+          "districtCode": "LK21",
+          "divisionCode": "LK2136"
+        },
+        {
+          "district": "Kandy",
+          "division": "Pasbage Korale",
+          "level": 1,
+          "districtCode": "LK21",
+          "divisionCode": "LK2157"
+        },
+        {
+          "district": "Kandy",
+          "division": "Udunuwara",
+          "level": 1,
+          "districtCode": "LK21",
+          "divisionCode": "LK2139"
+        },
+        {
+          "district": "Kandy",
+          "division": "Ganga Ihala Korale",
+          "level": 1,
+          "districtCode": "LK21",
+          "divisionCode": "LK2154"
+        },
+        {
+          "district": "Kegalle",
+          "division": "Galigamuwa",
+          "level": 1,
+          "districtCode": "LK92",
+          "divisionCode": "LK9215"
+        },
+        {
+          "district": "Kegalle",
+          "division": "Warakapola",
+          "level": 1,
+          "districtCode": "LK92",
+          "divisionCode": "LK9218"
+        },
+        {
+          "district": "Kegalle",
+          "division": "Ruwanwella",
+          "level": 1,
+          "districtCode": "LK92",
+          "divisionCode": "LK9221"
+        },
+        {
+          "district": "Kegalle",
+          "division": "Yatiyanthota",
+          "level": 1,
+          "districtCode": "LK92",
+          "divisionCode": "LK9227"
+        },
+        {
+          "district": "Kegalle",
+          "division": "Rambukkana",
+          "level": 1,
+          "districtCode": "LK92",
+          "divisionCode": "LK9203"
+        },
+        {
+          "district": "Kegalle",
+          "division": "Kegalle",
+          "level": 1,
+          "districtCode": "LK92",
+          "divisionCode": "LK9212"
+        },
+        {
+          "district": "Kegalle",
+          "division": "Bulathkohupitiya",
+          "level": 1,
+          "districtCode": "LK92",
+          "divisionCode": "LK9224"
+        },
+        {
+          "district": "Kegalle",
+          "division": "Dehiowita",
+          "level": 1,
+          "districtCode": "LK92",
+          "divisionCode": "LK9230"
+        },
+        {
+          "district": "Kegalle",
+          "division": "Deraniyagala",
+          "level": 1,
+          "districtCode": "LK92",
+          "divisionCode": "LK9233"
+        },
+        {
+          "district": "Kurunegala",
+          "division": "Kurunegala",
+          "level": 1,
+          "districtCode": "LK61",
+          "divisionCode": "LK6154"
+        },
+        {
+          "district": "Matara",
+          "division": "Kotapola",
+          "level": 1,
+          "districtCode": "LK32",
+          "divisionCode": "LK3206"
+        },
+        {
+          "district": "Matara",
+          "division": "Pitabeddara",
+          "level": 1,
+          "districtCode": "LK32",
+          "divisionCode": "LK3203"
+        },
+        {
+          "district": "Nuwara Eliya",
+          "division": "Kothmale West",
+          "level": 1,
+          "districtCode": "LK23",
+          "divisionCode": "LK2321"
+        },
+        {
+          "district": "Nuwara Eliya",
+          "division": "Kotmale East",
+          "level": 1,
+          "districtCode": "LK23",
+          "divisionCode": "LK2303"
+        },
+        {
+          "district": "Ratnapura",
+          "division": "Kalawana",
+          "level": 1,
+          "districtCode": "LK91",
+          "divisionCode": "LK9133"
+        },
+        {
+          "district": "Ratnapura",
+          "division": "Nivithigala",
+          "level": 1,
+          "districtCode": "LK91",
+          "divisionCode": "LK9136"
+        },
+        {
+          "district": "Ratnapura",
+          "division": "Kiriella",
+          "level": 1,
+          "districtCode": "LK91",
+          "divisionCode": "LK9109"
+        },
+        {
+          "district": "Ratnapura",
+          "division": "Godakawela",
+          "level": 1,
+          "districtCode": "LK91",
+          "divisionCode": "LK9142"
+        },
+        {
+          "district": "Ratnapura",
+          "division": "Eheliyagoda",
+          "level": 1,
+          "districtCode": "LK91",
+          "divisionCode": "LK9103"
+        },
+        {
+          "district": "Ratnapura",
+          "division": "Balangoda",
+          "level": 1,
+          "districtCode": "LK91",
+          "divisionCode": "LK9118"
+        },
+        {
+          "district": "Gampaha",
+          "division": "Attanagalla",
+          "level": 2,
+          "districtCode": "LK12",
+          "divisionCode": "LK1227"
+        },
+        {
+          "district": "Kalutara",
+          "division": "Bulathsinhala",
+          "level": 2,
+          "districtCode": "LK13",
+          "divisionCode": "LK1312"
+        },
+        {
+          "district": "Kalutara",
+          "division": "Dodangoda",
+          "level": 2,
+          "districtCode": "LK13",
+          "divisionCode": "LK1327"
+        },
+        {
+          "district": "Kegalle",
+          "division": "Mawanella",
+          "level": 2,
+          "districtCode": "LK92",
+          "divisionCode": "LK9206"
+        },
+        {
+          "district": "Kegalle",
+          "division": "Aranayake",
+          "level": 2,
+          "districtCode": "LK92",
+          "divisionCode": "LK9209"
+        },
+        {
+          "district": "Nuwara Eliya",
+          "division": "Norwood",
+          "level": 2,
+          "districtCode": "LK23",
+          "divisionCode": "LK2330"
+        },
+        {
+          "district": "Nuwara Eliya",
+          "division": "Ambagamuwa Korale",
+          "level": 2,
+          "districtCode": "LK23",
+          "divisionCode": "LK2315"
+        },
+        {
+          "district": "Ratnapura",
+          "division": "Ratnapura",
+          "level": 2,
+          "districtCode": "LK91",
+          "divisionCode": "LK9112"
+        },
+        {
+          "district": "Ratnapura",
+          "division": "Openayake",
+          "level": 2,
+          "districtCode": "LK91",
+          "divisionCode": "LK9121"
+        },
+        {
+          "district": "Ratnapura",
+          "division": "Kuruwita",
+          "level": 2,
+          "districtCode": "LK91",
+          "divisionCode": "LK9106"
+        },
+        {
+          "district": "Ratnapura",
+          "division": "Ayagama",
+          "level": 2,
+          "districtCode": "LK91",
+          "divisionCode": "LK9130"
+        },
+        {
+          "district": "Ratnapura",
+          "division": "Elapatha",
+          "level": 2,
+          "districtCode": "LK91",
+          "divisionCode": "LK9127"
+        },
+        {
+          "district": "Ratnapura",
+          "division": "Pelmadulla",
+          "level": 2,
+          "districtCode": "LK91",
+          "divisionCode": "LK9124"
+        }
+      ],
+      "sha256": "09c25b29a90d053861884ba00c5cc8b28f7237dfa504e435e3292632d736c64c",
+      "districtCodes": [],
+      "previousBulletinId": "LEWM-27-10-2026-1600-34",
+      "scopeBasis": "Original Update 35 columns on pages 2–3: 41 Yellow, 13 Amber and no Red entries. Named DS divisions and surrounding areas; special attention to susceptible slopes, valleys, cut slopes and hazardous roads. No whole-division inundation or parcel safety inferred."
     }
   ],
   "stations": [

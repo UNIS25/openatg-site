@@ -37,7 +37,7 @@ test('renewed Red warning and mapped areas remain active after old expiry withou
  assert.equal(layer.areas.length,71);assert.equal(layer.areas.filter(a=>a.level===3).length,10);assert.equal(layer.unmapped.length,0);
  const expiry=Date.parse(warning.expiresAt),beforeExpiry=provenance.reviewChecks.filter(r=>Date.parse(r.reviewedAt)<=expiry&&Date.parse(r.reviewedAt)>=expiry-3*3600000).at(-1);
  assert.ok(beforeExpiry,'a completed actual review exists before expiry');
- assert.equal(warningLayer({...current,reviewedAt:beforeExpiry.reviewedAt},catalog,overview,'landslide',expiry).areas.length,0);
+ assert.equal(warningLayer({...current,bulletins:current.bulletins.filter(w=>w.id!=='LEWM-28-10-2026-1600-35'),reviewedAt:beforeExpiry.reviewedAt},catalog,overview,'landslide',expiry).areas.length,0);
  assert.throws(()=>warningLayer({...current,reviewedAt:new Date(expiry+60000).toISOString()},catalog,overview,'landslide',expiry),/Unreviewed warning time/);
  for(const id of ['kelani-20261026-01','attanagalu-20261026-01'])assert.equal(warningState(current.bulletins.find(w=>w.id===id),now),'expired');
  const retained=provenance.reviews.find(r=>r.source?.sha256==='24f403b0375b169fcdbbd54a4e4002f967aa3486a49c3453a9412478e5b8fc41').previousStations;assert.ok(retained.every(s=>s.observedAt==='2026-10-27T15:00:00+05:30'&&s.issuedAt==='2026-10-27T15:30:00+05:30'));
