@@ -1,5 +1,12 @@
 export const HOUR = 3600000;
-export const CLIENT_VERSION = 11;
+export const CLIENT_VERSION = 12;
+export function marineWithdrawalVerified(w){
+  const x=w?.withdrawal;
+  return w?.kind==='marine'&&w.scope==='sea_only'&&w.severity==='amber'&&w.untilFurtherNotice===false&&
+    x?.instruction==='multi_day_fishing_and_naval_avoidance'&&x.scope==='deep_southwest_bay_of_bengal'&&
+    safeSource(w.url)&&x.sourceUrl===w.url&&/^[a-f0-9]{64}$/.test(w.sha256)&&x.sourceSha256===w.sha256&&
+    Number.isFinite(Date.parse(x.reviewedAt))&&x.reviewedAt===w.reviewedAt;
+}
 // Retain conflicting original time windows rather than choosing one as truth.
 export function marineTimeWindows(w){
   const windows=w?.timeConflict===true?w.sourceTimeWindows:[{issuedAt:w?.issuedAt,expiresAt:w?.expiresAt}];
@@ -120,6 +127,9 @@ export function validateSnapshot(d,clientVersion=CLIENT_VERSION) {
   }
   for(const s of d.stations)if(['alertNoTrend','minorNoTrend'].includes(s.status)&&(s.sourceTrend!==null||s.sourceRemarks!==(s.status==='minorNoTrend'?'Minor Flood':'Alert')))throw Error('Invalid no-trend station');
   for(const w of d.marineBulletins||[])if(w.timeConflict!==undefined&&(w.timeConflict!==true||!Number.isInteger(d.minClientVersion)||d.minClientVersion<11||w.kind!=='marine'||w.scope!=='sea_only'||w.severity!=='red'||!safeSource(w.url)||!marineTimeWindows(w)))throw Error('Invalid conflicting marine times');
+  for(const w of d.marineBulletins||[])if(w.severity==='amber'||w.withdrawal!==undefined){
+    if(!Number.isInteger(d.minClientVersion)||d.minClientVersion<12||w.timeConflict!==undefined||!marineTimeWindows(w)||!marineWithdrawalVerified(w))throw Error('Invalid reviewed marine withdrawal');
+  }
   for(const r of d.reservoirs)if(!Number.isFinite(r.effectivePercent)||!Number.isFinite(r.spillCusecs)||typeof r.name!=='string'||!safeSource(r.url))throw Error('Invalid reservoir');
   return d;
 }

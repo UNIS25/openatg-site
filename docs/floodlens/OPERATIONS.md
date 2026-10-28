@@ -1199,3 +1199,30 @@ observation times, marine timing conflict and tide validation hold are unchanged
 The official Tamil 16:00 general forecast companion is retained in provenance,
 not interpreted as a coloured warning or cancellation. Its source does not
 retroactively resolve earlier forecast discrepancies.
+
+## 28 October 21:00 SLST marine withdrawal and river observations
+
+All four original pages of marine Bulletin 09, MSW/26/10/28/01, were visually
+reviewed. This sea-only Amber advisory has agreeing header/map times: issued
+28 October 21:00 SLST, valid for twelve hours through 29 October 09:00 SLST.
+The 21:30 listing is not its issue time. It explicitly withdraws the earlier
+restriction on multi-day fishing boats and naval activity in the deep southwest
+Bay of Bengal. Rough or very rough seas with 55–65 km/h winds and vigilance
+advice remain for the mapped sea areas. This is neither an all-clear nor an
+inland warning, and does not cancel other advisories.
+
+Client 12 requires a reviewed source URL/hash, matching review time and the
+exact limited withdrawal scope before suppressing the older restriction notice.
+Older clients request an update. Bulletin 08 and both conflicting time windows
+remain in history. Expiry of Bulletin 09 must not resurrect the withdrawn
+restriction. The current sea advisory is available in the compact news section;
+app summaries retain their non-official translation label and original PDF link.
+
+The river report issued 21:30 SLST contains 21:00 observations and 20:00
+comparisons: four Minor Flood, four Alert, twelve Normal and two unavailable
+among the same 22 metre gauges. Galgamuwa and Thanthirimale have dashes and blank
+classification; their prior readings are not carried forward. Blank official
+trends remain null. Rainfall is a twelve-hour total ending 21:00, retained in
+provenance separately from gauge values; Nagalagam Street's feet are not added to
+the metre directory. Original observation times still control freshness, and
+Normal station readings never cancel an area warning or establish home safety.

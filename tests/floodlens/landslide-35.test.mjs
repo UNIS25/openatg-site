@@ -24,7 +24,8 @@ test('current lesser landslide levels replace expired Red without overriding act
  const norwood=locationEvidence(data.bulletins,[area('LK2330')],{now});assert.equal(norwood.source.id,warning.id);assert.equal(norwood.level,2);
  const yellow=warning.areas.find(a=>a.division==='Udapalatha'),local=locationEvidence(data.bulletins,[area(yellow.divisionCode)],{now});assert.equal(local.source.id,warning.id);assert.equal(local.level,1);
  const ratnapura=locationEvidence(data.bulletins,[area('LK9112')],{now});assert.equal(ratnapura.kind,'flood');assert.equal(ratnapura.source.id,'kalu-20261028-03');
- const later=now+2*3600000;assert.equal(ageState(data.stations[0].observedAt,3,later),'stale');assert.equal(locationEvidence(data.bulletins,[area('LK2330')],{now:later}).level,2);
+ // Use the observation timestamp so a genuinely newer river report can be fresh.
+ const later=Math.max(now+2*3600000,Date.parse(data.stations[0].observedAt)+3*3600000+1);assert.equal(ageState(data.stations[0].observedAt,3,later),'stale');assert.equal(locationEvidence(data.bulletins,[area('LK2330')],{now:later}).level,2);
 });
 test('omission, boundary uncertainty and later expiry never create a safe assessment',()=>{
  const omitted=prior.areas.filter(a=>!warning.areas.some(b=>b.divisionCode===a.divisionCode));assert.equal(omitted.length,17);

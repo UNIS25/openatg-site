@@ -2,8 +2,9 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {validateSnapshot,ageState,locationEvidence} from '../../floodlens/core.mjs';
-const d=JSON.parse(await readFile('floodlens/data/reviewed.json'));
+const current=JSON.parse(await readFile('floodlens/data/reviewed.json'));
 const p=JSON.parse(await readFile('floodlens/data/provenance.json'));
+const d={...current,stations:p.reviews.find(r=>r.source?.id==='river-20261028-2130').previousStations};
 const catalog=JSON.parse(await readFile('floodlens/data/areas.json'));
 // Independent expected transcription of the source's 17:00 and 18:00 columns.
 const rows=[['Holombuwa',1.15,1.14,'normal'],['Rathnapura',5.95,5.89,'alertFalling'],['Kithulgala',2.21,2.23,'normal'],['Norwood',1.17,1.17,'normal'],['Magura',4.19,4.28,'alertRising'],['Kalawellawa (Millakanda)',7.70,7.68,'minorFalling'],['Nawalapitiya',1.56,1.55,'normal'],['Dunamale',3.27,3.25,'normal'],['Panadugama',6.06,6.11,'minorRising'],['Urawa',2.20,2.09,'normal'],['Peradeniya',2.98,2.98,'normal'],['Glencourse',11.71,11.65,'normal'],['Thawalama',3.30,3.30,'normal'],['Badalgama',3.30,3.29,'normal'],['Hanwella',4.28,4.27,'normal'],['Putupaula',3.70,3.71,'alertRising'],['Baddegama',4.23,4.23,'minorNoTrend'],['Thalgahagoda',1.84,1.85,'minorRising'],['Moragaswewa',3.00,2.95,'normal'],['Galgamuwa',2.35,2.36,'normal'],['Thanthirimale',1.82,1.82,'normal'],['Ellagawa',10.41,10.40,'alertFalling']];
