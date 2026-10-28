@@ -3,7 +3,8 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {validateSnapshot,ageState} from '../../floodlens/core.mjs';
 
-const data=JSON.parse(await readFile('floodlens/data/reviewed.json'));
+const current=JSON.parse(await readFile('floodlens/data/reviewed.json'));
+const data={...current,stations:JSON.parse(await readFile('floodlens/data/provenance.json')).reviews.find(r=>r.source?.sha256==='758cc85a7b562c60dc1f891f86e1dc0a53c7b6a662744a91d5a370ab0283d21c'&&r.currentStations).currentStations};
 const provenance=JSON.parse(await readFile('floodlens/data/provenance.json'));
 const hash='758cc85a7b562c60dc1f891f86e1dc0a53c7b6a662744a91d5a370ab0283d21c';
 // Independently checked against both columns of the original 28 October 00:30 report.

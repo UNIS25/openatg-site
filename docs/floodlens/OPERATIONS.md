@@ -1,16 +1,14 @@
 # OpenATG FloodLens
 
-Latest reviewed river update: the 28 October 00:30 SLST report contains 00:00
-observations and the previous 23:00 column dated 27 October. The same 22 selected
-metre gauges now include five Minor Flood, four Alert, eleven Normal and two
-unavailable readings. Rathnapura changes from Minor Flood to Alert; area warnings
-are unchanged. Galgamuwa and Thanthirimale remain missing. Weraganthota and newly
-missing Yaka Wewa are outside the selected directory, and Nagalagam Street's
-feet-based measurements are not added. Printed Normal rows have no inferred
-trend. The fifteen-hour rainfall totals ending midnight are not ingested as
-hourly rainfall or water level. Prior readings remain in provenance. Regression
-coverage verifies midnight date rollover, missing values and independent
-observation freshness. Later sections record the historical release sequence.
+Latest reviewed river update: the 28 October 12:30 SLST report contains noon
+observations and the previous 11:00 comparison. The same 22 selected metre
+gauges include three Minor Flood, six Alert and thirteen Normal classifications.
+Galgamuwa and Thanthirimale have new numeric readings; their earlier missing
+readings remain in provenance. Blank official trends are not inferred. The
+three-hour rainfall totals ending noon remain separate from level data.
+Lightning Bulletin 05 and Gin No. 02 are now reviewed with their exact limited
+scope and original validity. No warning expiry establishes an all-clear.
+The recovery section below records the reviewed originals and checks.
 
 Public route: `https://openatg.com/ark/`. The legacy `/floodlens/` entry redirects to `/ark/`; data/assets and automated publisher paths remain under `/floodlens/`. Existing deployment route: GitHub
 Pages, `UNIS25/openatg-site`, `main`, repository root, behind existing Cloudflare.
@@ -1126,3 +1124,32 @@ provenance, not added as an inland forecast, arrival estimate or unverified trac
 Existing trilingual sea-only summary and non-official translation labels remain;
 new plain interface labels explain the timing conflict and link the original.
 Gin's 22:30 SLST validity has elapsed without a verified extension or cancellation.
+
+## 28 October recovery: noon river readings and renewed advisories
+
+The interrupted 27 October 21:42 review was saved locally but never published.
+Its original check stays in history; the recovery review does not claim a past
+publication. All concurrent approved data-only commits are fast-forwarded before
+releasing reviewed warnings. The original monitoring deadline remains unchanged.
+
+Fresh 100-row checks of each DMC category and original visual review confirm:
+- River report issued 12:30 SLST on 28 October, observations noon and comparison
+  11:00: three Minor Flood, six Alert and thirteen Normal among the same 22 metre
+  gauges. Blank trends stay null. Galgamuwa and Thanthirimale now have reported
+  numeric readings; their earlier missing readings remain in provenance.
+- Rainfall is a three-hour total ending noon. Thawalama's 68.6 mm is retained
+  separately in review provenance; its station classification is Normal. Neither
+  that classification nor rainfall determines household safety or cancels Gin.
+- Lightning Bulletin 05 is Amber for Monaragala, Ampara and Batticaloa only,
+  11:30–23:30 SLST on 28 October. Its English/Sinhala original is linked. It does
+  not inherit Bulletin 04's official Tamil PDF. App summaries remain non-official.
+- Gin No. 02 explicitly extends No. 01 with validity 12:30 SLST on 28 October
+  through 12:30 on 29 October, only the four named low-lying valley divisions.
+  Prior expiry and the gap before this new issue are preserved, not filled in.
+- Kalu expiry, NBRO Update 34 and marine Bulletin 08's conflicting windows remain
+  unchanged. The 05:30 general forecast is a separate original, not a cancellation.
+
+Historical regression cases use their actual dated source snapshots. Current
+recovery tests cover all 22 rows, returned missing gauges, exact lightning scope,
+Gin validity gap, preserved warning priority and trilingual current browser flow.
+The independent tide checker and retained validated tide snapshot are unchanged.

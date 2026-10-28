@@ -5,7 +5,7 @@ import {warningReviewStatus,locationEvidence,warningState,ageState,dailyAgeState
 import {copy} from '../../floodlens/i18n.mjs';
 const currentSnapshot=JSON.parse(await readFile(new URL('../../floodlens/data/reviewed.json',import.meta.url)));
 // Historical safety cases retain their actual No. 01 source; production now uses No. 02.
-const snapshot=structuredClone(currentSnapshot);snapshot.bulletins[0]=JSON.parse(await readFile(new URL('./fixtures/kalu-20261026-01.json',import.meta.url))).bulletin;
+const snapshot=structuredClone(currentSnapshot);snapshot.bulletins=snapshot.bulletins.filter(w=>Date.parse(w.issuedAt)<Date.parse("2026-10-28T00:00:00Z"));snapshot.bulletins[0]=JSON.parse(await readFile(new URL('./fixtures/kalu-20261026-01.json',import.meta.url))).bulletin;
 snapshot.bulletins[snapshot.bulletins.findIndex(w=>w.kind==='landslide')]=JSON.parse(await readFile(new URL('./fixtures/landslide-20261026-1800.json',import.meta.url))).bulletin;
 const previousRiver=JSON.parse(await readFile(new URL('../../floodlens/data/provenance.json',import.meta.url))).reviews.find(r=>r.source?.sha256==='24f403b0375b169fcdbbd54a4e4002f967aa3486a49c3453a9412478e5b8fc41').previousStations;
 snapshot.stations=structuredClone(previousRiver);
