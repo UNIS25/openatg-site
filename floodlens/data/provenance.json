@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-10-28T09:20:19.320071+00:00",
+  "checkedAt": "2026-10-28T09:57:29.731860+00:00",
   "publishing": "read-only; no automatic public publication",
   "sources": [
     {
@@ -733,6 +733,45 @@
       "listingAt": "2026-10-28T13:30:00+05:30",
       "reviewedAt": "2026-10-28T09:20:19.320071+00:00",
       "review": "All three original pages visually verified locally. Amber No. 03 header dated 28 October, issued 13:30 SLST, expressly valid until 29 October 13:30. Annex names the unchanged 13 DS low-lying Kalu floodplain portions. Reference-date discrepancy retained; no new geographic boundary or household forecast."
+    },
+    {
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Weather_Report_at_1400_hrs_on_2026__1793180020.pdf",
+      "checkedAt": "2026-10-28T09:44:26.996044+00:00",
+      "status": "ok",
+      "sha256": "2ec3744ce597801989111db9dd7f55d4485c4495769835f8e41e608f1e527c77",
+      "bytes": 1026764,
+      "contentType": "application/pdf",
+      "finalUrl": "https://www.dmc.gov.lk/images/dmcreports/Weather_Report_at_1400_hrs_on_2026__1793180020.pdf",
+      "rawFile": "discovered-9bcd11b8f1c9-2ec3744ce5978019.pdf",
+      "id": "general-weather-20261028-1400-en-si",
+      "issuedAt": "2026-10-28T14:00:00+05:30",
+      "listingAt": "2026-10-28T14:00:00+05:30",
+      "reviewedAt": "2026-10-28T09:57:29.731860+00:00",
+      "classification": "General land forecast for 29 October and sea forecast for next 24 hours; not a coloured warning or an explicit cancellation.",
+      "languages": [
+        "en",
+        "si"
+      ],
+      "review": "All three pages visually inspected. Language differences in land and specified coastal wind speeds retained in the associated review; not reconciled into a shared numerical forecast."
+    },
+    {
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Weather_Report_at_1400_hrs_on_2026__1793180043.pdf",
+      "checkedAt": "2026-10-28T09:44:26.996205+00:00",
+      "status": "ok",
+      "sha256": "b06d7b1e4c3398c7741061d4db89003b814ffb9c3ac906a54252e384e9ebb8f6",
+      "bytes": 395828,
+      "contentType": "application/pdf",
+      "finalUrl": "https://www.dmc.gov.lk/images/dmcreports/Weather_Report_at_1400_hrs_on_2026__1793180043.pdf",
+      "rawFile": "discovered-43e0198025f8-b06d7b1e4c3398c7.pdf",
+      "id": "general-weather-20261028-1400-ta",
+      "issuedAt": "2026-10-28T14:00:00+05:30",
+      "listingAt": "2026-10-28T14:00:00+05:30",
+      "reviewedAt": "2026-10-28T09:57:29.731860+00:00",
+      "classification": "General land forecast for 29 October and sea forecast for next 24 hours; not a coloured warning or an explicit cancellation.",
+      "languages": [
+        "ta"
+      ],
+      "review": "All three pages visually inspected. Language differences in land and specified coastal wind speeds retained in the associated review; not reconciled into a shared numerical forecast."
     }
   ],
   "reviews": [
@@ -10275,6 +10314,93 @@
       },
       "stationObservationsUnchanged": true,
       "priorValidityPublicationGap": "No. 03 explicit issue is the same instant as No. 02 expiry. The earlier Ark review found no listed extension, and its original completed check time is retained. This later publication does not retroactively claim it displayed No. 03."
+    },
+    {
+      "reviewedAt": "2026-10-28T09:57:29.731860+00:00",
+      "scope": "28 October 14:00 SLST general forecasts: language-specific originals and discrepancies only; no warning severity, geography or measurement change.",
+      "sources": [
+        {
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Weather_Report_at_1400_hrs_on_2026__1793180020.pdf",
+          "checkedAt": "2026-10-28T09:44:26.996044+00:00",
+          "status": "ok",
+          "sha256": "2ec3744ce597801989111db9dd7f55d4485c4495769835f8e41e608f1e527c77",
+          "bytes": 1026764,
+          "contentType": "application/pdf",
+          "finalUrl": "https://www.dmc.gov.lk/images/dmcreports/Weather_Report_at_1400_hrs_on_2026__1793180020.pdf",
+          "rawFile": "discovered-9bcd11b8f1c9-2ec3744ce5978019.pdf",
+          "id": "general-weather-20261028-1400-en-si",
+          "issuedAt": "2026-10-28T14:00:00+05:30",
+          "listingAt": "2026-10-28T14:00:00+05:30",
+          "reviewedAt": "2026-10-28T09:57:29.731860+00:00",
+          "classification": "General land forecast for 29 October and sea forecast for next 24 hours; not a coloured warning or an explicit cancellation.",
+          "languages": [
+            "en",
+            "si"
+          ],
+          "review": "All three pages visually inspected. Language differences in land and specified coastal wind speeds retained in the associated review; not reconciled into a shared numerical forecast."
+        },
+        {
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Weather_Report_at_1400_hrs_on_2026__1793180043.pdf",
+          "checkedAt": "2026-10-28T09:44:26.996205+00:00",
+          "status": "ok",
+          "sha256": "b06d7b1e4c3398c7741061d4db89003b814ffb9c3ac906a54252e384e9ebb8f6",
+          "bytes": 395828,
+          "contentType": "application/pdf",
+          "finalUrl": "https://www.dmc.gov.lk/images/dmcreports/Weather_Report_at_1400_hrs_on_2026__1793180043.pdf",
+          "rawFile": "discovered-43e0198025f8-b06d7b1e4c3398c7.pdf",
+          "id": "general-weather-20261028-1400-ta",
+          "issuedAt": "2026-10-28T14:00:00+05:30",
+          "listingAt": "2026-10-28T14:00:00+05:30",
+          "reviewedAt": "2026-10-28T09:57:29.731860+00:00",
+          "classification": "General land forecast for 29 October and sea forecast for next 24 hours; not a coloured warning or an explicit cancellation.",
+          "languages": [
+            "ta"
+          ],
+          "review": "All three pages visually inspected. Language differences in land and specified coastal wind speeds retained in the associated review; not reconciled into a shared numerical forecast."
+        }
+      ],
+      "issuedAt": "2026-10-28T14:00:00+05:30",
+      "landForecastDate": "2026-10-29",
+      "seaForecastPeriod": "Next 24 hours from issue; until-further-notice avoidance is distinct.",
+      "classification": "General forecast, no coloured warning and no explicit cancellation or supersession of Marine Bulletin 08.",
+      "sourceStatements": {
+        "cyclone": "Both originals state Arnab crossed the Andhra Pradesh coast and influence over Sri Lanka gradually weakened. No crossing time, new track point or household safety is inferred.",
+        "landRain": "Showers in Western/Sabaragamuwa, Kandy/Nuwara Eliya/Galle/Matara; after 13:00 a few places in Uva/Batticaloa/Ampara. Applies to 29 October land forecast.",
+        "offshoreContext": "12–20N, 80–87E: 80–100 km/h, waves 3–4 m; naval/fishing avoidance until further notice. This different general-forecast scope does not cancel the distinct Marine Red bulletin."
+      },
+      "languageDiscrepancies": [
+        {
+          "field": "landWindKmh",
+          "englishSinhala": [
+            30,
+            40
+          ],
+          "tamil": [
+            40,
+            50
+          ],
+          "scope": "Western central hills, Northern/North-central/North-western provinces, Trincomalee and Hambantota."
+        },
+        {
+          "field": "specifiedCoastalWindKmh",
+          "englishSinhala": [
+            50,
+            60
+          ],
+          "tamil": [
+            60,
+            65
+          ],
+          "scope": "Puttalam–Mullaitivu via Kankesanthurai and Galle–Pottuvil via Hambantota."
+        },
+        {
+          "field": "otherSeaWindKmh",
+          "englishSinhala": null,
+          "tamil": 50,
+          "note": "Tamil additionally states up to 50 km/h in other sea areas; the English page has no matching line."
+        }
+      ],
+      "resolution": "Unresolved source-language discrepancies. No blended numerical forecast, new hazard severity, withdrawal or local all-clear published. Originals and their hashes retained."
     }
   ],
   "reviewChecks": [
@@ -15448,6 +15574,316 @@
       },
       "marineTimingDiscrepancy": "Header issued 21:00 SLST on 27 October for 24 hours; map caption issued 20:00 and valid until 20:00 on 28 October. No unambiguous issue/expiry is asserted. Until-further-notice guidance remains distinct.",
       "tideValidationHold": "Unchanged limits and constituent coverage; prior validated snapshot retained. No claim of overall publisher success."
+    },
+    {
+      "checkedAt": "2026-10-28T09:57:29.731860+00:00",
+      "reviewedAt": "2026-10-28T09:57:29.731860+00:00",
+      "previousPublicReviewAt": "2026-10-28T09:20:19.320071+00:00",
+      "method": "100 rows each for DMC types 6/5/2; existing structured rows unchanged. All 38 recorded original PDFs freshly byte-identical. Two new general-forecast originals, all six pages visually reviewed after reconnect. Public Google overview/Kala Wewa/Puttalam checked separately.",
+      "result": "No new coloured warning, cancellation, renewal, supersession or changed gauge observation. New 14:00 general forecasts retained with unresolved language-specific wind differences. Existing active warning scope, original times, marine conflicting windows and stale noon observations unchanged.",
+      "listingCheckCompletedAt": "2026-10-28T09:45:30.326733+00:00",
+      "listingCoverage": {
+        "lookbackStart": "2026-10-21T00:00:00+05:30",
+        "streams": [
+          {
+            "stream": "flood",
+            "status": "complete",
+            "stopReason": "lookback-covered",
+            "rows": 100,
+            "earliestListingAt": "2026-10-14T12:30:00+05:30"
+          },
+          {
+            "stream": "landslide",
+            "status": "complete",
+            "stopReason": "lookback-covered",
+            "rows": 100,
+            "earliestListingAt": "2026-02-15T07:00:00+05:30"
+          },
+          {
+            "stream": "weather",
+            "status": "complete",
+            "stopReason": "lookback-covered",
+            "rows": 100,
+            "earliestListingAt": "2026-10-17T05:30:00+05:30"
+          }
+        ],
+        "completeForListingWindow": true,
+        "warningValidityCoverage": "unknown: listing dates cannot establish validity of unreviewed PDFs",
+        "maxPagesPerStream": 5,
+        "rowsScanned": 300
+      },
+      "originalHashCheckCompletedAt": "2026-10-28T09:46:16.687430+00:00",
+      "verifiedBaselineOriginalCount": 38,
+      "newOriginalVerifiedCount": 2,
+      "verifiedOriginalHashes": [
+        {
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Flood_warning_for_Kalu_River_Basin_-_No_01_-_2026__1792995574.pdf",
+          "sha256": "1767a274eea705bca490879756b1ad5bd255183c0d101ba5c8e81212b4da8ca3",
+          "checkedAt": "2026-10-28T09:45:59.468347+00:00",
+          "status": "unchanged"
+        },
+        {
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Flood_Warning_for_Mahaweli_River_-_No_01_-_2026__1792998739.pdf",
+          "sha256": "8746dbc111719bf59283836919e8ead312f8889fa29d6d9992d70e57d205a560",
+          "checkedAt": "2026-10-28T09:43:32.007933+00:00",
+          "status": "unchanged"
+        },
+        {
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Landslide_EW_Report_at_0900hrs_on_2026__1792988751.pdf",
+          "sha256": "85948d296020693c11da8bbcca8b705060e423f004586fb0db0b08241bdeb378",
+          "checkedAt": "2026-10-28T09:45:59.469396+00:00",
+          "status": "unchanged"
+        },
+        {
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Advisory_for_Heavy_Rain_at_0330_hrs_on_2026__1792968291.pdf",
+          "sha256": "0bd573752b1965d56fd8ec4ae0c372cba2766bb66294bfc2b6acef1c6d5e6136",
+          "checkedAt": "2026-10-28T09:43:48.914851+00:00",
+          "status": "unchanged"
+        },
+        {
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1792998944.pdf",
+          "sha256": "389d0696b0a0a5452ab8e4556704746762a47151527e371c25f81357e8201f25",
+          "checkedAt": "2026-10-28T09:45:59.469584+00:00",
+          "status": "unchanged"
+        },
+        {
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Landslide_EW_Report_at_1445hrs_on_2026__1793007485.pdf",
+          "sha256": "29f80d780c681a9090d51c713c5642db0756ab03aa74aeb003c5a5471582aa52",
+          "checkedAt": "2026-10-28T09:46:02.836525+00:00",
+          "status": "unchanged"
+        },
+        {
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793017314.pdf",
+          "sha256": "68f6608b19221bc5b16569b128f59a717163ad27a8bad111760b3a3cfefb60fd",
+          "checkedAt": "2026-10-28T09:46:03.786714+00:00",
+          "status": "unchanged"
+        },
+        {
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Weather_Report_at_1600_hrs_on_2026__1793011605.pdf",
+          "sha256": "4220f346c6f0c8598ab9447f26d06823732cf7fa47ecb9e3763ef24b2da8ecde",
+          "checkedAt": "2026-10-28T09:46:04.079554+00:00",
+          "status": "unchanged"
+        },
+        {
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Weather_Report_at_1400_hrs_on_2026__1793007431.pdf",
+          "sha256": "8b8c9d2985f04b709c330690453a2db535668a8a44efb699e4cd4138d44f0cde",
+          "checkedAt": "2026-10-28T09:46:07.246918+00:00",
+          "status": "unchanged"
+        },
+        {
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Advisory_for_Severe_Lightning_at_1130hrs_on_2026__1792997048.pdf",
+          "sha256": "e5a055762cc5fff61fe0ae610ce6241395f811d76ae020b955d21c98f707ac5c",
+          "checkedAt": "2026-10-28T09:46:09.438182+00:00",
+          "status": "unchanged"
+        },
+        {
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Advisory_for_Severe_Lightning_at_1130hrs_on_25__1792909124.pdf",
+          "sha256": "1a2c39d4cbf35294fb5719ad2a4d8e770acafe91c049be6891425003e1bb4fe4",
+          "checkedAt": "2026-10-28T09:46:09.666076+00:00",
+          "status": "unchanged"
+        },
+        {
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Landslide_EW_Report_at_1800hrs_on_2026__1793018981.pdf",
+          "sha256": "35e492bf3495070ff0e2fcfaf161528ebf942bb302fffbaa66f78949fdec716f",
+          "checkedAt": "2026-10-28T09:46:12.464370+00:00",
+          "status": "unchanged"
+        },
+        {
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Flood_Warning_for_Kelani_Basin-_No_01_-_2026__1793020603.pdf",
+          "sha256": "7ef2fd77855a9bf433e6bab591dcdbf53cc4b7301925ef0bfe248e3aa0e3edd4",
+          "checkedAt": "2026-10-28T09:43:57.098654+00:00",
+          "status": "unchanged"
+        },
+        {
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Flood_Warning_FOR_Attanagalu_Oya__-_NO_01_%282026__1793020643.pdf",
+          "sha256": "aee26763cf95bbe1c092b17161ac34a0f33c7c6cf24b6b9fc118bc0453f67b72",
+          "checkedAt": "2026-10-28T09:43:59.653703+00:00",
+          "status": "unchanged"
+        },
+        {
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793020835.pdf",
+          "sha256": "ff8ad0720346edf8b15827a9a843be66d2fe4201c6dbf6596cccaa9f2dbddc9e",
+          "checkedAt": "2026-10-28T09:45:22.473164+00:00",
+          "status": "unchanged"
+        },
+        {
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793031612.pdf",
+          "sha256": "eed191d373c03e12f80226e02d7f2a3146a3c6f84422e960b9c553b0e5b1381d",
+          "checkedAt": "2026-10-28T09:45:22.433823+00:00",
+          "status": "unchanged"
+        },
+        {
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Flood_warning_for_Gin_River_Basin_-_NO_01_(2026__1793038211.pdf",
+          "sha256": "8c83b04f7f2c1126a6bb5334ae48b69b842d2d6962d9d0c179cd97ba670de9c3",
+          "checkedAt": "2026-10-28T09:44:03.158144+00:00",
+          "status": "unchanged"
+        },
+        {
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793045388.pdf",
+          "sha256": "8fd8c2141f695cf54ddd62b08608d5ef0a85f119cf19600a5792535a1ef1550f",
+          "checkedAt": "2026-10-28T09:45:19.347751+00:00",
+          "status": "unchanged"
+        },
+        {
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793074896.pdf",
+          "sha256": "e27c924dc0d06d42bf99380c2ca4b4900dc7b3b0d010a2bdb923992d0b0b4f1a",
+          "checkedAt": "2026-10-28T09:45:02.828087+00:00",
+          "status": "unchanged"
+        },
+        {
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Warning_for_strong_winds_and_rough_seas_at_08__1793072903.pdf",
+          "sha256": "9a629881fba5ecfa1cf90f1a3d90f766d14c0dc1206cf24851dc540bc37b3cb4",
+          "checkedAt": "2026-10-28T09:45:07.011471+00:00",
+          "status": "unchanged"
+        },
+        {
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Weather_Report_at_0530_hrs_on_2026__1793071609.pdf",
+          "sha256": "1e7b8b23c9d644a9026ca159379bf59d0e0c193e7a52bbdab6fa7e01221c1a08",
+          "checkedAt": "2026-10-28T09:45:14.485373+00:00",
+          "status": "unchanged"
+        },
+        {
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Advisory_for_Severe_Lightning_at_1130hrs_on_27__1793082700.pdf",
+          "sha256": "34383e5c53aef78a5d6f93e4636a3d1d794f992178d3b3e148e24f935211a445",
+          "checkedAt": "2026-10-28T09:43:57.014510+00:00",
+          "status": "unchanged"
+        },
+        {
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Advisory_for_Severe_Lightning_at_1130hrs_on_27__1793085463.pdf",
+          "sha256": "8b0358d94e2291952b23235d8511eb683146eca1fd25938cb8c5a22dbc5c7485",
+          "checkedAt": "2026-10-28T09:44:56.405644+00:00",
+          "status": "unchanged"
+        },
+        {
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Flood_warning_for_Kalu_River_Basin_-_No_02_-_(Extended_warning)_2026__1793090488.pdf",
+          "sha256": "c552b54d56512af5fcd2a8b3a26bcf3f718b13a76168ff910dc5c8ae87142a80",
+          "checkedAt": "2026-10-28T09:43:32.007150+00:00",
+          "status": "unchanged"
+        },
+        {
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Weather_Report_at_1400_hrs_on_2026__1793092347.pdf",
+          "sha256": "b0f8aa55b9af13e1e41473976d7af27aa03464d67ed5d03f3c0ea50197d9bd68",
+          "checkedAt": "2026-10-28T09:44:52.554137+00:00",
+          "status": "unchanged"
+        },
+        {
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Weather_Report_at_1400_hrs_on_2026__1793093828.pdf",
+          "sha256": "425e8b9cf2617cbae6ef81675f6bcf7c5780ba134227e6000b9c0df16821a252",
+          "checkedAt": "2026-10-28T09:44:55.562999+00:00",
+          "status": "unchanged"
+        },
+        {
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793095515.pdf",
+          "sha256": "d1037a2a98cbbba25e484911d7087da875c87785f2b15b60487211880ec532db",
+          "checkedAt": "2026-10-28T09:44:49.942671+00:00",
+          "status": "unchanged"
+        },
+        {
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Landslide_EW_Report_at_1600hrs_on_2026__1793098165.pdf",
+          "sha256": "6734f8541331b9fcbf5a70a60b2d1dcca291f90a138fa2e7240180a71bfe64aa",
+          "checkedAt": "2026-10-28T09:43:32.008026+00:00",
+          "status": "unchanged"
+        },
+        {
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Weather_Report_at_1600_hrs_on_2026__1793099831.pdf",
+          "sha256": "7e5725887258706ffeb7845502dec6fca6d8d267014d3177b80969cf0787c678",
+          "checkedAt": "2026-10-28T09:44:46.490854+00:00",
+          "status": "unchanged"
+        },
+        {
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793106184.pdf",
+          "sha256": "24f403b0375b169fcdbbd54a4e4002f967aa3486a49c3453a9412478e5b8fc41",
+          "checkedAt": "2026-10-28T09:44:45.753043+00:00",
+          "status": "unchanged"
+        },
+        {
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793116593.pdf",
+          "sha256": "3c437d0b99e98432d27c95e511ec3ab9a3c087b62e240aa83af5a2d145170284",
+          "checkedAt": "2026-10-28T09:44:41.119762+00:00",
+          "status": "unchanged"
+        },
+        {
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Warning_for_strong_winds_and_rough_seas_at_2100hrs_on_27__1793119377.pdf",
+          "sha256": "a6ae16c15d85ba25e3e8613ed6a1ac0da42d24cdceb389f4ddb32de6d92c294f",
+          "checkedAt": "2026-10-28T09:44:45.735302+00:00",
+          "status": "unchanged"
+        },
+        {
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793128484.pdf",
+          "sha256": "758cc85a7b562c60dc1f891f86e1dc0a53c7b6a662744a91d5a370ab0283d21c",
+          "checkedAt": "2026-10-28T09:44:40.645548+00:00",
+          "status": "unchanged"
+        },
+        {
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793172979.pdf",
+          "sha256": "d194f5769c505e5966137cfa11add952e10ab98ed620219b9d2b459c78127a31",
+          "checkedAt": "2026-10-28T09:44:13.537290+00:00",
+          "status": "unchanged"
+        },
+        {
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Advisory_for_Severe_Lightning_at_1130hrs_on_28__1793168243.pdf",
+          "sha256": "c80d69f02c3ee77c7742abd2c8127c7bf6573df3d246c18ea58fde25bfb7cfcd",
+          "checkedAt": "2026-10-28T09:44:04.592303+00:00",
+          "status": "unchanged"
+        },
+        {
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Flood_warning_for_Gin_River_Basin_-_No_02_-_(Extended_warning)_2026__1793173754.pdf",
+          "sha256": "5d9ddf632d3aa980957645b72bf7c772dce9be3c2bd35d12bd89d2ad68e0487a",
+          "checkedAt": "2026-10-28T09:44:04.924930+00:00",
+          "status": "unchanged"
+        },
+        {
+          "url": "https://www.dmc.gov.lk/images/dmcreports/__1793147947.pdf",
+          "sha256": "7bcb506cf67e103871499ebfb3eba59b92fe50a35d77e54554cf3a21c2d1610e",
+          "checkedAt": "2026-10-28T09:44:33.901452+00:00",
+          "status": "unchanged"
+        },
+        {
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Flood_warning_for_Kalu_River_Basin_-_No_03_-_%28Extended_warning%29_2026__1793177654.pdf",
+          "sha256": "de78a7e17264a9a3494dc15cbec0d7c817b2316ea26324a1182550e8ea3ff8c6",
+          "checkedAt": "2026-10-28T09:44:08.312492+00:00",
+          "status": "unchanged"
+        },
+        {
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Weather_Report_at_1400_hrs_on_2026__1793180020.pdf",
+          "sha256": "2ec3744ce597801989111db9dd7f55d4485c4495769835f8e41e608f1e527c77",
+          "checkedAt": "2026-10-28T09:44:26.996044+00:00",
+          "status": "new-general-forecast-visually-reviewed"
+        },
+        {
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Weather_Report_at_1400_hrs_on_2026__1793180043.pdf",
+          "sha256": "b06d7b1e4c3398c7741061d4db89003b814ffb9c3ac906a54252e384e9ebb8f6",
+          "checkedAt": "2026-10-28T09:44:26.996205+00:00",
+          "status": "new-general-forecast-visually-reviewed"
+        }
+      ],
+      "googlePublicObservation": {
+        "checkedAt": "2026-10-28T09:57:29.731860+00:00",
+        "observationWindow": "Overview approximately 09:44 UTC and Kala Wewa approximately 09:45 UTC; after Mac reconnection Puttalam inspected approximately 09:55 UTC on 28 October.",
+        "method": "Read-only public UI in temporary Ark tabs, separate from untouched TradingView tabs. No private APIs or imagery redistribution.",
+        "overview": "At the exact requested overview, enabled flood layers show orange/red-outlined forecast shading near Colombo/Panadura; no claim of observed inundation or official cancellation. Do not infer household safety from absent shading elsewhere.",
+        "puttalam": "Public panel says No flooding data found for this location. Area not supported. Unavailable information, not an all-clear.",
+        "kalaWewa": "Green Normal marker; higher-confidence HYBAS forecast with 41/73/153 m3/s thresholds. No explicit provider issue/update or validity endpoints. Not reservoir telemetry.",
+        "providerIssuedAt": null,
+        "providerValidUntil": null,
+        "limitations": "No explicit provider issuance/update timestamp or exact validity endpoints displayed. Review times, Now and relative chart labels are not issuance, validity, household flood-arrival or reservoir-operation times. Puttalam remains unsupported/no flooding data, not an all-clear.",
+        "sourceUrl": "https://sites.research.google/floods/l/8.01027646645311/80.5352783203125/10/g/hybas_4121156830?hl=en-LK",
+        "nodeId": "hybas_4121156830",
+        "displayStatus": "Normal",
+        "previousDisplayStatus": "Normal",
+        "previousObservedAt": "2026-10-28T09:20:19.320071+00:00",
+        "observedBanner": null,
+        "changeType": "Kala Wewa remains Normal and Puttalam remains unsupported; current overview display recorded without inferring cancellation or household safety.",
+        "thresholdsCubicMetresPerSecond": [
+          41,
+          73,
+          153
+        ],
+        "overviewUrl": "https://sites.research.google/floods/l/7.724507070247079/80.27868115079531/7.552394675474881?hl=en-LK"
+      },
+      "marineTimingDiscrepancy": "Header issued 21:00 SLST on 27 October for 24 hours; map caption issued 20:00 and valid until 20:00 on 28 October. No unambiguous issue/expiry is asserted. Until-further-notice guidance remains distinct.",
+      "tideValidationHold": "Prior validated snapshot retained; no mapping, tolerance or coverage changes. Overall publisher failure remains distinct from independently valid groups.",
+      "interruption": "Mac disconnected after source fetch; original comparison completed at its recorded time. Remaining source review completed after reconnection. No scheduled-time backdating."
     }
   ]
 }
