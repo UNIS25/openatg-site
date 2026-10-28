@@ -1,5 +1,15 @@
 # OpenATG FloodLens
 
+Latest river review: 28 October 18:30 SLST issue, 18:00 observations and 17:00
+comparison. The original single-page table was visually verified. All 22 selected
+metre gauges are retained: four Minor Flood, four Alert and fourteen Normal.
+Panadugama is now Minor Flood/Rising at 6.11 m; Dunamale is Normal at 3.25 m.
+Baddegama's blank trend stays null. The rainfall column is a nine-hour total
+ending 18:00; Thawalama's 68.6 mm is not an hourly rate. Earlier readings and
+rainfall periods remain in provenance. Area warnings, marine conflicting
+windows, translation labels and tide validation hold are unchanged; station
+Normal never cancels a warning or establishes household safety.
+
 Latest river review: 28 October 15:30 SLST issue, 15:00 observations,
 14:00 comparison. All 22 selected metre gauges were visually checked: three
 Minor Flood, six Alert, thirteen Normal. Panadugama now has an official Rising
