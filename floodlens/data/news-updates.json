@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "kind": "reviewed_news_updates",
+  "reviewedAt": "2026-11-06T14:29:23Z",
+  "coverage": "Selected source-reviewed news. No social media. Reports do not establish conditions at a visitor location, passable roads or active shelter availability.",
+  "updates": [
+    {
+      "id": "colombo-road-flooding-20261106-evening",
+      "kind": "media",
+      "scope": "reported_conditions_no_geometry",
+      "districtCodes": [
+        "LK11"
+      ],
+      "publishedAt": "2026-11-06T19:11:00+05:30",
+      "reviewedAt": "2026-11-06T14:29:23Z",
+      "displayUntil": "2026-11-07T01:11:00+05:30",
+      "title": {
+        "en": "Colombo road flooding and travel delays reported",
+        "si": "කොළඹ මාර්ග ජලයෙන් යටවී ගමනාගමන ප්‍රමාද වාර්තා වේ",
+        "ta": "கொழும்பில் வீதி வெள்ளமும் பயணத் தாமதங்களும் அறிவிப்பு"
+      },
+      "summary": {
+        "en": "News First and Daily Mirror report flooded roads and heavy traffic in parts of Colombo this evening. Daily Mirror also reports possible train delays due to signal failures near Wellawatte, Fort, Maradana and Alawwa; it does not establish that flooding caused those failures. These are media reports, not an official river warning or a verified safe-route map. Noon river readings cannot rule out evening street flooding.",
+        "si": "අද සවස කොළඹ ප්‍රදේශ කිහිපයක මාර්ග ජලයෙන් යටවීම සහ දැඩි වාහන තදබදය News First සහ Daily Mirror වාර්තා කරයි. වැල්ලවත්ත, කොටුව, මරදාන සහ අලව්ව ආසන්නයේ සංඥා දෝෂ නිසා දුම්රිය ප්‍රමාද විය හැකි බව ද Daily Mirror වාර්තා කරයි. එම දෝෂ ගංවතුර නිසා ඇති වූ බව තහවුරු කර නැත. මේවා මාධ්‍ය වාර්තා මිස නිල ගංගා අනතුරු ඇඟවීමක් හෝ ආරක්ෂිත මාර්ග සිතියමක් නොවේ. දහවල් ගංගා මිනුම්වලින් සවස මාර්ග ජලයෙන් යටවීම බැහැර කළ නොහැක.",
+        "ta": "இன்று மாலை கொழும்பின் சில பகுதிகளில் வீதிகள் நீரில் மூழ்கியதையும் கடும் வாகன நெரிசலையும் News First மற்றும் Daily Mirror தெரிவிக்கின்றன. வெள்ளவத்தை, கோட்டை, மருதானை, அலவ்வ அருகே சமிக்ஞைக் கோளாறுகளால் ரயில் தாமதங்கள் ஏற்படலாம் என்றும் Daily Mirror கூறுகிறது; வெள்ளமே அந்தக் கோளாறுகளுக்குக் காரணம் என்பதை அது உறுதிப்படுத்தவில்லை. இவை ஊடகச் செய்திகள்; அதிகாரப்பூர்வ ஆற்று எச்சரிக்கையோ பாதுகாப்பான பாதை வரைபடமோ அல்ல. நண்பகல் ஆற்று அளவீடுகள் மாலை நேர வீதி வெள்ளத்தை மறுக்காது."
+      },
+      "sources": [
+        {
+          "name": "Daily Mirror",
+          "url": "https://www.dailymirror.lk/breaking-news/Traffic-congestion-in-Colombo-as-roads-flood-more-rain-expected/108-354355",
+          "publishedAt": "2026-11-06T19:11:00+05:30",
+          "verification": "Full article body and JSON-LD publication/modified time reviewed."
+        },
+        {
+          "name": "News First",
+          "url": "https://english.newsfirst.lk/2026/11/06/traffic-grinds-to-a-halt-after-floodwaters-inundate-colombo-streets",
+          "publishedAt": "2026-11-06T18:49:00+05:30",
+          "verification": "Full article body, byline and displayed publication time reviewed."
+        }
+      ]
+    }
+  ]
+}

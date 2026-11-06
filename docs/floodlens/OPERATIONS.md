@@ -1,3 +1,13 @@
+## 2026-11-06 19:59 SLST review and Colombo media update
+
+Latest official originals, CAP XML and RSS were re-fetched and their hashes matched the earlier reviewed files. Review cutoff: 14:29:23 UTC / 19:59:23 SLST. The latest reviewed DMC listing window still showed NBRO and weather at 16:00 and the river report at 12:30. Only the warning-review clock advances. Bulletin validity, image acquisition, river observation, and forecast model times remain unchanged.
+
+One media event, `colombo-road-flooding-20261106-evening`, records News First (18:49 SLST) and Daily Mirror (19:11 SLST) reports of Colombo road flooding and traffic delays. Railway signal failures/possible delays are attributed to Daily Mirror, without alleging floods caused those failures. News is source-labeled and separate from official warnings. No road-closure pins, flood polygons or safe routes are inferred; district scoping is only for selecting relevant reporting, never district-wide flooding. The current display expires six hours after the latest article, at 01:11 SLST Nov 7. This is an app display limit, not a source-issued validity period.
+
+New `news-updates.json` entries require reviewed source bodies and publication times. The validator permits Daily Mirror and News First article URLs only, rejects invented risk geometry/severity, enforces chronology and a maximum 24-hour display window, and excludes future or expired records. Each source keeps its own publication timestamp. The UI refreshes its news cache every five minutes and distinguishes a failed load from no recent report. The event appears under local news for Colombo and Explore → Reports without mapped incidents.
+
+Full article bodies were successfully verified during the source review. A later direct Daily Mirror fetch in the publication environment returned HTTP 403 and was stopped; no bypass or invented article-byte hash. Public app requests were previously blocked; exact GitHub Pages deployment must be verified separately, and browser/mobile QA remains unverified.
+
 ## 2026-11-06 dated satellite context release
 
 - Explore adds optional NASA VIIRS 2-day flood estimates and matched true-colour images, both dated 2026-11-05 UTC. The advertised global true-colour date November 6 had black/missing pixels over Sri Lanka, so it is not displayed.

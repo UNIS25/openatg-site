@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-11-06T13:05:53.972406+00:00",
+  "checkedAt": "2026-11-06T14:29:23Z",
   "publishing": "read-only; no automatic public publication",
   "sources": [
     {
@@ -26178,6 +26178,62 @@
       "marineTimingStateAtReview": "Historical Bulletin 08 windows have ended. New Bulletin 09 header and map agree: 21:00 October 28 through 09:00 October 29 SLST. Explicit withdrawal of the specified earlier deep southwest Bay activity restriction recorded; Amber rough-sea advisory continues.",
       "tideValidationHold": "Prior validated snapshot retained; no mapping, tolerance or coverage changes. Overall publisher failure remains distinct from independently valid groups.",
       "archiveDecision": "Retain active-warning view: NBRO Update 35, Kalu No. 03, Gin No. 02 and sea-only Amber Bulletin 09 remain active. Lightning Bulletin 05 has expired without a reviewed renewal or cancellation. No archive or all-clear. Monitoring unchanged."
+    },
+    {
+      "checkedAt": "2026-11-06T14:29:23Z",
+      "scope": "Latest DMC all-reports 50-item window and river listing, latest official originals and public CAP feed. No newer official bulletin found in reviewed material.",
+      "recheckedOriginals": [
+        {
+          "kind": "nbro",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Landslide_EW_Report_at_1600hrs_on_2026__1793961899.pdf",
+          "sha256": "fc71862dca69a0547805a207da7fce8178205d34424ff83fb347a5e945d78284",
+          "status": "unchanged"
+        },
+        {
+          "kind": "forecast",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Weather_Report_at_1600hrs_on_2026__1793962258.pdf",
+          "sha256": "bbbe6ef084614880ce4aa0367e475a107539d37d7181de4fb14c7b29fd9e51bd",
+          "status": "unchanged"
+        },
+        {
+          "kind": "river",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793948364.pdf",
+          "sha256": "8d123455244af8ae58fe3e7c3f3ffd277e0b660898a2d6d0611e786f687ad506",
+          "status": "unchanged"
+        },
+        {
+          "kind": "sitrep",
+          "url": "https://www.dmc.gov.lk/images/dmcreports/Situation_Report_on_2026__1793939773.pdf",
+          "sha256": "7fa7afd0f7c80b9016da2b26ffc1279b148f7318e8d8b25d563e0b5d648d22d1",
+          "status": "unchanged"
+        },
+        {
+          "kind": "cap",
+          "url": "https://was.meteo.gov.lk/cap/en/17f6e64ddc334403a2ababe2145ee3f2.xml",
+          "sha256": "8878a8519c5a9c54f0e484af29d8cc9cc531930c43ee26db8c56188e643f4b1a",
+          "status": "unchanged"
+        },
+        {
+          "kind": "rss",
+          "url": "https://was.meteo.gov.lk/cap/en/rss.xml",
+          "sha256": "fb0835eb746d45692d68514cb6615fd8d93d0af53382bd62a2a44b05f84c73ac",
+          "status": "unchanged"
+        }
+      ],
+      "mediaUpdates": [
+        {
+          "url": "https://www.dailymirror.lk/breaking-news/Traffic-congestion-in-Colombo-as-roads-flood-more-rain-expected/108-354355",
+          "publishedAt": "2026-11-06T19:11:00+05:30",
+          "reviewedAt": "2026-11-06T14:29:23Z"
+        },
+        {
+          "url": "https://english.newsfirst.lk/2026/11/06/traffic-grinds-to-a-halt-after-floodwaters-inundate-colombo-streets",
+          "publishedAt": "2026-11-06T18:49:00+05:30",
+          "reviewedAt": "2026-11-06T14:29:23Z"
+        }
+      ],
+      "interpretation": "Media-reported evening Colombo street flooding is separate from river-gauge classifications. Noon Normal observations do not rule out evening urban flooding. No verified closure geometry or flood-to-rail causation inferred.",
+      "publicCheck": "Direct public provenance/app checks denied HTTP 403; no bypass attempted. Deployment checked separately."
     }
   ]
 }
