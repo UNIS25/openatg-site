@@ -1,7 +1,7 @@
-import {copy} from './i18n.mjs?v=20261028-33';
-import {renderReservoirs,refreshReservoirs} from './reservoirs.mjs?v=20261028-33';
-import {createFlow} from './flow.mjs?v=20261028-33';
-import {warningSourceUrl,warningState,ageState,dailyAgeState,warningMatches,assessment,validateSnapshot,intersectsAccuracy,locationCandidates,insideGeometry} from './core.mjs?v=20261028-33';
+import {copy} from './i18n.mjs?v=20261106-34';
+import {renderReservoirs,refreshReservoirs} from './reservoirs.mjs?v=20261106-34';
+import {createFlow} from './flow.mjs?v=20261106-34';
+import {warningSourceUrl,warningState,ageState,dailyAgeState,warningMatches,assessment,validateSnapshot,intersectsAccuracy,locationCandidates,insideGeometry} from './core.mjs?v=20261106-34';
 const $=s=>document.querySelector(s);
 let lang='en',data=null,catalog=null,selected=null,locationMessage='',outside=false,loadFailed=false,loading=false,needsUpdate=false;
 const t=k=>copy[lang][k]??copy.en[k]??k;
@@ -57,8 +57,17 @@ function renderStations(){
   $('#observation-status').textContent=`${t('observationSnapshot')} · ${t('publishedAt')}: ${date(data.stations[0]?.issuedAt)}. ${t('snapshotFetch')}: ${date(data.fetchedAt)}.`;
   renderReservoirs({t,fallback:data.reservoirs});
 }
+function renderSourceNotes(){
+ for(const id of ['source-updates-location','source-updates-result']){
+  const root=$('#'+id);if(!root)continue;root.replaceChildren();root.hidden=!data;if(!data)continue;
+  root.append(el('summary','',t('sourceUpdates')));
+  const body=el('div','source-updates-body');body.append(el('p','small',t('snapshot')+': '+date(data.reviewedAt)),el('p','small',t('hourlyBestEffort')));
+  for(const n of data.sourceNotes||[]){const row=el('article');row.append(el('h3','',local(n.title)),el('p','',local(n.summary)),el('p','small',t('issued')+': '+date(n.issuedAt)+(n.expiresAt?' · '+t('validUntil')+': '+date(n.expiresAt):'')),link(n.url,t('original')+' ↗'));body.append(row);}
+  root.append(body);
+ }
+}
 function renderConnection(){const n=$('#connection');n.hidden=navigator.onLine&&!loadFailed&&!needsUpdate;n.textContent=!navigator.onLine?t('offline'):t(needsUpdate?'updateRequiredBody':data?'updateFailed':'dataError');$('#refresh').textContent=t(needsUpdate?'reloadPage':'refresh');}
-function render(){renderWarnings();renderStations();renderConnection();flow?.render();}
+function render(){renderSourceNotes();renderWarnings();renderStations();renderConnection();flow?.render();}
 async function loadSnapshot(){
   if(loading)return;loading=true;$('#refresh').disabled=true;$('#load-observations').disabled=true;
   try{const r=await fetch('/floodlens/data/reviewed.json',{cache:'no-store',signal:AbortSignal.timeout(12000)});if(!r.ok)throw Error('Snapshot unavailable');const next=validateSnapshot(await r.json());data=next;loadFailed=false;needsUpdate=false;}catch(error){if(error.code==='CLIENT_UPDATE_REQUIRED'){needsUpdate=true;data=null;}else loadFailed=true;}

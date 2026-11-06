@@ -1,5 +1,5 @@
 export const HOUR = 3600000;
-export const CLIENT_VERSION = 12;
+export const CLIENT_VERSION = 13;
 export function marineWithdrawalVerified(w){
   const x=w?.withdrawal;
   return w?.kind==='marine'&&w.scope==='sea_only'&&w.severity==='amber'&&w.untilFurtherNotice===false&&
@@ -61,6 +61,7 @@ export function warningReviewStatus(data,areas,{now=Date.now(),online=true,loadF
  const reviewed=Date.parse(data.reviewedAt);
  if(!Number.isFinite(reviewed)||reviewed>now)return 'unknown';
  if(ageState(data.reviewedAt,3,now)!=='fresh')return 'stale';
+ if(data.bulletins.some(w=>w.scopeIncomplete===true&&warningState(w,now)==='active'))return 'unknown';
  const relevant=data.bulletins.filter(w=>areas.some(a=>warningMatches(w,a)));
  if(relevant.some(w=>warningState(w,now)==='unknown'))return 'unknown';
  if(relevant.some(w=>warningState(w,now)==='active'))return 'active';
@@ -116,6 +117,8 @@ export function validateSnapshot(d,clientVersion=CLIENT_VERSION) {
     if(w.kind!=='landslide'&&w.severity!=='amber'){const error=new Error('Unsupported warning severity');error.code='CLIENT_UPDATE_REQUIRED';throw error;}
     if(w.areas.some(a=>a.level!==undefined&&![1,2,3].includes(a.level))){const error=new Error('Unsupported warning severity');error.code='CLIENT_UPDATE_REQUIRED';throw error;}
   }
+  for(const w of d.bulletins)if(w.scopeIncomplete!==undefined){if(w.scopeIncomplete!==true||d.minClientVersion<13||!Array.isArray(w.unmappedAreaNames)||!w.unmappedAreaNames.length||typeof w.sourceAreaDescription!=='string')throw Error('Invalid incomplete warning scope');}
+  for(const n of d.sourceNotes||[])if(!safeSource(n.url)||!n.title?.en||!n.summary?.en||!Number.isFinite(Date.parse(n.issuedAt))||(n.expiresAt&&!Number.isFinite(Date.parse(n.expiresAt))))throw Error('Invalid source note');
   for(const s of d.stations){
     if(!['m','ft'].includes(s.unit)||!safeSource(s.url))throw Error('Invalid station');
     if(s.status==='unavailable'){
@@ -134,7 +137,7 @@ export function validateSnapshot(d,clientVersion=CLIENT_VERSION) {
   return d;
 }
 export function safeSource(url) {
-  try{const u=new URL(url);return u.protocol==='https:'&&['www.dmc.gov.lk','docs.google.com','www.irrigation.gov.lk','irrigation.gov.lk'].includes(u.hostname);}catch{return false;}
+  try{const u=new URL(url);if(u.origin==='https://was.meteo.gov.lk')return /^\/cap\/en\/[a-f0-9]{32}\.xml$/.test(u.pathname)&&!u.search&&!u.hash&&!u.username&&!u.password;return u.protocol==='https:'&&['www.dmc.gov.lk','docs.google.com','www.irrigation.gov.lk','irrigation.gov.lk'].includes(u.hostname);}catch{return false;}
 }
 // This selects a reviewed original document, not an official status for our UI summary.
 export function warningSourceUrl(w,language) {

@@ -4,7 +4,7 @@ import {readFile} from 'node:fs/promises';
 import {validateSnapshot,warningState,warningMatches,locationEvidence,ageState} from '../../floodlens/core.mjs';
 import {warningLayer} from '../../floodlens/explore-model.mjs';
 const read=async p=>JSON.parse(await readFile(p));
-const data=await read('floodlens/data/reviewed.json'),provenance=await read('floodlens/data/provenance.json'),catalog=await read('floodlens/data/areas.json'),overview=await read('floodlens/data/map-overview.json');
+const data=await read('tests/floodlens/fixtures/reviewed-20261028-final.json'),provenance=await read('floodlens/data/provenance.json'),catalog=await read('floodlens/data/areas.json'),overview=await read('floodlens/data/map-overview.json');
 const current=data.bulletins.find(w=>w.id==='kalu-20261028-03'),previous=data.bulletins.find(w=>w.id==='kalu-20261027-02');
 test('Kalu No. 03 retains the exact 13-DS low-floodplain scope and trilingual summary',()=>{
  validateSnapshot(data);assert.equal(current.severity,'amber');assert.deepEqual(current.areas,previous.areas);assert.equal(current.areas.length,13);assert.deepEqual(current.districtCodes,[]);assert.deepEqual(current.summary,previous.summary);assert.match(current.summary.en,/low-lying/);

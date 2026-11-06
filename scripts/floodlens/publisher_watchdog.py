@@ -77,14 +77,14 @@ def decision(history,get,now,minutes=30,current_id=None,check_active=True):
 
 def request_slot(now):
  shifted=now-timedelta(minutes=7)
- return shifted.replace(minute=shifted.minute//30*30,second=0,microsecond=0)+timedelta(minutes=7)
+ return shifted.replace(minute=0,second=0,microsecond=0)+timedelta(minutes=7)
 
 def request_id(now):
- # One recovery identity per existing :07/:37 schedule slot; no visitor data.
+ # One recovery identity per existing :07 hourly schedule slot; no visitor data.
  return 'watchdog-'+request_slot(now).strftime('%Y%m%dT%H%MZ')
 
 def due_window(now):
- # A rolling 30-minute cooldown would skip alternate 30-minute review turns.
+ # The recovery identity follows the hourly schedule; retain the race cooldown.
  # Accept a real refresh in this slot, or within a 15-minute race cooldown.
  threshold=min(request_slot(now),now-timedelta(minutes=15))
  return (now-threshold).total_seconds()/60

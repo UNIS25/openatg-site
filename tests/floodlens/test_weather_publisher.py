@@ -49,5 +49,5 @@ class WeatherPublisher(unittest.TestCase):
  def test_no_force_push_persistent_credential_or_permission_expansion(self):
   source=(ROOT/'scripts/floodlens/publish_reservoirs.py').read_text();workflow=(ROOT/'.github/workflows/floodlens-observation-update.yml').read_text() if (ROOT/'.github/workflows/floodlens-observation-update.yml').exists() else ''
   self.assertIn("git('ls-remote'",source);self.assertIn("git('push',remote,'HEAD:main'",source);self.assertNotIn("'--force'",source)
-  if workflow:self.assertIn('persist-credentials: false',workflow);self.assertIn("'7,37 * * * *'",workflow);self.assertNotIn('secrets.',workflow);self.assertNotIn('id-token:',workflow)
+  if workflow:self.assertIn('persist-credentials: false',workflow);self.assertIn("'7 * * * *'",workflow);self.assertNotIn('secrets.',workflow);self.assertNotIn('id-token:',workflow)
 if __name__=='__main__':unittest.main()

@@ -1,3 +1,9 @@
+# 6 November 2026 reactivation
+
+Hourly schedules now run at :07 (guarded observations) and :17 (read-only source discovery). GitHub may delay runs. Editorial review remains separate. No social media. Latest official CAP lightning areas are taken only from exact unique catalogue names and explicitly named whole districts; unmatched source spellings remain visible and block an absence claim. DMC PDF placeholder discrepancy is retained. Current NBRO Level 1: Godakawela and Kalawana; validity ends 7 November 16:00 SLST. River records are noon observations, not present measurements.
+
+Forecast transport defect fixed: a valid 202,524-byte forecast exceeded the old 200,000-character fetch cap. The new bounded 1 MB cap retains all schema, same-run, grid, unit, completeness and time validation. No scientific tolerances changed. Historical tests use a frozen previous release fixture; current release has separate safety regressions.
+
 # OpenATG FloodLens
 
 Latest river review: 28 October 18:30 SLST issue, 18:00 observations and 17:00

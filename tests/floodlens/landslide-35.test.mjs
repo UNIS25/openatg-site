@@ -4,7 +4,7 @@ import {readFile} from 'node:fs/promises';
 import {validateSnapshot,warningState,locationEvidence,warningReviewStatus,ageState} from '../../floodlens/core.mjs';
 import {warningLayer} from '../../floodlens/explore-model.mjs';
 const json=async p=>JSON.parse(await readFile(new URL(p,import.meta.url)));
-const data=await json('../../floodlens/data/reviewed.json'), provenance=await json('../../floodlens/data/provenance.json'),catalog=await json('../../floodlens/data/areas.json'),overview=await json('../../floodlens/data/map-overview.json');
+const data=await json('./fixtures/reviewed-20261028-final.json'), provenance=await json('../../floodlens/data/provenance.json'),catalog=await json('../../floodlens/data/areas.json'),overview=await json('../../floodlens/data/map-overview.json');
 const warning=data.bulletins.find(w=>w.id==='LEWM-28-10-2026-1600-35'),prior=data.bulletins.find(w=>w.id===warning.previousBulletinId),now=Date.parse(data.reviewedAt);
 const area=code=>catalog.divisions.find(a=>a.code===code);
 test('Update 35 has its explicit issue, next-day expiry, original hash and preceding identity',()=>{

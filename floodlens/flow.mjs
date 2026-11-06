@@ -1,11 +1,11 @@
-import {mountClouds} from './clouds-ui.mjs?v=20261028-33';
-import {mountTides} from './tides-ui.mjs?v=20261028-33';
-import {renderNews} from './news.mjs?v=20261028-33';
-import {mountForecast} from './forecast-ui.mjs?v=20261028-33';
-import {createContext} from './context-ui.mjs?v=20261028-33';
-import {streetEnabled} from './street-map.mjs?v=20261028-33';
-import {LocationMap} from './location-map.mjs?v=20261028-33';
-import {warningSourceUrl,locationEvidence,warningReviewStatus,ageState,insideGeometry,intersectsAccuracy,locationCandidates} from './core.mjs?v=20261028-33';
+import {mountClouds} from './clouds-ui.mjs?v=20261106-34';
+import {mountTides} from './tides-ui.mjs?v=20261106-34';
+import {renderNews} from './news.mjs?v=20261106-34';
+import {mountForecast} from './forecast-ui.mjs?v=20261106-34';
+import {createContext} from './context-ui.mjs?v=20261106-34';
+import {streetEnabled} from './street-map.mjs?v=20261106-34';
+import {LocationMap} from './location-map.mjs?v=20261106-34';
+import {warningSourceUrl,locationEvidence,warningReviewStatus,warningState,ageState,insideGeometry,intersectsAccuracy,locationCandidates} from './core.mjs?v=20261106-34';
 const $=s=>document.querySelector(s);
 export function createFlow({t,name,getData,getCatalog,onLanguage,onArea,onRefresh}){
  let stage='language',point=null,accuracy=null,mode='gps',area=null,candidates=[],state='idle',manualPoint=null,catalog=null,locationRequest=0,matchRequest=0,lastMapMode=false;
@@ -73,7 +73,7 @@ export function createFlow({t,name,getData,getCatalog,onLanguage,onArea,onRefres
   const nextNewsKey=nextTideKey+'|'+(data?.reviewedAt||'');if(nextNewsKey!==newsKey){newsKey=nextNewsKey;renderNews($('#local-news'),data,districts,document.documentElement.lang);}
   const uncertain=state==='ambiguous';
   const evidence=locationEvidence(data?.bulletins||[],candidateAreas,{uncertain});
-  const primary=evidence.source;
+  let primary=evidence.source;
   let title='riskUnknown',body='noClearResult',facts=['missingNotSafe','checkOfficialShort'];let severity='unknown';
   if(state==='checking'){title='checkingPlace';body='checkingPlaceBody';facts=[];}
   else if(state==='outside'){title='outsideShort';body='outsideShortBody';facts=['checkLocalAuthorities'];}
@@ -93,6 +93,7 @@ export function createFlow({t,name,getData,getCatalog,onLanguage,onArea,onRefres
    if(review==='reviewed_absence'){title='noWarningFound';body='notAllClear';facts=['checkOfficialShort'];}
    else if(review==='expired_since_review'){title='previousWarningExpired';body='checkLatestShort';}
    else if(review==='stale'){title='outdatedShort';body='checkLatestShort';}
+   else {const scope=data?.bulletins.find(w=>w.scopeIncomplete===true&&warningState(w)==='active');if(scope){primary=scope;title='sourceScopeUnknown';body='sourceScopeBody';facts=['missingNotSafe','checkOfficialShort'];}}
   }
   if(needsUpdate){title='updateShort';body='updateShortBody';facts=['checkOfficialShort'];severity='unknown';}
   if(!navigator.onLine)facts.unshift('offlineShort');else if(loadFailed)facts.unshift('refreshFailedShort');

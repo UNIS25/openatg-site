@@ -10,22 +10,22 @@
   <title>Ark by OpenATG · Sri Lanka weather & flood awareness</title>
   <link rel="canonical" href="https://openatg.com/ark/">
   <link rel="icon" href="/atg-mark-transparent.png">
-  <link rel="stylesheet" href="/floodlens/floodlens.css?v=20261028-33">
-  <link rel="stylesheet" href="/floodlens/forecast.css?v=20261028-33">
-  <script defer src="/floodlens/boot.js?v=20261028-33"></script>
-  <link rel="modulepreload" href="/floodlens/app.mjs?v=20261028-33">
-  <link rel="modulepreload" href="/floodlens/i18n.mjs?v=20261028-33">
-  <link rel="modulepreload" href="/floodlens/flow.mjs?v=20261028-33">
-  <link rel="modulepreload" href="/floodlens/core.mjs?v=20261028-33">
-  <link rel="modulepreload" href="/floodlens/context-ui.mjs?v=20261028-33">
-  <link rel="modulepreload" href="/floodlens/forecast-ui.mjs?v=20261028-33">
-  <link rel="modulepreload" href="/floodlens/location-map.mjs?v=20261028-33">
-  <link rel="modulepreload" href="/floodlens/street-map.mjs?v=20261028-33">
-  <link rel="modulepreload" href="/floodlens/gates.mjs?v=20261028-33">
-  <link rel="modulepreload" href="/floodlens/context-evidence.mjs?v=20261028-33">
-  <link rel="modulepreload" href="/floodlens/forecast-model.mjs?v=20261028-33">
-  <link rel="modulepreload" href="/floodlens/reservoirs.mjs?v=20261028-33">
-  <script type="module" src="/floodlens/app.mjs?v=20261028-33"></script>
+  <link rel="stylesheet" href="/floodlens/floodlens.css?v=20261106-34">
+  <link rel="stylesheet" href="/floodlens/forecast.css?v=20261106-34">
+  <script defer src="/floodlens/boot.js?v=20261106-34"></script>
+  <link rel="modulepreload" href="/floodlens/app.mjs?v=20261106-34">
+  <link rel="modulepreload" href="/floodlens/i18n.mjs?v=20261106-34">
+  <link rel="modulepreload" href="/floodlens/flow.mjs?v=20261106-34">
+  <link rel="modulepreload" href="/floodlens/core.mjs?v=20261106-34">
+  <link rel="modulepreload" href="/floodlens/context-ui.mjs?v=20261106-34">
+  <link rel="modulepreload" href="/floodlens/forecast-ui.mjs?v=20261106-34">
+  <link rel="modulepreload" href="/floodlens/location-map.mjs?v=20261106-34">
+  <link rel="modulepreload" href="/floodlens/street-map.mjs?v=20261106-34">
+  <link rel="modulepreload" href="/floodlens/gates.mjs?v=20261106-34">
+  <link rel="modulepreload" href="/floodlens/context-evidence.mjs?v=20261106-34">
+  <link rel="modulepreload" href="/floodlens/forecast-model.mjs?v=20261106-34">
+  <link rel="modulepreload" href="/floodlens/reservoirs.mjs?v=20261106-34">
+  <script type="module" src="/floodlens/app.mjs?v=20261106-34"></script>
 </head>
 <body>
   <a href="#main" class="skip" data-i18n="skip">Skip to content</a>
@@ -44,6 +44,7 @@
     <section id="location-screen" class="flow-screen location-screen" hidden aria-labelledby="location-title">
       <div class="location-orbit" aria-hidden="true">⌖</div><h1 id="location-title" data-i18n="whereYouAre">Where are you?</h1>
       <button id="locate" class="button locate-primary"><span aria-hidden="true">⌖</span><span data-i18n="useLocation">Use my location</span></button>
+      <details id="source-updates-location" class="source-updates" hidden></details>
       <p class="flow-privacy" data-i18n="shortPrivacy">Your location stays on this device.</p>
       <p id="location-message" class="location-status" role="status"></p>
       <p id="location-help" class="small" hidden><a href="https://www.dmc.gov.lk/" target="_blank" rel="noopener noreferrer" data-i18n="officialUpdate">Official warning ↗</a> · <a href="tel:117">117</a></p>
@@ -61,6 +62,7 @@
       <ul id="quick-facts" class="quick-facts"></ul>
       <button id="improve-location" class="text-button" data-i18n="improvePin" hidden>Improve location</button>
       <div class="result-actions"><a id="quick-source" class="button" href="https://www.dmc.gov.lk/" target="_blank" rel="noopener noreferrer" data-i18n="officialUpdate">Official warning ↗</a><a class="help-short" href="tel:117"><span data-i18n="helpShort">Help</span><strong>117</strong></a></div>
+      <details id="source-updates-result" class="source-updates" hidden></details>
       <div id="result-map" class="location-map"></div>
       <div class="map-caption"><span data-i18n="mapYourLocation">Location map</span><span data-i18n="notHazardMap">Not a flood map</span></div>
       <section id="location-forecast" aria-label="Regional weather forecast" hidden></section>

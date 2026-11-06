@@ -1,4 +1,4 @@
-import {warningState,safeSource,marineTimeWindows,marineWithdrawalVerified} from './core.mjs?v=20261028-33';
+import {warningState,safeSource,marineTimeWindows,marineWithdrawalVerified} from './core.mjs?v=20261106-34';
 function latestMarine(snapshot,now){
  if(!Number.isFinite(now)||!Number.isFinite(Date.parse(snapshot?.reviewedAt))||Date.parse(snapshot.reviewedAt)>now)return null;
  return (snapshot?.marineBulletins||[]).filter(w=>w.kind==='marine'&&w.scope==='sea_only'&&(w.severity==='red'||marineWithdrawalVerified(w))&&safeSource(w.url)&&/^[a-f0-9]{64}$/.test(w.sha256)&&Date.parse(w.reviewedAt)<=now&&marineTimeWindows(w)?.every(x=>Date.parse(x.issuedAt)<=now)).sort((a,b)=>Math.max(...marineTimeWindows(b).map(x=>Date.parse(x.issuedAt)))-Math.max(...marineTimeWindows(a).map(x=>Date.parse(x.issuedAt))))[0]||null;

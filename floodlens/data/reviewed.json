@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "reviewedAt": "2026-10-28T18:17:23.173678+00:00",
+  "reviewedAt": "2026-11-06T13:05:53.972406+00:00",
   "reviewMethod": "Official PDFs visually checked; structured source transcription. Not an agency endorsement.",
   "bulletins": [
     {
@@ -1537,310 +1537,909 @@
       "districtCodes": [],
       "previousBulletinId": "LEWM-27-10-2026-1600-34",
       "scopeBasis": "Original Update 35 columns on pages 2–3: 41 Yellow, 13 Amber and no Red entries. Named DS divisions and surrounding areas; special attention to susceptible slopes, valleys, cut slopes and hazardous roads. No whole-division inundation or parcel safety inferred."
+    },
+    {
+      "id": "LEWM-06-11-2026-1600-04",
+      "kind": "landslide",
+      "title": {
+        "en": "Landslide early warning",
+        "si": "නායයෑම් පූර්ව අනතුරු ඇඟවීම",
+        "ta": "மண்சரிவு முன்னெச்சரிக்கை"
+      },
+      "authority": "NBRO / DMC",
+      "issuedAt": "2026-11-06T16:00:00+05:30",
+      "expiresAt": "2026-11-07T16:00:00+05:30",
+      "listingAt": "2026-11-06T16:00:00+05:30",
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Landslide_EW_Report_at_1600hrs_on_2026__1793961899.pdf",
+      "sha256": "fc71862dca69a0547805a207da7fce8178205d34424ff83fb347a5e945d78284",
+      "reviewedAt": "2026-11-06T13:05:53.972406+00:00",
+      "summary": {
+        "en": "Level 1 (Yellow) for Godakawela and Kalawana DS divisions and surrounding areas in Ratnapura. Be watchful for landslide signs and follow official instructions. No all-clear is implied elsewhere.",
+        "si": "රත්නපුර ගොඩකවෙල සහ කලවාන කොට්ඨාස හා අවට ප්‍රදේශ සඳහා මට්ටම 1 (කහ). නායයෑම් ලකුණු ගැන විමසිලිමත් වී නිල උපදෙස් අනුගමනය කරන්න. වෙනත් ප්‍රදේශ ආරක්ෂිත බව මෙයින් නොකියයි.",
+        "ta": "இரத்தினபுரி கொடகவளை, கலவானை பிரிவுகளுக்கும் சுற்றுப்பகுதிகளுக்கும் நிலை 1 (மஞ்சள்). மண்சரிவு அறிகுறிகளைக் கவனித்து அதிகாரிகளின் அறிவுறுத்தல்களைப் பின்பற்றுங்கள். மற்ற இடங்கள் பாதுகாப்பானவை என்று இது பொருளல்ல."
+      },
+      "areas": [
+        {
+          "district": "Ratnapura",
+          "division": "Godakawela",
+          "level": 1,
+          "districtCode": "LK91",
+          "divisionCode": "LK9142"
+        },
+        {
+          "district": "Ratnapura",
+          "division": "Kalawana",
+          "level": 1,
+          "districtCode": "LK91",
+          "divisionCode": "LK9133"
+        }
+      ]
+    },
+    {
+      "id": "cap-lightning-20261106-152842",
+      "kind": "lightning",
+      "severity": "amber",
+      "title": {
+        "en": "Severe lightning advisory",
+        "si": "තද අකුණු පිළිබඳ අවවාදය",
+        "ta": "பலத்த மின்னல் அறிவுறுத்தல்"
+      },
+      "authority": "Department of Meteorology · official CAP",
+      "issuedAt": "2026-11-06T15:28:42+05:30",
+      "expiresAt": "2026-11-07T01:00:00+05:30",
+      "url": "https://was.meteo.gov.lk/cap/en/17f6e64ddc334403a2ababe2145ee3f2.xml",
+      "sha256": "8878a8519c5a9c54f0e484af29d8cc9cc531930c43ee26db8c56188e643f4b1a",
+      "reviewedAt": "2026-11-06T13:05:53.972406+00:00",
+      "districtCodes": [
+        "LK92",
+        "LK61",
+        "LK42",
+        "LK82",
+        "LK44",
+        "LK91",
+        "LK43"
+      ],
+      "areas": [
+        {
+          "district": "Kalutara",
+          "division": "Agalawatta",
+          "districtCode": "LK13",
+          "divisionCode": "LK1333"
+        },
+        {
+          "district": "Matara",
+          "division": "Akuressa",
+          "districtCode": "LK32",
+          "divisionCode": "LK3218"
+        },
+        {
+          "district": "Hambantota",
+          "division": "Ambalantota",
+          "districtCode": "LK33",
+          "divisionCode": "LK3315"
+        },
+        {
+          "district": "Puttalam",
+          "division": "Anamaduwa",
+          "districtCode": "LK62",
+          "divisionCode": "LK6224"
+        },
+        {
+          "district": "Hambantota",
+          "division": "Angunakolapelessa",
+          "districtCode": "LK33",
+          "divisionCode": "LK3318"
+        },
+        {
+          "district": "Puttalam",
+          "division": "Arachchikattuwa",
+          "districtCode": "LK62",
+          "divisionCode": "LK6230"
+        },
+        {
+          "district": "Gampaha",
+          "division": "Attanagalla",
+          "districtCode": "LK12",
+          "divisionCode": "LK1227"
+        },
+        {
+          "district": "Galle",
+          "division": "Baddegama",
+          "districtCode": "LK31",
+          "divisionCode": "LK3127"
+        },
+        {
+          "district": "Badulla",
+          "division": "Badulla",
+          "districtCode": "LK81",
+          "divisionCode": "LK8121"
+        },
+        {
+          "district": "Kalutara",
+          "division": "Bandaragama",
+          "districtCode": "LK13",
+          "divisionCode": "LK1306"
+        },
+        {
+          "district": "Badulla",
+          "division": "Bandarawela",
+          "districtCode": "LK81",
+          "divisionCode": "LK8133"
+        },
+        {
+          "district": "Hambantota",
+          "division": "Beliatta",
+          "districtCode": "LK33",
+          "divisionCode": "LK3330"
+        },
+        {
+          "district": "Galle",
+          "division": "Bentota",
+          "districtCode": "LK31",
+          "divisionCode": "LK3103"
+        },
+        {
+          "district": "Gampaha",
+          "division": "Biyagama",
+          "districtCode": "LK12",
+          "divisionCode": "LK1239"
+        },
+        {
+          "district": "Puttalam",
+          "division": "Chilaw",
+          "districtCode": "LK62",
+          "divisionCode": "LK6233"
+        },
+        {
+          "district": "Ampara",
+          "division": "Damana",
+          "districtCode": "LK52",
+          "divisionCode": "LK5242"
+        },
+        {
+          "district": "Puttalam",
+          "division": "Dankotuwa",
+          "districtCode": "LK62",
+          "divisionCode": "LK6248"
+        },
+        {
+          "district": "Polonnaruwa",
+          "division": "Dimbulagala",
+          "districtCode": "LK72",
+          "divisionCode": "LK7212"
+        },
+        {
+          "district": "Gampaha",
+          "division": "Divulapitiya",
+          "districtCode": "LK12",
+          "divisionCode": "LK1209"
+        },
+        {
+          "district": "Kalutara",
+          "division": "Dodangoda",
+          "districtCode": "LK13",
+          "divisionCode": "LK1327"
+        },
+        {
+          "district": "Badulla",
+          "division": "Ella",
+          "districtCode": "LK81",
+          "divisionCode": "LK8136"
+        },
+        {
+          "district": "Galle",
+          "division": "Elpitiya",
+          "districtCode": "LK31",
+          "divisionCode": "LK3112"
+        },
+        {
+          "district": "Batticaloa",
+          "division": "Eravur Pattu",
+          "districtCode": "LK51",
+          "divisionCode": "LK5115"
+        },
+        {
+          "district": "Gampaha",
+          "division": "Gampaha",
+          "districtCode": "LK12",
+          "divisionCode": "LK1224"
+        },
+        {
+          "district": "Matara",
+          "division": "Hakmana",
+          "districtCode": "LK32",
+          "divisionCode": "LK3230"
+        },
+        {
+          "district": "Badulla",
+          "division": "Haldummulla",
+          "districtCode": "LK81",
+          "divisionCode": "LK8142"
+        },
+        {
+          "district": "Badulla",
+          "division": "Hali-Ela",
+          "districtCode": "LK81",
+          "divisionCode": "LK8124"
+        },
+        {
+          "district": "Hambantota",
+          "division": "Hambantota",
+          "districtCode": "LK33",
+          "divisionCode": "LK3312"
+        },
+        {
+          "district": "Badulla",
+          "division": "Haputale",
+          "districtCode": "LK81",
+          "divisionCode": "LK8139"
+        },
+        {
+          "district": "Colombo",
+          "division": "Homagama",
+          "districtCode": "LK11",
+          "divisionCode": "LK1112"
+        },
+        {
+          "district": "Kalutara",
+          "division": "Horana",
+          "districtCode": "LK13",
+          "divisionCode": "LK1309"
+        },
+        {
+          "district": "Colombo",
+          "division": "Kaduwela",
+          "districtCode": "LK11",
+          "divisionCode": "LK1109"
+        },
+        {
+          "district": "Kalutara",
+          "division": "Kalutara",
+          "districtCode": "LK13",
+          "divisionCode": "LK1321"
+        },
+        {
+          "district": "Kilinochchi",
+          "division": "Karachchi",
+          "districtCode": "LK45",
+          "divisionCode": "LK4509"
+        },
+        {
+          "district": "Galle",
+          "division": "Karandeniya",
+          "districtCode": "LK31",
+          "divisionCode": "LK3109"
+        },
+        {
+          "district": "Puttalam",
+          "division": "Karuwalagaswewa",
+          "districtCode": "LK62",
+          "divisionCode": "LK6209"
+        },
+        {
+          "district": "Gampaha",
+          "division": "Katana",
+          "districtCode": "LK12",
+          "divisionCode": "LK1206"
+        },
+        {
+          "district": "Hambantota",
+          "division": "Katuwana",
+          "districtCode": "LK33",
+          "divisionCode": "LK3324"
+        },
+        {
+          "district": "Gampaha",
+          "division": "Kelaniya",
+          "districtCode": "LK12",
+          "divisionCode": "LK1236"
+        },
+        {
+          "district": "Colombo",
+          "division": "Kolonnawa",
+          "districtCode": "LK11",
+          "divisionCode": "LK1106"
+        },
+        {
+          "district": "Matara",
+          "division": "Kotapola",
+          "districtCode": "LK32",
+          "divisionCode": "LK3206"
+        },
+        {
+          "district": "Ampara",
+          "division": "Lahugala",
+          "districtCode": "LK52",
+          "divisionCode": "LK5251"
+        },
+        {
+          "district": "Polonnaruwa",
+          "division": "Lankapura",
+          "districtCode": "LK72",
+          "divisionCode": "LK7209"
+        },
+        {
+          "district": "Puttalam",
+          "division": "Madampe",
+          "districtCode": "LK62",
+          "divisionCode": "LK6236"
+        },
+        {
+          "district": "Gampaha",
+          "division": "Mahara",
+          "districtCode": "LK12",
+          "divisionCode": "LK1233"
+        },
+        {
+          "district": "Colombo",
+          "division": "Maharagama",
+          "districtCode": "LK11",
+          "divisionCode": "LK1121"
+        },
+        {
+          "district": "Puttalam",
+          "division": "Mahawewa",
+          "districtCode": "LK62",
+          "divisionCode": "LK6239"
+        },
+        {
+          "district": "Anuradhapura",
+          "division": "Mahawilachchiya",
+          "districtCode": "LK71",
+          "divisionCode": "LK7112"
+        },
+        {
+          "district": "Badulla",
+          "division": "Mahiyanganaya",
+          "districtCode": "LK81",
+          "divisionCode": "LK8103"
+        },
+        {
+          "district": "Matara",
+          "division": "Malimbada",
+          "districtCode": "LK32",
+          "divisionCode": "LK3224"
+        },
+        {
+          "district": "Batticaloa",
+          "division": "Manmunai South West",
+          "districtCode": "LK51",
+          "divisionCode": "LK5130"
+        },
+        {
+          "district": "Batticaloa",
+          "division": "Manmunai West",
+          "districtCode": "LK51",
+          "divisionCode": "LK5121"
+        },
+        {
+          "district": "Kalutara",
+          "division": "Matugama",
+          "districtCode": "LK13",
+          "divisionCode": "LK1330"
+        },
+        {
+          "district": "Anuradhapura",
+          "division": "Medawachchiya",
+          "districtCode": "LK71",
+          "divisionCode": "LK7109"
+        },
+        {
+          "district": "Gampaha",
+          "division": "Minuwangoda",
+          "districtCode": "LK12",
+          "divisionCode": "LK1215"
+        },
+        {
+          "district": "Gampaha",
+          "division": "Mirigama",
+          "districtCode": "LK12",
+          "divisionCode": "LK1212"
+        },
+        {
+          "district": "Matara",
+          "division": "Mulatiyana",
+          "districtCode": "LK32",
+          "divisionCode": "LK3212"
+        },
+        {
+          "district": "Galle",
+          "division": "Nagoda",
+          "districtCode": "LK31",
+          "divisionCode": "LK3124"
+        },
+        {
+          "district": "Puttalam",
+          "division": "Nattandiya",
+          "districtCode": "LK62",
+          "divisionCode": "LK6242"
+        },
+        {
+          "district": "Puttalam",
+          "division": "Nawagattegama",
+          "districtCode": "LK62",
+          "divisionCode": "LK6212"
+        },
+        {
+          "district": "Galle",
+          "division": "Neluwa",
+          "districtCode": "LK31",
+          "divisionCode": "LK3121"
+        },
+        {
+          "district": "Ampara",
+          "division": "Nintavur",
+          "districtCode": "LK52",
+          "divisionCode": "LK5230"
+        },
+        {
+          "district": "Galle",
+          "division": "Niyagama",
+          "districtCode": "LK31",
+          "divisionCode": "LK3115"
+        },
+        {
+          "district": "Anuradhapura",
+          "division": "Nochchiyagama",
+          "districtCode": "LK71",
+          "divisionCode": "LK7139"
+        },
+        {
+          "district": "Hambantota",
+          "division": "Okewela",
+          "districtCode": "LK33",
+          "divisionCode": "LK3327"
+        },
+        {
+          "district": "Puttalam",
+          "division": "Pallama",
+          "districtCode": "LK62",
+          "divisionCode": "LK6227"
+        },
+        {
+          "district": "Matara",
+          "division": "Pasgoda",
+          "districtCode": "LK32",
+          "divisionCode": "LK3209"
+        },
+        {
+          "district": "Badulla",
+          "division": "Passara",
+          "districtCode": "LK81",
+          "divisionCode": "LK8118"
+        },
+        {
+          "district": "Batticaloa",
+          "division": "Porativu Pattu",
+          "districtCode": "LK51",
+          "divisionCode": "LK5133"
+        },
+        {
+          "district": "Ampara",
+          "division": "Pottuvil",
+          "districtCode": "LK52",
+          "divisionCode": "LK5248"
+        },
+        {
+          "district": "Puttalam",
+          "division": "Puttalam",
+          "districtCode": "LK62",
+          "divisionCode": "LK6215"
+        },
+        {
+          "district": "Ampara",
+          "division": "Sammanthurai",
+          "districtCode": "LK52",
+          "divisionCode": "LK5218"
+        },
+        {
+          "district": "Matara",
+          "division": "Thihagoda",
+          "districtCode": "LK32",
+          "divisionCode": "LK3236"
+        },
+        {
+          "district": "Kandy",
+          "division": "Tumpane",
+          "districtCode": "LK21",
+          "divisionCode": "LK2103"
+        },
+        {
+          "district": "Ampara",
+          "division": "Uhana",
+          "districtCode": "LK52",
+          "divisionCode": "LK5212"
+        },
+        {
+          "district": "Kalutara",
+          "division": "Walallawita",
+          "districtCode": "LK13",
+          "divisionCode": "LK1339"
+        },
+        {
+          "district": "Gampaha",
+          "division": "Wattala",
+          "districtCode": "LK12",
+          "divisionCode": "LK1218"
+        },
+        {
+          "district": "Badulla",
+          "division": "Welimada",
+          "districtCode": "LK81",
+          "divisionCode": "LK8130"
+        },
+        {
+          "district": "Matara",
+          "division": "Welipitiya",
+          "districtCode": "LK32",
+          "divisionCode": "LK3221"
+        },
+        {
+          "district": "Puttalam",
+          "division": "Wennappuwa",
+          "districtCode": "LK62",
+          "divisionCode": "LK6245"
+        },
+        {
+          "district": "Galle",
+          "division": "Yakkalamulla",
+          "districtCode": "LK31",
+          "divisionCode": "LK3148"
+        }
+      ],
+      "scopeIncomplete": true,
+      "unmappedAreaNames": [
+        "ADDALACHCHENAI",
+        "AMBANGAMUWA KORALE",
+        "AVISSAWELLA",
+        "BULATSINHALA",
+        "DEHIATTAKANDIYA 1",
+        "DEHIATTAKANDIYD 2",
+        "JA-ELA",
+        "KAMBURUPITIYA",
+        "KANDAWALAI",
+        "KEBITIGOLLEWA",
+        "KESDEWA",
+        "KORALE PATTIU NORTH",
+        "KORALE PATTU",
+        "LUNUGAMWEHARA",
+        "MADURUWELA",
+        "MAHA OYA",
+        "MAHAKUMBUKKADAWELA",
+        "MEEGAHAKIVULA",
+        "MUNDALA",
+        "NAMALOYA",
+        "NUWARAELIYA",
+        "NUWARAGAM PALATA EAST",
+        "NUWARAGAMPALATA CENTRAL",
+        "PADIYATALAWA",
+        "PITABEDDARA",
+        "PUNAKARI",
+        "RAJANGANE",
+        "RIDIMALIYADDA",
+        "SORANATOTA",
+        "SURIYAWEWA",
+        "TAMANKADUWA",
+        "TAWALAMA",
+        "THIRUKOVIL",
+        "TISSAMAHARAMA",
+        "VANATHAVILLU",
+        "WEKE",
+        "WIRAKETIYA"
+      ],
+      "sourceAreaDescription": "Districts: KEGALLE, KURUNEGALA, MANNAR, MONARAGALA, MULLAITIVU, RATNAPURA, VAVUNIYA\nDivisional Secretariats: ADDALACHCHENAI, AGALAWATTA, AKURESSA, AMBALANTOTA, AMBANGAMUWA KORALE, ANAMADUWA, ANGUNAKOLAPELESSA, ARACHCHIKATTUWA, ATTANAGALLA, AVISSAWELLA, BADDEGAMA, BADULLA, BANDARAGAMA, BANDARAWELA, BELIATTA, BENTOTA, BIYAGAMA, BULATSINHALA, CHILAW, DAMANA, DANKOTUWA, DEHIATTAKANDIYA 1, DEHIATTAKANDIYD 2, DIMBULAGALA, DIVULAPITIYA, DODANGODA, ELLA, ELPITIYA, ERAVUR PATTU, GAMPAHA, HAKMANA, HALDUMMULLA, HALI-ELA, HAMBANTOTA, HAPUTALE, HOMAGAMA, HORANA, JA-ELA, KADUWELA, KALUTARA, KAMBURUPITIYA, KANDAWALAI, KARACHCHI, KARANDENIYA, KARUWALAGASWEWA, KATANA, KATUWANA, KEBITIGOLLEWA, KELANIYA, KESDEWA, KOLONNAWA, KORALE PATTIU NORTH, KORALE PATTU, KOTAPOLA, LAHUGALA, LANKAPURA, LUNUGAMWEHARA, MADAMPE, MADURUWELA, MAHA OYA, MAHAKUMBUKKADAWELA, MAHARA, MAHARAGAMA, MAHAWEWA, MAHAWILACHCHIYA, MAHIYANGANAYA, MALIMBADA, MANMUNAI SOUTH WEST, MANMUNAI WEST, MATUGAMA, MEDAWACHCHIYA, MEEGAHAKIVULA, MINUWANGODA, MIRIGAMA, MULATIYANA, MUNDALA, NAGODA, NAMALOYA, NATTANDIYA, NAWAGATTEGAMA, NELUWA, NINTAVUR, NIYAGAMA, NOCHCHIYAGAMA, NUWARAELIYA, NUWARAGAM PALATA EAST, NUWARAGAMPALATA CENTRAL, OKEWELA, PADIYATALAWA, PALLAMA, PASGODA, PASSARA, PITABEDDARA, PORATIVU PATTU, POTTUVIL, PUNAKARI, PUTTALAM, RAJANGANE, RIDIMALIYADDA, SAMMANTHURAI, SORANATOTA, SURIYAWEWA, TAMANKADUWA, TAWALAMA, THIHAGODA, THIRUKOVIL, TISSAMAHARAMA, TUMPANE, UHANA, VANATHAVILLU, WALALLAWITA, WATTALA, WEKE, WELIMADA, WELIPITIYA, WENNAPPUWA, WIRAKETIYA, YAKKALAMULLA",
+      "sourceIdentifier": "urn:oid:2.49.0.1.144.0.20261106152842",
+      "initialPdfIssuedAt": "2026-11-06T12:45:00+05:30",
+      "pdfUrl": "https://www.dmc.gov.lk/images/dmcreports/lightningadvisory__1793951492.pdf",
+      "summary": {
+        "en": "Amber lightning advisory until 01:00 on 7 November. Scope comes from the official CAP alert: seven whole districts plus specifically named DS divisions, not all districts containing those divisions. Some source spellings remain unmatched. The PDF district text contains Xx placeholders; see the original CAP area list.",
+        "si": "නොවැම්බර් 7 පෙ.ව. 01:00 දක්වා ඇම්බර් අකුණු අවවාදය. ප්‍රදේශ නිල CAP නිවේදනයෙන්: දිස්ත්‍රික්ක හතක් සහ නම් කළ කොට්ඨාස පමණි. සමහර නම් සිතියමට ගැළපී නැත. PDF හි දිස්ත්‍රික් නම් Xx ලෙස ඇත. මුල් CAP ප්‍රදේශ ලැයිස්තුව බලන්න.",
+        "ta": "நவம்பர் 7 அதிகாலை 01:00 வரை அம்பர் மின்னல் அறிவுறுத்தல். அதிகாரப்பூர்வ CAP அறிவிப்பின் ஏழு முழு மாவட்டங்களும் குறிப்பிட்ட பிரிவுகளும் மட்டுமே பொருந்தும். சில பெயர்கள் வரைபடத்துடன் பொருந்தவில்லை. PDF மாவட்டப் பெயர்கள் Xx என உள்ளன. அசல் CAP பகுதி பட்டியலைப் பார்க்கவும்."
+      }
     }
   ],
   "stations": [
     {
       "name": "Holombuwa",
       "basin": "Gurugoda Oya · Kelani",
-      "value": 1.1,
+      "value": 0.88,
       "unit": "m",
       "status": "normal",
-      "observedAt": "2026-10-28T21:00:00+05:30",
-      "issuedAt": "2026-10-28T21:30:00+05:30",
-      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793203215.pdf",
-      "sha256": "e8393f346ce1841906471e0b5e1b128eeee0183cc28e877f2428f4d5ed087bc2",
+      "observedAt": "2026-11-06T12:00:00+05:30",
+      "issuedAt": "2026-11-06T12:30:00+05:30",
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793948364.pdf",
+      "sha256": "8d123455244af8ae58fe3e7c3f3ffd277e0b660898a2d6d0611e786f687ad506",
       "sourceRemarks": "Normal",
       "sourceTrend": null,
-      "listingAt": "2026-10-28T21:30:00+05:30",
-      "previousValue": 1.11,
-      "previousObservedAt": "2026-10-28T20:00:00+05:30"
+      "listingAt": "2026-11-06T12:30:00+05:30",
+      "previousValue": 0.89,
+      "previousObservedAt": "2026-11-06T11:00:00+05:30"
     },
     {
       "name": "Rathnapura",
       "basin": "Kalu Ganga",
-      "value": 5.74,
+      "value": 2.25,
       "unit": "m",
-      "status": "alertFalling",
-      "observedAt": "2026-10-28T21:00:00+05:30",
-      "issuedAt": "2026-10-28T21:30:00+05:30",
-      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793203215.pdf",
-      "sha256": "e8393f346ce1841906471e0b5e1b128eeee0183cc28e877f2428f4d5ed087bc2",
-      "sourceRemarks": "Alert",
-      "sourceTrend": "Falling",
-      "listingAt": "2026-10-28T21:30:00+05:30",
-      "previousValue": 5.79,
-      "previousObservedAt": "2026-10-28T20:00:00+05:30"
+      "status": "normal",
+      "observedAt": "2026-11-06T12:00:00+05:30",
+      "issuedAt": "2026-11-06T12:30:00+05:30",
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793948364.pdf",
+      "sha256": "8d123455244af8ae58fe3e7c3f3ffd277e0b660898a2d6d0611e786f687ad506",
+      "sourceRemarks": "Normal",
+      "sourceTrend": null,
+      "listingAt": "2026-11-06T12:30:00+05:30",
+      "previousValue": 2.31,
+      "previousObservedAt": "2026-11-06T11:00:00+05:30"
     },
     {
       "name": "Kithulgala",
       "basin": "Kelani Ganga",
-      "value": 2.22,
+      "value": 1.76,
       "unit": "m",
       "status": "normal",
-      "observedAt": "2026-10-28T21:00:00+05:30",
-      "issuedAt": "2026-10-28T21:30:00+05:30",
-      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793203215.pdf",
-      "sha256": "e8393f346ce1841906471e0b5e1b128eeee0183cc28e877f2428f4d5ed087bc2",
+      "observedAt": "2026-11-06T12:00:00+05:30",
+      "issuedAt": "2026-11-06T12:30:00+05:30",
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793948364.pdf",
+      "sha256": "8d123455244af8ae58fe3e7c3f3ffd277e0b660898a2d6d0611e786f687ad506",
       "sourceRemarks": "Normal",
       "sourceTrend": null,
-      "listingAt": "2026-10-28T21:30:00+05:30",
-      "previousValue": 2.32,
-      "previousObservedAt": "2026-10-28T20:00:00+05:30"
+      "listingAt": "2026-11-06T12:30:00+05:30",
+      "previousValue": 1.96,
+      "previousObservedAt": "2026-11-06T11:00:00+05:30"
     },
     {
       "name": "Norwood",
       "basin": "Kehelgamu Oya · Kelani",
-      "value": 1.17,
+      "value": 0.94,
       "unit": "m",
       "status": "normal",
-      "observedAt": "2026-10-28T21:00:00+05:30",
-      "issuedAt": "2026-10-28T21:30:00+05:30",
-      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793203215.pdf",
-      "sha256": "e8393f346ce1841906471e0b5e1b128eeee0183cc28e877f2428f4d5ed087bc2",
+      "observedAt": "2026-11-06T12:00:00+05:30",
+      "issuedAt": "2026-11-06T12:30:00+05:30",
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793948364.pdf",
+      "sha256": "8d123455244af8ae58fe3e7c3f3ffd277e0b660898a2d6d0611e786f687ad506",
       "sourceRemarks": "Normal",
       "sourceTrend": null,
-      "listingAt": "2026-10-28T21:30:00+05:30",
-      "previousValue": 1.17,
-      "previousObservedAt": "2026-10-28T20:00:00+05:30"
+      "listingAt": "2026-11-06T12:30:00+05:30",
+      "previousValue": 0.94,
+      "previousObservedAt": "2026-11-06T11:00:00+05:30"
     },
     {
       "name": "Magura",
       "basin": "Maguru Ganga · Kalu",
-      "value": 4.25,
+      "value": 1.95,
       "unit": "m",
-      "status": "alertFalling",
-      "observedAt": "2026-10-28T21:00:00+05:30",
-      "issuedAt": "2026-10-28T21:30:00+05:30",
-      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793203215.pdf",
-      "sha256": "e8393f346ce1841906471e0b5e1b128eeee0183cc28e877f2428f4d5ed087bc2",
-      "sourceRemarks": "Alert",
-      "sourceTrend": "Falling",
-      "listingAt": "2026-10-28T21:30:00+05:30",
-      "previousValue": 4.32,
-      "previousObservedAt": "2026-10-28T20:00:00+05:30"
+      "status": "normal",
+      "observedAt": "2026-11-06T12:00:00+05:30",
+      "issuedAt": "2026-11-06T12:30:00+05:30",
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793948364.pdf",
+      "sha256": "8d123455244af8ae58fe3e7c3f3ffd277e0b660898a2d6d0611e786f687ad506",
+      "sourceRemarks": "Normal",
+      "sourceTrend": null,
+      "listingAt": "2026-11-06T12:30:00+05:30",
+      "previousValue": 1.98,
+      "previousObservedAt": "2026-11-06T11:00:00+05:30"
     },
     {
       "name": "Kalawellawa (Millakanda)",
       "basin": "Kuda Ganga · Kalu",
-      "value": 7.65,
+      "value": 4.17,
       "unit": "m",
-      "status": "minorFalling",
-      "observedAt": "2026-10-28T21:00:00+05:30",
-      "issuedAt": "2026-10-28T21:30:00+05:30",
-      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793203215.pdf",
-      "sha256": "e8393f346ce1841906471e0b5e1b128eeee0183cc28e877f2428f4d5ed087bc2",
-      "sourceRemarks": "Minor Flood",
-      "sourceTrend": "Falling",
-      "listingAt": "2026-10-28T21:30:00+05:30",
-      "previousValue": 7.66,
-      "previousObservedAt": "2026-10-28T20:00:00+05:30"
+      "status": "normal",
+      "observedAt": "2026-11-06T12:00:00+05:30",
+      "issuedAt": "2026-11-06T12:30:00+05:30",
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793948364.pdf",
+      "sha256": "8d123455244af8ae58fe3e7c3f3ffd277e0b660898a2d6d0611e786f687ad506",
+      "sourceRemarks": "Normal",
+      "sourceTrend": null,
+      "listingAt": "2026-11-06T12:30:00+05:30",
+      "previousValue": 4.23,
+      "previousObservedAt": "2026-11-06T11:00:00+05:30"
     },
     {
       "name": "Nawalapitiya",
       "basin": "Mahaweli Ganga",
-      "value": 1.53,
+      "value": 1.15,
       "unit": "m",
       "status": "normal",
-      "observedAt": "2026-10-28T21:00:00+05:30",
-      "issuedAt": "2026-10-28T21:30:00+05:30",
-      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793203215.pdf",
-      "sha256": "e8393f346ce1841906471e0b5e1b128eeee0183cc28e877f2428f4d5ed087bc2",
+      "observedAt": "2026-11-06T12:00:00+05:30",
+      "issuedAt": "2026-11-06T12:30:00+05:30",
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793948364.pdf",
+      "sha256": "8d123455244af8ae58fe3e7c3f3ffd277e0b660898a2d6d0611e786f687ad506",
       "sourceRemarks": "Normal",
       "sourceTrend": null,
-      "listingAt": "2026-10-28T21:30:00+05:30",
-      "previousValue": 1.54,
-      "previousObservedAt": "2026-10-28T20:00:00+05:30"
+      "listingAt": "2026-11-06T12:30:00+05:30",
+      "previousValue": 1.15,
+      "previousObservedAt": "2026-11-06T11:00:00+05:30"
     },
     {
       "name": "Dunamale",
       "basin": "Attanagalu Oya",
-      "value": 3.06,
+      "value": 2.26,
       "unit": "m",
       "status": "normal",
-      "observedAt": "2026-10-28T21:00:00+05:30",
-      "issuedAt": "2026-10-28T21:30:00+05:30",
-      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793203215.pdf",
-      "sha256": "e8393f346ce1841906471e0b5e1b128eeee0183cc28e877f2428f4d5ed087bc2",
+      "observedAt": "2026-11-06T12:00:00+05:30",
+      "issuedAt": "2026-11-06T12:30:00+05:30",
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793948364.pdf",
+      "sha256": "8d123455244af8ae58fe3e7c3f3ffd277e0b660898a2d6d0611e786f687ad506",
       "sourceRemarks": "Normal",
       "sourceTrend": null,
-      "listingAt": "2026-10-28T21:30:00+05:30",
-      "previousValue": 3.11,
-      "previousObservedAt": "2026-10-28T20:00:00+05:30"
+      "listingAt": "2026-11-06T12:30:00+05:30",
+      "previousValue": 2.28,
+      "previousObservedAt": "2026-11-06T11:00:00+05:30"
     },
     {
       "name": "Panadugama",
       "basin": "Nilwala Ganga",
       "unit": "m",
-      "value": 6.15,
-      "status": "minorNoTrend",
-      "observedAt": "2026-10-28T21:00:00+05:30",
-      "issuedAt": "2026-10-28T21:30:00+05:30",
-      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793203215.pdf",
-      "sha256": "e8393f346ce1841906471e0b5e1b128eeee0183cc28e877f2428f4d5ed087bc2",
-      "sourceRemarks": "Minor Flood",
+      "value": 3.91,
+      "status": "normal",
+      "observedAt": "2026-11-06T12:00:00+05:30",
+      "issuedAt": "2026-11-06T12:30:00+05:30",
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793948364.pdf",
+      "sha256": "8d123455244af8ae58fe3e7c3f3ffd277e0b660898a2d6d0611e786f687ad506",
+      "sourceRemarks": "Normal",
       "sourceTrend": null,
-      "listingAt": "2026-10-28T21:30:00+05:30",
-      "previousValue": 6.15,
-      "previousObservedAt": "2026-10-28T20:00:00+05:30"
+      "listingAt": "2026-11-06T12:30:00+05:30",
+      "previousValue": 3.97,
+      "previousObservedAt": "2026-11-06T11:00:00+05:30"
     },
     {
       "name": "Urawa",
       "basin": "Urubokka Ganga · Nilwala",
       "unit": "m",
-      "value": 1.81,
+      "value": 0.98,
       "status": "normal",
-      "observedAt": "2026-10-28T21:00:00+05:30",
-      "issuedAt": "2026-10-28T21:30:00+05:30",
-      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793203215.pdf",
-      "sha256": "e8393f346ce1841906471e0b5e1b128eeee0183cc28e877f2428f4d5ed087bc2",
+      "observedAt": "2026-11-06T12:00:00+05:30",
+      "issuedAt": "2026-11-06T12:30:00+05:30",
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793948364.pdf",
+      "sha256": "8d123455244af8ae58fe3e7c3f3ffd277e0b660898a2d6d0611e786f687ad506",
       "sourceRemarks": "Normal",
       "sourceTrend": null,
-      "listingAt": "2026-10-28T21:30:00+05:30",
-      "previousValue": 1.9,
-      "previousObservedAt": "2026-10-28T20:00:00+05:30"
+      "listingAt": "2026-11-06T12:30:00+05:30",
+      "previousValue": 0.99,
+      "previousObservedAt": "2026-11-06T11:00:00+05:30"
     },
     {
       "name": "Peradeniya",
       "basin": "Mahaweli Ganga",
       "unit": "m",
-      "value": 3.17,
+      "value": 2.65,
       "status": "normal",
-      "observedAt": "2026-10-28T21:00:00+05:30",
-      "issuedAt": "2026-10-28T21:30:00+05:30",
-      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793203215.pdf",
-      "sha256": "e8393f346ce1841906471e0b5e1b128eeee0183cc28e877f2428f4d5ed087bc2",
+      "observedAt": "2026-11-06T12:00:00+05:30",
+      "issuedAt": "2026-11-06T12:30:00+05:30",
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793948364.pdf",
+      "sha256": "8d123455244af8ae58fe3e7c3f3ffd277e0b660898a2d6d0611e786f687ad506",
       "sourceRemarks": "Normal",
       "sourceTrend": null,
-      "listingAt": "2026-10-28T21:30:00+05:30",
-      "previousValue": 3.1,
-      "previousObservedAt": "2026-10-28T20:00:00+05:30"
+      "listingAt": "2026-11-06T12:30:00+05:30",
+      "previousValue": 2.69,
+      "previousObservedAt": "2026-11-06T11:00:00+05:30"
     },
     {
       "name": "Glencourse",
       "basin": "Kelani Ganga",
       "unit": "m",
-      "value": 11.66,
+      "value": 10.38,
       "status": "normal",
-      "observedAt": "2026-10-28T21:00:00+05:30",
-      "issuedAt": "2026-10-28T21:30:00+05:30",
-      "listingAt": "2026-10-28T21:30:00+05:30",
-      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793203215.pdf",
-      "sha256": "e8393f346ce1841906471e0b5e1b128eeee0183cc28e877f2428f4d5ed087bc2",
+      "observedAt": "2026-11-06T12:00:00+05:30",
+      "issuedAt": "2026-11-06T12:30:00+05:30",
+      "listingAt": "2026-11-06T12:30:00+05:30",
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793948364.pdf",
+      "sha256": "8d123455244af8ae58fe3e7c3f3ffd277e0b660898a2d6d0611e786f687ad506",
       "sourceRemarks": "Normal",
       "sourceTrend": null,
-      "previousValue": 11.5,
-      "previousObservedAt": "2026-10-28T20:00:00+05:30"
+      "previousValue": 10.32,
+      "previousObservedAt": "2026-11-06T11:00:00+05:30"
     },
     {
       "name": "Thawalama",
       "basin": "Gin Ganga",
       "unit": "m",
-      "value": 3.27,
+      "value": 1.93,
       "status": "normal",
-      "observedAt": "2026-10-28T21:00:00+05:30",
-      "issuedAt": "2026-10-28T21:30:00+05:30",
-      "listingAt": "2026-10-28T21:30:00+05:30",
-      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793203215.pdf",
-      "sha256": "e8393f346ce1841906471e0b5e1b128eeee0183cc28e877f2428f4d5ed087bc2",
+      "observedAt": "2026-11-06T12:00:00+05:30",
+      "issuedAt": "2026-11-06T12:30:00+05:30",
+      "listingAt": "2026-11-06T12:30:00+05:30",
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793948364.pdf",
+      "sha256": "8d123455244af8ae58fe3e7c3f3ffd277e0b660898a2d6d0611e786f687ad506",
       "sourceRemarks": "Normal",
       "sourceTrend": null,
-      "previousValue": 3.28,
-      "previousObservedAt": "2026-10-28T20:00:00+05:30"
+      "previousValue": 1.94,
+      "previousObservedAt": "2026-11-06T11:00:00+05:30"
     },
     {
       "name": "Badalgama",
       "basin": "Maha Oya",
       "unit": "m",
-      "value": 3.32,
+      "value": 3.01,
       "status": "normal",
       "sourceRemarks": "Normal",
       "sourceTrend": null,
-      "observedAt": "2026-10-28T21:00:00+05:30",
-      "issuedAt": "2026-10-28T21:30:00+05:30",
-      "listingAt": "2026-10-28T21:30:00+05:30",
-      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793203215.pdf",
-      "sha256": "e8393f346ce1841906471e0b5e1b128eeee0183cc28e877f2428f4d5ed087bc2",
-      "previousValue": 3.3,
-      "previousObservedAt": "2026-10-28T20:00:00+05:30"
+      "observedAt": "2026-11-06T12:00:00+05:30",
+      "issuedAt": "2026-11-06T12:30:00+05:30",
+      "listingAt": "2026-11-06T12:30:00+05:30",
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793948364.pdf",
+      "sha256": "8d123455244af8ae58fe3e7c3f3ffd277e0b660898a2d6d0611e786f687ad506",
+      "previousValue": 3.03,
+      "previousObservedAt": "2026-11-06T11:00:00+05:30"
     },
     {
       "name": "Hanwella",
       "basin": "Kelani Ganga",
       "unit": "m",
-      "value": 4.19,
+      "value": 2.24,
       "status": "normal",
-      "observedAt": "2026-10-28T21:00:00+05:30",
-      "issuedAt": "2026-10-28T21:30:00+05:30",
-      "listingAt": "2026-10-28T21:30:00+05:30",
-      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793203215.pdf",
-      "sha256": "e8393f346ce1841906471e0b5e1b128eeee0183cc28e877f2428f4d5ed087bc2",
+      "observedAt": "2026-11-06T12:00:00+05:30",
+      "issuedAt": "2026-11-06T12:30:00+05:30",
+      "listingAt": "2026-11-06T12:30:00+05:30",
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793948364.pdf",
+      "sha256": "8d123455244af8ae58fe3e7c3f3ffd277e0b660898a2d6d0611e786f687ad506",
       "sourceRemarks": "Normal",
       "sourceTrend": null,
-      "previousValue": 4.21,
-      "previousObservedAt": "2026-10-28T20:00:00+05:30"
+      "previousValue": 2.27,
+      "previousObservedAt": "2026-11-06T11:00:00+05:30"
     },
     {
       "name": "Putupaula",
       "basin": "Kalu Ganga",
       "unit": "m",
-      "value": 3.73,
-      "status": "alertRising",
-      "observedAt": "2026-10-28T21:00:00+05:30",
-      "issuedAt": "2026-10-28T21:30:00+05:30",
-      "listingAt": "2026-10-28T21:30:00+05:30",
-      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793203215.pdf",
-      "sha256": "e8393f346ce1841906471e0b5e1b128eeee0183cc28e877f2428f4d5ed087bc2",
-      "sourceRemarks": "Alert",
-      "sourceTrend": "Rising",
-      "previousValue": 3.72,
-      "previousObservedAt": "2026-10-28T20:00:00+05:30"
+      "value": 1.21,
+      "status": "normal",
+      "observedAt": "2026-11-06T12:00:00+05:30",
+      "issuedAt": "2026-11-06T12:30:00+05:30",
+      "listingAt": "2026-11-06T12:30:00+05:30",
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793948364.pdf",
+      "sha256": "8d123455244af8ae58fe3e7c3f3ffd277e0b660898a2d6d0611e786f687ad506",
+      "sourceRemarks": "Normal",
+      "sourceTrend": null,
+      "previousValue": 1.19,
+      "previousObservedAt": "2026-11-06T11:00:00+05:30"
     },
     {
       "name": "Baddegama",
       "basin": "Gin Ganga",
       "unit": "m",
-      "value": 4.23,
-      "status": "minorNoTrend",
-      "observedAt": "2026-10-28T21:00:00+05:30",
-      "issuedAt": "2026-10-28T21:30:00+05:30",
-      "listingAt": "2026-10-28T21:30:00+05:30",
-      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793203215.pdf",
-      "sha256": "e8393f346ce1841906471e0b5e1b128eeee0183cc28e877f2428f4d5ed087bc2",
-      "sourceRemarks": "Minor Flood",
+      "value": 1.67,
+      "status": "normal",
+      "observedAt": "2026-11-06T12:00:00+05:30",
+      "issuedAt": "2026-11-06T12:30:00+05:30",
+      "listingAt": "2026-11-06T12:30:00+05:30",
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793948364.pdf",
+      "sha256": "8d123455244af8ae58fe3e7c3f3ffd277e0b660898a2d6d0611e786f687ad506",
+      "sourceRemarks": "Normal",
       "sourceTrend": null,
-      "previousValue": 4.23,
-      "previousObservedAt": "2026-10-28T20:00:00+05:30"
+      "previousValue": 1.69,
+      "previousObservedAt": "2026-11-06T11:00:00+05:30"
     },
     {
       "name": "Thalgahagoda",
       "basin": "Nilwala Ganga",
       "unit": "m",
-      "value": 1.89,
-      "status": "minorRising",
-      "observedAt": "2026-10-28T21:00:00+05:30",
-      "issuedAt": "2026-10-28T21:30:00+05:30",
-      "listingAt": "2026-10-28T21:30:00+05:30",
-      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793203215.pdf",
-      "sha256": "e8393f346ce1841906471e0b5e1b128eeee0183cc28e877f2428f4d5ed087bc2",
-      "sourceRemarks": "Minor Flood",
-      "sourceTrend": "Rising",
-      "previousValue": 1.88,
-      "previousObservedAt": "2026-10-28T20:00:00+05:30"
+      "value": 1.1,
+      "status": "normal",
+      "observedAt": "2026-11-06T12:00:00+05:30",
+      "issuedAt": "2026-11-06T12:30:00+05:30",
+      "listingAt": "2026-11-06T12:30:00+05:30",
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793948364.pdf",
+      "sha256": "8d123455244af8ae58fe3e7c3f3ffd277e0b660898a2d6d0611e786f687ad506",
+      "sourceRemarks": "Normal",
+      "sourceTrend": null,
+      "previousValue": 1.12,
+      "previousObservedAt": "2026-11-06T11:00:00+05:30"
     },
     {
       "name": "Moragaswewa",
       "basin": "Deduru Oya",
       "unit": "m",
-      "value": 2.66,
+      "value": 2.83,
       "status": "normal",
-      "observedAt": "2026-10-28T21:00:00+05:30",
-      "previousObservedAt": "2026-10-28T20:00:00+05:30",
-      "issuedAt": "2026-10-28T21:30:00+05:30",
-      "listingAt": "2026-10-28T21:30:00+05:30",
-      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793203215.pdf",
-      "sha256": "e8393f346ce1841906471e0b5e1b128eeee0183cc28e877f2428f4d5ed087bc2",
-      "previousValue": 2.78,
+      "observedAt": "2026-11-06T12:00:00+05:30",
+      "previousObservedAt": "2026-11-06T11:00:00+05:30",
+      "issuedAt": "2026-11-06T12:30:00+05:30",
+      "listingAt": "2026-11-06T12:30:00+05:30",
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793948364.pdf",
+      "sha256": "8d123455244af8ae58fe3e7c3f3ffd277e0b660898a2d6d0611e786f687ad506",
+      "previousValue": 2.88,
       "sourceRemarks": "Normal",
       "sourceTrend": null
     },
@@ -1848,53 +2447,51 @@
       "name": "Galgamuwa",
       "basin": "Mee Oya",
       "unit": "m",
-      "value": null,
-      "status": "unavailable",
-      "observedAt": null,
-      "previousObservedAt": null,
-      "issuedAt": "2026-10-28T21:30:00+05:30",
-      "listingAt": "2026-10-28T21:30:00+05:30",
-      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793203215.pdf",
-      "sha256": "e8393f346ce1841906471e0b5e1b128eeee0183cc28e877f2428f4d5ed087bc2",
-      "previousValue": null,
-      "sourceRemarks": null,
+      "value": 0.25,
+      "status": "normal",
+      "observedAt": "2026-11-06T12:00:00+05:30",
+      "previousObservedAt": "2026-11-06T11:00:00+05:30",
+      "issuedAt": "2026-11-06T12:30:00+05:30",
+      "listingAt": "2026-11-06T12:30:00+05:30",
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793948364.pdf",
+      "sha256": "8d123455244af8ae58fe3e7c3f3ffd277e0b660898a2d6d0611e786f687ad506",
+      "previousValue": 0.25,
+      "sourceRemarks": "Normal",
       "sourceTrend": null,
-      "reportObservationAt": "2026-10-28T21:00:00+05:30",
       "missingReason": "Both columns are dashes and the official classification is blank; no previous value carried forward."
     },
     {
       "name": "Thanthirimale",
       "basin": "Malwathu Oya",
       "unit": "m",
-      "value": null,
-      "status": "unavailable",
-      "observedAt": null,
-      "previousObservedAt": null,
-      "issuedAt": "2026-10-28T21:30:00+05:30",
-      "listingAt": "2026-10-28T21:30:00+05:30",
-      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793203215.pdf",
-      "sha256": "e8393f346ce1841906471e0b5e1b128eeee0183cc28e877f2428f4d5ed087bc2",
-      "previousValue": null,
-      "sourceRemarks": null,
+      "value": 1.7,
+      "status": "normal",
+      "observedAt": "2026-11-06T12:00:00+05:30",
+      "previousObservedAt": "2026-11-06T11:00:00+05:30",
+      "issuedAt": "2026-11-06T12:30:00+05:30",
+      "listingAt": "2026-11-06T12:30:00+05:30",
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793948364.pdf",
+      "sha256": "8d123455244af8ae58fe3e7c3f3ffd277e0b660898a2d6d0611e786f687ad506",
+      "previousValue": 1.69,
+      "sourceRemarks": "Normal",
       "sourceTrend": null,
-      "reportObservationAt": "2026-10-28T21:00:00+05:30",
       "missingReason": "Both columns are dashes and the official classification is blank; no previous value carried forward."
     },
     {
       "name": "Ellagawa",
       "basin": "Kalu Ganga",
       "unit": "m",
-      "value": 10.35,
-      "previousValue": 10.38,
-      "status": "alertFalling",
-      "sourceRemarks": "Alert",
-      "sourceTrend": "Falling",
-      "observedAt": "2026-10-28T21:00:00+05:30",
-      "previousObservedAt": "2026-10-28T20:00:00+05:30",
-      "issuedAt": "2026-10-28T21:30:00+05:30",
-      "listingAt": "2026-10-28T21:30:00+05:30",
-      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793203215.pdf",
-      "sha256": "e8393f346ce1841906471e0b5e1b128eeee0183cc28e877f2428f4d5ed087bc2"
+      "value": 6.03,
+      "previousValue": 6.07,
+      "status": "normal",
+      "sourceRemarks": "Normal",
+      "sourceTrend": null,
+      "observedAt": "2026-11-06T12:00:00+05:30",
+      "previousObservedAt": "2026-11-06T11:00:00+05:30",
+      "issuedAt": "2026-11-06T12:30:00+05:30",
+      "listingAt": "2026-11-06T12:30:00+05:30",
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Water_level_%26_Rainfall_2026__1793948364.pdf",
+      "sha256": "8d123455244af8ae58fe3e7c3f3ffd277e0b660898a2d6d0611e786f687ad506"
     }
   ],
   "reservoirs": [
@@ -1923,9 +2520,9 @@
       "url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTcSGhi9RESl7CMCl1TQnrKe07Gx5Q696YiSB9jneIHqIP9lifpqSErgI3D5k9KtQXSdW5JpycIIr5e/pub?gid=1238978530&single=true&output=csv"
     }
   ],
-  "fetchedAt": "2026-10-27T06:48:51.499938+00:00",
-  "minClientVersion": 12,
-  "observationsReviewedAt": "2026-10-28T16:21:23.412344+00:00",
+  "fetchedAt": "2026-11-06T13:05:53.972406+00:00",
+  "minClientVersion": 13,
+  "observationsReviewedAt": "2026-11-06T13:05:53.972406+00:00",
   "marineBulletins": [
     {
       "id": "MSW-26-10-27-01-07",
@@ -2023,6 +2620,55 @@
         "basis": "Explicit withdrawal stated on original Sinhala page 1 and English page 3; other current advisories remain in effect."
       },
       "summaryTranslationStatus": "Non-official summaries; original official Sinhala and English pages linked."
+    }
+  ],
+  "sourceNotes": [
+    {
+      "kind": "scope_limitation",
+      "title": {
+        "en": "Lightning areas: source limitation",
+        "si": "අකුණු ප්‍රදේශ: මූලාශ්‍ර සීමාව",
+        "ta": "மின்னல் பகுதிகள்: மூல வரம்பு"
+      },
+      "summary": {
+        "en": "Amber lightning advisory until 01:00 on 7 November. Scope comes from the official CAP alert: seven whole districts plus specifically named DS divisions, not all districts containing those divisions. Some source spellings remain unmatched. The PDF district text contains Xx placeholders; see the original CAP area list.",
+        "si": "නොවැම්බර් 7 පෙ.ව. 01:00 දක්වා ඇම්බර් අකුණු අවවාදය. ප්‍රදේශ නිල CAP නිවේදනයෙන්: දිස්ත්‍රික්ක හතක් සහ නම් කළ කොට්ඨාස පමණි. සමහර නම් සිතියමට ගැළපී නැත. PDF හි දිස්ත්‍රික් නම් Xx ලෙස ඇත. මුල් CAP ප්‍රදේශ ලැයිස්තුව බලන්න.",
+        "ta": "நவம்பர் 7 அதிகாலை 01:00 வரை அம்பர் மின்னல் அறிவுறுத்தல். அதிகாரப்பூர்வ CAP அறிவிப்பின் ஏழு முழு மாவட்டங்களும் குறிப்பிட்ட பிரிவுகளும் மட்டுமே பொருந்தும். சில பெயர்கள் வரைபடத்துடன் பொருந்தவில்லை. PDF மாவட்டப் பெயர்கள் Xx என உள்ளன. அசல் CAP பகுதி பட்டியலைப் பார்க்கவும்."
+      },
+      "url": "https://was.meteo.gov.lk/cap/en/17f6e64ddc334403a2ababe2145ee3f2.xml",
+      "issuedAt": "2026-11-06T15:28:42+05:30",
+      "expiresAt": "2026-11-07T01:00:00+05:30"
+    },
+    {
+      "kind": "general_forecast",
+      "title": {
+        "en": "Official 36-hour weather forecast",
+        "si": "නිල පැය 36 කාලගුණ අනාවැකිය",
+        "ta": "அதிகாரப்பூர்வ 36 மணிநேர வானிலை முன்னறிவிப்பு"
+      },
+      "summary": {
+        "en": "Issued 16:00 on 6 November: local rainfall above 75 mm is likely in Western, Sabaragamuwa, Central, Uva and North-western provinces and Galle and Matara districts. This is a regional forecast, not a household flood prediction.",
+        "si": "නොවැම්බර් 6 ප.ව. 4:00 නිකුත් කළ අනාවැකිය: බස්නාහිර, සබරගමුව, මධ්‍යම, ඌව, වයඹ පළාත් සහ ගාල්ල, මාතර දිස්ත්‍රික්කවල ඇතැම් ස්ථානවල මි.මී. 75 ඉක්මවන වැසි ඇති විය හැක. මෙය නිවසක ගංවතුර අනාවැකියක් නොවේ.",
+        "ta": "நவம்பர் 6 மாலை 4:00 வெளியீடு: மேல், சபரகமுவ, மத்திய, ஊவா, வடமேல் மாகாணங்களிலும் காலி, மாத்தறை மாவட்டங்களிலும் சில இடங்களில் 75 மி.மீ.க்கு மேல் மழை பெய்யலாம். இது வீட்டுக்கான வெள்ளக் கணிப்பு அல்ல."
+      },
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Weather_Report_at_1600hrs_on_2026__1793962258.pdf",
+      "issuedAt": "2026-11-06T16:00:00+05:30",
+      "expiresAt": "2026-11-08T04:00:00+05:30"
+    },
+    {
+      "kind": "withdrawal",
+      "title": {
+        "en": "Earlier basin warnings withdrawn on 31 October",
+        "si": "පෙර ගංගා අවවාද ඔක්තෝබර් 31 ඉවත් කර ඇත",
+        "ta": "முந்தைய ஆற்று எச்சரிக்கைகள் அக்டோபர் 31 அன்று விலக்கப்பட்டன"
+      },
+      "summary": {
+        "en": "Irrigation withdrew the specified Kelani, Kalu, Gin, Mahaweli and Attanagalu warnings at 18:00 on 31 October. This historical withdrawal and today’s noon Normal gauge classifications are not an all-clear now. Measurements retain their actual times.",
+        "si": "කැලණි, කළු, ගිං, මහවැලි සහ අත්තනගලු අවවාද ඔක්තෝබර් 31 ප.ව. 6:00 ඉවත් කර ඇත. එය හෝ අද දහවල් සාමාන්‍ය මිනුම් දැන් ආරක්ෂිත බවක් නොකියයි.",
+        "ta": "களனி, களு, கிங், மகாவலி, அத்தனகலு எச்சரிக்கைகள் அக்டோபர் 31 மாலை 6:00 விலக்கப்பட்டன. அதுவும் இன்றைய நண்பகல் சாதாரண நிலையளவுகளும் இப்போது பாதுகாப்பு உறுதி அல்ல."
+      },
+      "url": "https://www.dmc.gov.lk/images/dmcreports/Withdrawal_of_Flood_warning_2026__1793453029.pdf",
+      "issuedAt": "2026-10-31T18:00:00+05:30"
     }
   ]
 }

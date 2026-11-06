@@ -47,3 +47,6 @@ export function selectPoint(data, point, now=Date.now()) {
 export function completeTotal(frames){if(!frames.length||frames.some(f=>f.rainMm===null||!Number.isFinite(f.rainMm)||f.endStep-f.startStep!==3))return null;for(let i=1;i<frames.length;i++)if(frames[i].startStep!==frames[i-1].endStep)return null;return frames.reduce((a,f)=>a+f.rainMm,0);}
 
 export function futureDayWindow(frames,now=Date.now()) {const upcoming=frames.filter(f=>Date.parse(f.intervalStart)>=now).slice(0,8);const total=upcoming.length===8?completeTotal(upcoming):null;return total===null?null:{rainMm:total,start:upcoming[0].intervalStart,end:upcoming[7].validAt};}
+
+export const MAX_FORECAST_TEXT_LENGTH = 1000000;
+export function parseForecastText(raw,now=Date.now()){if(typeof raw!=='string'||raw.length>MAX_FORECAST_TEXT_LENGTH)throw Error('Forecast too large or invalid');return validateForecast(JSON.parse(raw),now);}
