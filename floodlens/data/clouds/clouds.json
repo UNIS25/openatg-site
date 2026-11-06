@@ -160,5 +160,5 @@
   "source": "https://nasa-gibs.github.io/gibs-api-docs/",
   "metadata": "https://github.com/nasa-gibs/worldview/blob/main/config/default/common/config/metadata/layers/himawari/Himawari_AHI_Band13_Clean_Infrared.md",
   "acknowledgement": "We acknowledge the use of imagery provided by services from NASA's Global Imagery Browse Services (GIBS), part of NASA's Earth Science Data and Information System (ESDIS).",
-  "publication": "Validated fixed-region snapshot. Scheduled checks are every 30 minutes, subject to source availability and runner delays. Capture time is unchanged by a check."
+  "publication": "Validated fixed-region snapshot. Scheduled checks are hourly, subject to source availability and runner delays. Capture time is unchanged by a check."
 }
