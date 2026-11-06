@@ -22,7 +22,9 @@ jobs:
   publish-observations:
     if: github.repository == 'UNIS25/openatg-site' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    # Cold NOAA capture is paced at >=10 seconds/request (~11-15 minutes).
+    # Keep room for isolated source failures plus the exact-commit Pages check.
+    timeout-minutes: 50
     permissions:
       contents: write
       pages: write
@@ -40,9 +42,11 @@ jobs:
             floodlens/data/forecast
             floodlens/data/clouds
             floodlens/data/tides
+            floodlens/data/hourly-rain
             floodlens/forecast-model.mjs
             floodlens/clouds-model.mjs
             floodlens/tides-model.mjs
+            floodlens/hourly-rain-model.mjs
           sparse-checkout-cone-mode: false
       - name: Avoid duplicate refresh after serialized run
         id: due
@@ -60,17 +64,20 @@ jobs:
           python3 tests/floodlens/test_publisher_watchdog.py
           python3 tests/floodlens/test_pages_publication.py
           python3 tests/floodlens/test_weather_publisher.py
+          python3 tests/floodlens/test_hourly_publication.py
+          python3 tests/floodlens/test_gfs_hourly.py
+          node --test tests/floodlens/publication.test.mjs tests/floodlens/hourly-publication.test.mjs tests/floodlens/hourly-rain.test.mjs
       - name: Fetch and validate dated reservoir observations
         if: steps.due.outputs.proceed == 'true'
         id: reservoir
         run: python3 scripts/floodlens/update_reservoirs.py
-      - name: Validate forecast, cloud and tide candidates separately
+      - name: Validate forecast, cloud, tide and hourly rain candidates separately
         if: steps.due.outputs.proceed == 'true'
         id: weather
         env:
           ARK_FORCE_REFRESH: ${{ inputs.force_refresh == true && 'true' || 'false' }}
         run: python3 scripts/floodlens/update_weather.py
-      - name: Publish only the ten approved data files and verify Pages build
+      - name: Publish only the twelve approved data files and verify Pages build
         if: steps.due.outputs.proceed == 'true'
         env:
           GH_TOKEN: ${{ github.token }}

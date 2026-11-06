@@ -1,4 +1,4 @@
-"""Ten exact approved data paths; normal push and explicit Pages build with an ephemeral token."""
+"""Twelve exact approved data paths; normal push and explicit Pages build with an ephemeral token."""
 import base64,hashlib,json,os,re,subprocess,time
 from datetime import datetime,timezone
 from pathlib import Path
@@ -9,7 +9,7 @@ ROOT=Path(__file__).resolve().parents[2]
 REPOSITORY='UNIS25/openatg-site'
 PATH='floodlens/data/reservoirs.json'
 PUBLIC='https://openatg.com/'
-ALLOWED={PATH,'floodlens/data/forecast/forecast.json','floodlens/data/forecast/provenance.json','floodlens/data/clouds/clouds.json','floodlens/data/clouds/provenance.json',*[f'floodlens/data/clouds/frame-{i}.png' for i in range(3)],'floodlens/data/tides/colombo.json','floodlens/data/tides/validation.json'}
+ALLOWED={PATH,'floodlens/data/forecast/forecast.json','floodlens/data/forecast/provenance.json','floodlens/data/clouds/clouds.json','floodlens/data/clouds/provenance.json',*[f'floodlens/data/clouds/frame-{i}.png' for i in range(3)],'floodlens/data/tides/colombo.json','floodlens/data/tides/validation.json','floodlens/data/hourly-rain/hourly-rain.json','floodlens/data/hourly-rain/provenance.json'}
 
 def git(*args,env=None):
     return subprocess.check_output(['git',*args],cwd=ROOT,env=env,text=True).strip()
@@ -28,12 +28,15 @@ def assert_regular_files(paths):
 
 def validate_changed(paths):
     assert_regular_files(paths)
-    for group in ['forecast','clouds','tides']:
+    for group in ['forecast','clouds','tides','hourly-rain']:
         if any(p.startswith('floodlens/data/'+group+'/') for p in paths):
             before=ROOT/'artifacts/floodlens/publisher/baseline'/group;before.mkdir(parents=True,exist_ok=True)
-            name={'forecast':'forecast.json','clouds':'clouds.json','tides':'colombo.json'}[group]
+            name={'forecast':'forecast.json','clouds':'clouds.json','tides':'colombo.json','hourly-rain':'hourly-rain.json'}[group]
             (before/name).write_text(git('show','HEAD:floodlens/data/'+group+'/'+name))
             subprocess.run(['node','scripts/floodlens/validate_publication.mjs',group,str(ROOT/'floodlens/data'/group),str(before)],cwd=ROOT,check=True)
+            if group=='hourly-rain':
+                from hourly_publication import validate_cached_sources
+                validate_cached_sources(ROOT/'floodlens/data'/group,ROOT/'artifacts/floodlens/hourly-rain')
     if PATH in paths:
         import update_reservoirs as updater
         previous=json.loads(git('show','HEAD:'+PATH));current=json.loads((ROOT/PATH).read_text())

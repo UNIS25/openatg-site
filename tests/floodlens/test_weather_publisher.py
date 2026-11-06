@@ -11,9 +11,9 @@ class WeatherPublisher(unittest.TestCase):
   import rasterio,eccodes,uptide,netCDF4
   self.assertTrue(eccodes.codes_get_api_version())
  def test_allowed_paths_are_exact_and_warning_news_code_are_excluded(self):
-  self.assertEqual(len(p.ALLOWED),10)
+  self.assertEqual(len(p.ALLOWED),12)
   for name in p.ALLOWED:p.assert_paths([name])
-  for name in ['floodlens/data/reviewed.json','floodlens/data/provenance.json','floodlens/data/explore/cyclone.json','floodlens/data/reservoir-reports.json','.github/workflows/floodlens-observation-update.yml','floodlens/data/clouds/frame-3.png','floodlens/data/tides/colombo-source.json','floodlens/data/forecast/../../app.mjs']:
+  for name in ['floodlens/data/reviewed.json','floodlens/data/provenance.json','floodlens/data/explore/cyclone.json','floodlens/data/reservoir-reports.json','.github/workflows/floodlens-observation-update.yml','floodlens/data/clouds/frame-3.png','floodlens/data/tides/colombo-source.json','floodlens/data/forecast/../../app.mjs','floodlens/hourly-rain-model.mjs','floodlens/data/hourly-rain/reviewed.json','artifacts/floodlens/hourly-rain/2026110612/f001.grib2']:
    with self.assertRaises(ValueError):p.assert_paths([name])
  def test_latest_run_does_not_guess_future_or_downgrade(self):
   now=datetime(2026,10,27,5,40,tzinfo=timezone.utc);old=now.replace(day=26,hour=18,minute=0);seen=[]

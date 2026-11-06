@@ -1,5 +1,5 @@
 """Approved fixed-source candidates. Failure keeps each prior group byte-for-byte.
-No warning/news interpretation, no visitor inputs, no persistent token or cache.
+No warning/news interpretation, no visitor inputs or persistent token.
 """
 import json,os,shutil,subprocess,sys
 from pathlib import Path
@@ -8,10 +8,13 @@ from urllib.error import HTTPError
 import ecmwf_forecast as forecast
 ROOT=Path(__file__).resolve().parents[2]
 WORK=ROOT/'artifacts/floodlens/publisher';DATA=ROOT/'floodlens/data'
-GROUPS={'forecast':['forecast.json','provenance.json'],'clouds':['clouds.json','provenance.json','frame-0.png','frame-1.png','frame-2.png'],'tides':['colombo.json','validation.json']}
+GROUPS={'forecast':['forecast.json','provenance.json'],'clouds':['clouds.json','provenance.json','frame-0.png','frame-1.png','frame-2.png'],'tides':['colombo.json','validation.json'],'hourly-rain':['hourly-rain.json','provenance.json']}
 def install_group(group,candidate):
  # All validation precedes writes. Git publication validates again and is atomic.
  subprocess.run(['node','scripts/floodlens/validate_publication.mjs',group,str(candidate),str(DATA/group)],check=True,cwd=ROOT)
+ if group=='hourly-rain':
+  from hourly_publication import validate_cached_sources
+  validate_cached_sources(candidate,ROOT/'artifacts/floodlens/hourly-rain')
  for name in GROUPS[group]:
   target=DATA/group/name
   if target.is_symlink() or not target.is_file():raise ValueError('Publication requires pre-existing regular files')
@@ -61,9 +64,24 @@ def update_tides(now,out,force=False):
  subprocess.run([sys.executable,'scripts/floodlens/check_tides.py',str(out)],cwd=ROOT,check=True,timeout=90)
  install_group('tides',out);return 'validated rolling 48-hour astronomical prediction'
 
+def update_hourly_rain(now,out,force=False):
+ # Source cache is local to the runner and revalidated, not an external service.
+ # Reuse original retrieval times. A forced refresh never fabricates freshness.
+ old=json.loads((DATA/'hourly-rain/hourly-rain.json').read_text())
+ captured=datetime.fromisoformat(old['capturedAt'].replace('Z','+00:00'))
+ if not force and captured<=now<captured+timedelta(hours=6):
+  # GFS issues six-hourly cycles. Do not cold-download the same cycle during
+  # every hourly job; the retained buffer must still pass the full current gate.
+  checked=subprocess.run(['node','scripts/floodlens/validate_publication.mjs','hourly-rain',str(DATA/'hourly-rain'),str(DATA/'hourly-rain')],cwd=ROOT,check=False)
+  if checked.returncode==0:return 'unchanged: complete fresh hourly snapshot captured within six hours; original source times retained'
+ subprocess.run([sys.executable,'scripts/floodlens/gfs_hourly.py','--auto','--cache',str(ROOT/'artifacts/floodlens/hourly-rain'),'--out',str(out)],cwd=ROOT,check=True,timeout=1200)
+ install_group('hourly-rain',out)
+ candidate=json.loads((out/'hourly-rain.json').read_text())
+ return 'validated native hourly model rainfall; latest run '+max(r['runAt'] for r in candidate['runs'])+'; past values are model estimates, not observations'
+
 def main():
  os.chdir(ROOT);WORK.mkdir(parents=True,exist_ok=True);results={}
- for group,action in [('forecast',update_forecast),('clouds',update_clouds),('tides',update_tides)]:
+ for group,action in [('forecast',update_forecast),('clouds',update_clouds),('tides',update_tides),('hourly-rain',update_hourly_rain)]:
   out=WORK/group
   if out.exists():shutil.rmtree(out)
   out.mkdir()

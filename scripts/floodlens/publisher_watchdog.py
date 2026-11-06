@@ -16,8 +16,12 @@ WORKFLOW='floodlens-observation-update.yml'
 WORKFLOW_ID=396918646
 ENDPOINT=f'repos/{REPO}/actions/workflows/{WORKFLOW}'
 JOURNAL=ROOT/'artifacts/floodlens/watchdog/request.json'
-REQUIRED_STEPS={'Fetch and validate dated reservoir observations','Validate forecast, cloud and tide candidates separately','Publish only the ten approved data files and verify Pages build'}
-PUBLICATION_STEP='Publish only the ten approved data files and verify Pages build'
+REQUIRED_STEPS={'Fetch and validate dated reservoir observations','Validate forecast, cloud, tide and hourly rain candidates separately','Publish only the twelve approved data files and verify Pages build'}
+PUBLICATION_STEP='Publish only the twelve approved data files and verify Pages build'
+# A prior-version run may have pushed before failing its Pages verification.
+# Its uncertain outcome still blocks redispatch across this schema migration.
+LEGACY_PUBLICATION_STEP='Publish only the ten approved data files and verify Pages build'
+LEGACY_REQUIRED_STEPS={'Fetch and validate dated reservoir observations','Validate forecast, cloud and tide candidates separately',LEGACY_PUBLICATION_STEP}
 
 def stamp(value):
  d=datetime.fromisoformat(value.replace('Z','+00:00'))
@@ -69,9 +73,10 @@ def decision(history,get,now,minutes=30,current_id=None,check_active=True):
     completed=stamp(job['completed_at'])
     if completed>now:raise ValueError('Future completion time')
     if completed>now-timedelta(minutes=minutes):return {'state':'fresh','runId':r['id'],'completedAt':job['completed_at']}
-   publication=next((s for s in job.get('steps',[]) if s.get('name')==PUBLICATION_STEP),{})
-   if (REQUIRED_STEPS-{PUBLICATION_STEP})<=successful and publication.get('conclusion') in ['failure','cancelled','timed_out']:
-    unconfirmed.append(r)
+   for required,publication_name in [(REQUIRED_STEPS,PUBLICATION_STEP),(LEGACY_REQUIRED_STEPS,LEGACY_PUBLICATION_STEP)]:
+    publication=next((s for s in job.get('steps',[]) if s.get('name')==publication_name),{})
+    if (required-{publication_name})<=successful and publication.get('conclusion') in ['failure','cancelled','timed_out']:
+     unconfirmed.append(r);break
  if unconfirmed:return {'state':'publication-unconfirmed','runId':unconfirmed[0]['id'],'runUpdatedAt':unconfirmed[0]['updated_at'],'reason':'Publication may have pushed before verification failed. Inspect exact commit/build/public bytes; do not redispatch blindly.'}
  return {'state':'due','reason':'No active run or verified successful combined refresh in the interval'}
 

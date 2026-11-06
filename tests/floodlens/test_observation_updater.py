@@ -46,8 +46,8 @@ class ObservationUpdater(unittest.TestCase):
   for field,value in [('Effective Storage_per','999'),('Spilling_Cusec','-1'),('Range','New identity')]:
    rows=copy.deepcopy(self.rows);rows[0][field]=value
    with self.assertRaises(ValueError):updater.validate(self.raw(rows),self.before,self.now)
- def test_exact_ten_path_allowlist(self):
-  assert_paths([PATH]);assert_paths(sorted(ALLOWED));self.assertEqual(len(ALLOWED),10)
+ def test_exact_twelve_path_allowlist(self):
+  assert_paths([PATH]);assert_paths(sorted(ALLOWED));self.assertEqual(len(ALLOWED),12)
   for paths in [[],[PATH,'.github/workflows/other.yml'],['floodlens/data/reviewed.json'],['floodlens/data/../app.mjs'],[PATH,PATH],['floodlens/data/clouds/frame-3.png'],['floodlens/data/tides/colombo-source.json'],['floodlens/data/reservoir-reports.json']]:
    with self.assertRaises(ValueError):assert_paths(paths)
 if __name__=='__main__':unittest.main()

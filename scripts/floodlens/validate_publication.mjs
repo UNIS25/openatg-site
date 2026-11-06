@@ -4,11 +4,13 @@ import {createHash} from 'node:crypto';
 import {validateForecast,futureDayWindow,selectPoint} from '../../floodlens/forecast-model.mjs';
 import {cloudState} from '../../floodlens/clouds-model.mjs';
 import {selectTides} from '../../floodlens/tides-model.mjs';
+import {validateHourlyPublication} from './validate_hourly_publication.mjs';
 const sha=b=>createHash('sha256').update(b).digest('hex');
 async function raw(path){const s=await lstat(path);if(!s.isFile()||s.isSymbolicLink()||s.size>2000000)throw Error('Unexpected file type/size');return readFile(path);}
 const json=async p=>JSON.parse(await raw(p));
 const validTime=(value,now)=>{const t=Date.parse(value);if(!Number.isFinite(t)||t>now)throw Error('Invalid/future source time');return t;};
 export async function validateGroup(group,dir,beforeDir,now=Date.now()){
+ if(group==='hourly-rain')return validateHourlyPublication(dir,beforeDir,now);
  if(group==='forecast'){
   const bytes=await raw(dir+'/forecast.json'),d=JSON.parse(bytes),p=await json(dir+'/provenance.json'),old=await json(beforeDir+'/forecast.json');validateForecast(d,now);
   if(Date.parse(d.runAt)<Date.parse(old.runAt)||now-Date.parse(d.runAt)>18*3600000||d.captureErrors.length||p.errors.length||p.runAt!==d.runAt||p.forecastSha256!==sha(bytes)||p.forecastBytes!==bytes.length)throw Error('Regressed/incomplete forecast or provenance');

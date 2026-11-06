@@ -1,0 +1,231 @@
+{
+  "schemaVersion": 1,
+  "kind": "official_river_station_locations",
+  "source": "https://services3.arcgis.com/J7ZFXmR8rSmQ3FGf/arcgis/rest/services/hydrostations/FeatureServer/0/query?where=1%3D1&outFields=%2A&outSR=4326&f=geojson",
+  "sourceSha256": "c340bf1641466cc602ede2c132179ffa101adc74e15d042c8e9e889812a02301",
+  "retrievedAt": "2026-11-06T15:57:24.245540+00:00",
+  "attribution": "Irrigation Department, Sri Lanka \u00b7 Hydrology and Disaster Management Branch / GIS Branch",
+  "purpose": "Station locations only; not flood extent or current water levels.",
+  "stations": [
+    {
+      "name": "Holombuwa",
+      "point": [
+        80.266331,
+        7.188201
+      ],
+      "unit": "m",
+      "sourceObjectId": 5,
+      "coordinateNote": null
+    },
+    {
+      "name": "Rathnapura",
+      "point": [
+        80.397235,
+        6.679067
+      ],
+      "unit": "m",
+      "sourceObjectId": 10,
+      "coordinateNote": null
+    },
+    {
+      "name": "Kithulgala",
+      "point": [
+        80.419213,
+        6.991259
+      ],
+      "unit": "m",
+      "sourceObjectId": 4,
+      "coordinateNote": null
+    },
+    {
+      "name": "Norwood",
+      "point": [
+        80.611301,
+        6.840145
+      ],
+      "unit": "m",
+      "sourceObjectId": 7,
+      "coordinateNote": null
+    },
+    {
+      "name": "Magura",
+      "point": [
+        80.243935,
+        6.513727
+      ],
+      "unit": "m",
+      "sourceObjectId": 12,
+      "coordinateNote": null
+    },
+    {
+      "name": "Kalawellawa (Millakanda)",
+      "point": [
+        80.16069,
+        6.631166
+      ],
+      "unit": "m",
+      "sourceObjectId": 11,
+      "coordinateNote": null
+    },
+    {
+      "name": "Nawalapitiya",
+      "point": [
+        80.536162,
+        7.048945
+      ],
+      "unit": "m",
+      "sourceObjectId": 31,
+      "coordinateNote": null
+    },
+    {
+      "name": "Dunamale",
+      "point": [
+        80.084085,
+        7.116416
+      ],
+      "unit": "m",
+      "sourceObjectId": 41,
+      "coordinateNote": null
+    },
+    {
+      "name": "Panadugama",
+      "point": [
+        80.482384,
+        6.11178
+      ],
+      "unit": "m",
+      "sourceObjectId": 15,
+      "coordinateNote": null
+    },
+    {
+      "name": "Urawa",
+      "point": [
+        80.572011,
+        6.23673
+      ],
+      "unit": "m",
+      "sourceObjectId": 17,
+      "coordinateNote": null
+    },
+    {
+      "name": "Peradeniya",
+      "point": [
+        80.593005,
+        7.269059
+      ],
+      "unit": "m",
+      "sourceObjectId": 30,
+      "coordinateNote": null
+    },
+    {
+      "name": "Glencourse",
+      "point": [
+        80.194247,
+        6.976981
+      ],
+      "unit": "m",
+      "sourceObjectId": 3,
+      "coordinateNote": null
+    },
+    {
+      "name": "Thawalama",
+      "point": [
+        80.330616,
+        6.341776
+      ],
+      "unit": "m",
+      "sourceObjectId": 14,
+      "coordinateNote": null
+    },
+    {
+      "name": "Badalgama",
+      "point": [
+        79.983916,
+        7.300741
+      ],
+      "unit": "m",
+      "sourceObjectId": 39,
+      "coordinateNote": null
+    },
+    {
+      "name": "Hanwella",
+      "point": [
+        80.083126,
+        6.9097
+      ],
+      "unit": "m",
+      "sourceObjectId": 2,
+      "coordinateNote": null
+    },
+    {
+      "name": "Putupaula",
+      "point": [
+        80.061511,
+        6.614324
+      ],
+      "unit": "m",
+      "sourceObjectId": 8,
+      "coordinateNote": null
+    },
+    {
+      "name": "Baddegama",
+      "point": [
+        80.175381,
+        6.173806
+      ],
+      "unit": "m",
+      "sourceObjectId": 13,
+      "coordinateNote": null
+    },
+    {
+      "name": "Thalgahagoda",
+      "point": [
+        80.53293,
+        6.0103
+      ],
+      "unit": "m",
+      "sourceObjectId": 18,
+      "coordinateNote": null
+    },
+    {
+      "name": "Moragaswewa",
+      "point": [
+        79.99659,
+        7.700035
+      ],
+      "unit": "m",
+      "sourceObjectId": 38,
+      "coordinateNote": "Official map geometry retained; rounded source longitude attribute differs."
+    },
+    {
+      "name": "Galgamuwa",
+      "point": [
+        80.262322,
+        7.969368
+      ],
+      "unit": "m",
+      "sourceObjectId": 37,
+      "coordinateNote": null
+    },
+    {
+      "name": "Thanthirimale",
+      "point": [
+        80.27807,
+        8.590081
+      ],
+      "unit": "m",
+      "sourceObjectId": 36,
+      "coordinateNote": null
+    },
+    {
+      "name": "Ellagawa",
+      "point": [
+        80.218254,
+        6.731554
+      ],
+      "unit": "m",
+      "sourceObjectId": 9,
+      "coordinateNote": null
+    }
+  ]
+}

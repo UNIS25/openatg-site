@@ -3,8 +3,9 @@ import{validateGroup}from'../../scripts/floodlens/validate_publication.mjs';
 async function candidate(group,change){const dir=await mkdtemp(join(tmpdir(),'ark-publish-'));await cp('floodlens/data/'+group,dir,{recursive:true});try{await change(dir);}finally{await rm(dir,{recursive:true,force:true});}}
 async function changeJSON(dir,name,fn){const d=JSON.parse(await readFile(dir+'/'+name));fn(d);await writeFile(dir+'/'+name,JSON.stringify(d));}
 test('forecast publication rejects incomplete/future/regressed or mismatched source groups',async()=>{
- await validateGroup('forecast','floodlens/data/forecast','floodlens/data/forecast');
- for(const fn of [d=>d.runAt='2099-01-01T00:00:00Z',d=>d.frames[0].rainMm[0]=null,d=>d.frames[0].windUms[0]=null,d=>d.units.rainMm='m',d=>d.captureErrors.push({error:'source failed'})])await candidate('forecast',async dir=>{await changeJSON(dir,'forecast.json',fn);await assert.rejects(validateGroup('forecast',dir,'floodlens/data/forecast'));});
+ const retained=JSON.parse(await readFile('floodlens/data/forecast/forecast.json')),verifiedAt=Date.parse(retained.generatedAt);
+ await validateGroup('forecast','floodlens/data/forecast','floodlens/data/forecast',verifiedAt);
+ for(const fn of [d=>d.runAt='2099-01-01T00:00:00Z',d=>d.frames[0].rainMm[0]=null,d=>d.frames[0].windUms[0]=null,d=>d.units.rainMm='m',d=>d.captureErrors.push({error:'source failed'})])await candidate('forecast',async dir=>{await changeJSON(dir,'forecast.json',fn);await assert.rejects(validateGroup('forecast',dir,'floodlens/data/forecast',verifiedAt));});
 });
 test('cloud publication rejects swapped bytes, unapproved paths and false times',async()=>{
  const retained=JSON.parse(await readFile('floodlens/data/clouds/clouds.json'));

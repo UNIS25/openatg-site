@@ -21,6 +21,12 @@ class WatchdogTests(unittest.TestCase):
  def test_failed_publication_requires_verification_instead_of_blind_dispatch(self):
   result=w.decision([run(age=10,conclusion='failure')],lambda _:jobs(publication='failure'),NOW)
   self.assertEqual(result['state'],'publication-unconfirmed');self.assertEqual(result['runId'],1)
+ def test_legacy_failed_publication_stays_uncertain_after_hourly_schema_upgrade(self):
+  legacy={'jobs':[{'conclusion':'failure','steps':[{'name':name,'conclusion':'failure' if name==w.LEGACY_PUBLICATION_STEP else 'success'} for name in w.LEGACY_REQUIRED_STEPS]}]}
+  self.assertEqual(w.decision([run(age=10,conclusion='failure')],lambda _:legacy,NOW)['state'],'publication-unconfirmed')
+ def test_legacy_success_does_not_claim_hourly_rain_was_refreshed(self):
+  legacy={'jobs':[{'conclusion':'success','completed_at':(NOW-timedelta(minutes=10)).isoformat(),'steps':[{'name':name,'conclusion':'success'} for name in w.LEGACY_REQUIRED_STEPS]}]}
+  self.assertEqual(w.decision([run(age=10)],lambda _:legacy,NOW)['state'],'due')
  def test_successful_older_refresh_may_still_be_verified_but_failure_is_never_fresh(self):
   history=[run(id=2,age=2,conclusion='failure'),run(id=1,age=5)]
   result=w.decision(history,lambda endpoint:jobs(publication='failure') if '/2/' in endpoint else jobs(age=5),NOW)

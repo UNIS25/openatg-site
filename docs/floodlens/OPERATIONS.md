@@ -1252,3 +1252,13 @@ trends remain null. Rainfall is a twelve-hour total ending 21:00, retained in
 provenance separately from gauge values; Nagalagam Street's feet are not added to
 the metre directory. Original observation times still control freshness, and
 Normal station readings never cancel an area warning or establish home safety.
+
+### Native hourly rainfall and place explorer (6 November 2026)
+
+The opening language page is unchanged. The location weather panel separates the past 24 completed native hours (NOAA GFS archived forecast/model estimates, not measurements) and next 24 whole forecast hours, with expandable rows. The ongoing partial UTC hour is excluded; native boundaries are at :30 SLST. Original model-run and download times remain visible. Unknown intervals do not produce totals. ECMWF three-hour rain/wind remains a separately labeled expandable reference.
+
+Explore adds neutral district browsing, exact official CAP lightning outline, and 22 dated Irrigation gauge readings at exact-name-matched official station coordinates. A district news report never becomes an incident point or inundation polygon. Gauges retain the noon 6 November measurement clock and become explicitly old after 3 hours; their levels are not household water depths. The CAP outline is source/hash/time-bound and disappears on expiry. Satellite estimates remain dated, cloud-limited products, not route guidance.
+
+Hourly GFS snapshots use cached, fixed-region NOAA subsets and adjacent run-cumulative precipitation differences from the same model run. The observation publisher isolates the two hourly-data files behind schema, provenance, complete-window, non-regression and independently decoded-source checks. It never advances warning/news review timestamps. Invalid groups retain their last validated data; tide validation is unchanged.
+
+Release checks include model tests, source hashes, DOM rendering/lifecycle tests and publisher guards. The native browser adapter failed before page access with a timeoutMs runtime error; actual mobile visual/browser verification was unavailable. Public edge HTTP probes previously returned 403 and were not retried through an alternate route. GitHub Pages deployment status is verified separately from public-byte/mobile validation.
