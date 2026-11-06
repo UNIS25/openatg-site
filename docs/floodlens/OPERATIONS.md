@@ -1262,3 +1262,11 @@ Explore adds neutral district browsing, exact official CAP lightning outline, an
 Hourly GFS snapshots use cached, fixed-region NOAA subsets and adjacent run-cumulative precipitation differences from the same model run. The observation publisher isolates the two hourly-data files behind schema, provenance, complete-window, non-regression and independently decoded-source checks. It never advances warning/news review timestamps. Invalid groups retain their last validated data; tide validation is unchanged.
 
 Release checks include model tests, source hashes, DOM rendering/lifecycle tests and publisher guards. The native browser adapter failed before page access with a timeoutMs runtime error; actual mobile visual/browser verification was unavailable. Public edge HTTP probes previously returned 403 and were not retried through an alternate route. GitHub Pages deployment status is verified separately from public-byte/mobile validation.
+
+### Manual release recovery after a Pages cancellation
+
+A human-authorized branch push to the configured publishing source can start a Pages build automatically. Observe that exact-commit build before requesting another build; do not issue a duplicate Pages POST while it is queued or running. The observation publisher's GITHUB_TOKEN path remains separate and retains its explicit build request.
+
+For the 6 November hourly-rain release, application and data tests passed, but Pages timed out in updating_pages and a same-commit retry returned Deployment cancelled. No active competing workflow or changed main-branch commit was found. A fresh documentation-only release commit is a bounded rebuild attempt through the normal branch trigger, not proof that the hosting fault is resolved. Verify exact-commit deployment success before announcing availability. Do not change weather review or observation clocks, disable Pages, alter permissions, or repeatedly create retries to mask a hosting failure.
+
+GitHub reference: https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site
