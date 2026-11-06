@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "kind": "dated_satellite_context",
+  "bbox": [
+    79.19824218749994,
+    5.497558593750014,
+    82.50292968749994,
+    10.300781250000014
+  ],
+  "crs": "OGC:CRS84",
+  "pixelWidth": 752,
+  "pixelHeight": 1093,
+  "displayResolutionDegrees": 0.004394531249999999,
+  "nominalProductResolutionMeters": 250,
+  "retrievedAt": "2026-11-06T13:25:40.852277+00:00",
+  "products": {
+    "flood": {
+      "layer": "VIIRS_Combined_Flood_2-Day",
+      "date": "2026-11-05",
+      "path": "/floodlens/data/satellite/flood.png",
+      "sha256": "f73a7428724b389f5f87b825d5d4ad41a5f6255309448709fc8305c954a8c7b8",
+      "bytes": 68846,
+      "compositeDays": 2
+    },
+    "truecolor": {
+      "layer": "VIIRS_NOAA20_CorrectedReflectance_TrueColor",
+      "date": "2026-11-05",
+      "path": "/floodlens/data/satellite/truecolor.png",
+      "sha256": "7ffdb011646d4e4864a11335b406ef3a3a5d138a8964cb066c08911929a1ef86",
+      "bytes": 1174147,
+      "compositeDays": 1
+    }
+  },
+  "source": "https://lance.modaps.eosdis.nasa.gov/flood/",
+  "attribution": "NASA GIBS / ESDIS; NASA LANCE VIIRS NOAA-20 + NOAA-21 flood product; NOAA-20 true-colour imagery. OpenATG fixed-country crop. No endorsement.",
+  "publication": "Dated reviewed snapshot, not a live feed. Imagery is hidden once its date is over 72 hours old. Retrieval time is not acquisition time.",
+  "limitations": "Clouds, shadows and coarse pixels can conceal or misclassify flooding. Gray is insufficient data. Transparent pixels can mean no water OR no data and never prove safety. Not for route safety or rescue dispatch."
+}

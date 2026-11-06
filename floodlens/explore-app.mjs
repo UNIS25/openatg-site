@@ -1,12 +1,13 @@
-import {warningSourceUrl} from './core.mjs?v=20261106-34';
-import {copy} from './explore-copy.mjs?v=20261106-34';
-import {ExploreMap} from './explore-map.mjs?v=20261106-34';
-import {warningLayer,forecastLayer,forecastCells,reviewedReports,cycloneState} from './explore-model.mjs?v=20261106-34';
-import {cloudState,verifiedCloudImages} from './clouds-model.mjs?v=20261106-34';
+import {warningSourceUrl} from './core.mjs?v=20261106-35';
+import {copy} from './explore-copy.mjs?v=20261106-35';
+import {ExploreMap} from './explore-map.mjs?v=20261106-35';
+import {warningLayer,forecastLayer,forecastCells,reviewedReports,cycloneState} from './explore-model.mjs?v=20261106-35';
+import {cloudState,verifiedCloudImages} from './clouds-model.mjs?v=20261106-35';
+import {satelliteState,verifiedSatelliteImage} from './satellite-model.mjs?v=20261106-35';
 const $=s=>document.querySelector(s),node=(tag,text,cls)=>{const e=document.createElement(tag);if(text!==undefined)e.textContent=text;if(cls)e.className=cls;return e;};
-const paths={warnings:'/floodlens/data/reviewed.json',catalog:'/floodlens/data/areas.json',overview:'/floodlens/data/map-overview.json',outline:'/floodlens/data/clouds/outline.json',land:'/floodlens/data/explore/region-land.json',forecast:'/floodlens/data/forecast/forecast.json',cloud:'/floodlens/data/clouds/clouds.json',media:'/floodlens/data/reservoir-reports.json',locations:'/floodlens/data/reservoir-locations.json',cyclone:'/floodlens/data/explore/cyclone.json'};
+const paths={satellite:'/floodlens/data/satellite/satellite.json',warnings:'/floodlens/data/reviewed.json',catalog:'/floodlens/data/areas.json',overview:'/floodlens/data/map-overview.json',outline:'/floodlens/data/clouds/outline.json',land:'/floodlens/data/explore/region-land.json',forecast:'/floodlens/data/forecast/forecast.json',cloud:'/floodlens/data/clouds/clouds.json',media:'/floodlens/data/reservoir-reports.json',locations:'/floodlens/data/reservoir-locations.json',cyclone:'/floodlens/data/explore/cyclone.json'};
 let language='en',layer='warnings',warningKind='flood',frame=0,selected=null,playing=null,loading=false,generation=0,cloudBroken=false;
-const data={},failed=new Set();let current={};
+const data={},failed=new Set(),satelliteLoading=new Set();let current={};
 const map=new ExploreMap($('#explore-map'),id=>select(id));
 const t=k=>copy[language][k]||copy.en[k]||k,local=v=>v?.[language]||v?.en||'',time=v=>new Intl.DateTimeFormat(language,{timeZone:'Asia/Colombo',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit',hour12:false}).format(new Date(v))+' SLST';
 const link=(title,url)=>{const a=node('a',title);a.href=url;a.target='_blank';a.rel='noopener noreferrer';return a;};
@@ -17,7 +18,7 @@ function legend(items){$('#legend').replaceChildren(...items.map(([text,cls])=>{
 function select(id,focus=false){selected=id;renderSelection();if(focus)$('#selection').scrollIntoView({block:'nearest'});}
 function selectDistrict(){const code=$('#district').value,area=data.catalog?.districts.find(d=>d.code===code);selected=null;if(!area){map.home(layer==='cyclone');renderSelection();return;}const point=[(area.bbox[0]+area.bbox[2])/2,(area.bbox[1]+area.bbox[3])/2];map.target(point,Math.max(1.5,(area.bbox[3]-area.bbox[1])*1.8));if(['rain','wind'].includes(layer)&&current.cells){let best=0,d=Infinity;for(const [i,c]of current.cells.entries()){const dist=(c.point[0]-point[0])**2+(c.point[1]-point[1])**2;if(dist<d){d=dist;best=i;}}selected='cell:'+best;}else selected='district:'+code;renderSelection();}
 function renderSelection(){
- const root=$('#selection');root.hidden=layer==='clouds'||(layer==='reports'&&!selected);root.replaceChildren();const parts=selected?.split(':')||[],kind=parts[0],id=parts[1];
+ const root=$('#selection');root.hidden=['clouds','satellite','truecolor'].includes(layer)||(layer==='reports'&&!selected);root.replaceChildren();const parts=selected?.split(':')||[],kind=parts[0],id=parts[1];
  const add=(tag,text,cls)=>root.append(node(tag,text,cls));
  if(kind==='warning'){
   const a=current.warnings?.areas.find(a=>a.area.code===id);if(!a){selected=null;return renderSelection();}
@@ -43,8 +44,14 @@ function renderSelection(){
  add('h2',t('choose'));add('p',t('chooseNote'));if(layer==='reports')add('p',t('reportsNote'));if(layer==='warnings')add('p',t('noCurrent'));
 }
 function translate(){document.documentElement.lang=language;document.querySelectorAll('[data-copy]').forEach(e=>e.textContent=t(e.dataset.copy));$('#explore-map svg').setAttribute('aria-label',t('title'));$('#district').replaceChildren(new Option(t('allIsland'),''));for(const d of data.catalog?.districts||[])$('#district').append(new Option(local(d.names),d.code));$('#play').textContent=t(playing?'pause':'play');}
+async function loadSatelliteImage(key){
+ if(satelliteLoading.has(key))return;satelliteLoading.add(key);const manifest=data.satellite,hash=manifest.products[key].sha256;
+ try{const image=await verifiedSatelliteImage(manifest,key);if(data.satellite?.products[key].sha256===hash){data.satelliteImages||={};data.satelliteImages[key]={hash,image};failed.delete('satellite:'+key);}}
+ catch{if(data.satellite?.products[key].sha256===hash)failed.add('satellite:'+key);}
+ finally{satelliteLoading.delete(key);render();}
+}
 function render(){
- current={};$('#source-content').replaceChildren(node('p',t('sourcesNote')),node('small',t('timeZone')));$('#list-content').replaceChildren();$('#timeline').hidden=true;$('#warning-filter').hidden=layer!=='warnings';$('#district-filter').hidden=['cyclone','clouds','reports'].includes(layer);$('#legend').replaceChildren();
+ current={};$('#source-content').replaceChildren(node('p',t('sourcesNote')),node('small',t('timeZone')));$('#list-content').replaceChildren();$('#timeline').hidden=true;$('#warning-filter').hidden=layer!=='warnings';$('#district-filter').hidden=['cyclone','clouds','reports','satellite','truecolor'].includes(layer);$('#legend').replaceChildren();
  const model={land:data.land,outline:data.outline};let title=t('loading'),note='',timestamp='',status='available';
  try{
   if(layer==='warnings'){
@@ -52,13 +59,19 @@ function render(){
    const w=warningLayer(data.warnings,data.catalog,data.overview,warningKind);current.warnings=w;title=t('warningTitle')+' · '+t(warningKind==='rain'?'rainAdvisory':warningKind);note=t(['rain','lightning'].includes(warningKind)?'rainWarningNote':'warningNote');timestamp=t('reviewed')+': '+time(w.reviewedAt)+(w.reviewOlder?' · '+t('reviewOlder'):'');model.warnings=w.areas.map(a=>({...a,label:local(a.area.names)+' · '+t('level')+' '+a.level}));
    for(const a of w.areas)$('#list-content').append(button(local(a.area.names),'warning:'+a.area.code,t('level')+' '+a.level));
    for(const b of w.bulletins)addSource(local(b.title),b.authority+' · '+t('issued')+': '+time(b.issuedAt)+' · '+t('validUntil')+': '+time(b.expiresAt),warningSourceUrl(b,language));
-   if(!w.bulletins.length){note=t('noWarnings');status='empty';}if(w.unmapped.length)$('#list-content').append(node('p',t('mapUnmapped')), ...w.unmapped.map(x=>node('p',x.area.division)));
+   if(!w.bulletins.length){note=t('noWarnings');status='empty';}if(w.unmapped.length){note+=' '+t('mapUnmapped');}if(w.unmapped.length)$('#list-content').append(node('p',t('mapUnmapped')), ...w.unmapped.map(x=>node('p',x.area.division)));
    legend(warningKind==='landslide'?[[t('level')+' 1','yellow'],[t('level')+' 2','amber'],[t('level')+' 3','red']]:[[t('level')+' 2 · Amber','amber']]);
   }else if(['rain','wind'].includes(layer)){
    if(!data.forecast)throw Error('No forecast');const f=forecastLayer(data.forecast);current.forecast=f;title=t(layer==='rain'?'rainTitle':'windTitle');note=t('forecastNote');timestamp=t('run')+': '+time(data.forecast.runAt);status=f.status;if(f.status==='incomplete'){note=t('incomplete');}else{frame=Math.min(frame,f.frames.length-1);current.cells=forecastCells(data.forecast,f.frames[frame],layer);model.cells=current.cells.map(c=>({...c,label:t('gridSample')+' '+(c.value===null?t('noData'):c.value.toFixed(1)+(layer==='rain'?' mm':' km/h'))}));if(f.status==='older_run')note=t('olderRun')+' '+note;timeline(f.frames.length,time(f.frames[frame].intervalStart)+' → '+time(f.frames[frame].validAt));}
    legend(layer==='rain'?[['0–1 mm','rain0'],['1–5','rain1'],['5–15','rain2'],['15–30','rain3'],['30+','rain4'],[t('noData'),'missing']]:[['0–10 km/h','wind0'],['10–25','wind1'],['25–40','wind2'],['40–60','wind3'],['60+','wind4'],[t('noData'),'missing']]);
    for(const d of data.catalog?.districts||[])$('#list-content').append(button(local(d.names),'weatherDistrict:'+d.code));
    addSource(t('forecastCredit'),t('run')+': '+time(data.forecast.runAt)+' · '+t('reviewed')+': '+time(data.forecast.capturedAt),data.forecast.source);addSource('Provenance','0.25° · 198 regional points · m/s → km/h','/floodlens/data/forecast/provenance.json');
+  }else if(['satellite','truecolor'].includes(layer)){
+   const key=layer==='satellite'?'flood':'truecolor';if(!data.satellite)throw Error('No satellite snapshot');const c=satelliteState(data.satellite,key);title=t(key==='flood'?'satelliteTitle':'truecolorTitle');status=c.status;timestamp=t('imageDate')+': '+c.product.date+' UTC · '+t(key==='flood'?'twoDay':'dailyImage');note=t(key==='flood'?'satelliteNote':'truecolorNote');
+   if(c.status==='available'){if(failed.has('satellite:'+key))throw Error('No verified satellite image');const cached=data.satelliteImages?.[key];if(cached?.hash===c.product.sha256){model.cloud={bbox:data.satellite.bbox,path:cached.image};model.onCloudError=()=>{failed.add('satellite:'+key);delete data.satelliteImages[key];render();};}else{status='loading';note=t('loading')+' '+note;loadSatelliteImage(key);}}else note=t(c.status==='stale'?'satelliteStale':'clockUnknown')+' '+note;
+   $('#list-content').append(node('p',t('satelliteUse')),node('p',t('satelliteResolution')));
+   if(key==='flood')legend([[t('surfaceWater'),'water'],[t('recurringFlood'),'recurring'],[t('floodEstimate'),'floodestimate'],[t('insufficientData'),'insufficient'],[t('transparentUnknown'),'transparent']]);
+   addSource('NASA GIBS / ESDIS · NASA LANCE',data.satellite.attribution+' '+data.satellite.publication,data.satellite.source);addSource(t('imageDate'),c.product.date+' UTC · '+t('retrieved')+': '+time(data.satellite.retrievedAt),'/floodlens/data/satellite/provenance.json');addSource('NASA',t('satelliteUse'),'https://gibs.earthdata.nasa.gov/legends/MODIS_Flood_H.svg');
   }else if(layer==='reports'){
    if(!data.media||!data.locations)throw Error('No reports');current.reports=reviewedReports(data.media,data.locations);model.reports=current.reports;title=t('reportsTitle');note=t('reportsNote');timestamp=t('published')+': '+time(data.media.publishedAt);if(!current.reports.length){note=t('noReports');status='empty';}for(const r of current.reports)$('#list-content').append(button(r.name,'report:'+r.tankCode,r.spillCusecs.toLocaleString(language)+' '+t('cusecs')+' · '+t('news')));addSource(data.media.source,t('published')+': '+time(data.media.publishedAt)+' · '+t('reviewed')+': '+time(data.media.reviewedAt),data.media.url);
   }else if(layer==='clouds'){
@@ -72,7 +85,7 @@ function render(){
 }
 function timeline(count,text){$('#timeline').hidden=false;$('#frame-slider').max=count-1;$('#frame-slider').value=frame;$('#frame-slider').setAttribute('aria-valuetext',text);$('#frame-time').textContent=text;}
 const originalSelect=select;select=(id,focus=false)=>{if(id.startsWith('weatherDistrict:')){$('#district').value=id.split(':')[1];selectDistrict();if(focus)$('#selection').scrollIntoView({block:'nearest'});return;}if(id.startsWith('cloud:')){stop();frame=Number(id.split(':')[1]);render();return;}originalSelect(id,focus);};
-async function loadAll(){if(loading)return;loading=true;$('#refresh').disabled=true;const request=++generation;await Promise.allSettled(Object.entries(paths).map(async([key,url])=>{try{const r=await fetch(url,{cache:'no-store',credentials:'omit',referrerPolicy:'no-referrer',signal:AbortSignal.timeout(12000)});if(!r.ok)throw Error();const value=await r.json();if(request!==generation)return;if(key==='cloud'){data.cloudImages=null;if(cloudState(value).status==='available'){const images=await verifiedCloudImages(value);if(request!==generation)return;data.cloudImages=images;}}data[key]=value;failed.delete(key);}catch{if(request===generation)failed.add(key);}}));if(request!==generation)return;loading=false;cloudBroken=false;$('#refresh').disabled=false;const district=$('#district').value;translate();$('#district').value=district;render();document.documentElement.dataset.exploreReady='true';}
+async function loadAll(){if(loading)return;loading=true;$('#refresh').disabled=true;const request=++generation;await Promise.allSettled(Object.entries(paths).map(async([key,url])=>{try{const r=await fetch(url,{cache:'no-store',credentials:'omit',referrerPolicy:'no-referrer',signal:AbortSignal.timeout(12000)});if(!r.ok)throw Error();const value=await r.json();if(request!==generation)return;if(key==='cloud'){data.cloudImages=null;if(cloudState(value).status==='available'){const images=await verifiedCloudImages(value);if(request!==generation)return;data.cloudImages=images;}}if(key==='satellite'){for(const product of ['flood','truecolor']){satelliteState(value,product);failed.delete('satellite:'+product);}}data[key]=value;failed.delete(key);}catch{if(request===generation)failed.add(key);}}));if(request!==generation)return;loading=false;cloudBroken=false;$('#refresh').disabled=false;const district=$('#district').value;translate();$('#district').value=district;render();document.documentElement.dataset.exploreReady='true';}
 for(const b of document.querySelectorAll('.layers button[data-layer]'))b.onclick=()=>{stop();layer=b.dataset.layer;selected=null;frame=layer==='clouds'?2:0;$('#district').value='';document.querySelectorAll('.layers button[data-layer]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));map.home(layer==='cyclone');if(layer==='reports')map.target([80.04,8.0],1.4);render();};
 $('#explore-language').onchange=e=>{language=e.target.value;translate();render();};$('#warning-kind').onchange=e=>{warningKind=e.target.value;selected=null;render();};$('#district').onchange=selectDistrict;$('#zoom-in').onclick=()=>map.zoom(.65);$('#zoom-out').onclick=()=>map.zoom(1/.65);$('#map-home').onclick=()=>layer==='reports'?map.target([80.04,8.0],1.4):map.home(layer==='cyclone');$('#refresh').onclick=()=>{stop();loadAll();};$('#frame-slider').oninput=e=>{stop();frame=Number(e.target.value);render();};
 $('#play').onclick=()=>{if(playing){stop();return;}if(frame>=Number($('#frame-slider').max))frame=0;render();$('#play').textContent=t('pause');$('#play').setAttribute('aria-pressed','true');playing=setInterval(()=>{if(document.hidden||frame>=Number($('#frame-slider').max)){stop();return;}frame++;render();},1700);};

@@ -1,5 +1,5 @@
-import {validateSnapshot, warningState, warningMatches} from './core.mjs?v=20261106-34';
-import {validateForecast, wind} from './forecast-model.mjs?v=20261106-34';
+import {validateSnapshot, warningState, warningMatches} from './core.mjs?v=20261106-35';
+import {validateForecast, wind} from './forecast-model.mjs?v=20261106-35';
 
 // Each layer retains its own meaning and clock. No cross-layer risk score.
 export function warningLayer(snapshot, catalog, overview, kind, now=Date.now()) {
@@ -18,7 +18,7 @@ export function warningLayer(snapshot, catalog, overview, kind, now=Date.now()) 
     return [{feature,area,level,bulletins:matches}];
   });
   const known=new Set(overview.features.map(f=>f.properties.code));
-  const unmapped=bulletins.flatMap(w=>w.areas.filter(a=>!known.has(a.divisionCode)).map(a=>({bulletin:w,area:a})));
+  const unmapped=bulletins.flatMap(w=>[...w.areas.filter(a=>!known.has(a.divisionCode)).map(a=>({bulletin:w,area:a})),...(w.unmappedAreaNames||[]).map(name=>({bulletin:w,area:{division:name,divisionCode:null}}))]);
   return {bulletins,areas,unmapped,reviewedAt:snapshot.reviewedAt,reviewOlder:now-Date.parse(snapshot.reviewedAt)>3*3600000};
 }
 

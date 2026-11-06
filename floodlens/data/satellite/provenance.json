@@ -1,0 +1,101 @@
+{
+  "capabilitiesUrl": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/1.0.0/WMTSCapabilities.xml",
+  "capabilitiesSha256": "082e5a2b431f17744fe2da486da706417b0d6792512bd093d7c365b73d87aa04",
+  "capabilitiesRetrievedAt": "2026-11-06T13:25:35.547653+00:00",
+  "matrix": {
+    "identifier": "250m",
+    "zoom": 7,
+    "resolutionDegrees": 0.004394531249999999,
+    "origin": [
+      -180,
+      90
+    ]
+  },
+  "modifications": "NASA approximately 500 m overview tiles mosaicked and cropped without additional interpolation or recolouring. Source product nominal resolution is 250 m. No flood or person/road inference.",
+  "sources": [
+    {
+      "url": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/VIIRS_Combined_Flood_2-Day/default/2026-11-05/250m/7/35/115.png",
+      "sha256": "5809dc014ac8bebf935a90a960e4ed2540642587464763f7d11aa3ac443f25b0",
+      "bytes": 15282,
+      "retrievedAt": "2026-11-06T13:25:36.982883+00:00",
+      "date": "2026-11-05"
+    },
+    {
+      "url": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/VIIRS_Combined_Flood_2-Day/default/2026-11-05/250m/7/35/116.png",
+      "sha256": "daba0daa487a8c597af80cec6f8d7dc93e2922c912701def1a98ac53c88f5fe5",
+      "bytes": 7784,
+      "retrievedAt": "2026-11-06T13:25:36.619361+00:00",
+      "date": "2026-11-05"
+    },
+    {
+      "url": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/VIIRS_Combined_Flood_2-Day/default/2026-11-05/250m/7/36/115.png",
+      "sha256": "099f3e8b2031e7e7ae109ca4afceb3a1da7e842e035f6a7b4cacc78e4d065bdc",
+      "bytes": 12801,
+      "retrievedAt": "2026-11-06T13:25:36.641484+00:00",
+      "date": "2026-11-05"
+    },
+    {
+      "url": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/VIIRS_Combined_Flood_2-Day/default/2026-11-05/250m/7/36/116.png",
+      "sha256": "851377b0674053ab0c5765fbef3aca76248a892f5e8b0de8fc4caaa99f3824a7",
+      "bytes": 13302,
+      "retrievedAt": "2026-11-06T13:25:37.675936+00:00",
+      "date": "2026-11-05"
+    },
+    {
+      "url": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/VIIRS_Combined_Flood_2-Day/default/2026-11-05/250m/7/37/115.png",
+      "sha256": "716c304dbb4deeff62b93a914e8d9aed0959b5d5b6887bf2ff4f05b16179533e",
+      "bytes": 6852,
+      "retrievedAt": "2026-11-06T13:25:37.585399+00:00",
+      "date": "2026-11-05"
+    },
+    {
+      "url": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/VIIRS_Combined_Flood_2-Day/default/2026-11-05/250m/7/37/116.png",
+      "sha256": "c52f7c5f63d14df0091c1be3dcc6e851fc725154c55e3680ffcf74c0c2bc5e11",
+      "bytes": 15884,
+      "retrievedAt": "2026-11-06T13:25:37.966547+00:00",
+      "date": "2026-11-05"
+    },
+    {
+      "url": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/VIIRS_NOAA20_CorrectedReflectance_TrueColor/default/2026-11-05/250m/7/35/115.jpeg",
+      "sha256": "da6bf8b7bb875ec008be89161d96a07cbbdb71113ebed0c90ffc38b9ad5f209c",
+      "bytes": 48756,
+      "retrievedAt": "2026-11-06T13:25:39.519147+00:00",
+      "date": "2026-11-05"
+    },
+    {
+      "url": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/VIIRS_NOAA20_CorrectedReflectance_TrueColor/default/2026-11-05/250m/7/35/116.jpeg",
+      "sha256": "c47d9bf84204b8646b88ddd54cbdcf7c334263a7616458553b8b400c5450375c",
+      "bytes": 49571,
+      "retrievedAt": "2026-11-06T13:25:39.432671+00:00",
+      "date": "2026-11-05"
+    },
+    {
+      "url": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/VIIRS_NOAA20_CorrectedReflectance_TrueColor/default/2026-11-05/250m/7/36/115.jpeg",
+      "sha256": "ff4806f26c96d0a28435ec988f81dc30562cf9cc8a820dcf8a88f84fb650e5e5",
+      "bytes": 46370,
+      "retrievedAt": "2026-11-06T13:25:39.440268+00:00",
+      "date": "2026-11-05"
+    },
+    {
+      "url": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/VIIRS_NOAA20_CorrectedReflectance_TrueColor/default/2026-11-05/250m/7/36/116.jpeg",
+      "sha256": "89a39101fc7829e197df3659c16dc556ef5280b69ca654c811c97668d139fa70",
+      "bytes": 52815,
+      "retrievedAt": "2026-11-06T13:25:40.852277+00:00",
+      "date": "2026-11-05"
+    },
+    {
+      "url": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/VIIRS_NOAA20_CorrectedReflectance_TrueColor/default/2026-11-05/250m/7/37/115.jpeg",
+      "sha256": "24035e892dea501a28e97eae83df24631d2bbe4e864a802d12336a86ff6dba0d",
+      "bytes": 36472,
+      "retrievedAt": "2026-11-06T13:25:40.737745+00:00",
+      "date": "2026-11-05"
+    },
+    {
+      "url": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/VIIRS_NOAA20_CorrectedReflectance_TrueColor/default/2026-11-05/250m/7/37/116.jpeg",
+      "sha256": "5cf570e358b12254be8ad4d2a0ae9221cfc2d8de85d98c26f7f8c585a17d3196",
+      "bytes": 36251,
+      "retrievedAt": "2026-11-06T13:25:40.781998+00:00",
+      "date": "2026-11-05"
+    }
+  ]
+}

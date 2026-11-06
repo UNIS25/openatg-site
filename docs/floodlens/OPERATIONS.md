@@ -1,3 +1,13 @@
+## 2026-11-06 dated satellite context release
+
+- Explore adds optional NASA VIIRS 2-day flood estimates and matched true-colour images, both dated 2026-11-05 UTC. The advertised global true-colour date November 6 had black/missing pixels over Sri Lanka, so it is not displayed.
+- Regional crop uses the advertised CRS84 `250m/7` tile grid: approximately 500 m overview pixels, 250 m nominal source product. Pixel-aligned crop, no additional interpolation or recolouring. Manifest/provenance hashes bind the first-party image bytes to their dates. No visitor coordinates are sent to NASA.
+- Colours retain NASA meaning: cyan surface water, yellow recurring flood, red flood estimate, gray insufficient data. Transparent pixels can be no water OR no data. None is a route-safety or rescue-dispatch assessment. No person-in-need or active-shelter pins are inferred.
+- Imagery downloads only when selected, and is hidden after its date is older than 72 hours. This is a dated reviewed snapshot, NOT an automatically refreshed live layer. Capture candidates with `python scripts/floodlens/capture_satellite_flood.py`, visually review the two output images and metadata, then publish the four files in `floodlens/data/satellite/` using the authorized reviewed-content workflow. The existing guarded hourly publisher remains restricted to its ten observation files.
+- Google traffic and the NDRSC centre registry are optional external links with explicit limitations: traffic does not verify road passability, and registry entries do not confirm centres are open. No new API keys, paid APIs or persistent permissions were created.
+- CAP unmatched official DSD names remain visible in the warning-map limitation. Boundaries are never guessed from names.
+- Validation: 163 Node tests, 83 Python tests; actual regional image pixels visually inspected. UI browser verification was blocked by browser connection errors. Public HTTP verification was stopped after HTTP 403, never bypassed. GitHub Pages deployment status must be checked for each exact release commit.
+
 # 6 November 2026 reactivation
 
 Hourly schedules now run at :07 (guarded observations) and :17 (read-only source discovery). GitHub may delay runs. Editorial review remains separate. No social media. Latest official CAP lightning areas are taken only from exact unique catalogue names and explicitly named whole districts; unmatched source spellings remain visible and block an absence claim. DMC PDF placeholder discrepancy is retained. Current NBRO Level 1: Godakawela and Kalawana; validity ends 7 November 16:00 SLST. River records are noon observations, not present measurements.
